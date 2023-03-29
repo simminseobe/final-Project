@@ -10,7 +10,6 @@
     <body>
         <h1>안녕</h1>
         <a href="/member.do">회원</a>
-        혜진 테스트
     </body>
 
     </html>
