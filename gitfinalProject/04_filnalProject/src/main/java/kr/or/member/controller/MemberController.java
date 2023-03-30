@@ -21,6 +21,8 @@ public class MemberController {
 
 		model.addAttribute("list", list);
 		
+		System.out.println("테스트");
+		
 		return "member/member";
 	}
 }

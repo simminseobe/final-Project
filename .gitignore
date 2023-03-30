@@ -1,4 +1,6 @@
 /.metadata/
+target
+pom.properties
 .classpath
 .project
 Servers/
