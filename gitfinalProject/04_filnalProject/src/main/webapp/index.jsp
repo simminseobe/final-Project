@@ -10,6 +10,8 @@
     <body>
         <h1>안녕</h1>
         <a href="/member.do">회원</a>
+        <br>
+        <a href="/ticketing.do">빠른예매페이지 테스트</a>
     </body>
 
     </html>
