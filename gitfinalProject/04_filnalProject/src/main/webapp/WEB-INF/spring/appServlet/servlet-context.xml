@@ -40,8 +40,8 @@
 	<!-- DB 접속 정보를 저장하는 객체 -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.10.50:1521:xe" />
-		<beans:property name="username" value="spring" />
+		<beans:property name="url" value="jdbc:oracle:thin:@1.220.236.74:15215:xe" />
+		<beans:property name="username" value="team4test" />
 		<beans:property name="password" value="1234" />
 	</beans:bean>	
 	<!-- Mybatis 설정 객체 -->
@@ -78,11 +78,15 @@
 	
 	<context:component-scan base-package="kr.or.iei" />
 	<context:component-scan base-package="kr.or.member" />
+	<context:component-scan base-package="kr.or.movie" />
 	<context:component-scan base-package="kr.or.board" />
 	<context:component-scan base-package="kr.or.notice" />
 	<context:component-scan base-package="common" />
 	<context:component-scan base-package="kr.or.aop" />
 	<context:component-scan base-package="kr.or.dm" />
 	<context:component-scan base-package="kr.or.movie" />
+	
+	
+	<context:component-scan base-package="kr.or.ticketing" />
 	
 </beans:beans>
