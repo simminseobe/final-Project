@@ -1,5 +1,5 @@
 /.metadata/
-target
+target/
 pom.properties
 .classpath
 .project
