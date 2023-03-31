@@ -8,7 +8,7 @@
                 <dl>
                     <dt>예매</dt>
                     <dd>예매 안내</dd>
-                    <dd>빠른 예매</dd>
+                    <dd><a href="/ticketing.do">빠른 예매</dd>
                     <dd>상영시간표</dd>
                     <dd>예매 확인/취소</dd>
                     <dd>더 부티크 프라이빗 예매</dd>
