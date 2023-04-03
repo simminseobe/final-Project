@@ -11,8 +11,13 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 
-	@RequestMapping("/admin.do")
-	public String admin() {
-		return "admin/admin";
+	@RequestMapping("/adminPage.do")
+	public String adminPage() {
+		return "admin/adminPage";
+	}
+
+	@RequestMapping(value = "/registerMovie.do")
+	public String registerMovie() {
+		return "admin/registerMovie";
 	}
 }
