@@ -6,214 +6,8 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="/resources/css/joinFrm.css">
 </head>
-<style>
-.join-all-wrap{
-    width: 1200px;
-    margin: 0 auto;
-}
-.join-title{
-    text-align: center;
-}
-.join-title>h2{
-    margin-top: 80px;
-    color: #503396;
-}
-
-.join-box{
-    margin: 40px auto;
-    width: 650px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
-
-tr>td:first-child{
-    font-size: 15px;
-    font-weight: 600;
-}
-
-table{
-	margin : 0px auto;
-}
-
-tr>td:first-child>sup{
-    color: #503396;
-}
-
-.inputBox{
-    margin-left: 40px;
-    height: 45px;
-    width: 350px;
-    border: 1px solid rgb(211, 211, 211);
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.comment{
-    position: absolute;
-}
-
-.join-box>table>tbody>tr>td{ 
-    padding: 20px 0px;
-}
-
-.join-box>table>tbody>tr>td>button{ 
-    color:#503396;
-    border: 0px;
-    height: 45px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1.8px solid  #503396;
-    background-color: white;
-}
-
-.join-box>table>tbody>tr:nth-child(6)>td:nth-child(2){
-    padding-left: 40px;
-}
-
-.join-box>table>tbody>tr:nth-child(7)>td:nth-child(2){
-    padding-left: 40px;
-}
-
-
-.btn-box{
-    width: 650px;
-    margin: 0 auto;
-}
-
-.btn-box>button{
-    width: 640px;
-    background-color: #503396;
-    border: 0px;
-    height: 60px;
-    border-radius: 5px;
-    font-size: 18px;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    margin-bottom: 120px;
-}
-
-.agree-box>label{
-    color: #000;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 200%;
-}
-
-.agree-wrap{
-    border: 1px solid #503396;
-    width: 450px;
-    margin-left: 40px;
-    padding: 20px;
-}
-
-.agree-box>span{
-    float: right;
-    font-size: 12px;
-    color: #503396;
-    cursor: pointer;
-}
-
-.agree-box>.agreeCheck{
-    padding-left: 20px;
-}
-
-#agreeBox{
-    padding-left: 23px;
-}
-
-.inputBox{
-    padding-left: 10px;
-}
-
-.join-box>table>tbody>tr>td:last-child>.comment{ 
-    padding-left: 40px;
-    font-size: 13px;
-}
-
-.join-box>table>tbody>tr>td:last-child>#memberEmail{ 
-    width: 45%;
-}
-
-.join-box>table>tbody>tr>td:last-child>#checkEmail{ 
-    width: 20%;
-    margin: 0;
-}
-
-#email-time{
-    margin-left: 300px;
-}
-
-/*모달*/
-.agreeModal-wrap{
-	display: none;
-    width: 100vw;
-    height: 115vh;
-    background-color: rgba(0,0,0,0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    justify-content: center;
-    align-items: center;
-    z-index : 9000;
-    /*display: flex;*/
-}
-
-.agreeModal-title{
-	color: rgb(140, 0, 240);
-}
-
-.agreeModal-1{
-    background-color: #fff;
-    width: 750px;
-    min-width: 300px;
-    max-width: 500px;
-    height: 540px;
-    min-height: 350px;
-    max-height: 540px;
-    border-radius: 10px;
-}
-
-.agreeModal-top>h3{
-    margin: 0;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 25px;
-    color: rgb(140, 0, 240);
-}
-
-.agreeModal-content{
-    margin: 0 auto;
-    width: 400px;
-    height: 350px;
-    overflow: auto;
-}
-
-.resetBtn{
-    width: 400;
-}
-
-.content{
-	font-weight: 400;
-}
-.resetBtn>button{
-    display: flex;
-    margin: 25px auto;
-    border-radius: 5px;
-    border: none;
-    width: 130px;
-    height: 50px;
-    line-height : 50px;
-    justify-content: center;
-    background-color: white;
-    border: 1.8px solid rgb(140, 0, 240);
-    font-weight: 600;
-    color: rgb(140, 0, 240);
-    font-size: 15px;
-    cursor: pointer;
-}
-</style>
 <body>
 	<div class="join-all-wrap">
 		<div class="join-wrap">
@@ -221,20 +15,21 @@ tr>td:first-child>sup{
 				<h2>회원가입</h2>
 			</div>
 			<form action="/checkId.do" name="checkIdFrm">
-			<input type="hidden" name="checkId">
+			<input type="text" name="checkId">
 			</form>
+			
 			<form action="/join.do" method="post">
 				<div class="join-box">
 					<table>
 						<tr>
 							<td>아이디 <sup>*</sup></td>
 							<td><input type="text" name="memberId" id="memberId" class="inputBox" required autocomplete=off>
-                                <button type="button" class="double-check" id="double-check">중복체크</button>
-								<div class="comment" id="idCheck"></div></td>
+								<div class="comment" id="idCheck"></div>
+								<button type="button" id="idChkBtn" class="btn bc2">중복체크</button></td>
 						</tr>
 						<tr>
 							<td>비밀번호 <sup>*</sup></td>
-							<td><input type="password" name="memberPw" class="inputBox" required autocomplete=off>
+							<td><input type="password" name="memberPw" class="inputBox" required autocomplete=off placeholder="8~16글자 영문/숫자/특수문자 최소 한가지씩 조합">
 								<div class="comment" id="pwCheck"></div></td>
 						</tr>
 						<tr>
@@ -253,41 +48,31 @@ tr>td:first-child>sup{
                         <tr>
                             <td>생년월일 <sup>*</sup></td>
                             <td>
-                                <select name="" id="">
+                                <select name="memberBirthYear" class="birthDay">
                                     <option>년도</option>
-                                    <option value="1970">1970</option>
-                                    <option value="1971">1971</option>
-                                    <option value="1972">1972</option>
-                                    <option value="1973">1973</option>
-                                    <option value="1974">1974</option>
-                                    <option value="1975">1975</option>
-                                    <option value="1976">1976</option>
-                                    <option value="1977">1977</option>
-                                    <option value="1978">1978</option>
-                                    <option value="1979">1979</option>
-                                    <option value="1980">1980</option>
-                                    <option value="1981">1981</option>
-                                    <option value="1982">1982</option>
-                                    <option value="1983">1983</option>
-                                    <option value="1984">1984</option>
-                                    <option value="1985">1985</option>
-                                    <option value="1986">1986</option>
-                                    <option value="1987">1987</option>
-                                    <option value="1988">1988</option>
-                                    <option value="1989">1989</option>
-                                    <option value="1990">1990</option>
-                                    <option value="1991">1991</option>
-                                    <option value="1992">1992</option>
-                                    <option value="1993">1993</option>
-                                    <option value="1994">1994</option>
-                                    <option value="1995">1995</option>
-                                    <option value="1996">1996</option>
-                                    <option value="1997">1997</option>
-                                    <option value="1998">1998</option>
-                                    <option value="1999">1999</option>
-                                    <option value="2000">2000</option>
+                                    <option value="1980">1980년</option>
+                                    <option value="1981">1981년</option>
+                                    <option value="1982">1982년</option>
+                                    <option value="1983">1983년</option>
+                                    <option value="1984">1984년</option>
+                                    <option value="1985">1985년</option>
+                                    <option value="1986">1986년</option>
+                                    <option value="1987">1987년</option>
+                                    <option value="1988">1988년</option>
+                                    <option value="1989">1989년</option>
+                                    <option value="1990">1990년</option>
+                                    <option value="1991">1991년</option>
+                                    <option value="1992">1992년</option>
+                                    <option value="1993">1993년</option>
+                                    <option value="1994">1994년</option>
+                                    <option value="1995">1995년</option>
+                                    <option value="1996">1996년</option>
+                                    <option value="1997">1997년</option>
+                                    <option value="1998">1998년</option>
+                                    <option value="1999">1999년</option>
+                                    <option value="2000">2000년</option>
                                 </select>
-                                <select name="month" id="month">
+                                <select name="memberBirthMonth" class="birthDay">
                                     <option>월</option>
                                     <option value="01">1월</option>
                                     <option value="02">2월</option>
@@ -302,7 +87,7 @@ tr>td:first-child>sup{
                                     <option value="11">11월</option>
                                     <option value="12">12월</option>
                                 </select>
-                                <select name="day" id="day">
+                                <select name="memberBirthDay" class="birthDay">
                                     <option>일</option>
                                     <option value="01">1일</option>
                                     <option value="02">2일</option>
@@ -339,9 +124,9 @@ tr>td:first-child>sup{
                         </tr>
                         <tr>
                             <td>성별 <sup>*</sup></td>
-                            <label for="gender"></label>
-                            <td><input type="radio" id="male" name="gender">남자
-                            <input type="radio" id="female" name="gender">여자</td>
+                            <label for="memberGender"></label>
+                            <td><input type="radio" id="male" name="memberGender" value="남자">남자
+                            <input type="radio" id="female" name="memberGender" value="여자">여자</td>
                         </tr>
 						<tr>
 							<td>이메일인증 <sup>*</sup></td>
@@ -526,25 +311,29 @@ tr>td:first-child>sup{
     	const result = [false, false, false, false, false, false];
     	// 아이디 유효성 검사
     	// 아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자
-    	$("#memberId").on("keyup", function() {
+    	$("#memberId").on("change", function() {
     	    const memberId = $(this).val();
+    	    console.log(memberId);
     	    const idReg =  /^[a-z]+[a-z0-9]{5,19}$/g;
     	    const inputId = $(this).val();
     	    const check = idReg.test(inputId);
     	    if(check) {
     	        $.ajax({
     	            url : "/checkId.do",
-    	            type : 'POST',
+    	            type : 'get',
     	            data : {memberId:memberId},
     	            success : function(data) {
     	                if(data == "1") {
     	                    $("#idCheck").text("이미 사용중인 아이디 입니다.");
     	                    $("#idCheck").css("color", "red");
-    	                } else if(data == "0") {
+    	                } else if(data == "0"){
     	                    $("#idCheck").text("사용 가능한 아이디입니다.");
     	                    $("#idCheck").css("color", "green");
     	                    result[0] = true;
     	                }
+    	            },
+    	            error : function() {
+    	            	console.log("에러발생");
     	            }
     	        });
     	    } else {
@@ -554,9 +343,22 @@ tr>td:first-child>sup{
     	    }
     	});
 
+    	$("#idChkBtn").on("click", function() {
+    		const memberId = $("#memberId").val();
+    		if(memberId == "") {
+    			alert("아이디를 입력하세요.");
+    			return;
+    		}
+    		$("[name=checkId]").val(memberId);
+    		window.open("", "checkId","left=700px,top=300px,width=300px,height=200px,menubar=no,status=no,scrollbars=yes");
+    		
+    		$("[name=checkIdFrm]").attr("target", "checkId");
+    		$("[name=checkIdFrm]").submit();
+    	});
+    	
     	// 비밀번호 유효성 검사
     	// 8~16 글자 영문,숫자,특수문자 최소 한가지씩 조합
-    	$("[name=memberPw]").on("keyup", function() {
+    	$("[name=memberPw]").on("change", function() {
     	    const pwReg = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
     	    const inputPw = $(this).val();
     	    const check = pwReg.test(inputPw);
@@ -572,9 +374,9 @@ tr>td:first-child>sup{
     	});
 
     	// 비밀번호 중복체크
-    	$("[name=memberPwCheck]").on("keyup", function() {
+    	$("[name=memberPwCheck]").on("change", function() {
     	    const pwInput = $("[name=memberPwCheck]").val();
-    	    if(($this).val() == pwInput) {
+    	    if($(this).val() == pwInput) {
     	        $("#pwReCheck").text("비밀번호가 일치합니다.");
     	        $("#pwReCheck").css("color", "green");
     	        result[2] = true;
@@ -591,10 +393,11 @@ tr>td:first-child>sup{
     	    $("this").hide();
     	    $("#check").show();
     	    const email = $("#memberEmail").val();
+    	    console.log("이메일 : " + email);
     	    $.ajax({
-    	        url : "",
-    	        type : "POST",
-    	        data : {email, email},
+    	        url : "/emailCheck.do",
+    	        type : "get",
+    	        data : {email:email},
     	        success : function(data) {
     	            if(data == "null") {
     	                alert("이메일 주소를 확인하세요.");
@@ -602,6 +405,7 @@ tr>td:first-child>sup{
     	                mailCode = data;
     	                $("#email-time").text();
     	                authTime();
+    	                alert("인증번호가 전송되었습니다.");
     	            }
     	        },
     	        error : function() {
@@ -610,6 +414,7 @@ tr>td:first-child>sup{
     	    });
     	});
 
+    	// 이메일 인증 시간 설정 - 1 
     	let intervalId;
     	function authTime() {
     	    $("#email-time").html("<span id='min'>3</span> : <span id='sec'>00</span>");
@@ -618,6 +423,7 @@ tr>td:first-child>sup{
     	    }, 1000);
     	}
 
+    	// 이메일 인증 시간 설정 - 2
     	function timeCount() {
     	    const min = $("#min").text();
     	    const sec = $("#sec").text();
@@ -642,12 +448,29 @@ tr>td:first-child>sup{
     	    }
     	}
     
-    	
-    	
-    	
-    	$("#join-btn").on("click", function() {
-    		location.href="/join.do";
+    	// 인증버튼 클릭
+    	$("#check").on("click", function() {
+    		if(mailCode == null) {
+    			$("#email-time").text("");
+    			$("#email-time").css("color", "red");
+    		} else {
+    			const checkEmail = $("#checkEmail").val();
+    			if(checkEmail == mailCode) {
+    				$("#email-time").prop("readonly", true);
+    				$("#email-time").text("이메일 인증 완료");
+    				$("#email-time").css("color", "green");
+    				clearInterval(intervalId);
+    				result[3] = true;
+    			} else {
+    				$("#email-time").text("이메일 인증 실패");
+    				$("#email-time").css("color", "red");
+    				result[3] = false;
+    			}
+    		}
     	});
+    	
+    	
+    	
     </script>
 </body>
 </html>

@@ -42,5 +42,11 @@
   	from member where member_id=#{memberId}
   </select>
   
+  <!-- 회원가입 -->
+  <insert id="insertMember" parameterType="m">
+  	insert into member values
+  	(member_seq.nextval, #{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberBirthYear}, #{memberBirthMonth}, #{memberBirthDay},
+  	#{memberEmail}, 1, to_char(sysdate,'yyyy-mm-dd'), #{memberGender}, NULL, NULL)
+  </insert>
   
 </mapper>

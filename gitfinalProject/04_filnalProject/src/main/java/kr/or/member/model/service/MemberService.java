@@ -19,7 +19,15 @@ public class MemberService {
 	}
 
 	// 아이디 중복체크
-	public Member selectOneId(Member member) {
-		return dao.selectOneId(member);
+	public Member selectOneId(String memberId) {
+		return dao.selectOneId(memberId);
 	}
+
+	
+	
+	// 회원가입
+	public int insertMember(Member m) {
+		return dao.insertMember(m);
+	}
+	
 }

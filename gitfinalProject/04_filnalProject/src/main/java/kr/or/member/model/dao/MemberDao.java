@@ -20,8 +20,14 @@ public class MemberDao {
 	}
 
 	// 아이디 중복체크
-	public Member selectOneId(Member member) {
-		Member m = sqlSession.selectOne("member.selectOneId", member);
+	public Member selectOneId(String memberId) {
+		Member m = sqlSession.selectOne("member.selectOneId", memberId);
 		return m;
+	}
+
+	// 회원가입
+	public int insertMember(Member m) {
+		int result = sqlSession.insert("member.insertMember", m);
+		return result;
 	}
 }
