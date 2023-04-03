@@ -13,8 +13,15 @@ public class MemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	// 로그인
 	public Member selectOneMember(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneMember", member);
+		return m;
+	}
+
+	// 아이디 중복체크
+	public Member selectOneId(Member member) {
+		Member m = sqlSession.selectOne("member.selectOneId", member);
 		return m;
 	}
 }
