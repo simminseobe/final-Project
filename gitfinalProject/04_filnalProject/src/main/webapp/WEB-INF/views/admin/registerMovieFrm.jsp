@@ -22,7 +22,7 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            DataTable Example
+                            영화 등록 입력 양식
                         </div>
                         <div class="card-body">
                             <form>
@@ -36,18 +36,50 @@
                                         placeholder="감독 이름을 입력하세요">
                                 </div>
                                 <div class="form-group">
+                                    <label for="movieDirector">배우</label>
+                                    <input type="text" class="form-control" id="movieDirector" placeholder="배우들을 입력하세요">
+                                </div>
+                                <div class="form-group">
+                                    <label for="movieDirector">장르</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>드라마</option>
+                                        <option value="1">애니메이션</option>
+                                        <option value="2">액션</option>
+                                        <option value="3">어드벤처</option>
+                                        <option value="3">판타지</option>
+                                        <option value="3">뮤지컬</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="movieReleaseDate">개봉일</label>
                                     <input type="date" class="form-control" id="movieReleaseDate">
                                 </div>
                                 <div class="form-group">
-                                    <label for="moviePoster">포스터 이미지</label>
+                                    <label for="movieReleaseDate">상영시간</label>
+                                    <input type="text" class="form-control" id="movieReleaseDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="moviePoster">메인 이미지</label>
                                     <input type="file" class="form-control-file" id="moviePoster">
+                                </div>
+                                <div class="form-group">
+                                    <label for="moviePoster">포스트 이미지</label>
+                                    <input type="file" class="form-control-file" id="moviePoster">
+                                </div>
+                                <div class="form-group">
+                                    <label for="moviePoster">예고편 영상(링크를 걸어주세요.)</label>
+                                    <input type="text" class="form-control" id="movieReleaseDate">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieSynopsis">줄거리</label>
                                     <textarea class="form-control" id="movieSynopsis" rows="3"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">영화 등록</button>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button class="btn btn-primary" type="submit"
+                                            onclick="location.replace('/form.php')">등록</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -39,7 +39,7 @@
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="login.html">영화 목록</a>
-                                        <a class="nav-link" href="/registerMovie.do">영화 등록</a>
+                                        <a class="nav-link" href="/registerMovieFrm.do">영화 등록</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link" href="layout-sidenav-light.html">상영관 관리</a>

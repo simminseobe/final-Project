@@ -16,8 +16,8 @@ public class AdminController {
 		return "admin/adminPage";
 	}
 
-	@RequestMapping(value = "/registerMovie.do")
-	public String registerMovie() {
-		return "admin/registerMovie";
+	@RequestMapping(value = "/registerMovieFrm.do")
+	public String registerMovieFrm() {
+		return "admin/registerMovieFrm";
 	}
 }
