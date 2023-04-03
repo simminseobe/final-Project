@@ -133,8 +133,7 @@
         <div class="right">
             <ul>
                 <li><a href="#">고객센터</a></li>
-                <li><a href="#">멤버쉽</a></li>
-                <li><a href="#">VIP</a></li>
+                <li><a href="/mypage.do">마이페이지</a></li>
             </ul>
             <button type="button" onclick="alert('준비중입니다.')">상영시간표</button>
             <button type="button" onclick="alert('준비중입니다.')">빠른예매</button>

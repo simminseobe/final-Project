@@ -38,6 +38,11 @@ public class MemberController {
 		return "member/memberFrm";
 	}
 	
+	//마이페이지 이동
+	@RequestMapping(value="/mypage.do")
+	public String mypage() {
+		return "member/mypage";
+	}
 	
 	
 	
