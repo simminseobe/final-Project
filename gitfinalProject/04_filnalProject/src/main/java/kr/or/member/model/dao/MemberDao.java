@@ -1,6 +1,5 @@
 package kr.or.member.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,9 +13,8 @@ public class MemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Member> selectAllMember() {
-		List list = sqlSession.selectList("member.selectAllMember");
-
-		return (ArrayList<Member>) list;
+	public Member selectOneMember(Member member) {
+		Member m = sqlSession.selectOne("member.selectOneMember", member);
+		return m;
 	}
 }
