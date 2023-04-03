@@ -3,7 +3,7 @@
 <mapper namespace="member">
 
 <!-- 로그인 -->
-<select id="selectOneMember" parameterType="m" resultType="me">
+<select id="selectOneMember" parameterType="m" resultType="m">
   	select 
   		member_no as memberNo,
   		member_id as memberId,
