@@ -29,7 +29,7 @@ table{
 }
 
 tr>td:first-child>sup{
-    color: #503396;
+    color: red;
 }
 
 .inputBox{
@@ -164,12 +164,12 @@ tr>td:first-child>sup{
 
 .agreeModal-1{
     background-color: #fff;
-    width: 750px;
-    min-width: 300px;
-    max-width: 500px;
-    height: 540px;
-    min-height: 350px;
-    max-height: 540px;
+    width: 800px;
+    min-width: 400px;
+    max-width: 650px;
+    height: 650px;
+    min-height: 400px;
+    max-height: 800px;
     border-radius: 10px;
 }
 
@@ -183,8 +183,8 @@ tr>td:first-child>sup{
 
 .agreeModal-content{
     margin: 0 auto;
-    width: 400px;
-    height: 350px;
+    width: 600px;
+    height: 450px;
     overflow: auto;
 }
 

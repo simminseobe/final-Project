@@ -15,7 +15,7 @@
 				<h2>회원가입</h2>
 			</div>
 			<form action="/checkId.do" name="checkIdFrm">
-			<input type="text" name="checkId">
+			<input type="hidden" name="checkId">
 			</form>
 			
 			<form action="/join.do" method="post">
@@ -23,13 +23,13 @@
 					<table>
 						<tr>
 							<td>아이디 <sup>*</sup></td>
-							<td><input type="text" name="memberId" id="memberId" class="inputBox" required autocomplete=off>
+							<td><input type="text" name="memberId" id="memberId" class="inputBox" required autocomplete=off placeholder="아이디 입력(영문, 숫자 포함 6~20자)">
 								<div class="comment" id="idCheck"></div>
 								<button type="button" id="idChkBtn" class="btn bc2">중복체크</button></td>
 						</tr>
 						<tr>
 							<td>비밀번호 <sup>*</sup></td>
-							<td><input type="password" name="memberPw" class="inputBox" required autocomplete=off placeholder="8~16글자 영문/숫자/특수문자 최소 한가지씩 조합">
+							<td><input type="password" name="memberPw" class="inputBox" required autocomplete=off placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함 8~16자)">
 								<div class="comment" id="pwCheck"></div></td>
 						</tr>
 						<tr>
@@ -125,8 +125,8 @@
                         <tr>
                             <td>성별 <sup>*</sup></td>
                             <label for="memberGender"></label>
-                            <td><input type="radio" id="male" name="memberGender" value="남자">남자
-                            <input type="radio" id="female" name="memberGender" value="여자">여자</td>
+                            <td><input type="radio" id="male" name="memberGender" value="M">남자
+                            <input type="radio" id="female" name="memberGender" value="F">여자</td>
                         </tr>
 						<tr>
 							<td>이메일인증 <sup>*</sup></td>
@@ -143,14 +143,13 @@
 							<td>
 								<div class="agree-wrap">
 									<div class="agree-box">
-										<input type="checkbox" onclick="agreeAll();" id="all-agree"
-											class="all-agree"> <label for="all-agree">선택포함 전체약관 동의</label>
+										<input type="checkbox" onclick="agreeAll();" id="all-agree" class="all-agree">
+										<label for="all-agree">선택포함 전체약관 동의</label>
 									</div>
 									<div class="agree-box" id="agreeBox">
 										<input type="checkbox" id="agree-1" class="agreeCheck">
 										<label for="agree-1">이용약관 동의(필수)</label> <span class="modal1">약관보기></span>
 
-										<!-- 약관모달 -->
                                         <div class="agreeModal-wrap wrap1">
                                             <div class="agreeModal-1" >
                                                 <div class="agreeModal-top">
@@ -178,6 +177,7 @@
 														1. 본 약관에 명시되지 아니한 사항에 대해서는 전자상거래 등에서의 소비자보호에 관한 법률, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 및 기타 관련 법령의 규정에 따릅니다.
 														<br>
 														2. 본 약관에 명시되지 않은 서비스에 대한 사항은 당사 홈페이지, 모바일 또는 영화관 현장을 통한 해당 서비스 공지사항에 따릅니다.
+														<br><br>
                                                     </div>
                                                     <strong class="agreeModal-title">제4조 [용어의 정의]</strong>
                                                     <div class="content">
@@ -204,11 +204,9 @@
                                                 </div>
                                                 <div class="resetBtn">
                                                 <button type="button" class="reset" id="reset1">확인</button>
-                                                <!--<input type="reset" class="reset" id="reset" value="확인">-->
                                             </div>
                                             </div>
                                         </div>
-
 
 									</div>
 									<div class="agree-box" id="agreeBox">
@@ -220,7 +218,6 @@
 										<label for="agree-3">성별,생년 정보 제공 동의(선택)</label> <span class="modal2">약관보기></span>
 									</div>
 									
-										<!-- 약관모달 -->
                                         <div class="agreeModal-wrap wrap2">
                                             <div class="agreeModal-1" >
                                                 <div class="agreeModal-top">
@@ -257,7 +254,6 @@
 										<label for="agree-4">개인 정보 수집 및 이용 동의(필수)</label> <span class="modal3">약관보기></span>
 									</div>
 									
-										<!-- 약관모달 -->
                                         <div class="agreeModal-wrap wrap3">
                                             <div class="agreeModal-1" >
                                                 <div class="agreeModal-top">
@@ -291,7 +287,6 @@
                                                 </div>
                                                 <div class="resetBtn">
                                                 <button type="button" class="reset" id="reset3">확인</button>
-                                                <!--<input type="reset" class="reset" id="reset" value="확인">-->
                                             </div>
                                             </div>
                                         </div>
@@ -308,7 +303,7 @@
 	</div>
 
     <script>
-    	const result = [false, false, false, false, false, false];
+    	const result = [false, false, false];
     	// 아이디 유효성 검사
     	// 아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자
     	$("#memberId").on("change", function() {
@@ -358,12 +353,12 @@
     	
     	// 비밀번호 유효성 검사
     	// 8~16 글자 영문,숫자,특수문자 최소 한가지씩 조합
-    	$("[name=memberPw]").on("change", function() {
+    	$("[name=memberPw]").on("keyup", function() {
     	    const pwReg = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
     	    const inputPw = $(this).val();
     	    const check = pwReg.test(inputPw);
     	    if(check) {
-    	        $("#pwCheck").text("비밀번호가 일치합니다.");
+    	        $("#pwCheck").text("");
     	        $("#pwCheck").css("color", "green");
     	        result[1] = true;
     	    } else {
@@ -375,7 +370,7 @@
 
     	// 비밀번호 중복체크
     	$("[name=memberPwCheck]").on("change", function() {
-    	    const pwInput = $("[name=memberPwCheck]").val();
+    	    const pwInput = $("[name=memberPw]").val();
     	    if($(this).val() == pwInput) {
     	        $("#pwReCheck").text("비밀번호가 일치합니다.");
     	        $("#pwReCheck").css("color", "green");
@@ -396,20 +391,16 @@
     	    console.log("이메일 : " + email);
     	    $.ajax({
     	        url : "/emailCheck.do",
-    	        type : "get",
+    	        type : "POST",
     	        data : {email:email},
     	        success : function(data) {
-    	            if(data == "null") {
-    	                alert("이메일 주소를 확인하세요.");
-    	            } else {
-    	                mailCode = data;
-    	                $("#email-time").text();
-    	                authTime();
-    	                alert("인증번호가 전송되었습니다.");
-    	            }
+    	        	alert("인증번호가 발송되었습니다.");
+    	        	mailCode = data;
+    	        	$("#email-time").text();
+    	        	authTime();
     	        },
-    	        error : function() {
-    	            console.log("에러발생");
+    	        error : function(data) {
+    	            alert("인증번호 이메일 발송 실패");
     	        }
     	    });
     	});
@@ -451,7 +442,7 @@
     	// 인증버튼 클릭
     	$("#check").on("click", function() {
     		if(mailCode == null) {
-    			$("#email-time").text("");
+    			$("#email-time").text("test");
     			$("#email-time").css("color", "red");
     		} else {
     			const checkEmail = $("#checkEmail").val();
@@ -469,7 +460,44 @@
     		}
     	});
     	
+    	function agreeAll() {
+    		if($(".all-agree").is(":checked")) {
+    			$("input[type=checkbox]").prop("checked", true);
+    		} else {
+    			$("input[type=checkbox]").prop("checked", false);
+    		}
+    	}
     	
+    	$(".modal1").on("click", function() {
+    		$(".wrap1").css("display", "flex");
+    	});
+    	
+    	$("#reset1").on("click", function() {
+    		$(".wrap1").css("display", "none");
+    	});
+    	
+    	$(".modal2").on("click", function() {
+    		$(".wrap2").css("display", "flex");
+    	});
+    	
+    	$("#reset2").on("click", function() {
+    		$(".wrap2").css("display", "none");
+    	});
+    	
+    	$(".modal3").on("click", function() {
+    		$(".wrap3").css("display", "flex");
+    	});
+    	
+    	$("#reset3").on("click", function() {
+    		$(".wrap3").css("display", "none");
+    	});
+
+		$("[type=submit]").on("click",function(e){
+			if(!(result[0] && result[1] && result[2] && result[3] &&$("#agree-1").prop("checked") && $("#agree-4").prop("checked"))){
+		        e.preventDefault();
+		        alert("입력하신 정보를 확인하세요");        
+			}
+		});
     	
     </script>
 </body>

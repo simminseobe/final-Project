@@ -14,7 +14,7 @@
 		<c:choose>
 			<c:when test="${result == 0 }">
 				<div>
-					[<span class="join-text">${memberId }</span>] 는 사용 가능한 아이디입니다.
+					[<span class="join-text">${m.memberId }</span>] 는 사용 가능한 아이디입니다.
 				</div>
 				<br><br>
 				<button type="button" class="close-button" id="closeBtn">닫기</button>
@@ -32,7 +32,7 @@
 		</c:choose>
 		<c:otherwise>
 			<div>
-				[<span class="join-text">${memberId }</span>] 는 이미 사용중인 아이디입니다.
+				[<span class="join-text">${m.memberId }</span>] 는 이미 사용중인 아이디입니다.
 				<br><br>
 				<form action="/checkId.do" method="post">
 					<div class="id-wrap">

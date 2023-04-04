@@ -76,28 +76,22 @@
 		<websocket:mapping handler="dmCount" path="/dm.do"/>
 	</websocket:handlers>   -->
 	
-    <!-- 이메일 인증 관련 빈 등록/설정 -->
-    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
-     <beans:property name="host" value="smtp.google.com"/> <!-- 메이서버 호스트 -->
-     <beans:property name="port" value="587"/> <!-- 메인서버 포트번호 -->
-     <beans:property name="username" value="${email.account}"/> <!-- 자신의 이메일 아이디 : your_email -->
-     <beans:property name="password" value="${email.password}"/> <!-- 자신의 비밀번호 : your_password-->
-     <!-- 보안연결 SSL과 관련된 설정 -->
-     <beans:property name="javaMailProperties">
-      <beans:props>
-      <beans:prop key="mail.transport.protocol">smtp</beans:prop>
-      <beans:prop key="mail.smtp.auth">true</beans:prop>
-      <!-- Gmail의 경우 보안문제 업데이트로 인해 SSLSocketFactory를 추가해서 smtp 사용 가능 -->
-      <beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
-      <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-      <beans:prop key="mail.debug">true</beans:prop>
-      <beans:prop key="mail.smtps.ssl.trust">*</beans:prop>
-      <beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
-      <!-- <beans:prop key="mail.smtps.checkserveridentity">true</beans:prop> -->
-      </beans:props>
-     </beans:property>
-    </beans:bean>
-	
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+			<beans:property name="host" value="smtp.gmail.com"/>
+			<beans:property name="port" value="587"/>
+			<beans:property name="username" value="kyoungjun4188"/> <!-- khdsaclass -->
+			<beans:property name="password" value="sqyljlzgoeydbxps"></beans:property> <!-- qgovcxfslpxupjzo -->
+			<beans:property name="javaMailProperties">
+				<beans:props>
+					<beans:prop key="mail.smtp.auth">true</beans:prop>
+					<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+					<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+					<beans:prop key="mail.debug">true</beans:prop>				
+					<beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
+					<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
+				</beans:props>
+			</beans:property>
+		</beans:bean>
 	
 	<context:component-scan base-package="kr.or.iei" />
 	<context:component-scan base-package="kr.or.member" />

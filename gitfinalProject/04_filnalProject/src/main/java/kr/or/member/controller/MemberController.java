@@ -1,15 +1,19 @@
 package kr.or.member.controller;
 
+import java.util.Random;
+
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.member.model.service.MailSenderService;
+//import kr.or.member.model.service.MailSenderService;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -18,7 +22,8 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	@Autowired
-	private MailSenderService mailService;
+	private JavaMailSender mailSender;
+	//private MailSenderService mailService;
 
 	// 로그인 폼 이동
 	@RequestMapping(value="/login.do")
@@ -55,20 +60,108 @@ public class MemberController {
 	public String checkId(String memberId, Model model) {
 		Member m = service.selectOneId(memberId);
 		if(m == null) {
+			// 아이디 사용 가능
 			return "0";
 		} else {
+			// 아이디 사용 불가능
 			return "1";
 		}
 	}
 	
-	// 이메일 인증
+	private int authNumber;
+	public void makeRandomNumber() {
+		// 난수 생성
+		Random r = new Random();
+		int checkNum = r.nextInt(888888) + 111111;
+		System.out.println("인증번호 : " + checkNum); // 인증번호 확인
+		authNumber = checkNum;
+	}
+	
+	// 이메일 인증 -> 질문
 	@ResponseBody
 	@RequestMapping(value="/emailCheck.do")
 	public String emailCheck(String email) {
+		makeRandomNumber();
+		String subject = "MovieIsland 회원 가입 인증 이메일 입니다.";
+		String content = "홈페이지를 방문해주셔서 감사합니다."
+						 + "<br>"
+						 + "인증번호는 " + authNumber + " 입니다"
+						 + "<br>" 
+						 + "해당 인증 번호를 인증번호 란에 기입하여 주세요.";
+		String from = "manager@movieIsland.com";
+		String to = email;
+
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+			// true는 멀티파트 메세지를 사용하겠다는 의미
+
+			/*
+			 * 단순한 텍스트 메세지만 사용시엔 아래의 코드도 사용 가능 MimeMessageHelper mailHelper = new
+			 * MimeMessageHelper(mail,"UTF-8");
+			 */
+
+			mailHelper.setFrom(from);
+			// 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
+			// 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
+			// mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
+			mailHelper.setTo(to);
+			mailHelper.setSubject(subject);
+			mailHelper.setText(content, true);
+			// true는 html을 사용하겠다는 의미입니다.
+
+			/*
+			 * 단순한 텍스트만 사용하신다면 다음의 코드를 사용하셔도 됩니다. mailHelper.setText(content);
+			 */
+
+			mailSender.send(mail);
+			return Integer.toString(authNumber);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "1";
+	}		
+		
+		/*
 		System.out.println("이메일 인증 요청이 들어옴");
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailService.emailCheck(email);
+		}
+		 */
+	
+	/*
+		Random r = new Random();
+		int checkNum = r.nextInt(888888) + 111111;
+		
+		// 이메일 전송
+		String setFrom = "rudwns4188@gamil.com";
+		String toMail = email;
+		String title = "회원가입 인증 이메일 입니다.";
+		String content = 
+				" 홈페이지를 방문해주셔서 감사합니다." + 
+				"<br><br>" +
+				"인증번호는 " + checkNum + "입니다" +
+				"<br>" +
+				"해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content, true);
+			mailSender.send(message);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return Integer.toString(checkNum);
 	}
+}
+*/
 	
 	// 회원가입
 	@RequestMapping(value="/join.do")
