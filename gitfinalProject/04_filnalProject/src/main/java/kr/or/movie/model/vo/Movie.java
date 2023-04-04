@@ -20,6 +20,7 @@ public class Movie {
 	private String movieDistributor;
 	private String fileSociety;
 	private String classicSociety;
-	
+	private String specialMovie;
+	private String enrollMember;
 	
 }
