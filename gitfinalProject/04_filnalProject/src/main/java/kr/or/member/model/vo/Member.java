@@ -13,5 +13,11 @@ public class Member {
 	private String memberPw;
 	private String memberName;
 	private String memberPhone;
+	private String memberBirTh;
 	private String memberEmail;
+	private int memberLevel;
+	private String enrollDate;
+	private String memberGender;
+	private String memberFilename;
+	private String memberFilepath;
 }

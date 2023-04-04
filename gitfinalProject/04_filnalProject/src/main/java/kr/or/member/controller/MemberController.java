@@ -1,6 +1,6 @@
 package kr.or.member.controller;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,15 +14,31 @@ import kr.or.member.model.vo.Member;
 public class MemberController {
 	@Autowired
 	private MemberService service;
-	
-	@RequestMapping(value = "/member.do")
-	public String member(Model model) {
-		ArrayList<Member> list = service.selectAllMember();
 
-		model.addAttribute("list", list);
-		
-		System.out.println("테스트2");
-		
-		return "member/member";
+	// 로그인
+	@RequestMapping(value="/login.do")
+	public String login(Member member, HttpSession session) {
+		Member m = service.selectOneMember(member);
+		if(m != null) {
+			session.setAttribute("m", m);
+		}
+		return "redirect:/";
 	}
+	
+	// 로그아웃
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	// 회원가입 폼 이동
+	@RequestMapping(value="/joinFrm.do")
+	public String joinFrm() {
+		return "member/memberFrm";
+	}
+	
+	
+	
+	
 }

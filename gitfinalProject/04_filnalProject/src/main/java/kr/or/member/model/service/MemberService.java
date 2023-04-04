@@ -13,8 +13,8 @@ public class MemberService {
 	@Autowired
 	private MemberDao dao;
 
-	public ArrayList<Member> selectAllMember() {
-		
-		return dao.selectAllMember();
+	// 로그인
+	public Member selectOneMember(Member member) {
+		return dao.selectOneMember(member);
 	}
 }
