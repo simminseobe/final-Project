@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="movie">
+	<insert id="insertMovie" parameterType="movie">
+	insert into movie_tbl values
+	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, 'admin')
+	</insert>
+	<insert id="insertMainFile" parameterType="movieFile">
+		insert into movie_file values(movie_file_seq.nextval, #{movieFileName}, #{movieFilePath}, '메인', 5)
+	</insert>
+	<insert id="insertPostFile" parameterType="movieFile">
+		insert into movie_file values(movie_file_seq.nextval, #{movieFileName}, #{movieFilePath}, '포스트', 5)
+	</insert>
+</mapper>
