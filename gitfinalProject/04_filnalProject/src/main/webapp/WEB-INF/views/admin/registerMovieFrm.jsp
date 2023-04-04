@@ -25,7 +25,7 @@
                             영화 등록 입력 양식
                         </div>
                         <div class="card-body">
-                            <form action="/registerMovie.do" method="get">
+                            <form action="/registerMovie.do" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="movieTitle">영화 제목</label>
                                     <input type="text" class="form-control" id="movieTitle" name="movieTitle"
@@ -72,6 +72,15 @@
                                     <input type="checkbox" id="classicSociety" name="classicSociety" value="Y">
                                     <label for="specialMovie">특별영화</label>
                                     <input type="checkbox" id="specialMovie" name="specialMovie" value="Y">
+                                </div>
+                                <div class="form-group">
+                                    <label for="movieMain">메인 이미지</label>
+                                    <input type="file" class="form-control-file" id="movieMain" name="movieMain">
+                                </div>
+                                <div class="form-group">
+                                    <label for="moviePoster">포스터 이미지</label>
+                                    <input type="file" multiple class="form-control-file" id="moviePoster"
+                                        name="moviePoster">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieContent">소개</label>
