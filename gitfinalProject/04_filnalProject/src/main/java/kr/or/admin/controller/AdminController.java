@@ -32,11 +32,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/registerMovie.do")
-	public String registerMovie(Movie movie, MultipartFile movieMain, MultipartFile[] moviePoster,
+	public String registerMovie(Movie movie, String movieVideo[], MultipartFile movieMain, MultipartFile[] moviePoster,
 			HttpServletRequest request) {
-		System.err.println(moviePoster);
-		System.out.println(movieMain);
-
 		MovieFile mainFile = new MovieFile();
 		ArrayList<MovieFile> postList = new ArrayList<MovieFile>();
 
@@ -64,15 +61,15 @@ public class AdminController {
 				postList.add(movieFile);
 			}
 
-			int result = service.insertMovie(movie, mainFile, postList);
-
-			if (result == (postList.size() + 2)) { // mainfile insert + postfile insert + board insert
-				return "admin/registerMovieFrm";
-			} else {
-				return "redirect:/";
-			}
 		}
+		
+		int result = service.insertMovie(movie, mainFile, postList, movieVideo);
 
-		return "admin/registerMovieFrm";
+		if (result == (postList.size() + 2 + movieVideo.length)) { // mainfile insert + postfile insert + board insert + insert movieVideo[]
+			return "admin/registerMovieFrm";
+		} else {
+			return "redirect:/";
+		}
 	}
+
 }

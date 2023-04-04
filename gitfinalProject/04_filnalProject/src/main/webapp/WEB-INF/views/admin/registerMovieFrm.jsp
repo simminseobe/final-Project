@@ -66,6 +66,14 @@
                                     <input type="text" class="form-control" id="movieRating" name="movieRating">
                                 </div>
                                 <div class="form-group">
+                                    <label for="movieVideo">영화 영상 링크</label>
+                                    <input type="text" class="form-control" id="movieVideo" name="movieVideo">
+                                    <input type="text" class="form-control" id="movieVideo" name="movieVideo">
+                                    <input type="text" class="form-control" id="movieVideo" name="movieVideo">
+                                    <input type="text" class="form-control" id="movieVideo" name="movieVideo">
+                                    <input type="text" class="form-control" id="movieVideo" name="movieVideo">
+                                </div>
+                                <div class="form-group">
                                     <label for="filmSociety">필름 소사이어티</label>
                                     <input type="checkbox" id="filmSociety" name="filmSociety" value="Y">
                                     <label for="classicSociety">클래식 소사이터티</label>

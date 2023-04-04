@@ -14,18 +14,24 @@ public class AdminService {
 	@Autowired
 	private AdminDao dao;
 
-	public int insertMovie(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList) {
+	public int insertMovie(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList, String[] movieVideo) {
 		int result = dao.insertMovie(movie);
-
+		
 		if (result > 0) {
+			// 파일 insert
 			mainFile.setMovieNo(movie.getMoviceNo());
 
 			result += dao.insertMainFile(mainFile);
-
+			
 			for (MovieFile file : postList) {
 				file.setMovieNo(movie.getMoviceNo());
 
 				result += dao.insertPostFile(file);
+			}
+			
+			// 영상 링크 insert
+			for (String link : movieVideo) {
+				result += dao.insertmovieVideo(link);
 			}
 		}
 

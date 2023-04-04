@@ -29,4 +29,11 @@ public class AdminDao {
 
 		return result;
 	}
+
+	
+	public int insertmovieVideo(String link) {
+		int result = sqlSession.insert("movie.insertmovieVideo", link);
+
+		return result;
+	}
 }
