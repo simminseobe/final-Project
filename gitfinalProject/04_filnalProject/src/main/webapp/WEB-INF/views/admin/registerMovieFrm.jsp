@@ -25,59 +25,62 @@
                             영화 등록 입력 양식
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="/registerMovie.do" method="get">
                                 <div class="form-group">
                                     <label for="movieTitle">영화 제목</label>
-                                    <input type="text" class="form-control" id="movieTitle" placeholder="영화 제목을 입력하세요">
+                                    <input type="text" class="form-control" id="movieTitle" name="movieTitle"
+                                        placeholder="영화 제목을 입력하세요">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieDirector">감독</label>
-                                    <input type="text" class="form-control" id="movieDirector"
+                                    <input type="text" class="form-control" id="movieDirector" name="movieDirector"
                                         placeholder="감독 이름을 입력하세요">
                                 </div>
                                 <div class="form-group">
-                                    <label for="movieDirector">배우</label>
-                                    <input type="text" class="form-control" id="movieDirector" placeholder="배우들을 입력하세요">
+                                    <label for="movieActor">배우</label>
+                                    <input type="text" class="form-control" id="movieActor" name="movieActor"
+                                        placeholder="배우들을 입력하세요">
                                 </div>
                                 <div class="form-group">
-                                    <label for="movieDirector">장르</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>드라마</option>
-                                        <option value="1">애니메이션</option>
-                                        <option value="2">액션</option>
-                                        <option value="3">어드벤처</option>
-                                        <option value="3">판타지</option>
-                                        <option value="3">뮤지컬</option>
+                                    <label for="movieGenre">장르</label>
+                                    <select class="form-select" id="movieGenre" name="movieGenre"
+                                        aria-label="Default select example">
+                                        <option value="드라마">드라마</option>
+                                        <option value="애니메이션">애니메이션</option>
+                                        <option value="액션">액션</option>
+                                        <option value="어드벤처">어드벤처</option>
+                                        <option value="판타지">판타지</option>
+                                        <option value="뮤지컬">뮤지컬</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="movieReleaseDate">개봉일</label>
-                                    <input type="date" class="form-control" id="movieReleaseDate">
+                                    <label for="movieDate">개봉일</label>
+                                    <input type="date" class="form-control" id="movieDate" name="movieDate">
                                 </div>
                                 <div class="form-group">
-                                    <label for="movieReleaseDate">상영시간</label>
-                                    <input type="text" class="form-control" id="movieReleaseDate">
+                                    <label for="movieTime">상영시간</label>
+                                    <input type="text" class="form-control" id="movieTime" name="movieTime">
                                 </div>
                                 <div class="form-group">
-                                    <label for="moviePoster">메인 이미지</label>
-                                    <input type="file" class="form-control-file" id="moviePoster">
+                                    <label for="movieRating">심의 등급</label>
+                                    <input type="text" class="form-control" id="movieRating" name="movieRating">
                                 </div>
                                 <div class="form-group">
-                                    <label for="moviePoster">포스트 이미지</label>
-                                    <input type="file" class="form-control-file" id="moviePoster">
+                                    <label for="filmSociety">필름 소사이어티</label>
+                                    <input type="checkbox" id="filmSociety" name="filmSociety" value="Y">
+                                    <label for="classicSociety">클래식 소사이터티</label>
+                                    <input type="checkbox" id="classicSociety" name="classicSociety" value="Y">
+                                    <label for="specialMovie">특별영화</label>
+                                    <input type="checkbox" id="specialMovie" name="specialMovie" value="Y">
                                 </div>
                                 <div class="form-group">
-                                    <label for="moviePoster">예고편 영상(링크를 걸어주세요.)</label>
-                                    <input type="text" class="form-control" id="movieReleaseDate">
-                                </div>
-                                <div class="form-group">
-                                    <label for="movieSynopsis">줄거리</label>
-                                    <textarea class="form-control" id="movieSynopsis" rows="3"></textarea>
+                                    <label for="movieContent">소개</label>
+                                    <textarea class="form-control" id="movieContent" name="movieContent"
+                                        rows="3"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col text-center">
-                                        <button class="btn btn-primary" type="submit"
-                                            onclick="location.replace('/form.php')">등록</button>
+                                        <button class="btn btn-primary" type="submit">영화 등록</button>
                                     </div>
                                 </div>
                             </form>

@@ -17,7 +17,7 @@ public class Movie {
 	private String movieDate;
 	private int movieRating;
 	private String movieContent;
-	private String fileSociety;
+	private String filmSociety;
 	private String classicSociety;
 	private String specialMovie;
 	private String enrollMember;

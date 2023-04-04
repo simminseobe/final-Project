@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.admin.model.service.AdminService;
+import kr.or.movie.model.vo.Movie;
 
 @Controller
 public class AdminController {
@@ -18,6 +19,13 @@ public class AdminController {
 
 	@RequestMapping(value = "/registerMovieFrm.do")
 	public String registerMovieFrm() {
+		return "admin/registerMovieFrm";
+	}
+
+	@RequestMapping(value = "/registerMovie.do")
+	public String registerMovie(Movie movie) {
+		int result = service.insertMovie(movie);
+
 		return "admin/registerMovieFrm";
 	}
 }
