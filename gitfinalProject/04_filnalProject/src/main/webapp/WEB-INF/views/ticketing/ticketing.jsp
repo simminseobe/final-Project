@@ -66,6 +66,7 @@
 				<div class="header-title" style="margin-top:30px; margin-bottom:30px;">
 					<h1 style="font-size:30px;">빠른예매</h1>
 					<h1><a href="/choiceSeat.do">좌석선택(test)</a></h1>
+					<h1><a href="/paymentMethod.do">결제수단(test)</a></h1>
 				</div>
 			</div>
 			<div class="content-wrap" style="height:500px;">
