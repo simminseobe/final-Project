@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class MovieVideo {
 	private int videoNo;
 	private String videoLink;
-	private String movieNo;
+	private int movieNo;
 }

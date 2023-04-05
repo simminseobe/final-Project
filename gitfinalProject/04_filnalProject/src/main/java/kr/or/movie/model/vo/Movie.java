@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Movie {
-	private int moviceNo;
+	private int movieNo;
 	private String movieTitle;
 	private String movieDirector;
 	private String movieActor;
@@ -25,4 +25,5 @@ public class Movie {
 	private String enrollMember;
 	private MovieFile mainFile;
 	private ArrayList<MovieFile> moviePost;
+	private ArrayList<String> movieLink;
 }

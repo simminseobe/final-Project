@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MovieVideo;
 
 @Repository
 public class AdminDao {
@@ -30,9 +31,8 @@ public class AdminDao {
 		return result;
 	}
 
-	
-	public int insertmovieVideo(String link) {
-		int result = sqlSession.insert("movie.insertmovieVideo", link);
+	public int insertmovieVideo(MovieVideo video) {
+		int result = sqlSession.insert("movie.insertmovieVideo", video);
 
 		return result;
 	}

@@ -13,6 +13,7 @@ import common.FileManager;
 import kr.or.admin.model.service.AdminService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MovieVideo;
 
 @Controller
 public class AdminController {
@@ -62,10 +63,21 @@ public class AdminController {
 			}
 
 		}
-		
-		int result = service.insertMovie(movie, mainFile, postList, movieVideo);
 
-		if (result == (postList.size() + 2 + movieVideo.length)) { // mainfile insert + postfile insert + board insert + insert movieVideo[]
+		ArrayList<MovieVideo> videoList = new ArrayList<MovieVideo>();
+
+		for (String link : movieVideo) {
+			MovieVideo video = new MovieVideo();
+
+			video.setVideoLink(link);
+
+			videoList.add(video);
+		}
+
+		int result = service.insertMovie(movie, mainFile, postList, videoList);
+
+		if (result == (postList.size() + 2 + videoList.size())) { // mainfile insert + postfile insert + board insert +
+																	// insert movieVideo[]
 			return "admin/registerMovieFrm";
 		} else {
 			return "redirect:/";
