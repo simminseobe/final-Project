@@ -33,7 +33,6 @@ public class AdminService {
 				result += dao.insertPostFile(file);
 			}
 
-			System.out.println(videoList.size());
 			// 영상 링크 insert
 			for (MovieVideo video : videoList) {
 

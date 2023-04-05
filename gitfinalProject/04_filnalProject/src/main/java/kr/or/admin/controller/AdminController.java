@@ -45,21 +45,19 @@ public class AdminController {
 			String mainFilename = movieMain.getOriginalFilename();
 			String mainFilepath = fileManager.upload(savePath, movieMain);
 
-			MovieFile movieFile = new MovieFile();
-
-			movieFile.setMovieFileName(mainFilename);
-			movieFile.setMovieFilePath(mainFilepath);
-
-			mainFile = movieFile;
+			mainFile.setMovieFileName(mainFilename);
+			mainFile.setMovieFilePath(mainFilepath);
 
 			for (MultipartFile file : moviePoster) {
 				String filename = file.getOriginalFilename();
 				String filepath = fileManager.upload(savePath, file);
 
-				movieFile.setMovieFileName(filename);
-				movieFile.setMovieFilePath(filepath);
+				MovieFile postFile = new MovieFile();
 
-				postList.add(movieFile);
+				postFile.setMovieFileName(filename);
+				postFile.setMovieFilePath(filepath);
+
+				postList.add(postFile);
 			}
 
 		}
@@ -73,6 +71,8 @@ public class AdminController {
 
 			videoList.add(video);
 		}
+
+		System.out.println(mainFile.getMovieFileName());
 
 		int result = service.insertMovie(movie, mainFile, postList, videoList);
 
