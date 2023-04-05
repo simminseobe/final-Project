@@ -177,10 +177,14 @@
 				color: #fff;
 				background-color: #333;
 				border-radius: 10px;
-				padding: 5px 5px 5px 5px;
+				padding: 5px 5px 5px 0;
 			}
 
-			.result-wrap {}
+			.result-wrap {
+				position: relative;
+				width: 300px;
+				height: 550px;
+			}
 
 			.result-title {}
 
@@ -190,7 +194,38 @@
 
 			.result-pay {}
 
-			.result-btn {}
+			.result-btn {
+				position: absolute;
+				overflow: hidden;
+				bottom: 5px;
+				width: 100%;
+				height: 40px;
+				
+			}
+			.pagePrevious{
+				display: block;
+				float: left;
+				margin: 0;
+				width: 150px;
+				height: 50px;
+				line-height: 40px;
+				background-color: #53565b;
+				color: #fff;
+				font-size: 20px;
+				text-align: center;
+			}
+			.pageNext{
+				display: block;
+				float: left;
+				margin: 0;
+				width: 150px;
+				height: 50px;
+				line-height: 40px;
+				background-color: #e0e0e0;
+				color: #aaaaaa;
+				font-size: 20px;
+				text-align: center;
+			}
 		</style>
 	</head>
 
@@ -390,7 +425,8 @@
 
 						</div>
 						<div class="result-btn">
-
+							<a href="/ticketing.do" class="pagePrevious">이전</a>
+							<a href="#" class="pageNext">다음</a>
 						</div>
 					</div>
 				</div>
