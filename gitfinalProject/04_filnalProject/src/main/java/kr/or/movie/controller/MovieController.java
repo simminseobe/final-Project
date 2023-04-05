@@ -15,4 +15,8 @@ public class MovieController {
 	public String allMovieList() {
 		return "movie/movieAllList";
 	}
+	@RequestMapping(value="/movieDetail.do")
+	public String detailMovie() {
+		return "movie/movieDetail";
+	}
 }

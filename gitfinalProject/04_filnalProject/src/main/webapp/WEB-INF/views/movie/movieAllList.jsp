@@ -37,9 +37,9 @@
                 <div class="movie-list-content-mid active-movie-more clearfix">
                     <div class="movie-all-list" style="margin-top: 25px; margin-left: 0px; width: 230px;">
                         <div class="movie-list-set"> 
-                        <a href="#">
+                        <a href="/movieDetail.do">
                             <div class="img-poster">
-                                <img src="img/리바운드.jpg" style="width: 230px; height:331px;">
+                                <img src="img/리바운드.jpg"style="width: 230px; height:331px;">
                             </div>
                             <div class="cover"></div>
                         </a>
@@ -484,9 +484,5 @@
         </div>
 	</div>
     <script src = "/resources/js/movieAllList.js"></script>
-    <script>
-
-
-    </script>
 </body>
 </html>

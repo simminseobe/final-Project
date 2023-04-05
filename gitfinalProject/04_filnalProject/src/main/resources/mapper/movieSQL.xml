@@ -5,4 +5,7 @@
 	insert into movie_tbl values
 	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, 'admin')
 	</insert>
+	<select id="movieList">
+		select * from movie_tbl
+	</select>
 </mapper>
