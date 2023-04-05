@@ -1,5 +1,7 @@
 package kr.or.movie.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Movie {
-	private int moviceNo;
+	private int movieNo;
 	private String movieTitle;
 	private String movieDirector;
 	private String movieActor;
@@ -21,5 +23,7 @@ public class Movie {
 	private String classicSociety;
 	private String specialMovie;
 	private String enrollMember;
-	
+	private MovieFile mainFile;
+	private ArrayList<MovieFile> moviePost;
+	private ArrayList<String> movieLink;
 }

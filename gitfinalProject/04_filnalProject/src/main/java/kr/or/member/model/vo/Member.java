@@ -13,7 +13,9 @@ public class Member {
 	private String memberPw;
 	private String memberName;
 	private String memberPhone;
-	private String memberBirTh;
+	private String memberBirthYear;
+	private String memberBirthMonth;
+	private String memberBirthDay;
 	private String memberEmail;
 	private int memberLevel;
 	private String enrollDate;
