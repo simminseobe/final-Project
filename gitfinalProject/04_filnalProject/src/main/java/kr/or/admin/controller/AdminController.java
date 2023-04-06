@@ -84,4 +84,8 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping(value = "/manageTheaterFrm.do")
+	public String manageTheaterFrm() {
+		return "admin/manageTheaterFrm";
+	}
 }

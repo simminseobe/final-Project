@@ -22,4 +22,8 @@ public class TicketingController {
 	public String choiceSeat() {
 		return "ticketing/seat";
 	}
+	@RequestMapping(value="/paymentMethod.do")
+	public String paymentMethod() {
+		return "ticketing/paymentMethod";
+	}
 }

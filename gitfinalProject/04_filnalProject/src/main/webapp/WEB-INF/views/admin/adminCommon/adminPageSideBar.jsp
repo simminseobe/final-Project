@@ -42,7 +42,7 @@
                                         <a class="nav-link" href="/registerMovieFrm.do">영화 등록</a>
                                     </nav>
                                 </div>
-                                <a class="nav-link" href="layout-sidenav-light.html">상영관 관리</a>
+                                <a class="nav-link" href="/manageTheaterFrm.do">상영관 관리</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">상영 스케줄 관리</a>
                             </nav>
                         </div>
