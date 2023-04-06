@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <html>
@@ -8,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href= "/resources/css/movieDetail.css">
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="movie-detail-top"  style="margin: 0 auto; margin-top: 100px;">
@@ -56,7 +58,8 @@
                 <li><a href="#">예고편/스틸컷</a></li>
             </ul>
             <div class = "detail-content-wrap">
-                <div class = "importantInfo-content detail">
+                <div class="importantInfo-content-wrap">
+                    <div class = "importantInfo-content detail" style="font-size:18px;">
                    농구선수 출신 공익근무요원 ‘양현’은
                         <br>
                         해체 위기에 놓인 부산중앙고 농구부의 신임 코치로 발탁된다.
@@ -88,16 +91,97 @@
                         <br>
                         모두가 불가능이라 말할 때, 우리는 ‘리바운드’라는 또 다른 기회를 잡는다.
                         <br>
-                        <div class="bottom-btn more close">
-                            <button type="button" id="more-btn">더보기</button>
+                        <div class="bottom-btn toggle">
+                            <button type="button" id="more-btn" class="more">더보기</button>
                         </div>
                     </div>
+                    <div class="movie-detail-info-wrap" style="margin-top: 20px;">
+                        <div class="movie-detail-info">
+                            <p>상영타입 : 2D</p>
+                            <div class="pLine">
+                            <p>감독 : 장항준</p>
+                            <p>장르 : 드라마/122분</p>
+                            <p>등급 : 12세이상관람가</p>
+                            <p>개봉일 : 2023.04.05</p>
+                            </div>
+                            <p>출연진 : 안재홍, 이신영, 정진운, 김택, 정건주, 기민, 안지호</p>
+                        </div>
+                    </div>
+                    <div class="detail-chart" style="margin-top: 20px; position: relative; width: 100%;">
+                        <div class="col"style="border: 1px solid black; position: absolute; top: 0px; width: 366.33px; height:380px; display:inline-block; float:left;">
+                            <div class="pointTxt" style="padding-top: 50px; font-size: 18px; line-height: 18px;">
+                                <h2>관람포인트</h2>
+                                <h2>스토리,연출</h2>
+                            </div>
+                            <div class="chart" style="text-align: center;">
+                                <canvas id="myChart" width="216" height="216" style="margin:0 auto;"></canvas>
+                            </div>
+                        </div>
+                        <div class="col" style="position: absolute; top: 0px; left:366px; border: 1px solid black; width: 366.33px; height:380px;">
+                            <div class="pointTxt" style=" margin: 0 auto; padding-top: 50px; text-align: center; font-size: 18px; line-height: 18px;">
+                                <h2>실관람평점</h2>
+                                <div class="circle" style="margin: 0 auto; margin-top: 30px; vertical-align: center; z-index: 12; width: 120px; height: 120px; line-height: 120px; background-color: #6543b1;  border-radius: 120px;">
+                                    <em>평점</em>
+                                </div>
+                                <div class="reserve-rate-circle" style="margin-top: 30px;">
+                                    <h3>예매율</h3>
+                                    <span id="rankTag" style="display:inline-block; margin-top: 20px; font-size: 24px;">예매율나옴%</span>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="col" style="position: absolute; top: 0px; right: 0; border: 1px solid black; width: 366px; height:380px;">
+                            <div class="pointTxt" style="padding-top: 50px; font-size: 18px; line-height: 18px;">
+                                <h2>누적관객수</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
         </div>
-
+        
     </div>
-
+    
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['영상미', '스토리', '배우', 'OST', '연출'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [19, 3, 5, 10, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false, 
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
     <script src = "/resources/js/movieDetail.js"></script>
 </body>
 </html>

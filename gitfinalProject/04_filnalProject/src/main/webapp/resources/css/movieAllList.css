@@ -74,7 +74,10 @@
     background-color: rgba(0,0,0,0.5);
     left: 0;
     top: 600px;
+    padding: 10px;
 }
+
+
 .movie-all-list>.movie-list-set>a{
     position: relative;
     text-decoration: none;
@@ -117,3 +120,5 @@
 height: 2150px;
 display: block
 }
+
+

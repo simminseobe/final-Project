@@ -89,6 +89,7 @@
 }
 
 .importantInfo-content{
+    padding-bottom: 70px;
     position: relative;
     display: none;
     
@@ -101,17 +102,47 @@
     left: 0;
 }
 
-
 .importantInfo-content{
-height: 100px;
+height: 200px;
 display: block;
 overflow: hidden;
 }
 
+.movie-detail-info>.pLine p:first-child {
+    padding: 0;
+}
+.movie-detail-info>.pLine p{
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 20px;
+    
+}
+.movie-detail-info p{
+ font-size: 14px;
+}
+.pointTxt{
+    text-align: center;
+}
 
+.col>.pointTxt>.circle{
+   background-color: #432e75;
+    z-index: 12;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    border-radius: 120px;
+    margin: 0 auto;
+}
 
-
-
+.movie-all-list{
+    width: 275px; 
+    box-sizing: border-box; 
+    display: flex;
+    padding: 10px;
+    flex: 1;
+    margin: 0 0 0 60px;
+}
 
 
 
