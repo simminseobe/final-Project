@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.logo-wrap{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.wrapper>div>a>img{
+    width: 250px;
+    height: 55px;
+}
+
+.wrapper>p{
+    margin: 0 auto;
+    padding: 0 0 30px 0;
+    font-size: 1.8666em;
+    color: #503396;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.nav-header{
+    width: 550px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.nav-header>ul{
+    width: 100%;
+    height: 42px;
+}
+
+.tabs{
+    list-style-type: none;
+    width: 100%;
+}
+
+.tabs>li{
+    float: left;
+    width: calc(100%/2);
+    text-align: center;
+    line-height: 50px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 1.0667em;
+    box-sizing: border-box;
+}
+
+.active-tab{
+    box-sizing: border-box;
+    border-bottom: 2.5px solid #503396;
+    color: #503396;
+}
+
+.tabcontent{
+    width: 550px;
+    margin: 0 auto;
+    display: none;
+}
+
+.tabcontent>h2{
+    margin-top: 40px;
+    padding-bottom: 15px;
+}
+
+.table-wrap{
+    border-top: 1px solid black;
+    border-spacing: 2px;
+}
+
+input{
+    border: 1px solid #adb5bd;
+}
+
+table{
+    border-collapse: collapse;
+    empty-cells: show;
+}
+
+.table>tbody>tr>th>label{
+    cursor: pointer;
+}
+
+.table-wrap tbody th {
+    width: 130px;
+    height: 50px;
+    background: #f7f8f9;
+    height: 50px;
+    padding: 7px 15px;
+    text-align: left;
+    border-bottom: 1px solid #d1d5dd;
+    box-sizing: border-box;
+}
+
+.table-wrap tbody td {
+    width: 390px;
+    height: 50px;
+    padding: 7px 15px;
+    text-align: left;
+    border-bottom: 1px solid #d1d5dd;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+.input-text{
+    width: 250px;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 30px;
+    color: #444;
+    border: 1px solid #d8d9db;
+
+}
+
+.wrapper .btn-member-button{
+    padding: 40px 0 0 0;
+    text-align: center;
+}
+
+.wrapper .btn-member-button .button{
+    width: 200px;
+    height: 50px;
+    padding: 0;
+    font-size: 20px;
+    background: #503396;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 40px;
+}
+
+.wrapper .btn-member-button>button>a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.wrapper .btn-member-button .button:hover{
+    background: #351c6f;
+    color: #fff;
+}
