@@ -37,7 +37,7 @@
                     <dd>특별관 안내</dd>
                 </dl>
                 <dl>
-                    <dt>스토어</dt>
+                    <dt><a href="/allGiftList.do">스토어</a></dt>
                     <dd>메가티켓</dd>
                     <dd>메가찬스</dd>
                     <dd>스페셜굿즈/콤보</dd>
@@ -133,8 +133,7 @@
         <div class="right">
             <ul>
                 <li><a href="#">고객센터</a></li>
-                <li><a href="#">멤버쉽</a></li>
-                <li><a href="#">VIP</a></li>
+                <li><a href="/mypage.do">마이페이지</a></li>
             </ul>
             <button type="button" onclick="alert('준비중입니다.')">상영시간표</button>
             <button type="button" onclick="qTicketing();">빠른예매</button>
