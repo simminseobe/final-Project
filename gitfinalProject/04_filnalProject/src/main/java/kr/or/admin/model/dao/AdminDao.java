@@ -1,5 +1,8 @@
 package kr.or.admin.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,5 +38,11 @@ public class AdminDao {
 		int result = sqlSession.insert("movie.insertmovieVideo", video);
 
 		return result;
+	}
+
+	public ArrayList<String> selectTheaterAddrList(String theaterLocal) {
+		List list = sqlSession.selectList("theater.selectTheaterAddr", theaterLocal);
+
+		return (ArrayList<String>) list;
 	}
 }

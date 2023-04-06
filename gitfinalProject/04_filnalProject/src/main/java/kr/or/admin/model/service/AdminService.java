@@ -44,4 +44,10 @@ public class AdminService {
 
 		return result;
 	}
+
+	public ArrayList<String> selectTheaterAddr(String theaterLocal) {
+		ArrayList<String> theaterAddrList = dao.selectTheaterAddrList(theaterLocal);
+
+		return theaterAddrList;
+	}
 }
