@@ -208,6 +208,11 @@
 	</dependencies>
     <build>
         <plugins>
+			<!-- mac pom.xml 오류 수정 플러그인 -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+			</plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>

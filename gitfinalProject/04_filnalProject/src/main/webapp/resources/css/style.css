@@ -11,7 +11,7 @@ body { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; }
 .age_12::before { display: inline-block; content: '12'; margin-right: 17px;  width: 20px; height: 19px; line-height: 19px; text-align: center; color: #FFF; font-weight: 300; font-size: 14px; border: 1px solid #005b94; border-radius: 5px; background-color: #1993d2; }
 .age_15::before { display: inline-block; content: '15'; margin-right: 17px;  width: 20px; height: 19px; line-height: 19px; text-align: center; color: #FFF; font-weight: 300; font-size: 14px; border: 1px solid #b57916; border-radius: 5px; background-color: #eba621; }
 .age_19::before { display: inline-block; content: '19'; margin-right: 17px;  width: 20px; height: 19px; line-height: 19px; text-align: center; color: #FFF; font-weight: 300; font-size: 14px; border: 1px solid #9e2432; border-radius: 5px; background-color: #cd2027; }
-.main_content { height: calc(100vh - 210px); }
+.main_content { min-height: calc(100vh - 210px); width: 1200px; margin: 50px auto 0; }
 
 /*skip menu area*/
 .skip { position: absolute; left: 0; top: 0; line-height: 50px; text-align: center; background-color: #503396; }
