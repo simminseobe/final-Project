@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="movie">
+	<insert id="insertMovie" parameterType="movie">
+	insert into movie_tbl values
+	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, 'admin')
+	<selectKey resultType="_int" order="AFTER" keyProperty="movieNo">
+		select max(movie_no) from movie_tbl
+	</selectKey>
+	</insert>
+	<insert id="insertMainFile" parameterType="movieFile">
+		insert into movie_file values(movie_file_seq.nextval, #{movieFileName}, #{movieFilePath}, '메인', #{movieNo})
+	</insert>
+	<insert id="insertPostFile" parameterType="movieFile">
+		insert into movie_file values(movie_file_seq.nextval, #{movieFileName}, #{movieFilePath}, '포스트', #{movieNo})
+	</insert>
+	<insert id="insertmovieVideo" parameterType="movieVideo">
+		insert into movie_video values(movie_video_seq.nextval, #{videoLink}, #{movieNo})
+	</insert>
+	<select id="movieList">
+		select * from movie_tbl
+	</select>
+</mapper>

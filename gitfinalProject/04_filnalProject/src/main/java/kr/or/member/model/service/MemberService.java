@@ -17,4 +17,17 @@ public class MemberService {
 	public Member selectOneMember(Member member) {
 		return dao.selectOneMember(member);
 	}
+
+	// 아이디 중복체크
+	public Member selectOneId(String memberId) {
+		return dao.selectOneId(memberId);
+	}
+
+	
+	
+	// 회원가입
+	public int insertMember(Member m) {
+		return dao.insertMember(m);
+	}
+	
 }

@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.movie-list-wrap{
+    margin: 0 auto;
+}
+.movie-list-menu>ul{
+    display: flex;
+   
+}
+.movie-list-menu>ul>li{
+    margin-top: 30px;
+    list-style:none;
+    height: 40px;
+    line-height: 40px;
+    background-color: yellow;
+    width: calc(100% / 5);
+    text-align: center;
+    border: 1px solid black;
+}
+
+.btn-onair{
+    width: 100px;
+    height: 20px;
+
+}
+.movie-list-content-top{
+    overflow: hidden;
+}
+.searchBox{
+    position: relative;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    float: right;
+}
+.searchBox>input{
+    width: 150px;
+    height: 34px;
+    padding: 0 10px;
+    margin-right: 30px;  
+    border-style: none;
+    border-radius: 5px;
+}
+
+.searchBox>img{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    right: 0px;
+   
+
+}
+.movie-info{
+    overflow: hidden;
+}
+.reserve-rate{
+    float: left;
+    padding-top: 20px;
+    margin-right: 20px;
+   
+}
+.start-date{ 
+    padding-top: 20px;
+}
+
+.cover{
+    position: absolute;
+    width: 230px;
+    height: 331px;
+    background-color: rgba(0,0,0,0.5);
+    left: 0;
+    top: 600px;
+}
+.movie-all-list>.movie-list-set>a{
+    position: relative;
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    color: #000;
+    overflow: hidden;
+    width: 230px;
+    height: 331px;
+    
+}
+
+.movie-all-list>.movie-list-set>a:hover>.cover{
+    top: 0;
+}
+.movie-all-list{
+    float: left;
+    margin-left: 60px;
+}
+
+
+.movie-list-content-mid{
+    position: relative;
+    display: none;
+    
+}
+.bottom-btn>#more-btn{
+    width: 1100px;
+    height: 40px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+}
+
+.active-movie-more{
+    height: 1600px;
+   overflow: hidden;
+}
+.active-movie-more{
+height: 2150px;
+display: block
+}
