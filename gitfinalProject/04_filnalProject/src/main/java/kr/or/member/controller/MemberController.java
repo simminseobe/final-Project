@@ -56,7 +56,7 @@ public class MemberController {
 	
 	// 아이디 중복체크 -> 질문
 	@ResponseBody
-	@RequestMapping(value="/checkId.do", produces = "application/json;charset=utf-8")
+	@RequestMapping(value="/checkId.do", produces="application/json;charset=utf-8")
 	public String checkId(String memberId, Model model) {
 		Member m = service.selectOneId(memberId);
 		if(m == null) {
