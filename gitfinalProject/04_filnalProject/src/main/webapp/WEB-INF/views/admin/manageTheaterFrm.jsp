@@ -115,8 +115,9 @@
                         data: { theaterLocal: theaterLocal },
                         success: function (theaterAddrList) {
                             console.log(theaterAddrList);
+                            console.log(theaterAddrList.get(0).theaterAddrList);
 
-                            // const option = $(`<option value="${theaterAddrList.get(0)}">${theaterAddrList.get(0)}</option>`);
+                            // const option = $(`<option value="${theaterAddrList.theaterAddr.get(0)}">${theaterAddrList.theaterAddr.get(0)}</option>`);
 
                             // console.log(option.text());
                         },

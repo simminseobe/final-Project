@@ -48,6 +48,8 @@ public class AdminService {
 	public ArrayList<String> selectTheaterAddr(String theaterLocal) {
 		ArrayList<String> theaterAddrList = dao.selectTheaterAddrList(theaterLocal);
 
+//		System.out.println(theaterAddrList.get(0));
+
 		return theaterAddrList;
 	}
 }

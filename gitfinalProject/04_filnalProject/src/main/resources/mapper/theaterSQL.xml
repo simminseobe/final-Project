@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="theater">
   <select id="selectTheaterAddr" parameterType="String" resultType="theater">
-  	select theater_addr  from theater_tbl
+  	select theater_addr as theaterAddr  from theater_tbl
 	where theater_local = #{_parameter}
   </select>
 </mapper>
