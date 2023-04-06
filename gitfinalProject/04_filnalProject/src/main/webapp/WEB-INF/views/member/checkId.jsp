@@ -10,14 +10,17 @@
 <link rel="stylesheet" href="/resources/css/checkId.css">
 </head>
 <body>
+
 	<div id="idCheck">
 		<c:choose>
-			<c:when test="${result == 0 }">
-				<div>
+			<c:when test="${empty m.memberId }">
+				<div class="first-div">
 					[<span class="join-text">${m.memberId }</span>] 는 사용 가능한 아이디입니다.
 				</div>
 				<br><br>
-				<button type="button" class="close-button" id="closeBtn">닫기</button>
+                <div class="btn-wrap">
+                    <button type="button" class="close-button" id="closeBtn">닫기</button>
+                </div>
 				
 				<script>
 					$("#closeBtn").on("click", function() {
@@ -27,11 +30,10 @@
 						self.close();
 					});
 				</script>
-				
 			</c:when>
 		</c:choose>
-		<c:otherwise>
-			<div>
+		<c:if test="${not empty m.memberId }">
+			<div class="second-div">
 				[<span class="join-text">${m.memberId }</span>] 는 이미 사용중인 아이디입니다.
 				<br><br>
 				<form action="/checkId.do" method="post">
@@ -41,7 +43,8 @@
 					</div>
 				</form>
 			</div>
-		</c:otherwise>
+		</c:if>
 	</div>
+	
 </body>
 </html>

@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-//import kr.or.member.model.service.MailSenderService;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -23,7 +22,6 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private JavaMailSender mailSender;
-	//private MailSenderService mailService;
 
 	// 로그인 폼 이동
 	@RequestMapping(value="/login.do")
@@ -55,16 +53,18 @@ public class MemberController {
 	}
 	
 	// 아이디 중복체크 -> 질문
-	@ResponseBody
-	@RequestMapping(value="/checkId.do", produces="application/json;charset=utf-8")
+	@RequestMapping(value="/checkId.do")
 	public String checkId(String memberId, Model model) {
 		Member m = service.selectOneId(memberId);
+		System.out.println("model" + m);
 		if(m == null) {
 			// 아이디 사용 가능
-			return "0";
+			model.addAttribute("m", m);
+			return "member/checkId";
 		} else {
 			// 아이디 사용 불가능
-			return "1";
+			model.addAttribute("m", m);
+			return "member/checkId";
 		}
 	}
 
@@ -131,7 +131,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-
 	//마이페이지 이동
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {

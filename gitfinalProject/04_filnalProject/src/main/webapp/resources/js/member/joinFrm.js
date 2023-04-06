@@ -13,13 +13,13 @@ $("[name=memberId]").on("change", function() {
     if(check) {
         $.ajax({
             url : "/checkId.do",
-            type : 'POST',
+            type : 'GET',
             data : {memberId:memberId},
             success : function(data) {
-                if(data == "1") {
+                if(data != null) {
                     $("#idCheck").text("이미 사용중인 아이디 입니다.");
                     $("#idCheck").css("color", "red");
-                } else if(data == "0"){
+                } else if(data == null){
                     $("#idCheck").text("사용 가능한 아이디입니다.");
                     $("#idCheck").css("color", "green");
                     result[0] = true;
@@ -37,7 +37,7 @@ $("[name=memberId]").on("change", function() {
 });
 
 $("#idChkBtn").on("click", function() {
-    const memberId = $("#memberId").val();
+    const memberId = $("[name=memberId]").val();
     if(memberId == "") {
         alert("아이디를 입력하세요.");
         return;

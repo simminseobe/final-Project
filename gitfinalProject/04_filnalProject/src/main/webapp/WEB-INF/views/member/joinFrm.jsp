@@ -20,11 +20,11 @@
 			<div class="essential">
 				<span>
           <sup>* </sup>
-            필수입력사항
+            	필수입력사항
         </span>
 			</div>
 			<form action="/checkId.do" name="checkIdFrm" method="POST">
-        <input type="hidden" name="checkId">
+        	<input type="text" name="checkId">
 			</form>
 			
 			<form action="/join.do" method="post">
