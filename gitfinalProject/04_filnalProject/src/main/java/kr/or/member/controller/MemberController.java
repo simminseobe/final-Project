@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -53,18 +55,16 @@ public class MemberController {
 	}
 	
 	// 아이디 중복체크 -> 질문
+	@ResponseBody
 	@RequestMapping(value="/checkId.do")
-	public String checkId(String memberId, Model model) {
-		Member m = service.selectOneId(memberId);
-		System.out.println("model" + m);
+	public String checkId(String checkId, Model model) {
+		Member m = service.selectOneId(checkId);
 		if(m == null) {
 			// 아이디 사용 가능
-			model.addAttribute("m", m);
-			return "member/checkId";
+			return "ok";
 		} else {
 			// 아이디 사용 불가능
-			model.addAttribute("m", m);
-			return "member/checkId";
+			return "error";
 		}
 	}
 
@@ -141,6 +141,22 @@ public class MemberController {
 	@RequestMapping(value="/findIdFrm.do")
 	public String findIdFrm() {
 		return "member/findId";
+	}
+	
+	// 아이디 찾기(모달창 띄워서 데이터 전송)
+	@ResponseBody
+	@RequestMapping(value="/findId.do", produces = "application/json;charset=utf-8")
+	public String searchId(Member m) {
+		Member member = service.searchId(m);
+		return new Gson().toJson(member);
+	}
+	
+	// 비밀번호 찾기(모달창 띄워서 데이터 전송)
+	@ResponseBody
+	@RequestMapping(value="/findPw.do", produces = "application/json;charset=utf-8")
+	public String findPw(Member m) {
+		Member member = service.selectPw(m);
+		return new Gson().toJson(member);
 	}
 	
 	

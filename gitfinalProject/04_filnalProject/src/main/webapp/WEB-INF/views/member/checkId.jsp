@@ -13,9 +13,9 @@
 
 	<div id="idCheck">
 		<c:choose>
-			<c:when test="${empty m.memberId }">
+			<c:when test="${result eq 'ok' }">
 				<div class="first-div">
-					[<span class="join-text">${m.memberId }</span>] 는 사용 가능한 아이디입니다.
+					[<span class="join-text">${checkId }</span>] 는 사용 가능한 아이디입니다.
 				</div>
 				<br><br>
                 <div class="btn-wrap">
@@ -25,16 +25,15 @@
 				<script>
 					$("#closeBtn").on("click", function() {
 						const checkId = $(".join-text").text();
-						const inputId = $("#memberId", opener.document);
-						inputId.val(id);
+						const inputId = $("#inputId", opener.document);
+						inputId.val(checkId);
 						self.close();
 					});
 				</script>
 			</c:when>
-		</c:choose>
-		<c:if test="${not empty m.memberId }">
+			<c:otherwise>
 			<div class="second-div">
-				[<span class="join-text">${m.memberId }</span>] 는 이미 사용중인 아이디입니다.
+				[<span class="join-text">${checkId }</span>] 는 이미 사용중인 아이디입니다.
 				<br><br>
 				<form action="/checkId.do" method="post">
 					<div class="id-wrap">
@@ -43,7 +42,9 @@
 					</div>
 				</form>
 			</div>
-		</c:if>
+			</c:otherwise>
+		</c:choose>
+		
 	</div>
 	
 </body>

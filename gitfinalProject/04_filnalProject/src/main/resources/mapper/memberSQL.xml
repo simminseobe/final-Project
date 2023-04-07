@@ -49,4 +49,18 @@
   	#{memberEmail}, 1, to_char(sysdate,'yyyy-mm-dd'), #{memberGender}, NULL, NULL)
   </insert>
   
+  <!-- 비밀번호 찾기 -->
+  <select id="selectPw" parameterType="m" resultType="m">
+  	select
+  		member_pw as memberPw
+  	from member where member_id=#{memberId} and member_name=#{memberName} and member_email=#{memberEmail}
+  </select>
+  
+  <!-- Modal창 아이디, 가입일 찾기 -->
+  <select id="searchId" parameterType="m" resultType="m">
+  	select
+  		member_id as memberId, enroll_date as enrollDate
+  	from member where member_name=#{memberName} and member_phone=#{memberPhone}
+  </select>
+  
 </mapper>

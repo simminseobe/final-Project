@@ -7,21 +7,22 @@
 // 아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자
 $("[name=memberId]").on("change", function() {
     const memberId = $(this).val();
-    const idReg =  /^[a-z]+[a-z0-9]{5,19}$/g;
-    const inputId = $(this).val();
-    const check = idReg.test(inputId);
-    if(check) {
+    const idReg =  /^[a-z]+[a-z0-9]{5,19}$/g
+    const checkResult = idReg.test(memberId);
+    console.log(checkResult);
+    if(checkResult) {
         $.ajax({
             url : "/checkId.do",
             type : 'GET',
-            data : {memberId:memberId},
+            data : {checkId:memberId},
             success : function(data) {
-                if(data != null) {
-                    $("#idCheck").text("이미 사용중인 아이디 입니다.");
-                    $("#idCheck").css("color", "red");
-                } else if(data == null){
+                console.log(data);
+                if(data == "ok") {
                     $("#idCheck").text("사용 가능한 아이디입니다.");
                     $("#idCheck").css("color", "green");
+                } else{
+                    $("#idCheck").text("이미 사용중인 아이디 입니다.");
+                    $("#idCheck").css("color", "red");
                     result[0] = true;
                 }
             },
@@ -36,6 +37,7 @@ $("[name=memberId]").on("change", function() {
     }
 });
 
+// 아이디 중복체크 버튼
 $("#idChkBtn").on("click", function() {
     const memberId = $("[name=memberId]").val();
     if(memberId == "") {
