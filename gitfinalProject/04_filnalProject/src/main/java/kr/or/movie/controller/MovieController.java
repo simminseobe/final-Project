@@ -25,10 +25,10 @@ public class MovieController {
 	}
 
 	
-	/*@RequestMapping(value="/movieDetail.do")
-	public String detailMovie() {
-		List<Movie> list = service.movieList();
-		
+	@RequestMapping(value="/movieDetail.do")
+	public String detailMovie(int movieNo, Model model) {
+		Movie mov = service.selectOneMovie(movieNo);
+		model.addAttribute("mov", mov);
 		return "movie/movieDetail";
-	}*/
+	}
 }

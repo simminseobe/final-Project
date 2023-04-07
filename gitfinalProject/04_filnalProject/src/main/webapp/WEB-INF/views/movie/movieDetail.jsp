@@ -13,13 +13,14 @@
 </head>
 <body>
     <div class="movie-detail-top"  style="margin: 0 auto; margin-top: 100px;">
-        <div class="bg-img" style="background-image:url('https://img.megabox.co.kr/SharedImg/2023/03/17/u3QIqDdXhaAoIZTQoyz1blmF8n9aPeLw_570.jpg'); background-repeat: no-repeat; background-size:100%;"></div>
+    	
+        <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
         <div class="bg-mask">
             <div class="movie-detail-top-content" style="position: relative;">
                 <p class="d-day" style="float: left;">예매D-1</p>
                 <p class="contents-type" style="font-size: 22px; width: 300px; margin-left: 10px; display: inline-block;">#무비아일랜드토크 #무대인사</p>
-                <p class="title" style="font-size: 54px; position: absolute; left: 0; top: 100px;">리바운드</p>
+                <p class="title" style="font-size: 54px; position: absolute; left: 0; top: 100px;">${mov.movieTitle }</p>
                 <div class="btn-like" style="position: absolute; top: 35%;">
                     <button type="button" class="likeBtn" style="width: 150px; height: 40px;">
                         <i class="heart-icon">
@@ -41,8 +42,9 @@
                     <p class="audienceCount" style="text-align: center; font-size: 36px;">10000<span class="audienceSpan" style="font-size: 12px;"> 명</span></pre>
                 </div>
                 <div class="poster-img" style="position: absolute; top: 10%; right: 0;">
-                    <img src="/img/리바운드.jpg" style="border-radius: 10px; width: 260px; height: 375px;">
+                    <img src="/resources/upload/movie/${mov.mainFile.movieFileName}" style="border-radius: 10px; width: 260px; height: 375px;">
                 </div>
+               
                 <div class="detailReservBtnWap" style="position: absolute; bottom: 7%; right: 0;">
                     <button type="button" style="width: 260px; height: 46px; border-radius: 5px; background-color: #329eb1; color: white; font-size: 18px;">예약하기</button>
                 </div>
@@ -58,39 +60,9 @@
                 <li><a href="#">예고편/스틸컷</a></li>
             </ul>
             <div class = "detail-content-wrap">
-                <div class="importantInfo-content-wrap">
+                <div class="importantInfo-content-wrap" style="display: none;"><!--===================================-->
                     <div class = "importantInfo-content detail" style="font-size:18px;">
-                   농구선수 출신 공익근무요원 ‘양현’은
-                        <br>
-                        해체 위기에 놓인 부산중앙고 농구부의 신임 코치로 발탁된다.
-                        <br>
-                        하지만 전국대회에서의 첫 경기 상대는 고교농구 최강자 용산고.
-                        <br>
-                        팀워크가 무너진 중앙고는 몰수패라는 치욕의 결과를 낳고
-                        <br>
-                        학교는 농구부 해체까지 논의하지만,
-                        <br>
-                        ‘양현’은 MVP까지 올랐던 고교 시절을 떠올리며 다시 선수들을 모은다.
-                        <br>
-                        주목받던 천재 선수였지만 슬럼프에 빠진 가드 ‘기범’
-                        <br>
-                        부상으로 꿈을 접은 올라운더 스몰 포워드 ‘규혁’
-                        <br>
-                        점프력만 좋은 축구선수 출신의 괴력 센터 ‘순규’
-                        <br>
-                        길거리 농구만 해온 파워 포워드 ‘강호’
-                        <br>
-                        농구 경력 7년 차지만 만년 벤치 식스맨 ‘재윤’
-                        <br>
-                        농구 열정만 만렙인 자칭 마이클 조던 ‘진욱’까지
-                        <br>
-                        <br>
-                        아무도 주목하지 않은 최약체 팀이었지만 신임 코치와 6명의 선수가
-                        <br>
-                        2012년 전국 고교농구대회에서 써 내려간 8일간의 기적
-                        <br>
-                        모두가 불가능이라 말할 때, 우리는 ‘리바운드’라는 또 다른 기회를 잡는다.
-                        <br>
+                   		${mov.movieContent}
                         <div class="bottom-btn toggle">
                             <button type="button" id="more-btn" class="more">더보기</button>
                         </div>
@@ -99,12 +71,12 @@
                         <div class="movie-detail-info">
                             <p>상영타입 : 2D</p>
                             <div class="pLine">
-                            <p>감독 : 장항준</p>
-                            <p>장르 : 드라마/122분</p>
-                            <p>등급 : 12세이상관람가</p>
-                            <p>개봉일 : 2023.04.05</p>
+                            <p>감독 : ${mov.movieDirector}</p>
+                            <p>장르 : ${mov.movieGenre}/${mov.movieTime}</p>
+                            <p>등급 : ${mov.movieRating}세이상관람가</p>
+                            <p>개봉일 : ${mov.movieDate}</p>
                             </div>
-                            <p>출연진 : 안재홍, 이신영, 정진운, 김택, 정건주, 기민, 안지호</p>
+                            <p>출연진 : ${mov.movieActor}</p>
                         </div>
                     </div>
                     <div class="detail-chart" style="margin-top: 20px; position: relative; width: 100%;">
@@ -135,7 +107,70 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!--========주요정보 끝나는 자리==================================================-->
+                <div class="reviewAllWrap"><!--실관람평 시작 자리-->
+                   <div class="reaviewHeadSawBtnWrap">
+                        <div class="reviewHead">
+                            <h2>영화이름에 대한<span style="color:#01738b;">123456</span>개의 이야기가 있어요.</h2>
+                        </div>
+                        <div class="sawMovie">
+                            <button type="button" class="sawMovieBtn">본 영화 등록</button>
+                        </div>
+                    </div>
+
+                    <div class="reviewAllCountWrap">
+                        <div class="reviewAllCount" style="font-weight: bold;">
+                            <button>전체 <span style="color:#01738b;">123456</span>건</button>
+                        </div>
+                        <div class="reviewSearchBtn">
+                            <span><button>최신순</button></span>
+                            <span><button>공감순</button></span>
+                            <span><button>평점순</button></span>
+                        </div>
+                    </div>
+                    <div class="userReviewInfoWrap">
+                        <div class="userReviewInfo">
+                            <img src="img/관리자-50.png">
+                            <p class="user-id">MOVIEISLAND</p>
+                        </div>
+                        <div class="reviewText">
+                            <span class="reviewTextTit">영화이름</span>
+                            "재미있게 보셨나요? 영화의 어떤 점이 좋았는지 이야기해주세요."
+                            <br>
+                            관람일 기준 7일 이내 등록 시 
+                            <br>
+                            <span>50P</span>
+                            가 적립됩니다.
+                            <br>
+                            포인트는 관람평 최대 10편 지급가능합니다.
+                            <br>
+                        </div>
+                        <div class="reviewContentWrite" style="font-size: 15px;">
+                            <a href="#" style="color: #666666;">관람평 쓰기</a>
+                        </div>
+                    </div>
+                    <div class="userReviewInfoWrap">
+                        <div class="userReviewInfo">
+                            <img src="img/사용자-50.png">
+                            <p class="user-id">userId**</p>
+                        </div>
+                        <div class="reviewText">
+                            <div class="reviewTextTit">
+                                <span>관람평</span>
+                            </div>
+                            <div class="reviewTextPoint">
+                                <span>10</span>
+                            </div>
+                            <div class="reviewTextPointCom">
+                                <em>연출 외</em>
+                                <em>+4</em>
+                            </div>
+                        </div>
+                        <div class="reviewContentWrite" style="font-size: 15px;">
+                            <a href="#" style="color: #666666;">관람평 쓰기</a>
+                        </div>
+                    </div>
+                </div><!--실관람평 내용 끝나는 자리-->
             </div>
             
         </div>
@@ -181,6 +216,14 @@
                 }
             }
         });
+/*===========================================================================================================================================*/
+
+    
+
+
+
+
+
         </script>
     <script src = "/resources/js/movieDetail.js"></script>
 </body>

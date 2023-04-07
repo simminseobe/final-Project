@@ -42,23 +42,29 @@
                                 <c:forEach items="${list}" var="po">
                                 <div class="movie-all-list" style="margin-top: 25px; ">
                                     <div class="movie-list-set" style="overflow: hidden;">
-                                        <a href="/movieDetail.do">
+                                        <a href="/movieDetail.do?movieNo=${po.movieNo}">
+                                        	
                                             <div class="img-poster">
                                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
-                                                
+                                 
                                             </div>
                                             <div class="cover" style=" color:white; padding: 10px;">
                                                 <div class="coverMovieContent" style="font-size: 12px;">
                                                     <p>${po.movieContent}</p>
                                                 </div>
-                                                <div class="coverMovieRate" style="padding-top: 10px; margin: 0 auto; text-align: center;">
-                                                    <p style="font-size: 18px;">과람평</p>
+                                                <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; padding-top: 10px; margin: 0 auto; text-align: center;">
+                                                    <p style="font-size: 18px;">관람평</p>
+                                                    <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
+                                                        <p>점수</p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            
                                         </a>
 
                                         <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
                                             <p class="movie-title" >${po.movieTitle }</p>
+                                            <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                                         </div>
                                         <div class="reserve-rate" style="font-size: 18px;">
                                             <p>예매율%</p>
@@ -89,14 +95,6 @@
                             <!-- ================================================================================================================================================ -->
                             <!-- ================================================================================================================================================ -->
                             
-                            
-
-                          
-
-
-
-
-                            
                         </div>
                         <div class="bottom-btn">
                             <button type="button" id="more-btn">더보기</button>
@@ -105,6 +103,45 @@
                 </div>
             </div>
             </div>
+            <script>
+                  function test1() {
+            $.ajax({
+                url : 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=71cbebfb432511f450b163d5ba780945&targetDt=20230405&weekGb=1',
+                type : 'get',
+                dataType : 'json',
+                success : function(data) {
+                    console.log(data.boxOfficeResult);
+            }
+            }
+
+        )}
+		
+        $(".movie-list-set").on("click",function(){
+        	const inputMovieTitle=$(".inputMovieTitle").val();
+
+        	$.ajax({
+                url : 'http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=079dc5f01aab66e87cb9c6689349c5b6&movieNm=inputMovieTitle',
+                type : 'get',
+                dataType : 'json',
+                success : function(data) {
+                    console.log(data.movieListResult.dailyBoxOfficeList[0].audiAcc)
+            		const audiCount =data.boxOfficeResult.dailyBoxOfficeList[0].audiAcc;
+                    
+                }
+            });
+        });
+                  
+                  
+                  
+       
+            
+
+
+
+            </script>
+
+
+
             <script src="/resources/js/movieAllList.js"></script>
         </body>
 
