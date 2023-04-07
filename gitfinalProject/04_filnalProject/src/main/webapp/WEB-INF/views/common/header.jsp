@@ -21,7 +21,7 @@
                 <li><a href="#">큐레이션</a></li>
                 <li><a href="#">영화관</a></li>
                 <li><a href="#">특별관</a></li>
-                <li><a href="#">스토어</a></li>
+                <li><a href="/allGiftList.do">스토어</a></li>
                 <li><a href="#">이벤트</a></li>
                 <c:choose>
 	                <c:when test="${empty sessionScope.m }">
