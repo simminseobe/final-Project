@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -44,5 +45,11 @@ public class AdminDao {
 		List list = sqlSession.selectList("theater.selectTheaterAddr", theaterLocal);
 
 		return (ArrayList<String>) list;
+	}
+
+	public int insertTheater(Theater theater) {
+		int result = sqlSession.insert("theater.insertTheater", theater);
+
+		return result;
 	}
 }

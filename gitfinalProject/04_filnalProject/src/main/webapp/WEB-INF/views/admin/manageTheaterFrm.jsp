@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <div class="container">
                                 <h1>영화관 등록</h1>
-                                <form>
+                                <form action="/registerTheater.do" method="get">
                                     <div class="form-group">
                                         <label for="theaterLocal">지역</label>
                                         <select class="form-select" id="theaterLocal" name="theaterLocal"
@@ -45,7 +45,6 @@
                                         <label for="theaterAddr">영화관 상세 지역</label>
                                         <select class="form-select" id="theaterAddr" name="theaterAddr"
                                             aria-label="Default select example">
-                                            <option value="없음">없음</option>
                                         </select>
                                         <button type="button" class="theaterAddr">지역 상세 조회</button>
                                     </div>
@@ -114,12 +113,16 @@
                         type: "get",
                         data: { theaterLocal: theaterLocal },
                         success: function (theaterAddrList) {
-                            console.log(theaterAddrList);
-                            console.log(theaterAddrList.get(0).theaterAddrList);
+                            $("[name=theaterAddr]").empty();
 
-                            // const option = $(`<option value="${theaterAddrList.theaterAddr.get(0)}">${theaterAddrList.theaterAddr.get(0)}</option>`);
+                            for (let index = 0; index < theaterAddrList.length; index++) {
+                                const option = $("<option>");
 
-                            // console.log(option.text());
+                                option.val(theaterAddrList[index].theaterAddr);
+                                option.text(theaterAddrList[index].theaterAddr);
+
+                                $("[name=theaterAddr]").append(option);
+                            }
                         },
                         error: function () {
                             alert("서버 연결 실패");
