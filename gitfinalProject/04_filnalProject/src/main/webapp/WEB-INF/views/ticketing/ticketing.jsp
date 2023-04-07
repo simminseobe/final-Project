@@ -115,14 +115,12 @@
 		</div>
 		<script>
 			function test1(){
-
-				
 				$.ajax({
-				url: "https://megabox.co.kr/on/oh/ohb/SimpleBooking/selectBokdList.do",
+				url: "https://www.lottecinema.co.kr/LCWS/Ticketing/TicketingData.aspx",
 				type: "GET",
+				dataType : 'json',
 				success : function(data){
 					console.log(data);
-
 				}
 			});
 			

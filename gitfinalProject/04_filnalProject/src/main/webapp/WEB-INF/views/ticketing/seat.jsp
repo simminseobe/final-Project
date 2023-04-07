@@ -227,7 +227,7 @@
 					width: 150px;
 					height: 50px;
 					line-height: 40px;
-					background-color: #e0e0e0;
+					background-color: #e0e0e0;	/*좌석선택 후 다음버튼 color:#fff , bg-color:#329eb1*/
 					color: #aaaaaa;
 					font-size: 20px;
 					text-align: center;
