@@ -1,12 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-        <title>관리자 페이지</title>
-    </head>
-
-    <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageHeader.jsp"></jsp:include>
         <div id="layoutSidenav">
             <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageSideBar.jsp"></jsp:include>
@@ -570,6 +562,3 @@
                 <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
             </div>
         </div>
-    </body>
-
-    </html>
