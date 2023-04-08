@@ -199,7 +199,7 @@ cursor: pointer;
     width: 1100px;
     overflow: hidden;
     margin-bottom: 20px;
-    
+    position: relative;
 }
 .userReviewInfo{
     width: 105px;
@@ -217,7 +217,7 @@ cursor: pointer;
    border-top-left-radius: 5px;
    border-bottom-left-radius: 5px;
     display: inline-block;
-    float: left;
+    
 }
 
 .reviewContentWrite{
@@ -229,6 +229,8 @@ cursor: pointer;
     border-bottom-right-radius: 5px;
     text-align: center;
     line-height: 84px;
+    position: absolute;
+    top: 0;
 }
 
 .infoWrap2{
@@ -327,7 +329,6 @@ cursor: pointer;
     bottom: 40px;
     color: lightgrey;
 }
-
 
 
 

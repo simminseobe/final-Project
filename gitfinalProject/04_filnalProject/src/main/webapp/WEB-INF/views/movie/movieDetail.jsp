@@ -10,10 +10,68 @@
 <link rel="stylesheet" href= "/resources/css/movieDetail.css">
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.modal {
+	/*position을 absolute에서 fixed로 변경
+            왜냐? fixed를 하면 스크롤을 내려도 그 자리에 고정되어 있기때문에*/
+	/*box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            여기에 있던 이것을 modal_content로 이동*/
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center; /*justfy-content는 가로축을 중심축으로 함*/
+	align-items: center; /*align-items는 세로축을 중심축으로 함
+                                즉, center를 넣으면 세로축의 중앙으로 정렬하게 됨*/
+    z-index: 5;
+                            }
+
+.modal_overlay {
+	/*모달 전체 배경색 설정*/
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+   z-index: 6;
+    
+}
+
+.modal_content {
+    z-index: 7;
+	background-color: white;
+	padding: 10px 10px;
+	text-align: center;
+	position: relative;
+	top: 0px;
+	width: 500px;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+		rgba(0, 0, 0, 0.23);
+       
+}
+/*.hidden {
+	display: none;
+}*/
+
+</style>
 </head>
 <body>
     <div class="movie-detail-top"  style="margin: 0 auto; margin-top: 100px;">
-    	
+        <div class="modal hidden"><!--모달로 댓글 작성 들어가는 자리-->
+            <div class="modal_overlay"></div>
+            <div class="modal_content"><!--모달 댓글 내부화면-->
+                <div class="modalClose">
+                    <span>관람평 작성하기</span>
+                </div>
+                <div class="modalStar">
+                
+                </div>
+
+
+            </div><!--모달 댓글 내부화면 끝-->
+        </div><!--class="modal hidden 모달끝-->
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
         <div class="bg-mask">
@@ -109,7 +167,7 @@
                     </div>
                 </div><!--========주요정보 끝나는 자리==================================================-->
                 <div class="reviewAllWrap"><!--실관람평 시작 자리-->
-                   <div class="reaviewHeadSawBtnWrap">
+                    <div class="reaviewHeadSawBtnWrap">
                         <div class="reviewHead">
                             <h2>영화이름에 대한<span style="color:#01738b;">123456</span>개의 이야기가 있어요.</h2>
                         </div>
@@ -146,7 +204,8 @@
                             <br>
                         </div>
                         <div class="reviewContentWrite" style="font-size: 15px;">
-                            <a href="#" style="color: #666666;">관람평 쓰기</a>
+                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
+                           
                         </div>
                     </div>
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
@@ -188,8 +247,8 @@
                     </div><!--본인작성댓글 끝-->
                         <!--타인이 작성한 댓글이 시작되는 자리 -->
                               <div class="infoWap2Top">
-                                <div class=" infoWrap2">
-                                    <div class="userReviewInfo2">
+                                  <div class=" infoWrap2">
+                                      <div class="userReviewInfo2">
                                         <img src="img/사용자-50.png">
                                         <p class="user-id">userId**</p>
                                     </div>
@@ -223,12 +282,16 @@
                                     <span>몇분전으로 나옴</span>
                                 </div>
                             </div><!--타인이 작성한 댓글 끝나는 자리-->
-                </div><!--실관람평 내용 끝나는 자리-->
+                         
+
+
+
+
+                        </div><!--실관람평 내용 끝나는 자리-->
+                    </div>
+                </div>    
             </div>
             
-        </div>
-        
-    </div>
     
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -270,7 +333,23 @@
             }
         });
 /*===========================================================================================================================================*/
+/*===============모달OPEN=================*/
+const openButton=document.getElementById("open");
+   const modal = document.querySelector(".modal");
 
+   /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
+   const overlay = modal.querySelector(".modal_overlay");
+   const closeBtn = modal.querySelector("#close1");
+   const openModal  = () => {
+       modal.classList.remove("hidden");
+   }
+
+   const closeModal = () => {
+       modal.classList.add("hidden");
+   }
+   overlay.addEventListener("click",closeModal);
+   closeBtn.addEventListener("click",closeModal);
+   openButton.addEventListener("click",openModal);
         </script>
     <script src = "/resources/js/movieDetail.js"></script>
 </body>
