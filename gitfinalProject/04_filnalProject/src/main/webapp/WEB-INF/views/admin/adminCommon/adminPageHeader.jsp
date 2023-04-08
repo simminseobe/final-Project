@@ -6,15 +6,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- Simple-datatables 7.1.2 CSS-->
+        <meta name="description" content="" />
+        <meta name="author" content="" />
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <!-- Bootstrap CSS 5.2.3  CSS-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-        <!-- Templates Bootstrap 5.2.3 기반-->
         <link href="/resources/css/admin/styles.css" rel="stylesheet" />
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-        <!-- Fontawesome-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
