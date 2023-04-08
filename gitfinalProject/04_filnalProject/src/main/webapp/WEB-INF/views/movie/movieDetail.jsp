@@ -149,27 +149,80 @@
                             <a href="#" style="color: #666666;">관람평 쓰기</a>
                         </div>
                     </div>
-                    <div class="userReviewInfoWrap">
-                        <div class="userReviewInfo">
-                            <img src="img/사용자-50.png">
-                            <p class="user-id">userId**</p>
-                        </div>
-                        <div class="reviewText">
-                            <div class="reviewTextTit">
-                                <span>관람평</span>
+                    <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
+                    <div class="infoWap2Top">
+                        <div class=" infoWrap2">
+                            <div class="userReviewInfo2">
+                                <img src="img/사용자-50.png">
+                                <p class="user-id">userId**</p>
                             </div>
-                            <div class="reviewTextPoint">
-                                <span>10</span>
-                            </div>
-                            <div class="reviewTextPointCom">
-                                <em>연출 외</em>
-                                <em>+4</em>
+                            <div class="Text2">
+                                <div class="Tit2">
+                                    <p>관람평</p>
+                                </div>
+                                <div class=" Point2">
+                                    <p>10</p>
+                                </div>
+                                <div class="PointCom">
+                                    <p>연출 외</p>
+                                    <p>+4</p>
+                                </div>
+                                <div class="reviewTextContent">
+                                    <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
+                                </div>
+                                <div class="reviewTextLike">
+                                    <img src="img/like-24.png">
+                                    <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px;">
+                                        <p>0</p>
+                                    </div>
+                                </div>
+                                <div class="reviewContentWrite2" style="font-size: 15px;">
+                                    <a href="#" style="color: #666666;">수정</a>
+                                    <a href="#" style="color: #666666;">삭제</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="reviewContentWrite" style="font-size: 15px;">
-                            <a href="#" style="color: #666666;">관람평 쓰기</a>
+                        <div class="reviewDate">
+                            <span>몇분전으로 나옴</span>
                         </div>
-                    </div>
+                    </div><!--본인작성댓글 끝-->
+                        <!--타인이 작성한 댓글이 시작되는 자리 -->
+                              <div class="infoWap2Top">
+                                <div class=" infoWrap2">
+                                    <div class="userReviewInfo2">
+                                        <img src="img/사용자-50.png">
+                                        <p class="user-id">userId**</p>
+                                    </div>
+                                    <div class="Text2">
+                                        <div class="Tit2">
+                                            <p>관람평</p>
+                                        </div>
+                                        <div class=" Point2">
+                                            <p>10</p>
+                                        </div>
+                                        <div class="PointCom">
+                                            <p>연출 외</p>
+                                            <p>+4</p>
+                                        </div>
+                                        <div class="reviewTextContent">
+                                            <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
+                                        </div>
+                                        <div class="reviewTextLike">
+                                            <img src="img/like-24.png">
+                                            <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px;">
+                                                <p>0</p>
+                                            </div>
+                                        </div>
+                                        <div class="reviewContentWrite2" style="font-size: 15px;">
+                                            <a href="#" style="color: #666666;">수정</a>
+                                            <a href="#" style="color: #666666;">삭제</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reviewDate">
+                                    <span>몇분전으로 나옴</span>
+                                </div>
+                            </div><!--타인이 작성한 댓글 끝나는 자리-->
                 </div><!--실관람평 내용 끝나는 자리-->
             </div>
             
@@ -217,12 +270,6 @@
             }
         });
 /*===========================================================================================================================================*/
-
-    
-
-
-
-
 
         </script>
     <script src = "/resources/js/movieDetail.js"></script>
