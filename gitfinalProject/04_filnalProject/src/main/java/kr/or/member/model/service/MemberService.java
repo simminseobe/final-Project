@@ -23,11 +23,19 @@ public class MemberService {
 		return dao.selectOneId(memberId);
 	}
 
-	
-	
 	// 회원가입
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
+	}
+
+	// 비밀번호 찾기
+	public Member selectPw(Member m) {
+		return dao.selectPw(m);
+	}
+
+	// Modal 아이디, 가입일 띄우기
+	public Member searchId(Member m) {
+		return dao.searchId(m);
 	}
 	
 }

@@ -30,4 +30,18 @@ public class MemberDao {
 		int result = sqlSession.insert("member.insertMember", m);
 		return result;
 	}
+
+	// 비밀번호 찾기
+	public Member selectPw(Member m) {
+		Member member = sqlSession.selectOne("member.selectPw", m);
+		return member;
+	}
+
+	// Modal 아이디, 가입일 띄우기
+	public Member searchId(Member m) {
+		//System.out.println(m);
+		Member member = sqlSession.selectOne("member.searchId", m);
+		//System.out.println(member);
+		return member;
+	}
 }
