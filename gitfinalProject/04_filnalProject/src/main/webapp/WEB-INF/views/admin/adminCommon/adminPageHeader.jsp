@@ -6,12 +6,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- simple-datatables -->
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <!-- Templates BootStrap 5.2.3 기반 -->
         <link href="/resources/css/admin/styles.css" rel="stylesheet" />
         <!-- fontawesome -->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+        <!-- 일반 js는 adminPageFooter에 -->
         <title>관리자 페이지</title>
     </head>
 

@@ -3,8 +3,7 @@
     <html>
 
     <head>
-        <meta charset="UTF-8">
-        <title>Insert title here</title>
+        <title>영화 등록</title>
     </head>
 
     <body class="sb-nav-fixed">

@@ -38,7 +38,7 @@
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">영화 목록</a>
+                                        <a class="nav-link" href="/MovieList.do">영화 목록</a>
                                         <a class="nav-link" href="/registerMovieFrm.do">영화 등록</a>
                                     </nav>
                                 </div>

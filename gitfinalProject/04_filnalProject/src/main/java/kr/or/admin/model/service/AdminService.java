@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.dao.AdminDao;
 import kr.or.admin.model.vo.Theater;
+import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -16,6 +17,8 @@ import kr.or.movie.model.vo.MovieVideo;
 public class AdminService {
 	@Autowired
 	private AdminDao dao;
+	@Autowired
+	private MovieDao movieDao;
 
 	@Transactional
 	public int insertMovie(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList,
@@ -60,5 +63,11 @@ public class AdminService {
 		int result = dao.insertTheater(theater);
 
 		return result;
+	}
+
+	public ArrayList<Movie> selectMovieList() {
+		ArrayList<Movie> list = movieDao.selectMovieAll();
+
+		return list;
 	}
 }
