@@ -52,4 +52,10 @@ public class AdminDao {
 
 		return result;
 	}
+
+	public ArrayList<Theater> selectTheaterList() {
+		List list = sqlSession.selectList("theater.selectTheaterList");
+
+		return (ArrayList<Theater>) list;
+	}
 }

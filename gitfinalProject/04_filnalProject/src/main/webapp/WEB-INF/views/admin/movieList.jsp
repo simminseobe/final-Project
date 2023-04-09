@@ -53,8 +53,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="movie" items="${list}" begin="0" end="100" step="1"
-                                                varStatus="status">
+                                            <c:forEach items="${list}" var="movie">
                                                 <tr>
                                                     <td>${movie.movieNo}</td>
                                                     <td>${movie.movieTitle}</td>
@@ -65,8 +64,8 @@
                                                     <td>${movie.movieTime}</td>
                                                     <td>${movie.movieRating}</td>
                                                     <td>${movie.movieRating}</td>
-                                                    <td><button>수정</button></td>
-                                                    <td><button>삭제</button></td>
+                                                    <td><button onclick="">수정</button></td>
+                                                    <td><button onclick="">삭제</button></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

@@ -88,7 +88,11 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageTheaterFrm.do")
-	public String manageTheaterFrm() {
+	public String manageTheaterFrm(Model model) {
+		ArrayList<Theater> list = service.selectTheaterList();
+
+		model.addAttribute("list", list);
+
 		return "admin/manageTheaterFrm";
 	}
 

@@ -70,4 +70,10 @@ public class AdminService {
 
 		return list;
 	}
+
+	public ArrayList<Theater> selectTheaterList() {
+		ArrayList<Theater> list = dao.selectTheaterList();
+
+		return list;
+	}
 }
