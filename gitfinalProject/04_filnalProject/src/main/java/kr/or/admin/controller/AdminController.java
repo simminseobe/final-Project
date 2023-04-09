@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import common.FileManager;
 import kr.or.admin.model.service.AdminService;
 import kr.or.admin.model.vo.Theater;
+import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -24,6 +25,8 @@ import kr.or.movie.model.vo.MovieVideo;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	@Autowired
+	private MovieService movieServie;
 	@Autowired
 	private FileManager fileManager;
 
@@ -124,5 +127,20 @@ public class AdminController {
 		model.addAttribute("list", list);
 
 		return "admin/movieList";
+	}
+
+	@RequestMapping(value = "/updateMovieFrm.do")
+	public String updateMovieFrm(int movieNo, Model model) {
+		Movie movie = movieServie.selectOneMovie(movieNo);
+
+		model.addAttribute("movie", movie);
+
+		return "admin/updateMovieFrm";
+	}
+
+	@RequestMapping(value = "/updateMovie.do")
+	public String updateMovie() {
+		int result = service.boardUpdate(board, fileList, fileNo);
+		return "";
 	}
 }

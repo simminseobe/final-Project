@@ -64,8 +64,14 @@
                                                     <td>${movie.movieTime}</td>
                                                     <td>${movie.movieRating}</td>
                                                     <td>${movie.movieRating}</td>
-                                                    <td><button onclick="">수정</button></td>
-                                                    <td><button onclick="">삭제</button></td>
+                                                    <td>
+                                                        <button class="update-movie-btn"
+                                                            onclick="updateMovie(this);">수정</button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="delete-movie-btn"
+                                                            onclick=" deleteMovie(this);">삭제</button>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -77,6 +83,21 @@
                     <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
                 </div>
             </div>
+            <script>
+                function updateMovie(button) {
+                    const movieNo = $(button).parent().parent().children().eq(0).text();
+
+                    console.log(movieNo);
+
+                    location.href = "/updateMovieFrm.do?movieNo=" + movieNo;
+                }
+
+                function deleteMovie(button) {
+                    const movieNo = $(button).parent().parent().children().eq(0).text();
+
+                    console.log(movieNo);
+                }
+            </script>
         </body>
 
         </html>
