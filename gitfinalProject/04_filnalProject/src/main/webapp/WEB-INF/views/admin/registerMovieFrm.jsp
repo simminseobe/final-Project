@@ -106,11 +106,11 @@
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-outline-secondary"
                                                 id="inputGroupFileAddon04" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#main-post-modal">
                                                 미리보기
                                             </button>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                            <div class="modal fade" id="main-post-modal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -123,7 +123,7 @@
                                                             <div class="container-fluid">
                                                                 <div class="row">
                                                                     <div class="d-flex justify-content-center">
-                                                                        <img src="/resources/upload/movie/리바운드 메인.jpg">
+                                                                        <img id="main-post-image">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -145,8 +145,8 @@
                                             aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-secondary"
-                                            id="inputGroupFileAddon04" data-bs-toggle="movie-post-modal"
-                                            data-bs-target="movie-post-modal">
+                                            id="inputGroupFileAddon04" data-bs-toggle="modal"
+                                            data-bs-target="#movie-post-modal">
                                             미리보기
                                         </button>
                                         <!-- Modal -->
@@ -163,29 +163,12 @@
                                                         <div class="container-fluid">
                                                             <div class="row">
                                                                 <div class="col-md-4 my-2">
-                                                                    <p class="h6">사진 1</p>
-                                                                    <img class="img-fluid"
-                                                                        src="/resources/upload/movie/리바운드 메인.jpg">
+                                                                    <img id="movie-post-image" class="img-fluid">
                                                                 </div>
+                                                            </div>
+                                                            <div class="row">
                                                                 <div class="col-md-4 my-2">
-                                                                    <img class="img-fluid"
-                                                                        src="/resources/upload/movie/리바운드 메인.jpg">
-                                                                </div>
-                                                                <div class="col-md-4 my-2">
-                                                                    <img class="img-fluid"
-                                                                        src="/resources/upload/movie/리바운드 메인.jpg">
-                                                                </div>
-                                                                <div class="col-md-4 my-2">
-                                                                    <img class="img-fluid"
-                                                                        src="/resources/upload/movie/리바운드 메인.jpg">
-                                                                </div>
-                                                                <div class="col-md-4 my-2">
-                                                                    <img class="img-fluid"
-                                                                        src="/resources/upload/movie/리바운드 메인.jpg">
-                                                                </div>
-                                                                <div class="col-md-4 my-2">
-                                                                    <img class="img-fluid"
-                                                                        src="/resources/upload/movie/리바운드 메인.jpg">
+                                                                    <img id="movie-post-image" class="img-fluid">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -216,6 +199,31 @@
                 <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
             </div>
         </div>
+        <script>
+            $("#movieMain").on("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $("#main-post-image").attr("src", e.target.result);
+                }
+
+                reader.readAsDataURL(file);
+            })
+
+            $("#moviePoster").on("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $("#movie-post-image").attr("src", e.target.result);
+                }
+
+                reader.readAsDataURL(file);
+            })
+        </script>
     </body>
 
     </html>
