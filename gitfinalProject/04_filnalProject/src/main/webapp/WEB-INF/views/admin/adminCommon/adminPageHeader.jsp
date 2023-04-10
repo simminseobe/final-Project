@@ -14,6 +14,10 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+        <!-- summernote -->
+        <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+        <script src="/resources/summernote/summernote-lite.js"></script>
+        <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
         <!-- 일반 js는 adminPageFooter에 -->
         <title>관리자 페이지</title>
     </head>

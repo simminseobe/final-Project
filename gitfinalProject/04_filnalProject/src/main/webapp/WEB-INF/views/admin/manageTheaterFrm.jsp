@@ -42,14 +42,13 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="theaternewAddr">지점 입력</label>
-                                            <input type="text" class="form-control" id="theaternewAddr"
-                                                name="theaternewAddr">
+                                            <label for="theaterBranch">지점 입력</label>
+                                            <input type="text" class="form-control" id="theaterBranch"
+                                                name="theaterBranch">
                                         </div>
                                         <div class="form-group">
-                                            <label for="theaternewAddr">주소 입력</label>
-                                            <input type="text" class="form-control" id="theaternewAddr"
-                                                name="theaternewAddr">
+                                            <label for="theaterAddr">주소 입력</label>
+                                            <input type="text" class="form-control" id="theaterAddr" name="theaterAddr">
                                         </div>
                                         <div class="form-group">
                                             <label for="movieContent">극장 설명</label>
@@ -63,7 +62,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="container">
+                                <!-- <div class="container">
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
@@ -84,13 +83,23 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </main>
                     <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
                 </div>
                 <script>
+                    $("#movieContent").summernote({
+                        height: 400,
+                        lang: "ko-KR",
+                        callbacks: {
+                            onImageUpload: function (files) {
+                                uploadImage(files[0], this);
+                            }
+                        }
+                    });
+
                     $(".theaterAddr").on("click", function () {
                         const theaterLocal = $(this).parent().prev().children().eq(1).val();
 

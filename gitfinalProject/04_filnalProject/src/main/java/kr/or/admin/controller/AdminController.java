@@ -91,10 +91,10 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageTheaterFrm.do")
-	public String manageTheaterFrm(Model model) {
-		ArrayList<Theater> list = service.selectTheaterList();
-
-		model.addAttribute("list", list);
+	public String manageTheaterFrm() {
+//		ArrayList<Theater> list = service.selectTheaterList();
+//
+//		model.addAttribute("list", list);
 
 		return "admin/manageTheaterFrm";
 	}
@@ -110,8 +110,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/registerTheater.do")
-	public String registerTheater(Theater theater, String theaternewAddr) {
-		int result = service.insertTheater(theater, theaternewAddr);
+	public String registerTheater(Theater theater) {
+		int result = service.insertTheater(theater);
 
 		if (result > 0) {
 			return "admin/manageTheaterFrm";
