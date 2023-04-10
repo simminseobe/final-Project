@@ -13,7 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-//import kr.or.member.model.service.MailSenderService;
+import com.google.gson.Gson;
+
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -23,7 +24,6 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private JavaMailSender mailSender;
-	//private MailSenderService mailService;
 
 	// 로그인 폼 이동
 	@RequestMapping(value="/login.do")
@@ -56,28 +56,28 @@ public class MemberController {
 	
 	// 아이디 중복체크 -> 질문
 	@ResponseBody
-	@RequestMapping(value="/checkId.do", produces = "application/json;charset=utf-8")
-	public String checkId(String memberId, Model model) {
-		Member m = service.selectOneId(memberId);
+	@RequestMapping(value="/checkId.do")
+	public String checkId(String checkId, Model model) {
+		Member m = service.selectOneId(checkId);
 		if(m == null) {
 			// 아이디 사용 가능
-			return "0";
+			return "ok";
 		} else {
 			// 아이디 사용 불가능
-			return "1";
+			return "error";
 		}
 	}
-	
+
 	private int authNumber;
+	// 이메일 인증을 위한 랜덤 난수 생성
 	public void makeRandomNumber() {
-		// 난수 생성
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
 		System.out.println("인증번호 : " + checkNum); // 인증번호 확인
 		authNumber = checkNum;
 	}
 	
-	// 이메일 인증 -> 질문
+	// 이메일 인증
 	@ResponseBody
 	@RequestMapping(value="/emailCheck.do")
 	public String emailCheck(String email) {
@@ -123,45 +123,6 @@ public class MemberController {
 
 		return "1";
 	}		
-		
-		/*
-		System.out.println("이메일 인증 요청이 들어옴");
-		System.out.println("이메일 인증 이메일 : " + email);
-		return mailService.emailCheck(email);
-		}
-		 */
-	
-	/*
-		Random r = new Random();
-		int checkNum = r.nextInt(888888) + 111111;
-		
-		// 이메일 전송
-		String setFrom = "rudwns4188@gamil.com";
-		String toMail = email;
-		String title = "회원가입 인증 이메일 입니다.";
-		String content = 
-				" 홈페이지를 방문해주셔서 감사합니다." + 
-				"<br><br>" +
-				"인증번호는 " + checkNum + "입니다" +
-				"<br>" +
-				"해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-		
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom);
-			helper.setTo(toMail);
-			helper.setSubject(title);
-			helper.setText(content, true);
-			mailSender.send(message);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return Integer.toString(checkNum);
-	}
-}
-*/
 	
 	// 회원가입
 	@RequestMapping(value="/join.do")
@@ -174,6 +135,28 @@ public class MemberController {
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
 		return "member/mypage";
+	}
+
+	// 아이디 찾기 폼 이동
+	@RequestMapping(value="/findIdFrm.do")
+	public String findIdFrm() {
+		return "member/findId";
+	}
+	
+	// 아이디 찾기(모달창 띄워서 데이터 전송)
+	@ResponseBody
+	@RequestMapping(value="/findId.do", produces = "application/json;charset=utf-8")
+	public String searchId(Member m) {
+		Member member = service.searchId(m);
+		return new Gson().toJson(member);
+	}
+	
+	// 비밀번호 찾기(모달창 띄워서 데이터 전송)
+	@ResponseBody
+	@RequestMapping(value="/findPw.do", produces = "application/json;charset=utf-8")
+	public String findPw(Member m) {
+		Member member = service.selectPw(m);
+		return new Gson().toJson(member);
 	}
 	
 	

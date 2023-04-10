@@ -17,7 +17,51 @@
 	<insert id="insertmovieVideo" parameterType="movieVideo">
 		insert into movie_video values(movie_video_seq.nextval, #{videoLink}, #{movieNo})
 	</insert>
-	<select id="movieList">
+	<select id="movieList" resultType="movie">
 		select * from movie_tbl
 	</select>
+	<select id="selectMovieAll" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember
+		 from movie_tbl
+	</select>
+	<select id="selectMovieFile" resultType="movieFile" parameterType="_int">
+			select 
+			movie_file_no as movieFileNo,
+			movie_file_name as movieFileName,
+			movie_file_path as movieFilePath,
+			movie_file_category as movieFileCategory,
+			movie_no as movieNo
+			from movie_file where movie_file_category='메인' and movie_no=#{movieNo}
+	</select>
+	<select id="selectOneMovie" parameterType="_int" resultType="movie">
+			select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember
+		 from movie_tbl where movie_no=#{movieNo}
+	</select>
+	
 </mapper>

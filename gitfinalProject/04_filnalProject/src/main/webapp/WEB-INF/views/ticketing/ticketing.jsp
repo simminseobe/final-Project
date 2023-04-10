@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<!DOCTYPE html>
-	
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<html>
 
 	<head>
@@ -88,8 +88,22 @@
 					<div class="choice-movie">
 						<div class="choice choice-header">
 							<p>영화</p>
-							<div class="movie-list" style="background-color: #fff; height: 340px;">
-								<h1><button onclick="test1()">영화목록</button></h1>
+							<div class="list-area">
+								<div class="movie-list" style="background-color: #fff; height: 340px;">
+									<div class="scroll-container">
+										<ul>
+											<c:forEach items="${list }" var="movieList">
+												<li>
+													<div class="oneMovie">
+														<span class="movie-grade age-12">${movieList.movieRating }</span>
+														<span class="movie-title">${movieList.movieTitle }</span>
+														<i class="heart">관심영화</i>
+													</div>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -114,19 +128,7 @@
 			</div>
 		</div>
 		<script>
-			function test1(){
-
-				
-				$.ajax({
-				url: "https://megabox.co.kr/on/oh/ohb/SimpleBooking/selectBokdList.do",
-				type: "GET",
-				success : function(data){
-					console.log(data);
-
-				}
-			});
 			
-		}
 
 		</script>
 	</body>

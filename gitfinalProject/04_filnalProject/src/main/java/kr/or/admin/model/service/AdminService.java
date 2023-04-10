@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.dao.AdminDao;
+import kr.or.admin.model.vo.Theater;
+import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -15,6 +17,8 @@ import kr.or.movie.model.vo.MovieVideo;
 public class AdminService {
 	@Autowired
 	private AdminDao dao;
+	@Autowired
+	private MovieDao movieDao;
 
 	@Transactional
 	public int insertMovie(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList,
@@ -43,5 +47,33 @@ public class AdminService {
 		}
 
 		return result;
+	}
+
+	public ArrayList<String> selectTheaterAddr(String theaterLocal) {
+		ArrayList<String> theaterAddrList = dao.selectTheaterAddrList(theaterLocal);
+
+		return theaterAddrList;
+	}
+
+	public int insertTheater(Theater theater, String theaternewAddr) {
+		if (theater.getTheaterAddr() == null) {
+			theater.setTheaterAddr(theaternewAddr);
+		}
+
+		int result = dao.insertTheater(theater);
+
+		return result;
+	}
+
+	public ArrayList<Movie> selectMovieList() {
+		ArrayList<Movie> list = movieDao.selectMovieAll();
+
+		return list;
+	}
+
+	public ArrayList<Theater> selectTheaterList() {
+		ArrayList<Theater> list = dao.selectTheaterList();
+
+		return list;
 	}
 }

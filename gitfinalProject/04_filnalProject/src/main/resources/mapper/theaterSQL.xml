@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="theater">
+  <select id="selectTheaterAddr" parameterType="String" resultType="theater">
+  	select theater_addr as theaterAddr  from theater_tbl
+	where theater_local = #{_parameter}
+  </select>
+  <insert id="insertTheater" parameterType="theater">
+  	insert into theater_tbl
+  	values (theater_tbl_seq.nextval, #{theaterCode}, #{theaterLocal}, #{theaterAddr}, 'admin')
+  </insert>
+  <select id="selectTheaterList" resultType="theater">
+	  select 
+			 	theater_no as theaterNo,
+				theater_code as theaterCode,
+				theater_local as theaterLocal,
+				theater_addr as theaterAddr				
+	  from theater_tbl
+  </select>
+</mapper>

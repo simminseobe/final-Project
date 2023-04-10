@@ -37,7 +37,7 @@
                     <dd>특별관 안내</dd>
                 </dl>
                 <dl>
-                    <dt>스토어</dt>
+                    <dt><a href="/allGiftList.do">스토어</a></dt>
                     <dd>메가티켓</dd>
                     <dd>메가찬스</dd>
                     <dd>스페셜굿즈/콤보</dd>
