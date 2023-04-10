@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
@@ -34,6 +35,13 @@ public class MovieService {
 		
 	}
 
-
+	public Movie selectOneMovie(int movieNo) {
+		Movie mov = dao.selectOneMovie(movieNo);
+		 if(mov !=null) {
+			 MovieFile movieFile = dao.selectMovieFile(movieNo);
+			 mov.setMainFile(movieFile);
+		 }
+		return mov;
+	}
 
 }

@@ -1,20 +1,36 @@
 @charset "UTF-8";
 
 #check-container{
-	text-align: center;
-	padding-top: 50px;
-	width: 250px;
-	margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+    width: 250px;
+    margin: 0 auto;
 }
-	
+
 .id-wrap{
-	display: flex;
+    display: flex;
 }
-
 .id-wrap>input{
-	width: 70%;
+    width: 70%;
+}
+.id-wrap>button{
+    width: 30%;
 }
 
-.id-wrap>button{
-	width: 30%;
+.first-div{
+    text-align: center;
+}
+
+.second-div{
+    text-align: center;
+}
+
+.btn-wrap{
+    text-align: center;
+}
+
+.btn-wrap>button{
+    margin-bottom: 15px;
+    width: 45px;
+    height: 35px;
 }

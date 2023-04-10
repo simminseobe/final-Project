@@ -144,9 +144,191 @@ overflow: hidden;
     margin: 0 0 0 60px;
 }
 
+.reviewAllWrap{
+    margin-top: 50px;
+}
+.reaviewHeadSawBtnWrap{
+    position: relative;
+    width: 1100px;
+    height: 40px;
+    overflow: hidden;
+}
+.reviewHead{
+    line-height: 23px;
+    font-size: 23px;
+    vertical-align: center;
+    float: left;
+}
+.sawMovie{
+    position: absolute;
+    right: 0;
+}
 
+.sawMovie>button{
+width: 105px;
+height: 36px;
+border-radius: 5px;
+background-color: transparent;
+border: 1px solid #432e75;
+cursor: pointer;
+}
+.reviewAllCountWrap{
+    width: 1100px;
+    height: 50px;
+    margin: 30px 0;
+    font-size: 15px;
+    position: relative;
+    
+}
+.reviewAllCount>button{
+    background-color: transparent;
+}
 
+.reviewSearchBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
+.reviewSearchBtn button{
+    background-color: transparent;
+    cursor: pointer;
+}
+.userReviewInfoWrap{
+   height: 84px;
+    width: 1100px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+}
+.userReviewInfo{
+    width: 105px;
+    height: 84px;
+    text-align: center;
+   float: left;
+}
+.reviewText{
+    width: 850px;
+    height: 84px;
+    font-size: 15px;
+    padding-left: 20px;
+    padding-top: 10px;
+   border: 1px solid #f8f8fa;
+   border-top-left-radius: 5px;
+   border-bottom-left-radius: 5px;
+    display: inline-block;
+    
+}
+
+.reviewContentWrite{
+    display: inline-block;
+    width: 140px;
+    height: 84px;
+    background-color: #f8f8fa;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    line-height: 84px;
+    position: absolute;
+    top: 0;
+}
+
+.infoWrap2{
+    overflow: hidden;
+}
+.userReviewInfo2{
+    
+    width: 105px;
+    height: 150px;
+    text-align: center;
+    float: left;
+    
+}
+.Text2{
+    position: relative;   
+    width: 800px;
+    height: 84px;
+   
+    margin-left: 105px;
+}
+
+.Tit2{
+    position: absolute;
+    top: 0;
+     display: inline-block;
+    width: 85px;
+    height: 84px;
+    box-sizing: border-box;
+    font-size: 20px;
+    line-height: 84px;
+    text-align: center;
+    background-color: #f8f8fa;
+}
+
+.Point2{
+    position:absolute;
+    left: 85px;    
+    display: inline-block;
+    width: 85px;
+    height: 84px;
+    font-size: 38px;
+    line-height: 38px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f8fa;
+    
+   
+    
+}
+.PointCom{
+    position: absolute;
+    top: 0;
+    left: 170px;
+    width: 85px;
+    height: 84px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #f8f8fa;
+    
+    
+}
+.reviewTextContent{
+    position: absolute;
+    left: 255px;
+    border: 1px solid #f8f8fa;
+    display: inline-block;
+}
+
+.reviewTextLike{
+    position: absolute;
+    width: 70px;
+    left: 850px;
+    height: 84px;
+   line-height: 70px;
+    text-align: center;
+    background-color: #f8f8fa;
+}
+.reviewContentWrite2{
+    position: absolute;
+    left: 920px;
+    width: 70px;
+    height: 84px;
+    background-color: #f8f8fa;
+    text-align: center;
+    line-height: 84px;
+    padding-right: 10px;
+}
+.infoWap2Top{
+    position: relative;
+}
+.reviewDate{
+    position: absolute;
+    font-size: 18px;
+    right: 0;
+    bottom: 40px;
+    color: lightgrey;
+}
 
 
 
