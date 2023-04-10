@@ -44,4 +44,16 @@ public class MemberDao {
 		//System.out.println(member);
 		return member;
 	}
+
+	// 개인정보 수정
+	public int updateMember(Member member) {
+		int result = sqlSession.update("member.updateMember", member);
+		return result;
+	}
+
+	// 회원탈퇴
+	public int deleteMember(Member member) {
+		int result = sqlSession.delete("member.deleteMember", member);
+		return result;
+	}
 }
