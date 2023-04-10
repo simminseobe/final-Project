@@ -42,14 +42,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="theaterAddr">지점</label>
-                                            <select class="form-select" id="theaterAddr" name="theaterAddr"
-                                                aria-label="Default select example">
-                                            </select>
-                                            <button type="button" class="theaterAddr">지점 조회</button>
+                                            <label for="theaternewAddr">지점 입력</label>
+                                            <input type="text" class="form-control" id="theaternewAddr"
+                                                name="theaternewAddr">
                                         </div>
                                         <div class="form-group">
-                                            <label for="theaternewAddr">새 지점 입력</label>
+                                            <label for="theaternewAddr">주소 입력</label>
                                             <input type="text" class="form-control" id="theaternewAddr"
                                                 name="theaternewAddr">
                                         </div>
@@ -118,6 +116,13 @@
                         });
                     });
                 </script>
+
+                <!-- <div class="form-group">
+                    <label for="theaterAddr">지점</label>
+                    <select class="form-select" id="theaterAddr" name="theaterAddr" aria-label="Default select example">
+                    </select>
+                    <button type="button" class="theaterAddr">지점 조회</button>
+                </div> -->
         </body>
 
         </html>
