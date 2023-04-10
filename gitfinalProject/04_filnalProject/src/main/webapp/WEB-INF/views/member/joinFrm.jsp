@@ -20,11 +20,11 @@
 			<div class="essential">
 				<span>
           <sup>* </sup>
-            필수입력사항
+            	필수입력사항
         </span>
 			</div>
 			<form action="/checkId.do" name="checkIdFrm" method="POST">
-        <input type="hidden" name="checkId">
+        	<input type="text" name="checkId">
 			</form>
 			
 			<form action="/join.do" method="post">
@@ -37,6 +37,7 @@
 							<td>
                 <input type="text" id="inputId" class="input-text" name="memberId" id="memberId" maxlength="20" autocomplete=off placeholder="아이디를 입력해주세요 (영문, 숫자 포함 6~20자)" required>
                 <button type="button" id="idChkBtn">중복체크</button>
+                <div class="comment" id="idCheck"></div>
               </td>
 						</tr>
 						<tr>
@@ -69,7 +70,7 @@
                 
               </td>
 							<td>
-                <input type="text" id="phone" class="input-text" name="memberPhone" minlength="12" maxlength="13" required placeholder="예 : 010-0000-0000" autocomplete=off>
+                <input type="text" id="phone" class="input-text" name="memberPhone" minlength="11" maxlength="11" required placeholder="'-'없이 숫자만 입력" autocomplete=off>
                 <div class="comment" id="phoneCheck"></div></td>
 						</tr>
             <tr>
@@ -540,7 +541,7 @@
 				</div>
 			</form>
 		</div>
-	</div>	
+	</div>
 	
 	<script src="/resources/js/member/joinFrm.js"></script>
 </body>

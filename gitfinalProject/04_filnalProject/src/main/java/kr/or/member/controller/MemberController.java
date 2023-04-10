@@ -13,7 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-//import kr.or.member.model.service.MailSenderService;
+import com.google.gson.Gson;
+
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -23,7 +24,6 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private JavaMailSender mailSender;
-	//private MailSenderService mailService;
 
 	// 로그인 폼 이동
 	@RequestMapping(value="/login.do")
@@ -56,15 +56,15 @@ public class MemberController {
 	
 	// 아이디 중복체크 -> 질문
 	@ResponseBody
-	@RequestMapping(value="/checkId.do", produces="application/json;charset=utf-8")
-	public String checkId(String memberId, Model model) {
-		Member m = service.selectOneId(memberId);
+	@RequestMapping(value="/checkId.do")
+	public String checkId(String checkId, Model model) {
+		Member m = service.selectOneId(checkId);
 		if(m == null) {
 			// 아이디 사용 가능
-			return "0";
+			return "ok";
 		} else {
 			// 아이디 사용 불가능
-			return "1";
+			return "error";
 		}
 	}
 
@@ -131,7 +131,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-
 	//마이페이지 이동
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
@@ -142,6 +141,22 @@ public class MemberController {
 	@RequestMapping(value="/findIdFrm.do")
 	public String findIdFrm() {
 		return "member/findId";
+	}
+	
+	// 아이디 찾기(모달창 띄워서 데이터 전송)
+	@ResponseBody
+	@RequestMapping(value="/findId.do", produces = "application/json;charset=utf-8")
+	public String searchId(Member m) {
+		Member member = service.searchId(m);
+		return new Gson().toJson(member);
+	}
+	
+	// 비밀번호 찾기(모달창 띄워서 데이터 전송)
+	@ResponseBody
+	@RequestMapping(value="/findPw.do", produces = "application/json;charset=utf-8")
+	public String findPw(Member m) {
+		Member member = service.selectPw(m);
+		return new Gson().toJson(member);
 	}
 	
 	

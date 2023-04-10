@@ -3,7 +3,8 @@
     <html>
 
     <head>
-        <title>영화 등록</title>
+        <meta charset="UTF-8">
+        <title>영화 수정</title>
     </head>
 
     <body class="sb-nav-fixed">
@@ -24,21 +25,21 @@
                             영화 등록 입력 양식
                         </div>
                         <div class="card-body">
-                            <form action="/registerMovie.do" method="post" enctype="multipart/form-data">
+                            <form action="/updateMovie.do" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="movieTitle">영화 제목</label>
+                                    <label for="movieTitle">제목</label>
                                     <input type="text" class="form-control" id="movieTitle" name="movieTitle"
-                                        placeholder="영화 제목을 입력하세요">
+                                        value="${movie.movieTitle}">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieDirector">감독</label>
                                     <input type="text" class="form-control" id="movieDirector" name="movieDirector"
-                                        placeholder="감독 이름을 입력하세요">
+                                        value="${movie.movieDirector}">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieActor">배우</label>
                                     <input type="text" class="form-control" id="movieActor" name="movieActor"
-                                        placeholder="배우들을 입력하세요">
+                                        value="${movie.movieActor}">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieGenre">장르</label>
@@ -54,15 +55,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="movieDate">개봉일</label>
-                                    <input type="date" class="form-control" id="movieDate" name="movieDate">
+                                    <input type="date" class="form-control" id="movieDate" name="movieDate"
+                                        value="${movie.movieDate}">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieTime">상영시간</label>
-                                    <input type="text" class="form-control" id="movieTime" name="movieTime">
+                                    <input type="text" class="form-control" id="movieTime" name="movieTime"
+                                        value="${movie.movieTime}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="movieRating">심의 등급</label>
-                                    <input type="text" class="form-control" id="movieRating" name="movieRating">
+                                    <label for="movieRating">영화 등급</label>
+                                    <input type="text" class="form-control" id="movieRating" name="movieRating"
+                                        value="${movie.movieRating}">
                                 </div>
                                 <div class="form-group">
                                     <label for="movieVideo">영화 영상 링크</label>
@@ -90,9 +94,9 @@
                                         name="moviePoster">
                                 </div>
                                 <div class="form-group">
-                                    <label for="movieContent">소개</label>
+                                    <label for="movieContent">내용</label>
                                     <textarea class="form-control" id="movieContent" name="movieContent"
-                                        rows="3"></textarea>
+                                        rows="3">${movie.movieContent}</textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col text-center">
