@@ -52,8 +52,8 @@ public class MemberDao {
 	}
 
 	// 회원탈퇴
-	public int deleteMember(Member member) {
-		int result = sqlSession.delete("member.deleteMember", member);
+	public int deleteMember(int memberNo) {
+		int result = sqlSession.delete("member.deleteMember", memberNo);
 		return result;
 	}
 }

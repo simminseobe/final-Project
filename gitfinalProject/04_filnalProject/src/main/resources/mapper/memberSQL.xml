@@ -71,8 +71,8 @@
   </update>
   
   <!-- 회원 탈퇴 -->
-  <delete id="deleteMember" parameterType="m">
-  	delete from member where member_id=#{memberId}
+  <delete id="deleteMember" parameterType="_int">
+  	delete from member where member_no=#{_parameter}
   </delete>
   
 </mapper>

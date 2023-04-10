@@ -44,8 +44,8 @@ public class MemberService {
 	}
 
 	// 회원탈퇴
-	public int deleteMember(Member member) {
-		return dao.deleteMember(member);
+	public int deleteMember(int memberNo) {
+		return dao.deleteMember(memberNo);
 	}
 	
 }

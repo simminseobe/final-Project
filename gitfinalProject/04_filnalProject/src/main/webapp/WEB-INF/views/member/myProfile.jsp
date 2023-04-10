@@ -37,7 +37,6 @@
 
 	<div class="wrapper">
 	    <form action="/updateMember.do" method="post" enctype="multipart/form-data">
-        <!-- form 태그로 감싸기 밑에 태그들 -->
         <div class="mypage-wrap">
             <div class="mypage-header">
                 <h2>개인정보 수정</h2>
@@ -54,8 +53,10 @@
                                 <div class="profile-title">
                                     <input type="file" id="profile-file" name="profile">
                                     <img src="/resources/images/member/my-profile.png" class="img" width="68px" height="68px">
-                                    <!-- <button type="button" class="allBtn" id="addProfileImgBtn">이미지 등록</button> -->
-                                    <a href="/deleteMember.do" class="allBtn" id="deleteMember">회원탈퇴</a>
+                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button>
+                                    <div>
+	                                    <a href="/deleteFrm.do" id="deleteMember">회원탈퇴</a>
+                                    </div>
                                     <p class="comment">※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
                                 </div>
                             </td>
@@ -134,3 +135,4 @@
    
    <script src="/resources/js/member/myProfile.js"></script>
    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</body>

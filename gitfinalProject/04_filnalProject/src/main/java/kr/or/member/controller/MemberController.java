@@ -179,10 +179,16 @@ public class MemberController {
 		}
 	}
 	
+	// 회원탈퇴 페이지 이동
+	@RequestMapping(value="/deleteFrm.do")
+	public String deleteFrm() {
+		return "member/deleteFrm";
+	}
+	
 	// 회원탈퇴
 	@RequestMapping(value="/deleteMember.do")
-	public String deleteMember(Member member) {
-		int result = service.deleteMember(member);
+	public String deleteMember(int memberNo) {
+		int result = service.deleteMember(memberNo);
 		if(result > 0) {
 			return "redirect:/logout.do";
 		} else {
