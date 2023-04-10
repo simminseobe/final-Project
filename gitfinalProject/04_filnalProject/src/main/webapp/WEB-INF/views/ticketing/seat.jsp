@@ -308,7 +308,7 @@
 										<button type="button" class="now now3" id="now3">0</button>
 										<ul class="num-choice">
 											<li>
-												<button type="button" class="btn on">+</button>
+												<button type="button" class="btn on">0</button>
 											</li>
 										</ul>
 									</div>
@@ -465,7 +465,7 @@
 					</div>
 				</div>
 
-				<button onclick="nowTotal();" class="nowTotal">선택된 인원 수 : 0</button>
+				<button class="nowTotal">선택된 인원 수 : 0</button>
 			</div>
 			<script>
 				/*
@@ -537,12 +537,14 @@
 						var nowVal = parseInt($now.text());
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
+							nowTotal(); // nowTotal() 함수 호출
 						}
 					});
 					$('.how-many .cell:nth-child(1) .up').click(function () {
 						var $count = $(this).closest('.count');
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
+						nowTotal(); // nowTotal() 함수 호출
 					});
 
 					// 청소년 버튼
@@ -552,12 +554,14 @@
 						var nowVal = parseInt($now.text());
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
+							nowTotal(); // nowTotal() 함수 호출
 						}
 					});
 					$('.how-many .cell:nth-child(2) .up').click(function () {
 						var $count = $(this).closest('.count');
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
+						nowTotal(); // nowTotal() 함수 호출
 					});
 
 					// 우대 버튼
@@ -567,17 +571,20 @@
 						var nowVal = parseInt($now.text());
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
+							nowTotal(); // nowTotal() 함수 호출
 						}
 					});
 					$('.how-many .cell:nth-child(3) .up').click(function () {
 						var $count = $(this).closest('.count');
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
+						nowTotal(); // nowTotal() 함수 호출
 					});
 				});
 
 				function resetBtn() {
 					$('.now').text('0');
+					nowTotal(); // nowTotal() 함수 호출
 				}
 				
 				$(".pageNext").on("click",function(){
@@ -601,10 +608,7 @@
 				$('.nowTotal').text('선택된 인원 수 : ' + nowTotal);
 				}
 
-				// .now1, .now2, .now3 요소의 값이 변경될 때마다 nowTotal() 함수 호출
-				$('.now').on('click', function() {
-				nowTotal();
-				});	
+				
 
 			</script>
 
