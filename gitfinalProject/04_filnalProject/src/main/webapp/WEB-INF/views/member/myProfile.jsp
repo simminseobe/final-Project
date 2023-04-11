@@ -26,9 +26,18 @@
                             <th>프로필 사진</th>
                             <td>
                                 <div class="profile-title">
-                                    <input type="file" id="profile-file" name="profile">
-                                    <img src="/resources/images/member/my-profile.png" class="img" width="68px" height="68px">
-                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button>
+                                    <c:choose>
+                                    	<c:when test="${file.files.length eq 0 && file.files[0] eq 0 }">
+                                    		<input type="file" id="profile-file" name="file" style="display: none" onchange="loadImg(this);">
+		                                    <img id="testImg" src="/resources/images/member/my-profile.png" class="img" width="68px" height="68px">
+		                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button> 
+                                    	</c:when>
+                                    	<c:otherwise>
+		                                    <input type="file" id="profile-file" name="file" style="display: none" onchange="loadImg(this);">
+		                                    <img id="testImg" src="/resources/upload/member/${sessionScope.m.memberFilepath }" class="img" width="68px" height="68px">
+		                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button>                                    	
+                                    	</c:otherwise>
+                                    </c:choose>
                                     <div>
 	                                    <a href="/deleteFrm.do" id="deleteMember">회원탈퇴</a>
                                     </div>
