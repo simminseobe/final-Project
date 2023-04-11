@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 *{
     margin: 0;
     padding: 0;
@@ -6,24 +7,81 @@
 }
 
 .wrapper{
-	min-height: calc(100vh - 100px);
-    width: 1200px;
+	min-height: calc(100vh - 210px);
 }
 
 .mypage-wrap{
     margin: 0 auto;
     padding-top: 80px;
+    width: 100vh;
+    height: 100vh;
+}
+
+.mypage-header{
+    width: 100vh;
 }
 
 .mypage-header>h2{
-    padding: 20px 0px 25px 0px;
+    padding: 15px 0px 15px 0px;
     font-weight: bold;
     font-size: 28px;
     color: #222222;
 }
 
+.info>li{
+    margin: 15px 0px 15px 0px;
+    font-size: 14px;
+}
 
-.profile-content>tbody>tr>th{
+.comment{
+    font-size: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.second-comment{
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+.info-two{
+    font-size: 16px;
+}
+
+.info-two>li{
+    padding: 5px;
+}
+
+.label-comment{
+    font-size: 16px;
+}
+
+.select>li{
+    padding: 10px;
+}
+
+.btn-wrap{
+    position: relative;
+    margin: 50px 0px 50px 0px;
+    height: 50px;
+}
+
+table{
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #d1d5dd;
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+.deleteForm>tbody>tr>th{
     background-color: #f7f8f9;
     padding: 20px;
     font-size: 18px;
@@ -33,68 +91,17 @@
 }
 
 .input-text{
-    width: 450px;
-    height: 45px;
+    width: 300px;
+    height: 30px;
     font-size: 16px;
     margin-left: 7px;
     padding-left: 7px;
-    border: none;
-}
-
-.change-input-text{
-    width: 350px;
-    height: 30px;
-    padding-left: 7px;
-    margin-left: 10px;
-}
-
-.input-birth{
-	padding-left: 7px;
-    margin-left: 10px;
-    height: 30px;
-    width: 45px;
-    border: none;
-}
-
-.input-birthDetail{
-	border: none;
-    width: 15px;
-}
-
-select{
-	padding-left: 7px;
-    margin-left: 10px;
-    height: 30px;
-    width: 85px;
-}
-
-.info{
-    list-style-type: none;
-}
-
-.info>li{
-    padding-left: 5px;
-    margin: 15px 0px 15px 0px;
-    font-size: 14px;
-}
-
-#changePw:hover{
-    color: #fff;
-    background-color: #351c6f;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.btn-wrap{
-    position: relative;
-    margin: 50px 0px 50px 0px;
-    height: 50px;
 }
 
 #cancelBtn{
     position: absolute;
     top: 10px;
-    left: 680px;
+    left: 480px;
     width: 75px;
     height: 45px;
     border-radius: 10px;
@@ -114,7 +121,7 @@ select{
 #enrollBtn{
     position: absolute;
     top: 10px;
-    left: 780px;
+    left: 580px;
     width: 75px;
     height: 45px;
     border-radius: 10px;

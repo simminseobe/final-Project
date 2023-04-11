@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="/resources/css/member/myProfile.css">
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/menubar.jsp"/>
 
 	<div class="wrapper">
+		<jsp:include page="/WEB-INF/views/common/menubar.jsp"/>
 	    <form action="/updateMember.do" method="post" enctype="multipart/form-data">
         <div class="mypage-wrap">
             <div class="mypage-header">
@@ -99,10 +99,10 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
             <div class="btn-wrap">
                 <button type="button" id="cancelBtn">취소</button>
                 <input type="submit" value="등록" id="enrollBtn"></input>
+            </div>
             </div>
         </div>
     </form>
