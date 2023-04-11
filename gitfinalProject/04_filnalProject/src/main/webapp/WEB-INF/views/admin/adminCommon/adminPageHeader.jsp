@@ -20,6 +20,7 @@
         <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
         <!-- 일반 js는 adminPageFooter에 -->
         <title>관리자 페이지</title>
+        <link href="/resources/css/admin/adminGift/adminGift.css" rel="stylesheet" />
     </head>
 
     <body class="sb-nav-fixed">

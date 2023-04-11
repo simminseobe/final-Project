@@ -405,13 +405,18 @@
                                     <h2>동영상 종류 제목</h2>
                                 </div>
                                 <div class="previewPlayer">
-                                    <input style="display:none;" name="movieNo" value="${mov.movieNo}">
+                                   <c:forEach items="${mvList }" var="mv">
+						            	<video width="300px" height="136px" src="${mv.videoLink }" controls>
+						            	
+						            	</video>
+						            </c:forEach>
                                 </div>
                             </div>
                         </div><!--preview예고편 끝-->    
                     </div>
-                </div>    s
+                </div>
             </div>
+            
            
     
     <script>
@@ -461,11 +466,11 @@ const openButton=document.getElementById("open");
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
    const overlay = modal.querySelector(".modal_overlay");
    const closeBtn = modal.querySelector("#close1");
-   const openModal  = ()=> {
+   const openModal  =() => {
        modal.classList.remove("hidden");
    }
 
-   const closeModal = ()=> {
+   const closeModal = () => {
        modal.classList.add("hidden");
    }
    overlay.addEventListener("click",closeModal);
@@ -473,7 +478,8 @@ const openButton=document.getElementById("open");
    openButton.addEventListener("click",openModal);
    
    //영화 예고편 영상 받아오기 위한 ajax
-    const movieNo = $("[name=movieNo]").val();
+   
+  /*   const movieNo = $("[name=movieNo]").val();
    	console.log(movieNo);
    $.ajax({
 	  url : "/searchMovieVideo.do",
@@ -487,7 +493,7 @@ const openButton=document.getElementById("open");
 		  }
 	  }
    });
-   
+    */
    
    
    

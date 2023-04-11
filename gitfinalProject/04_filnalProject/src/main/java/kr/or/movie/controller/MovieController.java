@@ -1,7 +1,6 @@
 package kr.or.movie.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import com.google.gson.Gson;
 
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
-import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
 
 @Controller
@@ -27,23 +25,24 @@ public class MovieController {
 		model.addAttribute("list", list);
 		return "movie/movieAllList";
 	}
-
 	
 	@RequestMapping(value="/movieDetail.do")
 	public String detailMovie(int movieNo, Model model) {
 		Movie mov = service.selectOneMovie(movieNo);
+		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
 		model.addAttribute("mov", mov);
+		model.addAttribute("mvList", mvList);
 		return "movie/movieDetail";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/searchMovieVideo.do",produces = "application/json;charset=utf-8")
 	public String searchMovieVideo(int movieNo) {
-		
-		MovieVideo mv = service.selectOneMovieVideo(movieNo);
-//		model.addAttribute("mv", mv);
-		return new Gson().toJson(mv);
+		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
+//		model.addAttribute("mvmvList", mvList);
+		return new Gson().toJson(mvList);
 		
 	}
+
 	
 }

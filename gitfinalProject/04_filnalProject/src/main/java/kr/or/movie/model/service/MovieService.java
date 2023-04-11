@@ -22,10 +22,9 @@ public class MovieService {
 	@Autowired
 	private MovieDao dao;
 
-	public ArrayList<Movie> selectMovieAll() {
+public ArrayList<Movie> selectMovieAll() {
 		
 		ArrayList<Movie> list =dao.selectMovieAll();
-		System.out.println(list);
 		for(Movie movie : list) {
 			int movieNum= movie.getMovieNo();
 			System.out.println(movieNum);
@@ -35,20 +34,16 @@ public class MovieService {
 		return list;
 		
 	}
-
 	public Movie selectOneMovie(int movieNo) {
 		Movie mov = dao.selectOneMovie(movieNo);
 		 if(mov !=null) {
 			 MovieFile movieFile = dao.selectMovieFile(movieNo);
 			 mov.setMainFile(movieFile);
-			 
 		 }
 		return mov;
-		
 	}
-
-	public MovieVideo selectOneMovieVideo(int movieNo) {
-		MovieVideo mv= dao.selectOneMovieVideo(movieNo);	
+	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
+		ArrayList<MovieVideo> mv= dao.selectOneMovieVideo(movieNo);	
 		return mv;
 	}
 

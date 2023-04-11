@@ -5,11 +5,9 @@
 
 <div id="layoutSidenav">
 <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageSideBar.jsp" />
-<div id="layoutSidenav_content">
+<div id="admin-main-content">
     <h1>gift insert form</h1>
-    <form action="#">
-        
-    </form>
+
 </div>
 </div>
 <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp" />

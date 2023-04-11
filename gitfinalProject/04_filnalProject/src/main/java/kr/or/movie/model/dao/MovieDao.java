@@ -22,30 +22,25 @@ public class MovieDao {
 		return (ArrayList<Movie>)list;
 		
 	}
-
-
 	public MovieFile selectMovieFile(int movieNum) {
 		MovieFile result = sqlSession.selectOne("movie.selectMovieFile",movieNum);
 		return result;
 	}
-
 	public ArrayList<Movie> selectMovieAll(int movieNo) {
 		List list = sqlSession.selectList("movie.selectMovieAllDetail",movieNo);
 		return (ArrayList<Movie>)list;
 	}
-
-
 	public Movie selectOneMovie(int movieNo) {
 		Movie mov =sqlSession.selectOne("movie.selectOneMovie", movieNo);
 		
 		return mov;
 	}
-
-
-	public MovieVideo selectOneMovieVideo(int movieNo) {
-		MovieVideo mv = sqlSession.selectOne("movie.selectOneMovieVideo", movieNo);
-		return mv;
+	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
+		List list = sqlSession.selectList("movie.selectOneMovieVideo", movieNo);
+		return (ArrayList<MovieVideo>) list;
 	}
+
+
 
 
 
