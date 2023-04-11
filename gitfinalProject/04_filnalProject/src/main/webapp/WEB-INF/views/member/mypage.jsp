@@ -9,17 +9,15 @@
     	padding: 0;
     	outline: none;
 	}
-	tbody{
-		margin: 0;
-	}
+	
 	.content-wrap{
 		background-color : #010101;
 		width : 900px;
-		height : 300px;
+		height : 900px;
+		
 	}
-	.menubar{
-		width: 400px;
-	}
+	
+	
 </style>
 <table>
 <td>
