@@ -30,19 +30,31 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                    data-bs-target="#movieManage" aria-expanded="false"
                                     aria-controls="pagesCollapseAuth">
                                     영화 관리
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                <div class="collapse" id="movieManage" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="/MovieList.do">영화 목록</a>
                                         <a class="nav-link" href="/registerMovieFrm.do">영화 등록</a>
                                     </nav>
                                 </div>
-                                <a class="nav-link" href="/manageTheaterFrm.do">상영관 관리</a>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#theaterManage" aria-expanded="false"
+                                    aria-controls="pagesCollapseAuth">
+                                    극장 관리
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="theaterManage" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/theaterList.do">극장 목록</a>
+                                        <a class="nav-link" href="/registerTheaterFrm.do">극장 등록</a>
+                                    </nav>
+                                </div>
                                 <a class="nav-link" href="layout-sidenav-light.html">상영 스케줄 관리</a>
                             </nav>
                         </div>

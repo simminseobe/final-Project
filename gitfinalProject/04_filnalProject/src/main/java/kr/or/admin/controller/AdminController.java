@@ -90,23 +90,22 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "/manageTheaterFrm.do")
-	public String manageTheaterFrm(Model model) {
+	@RequestMapping(value = "/MovieList.do")
+	public String MovieList(Model model) {
+		ArrayList<Movie> list = service.selectMovieList();
+
+		model.addAttribute("list", list);
+
+		return "admin/movieList";
+	}
+
+	@RequestMapping(value = "/registerTheaterFrm.do")
+	public String registerTheaterFrm(Model model) {
 		ArrayList<Theater> list = service.selectTheaterList();
 //
 		model.addAttribute("list", list);
 
-		return "admin/manageTheaterFrm";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/searchtheaterAddr.do", produces = "application/json;charset=utf-8")
-	public String searchtheaterAddr(String theaterLocal) {
-		ArrayList<String> theaterAddrList = new ArrayList<String>();
-
-		theaterAddrList = service.selectTheaterAddr(theaterLocal);
-
-		return new Gson().toJson(theaterAddrList);
+		return "admin/registerTheaterFrm";
 	}
 
 	@RequestMapping(value = "/registerTheater.do")
@@ -120,13 +119,23 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "/MovieList.do")
-	public String MovieList(Model model) {
-		ArrayList<Movie> list = service.selectMovieList();
+	@RequestMapping(value = "/theaterList.do")
+	public String theaterList(Model model) {
+		ArrayList<Theater> list = service.selectTheaterList();
 
 		model.addAttribute("list", list);
 
-		return "admin/movieList";
+		return "/admin/theaterList";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/searchtheaterAddr.do", produces = "application/json;charset=utf-8")
+	public String searchtheaterAddr(String theaterLocal) {
+		ArrayList<String> theaterAddrList = new ArrayList<String>();
+
+		theaterAddrList = service.selectTheaterAddr(theaterLocal);
+
+		return new Gson().toJson(theaterAddrList);
 	}
 
 	@RequestMapping(value = "/updateMovieFrm.do")

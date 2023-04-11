@@ -12,7 +12,8 @@
 				theater_branch as theaterBranch,
 				theater_addr as theaterAddr,	
 				theater_facility as theaterFacility,
-				theater_content as theaterContent			
+				theater_content as theaterContent,
+				enroll_member as EnrollMember		
 	  from theater_tbl
   </select>
   <insert id="insertTheater" parameterType="theater">
