@@ -138,9 +138,19 @@ public class AdminController {
 		return "admin/updateMovieFrm";
 	}
 
+
 //	@RequestMapping(value = "/updateMovie.do")
 //	public String updateMovie() {
 //		int result = service.boardUpdate(board, fileList, fileNo);
 //		return "";
 //	}
+
+
+	@RequestMapping(value="/allTheater.do")
+	public String allTheater() {
+		return "admin/allTheater";
+	}
+	
+
+
 }
