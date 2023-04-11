@@ -48,6 +48,7 @@ public class AdminDao {
 	}
 
 	public int insertTheater(Theater theater) {
+		System.out.println(theater);
 		int result = sqlSession.insert("theater.insertTheater", theater);
 
 		return result;

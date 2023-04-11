@@ -13,5 +13,6 @@ public class Theater {
 	private String theaterBranch;
 	private String theaterAddr;
 	private String theaterContent;
+	private String theaterFacility;
 	private String enrollMember;
 }

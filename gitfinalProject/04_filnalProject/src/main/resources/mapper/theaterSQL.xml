@@ -8,13 +8,16 @@
   <select id="selectTheaterList" resultType="theater">
 	  select 
 			 	theater_no as theaterNo,
-				theater_code as theaterCode,
-				theater_local as theaterLocal,
-				theater_addr as theaterAddr				
+				theater_code as theaterLocal,
+				theater_local as theaterBranch,
+				theater_addr as theaterAddr,	
+				theater_facility as theaterFacility
+				theater_content as theaterContent			
 	  from theater_tbl
   </select>
   <insert id="insertTheater" parameterType="theater">
   	insert into theater_tbl
-  	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterContent}, 'admin')
+  	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, 'admin')
+  	
   </insert>
 </mapper>

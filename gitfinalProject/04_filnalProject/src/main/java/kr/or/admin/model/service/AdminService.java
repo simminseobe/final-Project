@@ -56,6 +56,7 @@ public class AdminService {
 	}
 
 	public int insertTheater(Theater theater) {
+		System.out.println(theater);
 		int result = dao.insertTheater(theater);
 
 		return result;

@@ -50,7 +50,7 @@
                                             <label for="theaterAddr">주소 입력</label>
                                             <input type="text" class="form-control" id="theaterAddr" name="theaterAddr">
                                         </div>
-                                        <!-- <div class="form-group">
+                                        <div class="form-group">
                                             <label for="theaterFacility">보유 시설</label>
                                             <select class="form-select" id="theaterFacility" name="theater Facility"
                                                 aria-label="Default select example">
@@ -62,7 +62,7 @@
                                                 <option value="컴포트">컴포트</option>
                                                 <option value="스페셜석">스페셜석</option>
                                             </select>
-                                        </div> -->
+                                        </div>
                                         <div class="form-group">
                                             <label for="theaterContent">극장 설명</label>
                                             <textarea class="form-control" id="theaterContent" name="theaterContent"
