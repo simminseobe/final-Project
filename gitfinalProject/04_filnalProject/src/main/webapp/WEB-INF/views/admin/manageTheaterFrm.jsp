@@ -50,9 +50,22 @@
                                             <label for="theaterAddr">주소 입력</label>
                                             <input type="text" class="form-control" id="theaterAddr" name="theaterAddr">
                                         </div>
+                                        <!-- <div class="form-group">
+                                            <label for="theaterFacility">보유 시설</label>
+                                            <select class="form-select" id="theaterFacility" name="theater Facility"
+                                                aria-label="Default select example">
+                                                <option value="부티크">부티크</option>
+                                                <option value="MX">MX</option>
+                                                <option value="장애인석">장애인석</option>
+                                                <option value="스위트룸">스위트룸</option>
+                                                <option value="돌비">돌비</option>
+                                                <option value="컴포트">컴포트</option>
+                                                <option value="스페셜석">스페셜석</option>
+                                            </select>
+                                        </div> -->
                                         <div class="form-group">
-                                            <label for="movieContent">극장 설명</label>
-                                            <textarea class="form-control" id="movieContent" name="movieContent"
+                                            <label for="theaterContent">극장 설명</label>
+                                            <textarea class="form-control" id="theaterContent" name="theaterContent"
                                                 rows="3"></textarea>
                                         </div>
                                         <div class="row">
@@ -87,10 +100,13 @@
                             </div>
                         </div>
                     </main>
+                    <div>
+                        <p>${theater.theaterContent}</p>
+                    </div>
                     <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
                 </div>
                 <script>
-                    $("#movieContent").summernote({
+                    $("#theaterContent").summernote({
                         height: 400,
                         lang: "ko-KR",
                         callbacks: {
