@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    vertical-align: none;
+}
+
+.wrapper{
+	min-height: calc(100vh - 210px);
+    width: 1200px;
+}
+
+.mypage-wrap{
+    margin: 0 auto;
+    padding-top: 80px;
+}
+
+.mypage-header>h2{
+    padding: 30px 0 15px 0;
+    font-weight: bold;
+    font-size: 28px;
+    color: #222222;
+}
+
+.profile-title{
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.profile-content>tbody>tr>th{
+    background-color: #f7f8f9;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 200px;
+    text-align: left;
+}
+
+.input-text{
+    width: 450px;
+    height: 45px;
+    font-size: 16px;
+    margin-left: 7px;
+    padding-left: 7px;
+    border: none;
+}
+
+.change-input-text{
+    width: 350px;
+    height: 30px;
+    padding-left: 7px;
+    margin-left: 10px;
+}
+
+.input-birth{
+	padding-left: 7px;
+    margin-left: 10px;
+    height: 30px;
+    width: 45px;
+    border: none;
+}
+
+.input-birthDetail{
+	border: none;
+    width: 15px;
+}
+
+select{
+	padding-left: 7px;
+    margin-left: 10px;
+    height: 30px;
+    width: 85px;
+}
+
+.info{
+    list-style-type: none;
+}
+
+.info>li{
+    padding-left: 5px;
+    margin: 15px 0px 15px 0px;
+    font-size: 14px;
+}
+
+table{
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #d1d5dd;
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+.profile-content tbody td{
+    width: 600px;
+}
+
+.profile-img{
+    position: relative;
+    display: block;
+}
+
+.img{
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+#deleteMember{
+	position: absolute;
+    text-align: center;
+    width: 65px;
+    height: 35px;
+    padding-top: 10px;
+    font-size: 12px;
+    top: 25px;
+    left: 500px;
+    border-radius: 10px;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+#deleteMember:hover{
+    background: #351c6f;
+    cursor: pointer;
+}
+
+#profile-file{
+	/* display: none; */
+    position: absolute;
+}
+
+#addImgBtn{
+    position: absolute;
+    left: 110px;
+    top: 17px;
+    width: 85px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    background-color: #503396;
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+#addImgBtn:hover{
+	background-color: #351c6f;
+}
+
+.comment{
+    font-size: 1.0em;
+    color: #999;
+    margin-top: 10px;
+    padding: 0;
+    text-align: left;
+    position: absolute;
+    top: 60px;
+    left: 110px;
+}
+
+.left>h2{
+	font-size: 28px;
+	font-weight: bold;
+    margin: 65px 0px 15px 0px;
+}
+
+.right{
+    position: relative;
+    height: 35px;
+}
+
+.profile-essential{
+    position: absolute;
+	left: 1170px;
+    top: 10px;
+}
+
+sup{
+    color: red;
+}
+
+#changePw{
+    margin-left: 10px;
+    width: 120px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #503396;
+    border-radius: 10px;
+}
+
+#changePw:hover{
+    color: #fff;
+    background-color: #351c6f;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btn-wrap{
+    position: relative;
+    margin: 50px 0px 50px 0px;
+    height: 50px;
+}
+
+#cancelBtn{
+    position: absolute;
+    top: 10px;
+    left: 680px;
+    width: 75px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+#cancelBtn:hover{
+    color: #fff;
+    background: #351c6f;
+}
+
+#enrollBtn{
+    position: absolute;
+    top: 10px;
+    left: 780px;
+    width: 75px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+#enrollBtn:hover{
+    color: #fff;
+    background: #351c6f;
+}
