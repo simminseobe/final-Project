@@ -182,7 +182,7 @@
     <div class="movie-detail-content-wrap"style="width:1100px; margin: 0 auto; margin-top:50px;">
         <div class="movie-detail-menu">
             <ul>
-                <li><a href="#">주요정보</a></li>
+                <li><a href="#">${mv.videoLink }</a></li>
                 <li><a href="#">실관람평</a></li>
                 <li><a href="#">무비포스트</a></li>
                 <li><a href="#">예고편/스틸컷</a></li>
@@ -410,8 +410,9 @@
                             </div>
                         </div><!--preview예고편 끝-->    
                     </div>
-                </div>    s
+                </div>
             </div>
+            
            
     
     <script>
@@ -461,11 +462,11 @@ const openButton=document.getElementById("open");
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
    const overlay = modal.querySelector(".modal_overlay");
    const closeBtn = modal.querySelector("#close1");
-   const openModal  = ()=> {
+   const openModal  =() => {
        modal.classList.remove("hidden");
    }
 
-   const closeModal = ()=> {
+   const closeModal = () => {
        modal.classList.add("hidden");
    }
    overlay.addEventListener("click",closeModal);
@@ -473,7 +474,8 @@ const openButton=document.getElementById("open");
    openButton.addEventListener("click",openModal);
    
    //영화 예고편 영상 받아오기 위한 ajax
-    const movieNo = $("[name=movieNo]").val();
+   
+  /*   const movieNo = $("[name=movieNo]").val();
    	console.log(movieNo);
    $.ajax({
 	  url : "/searchMovieVideo.do",
@@ -487,7 +489,7 @@ const openButton=document.getElementById("open");
 		  }
 	  }
    });
-   
+    */
    
    
    

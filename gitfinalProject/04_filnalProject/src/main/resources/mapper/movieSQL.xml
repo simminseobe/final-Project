@@ -47,27 +47,26 @@
 			from movie_file where movie_file_category='메인' and movie_no=#{movieNo}
 	</select>
 	<select id="selectOneMovie" parameterType="_int" resultType="movie">
-			select 
-		 	movie_no as movieNo,
-			movie_title as movieTitle,
-			movie_director as movieDirector,
-			movie_actor as movieActor,
-			movie_genre as movieGenre,
-			movie_time as movieTime,
-			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
-			movie_rating as movieRating,
-			movie_content as movieContent,
-			film_society as filmSociety,
-			classic_society as classicSociety,
-			special_movie as specialMovie,
-			enroll_member as enrollMember
-		 from movie_tbl where movie_no=#{movieNo}
-	</select>
+				select
+			 	movie_no as movieNo,
+				movie_title as movieTitle,
+				movie_director as movieDirector,
+				movie_actor as movieActor,
+				movie_genre as movieGenre,
+				movie_time as movieTime,
+				to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+				movie_rating as movieRating,
+				movie_content as movieContent,
+				film_society as filmSociety,
+				classic_society as classicSociety,
+				special_movie as specialMovie,
+				enroll_member as enrollMember
+			 from movie_tbl where movie_no=#{movieNo}
+		</select>
 	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
 		select 
 			movie_video_no as videoNo,
-			movie_video_link as videoLink,
-			movie_no as movieNo
+			movie_video_link as videoLink
 		from movie_video where movie_no=#{movieNo}
 	</select>
 	
