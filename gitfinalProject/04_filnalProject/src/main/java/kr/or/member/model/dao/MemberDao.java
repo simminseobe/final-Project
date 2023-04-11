@@ -56,4 +56,10 @@ public class MemberDao {
 		int result = sqlSession.delete("member.deleteMember", memberNo);
 		return result;
 	}
+
+	// 마이페이지 → 비밀번호 변경
+	public int updatePw(Member m) {
+		int result = sqlSession.update("member.updatePw", m);
+		return result;
+	}
 }

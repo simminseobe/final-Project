@@ -134,7 +134,11 @@ public class MemberController {
 	@RequestMapping(value="/join.do")
 	public String join(Member m) {
 		int result = service.insertMember(m);
-		return "redirect:/";
+		if(result > 0) {
+			return "redirect:/";
+		} else {
+			return "redirect:/join.do";
+		}
 	}
 
 	// 아이디 찾기 폼 이동
@@ -207,6 +211,14 @@ public class MemberController {
 		} else {
 			return "redirect:/myProfile.do";
 		}
+	}
+	
+	// 마이페이지 → 비밀번호 변경
+	@ResponseBody
+	@RequestMapping(value="/updatePw.do", produces="application/json;charset=utf-8")
+	public String changePw(Member m) {
+		int result = service.updatePw(m);
+		return new Gson().toJson(result);
 	}
 	
 	

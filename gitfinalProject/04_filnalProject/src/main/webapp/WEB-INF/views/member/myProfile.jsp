@@ -27,15 +27,15 @@
                             <td>
                                 <div class="profile-title">
                                     <c:choose>
-                                    	<c:when test="${file.files.length eq 0 && file.files[0] eq 0 }">
+                                    	<c:when test="${empty sessionScope.m.memberFilepath}">
                                     		<input type="file" id="profile-file" name="file" style="display: none" onchange="loadImg(this);">
-		                                    <img id="testImg" src="/resources/images/member/my-profile.png" class="img" width="68px" height="68px">
+		                                    <img src="/resources/images/member/nonImg.png" id="testImg" class="img" width="68px" height="68px">
 		                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button> 
                                     	</c:when>
                                     	<c:otherwise>
 		                                    <input type="file" id="profile-file" name="file" style="display: none" onchange="loadImg(this);">
 		                                    <img id="testImg" src="/resources/upload/member/${sessionScope.m.memberFilepath }" class="img" width="68px" height="68px">
-		                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button>                                    	
+		                                    <button type="button" id="updateImgBtn">이미지 변경</button>                                    	
                                     	</c:otherwise>
                                     </c:choose>
                                     <div>
@@ -103,7 +103,8 @@
                         <tr>
                             <th>비밀번호<sup> *</sup></th>
                             <td>
-                                <button id="changePw">비밀번호 변경</button>
+                            	<input type="hidden" name="memberPw" value="${sessionScope.m.memberPw }">
+                                <button id="changePw"><a href="/changePw.do">비밀번호 변경</a></button>
                             </td>
                         </tr>
                     </tbody>

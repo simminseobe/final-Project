@@ -157,9 +157,29 @@ th:first-child, td:first-child {
     background-color: #503396;
     font-size: 1.1em;
     font-weight: 300;
+    cursor: pointer;
+}
+
+#updateImgBtn{
+    position: absolute;
+    left: 110px;
+    top: 17px;
+    width: 85px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    background-color: #503396;
+    font-size: 1.1em;
+    font-weight: 300;
+    cursor: pointer;
 }
 
 #addImgBtn:hover{
+	background-color: #351c6f;
+}
+
+#updateImgBtn:hover{
 	background-color: #351c6f;
 }
 
@@ -209,6 +229,11 @@ sup{
     background-color: #351c6f;
     cursor: pointer;
     border-radius: 10px;
+}
+
+#changePw>a{
+	text-decoration: none;
+	color: #444444;
 }
 
 .btn-wrap{
