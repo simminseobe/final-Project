@@ -7,8 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href= "/resources/css/movieDetail.css">
+<!--
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    
+-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href= "/resources/css/movieDetail.css">
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
@@ -352,7 +359,7 @@
                                 </div>
                             </div><!--타인이 작성한 댓글 끝나는 자리-->
                         </div><!--실관람평 내용 끝나는 자리-->
-                        <div class="moviePostWrap" style="display: none;"><!--무비포스트 시작하는 자리-->
+                        <div class="moviePostWrap"><!--무비포스트 시작하는 자리-->
                             <div class="moviePostHead reaviewHeadSawBtnWrap">
                                 <div class="reviewHead">
                                     <h2>영화이름에 대한<span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
@@ -370,7 +377,7 @@
                                     </p>
                                 </div>
                                 <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
-                                    <a href="#" id="open" style="color: #666666;">무비포스트 쓰기</a>
+                                    <a href="/moviePostFrm.do" id="open" style="color: #666666;">무비포스트 쓰기</a>
                                 </div>
                             </div>
                             <div class="moviePostTotalCnt reviewAllCountWrap">
@@ -395,22 +402,56 @@
                                 </div>
                             </div>     
                         </div><!--무비포스트 끝나는 자리-->
-                        <div class="previewWrap"><!--preview예고편 시작-->
+                        <div class="previewWrap" style="display: none;"><!--preview예고편 시작-->
                             <div class="previewTop">
                                 <span>예고편(?)</span>
                                 <span> 스틸컷(?)</span>
                             </div>
                             <div class="previewContentWrap">
                                 <div class="previewContentTit">
-                                    <h2>동영상 종류 제목</h2>
+                                    <h2 style="font-size: 18px;">런칭 예고편</h2>
                                 </div>
                                 <div class="previewPlayer">
-                                   <c:forEach items="${mvList }" var="mv">
-						            	<video width="300px" height="136px" src="${mv.videoLink }" controls>
-						            	
-						            	</video>
-						            </c:forEach>
+                                    <!--<c:forEach items="${mvList }" var="mv">
+                                        <video width="300px" height="136px" src="${mv.videoLink }" controls>
+                            
+                                        </video>
+			                        </c:forEach>-->
+                               </div>
+                               <!--
+                               <div class="previewPlayerLine">
+                                    <c:forEach items="${mvList }" var="mv">
+                                        <video width="240px" height="136px" src="${mv.videoLink }" controls>
+                            
+                                        </video>
+			                        </c:forEach>
                                 </div>
+                                -->
+                                <!--
+                                    <div id="carouselExampleControls" class="previewPlayerLine carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                              <img src="cat.png" class="d-block w-100" alt="...">
+                                            </div>
+                                            <div class="carousel-item">
+                                              <img src="dog.png" class="d-block w-100" alt="...">
+                                            </div>
+                                            <div class="carousel-item">
+                                              <img src="bird.png" class="d-block w-100" alt="...">
+                                            </div>
+                                          </div>
+                                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                          </button>
+                                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                          </button>
+                                      </div>
+                                -->
+
+
                             </div>
                         </div><!--preview예고편 끝-->    
                     </div>
@@ -477,24 +518,7 @@ const openButton=document.getElementById("open");
    closeBtn.addEventListener("click",closeModal);
    openButton.addEventListener("click",openModal);
    
-   //영화 예고편 영상 받아오기 위한 ajax
-   
-  /*   const movieNo = $("[name=movieNo]").val();
-   	console.log(movieNo);
-   $.ajax({
-	  url : "/searchMovieVideo.do",
-	  type : "post",
-	  data : {movieNo:movieNo},
-	  success : function(mv){
-		  if(mv != null){
-			  console.log(mv+"성공");
-		  }else{
-			  console.log("실패");
-		  }
-	  }
-   });
-    */
-   
+
    
    
         </script>

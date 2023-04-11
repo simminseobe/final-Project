@@ -504,7 +504,31 @@ cursor: pointer;
 }
 
 .previewWrap{
+    width: 1100px;
     margin-top: 50px;
+}
+.previewContentTit{
+    width: 1100px;
+    padding: 20px 0;
+    margin-top: 20px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid lightgray;
+
+}
+
+.previewPlayer{
+    margin-top: 20px;
+}
+.previewContentWrap>.previewContentTit>h2{
+    font-size: 32px;
+}
+
+.previewContentWrap>.previewPlayer{
+    margin-top: 40px;
+}
+.previewPlayerLine>video{
+    padding: 0 50px;
+
 }
 
 
