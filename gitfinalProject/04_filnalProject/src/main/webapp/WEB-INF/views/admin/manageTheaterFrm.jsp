@@ -42,20 +42,21 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="theaterAddr">영화관 상세 지역</label>
+                                            <label for="theaterAddr">지점</label>
                                             <select class="form-select" id="theaterAddr" name="theaterAddr"
                                                 aria-label="Default select example">
                                             </select>
-                                            <button type="button" class="theaterAddr">지역 상세 조회</button>
+                                            <button type="button" class="theaterAddr">지점 조회</button>
                                         </div>
                                         <div class="form-group">
-                                            <label for="theaternewAddr">영화관 상세 지역 새로 입력</label>
+                                            <label for="theaternewAddr">새 지점 입력</label>
                                             <input type="text" class="form-control" id="theaternewAddr"
                                                 name="theaternewAddr">
                                         </div>
                                         <div class="form-group">
-                                            <label for="TheaterCode">영화관 코드(A~B, 1~100관)</label>
-                                            <input type="text" class="form-control" id="TheaterCode" name="TheaterCode">
+                                            <label for="movieContent">극장 설명</label>
+                                            <textarea class="form-control" id="movieContent" name="movieContent"
+                                                rows="3"></textarea>
                                         </div>
                                         <div class="row">
                                             <div class="col text-center">

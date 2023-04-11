@@ -40,7 +40,16 @@ public class TicketingController {
 	public String paymentMethod() {
 		return "ticketing/paymentMethod";
 	}
-	
+	////////////////////////////////////////////////////////임시
+	@RequestMapping(value="/testPage.do")
+	public String testPage() {
+		return "ticketing/testPage";
+	}
+	@RequestMapping(value="/testPage2.do")
+	public String testPage2() {
+		return "ticketing/testPage2";
+	}
+	////////////////////////////////////////////////////////임시
 	
 	
 }
