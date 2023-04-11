@@ -23,7 +23,7 @@
                             <i class="fas fa-table me-1"></i>
                             영화 등록 양식
                         </div>
-                        <div class="card-body">
+                        <div class="container">
                             <form action="/registerMovie.do" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="movieTitle" class="my-1">영화 제목</label>

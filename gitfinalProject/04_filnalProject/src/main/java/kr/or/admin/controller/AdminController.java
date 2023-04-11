@@ -90,13 +90,42 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "/manageTheaterFrm.do")
-	public String manageTheaterFrm(Model model) {
+	@RequestMapping(value = "/MovieList.do")
+	public String MovieList(Model model) {
+		ArrayList<Movie> list = service.selectMovieList();
+
+		model.addAttribute("list", list);
+
+		return "admin/movieList";
+	}
+
+	@RequestMapping(value = "/registerTheaterFrm.do")
+	public String registerTheaterFrm(Model model) {
+		ArrayList<Theater> list = service.selectTheaterList();
+//
+		model.addAttribute("list", list);
+
+		return "admin/registerTheaterFrm";
+	}
+
+	@RequestMapping(value = "/registerTheater.do")
+	public String registerTheater(Theater theater) {
+		int result = service.insertTheater(theater);
+
+		if (result > 0) {
+			return "admin/manageTheaterFrm";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	@RequestMapping(value = "/theaterList.do")
+	public String theaterList(Model model) {
 		ArrayList<Theater> list = service.selectTheaterList();
 
 		model.addAttribute("list", list);
 
-		return "admin/manageTheaterFrm";
+		return "/admin/theaterList";
 	}
 
 	@ResponseBody
@@ -107,26 +136,6 @@ public class AdminController {
 		theaterAddrList = service.selectTheaterAddr(theaterLocal);
 
 		return new Gson().toJson(theaterAddrList);
-	}
-
-	@RequestMapping(value = "/registerTheater.do")
-	public String registerTheater(Theater theater, String theaternewAddr) {
-		int result = service.insertTheater(theater, theaternewAddr);
-
-		if (result > 0) {
-			return "admin/manageTheaterFrm";
-		} else {
-			return "redirect:/";
-		}
-	}
-
-	@RequestMapping(value = "/MovieList.do")
-	public String MovieList(Model model) {
-		ArrayList<Movie> list = service.selectMovieList();
-
-		model.addAttribute("list", list);
-
-		return "admin/movieList";
 	}
 
 	@RequestMapping(value = "/updateMovieFrm.do")
@@ -143,4 +152,10 @@ public class AdminController {
 //		int result = service.boardUpdate(board, fileList, fileNo);
 //		return "";
 //	}
+
+	@RequestMapping(value = "/allTheater.do")
+	public String allTheater() {
+		return "admin/allTheater";
+	}
+
 }

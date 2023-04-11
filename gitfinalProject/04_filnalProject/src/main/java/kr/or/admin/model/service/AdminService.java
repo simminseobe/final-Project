@@ -55,11 +55,7 @@ public class AdminService {
 		return theaterAddrList;
 	}
 
-	public int insertTheater(Theater theater, String theaternewAddr) {
-		if (theater.getTheaterAddr() == null) {
-			theater.setTheaterAddr(theaternewAddr);
-		}
-
+	public int insertTheater(Theater theater) {
 		int result = dao.insertTheater(theater);
 
 		return result;

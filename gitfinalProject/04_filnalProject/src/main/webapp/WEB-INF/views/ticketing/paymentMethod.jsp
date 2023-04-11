@@ -10,6 +10,7 @@
 <style>
 .content-all-wrap {
 	position: relative;
+	margin-bottom: 100px;
 }
 
 .content-title-wrap {
@@ -305,5 +306,6 @@
 
 		
 	</script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

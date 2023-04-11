@@ -12,6 +12,7 @@
 			<style>
 				.content-all-wrap {
 					position: relative;
+					margin-bottom: 200px;
 				}
 
 				.content-title-wrap {
@@ -463,9 +464,9 @@
 							</div>
 						</div>
 					</div>
+				<button class="nowTotal">선택된 인원 수 : 0</button>
 				</div>
 
-				<button class="nowTotal">선택된 인원 수 : 0</button>
 			</div>
 			<script>
 				/*
@@ -612,7 +613,7 @@
 
 			</script>
 
-
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 		</body>
 
 		</html>
