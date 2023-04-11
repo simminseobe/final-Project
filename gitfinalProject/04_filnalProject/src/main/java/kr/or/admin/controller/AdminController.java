@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import com.google.gson.Gson;
 import common.FileManager;
 import kr.or.admin.model.service.AdminService;
 import kr.or.admin.model.vo.Theater;
+import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -23,6 +25,8 @@ import kr.or.movie.model.vo.MovieVideo;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	@Autowired
+	private MovieService movieServie;
 	@Autowired
 	private FileManager fileManager;
 
@@ -87,7 +91,11 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageTheaterFrm.do")
-	public String manageTheaterFrm() {
+	public String manageTheaterFrm(Model model) {
+		ArrayList<Theater> list = service.selectTheaterList();
+
+		model.addAttribute("list", list);
+
 		return "admin/manageTheaterFrm";
 	}
 
@@ -111,4 +119,28 @@ public class AdminController {
 			return "redirect:/";
 		}
 	}
+
+	@RequestMapping(value = "/MovieList.do")
+	public String MovieList(Model model) {
+		ArrayList<Movie> list = service.selectMovieList();
+
+		model.addAttribute("list", list);
+
+		return "admin/movieList";
+	}
+
+	@RequestMapping(value = "/updateMovieFrm.do")
+	public String updateMovieFrm(int movieNo, Model model) {
+		Movie movie = movieServie.selectOneMovie(movieNo);
+
+		model.addAttribute("movie", movie);
+
+		return "admin/updateMovieFrm";
+	}
+
+//	@RequestMapping(value = "/updateMovie.do")
+//	public String updateMovie() {
+//		int result = service.boardUpdate(board, fileList, fileNo);
+//		return "";
+//	}
 }

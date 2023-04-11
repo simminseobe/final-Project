@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
@@ -130,12 +131,6 @@ public class MemberController {
 		int result = service.insertMember(m);
 		return "redirect:/";
 	}
-	
-	//마이페이지 이동
-	@RequestMapping(value="/mypage.do")
-	public String mypage() {
-		return "member/mypage";
-	}
 
 	// 아이디 찾기 폼 이동
 	@RequestMapping(value="/findIdFrm.do")
@@ -157,6 +152,48 @@ public class MemberController {
 	public String findPw(Member m) {
 		Member member = service.selectPw(m);
 		return new Gson().toJson(member);
+	}
+	
+	// 마이페이지 이동
+	@RequestMapping(value="/mypage.do")
+	public String mypage() {
+		return "member/mypage";
+	}
+	
+	// 개인정보 수정 페이지 이동
+	@RequestMapping(value="/myProfile.do")
+	public String myProfile() {
+		return "member/myProfile";
+	}
+	
+	// 개인정보 수정
+	@RequestMapping(value="/updateMember.do")
+	public String updateMember(Member member, @SessionAttribute(required=false) Member m) {
+		int result = service.updateMember(member);
+		if(result > 0) {
+			m.setMemberPhone(member.getMemberPhone());
+			m.setMemberEmail(member.getMemberEmail());
+			return "redirect:/myProfile.do";
+		} else {
+			return "redirect:/";
+		}
+	}
+	
+	// 회원탈퇴 페이지 이동
+	@RequestMapping(value="/deleteFrm.do")
+	public String deleteFrm() {
+		return "member/deleteFrm";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(int memberNo) {
+		int result = service.deleteMember(memberNo);
+		if(result > 0) {
+			return "redirect:/logout.do";
+		} else {
+			return "redirect:/myProfile.do";
+		}
 	}
 	
 	
