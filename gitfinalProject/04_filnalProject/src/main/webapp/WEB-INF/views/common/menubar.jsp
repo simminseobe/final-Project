@@ -26,7 +26,7 @@
              <li>
                 <a href="#">회원정보</a>
                 <ul class="sub-menu">
-                    <li><a href="#">• 개인정보 수정</a></li>
+                    <li><a href="/myProfile.do">• 개인정보 수정</a></li>
                     <li><a href="#">• 선택정보 수정</a></li>
                 </ul>
             </li>
