@@ -162,13 +162,7 @@
                                                     <div class="modal-body">
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-md-4 my-2">
-                                                                    <img id="movie-post-image" class="img-fluid">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-4 my-2">
-                                                                    <img id="movie-post-image" class="img-fluid">
+                                                                <div class="col-md-4 my-2" id="movie-post-image-div">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -200,29 +194,48 @@
             </div>
         </div>
         <script>
+            $("#movieContent").summernote({
+                height: 400,
+                lang: "ko-KR",
+                callbacks: {
+                    onImageUpload: function (files) {
+                        uploadImage(files[0], this);
+                    }
+                }
+            });
+
             $("#movieMain").on("change", function (event) {
                 var file = event.target.files[0];
                 var reader = new FileReader();
 
-                reader.onload = function (e) {
+                reader.onload = function (event) {
+                    $("#main-post-image").attr("width", "200px");
+                    $("#main-post-image").attr("height", "200px");
 
-                    $("#main-post-image").attr("src", e.target.result);
+                    $("#main-post-image").attr("src", event.target.result);
                 }
 
                 reader.readAsDataURL(file);
             })
 
             $("#moviePoster").on("change", function (event) {
-                var file = event.target.files[0];
+                var files = event.target.files;
                 var reader = new FileReader();
 
-                reader.onload = function (e) {
+                [...event.target.files].forEach(file => {
+                    const img = $("<img>");
+                    $("#movie-post-image-div").append(img);
+                    img.addClass("movie-post-image");
 
-                    $("#movie-post-image").attr("src", e.target.result);
-                }
+                    reader.onload = function (event) {
+                        $(".movie-post-image").attr("width", "200px");
+                        $(".movie-post-image").attr("height", "200px");
+                        $(".movie-post-image").attr("src", event.target.result);
+                    }
 
-                reader.readAsDataURL(file);
-            })
+                    reader.readAsDataURL(file);
+                });
+            });
         </script>
     </body>
 
