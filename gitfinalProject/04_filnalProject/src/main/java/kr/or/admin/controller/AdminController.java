@@ -112,6 +112,7 @@ public class AdminController {
 	@RequestMapping(value = "/registerTheater.do")
 	public String registerTheater(Theater theater) {
 		int result = service.insertTheater(theater);
+		System.out.println(theater.getTheaterAddr());
 
 		if (result > 0) {
 			return "admin/manageTheaterFrm";
@@ -138,19 +139,15 @@ public class AdminController {
 		return "admin/updateMovieFrm";
 	}
 
-
 //	@RequestMapping(value = "/updateMovie.do")
 //	public String updateMovie() {
 //		int result = service.boardUpdate(board, fileList, fileNo);
 //		return "";
 //	}
 
-
-	@RequestMapping(value="/allTheater.do")
+	@RequestMapping(value = "/allTheater.do")
 	public String allTheater() {
 		return "admin/allTheater";
 	}
-	
-
 
 }
