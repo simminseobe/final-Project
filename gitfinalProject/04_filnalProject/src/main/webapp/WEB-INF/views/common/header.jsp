@@ -20,7 +20,7 @@
             <ul>
                 <li><a href="/allMovieList.do">영화</a></li>
                 <li><a href="#">큐레이션</a></li>
-                <li><a href="#">영화관</a></li>
+                <li><a href="/allTheater.do">영화관</a></li>
                 <li><a href="#">특별관</a></li>
                 <li><a href="/allGiftList.do">스토어</a></li>
                 <li><a href="#">이벤트</a></li>

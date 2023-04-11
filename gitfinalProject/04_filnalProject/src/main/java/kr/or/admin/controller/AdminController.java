@@ -143,4 +143,9 @@ public class AdminController {
 		int result = service.boardUpdate(board, fileList, fileNo);
 		return "";
 	}
+	
+	@RequestMapping(value="/allTheater.do")
+	public String allTheater() {
+		return "admin/allTheater";
+	}
 }
