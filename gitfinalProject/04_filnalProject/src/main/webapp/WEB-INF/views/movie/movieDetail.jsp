@@ -182,7 +182,7 @@
     <div class="movie-detail-content-wrap"style="width:1100px; margin: 0 auto; margin-top:50px;">
         <div class="movie-detail-menu">
             <ul>
-                <li><a href="#">${mv.videoLink }</a></li>
+                <li><a href="#">주요정보</a></li>
                 <li><a href="#">실관람평</a></li>
                 <li><a href="#">무비포스트</a></li>
                 <li><a href="#">예고편/스틸컷</a></li>
@@ -405,7 +405,11 @@
                                     <h2>동영상 종류 제목</h2>
                                 </div>
                                 <div class="previewPlayer">
-                                    <input style="display:none;" name="movieNo" value="${mov.movieNo}">
+                                   <c:forEach items="${mvList }" var="mv">
+						            	<video width="300px" height="136px" src="${mv.videoLink }" controls>
+						            	
+						            	</video>
+						            </c:forEach>
                                 </div>
                             </div>
                         </div><!--preview예고편 끝-->    

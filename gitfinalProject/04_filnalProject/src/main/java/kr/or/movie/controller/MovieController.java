@@ -29,20 +29,20 @@ public class MovieController {
 	@RequestMapping(value="/movieDetail.do")
 	public String detailMovie(int movieNo, Model model) {
 		Movie mov = service.selectOneMovie(movieNo);
-		MovieVideo mv = service.selectOneMovieVideo(movieNo);
-		System.out.println(mv + " : mv");
+		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
 		model.addAttribute("mov", mov);
-		model.addAttribute("mv", mv);
+		model.addAttribute("mvList", mvList);
 		return "movie/movieDetail";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/searchMovieVideo.do",produces = "application/json;charset=utf-8")
 	public String searchMovieVideo(int movieNo) {
-		MovieVideo mv = service.selectOneMovieVideo(movieNo);
-//		model.addAttribute("mv", mv);
-		return new Gson().toJson(mv);
+		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
+//		model.addAttribute("mvmvList", mvList);
+		return new Gson().toJson(mvList);
 		
 	}
+
 	
 }

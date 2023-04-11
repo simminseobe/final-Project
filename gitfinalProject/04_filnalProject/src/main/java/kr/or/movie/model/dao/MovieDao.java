@@ -35,9 +35,9 @@ public class MovieDao {
 		
 		return mov;
 	}
-	public MovieVideo selectOneMovieVideo(int movieNo) {
-		MovieVideo mv = sqlSession.selectOne("movie.selectOneMovieVideo", movieNo);
-		return mv;
+	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
+		List list = sqlSession.selectList("movie.selectOneMovieVideo", movieNo);
+		return (ArrayList<MovieVideo>) list;
 	}
 
 
