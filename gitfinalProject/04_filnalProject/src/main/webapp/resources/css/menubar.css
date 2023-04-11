@@ -13,6 +13,11 @@
 .menu ul{
     list-style-type: none;
 }
+.menu ul>li>.on{
+	font-weight : bold;
+	color: #008040;
+	background-color: #fff;
+}
 #myBox>a{
 	background-color: #454545;
 	font-size : 20px;
