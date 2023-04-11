@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MovieVideo;
 
 @Repository
 public class MovieDao {
@@ -38,6 +39,12 @@ public class MovieDao {
 		Movie mov =sqlSession.selectOne("movie.selectOneMovie", movieNo);
 		
 		return mov;
+	}
+
+
+	public MovieVideo selectOneMovieVideo(int movieNo) {
+		MovieVideo mv = sqlSession.selectOne("movie.selectOneMovieVideo", movieNo);
+		return mv;
 	}
 
 

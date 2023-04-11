@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MovieVideo;
 
 @Service
 public class MovieService {
@@ -40,8 +41,15 @@ public class MovieService {
 		 if(mov !=null) {
 			 MovieFile movieFile = dao.selectMovieFile(movieNo);
 			 mov.setMainFile(movieFile);
+			 
 		 }
 		return mov;
+		
+	}
+
+	public MovieVideo selectOneMovieVideo(int movieNo) {
+		MovieVideo mv= dao.selectOneMovieVideo(movieNo);	
+		return mv;
 	}
 
 }
