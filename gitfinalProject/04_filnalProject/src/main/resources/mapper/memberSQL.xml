@@ -63,4 +63,16 @@
   	from member where member_name=#{memberName} and member_phone=#{memberPhone}
   </select>
   
+  <!-- 회원정보 수정 -->
+  <update id="updateMember" parameterType="m">
+  	update member set 
+  		member_phone=#{memberPhone}, member_email=#{memberEmail} 
+  	where member_id=#{memberId}
+  </update>
+  
+  <!-- 회원 탈퇴 -->
+  <delete id="deleteMember" parameterType="_int">
+  	delete from member where member_no=#{_parameter}
+  </delete>
+  
 </mapper>

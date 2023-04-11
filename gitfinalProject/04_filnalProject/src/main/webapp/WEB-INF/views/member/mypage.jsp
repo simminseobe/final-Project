@@ -9,17 +9,15 @@
     	padding: 0;
     	outline: none;
 	}
-	tbody{
-		margin: 0;
-	}
+	
 	.content-wrap{
 		background-color : #010101;
 		width : 900px;
-		height : 300px;
+		height : 900px;
+		
 	}
-	.menubar{
-		width: 400px;
-	}
+	
+	
 </style>
 <table>
 <td>
@@ -34,4 +32,15 @@
 </td>
 </table>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</script>
+</head>
+<body>
+
+    <script>
+    $(".sub-menu").prev().append("<span class='more'>+</span>");
+    $(".more").on("click",function(event){
+        $(this).parent().next().slideToggle();
+        $(this).toggleClass("active");
+        event.stopPropagation();
+    });
 
