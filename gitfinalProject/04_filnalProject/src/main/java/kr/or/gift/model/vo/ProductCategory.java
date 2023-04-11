@@ -7,14 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
-	private int productNo;
+public class ProductCategory {
 	private int pcNo;
-	private String productName;
-	private int productPrice;
-	private String productDetail;
-	private String productCompany;
-	private int shipping;
-	
 	private String pcCategory;
+	private int pcStep;
+	private int pcDepth;
 }

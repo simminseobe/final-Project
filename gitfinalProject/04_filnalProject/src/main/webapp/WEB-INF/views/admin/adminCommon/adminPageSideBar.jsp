@@ -104,8 +104,8 @@
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">여기에</a>
-                                        <a class="nav-link" href="register.html">반복문</a>
+                                        <a class="nav-link" href="/allCategoryList.do">카테고리 리스트</a>
+                                        <a class="nav-link" href="/categoryInsertForm.do">카테고리 상품 추가</a>
                                         <a class="nav-link" href="password.html">출력 예정입니다</a>
                                     </nav>
                                 </div>
@@ -118,8 +118,8 @@
                                 <div class="collapse" id="management" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/adminGiftList.do">기프트 상품 리스트</a>
                                         <a class="nav-link" href="/giftInsertForm.do">기프트 상품 등록</a>
-                                        <a class="nav-link" href="404.html">다음엔 뭐넣지</a>
                                         <a class="nav-link" href="500.html">여기다는 뭐넣지</a>
                                     </nav>
                                 </div>
