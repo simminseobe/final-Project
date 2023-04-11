@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="theaterFacility">보유 시설</label>
-                                        <select class="form-select" id="theaterFacility" name="theater Facility"
+                                        <select class="form-select" id="theaterFacility" name="theaterFacility"
                                             aria-label="Default select example">
                                             <option value="부티크">부티크</option>
                                             <option value="MX">MX</option>
@@ -74,46 +74,46 @@
                                     </div>
                                 </form>
                             </div>
-                            <%--  <div class="container">
-                                    <table id="datatablesSimple">
-                                        <thead>
+                            <%-- <div class="container">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>지역</th>
+                                            <th>상세지역</th>
+                                            <th>관</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${list}" var="theater">
                                             <tr>
-                                                <th>번호</th>
-                                                <th>지역</th>
-                                                <th>상세지역</th>
-                                                <th>관</th>
+                                                <td>${theater.theaterNo}</td>
+                                                <td>${theater.theaterLocal}</td>
+                                                <td>${theater.theaterAddr}</td>
+                                                <td>${theater.theaterCode}</td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${list}" var="theater">
-                                                <tr>
-                                                    <td>${theater.theaterNo}</td>
-                                                    <td>${theater.theaterLocal}</td>
-                                                    <td>${theater.theaterAddr}</td>
-                                                    <td>${theater.theaterCode}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div> --%>                     
-                        </div>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                        </div> --%>
                     </div>
-                </main>
-                <!-- <div>
+            </div>
+            </main>
+            <!-- <div>
                         <p>${theater.theaterContent}</p>
                     </div> -->
-                <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
-            </div>
-            <script>
-                $("#theaterContent").summernote({
-                    height: 400,
-                    lang: "ko-KR",
-                    callbacks: {
-                        onImageUpload: function (files) {
-                            uploadImage(files[0], this);
-                        }
+            <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
+        </div>
+        <script>
+            $("#theaterContent").summernote({
+                height: 400,
+                lang: "ko-KR",
+                callbacks: {
+                    onImageUpload: function (files) {
+                        uploadImage(files[0], this);
                     }
-                });
+                }
+            });
 
                     // $(".theaterAddr").on("click", function () {
                     //     const theaterLocal = $(this).parent().prev().children().eq(1).val();
@@ -139,9 +139,9 @@
                     //         }
                     //     });
                     // });
-            </script>
+        </script>
 
-            <!-- <div class="form-group">
+        <!-- <div class="form-group">
                     <label for="theaterAddr">지점</label>
                     <select class="form-select" id="theaterAddr" name="theaterAddr" aria-label="Default select example">
                     </select>

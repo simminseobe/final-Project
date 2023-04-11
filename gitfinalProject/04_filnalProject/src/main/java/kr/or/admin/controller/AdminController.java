@@ -112,7 +112,6 @@ public class AdminController {
 	@RequestMapping(value = "/registerTheater.do")
 	public String registerTheater(Theater theater) {
 		int result = service.insertTheater(theater);
-		System.out.println(theater.getTheaterAddr());
 
 		if (result > 0) {
 			return "admin/manageTheaterFrm";
