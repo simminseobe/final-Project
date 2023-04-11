@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href= "/resources/css/movieDetail.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
@@ -51,10 +52,24 @@
 		rgba(0, 0, 0, 0.23);
        
 }
-/*.hidden {
-	display: none;
-}*/
 
+.hidden {
+	display: none;
+}
+
+.material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+        }
+.star>span{
+    color: gray;
+    }
+.s-yellow{
+    color: yellow;
+    }
 </style>
 </head>
 <body>
@@ -63,13 +78,68 @@
             <div class="modal_overlay"></div>
             <div class="modal_content"><!--모달 댓글 내부화면-->
                 <div class="modalClose">
-                    <span>관람평 작성하기</span>
+                    <div class="modalCloseTit">
+                        <span>관람평 작성하기</span>
+                    </div>
                 </div>
-                <div class="modalStar">
-                
+                <div class="modal_content_tit">
+                    <p>영화이름</p>
+                    <p>어떠셨나요?</p>
                 </div>
-
-
+                <div class = "star-wrap star-wrap1">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <div class="modalStar-result">
+                        <span id ="star-result" style="color:#6543b1">0</span>
+                        <span style="color:#6543b1">점</span>
+                    </div>
+                </div>
+                <div class="modalTxtArea">
+                    <textarea></textarea>
+                </div>
+                <div class="modal_content_tit" style="margin-top: 50px;">
+                    <p>관람포인트는 무엇인가요?</p>
+                    <p style="font-size: 18px; margin-top: 5px;">(최대 5개 선택가능)</p>
+                </div>
+                <div class="modalWatchPointChk">
+                    <div class="productionDiv">
+                        <p><label for = "production">연출</label></p>
+                        <input type = "checkbox" name ="production" id ="production">
+                    </div>
+                    <div class="storyDiv">
+                        <p><label for = "story">스토리</label></p>
+                        <input type = "checkbox" name ="story" id = "story">
+                    </div>
+                    <div class="visualDiv">
+                        <p><label for = "visualBeauty">영상미</label></p>
+                        <input type = "checkbox" name ="visualBeauty" id ="visualBeauty">
+                    </div>
+                    <div class="actorDiv">
+                        <p><label for = "actor">배우</label></p>
+                        <input type = "checkbox" name="actor" id="actor">
+                    </div>
+                    <div class="OSTDiv">
+                        <p><label for = "OST">OST</label></p>
+                        <input type = "checkbox" name="OST" id ="OST">
+                    </div>
+                </div>
+                <div class="modalContentBottom">
+                    <button type="button" class="bc1" id="close1" style="margin-right: 5px;">닫기</button>
+                    <button type="button" class="enrollBtn" style="margin-right: 5px;">등록</button>
+                </div>
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 모달끝-->
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
@@ -166,7 +236,7 @@
                         </div>
                     </div>
                 </div><!--========주요정보 끝나는 자리==================================================-->
-                <div class="reviewAllWrap"><!--실관람평 시작 자리-->
+                <div class="reviewAllWrap" style="display: none;"><!--실관람평 시작 자리-->
                     <div class="reaviewHeadSawBtnWrap">
                         <div class="reviewHead">
                             <h2>영화이름에 대한<span style="color:#01738b;">123456</span>개의 이야기가 있어요.</h2>
@@ -205,7 +275,6 @@
                         </div>
                         <div class="reviewContentWrite" style="font-size: 15px;">
                             <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
-                           
                         </div>
                     </div>
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
@@ -282,16 +351,68 @@
                                     <span>몇분전으로 나옴</span>
                                 </div>
                             </div><!--타인이 작성한 댓글 끝나는 자리-->
-                         
-
-
-
-
                         </div><!--실관람평 내용 끝나는 자리-->
+                        <div class="moviePostWrap" style="display: none;"><!--무비포스트 시작하는 자리-->
+                            <div class="moviePostHead reaviewHeadSawBtnWrap">
+                                <div class="reviewHead">
+                                    <h2>영화이름에 대한<span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
+                                </div>
+                                <div class="morePostMovie sawMovie">
+                                    <button type="button" class="sawMovieBtn morePostMovie">더보기</button>
+                                </div>
+                            </div>
+                            <div class="userReviewInfoWrap moviePostWriteWrap">
+                                <div class="reviewText moviePostText">
+                                    <p>
+                                    <span class="useNameMoviePost">홍길동님</span>
+                                    <span class="reviewTextTit">"영화이름"</span>
+                                    재미있게 보셨나요? <span class="useNameMoviePost">홍길동</span>님만의 무비포스트를 남겨보세요.
+                                    </p>
+                                </div>
+                                <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
+                                    <a href="#" id="open" style="color: #666666;">무비포스트 쓰기</a>
+                                </div>
+                            </div>
+                            <div class="moviePostTotalCnt reviewAllCountWrap">
+                                <div class="moviePostTotalCnt reviewAllCount" style="font-weight: bold;">
+                                    <button>전체 <span style="color:#01738b;">123456</span>건</button>
+                                </div>
+                            </div>
+                            <div class="moviePostContentList">
+                                <div class="moviePostImg"><!--영화 한개 시작-->
+                                    <img src="img/리바운드.jpg">
+                                    <div class="moviePostImgContent">
+                                        <a href="#"><p>userId조회</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
+                                        <a href="#"><!--클릭시 무비포스트 상세보기-->
+                                            <p class="moviePostImgMovieTit">제목</p>
+                                            <p class="moviePostImgMovieCont">내용출내용출력내용출력내용출력내용출력내용출력내용출력력내용출력내용출력내용출력내용출력내용출력내용출력</p>
+                                            <p class="moviePostImgTime">몇분전</p>
+                                        </a>
+                                    </div>
+                                </div><!--영화 한개 끝-->
+                                <div class="postMoreBtnWrap">
+                                    <button class="postMoreBtn" id="load">더보기</button>
+                                </div>
+                            </div>     
+                        </div><!--무비포스트 끝나는 자리-->
+                        <div class="previewWrap"><!--preview예고편 시작-->
+                            <div class="previewTop">
+                                <span>예고편(?)</span>
+                                <span> 스틸컷(?)</span>
+                            </div>
+                            <div class="previewContentWrap">
+                                <div class="previewContentTit">
+                                    <h2>동영상 종류 제목</h2>
+                                </div>
+                                <div class="previewPlayer">
+                                    <input style="display:none;" name="movieNo" value="${mov.movieNo}">
+                                </div>
+                            </div>
+                        </div><!--preview예고편 끝-->    
                     </div>
-                </div>    
+                </div>    s
             </div>
-            
+           
     
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -340,16 +461,36 @@ const openButton=document.getElementById("open");
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
    const overlay = modal.querySelector(".modal_overlay");
    const closeBtn = modal.querySelector("#close1");
-   const openModal  = () => {
+   const openModal  = ()=> {
        modal.classList.remove("hidden");
    }
 
-   const closeModal = () => {
+   const closeModal = ()=> {
        modal.classList.add("hidden");
    }
    overlay.addEventListener("click",closeModal);
    closeBtn.addEventListener("click",closeModal);
    openButton.addEventListener("click",openModal);
+   
+   //영화 예고편 영상 받아오기 위한 ajax
+    const movieNo = $("[name=movieNo]").val();
+   	console.log(movieNo);
+   $.ajax({
+	  url : "/searchMovieVideo.do",
+	  type : "post",
+	  data : {movieNo:movieNo},
+	  success : function(mv){
+		  if(mv != null){
+			  console.log(mv+"성공");
+		  }else{
+			  console.log("실패");
+		  }
+	  }
+   });
+   
+   
+   
+   
         </script>
     <script src = "/resources/js/movieDetail.js"></script>
 </body>

@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MovieVideo;
 
 @Controller
 public class MovieController {
@@ -31,4 +35,15 @@ public class MovieController {
 		model.addAttribute("mov", mov);
 		return "movie/movieDetail";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/searchMovieVideo.do",produces = "application/json;charset=utf-8")
+	public String searchMovieVideo(int movieNo) {
+		
+		MovieVideo mv = service.selectOneMovieVideo(movieNo);
+//		model.addAttribute("mv", mv);
+		return new Gson().toJson(mv);
+		
+	}
+	
 }

@@ -64,5 +64,12 @@
 			enroll_member as enrollMember
 		 from movie_tbl where movie_no=#{movieNo}
 	</select>
+	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
+		select 
+			movie_video_no as videoNo,
+			movie_video_link as videoLink,
+			movie_no as movieNo
+		from movie_video where movie_no=#{movieNo}
+	</select>
 	
 </mapper>
