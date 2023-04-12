@@ -213,12 +213,22 @@ public class MemberController {
 		}
 	}
 	
+	// 마이페이지 → 비밀번호 변경 페이지 이동
+	@RequestMapping(value="/changePw.do")
+	public String changePw() {
+		return "member/changeNewPw";
+	}
+	
 	// 마이페이지 → 비밀번호 변경
-	@ResponseBody
-	@RequestMapping(value="/updatePw.do", produces="application/json;charset=utf-8")
-	public String changePw(Member m) {
-		int result = service.updatePw(m);
-		return new Gson().toJson(result);
+	@RequestMapping(value="/updatePw.do")
+	public String updatePw(Member member, String newPassword) {
+		int result = service.updatePw(member, newPassword);
+		System.out.println(result);
+		if(result > 0) {
+			return "redirect:/updatePw.do";
+		} else {
+			return "redirect:/updatePw.do";
+		}
 	}
 	
 	
