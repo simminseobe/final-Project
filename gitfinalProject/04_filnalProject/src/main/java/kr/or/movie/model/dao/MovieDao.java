@@ -49,4 +49,10 @@ public class MovieDao {
 		return (ArrayList<MovieVideo>) list;
 	}
 
+	public Movie selectOneUpdateMovie(int movieNo) {
+		Movie movie = sqlSession.selectOne("movie.selectOneUpdateMovie", movieNo);
+
+		return movie;
+	}
+
 }

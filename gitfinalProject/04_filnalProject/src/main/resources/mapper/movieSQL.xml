@@ -79,4 +79,43 @@
 			movie_video_link as videoLink
 		from movie_video where movie_no=#{movieNo}
 	</select>
+	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
+		select
+			 	movie_no as movieNo,
+				movie_title as movieTitle,
+				movie_director as movieDirector,
+				movie_actor as movieActor,
+				movie_genre as movieGenre,
+				movie_time as movieTime,
+				to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+				movie_rating as movieRating,
+				movie_content as movieContent,
+				film_society as filmSociety,
+				classic_society as classicSociety,
+				special_movie as specialMovie,
+				enroll_member as enrollMember
+			 from movie_tbl where movie_no=#{movieNo}
+	</select>
+	<resultMap type="movie" id="getMovie">
+	<result column="movie_no" property="movieNo"/>
+	<result column="movie_title" property="movieTitle"/>
+	<result column="movie_director" property="movieDirector"/>
+	<result column="movie_actor" property="movieActor"/>
+	<result column="movie_genre" property="movieGenre"/>
+	<result column="movie_time" property="movieTime"/>
+	<result column="movie_date" property="movieDate"/>
+	<result column="movie_rating" property="movieRating"/>
+	<result column="movie_content" property="movieContent"/>
+	<result column="film_society" property="filmSociety"/>
+	<result column="classic_society" property="classicSociety"/>
+	<result column="special_movie" property="specialMovie"/>
+	<result column="enroll_member" property="enrollMember"/>
+	<collection 
+	property="fileList" 
+	select="selectMoviePost" 
+	column="movie_no"
+	ofType="Movie"
+	javaType="java.util.ArrayList"
+	/>
+</resultMap>
 </mapper>

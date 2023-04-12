@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
         <!DOCTYPE html>
         <html>
 
@@ -26,7 +27,7 @@
                                 영화 등록 양식
                             </div>
                             <div class="container">
-                                <form action="/registerMovie.do" method="post" enctype="multipart/form-data">
+                                <form action="/updateMovie.do" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="movieTitle" class="my-1">영화 제목</label>
                                         <input type="text" class="form-control" id="movieTitle" name="movieTitle"
@@ -237,6 +238,84 @@
                                         </c:choose>
                                     </div>
                                     <div class="form-group my-2">
+                                        <label for="" class="my-1">기존 이미지 관리</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group w-50">
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    id="main-image-magnage" data-bs-toggle="modal"
+                                                    data-bs-target="#main-magnage-modal">
+                                                    메인 이미지
+                                                </button>
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    id="post-image-magnage" data-bs-toggle="modal"
+                                                    data-bs-target="#post-magnage-modal">
+                                                    포스트 이미지
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="main-magnage-modal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">메인 포스터 관리
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <img src="/resources/upload/movie/${movie.mainFile.movieFileName}"
+                                                                                style="width: 200px; height:300px;">
+                                                                            <button>삭제</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">닫기</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="post-magnage-modal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">포스터 관리
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                     <c:forEach items="${movie.fileList}" var="file">
+                                                                    	 <div class="d-flex justify-content-center">
+                                                                                <img src="/resources/upload/movie/${file.movieFileName}"
+                                                                                    style="width: 200px; height:300px;">
+                                                                                <button>삭제</button>
+                                                                            </div>
+                                                                    </c:forEach>                                                                                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">닫기</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group my-2">
                                         <label class="my-1">이미지 추가</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group w-50">
@@ -307,7 +386,6 @@
                                                                     <div class="d-flex justify-content-center my-2"
                                                                         id="movie-post-image-div"
                                                                         style="flex-wrap: wrap;">
-                                                                        <!-- img -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -322,16 +400,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="movieVideo" class="my-3">영화 영상 링크</label>
-                                            <input type="text" class="form-control my-1" id="movieVideo"
-                                                name="movieVideo">
-                                            <input type="text" class="form-control my-1" id="movieVideo"
-                                                name="movieVideo">
-                                            <input type="text" class="form-control my-1" id="movieVideo"
-                                                name="movieVideo">
-                                            <input type="text" class="form-control my-1" id="movieVideo"
-                                                name="movieVideo">
-                                            <input type="text" class="form-control my-1" id="movieVideo"
-                                                name="movieVideo">
+                                           <c:forEach items="${list}" var="movie">
+                                           	<input type="text" class="form-control my-1" id="movieVideo"
+                                                name="movieVideo" value="movie.">
+                                           </c:forEach>                                       
                                         </div>
                                         <div class="form-group my-1">
                                             <label for="movieContent" class="my-1">소개</label>

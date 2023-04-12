@@ -50,17 +50,11 @@ public class AdminService {
 	}
 
 	public Movie selectOneUpdateMovie(int movieNo) {
-		Movie movie = movieDao.selectOneMovie(movieNo);
+		Movie movie = movieDao.selectOneUpdateMovie(movieNo);
 
 		if (movie != null) {
 			MovieFile movieFile = movieDao.selectMovieFile(movieNo);
 			movie.setMainFile(movieFile);
-
-			ArrayList<MovieFile> moviePost = movieDao.selectMoviePost(movieNo);
-			movie.setMoviePost(moviePost);
-
-			ArrayList<MovieVideo> movieVideos = movieDao.selectOneMovieVideo(movieNo);
-			movie.setMovieVideos(movieVideos);
 		}
 
 		return movie;
