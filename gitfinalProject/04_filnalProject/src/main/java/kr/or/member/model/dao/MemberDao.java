@@ -59,7 +59,6 @@ public class MemberDao {
 
 	public int updatePw(Member member) {
 		int result = sqlSession.update("member.updatePw", member);
-		System.out.println("dao : " + result);
 		return result;
 	}
 

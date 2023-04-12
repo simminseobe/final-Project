@@ -20,20 +20,11 @@
 		<table class="table-wrap">
 			<tr>
 				<th>
-					<label for="currentPw">현재 비밀번호</label>
+					<label for="currentPw">새 비밀번호</label>
 				</th>
 				<td>
-					<input type="password" name="memberPw" id="currentPw" class="input-text">
-					<span id="comment"></span>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					<label for="newPw">새 비밀번호</label>
-				</th>
-				<td>
-					<input type="password" name="newPassword" id="newPw" class="input-text"> &nbsp<span>※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력해 주세요. </span>
-					<span id="comment"></span>
+					<input type="password" name="memberPw" id="currentPw" minlength="8" maxlength="16" class="input-text"> &nbsp<span>※ 영문, 숫자, 특수문자 중 1가지 이상 조합하여 8자리 이상으로 입력해 주세요. </span>
+					<br><span id="password-comment"></span>
 				</td>
 			</tr>
  			<tr>
@@ -41,8 +32,8 @@
 					<label for="reNewPw">새 비밀번호 재입력</label>
 				</th>
 				<td>
-					<input type="password" name="newPassword" id="newPw" class="input-text"> &nbsp<span>※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다. </span>
-					<span id="comment"></span>
+					<input type="password" name="newPassword" id="newPw" minlength="8" maxlength="16" class="input-text"> &nbsp<span>※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다. </span>
+					<br><span id="rePassword-comment"></span>
 				</td> 
 			</tr>
 		</table>
@@ -59,12 +50,7 @@
 	</div>
 	</form>
 	
-	<script>
-		$("#cancelBtn").on("click", function() {
-			location.replace: "/";
-		});
-	</script>
-	
+	<script src="/resources/js/member/changeNewPw.js"></script>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

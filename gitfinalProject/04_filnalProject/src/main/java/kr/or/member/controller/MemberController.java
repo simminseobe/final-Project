@@ -223,11 +223,10 @@ public class MemberController {
 	@RequestMapping(value="/updatePw.do")
 	public String updatePw(Member member, String newPassword) {
 		int result = service.updatePw(member, newPassword);
-		System.out.println(result);
 		if(result > 0) {
-			return "redirect:/updatePw.do";
+			return "redirect:/logout.do";
 		} else {
-			return "redirect:/updatePw.do";
+			return "redirect:/myProfile.do";
 		}
 	}
 	
