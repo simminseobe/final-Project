@@ -66,7 +66,7 @@
   <!-- 회원정보 수정 -->
   <update id="updateMember" parameterType="m">
   	update member set 
-  		member_phone=#{memberPhone}, member_email=#{memberEmail} 
+  		member_phone=#{memberPhone}, member_email=#{memberEmail}, member_filename=#{memberFilename}, member_filepath=#{memberFilepath}
   	where member_id=#{memberId}
   </update>
   
@@ -74,5 +74,10 @@
   <delete id="deleteMember" parameterType="_int">
   	delete from member where member_no=#{_parameter}
   </delete>
+  
+  <!-- 마이페이지 → pw 변경 -->
+  <update id="updatePw" parameterType="m">
+  	update member set member_pw=#{memberPW} where member_id=#{memberId}
+  </update>
   
 </mapper>

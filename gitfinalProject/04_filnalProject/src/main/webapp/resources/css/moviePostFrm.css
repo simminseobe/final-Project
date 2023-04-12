@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+.moviePostTit>h2{
+  font-size: 32px;
+}
+.moviePostSubwrap{
+    margin-top: 20px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+}
+.postSubLeft{
+    font-size: 28px;
+}
+.postSubRight>button{
+    width: 110px;
+    height: 36px;
+}
+.moviePostSideAll{
+    width: 1100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.moviePostLeftSide{
+    box-sizing: border-box;
+    width: 530px;
+    height: 650px;
+    border: 1px solid #503396;
+   font-size: 18px;
+   padding-top: 10px;
+   background-color: #503396;
+}
+.postLeftSideTit{
+    color: #fff;
+}
+.postLeftSideContent{
+    width: 530px;
+    height: 630px;
+    border: 1px solid lightgray;
+    text-align: center;
+    margin-top: 20px;
+    padding:20px 0;
+}
+.postLeftSideContent>span button{
+    background-color: transparent;
+    color: #fff;
+    padding-bottom: 5px;
+    border-style: none;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+.moviePostRightSide{
+    width: 530px;
+    height: 650px;
+   
+
+}
+.moviePostRightSide{
+    box-sizing: border-box;
+    width: 530px;
+    height: 650px;
+    border: 1px solid #503396;
+    background-color: #503396;;
+    color: #fff;
+   font-size: 18px;
+   padding-top: 10px;
+}
+.postRightSideContent{
+    width: 530px;
+    height: 392px;
+    border: 1px solid lightgray;
+    text-align: center;
+    margin-top: 20px;
+    padding:10px 0;
+    background-color: #503396;
+}
+
+.postRightSideSel{
+    margin: 20px 0;
+}
+.postRightSideTxt{
+padding-bottom: 20px;
+}
+
+.postRightSideBtn{
+    padding-top: 30px;
+    text-align: center;
+}
+.postRightSideBtn>button{
+    border: 2px dashed lightgrey;
+    background-color: #723396;
+    border-radius: 23px;
+    width: 150px;
+    height:46px;
+    color: #fff;
+}   

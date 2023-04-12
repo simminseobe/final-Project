@@ -21,15 +21,6 @@
                 <div class="btn-wrap">
                     <button type="button" class="close-button" id="closeBtn">닫기</button>
                 </div>
-				
-				<script>
-					$("#closeBtn").on("click", function() {
-						const checkId = $(".join-text").text();
-						const inputId = $("#inputId", opener.document);
-						inputId.val(checkId);
-						self.close();
-					});
-				</script>
 			</c:when>
 			<c:otherwise>
 			<div class="second-div">
@@ -44,8 +35,15 @@
 			</div>
 			</c:otherwise>
 		</c:choose>
-		
 	</div>
-	
+
+	<script>
+		$("#closeBtn").on("click", function() {
+			const checkId = $(".join-text").text();
+			const inputId = $("#inputId", opener.document);
+			inputId.val(checkId);
+			self.close();
+		});
+	</script>
 </body>
 </html>

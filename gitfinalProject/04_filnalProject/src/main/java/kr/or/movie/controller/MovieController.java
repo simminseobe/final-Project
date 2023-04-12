@@ -34,14 +34,10 @@ public class MovieController {
 		model.addAttribute("mvList", mvList);
 		return "movie/movieDetail";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/searchMovieVideo.do",produces = "application/json;charset=utf-8")
-	public String searchMovieVideo(int movieNo) {
-		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
-//		model.addAttribute("mvmvList", mvList);
-		return new Gson().toJson(mvList);
-		
+	//무비포스트 작성 폼으로 이동
+	@RequestMapping(value="/moviePostFrm.do")
+	public String moviePostFrm() {
+		return "movie/moviePostFrm";
 	}
 
 	
