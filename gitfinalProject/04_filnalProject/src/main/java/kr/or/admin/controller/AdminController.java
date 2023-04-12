@@ -147,6 +147,58 @@ public class AdminController {
 		return "admin/updateMovieFrm";
 	}
 
+	@RequestMapping(value = "/updateMovie.do")
+	public String updateMovie(Movie movie, int[] fileNo, String[] filepath, MultipartFile movieMain,
+			MultipartFile[] moviePoster, HttpServletRequest request) {
+		MovieFile mainFile = new MovieFile();
+		ArrayList<MovieFile> postList = new ArrayList<MovieFile>();
+
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/movie/");
+
+		// 파일 서버에 업로드
+		if (movieMain != null && !moviePoster[0].isEmpty()) {
+			String mainFilename = movieMain.getOriginalFilename();
+			String mainFilepath = fileManager.upload(savePath, movieMain);
+
+			mainFile.setMovieFileName(mainFilename);
+			mainFile.setMovieFilePath(mainFilepath);
+
+			for (MultipartFile file : moviePoster) {
+				String filename = file.getOriginalFilename();
+				String upfilepath = fileManager.upload(savePath, file);
+
+				MovieFile postFile = new MovieFile();
+
+				postFile.setMovieFileName(filename);
+				postFile.setMovieFilePath(upfilepath);
+
+				postList.add(postFile);
+			}
+		}
+
+		// board: board 내용 업데이트, fileList 사진 업데이트, fileNo 삭제
+		int result = service.movieUpdate(movie, mainFile, postList, fileNo);
+
+		// 업데이트 성공 조건, result가 삭제한 파일수 + 추가한 파일수 + 1(boardUpadte)
+		if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) { // 파일도 삭제하고 파일도 첨부하면
+			for (String delFile : filepath) {
+				boolean delResult = fileManager.deleteFile(savePath, delFile);
+
+				if (delResult) {
+					System.out.println("파일 삭제 성공");
+				} else {
+					System.out.println("파일 삭제 실패");
+				}
+			}
+
+			return "admin/updateMovieFrm";
+		} else if (fileNo == null && (result == (postList.size() + 1))) { // 파일을 삭제안하고 파일만 첨부하거나 첨부 안하면
+			return "admin/updateMovieFrm";
+		} else {
+			return "ridirect:/";
+		}
+	}
+
 	@RequestMapping(value = "/allTheater.do")
 	public String allTheater() {
 		return "admin/allTheater";

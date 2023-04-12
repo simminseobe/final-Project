@@ -1,6 +1,7 @@
 package kr.or.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -63,5 +64,21 @@ public class AdminDao {
 		List list = sqlSession.selectList("theater.selectTheaterList");
 
 		return (ArrayList<Theater>) list;
+	}
+
+	public int updateMovie(Movie movie) {
+		int result = sqlSession.update("movie.updateMovie", movie);
+
+		return result;
+	}
+
+	public int deleteFile(int[] fileNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("fileArray", fileNo);
+
+		int result = sqlSession.delete("movie.deleteFile", map);
+
+		return result;
 	}
 }

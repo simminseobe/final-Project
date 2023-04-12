@@ -80,21 +80,7 @@
 		from movie_video where movie_no=#{movieNo}
 	</select>
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
-		select
-			 	movie_no as movieNo,
-				movie_title as movieTitle,
-				movie_director as movieDirector,
-				movie_actor as movieActor,
-				movie_genre as movieGenre,
-				movie_time as movieTime,
-				to_char(movie_date,'yyyy-mm-dd')  as movieDate,
-				movie_rating as movieRating,
-				movie_content as movieContent,
-				film_society as filmSociety,
-				classic_society as classicSociety,
-				special_movie as specialMovie,
-				enroll_member as enrollMember
-			 from movie_tbl where movie_no=#{movieNo}
+		select * from movie_tbl where movie_no=#{movieNo}
 	</select>
 	<resultMap type="movie" id="getMovie">
 	<result column="movie_no" property="movieNo"/>
@@ -111,11 +97,22 @@
 	<result column="special_movie" property="specialMovie"/>
 	<result column="enroll_member" property="enrollMember"/>
 	<collection 
-	property="fileList" 
+	property="moviePost" 
 	select="selectMoviePost" 
 	column="movie_no"
 	ofType="Movie"
 	javaType="java.util.ArrayList"
 	/>
 </resultMap>
+<update id="updateMovie" parameterType="movie">
+	update movie_tbl set 
+		movie_title=#{movieTitle}, movie_director=#{movieDirector}, movie_actor=#{movieActor}, movie_genre=#{movieGenre}, movie_time=#{movieTime}, movie_date=#{movieDate}, movie_rating=#{movieRating}, movie_content=#{movieContent}, film_society=#{filmSociety}, classic_society=#{classicSociety}, special_movie=#{specialMovie}, movie_type=#{movieType}
+	where movie_no=#{movieNo}
+</update>
+<delete id="deleteFile" parameterType="map">
+	delete from movie_file where movie_file_no=
+	<foreach collection="fileArray" item="fileno" open="(" close=")" separator=",">
+		#{fileno}
+	</foreach>
+</delete>
 </mapper>

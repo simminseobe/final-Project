@@ -49,17 +49,6 @@ public class AdminService {
 		return result;
 	}
 
-	public Movie selectOneUpdateMovie(int movieNo) {
-		Movie movie = movieDao.selectOneUpdateMovie(movieNo);
-
-		if (movie != null) {
-			MovieFile movieFile = movieDao.selectMovieFile(movieNo);
-			movie.setMainFile(movieFile);
-		}
-
-		return movie;
-	}
-
 	public ArrayList<String> selectTheaterAddr(String theaterLocal) {
 		ArrayList<String> theaterAddrList = dao.selectTheaterAddrList(theaterLocal);
 
@@ -82,5 +71,38 @@ public class AdminService {
 		ArrayList<Theater> list = dao.selectTheaterList();
 
 		return list;
+	}
+
+	public Movie selectOneUpdateMovie(int movieNo) {
+		Movie movie = movieDao.selectOneUpdateMovie(movieNo);
+
+		if (movie != null) {
+			MovieFile movieFile = movieDao.selectMovieFile(movieNo);
+			movie.setMainFile(movieFile);
+		}
+
+		return movie;
+	}
+
+	@Transactional
+	public int movieUpdate(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList, int[] fileNo) {
+		int result = dao.updateMovie(movie);
+
+		if (result > 0) {
+			if (fileNo != null) {
+				result += dao.deleteFile(fileNo);
+			}
+
+			result += dao.insertMainFile(mainFile);
+
+			// 첨부파일 추가
+			for (MovieFile file : postList) {
+				file.setMovieFileNo(movie.getMovieNo());
+
+				result += dao.insertPostFile(file);
+			}
+		}
+
+		return result;
 	}
 }
