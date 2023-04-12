@@ -47,6 +47,15 @@
 			movie_no as movieNo
 			from movie_file where movie_file_category='메인' and movie_no=#{movieNo}
 	</select>
+	<select id="selectMoviePost" resultType="movieFile" parameterType="_int">
+		select 
+			movie_file_no as movieFileNo,
+			movie_file_name as movieFileName,
+			movie_file_path as movieFilePath,
+			movie_file_category as movieFileCategory,
+			movie_no as movieNo
+			from movie_file where movie_file_category='포스트' and movie_no=#{movieNo}
+	</select>
 	<select id="selectOneMovie" parameterType="_int" resultType="movie">
 				select
 			 	movie_no as movieNo,
@@ -70,5 +79,4 @@
 			movie_video_link as videoLink
 		from movie_video where movie_no=#{movieNo}
 	</select>
-	
 </mapper>

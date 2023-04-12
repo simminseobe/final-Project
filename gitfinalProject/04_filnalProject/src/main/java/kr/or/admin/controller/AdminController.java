@@ -140,18 +140,12 @@ public class AdminController {
 
 	@RequestMapping(value = "/updateMovieFrm.do")
 	public String updateMovieFrm(int movieNo, Model model) {
-		Movie movie = movieServie.selectOneMovie(movieNo);
+		Movie movie = service.selectOneUpdateMovie(movieNo);
 
 		model.addAttribute("movie", movie);
 
 		return "admin/updateMovieFrm";
 	}
-
-//	@RequestMapping(value = "/updateMovie.do")
-//	public String updateMovie() {
-//		int result = service.boardUpdate(board, fileList, fileNo);
-//		return "";
-//	}
 
 	@RequestMapping(value = "/allTheater.do")
 	public String allTheater() {

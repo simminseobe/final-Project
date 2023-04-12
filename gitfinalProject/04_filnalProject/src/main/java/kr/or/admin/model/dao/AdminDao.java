@@ -47,6 +47,12 @@ public class AdminDao {
 		return (ArrayList<String>) list;
 	}
 
+	public ArrayList<String> selectOnemovieVideo(int movieNo) {
+		List list = sqlSession.selectList("theater.selectOnemovieVideo", movieNo);
+
+		return (ArrayList<String>) list;
+	}
+
 	public int insertTheater(Theater theater) {
 		int result = sqlSession.insert("theater.insertTheater", theater);
 

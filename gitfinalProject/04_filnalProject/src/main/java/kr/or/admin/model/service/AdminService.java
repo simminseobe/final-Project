@@ -49,6 +49,23 @@ public class AdminService {
 		return result;
 	}
 
+	public Movie selectOneUpdateMovie(int movieNo) {
+		Movie movie = movieDao.selectOneMovie(movieNo);
+
+		if (movie != null) {
+			MovieFile movieFile = movieDao.selectMovieFile(movieNo);
+			movie.setMainFile(movieFile);
+
+			ArrayList<MovieFile> moviePost = movieDao.selectMoviePost(movieNo);
+			movie.setMoviePost(moviePost);
+
+			ArrayList<MovieVideo> movieVideos = movieDao.selectOneMovieVideo(movieNo);
+			movie.setMovieVideos(movieVideos);
+		}
+
+		return movie;
+	}
+
 	public ArrayList<String> selectTheaterAddr(String theaterLocal) {
 		ArrayList<String> theaterAddrList = dao.selectTheaterAddrList(theaterLocal);
 

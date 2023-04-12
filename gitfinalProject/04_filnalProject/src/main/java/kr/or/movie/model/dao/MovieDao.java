@@ -1,6 +1,5 @@
 package kr.or.movie.model.dao;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,29 +18,35 @@ public class MovieDao {
 
 	public ArrayList<Movie> selectMovieAll() {
 		List list = sqlSession.selectList("movie.selectMovieAll");
-		return (ArrayList<Movie>)list;
-		
+		return (ArrayList<Movie>) list;
+
 	}
+
 	public MovieFile selectMovieFile(int movieNum) {
-		MovieFile result = sqlSession.selectOne("movie.selectMovieFile",movieNum);
+		MovieFile result = sqlSession.selectOne("movie.selectMovieFile", movieNum);
 		return result;
 	}
-	public ArrayList<Movie> selectMovieAll(int movieNo) {
-		List list = sqlSession.selectList("movie.selectMovieAllDetail",movieNo);
-		return (ArrayList<Movie>)list;
+
+	public ArrayList<MovieFile> selectMoviePost(int movieNo) {
+		List list = sqlSession.selectList("movie.selectMoviePost", movieNo);
+
+		return (ArrayList<MovieFile>) list;
 	}
+
+	public ArrayList<Movie> selectMovieAll(int movieNo) {
+		List list = sqlSession.selectList("movie.selectMovieAllDetail", movieNo);
+		return (ArrayList<Movie>) list;
+	}
+
 	public Movie selectOneMovie(int movieNo) {
-		Movie mov =sqlSession.selectOne("movie.selectOneMovie", movieNo);
-		
+		Movie mov = sqlSession.selectOne("movie.selectOneMovie", movieNo);
+
 		return mov;
 	}
+
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
 		List list = sqlSession.selectList("movie.selectOneMovieVideo", movieNo);
 		return (ArrayList<MovieVideo>) list;
 	}
-
-
-
-
 
 }
