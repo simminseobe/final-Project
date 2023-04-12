@@ -162,7 +162,9 @@
                                                     <div class="modal-body">
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-md-4 my-2" id="movie-post-image-div">
+                                                                <div class="d-flex justify-content-center my-2"
+                                                                    id="movie-post-image-div" style="flex-wrap: wrap;">
+                                                                    <!-- img -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -209,8 +211,8 @@
                 var reader = new FileReader();
 
                 reader.onload = function (event) {
-                    $("#main-post-image").attr("width", "200px");
-                    $("#main-post-image").attr("height", "200px");
+                    $("#main-post-image").css("width", "300px");
+                    $("#main-post-image").css("height", "300px");
 
                     $("#main-post-image").attr("src", event.target.result);
                 }
@@ -219,18 +221,22 @@
             })
 
             $("#moviePoster").on("change", function (event) {
+                $("#movie-post-image-div").empty();
+
                 var files = event.target.files;
-                var reader = new FileReader();
 
                 [...event.target.files].forEach(file => {
                     const img = $("<img>");
                     $("#movie-post-image-div").append(img);
-                    img.addClass("movie-post-image");
+
+                    var reader = new FileReader();
 
                     reader.onload = function (event) {
-                        $(".movie-post-image").attr("width", "200px");
-                        $(".movie-post-image").attr("height", "200px");
-                        $(".movie-post-image").attr("src", event.target.result);
+                        img.css("width", "200px");
+                        img.css("height", "200px");
+                        img.css("margin", "10px");
+
+                        img.attr("src", event.target.result);
                     }
 
                     reader.readAsDataURL(file);
