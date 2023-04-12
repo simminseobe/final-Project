@@ -47,5 +47,10 @@ public class MemberService {
 	public int deleteMember(int memberNo) {
 		return dao.deleteMember(memberNo);
 	}
+
+	// 마이페이지 → 비밀번호 변경
+	public int updatePw(Member m) {
+		return dao.updatePw(m);
+	}
 	
 }

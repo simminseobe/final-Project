@@ -36,11 +36,11 @@
                     <tbody>
                         <tr>
                             <th><label for="inputName">이름</label></th>
-                            <td><input type="text" id="inputName" class="input-text" name="memberName" placeholder="이름" autocomplete="off" maxlength="5"></td>
+                            <td><input type="text" id="inputName" class="input-text" name="memberName" placeholder="이름" autocomplete="off" maxlength="6"></td>
                         </tr>
                         <tr>
                             <th><label for="inputPhone">휴대폰번호</label></th>
-                            <td><input type="text" id="inputPhone" class="input-text" name="memberPhone" placeholder="'-'없이 숫자만 입력" autocomplete="off" maxlength="11"></td>
+                            <td><input type="text" id="inputPhone" class="input-text" name="memberPhone" placeholder="'-'없이 숫자만 입력" autocomplete="off" maxlength="13"></td>
                         </tr>
                     </tbody>
                 </table>

@@ -9,13 +9,18 @@
 }
 
 .wrapper{
-	min-height: calc(100vh - 210px);
+	min-height: calc(100vh - 0px);
     width: 1200px;
+    position: relative;
 }
 
 .mypage-wrap{
-    margin: 0 auto;
+	margin: 0 auto;
     padding-top: 80px;
+    width: 100vh;
+    position: absolute;
+    left: 450px;
+    height: 100vh;
 }
 
 .mypage-header>h2{
@@ -152,9 +157,29 @@ th:first-child, td:first-child {
     background-color: #503396;
     font-size: 1.1em;
     font-weight: 300;
+    cursor: pointer;
+}
+
+#updateImgBtn{
+    position: absolute;
+    left: 110px;
+    top: 17px;
+    width: 85px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    background-color: #503396;
+    font-size: 1.1em;
+    font-weight: 300;
+    cursor: pointer;
 }
 
 #addImgBtn:hover{
+	background-color: #351c6f;
+}
+
+#updateImgBtn:hover{
 	background-color: #351c6f;
 }
 
@@ -182,7 +207,7 @@ th:first-child, td:first-child {
 
 .profile-essential{
     position: absolute;
-	left: 1170px;
+	left: 770px;
     top: 10px;
 }
 
@@ -206,6 +231,11 @@ sup{
     border-radius: 10px;
 }
 
+#changePw>a{
+	text-decoration: none;
+	color: #444444;
+}
+
 .btn-wrap{
     position: relative;
     margin: 50px 0px 50px 0px;
@@ -215,7 +245,7 @@ sup{
 #cancelBtn{
     position: absolute;
     top: 10px;
-    left: 680px;
+    left: 300px;
     width: 75px;
     height: 45px;
     border-radius: 10px;
@@ -235,7 +265,7 @@ sup{
 #enrollBtn{
     position: absolute;
     top: 10px;
-    left: 780px;
+    left: 400px;
     width: 75px;
     height: 45px;
     border-radius: 10px;
