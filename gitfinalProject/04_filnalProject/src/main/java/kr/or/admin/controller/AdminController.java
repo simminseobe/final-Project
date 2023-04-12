@@ -150,7 +150,10 @@ public class AdminController {
 	public String allTheater() {
 		return "admin/allTheater";
 	}
-	
+	@RequestMapping(value="/detailTheater.do")	//임시 (no줘서 이동할거)
+	public String detailTheater() {
+		return "admin/detailTheater";
+	}
 
 
 }
