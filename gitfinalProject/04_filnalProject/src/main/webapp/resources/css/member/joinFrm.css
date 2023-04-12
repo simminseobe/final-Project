@@ -83,6 +83,10 @@ tr>td:first-child>sup{
     font-size: 12px;
 }
 
+label{
+	cursor: pointer;
+}
+
 .join-content>table>tbody>tr>td{ 
     padding: 12.5px 10px;
 }

@@ -108,7 +108,7 @@
         </div>
     </div>
     
-    <div class="modal-wrapper" id="modal_two" style="display: none">
+    <div class="modal-wrapper" id="modal-two" style="display: none">
         <div class="ok-modal">
             <div class="modal-top">
             </div>
@@ -126,6 +126,44 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal-wrapper" id="modal-three" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"이름 / 휴대폰 번호를 확인해 주세요."</p>
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn">
+                            <a href="/">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-wrapper" id="modal-four" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"아이디 / 이름 / 이메일을 확인해주세요."</p>
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn">
+                            <a href="/">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
     
 	<script src="/resources/js/member/findId.js"></script>
 </body>

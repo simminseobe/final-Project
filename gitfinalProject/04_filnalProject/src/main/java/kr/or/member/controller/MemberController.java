@@ -60,7 +60,7 @@ public class MemberController {
 		return "member/joinFrm";
 	}
 	
-	// 아이디 중복체크 -> 질문
+	// 아이디 중복체크
 	@ResponseBody
 	@RequestMapping(value="/checkId.do")
 	public String checkId(String checkId, Model model) {
@@ -219,7 +219,8 @@ public class MemberController {
 		return "member/changeNewPw";
 	}
 	
-	// 마이페이지 → 비밀번호 변경
+	// 마이페이지 → 비밀번호 변경 
+	// java.lang.StringIndexOutOfBoundsException: String index out of range: -1
 	@RequestMapping(value="/updatePw.do")
 	public String updatePw(Member member, String newPassword) {
 		int result = service.updatePw(member, newPassword);
