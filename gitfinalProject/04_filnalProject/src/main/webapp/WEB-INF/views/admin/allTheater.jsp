@@ -140,7 +140,7 @@
 							<button type="button" class="sel-city">서울</button>
 							<div class="tab-content" id="tab-content">
 								<ul>
-									<li><a href="/detailTheater.do" class="theater-detail">강남</a></li>
+									<li><a href="/detailTheater.do?theaterNo=1" class="theater-detail">강남</a></li>
 									<li><a href="#" class="theater-detail">강남대로(씨티)</a></li>
 									<li><a href="#" class="theater-detail">강동</a></li>
 									<li><a href="#" class="theater-detail">군자</a></li>
