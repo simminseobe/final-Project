@@ -30,30 +30,22 @@ body {
   flex-direction: column;
   justify-content: center;
 
-
   &__item {
-
     &--start {
       align-self: flex-start;
     }
-
     &--end {
       align-self: flex-end;
     }
-
   }
-
 }
 
 .site {
-
   &__main {
   }
-
   &__logo {
     margin-bottom: 2rem;
   }
-
 }
 
 $input-placeholder-color: #7e8ba3;
@@ -65,11 +57,9 @@ input {
   &::placeholder {
     color: $input-placeholder-color;
   }
-
 }
 
 .form {
-
   &__field {
     margin-bottom: 1rem;
   }
@@ -77,14 +67,11 @@ input {
   input {
     outline: 0;
     padding: .5rem 1rem;
-
     &[type="email"],
     &[type="password"] {
       width: 100%;
     }
-
   }
-
 }
 
 $grid-max-width: 25rem;

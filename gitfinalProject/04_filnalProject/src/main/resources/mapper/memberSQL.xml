@@ -77,7 +77,7 @@
   
   <!-- 마이페이지 → pw 변경 -->
   <update id="updatePw" parameterType="m">
-  	update member set member_pw=#{memberPW} where member_id=#{memberId}
+  	update member set member_pw=#{memberPw} where member_id=#{memberId}
   </update>
   
 </mapper>
