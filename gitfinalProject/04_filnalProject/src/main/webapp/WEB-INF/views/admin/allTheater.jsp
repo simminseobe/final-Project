@@ -112,7 +112,7 @@
 					background: #e0e0e0;
 				}
 
-				.theater-detail {
+				.tab-content>ul>li>a {
 					color: #444;
 					font-size: 15px;
 				}
@@ -137,10 +137,11 @@
 					<ul class="theater-tabs">
 						<li class="theater-city active-tab"
 							style="border-top-left-radius: 5px; border-left: #555; border-top: #555;">
-							<button type="button" class="sel-city">서울</button>
+							<button type="button" class="sel-city seoul">서울</button>
 							<div class="tab-content" id="tab-content">
-								<ul>
-									<li><a href="/detailTheater.do?theaterNo=1" class="theater-detail">강남</a></li>
+								<ul class="brchNo">
+									<!--  
+									<li><a href="/selectOneTheater.do?theaterNo=1" class="theater-detail">강남</a></li>
 									<li><a href="#" class="theater-detail">강남대로(씨티)</a></li>
 									<li><a href="#" class="theater-detail">강동</a></li>
 									<li><a href="#" class="theater-detail">군자</a></li>
@@ -160,13 +161,16 @@
 									<li><a href="#" class="theater-detail">홍대</a></li>
 									<li><a href="#" class="theater-detail">화곡</a></li>
 									<li><a href="#" class="theater-detail">ARTNINE</a></li>
+									-->
+									
 								</ul>
 							</div>
 						</li>
 						<li class="theater-city" style=" border-top: #555;">
 							<button type="button" class="sel-city">경기</button>
 							<div class="tab-content">
-								<ul>
+								<ul class="brchNo">
+									<!--  
 									<li><a href="#" class="theater-detail">고양스타필드</a></li>
 									<li><a href="#" class="theater-detail">광명AK플라자</a></li>
 									<li><a href="#" class="theater-detail">광명소하</a></li>
@@ -197,25 +201,29 @@
 									<li><a href="#" class="theater-detail">파주운정</a></li>
 									<li><a href="#" class="theater-detail">파주출판도시</a></li>
 									<li><a href="#" class="theater-detail">하남스타필드</a></li>
+									-->
 								</ul>
 							</div>
 						</li>
 						<li class="theater-city" style=" border-top: #555;">
 							<button type="button" class="sel-city">인천</button>
 							<div class="tab-content">
-								<ul>
+								<ul class="brchNo">
+									<!--  
 									<li><a href="#" class="theater-detail">검단</a></li>
 									<li><a href="#" class="theater-detail">송도</a></li>
 									<li><a href="#" class="theater-detail">영종</a></li>
 									<li><a href="#" class="theater-detail">인천논현</a></li>
 									<li><a href="#" class="theater-detail">청라지젤</a></li>
+									-->
 								</ul>
 							</div>
 						</li>
 						<li class="theater-city" style=" border-top: #555;">
 							<button type="button" class="sel-city">대전/충청/세종</button>
 							<div class="tab-content">
-								<ul>
+								<ul class="brchNo">
+									<!--  
 									<li><a href="#" class="theater-detail">공주</a></li>
 									<li><a href="#" class="theater-detail">논산</a></li>
 									<li><a href="#" class="theater-detail">대전</a></li>
@@ -231,13 +239,15 @@
 									<li><a href="#" class="theater-detail">천안</a></li>
 									<li><a href="#" class="theater-detail">청주사창</a></li>
 									<li><a href="#" class="theater-detail">홍성내포</a></li>
+									-->
 								</ul>
 							</div>
 						</li>
 						<li class="theater-city" style=" border-top: #555;">
 							<button type="button" class="sel-city">부산/대구/경상</button>
 							<div class="tab-content">
-								<ul>
+								<ul class="brchNo">
+									<!--  
 									<li><a href="#" class="theater-detail">경북도청</a></li>
 									<li><a href="#" class="theater-detail">경산하양</a></li>
 									<li><a href="#" class="theater-detail">경주</a></li>
@@ -263,13 +273,15 @@
 									<li><a href="#" class="theater-detail">창원내서</a></li>
 									<li><a href="#" class="theater-detail">포항</a></li>
 									<li><a href="#" class="theater-detail">해운대(장산)</a></li>
+									-->
 								</ul>
 							</div>
 						</li>
 						<li class="theater-city" style=" border-top: #555;">
 							<button type="button" class="sel-city">광주/전라</button>
 							<div class="tab-content">
-								<ul>
+								<ul class="brchNo">
+									<!-- 
 									<li><a href="#" class="theater-detail">광주상무</a></li>
 									<li><a href="#" class="theater-detail">광주하남</a></li>
 									<li><a href="#" class="theater-detail">목포하당(포르모)</a></li>
@@ -280,6 +292,7 @@
 									<li><a href="#" class="theater-detail">전주송천</a></li>
 									<li><a href="#" class="theater-detail">전주혁신</a></li>
 									<li><a href="#" class="theater-detail">첨단</a></li>
+									 -->
 								</ul>
 							</div>
 						</li>
@@ -287,12 +300,14 @@
 							style="border-top-right-radius: 5px; border-right: #555; border-top: #555 ;">
 							<button type="button" class="sel-city">강원</button>
 							<div class="tab-content">
-								<ul>
+								<ul class="brchNo">
+									<!-- 
 									<li><a href="#" class="theater-detail">남춘천</a></li>
 									<li><a href="#" class="theater-detail">속초</a></li>
 									<li><a href="#" class="theater-detail">원주</a></li>
 									<li><a href="#" class="theater-detail">원주센트럴</a></li>
 									<li><a href="#" class="theater-detail">춘천석사</a></li>
+									 -->
 								</ul>
 							</div>
 						</li>
@@ -316,7 +331,6 @@
 
 
 			</div>
-			</div>
 			<script>
 				$(".theater-city").on("click", function () {
 					$(".theater-city").removeClass("active-tab");
@@ -328,7 +342,34 @@
 				});
 				$(".theater-city").eq(0).click();
 
-
+				$(".sel-city").on("click", function() {
+					const theaterLocal = $(this).text();
+					
+					$.ajax({
+						url : "/selectBranchList.do",
+						type : "get",
+						data : {theaterLocal : theaterLocal},
+						success : function(data) {
+							$(".brchNo").empty();
+							console.log(data);
+							for(var i=0; i<data.length; i++){
+								console.log(data[i]);
+								const li = $("<li>");
+								const a = $("<a>");
+								
+								li.append(a);
+								a.attr("href", "/selectOneTheater.do?theaterNo=" + data[i].theaterNo);
+								a.text(data[i].theaterBranch);
+								
+								$(".brchNo").append(li);
+								
+							}
+						}
+					});
+				});
+				$(document).ready(function(){
+					$(".seoul").click();
+				});
 				
 			</script>
 		</body>

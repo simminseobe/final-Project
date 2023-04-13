@@ -105,4 +105,22 @@ public class AdminService {
 
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Theater selectOntTheater(int theaterNo) {
+		Theater theater = dao.selectOneTheater(theaterNo);
+		return theater;
+	}
+
+	public ArrayList<Theater> selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = dao.selectBranchList(theaterLocal);
+		return list;
+	}
 }

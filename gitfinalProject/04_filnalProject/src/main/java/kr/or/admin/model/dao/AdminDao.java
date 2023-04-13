@@ -81,4 +81,20 @@ public class AdminDao {
 
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	public Theater selectOneTheater(int theaterNo) {
+		Theater theater = sqlSession.selectOne("theater.selectOneTheater", theaterNo);
+		return theater;
+	}
+
+	public ArrayList<Theater> selectBranchList(String theaterLocal) {
+		List list = sqlSession.selectList("theater.selectBranchList", theaterLocal);
+		return (ArrayList<Theater>) list;
+	}
 }
