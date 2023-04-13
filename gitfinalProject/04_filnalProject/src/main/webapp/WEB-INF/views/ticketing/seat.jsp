@@ -181,7 +181,7 @@
 		            background-color: red;
 		            color: white;
 		        }
-				.content-result {
+				.choice-result {
 					overflow: hidden;
 					position: absolute;
 					left: 680px;
@@ -443,10 +443,10 @@
 							-->
 						</div>
 					</div>
-					<div class="content-result">
+					<div class="choice-result">
 						<div class="result-wrap">
 							<div class="result-title">
-
+								
 							</div>
 							<div class="result-info">
 

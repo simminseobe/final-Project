@@ -261,19 +261,21 @@
 	text-decoration: none;
 }
 .btn{
-	margin-left: 90px;
+	margin-left: 94px;
     margin-top: 10px;
 }
 .mapBtn{
+	font-size: 13px;
 	color: #fff;
     line-height: 36px;
     border: 0;
     background: #503396;
-	width: 130px;
+	width: 110px;
 	border-radius: 5px;
 	cursor: pointer;
 }
 .mapBtn>img{
+	vertical-align: -3px;
 	margin-right: 5px;
 	line-height: 50%;
 }
@@ -473,7 +475,7 @@
 			</div>
 		</div>
 		<div class="btn">
-			<button type="button" id="mapGogo" class="mapBtn"><img src="/img/ping.png" style="width: 10px;"></img>실시간 길찾기</button>
+			<button type="button" id="mapGogo" class="mapBtn"><img src="/img/ping.png"></img>실시간 길찾기</button>
 		</div>
 
 

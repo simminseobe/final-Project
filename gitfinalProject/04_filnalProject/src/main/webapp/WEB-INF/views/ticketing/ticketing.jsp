@@ -184,7 +184,6 @@
 						<h1>
 							<a href="/paymentMethod.do">결제수단(test)</a>
 						</h1>
-						<button onclick="test();">테스트버튼</button>
 						<button onclick="getMega();">제발 가져와져라 쫌</button>
 						<!-- 
 				<h1>
@@ -308,22 +307,7 @@
 				}
 				
 				
-				function test(){
-					console.log("꾹");
-					$.ajax({
-						url : "/ticketing.do",
-						type : "get",
-						success : function() {
-							console.log("서버호출완료!");
-						},
-						error : function(){
-							console.log("서버호출실패!");
-						},
-						complete : function(){
-							console.log("무조건 호출");
-						}
-					});
-				}
+				
 				
 				function getMega(){
 					console.log("꾹");
