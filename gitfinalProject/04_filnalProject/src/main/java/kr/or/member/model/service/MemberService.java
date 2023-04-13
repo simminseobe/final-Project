@@ -52,5 +52,10 @@ public class MemberService {
 	public int updatePw(Member member, String newPassword) {
 		return dao.updatePw(member);
 	}
+
+	// 아이디 중복체크 버튼 클릭
+	public Member selectId(Member m) {
+		return dao.selectId(m);
+	}
 	
 }

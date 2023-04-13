@@ -60,7 +60,7 @@ public class MemberController {
 		return "member/joinFrm";
 	}
 	
-	// 아이디 중복체크
+	// 아이디 중복체크(정규표현식)
 	@ResponseBody
 	@RequestMapping(value="/checkId.do")
 	public String checkId(String checkId, Model model) {
@@ -229,6 +229,15 @@ public class MemberController {
 		} else {
 			return "redirect:/myProfile.do";
 		}
+	}
+	
+	// 아이디 중복체크 버튼 클릭
+	@ResponseBody
+	@RequestMapping(value="/dupIdChk.do", produces = "application/json;charset=utf-8")
+	public String dupIdchk(Member m, Model model) {
+		Member member = service.selectId(m);
+		System.out.println(member);
+		return new Gson().toJson(member);
 	}
 	
 	

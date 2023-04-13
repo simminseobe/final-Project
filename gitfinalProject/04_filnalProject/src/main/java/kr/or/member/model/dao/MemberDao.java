@@ -62,4 +62,10 @@ public class MemberDao {
 		return result;
 	}
 
+	// 아이디 중복체크 버튼 클릭
+	public Member selectId(Member m) {
+		Member member = sqlSession.selectOne("member.selectId", m);
+		return member;
+	}
+
 }

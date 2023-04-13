@@ -41,7 +41,7 @@
 	        	<button><a href="/findIdFrm.do" class="login-form">ID/PW 찾기</a></button> | 
     	    	<button><a href="/joinFrm.do" class="login-form">회원가입</a></button><br>
         	</div>
-        	<div>
+        	<div class="subBtn">
         		<button><a href="#" class="login-form">카카오API 로그인</a></button> | 
         		<button><a href="#" class="login-form">네이버API 로그인</a></button>
         	</div>
