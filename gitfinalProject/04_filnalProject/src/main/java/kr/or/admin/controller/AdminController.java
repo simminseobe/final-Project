@@ -214,9 +214,22 @@ public class AdminController {
 		return "admin/allTheater";
 	}
 
+
+	@RequestMapping(value="/selectOneTheater.do")	//임시 (no줘서 이동할거)
+	public String selectOneTheater(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheater(theaterNo);
+		model.addAttribute("theater",theater);
 	@RequestMapping(value = "/detailTheater.do") // 임시 (no줘서 이동할거)
 	public String detailTheater() {
 		return "admin/detailTheater";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/selectBranchList.do", produces = "application/json;charset=utf-8")
+	public String selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		list =	service.selectBranchList(theaterLocal);
+		return new Gson().toJson(list);
 	}
 
 }
