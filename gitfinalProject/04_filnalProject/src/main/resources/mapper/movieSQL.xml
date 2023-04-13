@@ -103,6 +103,13 @@
 	ofType="Movie"
 	javaType="java.util.ArrayList"
 	/>
+	<collection 
+	property="movieVideos" 
+	select="selectOneMovieVideo" 
+	column="movie_no"
+	ofType="MovieVideo"
+	javaType="java.util.ArrayList"
+	/>
 </resultMap>
 <update id="updateMovie" parameterType="movie">
 	update movie_tbl set 

@@ -415,13 +415,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group">
-                                                                                <label for="movieVideo" class="my-3">영화 영상 링크</label>
-                                                                                <c:forEach items="${list}" var="movie">
-                                                                                    <input type="text" class="form-control my-1" id="movieVideo"
-                                                                                        name="movieVideo" value="movie.">
-                                                                                </c:forEach>
-                                                                            </div> -->
+                                            <div class="form-group">
+                                                <label for="movieVideo" class="my-3">기존 영상 관리</label>
+                                                <c:forEach items="${movie.movieVideos}" var="video">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control my-2 ms-2 mb-2"
+                                                            id="movieVideo" name="movieVideo" value="${video.videoLink}"
+                                                            disabled>
+                                                        <span class="input-group-btn">
+                                                            <button type="button"
+                                                                onclick="upDateFile(this);">수정</button>
+                                                        </span>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
                                             <div class="form-group my-1">
                                                 <label for="movieContent" class="my-1">소개</label>
                                                 <textarea class="form-control" id="movieContent" name="movieContent"
@@ -489,9 +496,6 @@
                     });
 
                     function deleteFile(obj, fileNo, filepath) {
-                        console.log(fileNo);
-                        console.log(filepath);
-
                         const fileNoInput = $("<input>");
 
                         fileNoInput.attr("name", "fileNo");
@@ -507,6 +511,11 @@
                         $("#updateMovieFrm").append(fileNoInput).append(filepathInput);
 
                         $(obj).parent().remove();
+                    }
+
+                    function upDateFile(obj) {
+                        // console.log($(obj).parent().prev());
+                        $(obj).parent().prev().attr("disabled", false);
                     }
                 </script>
             </body>

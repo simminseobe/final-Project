@@ -19,6 +19,5 @@
   <insert id="insertTheater" parameterType="theater">
   	insert into theater_tbl
   	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, 'admin')
-  	
   </insert>
 </mapper>

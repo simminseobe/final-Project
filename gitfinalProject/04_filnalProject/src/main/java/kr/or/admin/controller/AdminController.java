@@ -149,7 +149,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/updateMovie.do")
 	public String updateMovie(Movie movie, int[] fileNo, String[] filepath, MultipartFile movieMain,
-			MultipartFile[] moviePoster, HttpServletRequest request) {
+			MultipartFile[] moviePoster, String movieVideo[], HttpServletRequest request) {
 		MovieFile mainFile = new MovieFile();
 		ArrayList<MovieFile> postList = new ArrayList<MovieFile>();
 
@@ -176,8 +176,18 @@ public class AdminController {
 			}
 		}
 
+		ArrayList<MovieVideo> videoList = new ArrayList<MovieVideo>();
+
+		for (String link : movieVideo) {
+			MovieVideo video = new MovieVideo();
+
+			video.setVideoLink(link);
+
+			videoList.add(video);
+		}
+
 		// board: board 내용 업데이트, fileList 사진 업데이트, fileNo 삭제
-		int result = service.movieUpdate(movie, mainFile, postList, fileNo);
+		int result = service.movieUpdate(movie, mainFile, postList, fileNo, videoList);
 
 		// 업데이트 성공 조건, result가 삭제한 파일수 + 추가한 파일수 + 1(boardUpadte)
 		if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) { // 파일도 삭제하고 파일도 첨부하면
@@ -204,12 +214,9 @@ public class AdminController {
 		return "admin/allTheater";
 	}
 
-
-	@RequestMapping(value="/detailTheater.do")	//임시 (no줘서 이동할거)
+	@RequestMapping(value = "/detailTheater.do") // 임시 (no줘서 이동할거)
 	public String detailTheater() {
 		return "admin/detailTheater";
 	}
-
-
 
 }

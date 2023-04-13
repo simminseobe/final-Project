@@ -85,7 +85,8 @@ public class AdminService {
 	}
 
 	@Transactional
-	public int movieUpdate(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList, int[] fileNo) {
+	public int movieUpdate(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList, int[] fileNo,
+			ArrayList<MovieVideo> videoList) {
 		int result = dao.updateMovie(movie);
 
 		if (result > 0) {
@@ -101,8 +102,18 @@ public class AdminService {
 
 				result += dao.insertPostFile(file);
 			}
+
+			// 영상 링크 insert
+			for (MovieVideo video : videoList) {
+				video.setMovieNo(movie.getMovieNo());
+
+				if (video.getVideoLink() != null) {
+					result += dao.insertmovieVideo(video);
+				}
+			}
 		}
 
 		return result;
 	}
+
 }
