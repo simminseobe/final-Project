@@ -64,7 +64,10 @@
                                                         <button class="delete-movie-btn"
                                                             onclick=" deleteMovie(this);">삭제</button>
                                                     </td>
-                                                </tr>
+                                                </tr> 
+                                                <div>
+                                                	<c:out value="${theater.theaterContent}" escapeXml="false"/><br>
+                                                </div>                                                                                               
                                             </c:forEach>
                                         </tbody>
                                     </table>

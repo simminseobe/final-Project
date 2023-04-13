@@ -152,7 +152,6 @@ th:first-child, td:first-child {
 
 .modal-wrapper{
     width: 100%;
-    height: 100vh;
     background-color: rgba(0,0,0,0.5);
     position: absolute;
     top: 0;
@@ -191,7 +190,7 @@ th:first-child, td:first-child {
 } */
 
 .layer-content{
-    padding: 20px 0px 20px 20px;
+    padding: 7px 0px 15px 15px;
     font-size: 0.8em;
     color: #444444;
 }

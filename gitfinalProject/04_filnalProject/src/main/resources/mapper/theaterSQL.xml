@@ -19,7 +19,6 @@
   <insert id="insertTheater" parameterType="theater">
   	insert into theater_tbl
   	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, 'admin')
-  	
   </insert>
   <select id="selectOneTheater" parameterType="_int" resultType="theater">
   	select 

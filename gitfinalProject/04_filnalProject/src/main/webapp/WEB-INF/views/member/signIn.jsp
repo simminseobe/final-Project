@@ -38,12 +38,12 @@
         </div>
         <div>
         	<div class="position">
-	        	<a href="/findIdFrm.do" class="login-form">ID/PW 찾기</a> | 
-    	    	<a href="/joinFrm.do" class="login-form">회원가입</a><br>
+	        	<button><a href="/findIdFrm.do" class="login-form">ID/PW 찾기</a></button> | 
+    	    	<button><a href="/joinFrm.do" class="login-form">회원가입</a></button><br>
         	</div>
         	<div>
-        		<a href="#" class="login-form">카카오API 로그인</a> | 
-        		<a href="#" class="login-form">네이버API 로그인</a>
+        		<button><a href="#" class="login-form">카카오API 로그인</a></button> | 
+        		<button><a href="#" class="login-form">네이버API 로그인</a></button>
         	</div>
         </div>
       </form>
