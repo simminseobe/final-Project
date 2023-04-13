@@ -33,6 +33,7 @@ $("#idChkBtn").on("click", function() {
             }else{
                 // data가 넘어오지 않을 때 모달 창 처리
                 // 모달하나 더 만들어서 처리하기
+                $("#modal-three").show();
             }
         },
         error: function() {
@@ -55,7 +56,9 @@ $("#pwChkBtn").on("click", function() {
             console.log(data)
             if(data != null) {
                 $("#findPw").text(data.memberPw);
-                $("#modal_two").show();
+                $("#modal-two").show();
+            } else {
+                $("#modal-four").show();
             }
         }, 
         error : function() {

@@ -3,6 +3,7 @@ package kr.or.member.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import common.FileManager;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -25,6 +28,8 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private JavaMailSender mailSender;
+	@Autowired
+	private FileManager manager;
 
 	// 로그인 폼 이동
 	@RequestMapping(value="/login.do")
@@ -56,7 +61,7 @@ public class MemberController {
 		return "member/joinFrm";
 	}
 	
-	// 아이디 중복체크 -> 질문
+	// 아이디 중복체크(정규표현식)
 	@ResponseBody
 	@RequestMapping(value="/checkId.do")
 	public String checkId(String checkId, Model model) {
@@ -130,7 +135,11 @@ public class MemberController {
 	@RequestMapping(value="/join.do")
 	public String join(Member m) {
 		int result = service.insertMember(m);
-		return "redirect:/";
+		if(result > 0) {
+			return "redirect:/";
+		} else {
+			return "redirect:/join.do";
+		}
 	}
 
 	// 아이디 찾기 폼 이동
@@ -169,11 +178,19 @@ public class MemberController {
 	
 	// 개인정보 수정
 	@RequestMapping(value="/updateMember.do")
-	public String updateMember(Member member, @SessionAttribute(required=false) Member m) {
+	public String updateMember(Member member, @SessionAttribute(required=false) Member m, String memberFilepath, MultipartFile file, HttpServletRequest request) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+		String filename = file.getOriginalFilename();
+		String upFilepath = manager.upload(savePath, file);
+		member.setMemberFilename(filename);
+		member.setMemberFilepath(upFilepath);
+		
 		int result = service.updateMember(member);
 		if(result > 0) {
 			m.setMemberPhone(member.getMemberPhone());
 			m.setMemberEmail(member.getMemberEmail());
+			m.setMemberFilename(member.getMemberFilename());
+			m.setMemberFilepath(member.getMemberFilepath());
 			return "redirect:/myProfile.do";
 		} else {
 			return "redirect:/";
@@ -195,6 +212,33 @@ public class MemberController {
 		} else {
 			return "redirect:/myProfile.do";
 		}
+	}
+	
+	// 마이페이지 → 비밀번호 변경 페이지 이동
+	@RequestMapping(value="/changePw.do")
+	public String changePw() {
+		return "member/changeNewPw";
+	}
+	
+	// 마이페이지 → 비밀번호 변경 
+	// java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	@RequestMapping(value="/updatePw.do")
+	public String updatePw(Member member, String newPassword) {
+		int result = service.updatePw(member, newPassword);
+		if(result > 0) {
+			return "redirect:/logout.do";
+		} else {
+			return "redirect:/myProfile.do";
+		}
+	}
+	
+	// 아이디 중복체크 버튼 클릭
+	@ResponseBody
+	@RequestMapping(value="/dupIdChk.do", produces = "application/json;charset=utf-8")
+	public String dupIdchk(Member m, Model model) {
+		Member member = service.selectId(m);
+		System.out.println(member);
+		return new Gson().toJson(member);
 	}
 	
 	

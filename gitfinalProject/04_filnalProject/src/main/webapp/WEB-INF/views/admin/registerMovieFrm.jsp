@@ -57,13 +57,11 @@
                                     <select class="form-select" id="movieType" name="movieType"
                                         aria-label="Default select example">
                                         <option value="2D">2D</option>
-                                        <option value="2D(자막)">2D(자막)</option>
-                                        <option value="2D ATMOS(자막)">2D ATMOS(자막)</option>
-                                        <option value="2D Dolby(자막)">2D Dolby(자막)</option>
-                                        <option value="판타지">3D</option>
-                                        <option value="2D(자막)">3D(자막)</option>
-                                        <option value="2D ATMOS(자막)">3D ATMOS(자막)</option>
-                                        <option value="2D Dolby(자막)">3D Dolby(자막)</option>
+                                        <option value="2D ATMOS">2D ATMOS</option>
+                                        <option value="2D Dolby">2D Dolby</option>
+                                        <option value="3D">3D</option>
+                                        <option value="3D ATMOS">3D ATMOS</option>
+                                        <option value="3D Dolby">3D Dolby</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -78,15 +76,7 @@
                                     <label for="movieRating" class="my-1">심의 등급</label>
                                     <input type="text" class="form-control" id="movieRating" name="movieRating">
                                 </div>
-                                <div class="form-group">
-                                    <label for="movieVideo" class="my-1">영화 영상 링크</label>
-                                    <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                    <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                    <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                    <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                    <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group my-2">
                                     <label for="filmSociety" class="form-check-label my-1">필름 소사이어티</label>
                                     <input type="checkbox" class="form-check-input my-1" id="filmSociety"
                                         name="filmSociety" value="Y">
@@ -97,7 +87,7 @@
                                     <input type="checkbox" class="form-check-input my-1" id="specialMovie"
                                         name="specialMovie" value="Y">
                                 </div>
-                                <div class="form-group my-1">
+                                <div class="form-group my-2">
                                     <div class="input-group mb-3">
                                         <div class="input-group w-50">
                                             <label class="input-group-text" for="movieMain">메인 이미지</label>
@@ -138,7 +128,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" class="my-1">
+                                <div class="form-group" class="my-2">
                                     <div class="input-group w-50">
                                         <label class="input-group-text" for="moviePoster">포스터 이미지</label>
                                         <input type="file" class="form-control" id="moviePoster" name="moviePoster"
@@ -162,13 +152,9 @@
                                                     <div class="modal-body">
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-md-4 my-2">
-                                                                    <img id="movie-post-image" class="img-fluid">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-4 my-2">
-                                                                    <img id="movie-post-image" class="img-fluid">
+                                                                <div class="d-flex justify-content-center my-2"
+                                                                    id="movie-post-image-div" style="flex-wrap: wrap;">
+                                                                    <!-- img -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -176,11 +162,18 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">닫기</button>
-                                                        <button type="button" class="btn btn-primary">수정</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="movieVideo" class="my-3">영화 영상 링크</label>
+                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
+                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
+                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
+                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
+                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
                                     </div>
                                     <div class="form-group my-1">
                                         <label for="movieContent" class="my-1">소개</label>
@@ -200,29 +193,52 @@
             </div>
         </div>
         <script>
+            $("#movieContent").summernote({
+                height: 400,
+                lang: "ko-KR",
+                callbacks: {
+                    onImageUpload: function (files) {
+                        uploadImage(files[0], this);
+                    }
+                }
+            });
+
             $("#movieMain").on("change", function (event) {
                 var file = event.target.files[0];
                 var reader = new FileReader();
 
-                reader.onload = function (e) {
+                reader.onload = function (event) {
+                    $("#main-post-image").css("width", "300px");
+                    $("#main-post-image").css("height", "300px");
 
-                    $("#main-post-image").attr("src", e.target.result);
+                    $("#main-post-image").attr("src", event.target.result);
                 }
 
                 reader.readAsDataURL(file);
             })
 
             $("#moviePoster").on("change", function (event) {
-                var file = event.target.files[0];
-                var reader = new FileReader();
+                $("#movie-post-image-div").empty();
 
-                reader.onload = function (e) {
+                var files = event.target.files;
 
-                    $("#movie-post-image").attr("src", e.target.result);
-                }
+                [...event.target.files].forEach(file => {
+                    const img = $("<img>");
+                    $("#movie-post-image-div").append(img);
 
-                reader.readAsDataURL(file);
-            })
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        img.css("width", "200px");
+                        img.css("height", "200px");
+                        img.css("margin", "10px");
+
+                        img.attr("src", event.target.result);
+                    }
+
+                    reader.readAsDataURL(file);
+                });
+            });
         </script>
     </body>
 

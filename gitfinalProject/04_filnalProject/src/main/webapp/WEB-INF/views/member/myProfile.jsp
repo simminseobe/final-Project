@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="/resources/css/member/myProfile.css">
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/menubar.jsp"/>
 
 	<div class="wrapper">
+		<jsp:include page="/WEB-INF/views/common/menubar.jsp"/>
 	    <form action="/updateMember.do" method="post" enctype="multipart/form-data">
         <div class="mypage-wrap">
             <div class="mypage-header">
@@ -26,9 +26,18 @@
                             <th>프로필 사진</th>
                             <td>
                                 <div class="profile-title">
-                                    <input type="file" id="profile-file" name="profile">
-                                    <img src="/resources/images/member/my-profile.png" class="img" width="68px" height="68px">
-                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button>
+                                    <c:choose>
+                                    	<c:when test="${empty sessionScope.m.memberFilepath}">
+                                    		<input type="file" id="profile-file" name="file" style="display: none" onchange="loadImg(this);">
+		                                    <img src="/resources/images/member/nonImg.png" id="testImg" class="img" width="68px" height="68px">
+		                                    <button type="button" id="addImgBtn" onclick="fileUpload();">이미지 등록</button> 
+                                    	</c:when>
+                                    	<c:otherwise>
+		                                    <input type="file" id="profile-file" name="file" style="display: none" onchange="loadImg(this);">
+		                                    <img id="testImg" src="/resources/upload/member/${sessionScope.m.memberFilepath }" class="img" width="68px" height="68px">
+		                                    <button type="button" id="updateImgBtn">이미지 변경</button>                                    	
+                                    	</c:otherwise>
+                                    </c:choose>
                                     <div>
 	                                    <a href="/deleteFrm.do" id="deleteMember">회원탈퇴</a>
                                     </div>
@@ -94,15 +103,16 @@
                         <tr>
                             <th>비밀번호<sup> *</sup></th>
                             <td>
-                                <button id="changePw">비밀번호 변경</button>
+                            	<input type="hidden" name="memberPw" value="${sessionScope.m.memberPw }">
+                                <button id="changePw"><a href="/changePw.do">비밀번호 변경</a></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
             <div class="btn-wrap">
                 <button type="button" id="cancelBtn">취소</button>
                 <input type="submit" value="등록" id="enrollBtn"></input>
+            </div>
             </div>
         </div>
     </form>

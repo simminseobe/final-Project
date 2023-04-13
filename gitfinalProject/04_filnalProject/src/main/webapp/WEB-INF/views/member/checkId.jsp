@@ -13,7 +13,7 @@
 
 	<div id="idCheck">
 		<c:choose>
-			<c:when test="${result eq 'ok' }">
+			<c:when test="${empty data }">
 				<div class="first-div">
 					[<span class="join-text">${checkId }</span>] 는 사용 가능한 아이디입니다.
 				</div>
@@ -21,15 +21,6 @@
                 <div class="btn-wrap">
                     <button type="button" class="close-button" id="closeBtn">닫기</button>
                 </div>
-				
-				<script>
-					$("#closeBtn").on("click", function() {
-						const checkId = $(".join-text").text();
-						const inputId = $("#inputId", opener.document);
-						inputId.val(checkId);
-						self.close();
-					});
-				</script>
 			</c:when>
 			<c:otherwise>
 			<div class="second-div">
@@ -44,8 +35,15 @@
 			</div>
 			</c:otherwise>
 		</c:choose>
-		
 	</div>
-	
+
+	<script>
+		$("#closeBtn").on("click", function() {
+			const checkId = $(".join-text").text();
+			const inputId = $("#inputId", opener.document);
+			inputId.val(checkId);
+			self.close();
+		});
+	</script>
 </body>
 </html>

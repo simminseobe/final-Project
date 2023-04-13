@@ -140,22 +140,100 @@ public class AdminController {
 
 	@RequestMapping(value = "/updateMovieFrm.do")
 	public String updateMovieFrm(int movieNo, Model model) {
-		Movie movie = movieServie.selectOneMovie(movieNo);
+		Movie movie = service.selectOneUpdateMovie(movieNo);
 
 		model.addAttribute("movie", movie);
 
 		return "admin/updateMovieFrm";
 	}
 
-//	@RequestMapping(value = "/updateMovie.do")
-//	public String updateMovie() {
-//		int result = service.boardUpdate(board, fileList, fileNo);
-//		return "";
-//	}
+	@RequestMapping(value = "/updateMovie.do")
+	public String updateMovie(Movie movie, int[] fileNo, String[] filepath, MultipartFile movieMain,
+			MultipartFile[] moviePoster, String movieVideo[], HttpServletRequest request) {
+		MovieFile mainFile = new MovieFile();
+		ArrayList<MovieFile> postList = new ArrayList<MovieFile>();
+
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/movie/");
+
+		// 파일 서버에 업로드
+		if (movieMain != null && !moviePoster[0].isEmpty()) {
+			String mainFilename = movieMain.getOriginalFilename();
+			String mainFilepath = fileManager.upload(savePath, movieMain);
+
+			mainFile.setMovieFileName(mainFilename);
+			mainFile.setMovieFilePath(mainFilepath);
+
+			for (MultipartFile file : moviePoster) {
+				String filename = file.getOriginalFilename();
+				String upfilepath = fileManager.upload(savePath, file);
+
+				MovieFile postFile = new MovieFile();
+
+				postFile.setMovieFileName(filename);
+				postFile.setMovieFilePath(upfilepath);
+
+				postList.add(postFile);
+			}
+		}
+
+		ArrayList<MovieVideo> videoList = new ArrayList<MovieVideo>();
+
+		for (String link : movieVideo) {
+			MovieVideo video = new MovieVideo();
+
+			video.setVideoLink(link);
+
+			videoList.add(video);
+		}
+
+		// board: board 내용 업데이트, fileList 사진 업데이트, fileNo 삭제
+		int result = service.movieUpdate(movie, mainFile, postList, fileNo, videoList);
+
+		// 업데이트 성공 조건, result가 삭제한 파일수 + 추가한 파일수 + 1(boardUpadte)
+		if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) { // 파일도 삭제하고 파일도 첨부하면
+			for (String delFile : filepath) {
+				boolean delResult = fileManager.deleteFile(savePath, delFile);
+
+				if (delResult) {
+					System.out.println("파일 삭제 성공");
+				} else {
+					System.out.println("파일 삭제 실패");
+				}
+			}
+
+			return "admin/updateMovieFrm";
+		} else if (fileNo == null && (result == (postList.size() + 1))) { // 파일을 삭제안하고 파일만 첨부하거나 첨부 안하면
+			return "admin/updateMovieFrm";
+		} else {
+			return "ridirect:/";
+		}
+	}
 
 	@RequestMapping(value = "/allTheater.do")
 	public String allTheater() {
 		return "admin/allTheater";
+	}
+
+
+	@RequestMapping(value="/selectOneTheater.do")	//임시 (no줘서 이동할거)
+	public String selectOneTheater(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheater(theaterNo);
+		model.addAttribute("theater",theater);
+		return "admin/detailTheater";
+	}
+	/*
+	 * @RequestMapping(value = "/detailTheater.do") // 임시 (no줘서 이동할거) 
+	 * public String detailTheater() { 
+	 * return "admin/detailTheater"; 
+	 * }
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value="/selectBranchList.do", produces = "application/json;charset=utf-8")
+	public String selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		list =	service.selectBranchList(theaterLocal);
+		return new Gson().toJson(list);
 	}
 
 }
