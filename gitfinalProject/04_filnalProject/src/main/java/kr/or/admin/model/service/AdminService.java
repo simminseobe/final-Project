@@ -42,7 +42,9 @@ public class AdminService {
 
 				video.setMovieNo(movie.getMovieNo());
 
-				result += dao.insertmovieVideo(video);
+				if (video.getVideoLink() != null) {
+					result += dao.insertmovieVideo(video);
+				}
 			}
 		}
 
