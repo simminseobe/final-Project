@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.content{
+	width: calc(100% - 360px);
+	float: right;
+}
+
+.content-header>h2{
+	font-size: 28px;
+	font-weight: bold;
+	color: #444444;
+	margin: 20px 0px 20px 0px;
+}
+
+.support>li{
+	font-size: 1.1em;
+	margin: 20px 0px 20px 0px;
+}
+
+.table-wrap{
+	border-collapse: collapse;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #d1d5dd;
+}
+
+th, td{
+	border-bottom: 1px solid #d1d5dd;
+}
+
+.table-wrap>tbody>tr>th{
+	width: 180px;
+	height: 50px;
+	background-color: #f7f8f9;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.table-wrap>tbody>tr>td{
+	padding: 7px 15px;
+	width: 660px;
+	height: 50px;
+}
+
+.table-wrap>tbody>tr>td>input{
+	padding-left: 10px;
+	width: 150px;
+	height: 30px;
+}
+
+.input-text{
+	border: 1px solid #d8d9db;
+}
+
+label{
+	cursor: pointer;
+}
+
+span{
+	font-size: 14px;
+}
+
+.btn-wrap{
+	display: flex;
+	justify-content: center;
+	margin: 50px auto;
+	flex-wrap: nowrap;
+}
+
+#cancelBtn:hover{
+	text-decoration: none;
+    color: #fff;
+    background: #351c6f;
+}
+
+#updateBtn:hover{
+    text-decoration: none;
+    color: #fff;
+    background: #351c6f;
+}
+
+#cancelBtn{
+	width: 80px;
+	height: 45px;
+	margin-right: 15px;
+	background-color: #503396;
+	border-color: #503396;
+	font-size: 15px;
+	color: #fff;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+#updateBtn{
+	width: 80px;
+	height: 45px;
+	background-color: #503396;
+	border-color: #503396;
+	font-size: 15px;
+	color: #fff;
+	border-radius: 10px;
+	cursor: pointer;
+}

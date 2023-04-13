@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<!DOCTYPE html>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<html>
 
 	<head>
@@ -121,6 +122,20 @@
 				margin-top: -6px;
 				background-color: #d8d9db;
 			}
+
+			.now-theater{
+				position: absolute;
+				top: 50px;
+				left: 500px;
+				overflow: hidden;
+				padding: 40px 0 0 0;
+				text-align: center;
+				color: #fff;
+				font-size: 3.0666em;
+				font-weight: 400;
+				line-height: 1.1;
+				text-shadow: 2px 2px 10px rgba(0,0,0,.7);
+			}
 			/*--------------------------------------------------*/
 			/*--------------------------------------------------*/
 			/*--------------------------------------------------*/
@@ -236,7 +251,7 @@
 								<a href="#">서울</a>
 								<div class="sub">
 									<ul>
-										<li><a href="#">강남</a></li>
+										<li><a href="/detailTheater.do?theaterNo=1">강남</a></li>
 										<li><a href="#">강남대로(씨티)</a></li>
 										<li><a href="#">강동</a></li>
 										<li><a href="#">군자</a></li>
@@ -393,6 +408,7 @@
 							</li>
 						</ul>
 					</div>
+					<p class="now-theater">${theater.theaterNo }</p>
 				</div>
 			</div>
 			<!--------------------------------------------------------------->

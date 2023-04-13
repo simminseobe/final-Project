@@ -57,9 +57,9 @@ public class MemberDao {
 		return result;
 	}
 
-	// 마이페이지 → 비밀번호 변경
-	public int updatePw(Member m) {
-		int result = sqlSession.update("member.updatePw", m);
+	public int updatePw(Member member) {
+		int result = sqlSession.update("member.updatePw", member);
 		return result;
 	}
+
 }

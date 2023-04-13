@@ -33,18 +33,3 @@ $("#cancelBtn").on("click", function() {
 $("#updateImgBtn").on("click", function() {
     $("#profile-file").click();
 });
-
-$("#changePw").on("click", function() {
-    const memberPw = $("[name=memberPw]");
-    $.ajax({
-        url: "/updatePw.do",
-        type: "post",
-        data: {memberPw:memberPw},
-        success: function(data) {
-            console.log(data);
-        },
-        error: function() {
-            console.log("오류");
-        }
-    });
-});

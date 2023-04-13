@@ -49,8 +49,8 @@ public class MemberService {
 	}
 
 	// 마이페이지 → 비밀번호 변경
-	public int updatePw(Member m) {
-		return dao.updatePw(m);
+	public int updatePw(Member member, String newPassword) {
+		return dao.updatePw(member);
 	}
 	
 }
