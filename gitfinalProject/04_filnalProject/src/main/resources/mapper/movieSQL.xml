@@ -35,7 +35,8 @@
 			film_society as filmSociety,
 			classic_society as classicSociety,
 			special_movie as specialMovie,
-			enroll_member as enrollMember
+			enroll_member as enrollMember,
+			movie_type as movieType
 		 from movie_tbl
 	</select>
 	<select id="selectMovieFile" resultType="movieFile" parameterType="_int">
@@ -61,7 +62,8 @@
 				film_society as filmSociety,
 				classic_society as classicSociety,
 				special_movie as specialMovie,
-				enroll_member as enrollMember
+				enroll_member as enrollMember,
+				movie_type as movieType
 			 from movie_tbl where movie_no=#{movieNo}
 		</select>
 	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
@@ -70,5 +72,56 @@
 			movie_video_link as videoLink
 		from movie_video where movie_no=#{movieNo}
 	</select>
+	<insert id="insertReview" parameterType="review" >
+		insert into review values(review_seq.nextval,#{movieNo},#{reviewContent},#{movieScore},to_char(sysdate,'yyyy-mm-dd'),#{memberId})
+		<selectKey  resultType="_int" order="AFTER" keyProperty="reviewCommentNo">
+			select max(review_comment_no) from review
+		</selectKey>		
+	</insert>
+	<insert id="insertWatchPoint" parameterType="reviewWatch" >
+		insert into watch_point values(watch_point_seq.nextval,#{reviewCommentNo},#{story},#{actor},#{ost},#{videoVisual},#{production})
+	</insert>
+	<select id="getOneReview" parameterType="String" resultType="review">
+		select
+			member_id as memberId
+		from
+			review
+		where
+			member_id = #{memberId}
+	</select>
+	<select id="oneMovieAllReview" parameterType="_int" resultType="review">
+		select
+			review_comment_no as reviewCommentNo,
+			movie_no as movieNo,
+			review_content as reviewContent,
+			movie_score as movieScore,
+			review_date as reviewDate,
+			member_id as memberId,
+			watch_point_no as watchPointNo,
+			review_comment_no as reviewCommentNo,
+			story as story,
+			actor as actor,
+			ost as ost,
+			video_visual as videoVisual,
+			production as production
+		from review join watch_point using(review_comment_no)
+		where movie_no=#{movieNo}
+	
+	</select>
+	<select id="watchPointAll" parameterType="_int" resultType="reviewWatch">
+		select
+			watch_point_no as watchPointNo,
+			review_comment_no as reviewCommentNo,
+			story as story,
+			actor as actor,
+			ost as ost,
+			video_visual as videoVisual,
+			production as production
+		from watch_point 
+		where review_comment_No = #{reviewCommentNo}
+	
+	</select>
+	
+	
 	
 </mapper>

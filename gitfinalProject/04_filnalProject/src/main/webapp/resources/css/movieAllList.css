@@ -97,28 +97,9 @@
     float: left;
     margin-left: 60px;
 }
-
-
-.movie-list-content-mid{
-    position: relative;
-    display: none;
-    
-}
-.bottom-btn>#more-btn{
+.bottom-btn>button{
     width: 1100px;
-    height: 40px;
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-}
-
-.active-movie-more{
-    height: 1600px;
-   overflow: hidden;
-}
-.active-movie-more{
-height: 2150px;
-display: block
+    height: 30px;
 }
 
 

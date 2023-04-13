@@ -42,6 +42,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+
 	// 로그아웃
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {

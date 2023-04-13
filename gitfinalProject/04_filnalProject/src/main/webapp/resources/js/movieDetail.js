@@ -6,7 +6,7 @@ moreBtn.addEventListener("click",function(){
     this.remove();
 });
 /*별점표시*/
-const stars = $(".modal>.modal_content>.star-wrap1>span");
+const stars = $(".modal>.modal_content>form>.star-wrap1>span");
 stars.on("mouseover",function(){
     //별의 최초의 색상을 회색으로 해놓음
     //그래야 마우스를 치웠을때 회색으로 바뀜
@@ -17,6 +17,7 @@ stars.on("mouseover",function(){
         stars.eq(i).css("color","gold");
     }
     $(".modalStar-result>#star-result").text(index+1);
+    $(".modalStar-result>#star-result2").val(index+1);
 });
 
 
@@ -30,3 +31,15 @@ $(function(){
     }
     });
     });
+
+ $(".tabs>li").on("click", function(){
+    $(".tabs>li").removeClass("active-tab");
+    $(this).addClass("active-tab");
+    const contents = $(".tabcontent");
+    contents.hide();
+    const index = $(".tabs>li").index(this);
+    contents.eq(index).show();
+
+ });
+ $(".tabs>li").eq(0).click();
+
