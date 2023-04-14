@@ -43,10 +43,9 @@
                                 <div class="movie-all-list" style="margin-top: 25px; ">
                                     <div class="movie-list-set" style="overflow: hidden;">
                                         <a href="/movieDetail.do?movieNo=${po.movieNo}">
-                                        	
+                                  
                                             <div class="img-poster">
                                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
-                                 
                                             </div>
                                             <div class="cover" style=" color:white; padding: 10px;">
                                                 <div class="coverMovieContent" style="font-size: 12px;">
@@ -61,7 +60,6 @@
                                             </div>
                                             
                                         </a>
-
                                         <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
                                             <p class="movie-title" >${po.movieTitle }</p>
                                             <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">

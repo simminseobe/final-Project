@@ -64,9 +64,12 @@ public ArrayList<Movie> selectMovieAll() {
 	//한 영화의 관람평 리스트를 모두 조회함
 	public ArrayList<Review> oneMovieAllReview(int movieNo) {
 		ArrayList<Review> reviewList = dao.oneMovieAllReview(movieNo);
-//		ArrayList<WatchPoint> watchPointAllList = dao.watchPointAll(reviewCommentNo);
-//		oneMovieReview.setWatchPoint(watchPointAllList);
 		return reviewList;
+	}
+	//watchPoint를 위한 조회
+	public Movie onlyWatchPointAvg(int movieNo) {
+		Movie wpList=dao.onlyWatchPointAvg(movieNo);
+		return wpList;
 	}
 
 }

@@ -36,7 +36,14 @@ public class MovieController {
 		Movie mov = service.selectOneMovie(movieNo);
 		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
 		model.addAttribute("mov", mov);
+		//모든 관람평(review)조회하기
 		model.addAttribute("mvList", mvList);
+		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);
+		model.addAttribute("reviewList",reviewList);
+		//실관람평점산출위한 watchPoint조회
+		Movie watchPointAvg = service.onlyWatchPointAvg(movieNo);
+		model.addAttribute("watchPointAvg",watchPointAvg);
+		
 		return "movie/movieDetail";
 	}
 	//무비포스트 작성 폼으로 이동
@@ -64,13 +71,12 @@ public class MovieController {
 	}*/
 	
 	//모든 관람평(review)조회하기
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value="oneMovieReviewList.do",produces="application/json;charset=utf-8")
 	public String oneMovieAllReview(int movieNo) {
-		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);
 		System.out.println(reviewList);
 		return new Gson().toJson(reviewList);
 	}
 
-	
+	*/
 }

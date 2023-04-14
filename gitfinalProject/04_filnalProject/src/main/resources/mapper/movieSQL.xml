@@ -130,7 +130,13 @@
 		where review_comment_No = #{reviewCommentNo}
 	
 	</select>
+	<select id="selectWatchPointAvg" parameterType="_int" resultType="review">
+		select
+      trunc(avg(movie_score)) as movieScore
+		from watch_point join review using(review_comment_no)
+		where movie_no=#{movieNo}
 	
+	</select>
 	
 	
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">

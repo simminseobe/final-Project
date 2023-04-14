@@ -173,7 +173,7 @@
                 </div>
                 <div class="movie-Score-wrap" style="position: absolute; bottom: 10%;">
                     <p class="movieScoreTitle" style="padding-bottom: 10px; font-size: 15px;">실관람평점</p>
-                    <p class="movieScoreContent" style="text-align: center; font-size: 36px;">9.1</p>
+                    <p class="movieScoreContent" style="text-align: center; font-size: 36px;">${watchPointAvg.movieScoreAvg}</p>
                 </div>
                 <div class="reservationRate-wrap" style="position: absolute; left: 10%; bottom: 10%;">
                     <p class="reservationTitle" style="padding-bottom: 10px; font-size: 15px;">예매율</p>
@@ -273,9 +273,9 @@
                     <div class="userReviewInfoWrap">
                         <div class="userReviewInfo">
                             <img src="img/관리자-50.png">
-                            <p class="user-id">MOVIEISLAND</p>
+                            <p class="user-id user-first">MOVIEISLAND</p>
                         </div>
-                        <div class="reviewText">
+                        <div class="reviewText reviewTextFirst">
                             <span class="reviewTextTit" style="color: #329eb1;">${mov.movieTitle }</span>
                             "재미있게 보셨나요? 영화의 어떤 점이 좋았는지 이야기해주세요."
                             <br>
@@ -303,20 +303,20 @@
                         <div class=" infoWrap2">
                             <div class="userReviewInfo2">
                                 <img src="img/사용자-50.png">
-                                <p class="user-id">${sessionScope.m.memberId}</p>
+                                <p class="user-id user-second">${sessionScope.m.memberId}</p>
                             </div>
-                            <div class="Text2">
+                            <div class="Text2 textSecond">
                                 <div class="Tit2">
                                     <p>관람평</p>
                                 </div>
-                                <div class=" Point2">
+                                <div class=" Point2 pointSecond">
                                     <p>10</p>
                                 </div>
-                                <div class="PointCom">
+                                <div class="PointCom PointComSecond">
                                     <p>연출 외</p>
                                     <p>+4</p>
                                 </div>
-                                <div class="reviewTextContent">
+                                <div class="reviewTextContent reviewTextSecond">
                                     <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
                                 </div>
                                 <div class="reviewTextLike">
@@ -336,26 +336,26 @@
                         </div>
                     </div><!--본인작성댓글 끝-->
                         <!--타인이 작성한 댓글이 시작되는 자리 -->
-                              <div class="infoWap2Top">
-                              <c:forEach items="${reviewList}" var="revList">
+                        <c:forEach items="${reviewList }" var="reviewList">
+                              <div class="infoWap2Top" id="ajaxRev">
                                   <div class=" infoWrap2">
                                       <div class="userReviewInfo2">
                                         <img src="img/사용자-50.png">
-                                        <p class="user-id">${revList.memberId }</p>
+                                        <p class="user-id user-third">${reviewList.memberId}</p>
                                     </div>
                                     <div class="Text2">
-                                        <div class="Tit2">
-                                            <p>${revList.movieScore}</p>
+                                        <div class="Tit2 textThird">
+                                            <p>관람평</p>
                                         </div>
-                                        <div class=" Point2">
-                                            <p>10</p>
+                                        <div class=" Point2 pointThird">
+                                            <p>${reviewList.movieScore}</p>
                                         </div>
-                                        <div class="PointCom">
+                                        <div class="PointCom PointComThird">
                                             <p>연출 외</p>
                                             <p>+4</p>
                                         </div>
-                                        <div class="reviewTextContent">
-                                            <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
+                                        <div class="reviewTextContent reviewTextContentThird">
+                                            <textarea style="width:595px; height: 84px; resize: none; border-style: none;">${reviewList.reviewContent}</textarea>
                                         </div>
                                         <div class="reviewTextLike">
                                             <img src="img/like-24.png">
@@ -369,11 +369,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="reviewDate">
+                                <div class="reviewDate reviewDateThird">
                                     <span>몇분전으로 나옴</span>
                                 </div>
-                                </c:forEach>
                             </div><!--타인이 작성한 댓글 끝나는 자리-->
+                            </c:forEach>
                         </div><!--실관람평 내용 끝나는 자리-->
                         <div class="moviePostWrap tabcontent" style="display: none;"><!--무비포스트 시작하는 자리-->
                             <div class="moviePostHead reaviewHeadSawBtnWrap">
@@ -471,7 +471,9 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="testDiv">
+            	<input type="text" class="testInput1" value="">
+            </div>
            
     <input type="text" value="${sessionScope.m.memberId}" id="memberId">
     <script>
@@ -482,7 +484,7 @@
                 labels: ['영상미', '스토리', '배우', 'OST', '연출'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [19, 3, 5, 10, 3],
+                    data: [5, 3, 5, 10, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -532,65 +534,11 @@ const openButton=document.getElementById("open");
    closeBtn.addEventListener("click",closeModal);
    openButton.addEventListener("click",openModal);
    
-/*
-   $("[name=reviewEnroll]").on("click",function(){
-	   const movieNo = $("[name=movieNo]").val();
-	   const memberId = $("[name=memberId]").val();
-	   const movieScore = $("[name=movieScore]").val();
-	   const production = $("[name=production]").val();
-	   const reviewContent = $("[name=reviewContent]").val();
-	   const story = $("[name=story]").val();
-	   const videoVisual = $("[name=videoVisual]").val();
-	   const actor = $("[name=actor]").val();
-	   const ost = $("[name=ost]").val();
-	   
-	  	 $.ajax({
-	  		url : "/watchPointInsert.do",
-	  		type : "get",
-	  		data : {reviewContent:reviewContent,movieNo:movieNo,memberId:memberId,movieScore:movieScore,production:production,story:story,videoVisual:videoVisual,actor:actor,ost:ost},
-	  		success : function(data) {
-				
-			}
-	  	 });
-   });
-*/
-   /*
-   const movieNo = $("#movieNo").val();
-   const memberId = $("#memberId").val();
-   function testCheck() {
-       $.ajax({
-           url : "/checkReview.do",
-           type : "post",
-           data : {memberId:memberId,movieNo:movieNo},
-           success :  function(data){
-               console.log(data)
-               if(data == 'ok') {
-                   console.log(data + "success")
-                   document.querySelector("form[name=watchPoint]").submit()
-                  } else{
-                   console.log(14)
-                      alert('중복')
-                  }
-           }
-       });
-   }*/
 
-   const movieNo = $("#movieNo").val();
-	window.onload=function(){
-	     $.ajax({
-	           url : "/oneMovieReviewList.do",
-	           type : "post",
-	           data : { movieNo:movieNo },
-	           success :  function(data){
-	            const tr =  $("<tr>")
-                const th = $("<th>").html(data.reviewContent)
-                tr.append(th);
-                $("#meme").append(tr)
-                
-	           }
-	       });
-	}
-        </script>
+	
+	
+	
+	</script>
     <script src = "/resources/js/movieDetail.js"></script>
 </body>
 </html>
