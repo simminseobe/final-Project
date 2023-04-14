@@ -31,11 +31,11 @@
                     <span><button type="button">스틸컷</button></span>
                     <span><button type="button">예고편</button></span>
                     <span><button type="button">내사진</button></span>
-                </div>
-                <div class="postLeftSideSel">
-                    <ul>
-                        <li></li>
-                    </ul>    
+                    <div class="postLeftSideSel">
+                        <ul>
+                            <li>사진돌려볼까?</li>
+                        </ul>    
+                    </div>
                 </div>
             </div>
             <div class="moviePostRightSide">

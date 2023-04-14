@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
         </span>
 			</div>
 			<form action="/checkId.do" name="checkIdFrm" method="POST">
-        	<input type="text" name="checkId">
+        	<input type="hidden" name="checkId">
 			</form>
 			
 			<form action="/join.do" method="post">
@@ -542,7 +543,28 @@
 			</form>
 		</div>
 	</div>
-	
+
+	<div class="modal-wrapper" id="modal" style="display: none">
+		<div class="ok-modal">
+			<div class="modal-top"></div>
+			<div class="modal-content">
+				<h3>알림</h3>
+				<button class="close-btn" onclick="closeClick();"></button>
+				<div class="layer-content">
+					<p class="text-common">
+						<span id="findId">[<span></span>] 는 이미 사용중인 아이디 입니다.</span>
+						<span  id="instDate">[<span></span>]는 사용가능한 아이디 입니다.</span>
+					</p>
+					<div class="btn-wrapper">
+						<button type="button" class="okBtn" id="buttonOk">
+							확인
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="/resources/js/member/joinFrm.js"></script>
 </body>
 </html>

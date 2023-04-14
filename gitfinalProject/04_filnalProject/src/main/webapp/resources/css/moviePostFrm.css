@@ -93,9 +93,15 @@ padding-bottom: 20px;
 }
 .postRightSideBtn>button{
     border: 2px dashed lightgrey;
-    background-color: #723396;
+    background-color: #fff;
     border-radius: 23px;
     width: 150px;
     height:46px;
-    color: #fff;
+    color: #503396;
 }   
+.postLeftSideSel{
+    margin-top: 20px;
+    border: 1px solid lightgray;
+}
+
+

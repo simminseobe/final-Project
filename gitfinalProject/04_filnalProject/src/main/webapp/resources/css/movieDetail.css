@@ -82,8 +82,19 @@
     line-height: 40px;
     width: calc(100% / 4);
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid lightgray;
 }
+.movie-detail-menu>ul>li>a{
+    color: #432e75;
+}
+
+.tabs>li>.active-tab{
+    background-color: #432e75;
+    border: 1px solid #432e75;
+    
+}
+
+
 .detail-content-wrap{
     margin-top: 20px;
 }
@@ -530,5 +541,4 @@ cursor: pointer;
     padding: 0 50px;
 
 }
-
 

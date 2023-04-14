@@ -1,5 +1,7 @@
+<%@page import="kr.or.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -84,13 +86,16 @@
         <div class="modal hidden"><!--모달로 댓글 작성 들어가는 자리-->
             <div class="modal_overlay"></div>
             <div class="modal_content"><!--모달 댓글 내부화면-->
+                <form name="watchPoint" action="/watchPointInsert.do" method="post">
+                <input type="text" name="movieNo" id="movieNo" value="${mov.movieNo }" style="display:none;">
+                <input type="text" name="memberId" value="${sessionScope.m.memberId}" style="display:none;">
                 <div class="modalClose">
                     <div class="modalCloseTit">
-                        <span>관람평 작성하기</span>
+                        <span>관람평 작성하기</span>                    
                     </div>
                 </div>
                 <div class="modal_content_tit">
-                    <p>영화이름</p>
+                    <p>${mov.movieTitle }</p>
                     <p>어떠셨나요?</p>
                 </div>
                 <div class = "star-wrap star-wrap1">
@@ -110,12 +115,13 @@
                         star
                     </span>
                     <div class="modalStar-result">
+                        <input type="text" name="movieScore" id="star-result2" value="0" style="display: none;">
                         <span id ="star-result" style="color:#6543b1">0</span>
                         <span style="color:#6543b1">점</span>
                     </div>
                 </div>
                 <div class="modalTxtArea">
-                    <textarea></textarea>
+                    <textarea name="reviewContent"></textarea>
                 </div>
                 <div class="modal_content_tit" style="margin-top: 50px;">
                     <p>관람포인트는 무엇인가요?</p>
@@ -124,29 +130,30 @@
                 <div class="modalWatchPointChk">
                     <div class="productionDiv">
                         <p><label for = "production">연출</label></p>
-                        <input type = "checkbox" name ="production" id ="production">
+                        <input type = "checkbox" name ="production" id ="production" value="1">
                     </div>
                     <div class="storyDiv">
                         <p><label for = "story">스토리</label></p>
-                        <input type = "checkbox" name ="story" id = "story">
+                        <input type = "checkbox" name ="story" id = "story" value="1">
                     </div>
                     <div class="visualDiv">
-                        <p><label for = "visualBeauty">영상미</label></p>
-                        <input type = "checkbox" name ="visualBeauty" id ="visualBeauty">
+                        <p><label for = "videoVisual">영상미</label></p>
+                        <input type = "checkbox" name ="videoVisual" id ="videoVisual" value="1">
                     </div>
                     <div class="actorDiv">
                         <p><label for = "actor">배우</label></p>
-                        <input type = "checkbox" name="actor" id="actor">
+                        <input type = "checkbox" name="actor" id="actor" value="1">
                     </div>
                     <div class="OSTDiv">
-                        <p><label for = "OST">OST</label></p>
-                        <input type = "checkbox" name="OST" id ="OST">
+                        <p><label for = "ost">OST</label></p>
+                        <input type = "checkbox" name="ost" id ="ost" value="1">
                     </div>
                 </div>
                 <div class="modalContentBottom">
                     <button type="button" class="bc1" id="close1" style="margin-right: 5px;">닫기</button>
-                    <button type="button" class="enrollBtn" style="margin-right: 5px;">등록</button>
+                    <button type="submit" name=reviewEnroll id="reviewEnroll" class="enrollBtn" style="margin-right: 5px;">등록</button>
                 </div>
+                </form>
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 모달끝-->
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
@@ -166,7 +173,7 @@
                 </div>
                 <div class="movie-Score-wrap" style="position: absolute; bottom: 10%;">
                     <p class="movieScoreTitle" style="padding-bottom: 10px; font-size: 15px;">실관람평점</p>
-                    <p class="movieScoreContent" style="text-align: center; font-size: 36px;">9.1</p>
+                    <p class="movieScoreContent" style="text-align: center; font-size: 36px;">${watchPointAvg.movieScoreAvg}</p>
                 </div>
                 <div class="reservationRate-wrap" style="position: absolute; left: 10%; bottom: 10%;">
                     <p class="reservationTitle" style="padding-bottom: 10px; font-size: 15px;">예매율</p>
@@ -186,16 +193,16 @@
             </div>
         </div>
     </div>
-    <div class="movie-detail-content-wrap"style="width:1100px; margin: 0 auto; margin-top:50px;">
+    <div class="movie-detail-content-wrap"style="width:1100px; margin: 0 auto; margin-top:50px; margin-bottom:500px;">
         <div class="movie-detail-menu">
-            <ul>
+            <ul class="tabs">
                 <li><a href="#">주요정보</a></li>
                 <li><a href="#">실관람평</a></li>
                 <li><a href="#">무비포스트</a></li>
                 <li><a href="#">예고편/스틸컷</a></li>
             </ul>
-            <div class = "detail-content-wrap">
-                <div class="importantInfo-content-wrap" style="display: none;"><!--===================================-->
+            <div class = "detail-content-wrap content-wrap">
+                <div class="importantInfo-content-wrap tabcontent"><!--===================================-->
                     <div class = "importantInfo-content detail" style="font-size:18px;">
                    		${mov.movieContent}
                         <div class="bottom-btn toggle">
@@ -204,7 +211,7 @@
                     </div>
                     <div class="movie-detail-info-wrap" style="margin-top: 20px;">
                         <div class="movie-detail-info">
-                            <p>상영타입 : 2D</p>
+                            <p>상영타입 : ${mov.movieType}</p>
                             <div class="pLine">
                             <p>감독 : ${mov.movieDirector}</p>
                             <p>장르 : ${mov.movieGenre}/${mov.movieTime}</p>
@@ -243,10 +250,10 @@
                         </div>
                     </div>
                 </div><!--========주요정보 끝나는 자리==================================================-->
-                <div class="reviewAllWrap" style="display: none;"><!--실관람평 시작 자리-->
+                <div class="reviewAllWrap tabcontent" style="display: none;"><!--실관람평 시작 자리-->
                     <div class="reaviewHeadSawBtnWrap">
                         <div class="reviewHead">
-                            <h2>영화이름에 대한<span style="color:#01738b;">123456</span>개의 이야기가 있어요.</h2>
+                            <h2>${mov.movieTitle }에 대한<span style="color:#01738b;">123456</span>개의 이야기가 있어요.</h2>
                         </div>
                         <div class="sawMovie">
                             <button type="button" class="sawMovieBtn">본 영화 등록</button>
@@ -266,10 +273,10 @@
                     <div class="userReviewInfoWrap">
                         <div class="userReviewInfo">
                             <img src="img/관리자-50.png">
-                            <p class="user-id">MOVIEISLAND</p>
+                            <p class="user-id user-first">MOVIEISLAND</p>
                         </div>
-                        <div class="reviewText">
-                            <span class="reviewTextTit">영화이름</span>
+                        <div class="reviewText reviewTextFirst">
+                            <span class="reviewTextTit" style="color: #329eb1;">${mov.movieTitle }</span>
                             "재미있게 보셨나요? 영화의 어떤 점이 좋았는지 이야기해주세요."
                             <br>
                             관람일 기준 7일 이내 등록 시 
@@ -281,7 +288,14 @@
                             <br>
                         </div>
                         <div class="reviewContentWrite" style="font-size: 15px;">
-                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
+                        <c:choose>
+							<c:when test="${not empty sessionScope.m }">
+	                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/login.do" style="color: #666666;">관람평 쓰기</a>
+							</c:otherwise>                        
+                        </c:choose>
                         </div>
                     </div>
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
@@ -289,20 +303,20 @@
                         <div class=" infoWrap2">
                             <div class="userReviewInfo2">
                                 <img src="img/사용자-50.png">
-                                <p class="user-id">userId**</p>
+                                <p class="user-id user-second">${sessionScope.m.memberId}</p>
                             </div>
-                            <div class="Text2">
+                            <div class="Text2 textSecond">
                                 <div class="Tit2">
                                     <p>관람평</p>
                                 </div>
-                                <div class=" Point2">
+                                <div class=" Point2 pointSecond">
                                     <p>10</p>
                                 </div>
-                                <div class="PointCom">
+                                <div class="PointCom PointComSecond">
                                     <p>연출 외</p>
                                     <p>+4</p>
                                 </div>
-                                <div class="reviewTextContent">
+                                <div class="reviewTextContent reviewTextSecond">
                                     <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
                                 </div>
                                 <div class="reviewTextLike">
@@ -322,25 +336,26 @@
                         </div>
                     </div><!--본인작성댓글 끝-->
                         <!--타인이 작성한 댓글이 시작되는 자리 -->
-                              <div class="infoWap2Top">
+                        <c:forEach items="${reviewList }" var="reviewList">
+                              <div class="infoWap2Top" id="ajaxRev">
                                   <div class=" infoWrap2">
                                       <div class="userReviewInfo2">
                                         <img src="img/사용자-50.png">
-                                        <p class="user-id">userId**</p>
+                                        <p class="user-id user-third">${reviewList.memberId}</p>
                                     </div>
                                     <div class="Text2">
-                                        <div class="Tit2">
+                                        <div class="Tit2 textThird">
                                             <p>관람평</p>
                                         </div>
-                                        <div class=" Point2">
-                                            <p>10</p>
+                                        <div class=" Point2 pointThird">
+                                            <p>${reviewList.movieScore}</p>
                                         </div>
-                                        <div class="PointCom">
+                                        <div class="PointCom PointComThird">
                                             <p>연출 외</p>
                                             <p>+4</p>
                                         </div>
-                                        <div class="reviewTextContent">
-                                            <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
+                                        <div class="reviewTextContent reviewTextContentThird">
+                                            <textarea style="width:595px; height: 84px; resize: none; border-style: none;">${reviewList.reviewContent}</textarea>
                                         </div>
                                         <div class="reviewTextLike">
                                             <img src="img/like-24.png">
@@ -354,15 +369,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="reviewDate">
+                                <div class="reviewDate reviewDateThird">
                                     <span>몇분전으로 나옴</span>
                                 </div>
                             </div><!--타인이 작성한 댓글 끝나는 자리-->
+                            </c:forEach>
                         </div><!--실관람평 내용 끝나는 자리-->
-                        <div class="moviePostWrap"><!--무비포스트 시작하는 자리-->
+                        <div class="moviePostWrap tabcontent" style="display: none;"><!--무비포스트 시작하는 자리-->
                             <div class="moviePostHead reaviewHeadSawBtnWrap">
                                 <div class="reviewHead">
-                                    <h2>영화이름에 대한<span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
+                                    <h2><span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
                                 </div>
                                 <div class="morePostMovie sawMovie">
                                     <button type="button" class="sawMovieBtn morePostMovie">더보기</button>
@@ -377,7 +393,7 @@
                                     </p>
                                 </div>
                                 <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
-                                    <a href="/moviePostFrm.do" id="open" style="color: #666666;">무비포스트 쓰기</a>
+                                    <a href="/moviePostFrm.do?movieNo=${mov.movieNo}" id="open" style="color: #666666;">무비포스트 쓰기</a>
                                 </div>
                             </div>
                             <div class="moviePostTotalCnt reviewAllCountWrap">
@@ -402,7 +418,7 @@
                                 </div>
                             </div>     
                         </div><!--무비포스트 끝나는 자리-->
-                        <div class="previewWrap" style="display: none;"><!--preview예고편 시작-->
+                        <div class="previewWrap tabcontent" style="display: none;"><!--preview예고편 시작-->
                             <div class="previewTop">
                                 <span>예고편(?)</span>
                                 <span> 스틸컷(?)</span>
@@ -450,16 +466,16 @@
                                           </button>
                                       </div>
                                 -->
-
-
                             </div>
                         </div><!--preview예고편 끝-->    
                     </div>
                 </div>
             </div>
-            
+            <div class="testDiv">
+            	<input type="text" class="testInput1" value="">
+            </div>
            
-    
+    <input type="text" value="${sessionScope.m.memberId}" id="memberId">
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -468,7 +484,7 @@
                 labels: ['영상미', '스토리', '배우', 'OST', '연출'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [19, 3, 5, 10, 3],
+                    data: [5, 3, 5, 10, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -519,9 +535,11 @@ const openButton=document.getElementById("open");
    openButton.addEventListener("click",openModal);
    
 
-   
-   
-        </script>
+	
+	
+	
+	</script>
     <script src = "/resources/js/movieDetail.js"></script>
 </body>
 </html>
+<%@include file="/WEB-INF/views/common/footer.jsp" %>

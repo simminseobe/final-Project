@@ -13,7 +13,7 @@
 
 	<div id="idCheck">
 		<c:choose>
-			<c:when test="${result eq 'ok' }">
+			<c:when test="${empty data }">
 				<div class="first-div">
 					[<span class="join-text">${checkId }</span>] 는 사용 가능한 아이디입니다.
 				</div>

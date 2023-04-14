@@ -48,13 +48,13 @@
                 	<tr>
                 		<th>아이디</th>
                 		<td>
-                			<input type="text" name="memberId" class="input-text">
+                			<input type="text" name="memberId" class="input-text" maxlength="16" placeholder="아이디를 입력해주세요." autocomplete="off">
                 		</td>
                 	</tr>
                 	<tr>
                 		<th>비밀번호</th>
                 		<td>
-                			<input type="password" name="memberPw" class="input-text">
+                			<input type="password" name="memberPw" class="input-text" maxlength="16" placeholder="비밀번호를 입력해주세요." autocomplete="off">
                 		</td>
                 	</tr>
                 </table>

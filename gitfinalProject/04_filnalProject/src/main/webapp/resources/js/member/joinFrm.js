@@ -3,52 +3,61 @@
  */
 
  const result = [false, false, false, false, false, false];
-// 아이디 유효성 검사
-// 아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자
-$("[name=memberId]").on("change", function() {
-    const memberId = $(this).val();
-    const idReg =  /^[a-z]+[a-z0-9]{5,19}$/g
-    const checkResult = idReg.test(memberId);
-    console.log(checkResult);
-    if(checkResult) {
-        $.ajax({
-            url : "/checkId.do",
-            type : 'GET',
-            data : {checkId:memberId},
-            success : function(data) {
-                console.log(data);
-                if(data == "ok") {
-                    $("#idCheck").text("사용 가능한 아이디입니다.");
-                    $("#idCheck").css("color", "green");
-                } else{
-                    $("#idCheck").text("이미 사용중인 아이디 입니다.");
-                    $("#idCheck").css("color", "red");
-                    result[0] = true;
-                }
-            },
-            error : function() {
-                console.log("에러발생");
-            }
-        });
-    } else {
-        $("#idCheck").text("아이디는 영문자/숫자로 6~20글자");
-        $("#idCheck").css("color", "red");
-        result[0] = false;
-    }
-});
 
 // 아이디 중복체크 버튼
+// 아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자
 $("#idChkBtn").on("click", function() {
     const memberId = $("[name=memberId]").val();
     if(memberId == "") {
         alert("아이디를 입력하세요.");
         return;
+    } else {
+        //$("[name=checkId]").val(memberId);
+        //window.open("", "checkId","left=700px,top=300px,width=300px,height=200px,menubar=no,status=no,scrollbars=yes");
+        
+        const idReg =  /^[a-z]+[a-z0-9]{5,19}$/g
+        const checkResult = idReg.test(memberId);
+        if(checkResult) {
+            $.ajax({
+                url:"/dupIdChk.do",
+                type:"post",
+                data:{memberId:memberId},
+                success: function(data) {
+                    if(data != null) {
+                        $("#findId>span").text(data.memberId);
+                        $("#findId").show();
+                        $("#instDate").hide();
+                        $("#modal").show()
+                        $("#idCheck").text("이미 사용중인 아이디 입니다.");
+                        $("#idCheck").css("color", "red");                        
+                        result[0] = false; 
+                    } else {
+                        $("#instDate>span").text(memberId);
+                        $("#findId").hide();
+                        $("#instDate").show();
+                        $("#modal").show();
+                        $("#idCheck").text("사용 가능한 아이디입니다.");
+                        $("#idCheck").css("color", "green");
+                        result[0] = true;
+                    }
+                },
+                error : function() {
+                    console.log("에러발생");
+                }
+            });
+        } else {
+            $("#idCheck").text("아이디는 영문자/숫자로 6~20글자");
+            $("#idCheck").css("color", "red");
+        }
     }
-    $("[name=checkId]").val(memberId);
-    window.open("", "checkId","left=700px,top=300px,width=300px,height=200px,menubar=no,status=no,scrollbars=yes");
-    
-    $("[name=checkIdFrm]").attr("target", "checkId");
-    $("[name=checkIdFrm]").submit();
+});
+
+function closeClick() {
+    $("#modal").hide();
+}
+
+$("#buttonOk").on("click", function() {
+    $("#modal").hide();
 });
 
 // 비밀번호 유효성 검사
@@ -93,7 +102,7 @@ $("[name=memberName]").on("keyup", function() {
         $("#nameCheck").css("color", "green");
         result[3] = true;
     } else {
-        $("#nameCheck").text("한글을 입력해주세요.");
+        $("#nameCheck").text("한글만 입력해주세요.");
         $("#nameCheck").css("color", "red");
         result[3] = false;
     }
@@ -101,7 +110,7 @@ $("[name=memberName]").on("keyup", function() {
 
 // 휴대폰번호 정규표현식
 $("[name=memberPhone]").on("change", function() {
-    const phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
+    const phoneReg = /^\d{3}\d{3,4}\d{4}$/;
     const inputPhone = $(this).val();
     const check = phoneReg.test(inputPhone);
     if(check) {
@@ -131,7 +140,7 @@ $("#emailCheck").on("click", function() {
             $("#email-time").text();
             authTime();
         },
-        error : function(data) {
+        error : function() {
             alert("인증번호 이메일 발송 실패");
         }
     });

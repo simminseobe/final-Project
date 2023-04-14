@@ -43,10 +43,9 @@
                                 <div class="movie-all-list" style="margin-top: 25px; ">
                                     <div class="movie-list-set" style="overflow: hidden;">
                                         <a href="/movieDetail.do?movieNo=${po.movieNo}">
-                                        	
+                                  
                                             <div class="img-poster">
                                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
-                                 
                                             </div>
                                             <div class="cover" style=" color:white; padding: 10px;">
                                                 <div class="coverMovieContent" style="font-size: 12px;">
@@ -61,7 +60,6 @@
                                             </div>
                                             
                                         </a>
-
                                         <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
                                             <p class="movie-title" >${po.movieTitle }</p>
                                             <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
@@ -79,25 +77,18 @@
                                                     style="width:18px; height:18px;">1234</button>
                                         </div>
                                         <div class="movieAllList-reserve" style="margin-top: 10px;"">
-                                    <button type=" button"
+                                        <button type=" button"
                                             style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
-                                            예약하기</button>
+                                            예약하기
+                                        </button>
                                         </div>
-
                                     </div>
                                 </div>
-                                
-                                </c:forEach>
-                         
-                              
+                            </c:forEach>
+                            <div class="bottom-btn" style="margin-left: 55px; margin-top: 20px;">
+                                <button type="button" id="load">더보기</button>
                             </div>
-                            <!-- ================================================================================================================================================ -->
-                            <!-- ================================================================================================================================================ -->
-                            <!-- ================================================================================================================================================ -->
-                            
-                        </div>
-                        <div class="bottom-btn">
-                            <button type="button" id="more-btn">더보기</button>
+                            </div> 
                         </div>
                     </div>
                 </div>
