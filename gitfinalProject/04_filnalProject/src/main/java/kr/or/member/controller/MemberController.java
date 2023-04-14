@@ -47,7 +47,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-
 	// 로그아웃
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
@@ -66,7 +65,6 @@ public class MemberController {
 	public void makeRandomNumber() {
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
-		System.out.println("인증번호 : " + checkNum); // 인증번호 확인
 		authNumber = checkNum;
 	}
 	
@@ -283,6 +281,13 @@ public class MemberController {
 		System.out.println(member);
 		return new Gson().toJson(member);
 	}
+	
+	// 예매/구매 내역 페이지 이동
+	@RequestMapping(value="/purchaseList.do")
+	public String purchaseList() {
+		return "member/purchaseDetail";
+	}
+	
 	
 	
 	

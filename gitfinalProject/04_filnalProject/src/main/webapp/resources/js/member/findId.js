@@ -46,13 +46,11 @@ function mailsendPw(){
     const memberId = $("[name=memberId]").val();
     const memberName = $("[name=memberName]").val();
     const email = $("#inputEmail").val();
-    console.log(email);
     $.ajax({
         url : "/sendEmailPw.do",
         type : "post",
         data : {memberId:memberId, memberName:memberName, email:email},
         success : function(data){
-            console.log(data);
             alert("임시 비밀번호가 발송되었습니다.");
             mailCode = data;
         },
