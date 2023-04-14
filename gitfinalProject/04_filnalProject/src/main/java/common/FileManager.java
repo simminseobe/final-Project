@@ -1,10 +1,16 @@
 package common;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,5 +63,49 @@ public class FileManager {
 		}
 
 		return filepath;
+	}
+
+	public boolean deleteFile(String savePath, String filepath) {
+		File delFile = new File(savePath + filepath);
+
+		return delFile.delete();
+	}
+
+	public void downloadFile(String filename, String downFile, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			FileInputStream fis = new FileInputStream(downFile);
+			// 속도 빠르게
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			// 읽어온 파일을 사용자에게 내보낼 스트림 생성
+			ServletOutputStream sos = response.getOutputStream();
+			// 보조 스트림
+			BufferedOutputStream bos = new BufferedOutputStream(sos);
+			// 파일명 처리
+			String resFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+
+			// response: 파일 다운로드 로직 구현
+			// 파일 다운로드를 위한 HTTP 헤더 설정
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment;filename=" + resFilename);
+
+			// 파일 전송
+			while (true) {
+				int read = bis.read();
+
+				if (read != -1) {
+					bos.write(read);
+				} else {
+					break;
+				}
+			}
+
+			bos.close();
+			bis.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

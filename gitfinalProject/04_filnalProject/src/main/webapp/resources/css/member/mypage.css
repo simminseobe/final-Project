@@ -7,7 +7,8 @@
 .menu{
     width: 200px; 
     margin: 100px 100px;
-    border-radius : 15px 15px 15px 15px:
+    border-radius : 15px 15px 15px 15px;
+    float: left;
 }
 
 .menu ul{
@@ -24,6 +25,7 @@
     border: 1px solid #400040;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    padding-left : 35px;
     
 }
 .menu a{
@@ -46,7 +48,18 @@
 
 .sub-menu>li>a{
     background-color: #ffffff;
+   
+    
 }
+.sub-menu>li:nth-child(1)>a{
+    border-bottom : none;
+    
+}
+.sub-menu>li:nth-child(2)>a{
+    border-top : none;
+    
+}
+
 .main-menu>li>a:hover{
    color: #008040;
 }

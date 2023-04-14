@@ -1,6 +1,7 @@
 package kr.or.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -47,9 +48,53 @@ public class AdminDao {
 		return (ArrayList<String>) list;
 	}
 
+	public ArrayList<String> selectOnemovieVideo(int movieNo) {
+		List list = sqlSession.selectList("theater.selectOnemovieVideo", movieNo);
+
+		return (ArrayList<String>) list;
+	}
+
 	public int insertTheater(Theater theater) {
 		int result = sqlSession.insert("theater.insertTheater", theater);
 
 		return result;
+	}
+
+	public ArrayList<Theater> selectTheaterList() {
+		List list = sqlSession.selectList("theater.selectTheaterList");
+
+		return (ArrayList<Theater>) list;
+	}
+
+	public int updateMovie(Movie movie) {
+		int result = sqlSession.update("movie.updateMovie", movie);
+
+		return result;
+	}
+
+	public int deleteFile(int[] fileNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("fileArray", fileNo);
+
+		int result = sqlSession.delete("movie.deleteFile", map);
+
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public Theater selectOneTheater(int theaterNo) {
+		Theater theater = sqlSession.selectOne("theater.selectOneTheater", theaterNo);
+		return theater;
+	}
+
+	public ArrayList<Theater> selectBranchList(String theaterLocal) {
+		List list = sqlSession.selectList("theater.selectBranchList", theaterLocal);
+		return (ArrayList<Theater>) list;
 	}
 }

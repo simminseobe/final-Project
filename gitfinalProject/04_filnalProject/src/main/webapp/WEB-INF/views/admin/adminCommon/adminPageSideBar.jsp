@@ -10,19 +10,19 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">관리자</div>
+                        <div class="sb-sidenav-menu-heading">관리자 페이지</div>
                         <a class="nav-link" href="/adminPage.do">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                             관리자 홈
                         </a>
                         <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             회원 관리
                         </a>
                         <div class="sb-sidenav-menu-heading">사이트 관리</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-film"></i></div>
                             영화 정보 관리
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -30,25 +30,37 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                    data-bs-target="#movieManage" aria-expanded="false"
                                     aria-controls="pagesCollapseAuth">
                                     영화 관리
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                <div class="collapse" id="movieManage" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">영화 목록</a>
+                                        <a class="nav-link" href="/MovieList.do">영화 목록</a>
                                         <a class="nav-link" href="/registerMovieFrm.do">영화 등록</a>
                                     </nav>
                                 </div>
-                                <a class="nav-link" href="/manageTheaterFrm.do">상영관 관리</a>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#theaterManage" aria-expanded="false"
+                                    aria-controls="pagesCollapseAuth">
+                                    극장 관리
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="theaterManage" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/theaterList.do">극장 목록</a>
+                                        <a class="nav-link" href="/registerTheaterFrm.do">극장 등록</a>
+                                    </nav>
+                                </div>
                                 <a class="nav-link" href="layout-sidenav-light.html">상영 스케줄 관리</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tags"></i></div>
                             쿠폰 관리
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -88,7 +100,7 @@
                         <div class="sb-sidenav-menu-heading">쇼핑몰 관리</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#shopControll"
                             aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-store"></i></div>
                             기프트샵 상품등록
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -127,18 +139,18 @@
                         </div>
                         <div class="sb-sidenav-menu-heading">고객센터</div>
                         <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
                             공지사항 관리
                         </a>
                         <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
                             1대1 문의
                         </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    <div class="small">로그인 되었습니다.</div>
+                    admin1
                 </div>
             </nav>
         </div>

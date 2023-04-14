@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.dao.AdminDao;
 import kr.or.admin.model.vo.Theater;
+import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -16,6 +17,8 @@ import kr.or.movie.model.vo.MovieVideo;
 public class AdminService {
 	@Autowired
 	private AdminDao dao;
+	@Autowired
+	private MovieDao movieDao;
 
 	@Transactional
 	public int insertMovie(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList,
@@ -39,7 +42,9 @@ public class AdminService {
 
 				video.setMovieNo(movie.getMovieNo());
 
-				result += dao.insertmovieVideo(video);
+				if (video.getVideoLink() != null) {
+					result += dao.insertmovieVideo(video);
+				}
 			}
 		}
 
@@ -52,13 +57,83 @@ public class AdminService {
 		return theaterAddrList;
 	}
 
-	public int insertTheater(Theater theater, String theaternewAddr) {
-		if (theater.getTheaterAddr() == null) {
-			theater.setTheaterAddr(theaternewAddr);
-		}
-
+	public int insertTheater(Theater theater) {
 		int result = dao.insertTheater(theater);
 
 		return result;
 	}
+
+	public ArrayList<Movie> selectMovieList() {
+		ArrayList<Movie> list = movieDao.selectMovieAll();
+
+		return list;
+	}
+
+	public ArrayList<Theater> selectTheaterList() {
+		ArrayList<Theater> list = dao.selectTheaterList();
+
+		return list;
+	}
+
+	public Movie selectOneUpdateMovie(int movieNo) {
+		Movie movie = movieDao.selectOneUpdateMovie(movieNo);
+
+		if (movie != null) {
+			MovieFile movieFile = movieDao.selectMovieFile(movieNo);
+			movie.setMainFile(movieFile);
+		}
+
+		return movie;
+	}
+
+	@Transactional
+	public int movieUpdate(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList, int[] fileNo,
+			ArrayList<MovieVideo> videoList) {
+		int result = dao.updateMovie(movie);
+
+		if (result > 0) {
+			if (fileNo != null) {
+				result += dao.deleteFile(fileNo);
+			}
+
+			result += dao.insertMainFile(mainFile);
+
+			// 첨부파일 추가
+			for (MovieFile file : postList) {
+				file.setMovieFileNo(movie.getMovieNo());
+
+				result += dao.insertPostFile(file);
+			}
+
+			// 영상 링크 insert
+			for (MovieVideo video : videoList) {
+				video.setMovieNo(movie.getMovieNo());
+
+				if (video.getVideoLink() != null) {
+					result += dao.insertmovieVideo(video);
+				}
+			}
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Theater selectOntTheater(int theaterNo) {
+		Theater theater = dao.selectOneTheater(theaterNo);
+		return theater;
+	}
+
+	public ArrayList<Theater> selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = dao.selectBranchList(theaterLocal);
+		return list;
+	}
+
 }

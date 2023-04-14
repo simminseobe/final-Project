@@ -36,15 +36,11 @@
                     <tbody>
                         <tr>
                             <th><label for="inputName">이름</label></th>
-                            <td><input type="text" id="inputName" class="input-text" name="memberName" placeholder="이름" autocomplete="off"></td>
-                        </tr>
-                        <tr>
-                            <th><label for="inputBirth">생년월일</label></th>
-                            <td><input type="text" id="inputBirth" class="input-text" name="memberBirthYear" placeholder="생년월일 앞8자리"></td>
+                            <td><input type="text" id="inputName" class="input-text" name="memberName" placeholder="이름" autocomplete="off" maxlength="6"></td>
                         </tr>
                         <tr>
                             <th><label for="inputPhone">휴대폰번호</label></th>
-                            <td><input type="text" id="inputPhone" class="input-text" name="memberPhone" placeholder="'-' 포함 입력" autocomplete="off"></td>
+                            <td><input type="text" id="inputPhone" class="input-text" name="memberPhone" placeholder="'-'없이 숫자만 입력" autocomplete="off" maxlength="13"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -54,7 +50,8 @@
             <br>
             <div class="btn-member-button">
                 <button type="button" id="idChkBtn" class="button">
-                    <a href="#">아이디 찾기</a>
+                	아이디찾기
+                    <!-- <a href="/findId.do">아이디 찾기</a> -->
                 </button>
             </div>
         </div>
@@ -67,11 +64,11 @@
                     <tbody>
                         <tr>
                             <th><label for="inputId">아이디</label></th>
-                            <td><input type="text" id="inputId" class="input-text" name="memberId" placeholder="아이디" autocomplete="off"></td>
+                            <td><input type="text" id="inputId" class="input-text" name="memberId" placeholder="아이디" autocomplete="off" maxlength="20"></td>
                         </tr>
                         <tr>
                             <th><label for="inputName2">이름</label></th>
-                            <td><input type="text" id="inputName2" class="input-text" name="memberName" placeholder="이름"></td>
+                            <td><input type="text" id="inputName2" class="input-text" name="memberName" placeholder="이름" autocomplete="off" maxlength="5"></td>
                         </tr>
                         <tr>
                             <th><label for="inputEmail">이메일</label></th>
@@ -84,12 +81,90 @@
             <div>※ 비밀번호를 잊어버리신 경우 비밀번호 찾기를 진행해주시기 바랍니다.</div>
             <br>
             <div class="btn-member-button">
-                <button type="button" id="idChkBtn" class="button">
-                    <a href="#">비밀번호 찾기</a>
+                <button type="button" id="pwChkBtn" class="button">
+                    	비밀번호 찾기
                 </button>
             </div>
         </div>
     </div>
+    
+    <div class="modal-wrapper" id="modal" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"회원님의 아이디는 [<span id="findId"></span>] 입니다."</p>
+                    	가입일 : [<span id="instDate"></span>]
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn">
+                            <a href="/">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-wrapper" id="modal-two" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"회원님의 비밀번호는 [<span id="findPw"></span>] 입니다."</p>
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn">
+                            <a href="/">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-wrapper" id="modal-three" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"이름 / 휴대폰 번호를 확인해 주세요."</p>
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn">
+                            <a href="/">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-wrapper" id="modal-four" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"아이디 / 이름 / 이메일을 확인해주세요."</p>
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn">
+                            <a href="/">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    
 	<script src="/resources/js/member/findId.js"></script>
 </body>
 </html>

@@ -23,11 +23,39 @@ public class MemberService {
 		return dao.selectOneId(memberId);
 	}
 
-	
-	
 	// 회원가입
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
+	}
+
+	// 비밀번호 찾기
+	public Member selectPw(Member m) {
+		return dao.selectPw(m);
+	}
+
+	// Modal 아이디, 가입일 띄우기
+	public Member searchId(Member m) {
+		return dao.searchId(m);
+	}
+
+	// 개인정보 수정
+	public int updateMember(Member member) {
+		return dao.updateMember(member);
+	}
+
+	// 회원탈퇴
+	public int deleteMember(int memberNo) {
+		return dao.deleteMember(memberNo);
+	}
+
+	// 마이페이지 → 비밀번호 변경
+	public int updatePw(Member member, String newPassword) {
+		return dao.updatePw(member);
+	}
+
+	// 아이디 중복체크 버튼 클릭
+	public Member selectId(Member m) {
+		return dao.selectId(m);
 	}
 	
 }

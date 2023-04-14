@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.wrapper{
+	min-height: calc(100vh - 210px);
+}
+
+.mypage-wrap{
+    margin: 0 auto;
+    padding-top: 80px;
+    width: 100vh;
+    height: 100vh;
+}
+
+.mypage-header{
+    width: 100vh;
+}
+
+.mypage-header>h2{
+    padding: 15px 0px 15px 0px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #222222;
+}
+
+.info>li{
+    margin: 15px 0px 15px 0px;
+    font-size: 14px;
+}
+
+.comment{
+    font-size: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.second-comment{
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+.info-two{
+    font-size: 16px;
+}
+
+.info-two>li{
+    padding: 5px;
+}
+
+.label-comment{
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.select>li{
+    padding: 10px;
+}
+
+.btn-wrap{
+    position: relative;
+    margin: 50px 0px 50px 0px;
+    height: 50px;
+}
+
+table{
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #d1d5dd;
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+.deleteForm>tbody>tr>th{
+    background-color: #f7f8f9;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 200px;
+    text-align: left;
+}
+
+.input-text{
+    width: 300px;
+    height: 30px;
+    font-size: 1.1em;
+    margin-left: 7px;
+    padding-left: 7px;
+}
+
+#cancelBtn{
+    position: absolute;
+    top: 10px;
+    left: 480px;
+    width: 75px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+#cancelBtn:hover{
+    color: #fff;
+    background: #351c6f;
+}
+
+#enrollBtn{
+    position: absolute;
+    top: 10px;
+    left: 580px;
+    width: 75px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+#enrollBtn:hover{
+    color: #fff;
+    background: #351c6f;
+}

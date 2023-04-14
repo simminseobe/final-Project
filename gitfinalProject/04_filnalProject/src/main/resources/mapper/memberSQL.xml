@@ -49,4 +49,55 @@
   	#{memberEmail}, 1, to_char(sysdate,'yyyy-mm-dd'), #{memberGender}, NULL, NULL)
   </insert>
   
+  <!-- 비밀번호 찾기 -->
+  <select id="selectPw" parameterType="m" resultType="m">
+  	select
+  		member_pw as memberPw
+  	from member where member_id=#{memberId} and member_name=#{memberName} and member_email=#{memberEmail}
+  </select>
+  
+  <!-- Modal창 아이디, 가입일 찾기 -->
+  <select id="searchId" parameterType="m" resultType="m">
+  	select
+  		member_id as memberId, enroll_date as enrollDate
+  	from member where member_name=#{memberName} and member_phone=#{memberPhone}
+  </select>
+  
+  <!-- 회원정보 수정 -->
+  <update id="updateMember" parameterType="m">
+  	update member set 
+  		member_phone=#{memberPhone}, member_email=#{memberEmail}, member_filename=#{memberFilename}, member_filepath=#{memberFilepath}
+  	where member_id=#{memberId}
+  </update>
+  
+  <!-- 회원 탈퇴 -->
+  <delete id="deleteMember" parameterType="_int">
+  	delete from member where member_no=#{_parameter}
+  </delete>
+  
+  <!-- 마이페이지 → pw 변경 -->
+  <update id="updatePw" parameterType="m">
+  	update member set member_pw=#{memberPw} where member_id=#{memberId}
+  </update>
+  
+  <!-- 아이디 중복체크 버튼 -->
+  <select id="selectId" parameterType="m" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_id as memberId,
+  		member_pw  as memberPw,
+  		member_name as memberName,
+  		member_phone as memberPhone,
+  		member_birth_year as memberBirthYear,
+  		member_birth_month as memberBirthMonth,
+  		member_birth_day as memberBirthDay,
+  		member_email as memberEmail,
+  		member_level as memberLevel,
+  		enroll_date as enrollDate,
+  		member_gender as memberGender,
+  		member_filename as memberFilename,
+  		member_filepath as memberFilepath
+  	from member where member_id=#{memberId}
+  </select>
+  
 </mapper>

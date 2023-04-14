@@ -30,4 +30,42 @@ public class MemberDao {
 		int result = sqlSession.insert("member.insertMember", m);
 		return result;
 	}
+
+	// 비밀번호 찾기
+	public Member selectPw(Member m) {
+		Member member = sqlSession.selectOne("member.selectPw", m);
+		return member;
+	}
+
+	// Modal 아이디, 가입일 띄우기
+	public Member searchId(Member m) {
+		//System.out.println(m);
+		Member member = sqlSession.selectOne("member.searchId", m);
+		//System.out.println(member);
+		return member;
+	}
+
+	// 개인정보 수정
+	public int updateMember(Member member) {
+		int result = sqlSession.update("member.updateMember", member);
+		return result;
+	}
+
+	// 회원탈퇴
+	public int deleteMember(int memberNo) {
+		int result = sqlSession.delete("member.deleteMember", memberNo);
+		return result;
+	}
+
+	public int updatePw(Member member) {
+		int result = sqlSession.update("member.updatePw", member);
+		return result;
+	}
+
+	// 아이디 중복체크 버튼 클릭
+	public Member selectId(Member m) {
+		Member member = sqlSession.selectOne("member.selectId", m);
+		return member;
+	}
+
 }

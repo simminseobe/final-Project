@@ -23,7 +23,9 @@ public class Movie {
 	private String classicSociety;
 	private String specialMovie;
 	private String enrollMember;
+	private String movieType;
 	private MovieFile mainFile;
 	private ArrayList<MovieFile> moviePost;
 	private ArrayList<String> movieLink;
+	private ArrayList<MovieVideo> movieVideos;
 }

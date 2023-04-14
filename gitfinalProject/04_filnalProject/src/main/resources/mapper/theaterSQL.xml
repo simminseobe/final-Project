@@ -5,8 +5,43 @@
   	select theater_addr as theaterAddr  from theater_tbl
 	where theater_local = #{_parameter}
   </select>
+  <select id="selectTheaterList" resultType="theater">
+	  select 
+			 	theater_no as theaterNo,
+				theater_local as theaterLocal,
+				theater_branch as theaterBranch,
+				theater_addr as theaterAddr,	
+				theater_facility as theaterFacility,
+				theater_content as theaterContent,
+				enroll_member as EnrollMember		
+	  from theater_tbl
+  </select>
   <insert id="insertTheater" parameterType="theater">
   	insert into theater_tbl
-  	values (theater_tbl_seq.nextval, #{theaterCode}, #{theaterLocal}, #{theaterAddr})
+  	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, 'admin')
   </insert>
+  <select id="selectOneTheater" parameterType="_int" resultType="theater">
+  	select 
+			 	theater_no as theaterNo,
+				theater_local as theaterLocal,
+				theater_branch as theaterBranch,
+				theater_addr as theaterAddr,	
+				theater_facility as theaterFacility,
+				theater_content as theaterContent,
+				enroll_member as EnrollMember		
+	  from theater_tbl
+	  where theater_no = #{_parameter}
+  </select>
+  <select id="selectBranchList" parameterType="string" resultType="theater">
+  	select 
+			 	theater_no as theaterNo,
+				theater_local as theaterLocal,
+				theater_branch as theaterBranch,
+				theater_addr as theaterAddr,	
+				theater_facility as theaterFacility,
+				theater_content as theaterContent,
+				enroll_member as EnrollMember		
+	  from theater_tbl
+	  where theater_local = #{_parameter}
+  </select>
 </mapper>

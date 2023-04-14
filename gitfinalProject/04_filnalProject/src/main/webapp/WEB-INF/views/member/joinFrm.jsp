@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +21,11 @@
 			<div class="essential">
 				<span>
           <sup>* </sup>
-            필수입력사항
+            	필수입력사항
         </span>
 			</div>
 			<form action="/checkId.do" name="checkIdFrm" method="POST">
-        <input type="hidden" name="checkId">
+        	<input type="hidden" name="checkId">
 			</form>
 			
 			<form action="/join.do" method="post">
@@ -37,6 +38,7 @@
 							<td>
                 <input type="text" id="inputId" class="input-text" name="memberId" id="memberId" maxlength="20" autocomplete=off placeholder="아이디를 입력해주세요 (영문, 숫자 포함 6~20자)" required>
                 <button type="button" id="idChkBtn">중복체크</button>
+                <div class="comment" id="idCheck"></div>
               </td>
 						</tr>
 						<tr>
@@ -69,7 +71,7 @@
                 
               </td>
 							<td>
-                <input type="text" id="phone" class="input-text" name="memberPhone" minlength="12" maxlength="13" required placeholder="예 : 010-0000-0000" autocomplete=off>
+                <input type="text" id="phone" class="input-text" name="memberPhone" minlength="11" maxlength="11" required placeholder="'-'없이 숫자만 입력" autocomplete=off>
                 <div class="comment" id="phoneCheck"></div></td>
 						</tr>
             <tr>
@@ -540,8 +542,29 @@
 				</div>
 			</form>
 		</div>
-	</div>	
-	
+	</div>
+
+	<div class="modal-wrapper" id="modal" style="display: none">
+		<div class="ok-modal">
+			<div class="modal-top"></div>
+			<div class="modal-content">
+				<h3>알림</h3>
+				<button class="close-btn" onclick="closeClick();"></button>
+				<div class="layer-content">
+					<p class="text-common">
+						<span id="findId">[<span></span>] 는 이미 사용중인 아이디 입니다.</span>
+						<span  id="instDate">[<span></span>]는 사용가능한 아이디 입니다.</span>
+					</p>
+					<div class="btn-wrapper">
+						<button type="button" class="okBtn" id="buttonOk">
+							확인
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="/resources/js/member/joinFrm.js"></script>
 </body>
 </html>
