@@ -35,5 +35,4 @@ public class GiftDao {
 		List list = sqlSession.selectList("gift.selectStepCategoryList",pcNo);
 		return (ArrayList<ProductCategory>) list;
 	}
-	
 }

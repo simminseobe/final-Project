@@ -2,15 +2,19 @@ package kr.or.gift.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import kr.or.gift.model.service.GiftService;
+import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 
 @Controller
@@ -29,10 +33,24 @@ public class GiftController {
 		model.addAttribute("categoryList", categoryList);
 		return "admin/gift/giftInsertForm";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/getOrderlyCategory.do", produces = "application/json;charset=utf-8")
+	public String getOrderlyCategory(int pcNo) {
+		ArrayList<ProductCategory> list = sv.getOrderlyCategory(pcNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
 	@RequestMapping(value = "/insertGift.do")
-	public String insertGift() {
-		
-		return "admin/gift/allGiftLsit";
+	public String insertGift(Product product, MultipartFile[] productPhoto, HttpServletRequest request) {
+		int fileIndex = 0;
+		System.out.println(product);
+		System.out.println("=============================");
+		for(MultipartFile file : productPhoto) {
+			System.out.println(file.getOriginalFilename());
+			System.out.println("File index : " + ++fileIndex);
+		}
+		return "redirect:/adminGiftList.do";
 	}
 	@RequestMapping(value = "/adminGiftList.do")
 	public String adminGiftLsit() {
@@ -63,13 +81,5 @@ public class GiftController {
 		}
 		sv.insertCategory(category);
 		return "admin/gift/allCategoryList";
-	}
-	@ResponseBody
-	@RequestMapping(value = "/getOrderlyCategory.do", produces = "application/json;charset=utf-8")
-	public String getOrderlyCategory(int pcNo) {
-		ArrayList<ProductCategory> list = sv.getOrderlyCategory(pcNo);
-		Gson gson = new Gson();
-		String result = gson.toJson(list);
-		return result;
 	}
 } 
