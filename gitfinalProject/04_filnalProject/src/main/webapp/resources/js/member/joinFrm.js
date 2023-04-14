@@ -98,11 +98,11 @@ $("[name=memberName]").on("keyup", function() {
     const inputName = $(this).val();
     const check = nameReg.test(inputName);
     if(check) {
-        $("#nameCheck").text("ok");
+        $("#nameCheck").text("");
         $("#nameCheck").css("color", "green");
         result[3] = true;
     } else {
-        $("#nameCheck").text("한글을 입력해주세요.");
+        $("#nameCheck").text("한글만 입력해주세요.");
         $("#nameCheck").css("color", "red");
         result[3] = false;
     }
@@ -114,7 +114,7 @@ $("[name=memberPhone]").on("change", function() {
     const inputPhone = $(this).val();
     const check = phoneReg.test(inputPhone);
     if(check) {
-        $("#phoneCheck").text("ok");
+        $("#phoneCheck").text("");
         $("#phoneCheck").css("color", "green");
         result[4] = true;
     } else {
@@ -140,7 +140,7 @@ $("#emailCheck").on("click", function() {
             $("#email-time").text();
             authTime();
         },
-        error : function(data) {
+        error : function() {
             alert("인증번호 이메일 발송 실패");
         }
     });
