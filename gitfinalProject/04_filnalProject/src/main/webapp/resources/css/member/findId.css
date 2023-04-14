@@ -172,6 +172,21 @@ th:first-child, td:first-child {
     margin: 350px auto;
 }
 
+.ok-modalPw{
+	background-color: #fff;
+	width: 32vw;
+    min-width: 300px;
+    max-width: 400px;
+    min-height: 150px;
+    max-height: 200px;
+    margin: 350px auto;
+}
+
+.text-common-two{
+	font-size: 12px;
+    padding-bottom: 5px;
+}
+
 .modal-content>h3{
     color: #fff;
     background-color: #503396;
