@@ -78,9 +78,14 @@ public class MovieDao {
 		return movie;
 	}
 
-	public Movie onlyWatchPointAvg(int movieNo) {
-		Movie movie = sqlSession.selectOne("movie.selectWatchPointAvg", movieNo);
+	public Review onlyWatchPointAvg(int movieNo) {
+		Review movie = sqlSession.selectOne("movie.selectWatchPointAvg", movieNo);
 		return movie;
+	}
+
+	public WatchPoint watchPointSum(int movieNo) {
+		WatchPoint wpSum=sqlSession.selectOne("movie.selectWatchPointSum",movieNo);
+		return wpSum;
 	}
 
 }

@@ -225,7 +225,6 @@
                         <div class="col"style="border: 1px solid black; position: absolute; top: 0px; width: 366.33px; height:380px; display:inline-block; float:left;">
                             <div class="pointTxt" style="padding-top: 50px; font-size: 18px; line-height: 18px;">
                                 <h2>관람포인트</h2>
-                                <h2>스토리,연출</h2>
                             </div>
                             <div class="chart" style="text-align: center;">
                                 <canvas id="myChart" width="216" height="216" style="margin:0 auto;"></canvas>
@@ -234,8 +233,8 @@
                         <div class="col" style="position: absolute; top: 0px; left:366px; border: 1px solid black; width: 366.33px; height:380px;">
                             <div class="pointTxt" style=" margin: 0 auto; padding-top: 50px; text-align: center; font-size: 18px; line-height: 18px;">
                                 <h2>실관람평점</h2>
-                                <div class="circle" style="margin: 0 auto; margin-top: 30px; vertical-align: center; z-index: 12; width: 120px; height: 120px; line-height: 120px; background-color: #6543b1;  border-radius: 120px;">
-                                    <em>평점</em>
+                                <div class="circle" style="margin: 0 auto; margin-top: 30px; vertical-align: center; z-index: 12; width: 120px; height: 120px; line-height: 120px; background-color: #6543b1;  border-radius: 120px; color:#fff;">
+                                    <em>${watchPointAvg.movieScoreAvg}</em>
                                 </div>
                                 <div class="reserve-rate-circle" style="margin-top: 30px;">
                                     <h3>예매율</h3>
@@ -471,20 +470,29 @@
                     </div>
                 </div>
             </div>
-            <div class="testDiv">
-            	<input type="text" class="testInput1" value="">
+            <div class="wpSum" style="display:none;">
+            	<input type="text" class="wpSumStory" value="${watchPointSum.story}">
+            	<input type="text" class="wpSumOST" value="${watchPointSum.ost}"> 
+            	<input type="text" class="wpSumActor" value="${watchPointSum.actor}">
+            	<input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
+            	<input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
             </div>
            
-    <input type="text" value="${sessionScope.m.memberId}" id="memberId">
+
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
+        var story = $(".wpSumStory").val();
+        var ost = $(".wpSumOST").val();
+        var actor = $(".wpSumActor").val();
+        var videoVisual = $(".wpSumVideoVisual").val();
+        var production = $(".wpSumProduction").val();
         var myChart = new Chart(ctx, {
             type: 'radar',
             data: {
                 labels: ['영상미', '스토리', '배우', 'OST', '연출'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [5, 3, 5, 10, 3],
+                    label: '영상미,스토리,배우,OST,연출',
+                    data: [videoVisual, story, actor, ost, production],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
