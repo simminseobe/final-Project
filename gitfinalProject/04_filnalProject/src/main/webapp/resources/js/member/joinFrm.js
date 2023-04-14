@@ -12,9 +12,6 @@ $("#idChkBtn").on("click", function() {
         alert("아이디를 입력하세요.");
         return;
     } else {
-        //$("[name=checkId]").val(memberId);
-        //window.open("", "checkId","left=700px,top=300px,width=300px,height=200px,menubar=no,status=no,scrollbars=yes");
-        
         const idReg =  /^[a-z]+[a-z0-9]{5,19}$/g
         const checkResult = idReg.test(memberId);
         if(checkResult) {

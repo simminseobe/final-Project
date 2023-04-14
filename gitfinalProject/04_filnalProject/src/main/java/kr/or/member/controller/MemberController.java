@@ -60,20 +60,6 @@ public class MemberController {
 	public String joinFrm() {
 		return "member/joinFrm";
 	}
-	
-	// 아이디 중복체크(정규표현식)
-	@ResponseBody
-	@RequestMapping(value="/checkId.do")
-	public String checkId(String checkId, Model model) {
-		Member m = service.selectOneId(checkId);
-		if(m == null) {
-			// 아이디 사용 가능
-			return "ok";
-		} else {
-			// 아이디 사용 불가능
-			return "error";
-		}
-	}
 
 	private int authNumber;
 	// 이메일 인증을 위한 랜덤 난수 생성
@@ -164,6 +150,62 @@ public class MemberController {
 		return new Gson().toJson(member);
 	}
 	
+	// 비밀번호 찾기(이메일 전송)
+	@ResponseBody
+	@RequestMapping(value="/sendEmailPw.do")	
+	public String sendEmailPw(String email, Member member) {
+		makeRandomNumber();
+		String subject = "MovieIsland 임시 비밀번호 이메일 입니다.";
+		String content = "회원님의 임시 비밀번호를 알려드리겠습니다."
+						 + "<br>"
+						 + "인증번호는 " + authNumber + " 입니다"
+						 + "<br>" 
+						 + "해당 임시 비밀번호를 통해 로그인 해주세요.";
+		String from = "manager@movieIsland.com";
+		String to = email;
+		
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+			// true는 멀티파트 메세지를 사용하겠다는 의미
+
+			/*
+			 * 단순한 텍스트 메세지만 사용시엔 아래의 코드도 사용 가능 MimeMessageHelper mailHelper = new
+			 * MimeMessageHelper(mail,"UTF-8");
+			 */
+
+			mailHelper.setFrom(from);
+			// 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
+			// 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
+			// mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
+			mailHelper.setTo(to);
+			mailHelper.setSubject(subject);
+			mailHelper.setText(content, true);
+			// true는 html을 사용하겠다는 의미입니다.
+
+			/*
+			 * 단순한 텍스트만 사용하신다면 다음의 코드를 사용하셔도 됩니다. mailHelper.setText(content);
+			 */
+
+			mailSender.send(mail);
+			// 임시비밀번호로 pw 변경
+			member.setMemberId(member.getMemberId());
+			member.setMemberName(member.getMemberName());
+			member.setMemberEmail(member.getMemberEmail());
+			member.setMemberPw(String.valueOf(authNumber));
+			int result = service.updatePwMember(member);
+			return Integer.toString(authNumber);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "1";
+	}
+	
+	
+	
 	// 마이페이지 이동
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
@@ -179,11 +221,13 @@ public class MemberController {
 	// 개인정보 수정
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member member, @SessionAttribute(required=false) Member m, String memberFilepath, MultipartFile file, HttpServletRequest request) {
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
-		String filename = file.getOriginalFilename();
-		String upFilepath = manager.upload(savePath, file);
-		member.setMemberFilename(filename);
-		member.setMemberFilepath(upFilepath);
+		if(!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+			String filename = file.getOriginalFilename();			
+			String upFilepath = manager.upload(savePath, file);
+			member.setMemberFilename(filename);
+			member.setMemberFilepath(upFilepath);
+		}
 		
 		int result = service.updateMember(member);
 		if(result > 0) {
@@ -221,7 +265,6 @@ public class MemberController {
 	}
 	
 	// 마이페이지 → 비밀번호 변경 
-	// java.lang.StringIndexOutOfBoundsException: String index out of range: -1
 	@RequestMapping(value="/updatePw.do")
 	public String updatePw(Member member, String newPassword) {
 		int result = service.updatePw(member, newPassword);

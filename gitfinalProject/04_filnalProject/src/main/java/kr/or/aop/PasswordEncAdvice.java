@@ -32,16 +32,16 @@ public class PasswordEncAdvice {
 	public void passwordEnc(JoinPoint jp) throws Exception {
 		// 메소드 이름 가져오기
 		String methodName = jp.getSignature().getName();
-		System.out.println("비밀번호 암호화 동작 메소드 : " + methodName);
+		//System.out.println("비밀번호 암호화 동작 메소드 : " + methodName);
 		// 매개변수 꺼내기(항상 Object[] 타입)
 		Object[] args = jp.getArgs(); 
 		Member member = (Member)args[0];
 		
 		String memberPw = member.getMemberPw();
-		System.out.println("사용자 입력 비밀번호 : " + memberPw);
+		//System.out.println("사용자 입력 비밀번호 : " + memberPw);
 		
 		String encPw = passEnc.encDate(memberPw);
-		System.out.println("암호화 비밀번호 : " + encPw);
+		//System.out.println("암호화 비밀번호 : " + encPw);
 		
 		member.setMemberPw(encPw);
 	}
@@ -52,12 +52,12 @@ public class PasswordEncAdvice {
 	@Before(value="pwChange()")
 	public void passPw(JoinPoint jp) throws Exception {
 		String methodName = jp.getSignature().getName();
-		System.out.println("비밀번호 변경 메소드 : " + methodName);
+		//System.out.println("비밀번호 변경 메소드 : " + methodName);
 		Object[] args = jp.getArgs();
 		Member member = (Member)args[0];
 		String memberPwRe = (String)args[1];
-		System.out.println("pw : " + member.getMemberPw());
-		System.out.println("pwRe : " + memberPwRe);
+		//System.out.println("pw : " + member.getMemberPw());
+		//System.out.println("pwRe : " + memberPwRe);
 		String encPw = passEnc.encDate(member.getMemberPw());
 		member.setMemberPw(encPw);
 	}
