@@ -184,7 +184,10 @@
 						<h1>
 							<a href="/paymentMethod.do">결제수단(test)</a>
 						</h1>
-						<button onclick="getMega();">제발 가져와져라 쫌</button>
+						<button class="test1" id="jQ5">서버에서 리스트 데이터 받기</button>
+						<p class="ajaxResult" id="result5" style="min-height: 100px; border: 2px solid #ccc;"></p>
+						<button class="test2" id="jQ7">서버에서 리스트 데이터 받기</button>
+						<p class="ajaxResult" id="result7" style="min-height: 100px; border: 2px solid #ccc;""></p>
 						<!-- 
 				<h1>
 					<a href="/testPage.do">테스트페이지(test)</a>
@@ -325,6 +328,48 @@
 						}
 					});
 				}
+
+
+				/////////AJAXtest/////////AJAXtest///////////AJAXtest///////////AJAXtest///////
+				$("#jQ5").on("click",function(){
+					const result = $("#result5");
+					result.empty();
+					$.ajax({
+						url : "https://www.megabox.co.kr/booking",
+						type : "get",
+						dataType : "json",
+						success : function(data){
+							for(let i=0; i<data.length; i++){
+								const div = $("div></div>");
+								div.append(data[i].movieAges);
+								div.append("/");
+								div.append(data[i].movieTitles);
+								div.append("/");
+								div.append(data[i].movieOpenDates);
+								result.append(div);
+							}
+						},
+						error : function(){
+
+						}
+					});
+				});
+				$("#jQ7").on("click",function(){
+					const result = $("#result7");
+					result.empty();
+					$.ajax({
+						url : "http://www.cgv.co.kr/movies/",
+						type : "get",
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+						},
+						error : function(){
+							console.log("호출실패");
+						}
+					});
+				});
+
 				
 			</script>
 			<script src="/resources/js/seat.js"></script>

@@ -199,15 +199,67 @@
 					position: relative;
 					width: 300px;
 					height: 550px;
+					padding: 15px 20px 0 0;
 				}
 
-				.result-title {}
+				.result-title {
+					overflow: hidden;
+					position: relative;
+					margin-left: 20px;
+					padding: 0 0 0 28px;
+					border-bottom: 1px solid #434343;
+					height: 50px;
+				}
 
-				.result-info {}
+				.result-info {
+					position: relative;
+					min-height: 121px;
+					margin-left: 20px;
+					padding: 0 104px 0 0;
+					font-size: .8667em;
+					border-bottom: 1px solid #434343;
+					height: 120px;
+				}
 
-				.result-seat {}
+				.result-seat {
+					overflow: hidden;
+					position: relative;
+					min-height: 230px;
+					margin: 10px 0 0 20px;
+					border-radius: 5px;
+					border: 1px solid #434343;
+					height: 230px;
+				}
 
-				.result-pay {}
+				.result-pay {
+					width: 260px;
+					margin: 15px 0 0 20px;
+					padding: 10px 0;
+					height: 50px;
+				}
+				.pay-tit{
+					float: left;
+					line-height: 35px;
+					font-size: 15px;
+				}
+				.money{
+					float: right;
+				}
+				.amount{
+					display: block;
+					float: left;
+					line-height: 35px;
+					font-size: 24px;
+					color: #59bec9;
+					font-weight: 400;
+				}
+				.won{
+					display: block;
+					float: left;
+					padding: 0 0 0 5px;
+					line-height: 35px;
+					font-size: 15px;
+				}
 
 				.result-btn {
 					position: absolute;
@@ -215,7 +267,6 @@
 					bottom: 5px;
 					width: 100%;
 					height: 40px;
-
 				}
 
 				.pagePrevious {
@@ -454,8 +505,12 @@
 							<div class="result-seat">
 
 							</div>
-							<div class="pay">
-
+							<div class="result-pay">
+								<p class="pay-tit">최종결제금액</p>
+								<div class="money">
+									<span class="amount">15,000</span>
+									<span class="won">원</span>
+								</div>
 							</div>
 							<div class="result-btn">
 								<a href="/ticketing.do" class="pagePrevious">이전</a>
