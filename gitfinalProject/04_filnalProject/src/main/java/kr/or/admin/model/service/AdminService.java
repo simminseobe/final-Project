@@ -42,6 +42,8 @@ public class AdminService {
 
 				video.setMovieNo(movie.getMovieNo());
 
+				System.out.println(video.getVideoLink());
+
 				if (video.getVideoLink() != null) {
 					result += dao.insertmovieVideo(video);
 				}
@@ -61,6 +63,16 @@ public class AdminService {
 		int result = dao.insertTheater(theater);
 
 		return result;
+	}
+
+	public int deleteTheater(int theaterNo) {
+		int result = dao.deleteTheater(theaterNo);
+
+		return result;
+	}
+
+	public int updateTheater(Theater theater) {
+		return dao.updateTheater(theater);
 	}
 
 	public ArrayList<Movie> selectMovieList() {
@@ -117,15 +129,7 @@ public class AdminService {
 
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public Theater selectOntTheater(int theaterNo) {
 		Theater theater = dao.selectOneTheater(theaterNo);
 		return theater;

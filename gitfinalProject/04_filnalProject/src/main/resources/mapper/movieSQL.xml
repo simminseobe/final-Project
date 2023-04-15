@@ -3,7 +3,7 @@
 <mapper namespace="movie">
 	<insert id="insertMovie" parameterType="movie">
 	insert into movie_tbl values
-	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, 'admin', #{movieType})
+	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, '#{enrollMember}', #{movieType})
 	
 	<selectKey resultType="_int" order="AFTER" keyProperty="movieNo">
 		select max(movie_no) from movie_tbl

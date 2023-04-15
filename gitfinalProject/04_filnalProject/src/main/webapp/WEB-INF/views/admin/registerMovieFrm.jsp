@@ -25,20 +25,21 @@
                         </div>
                         <div class="container">
                             <form action="/registerMovie.do" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}">
                                 <div class="form-group">
                                     <label for="movieTitle" class="my-1">영화 제목</label>
                                     <input type="text" class="form-control" id="movieTitle" name="movieTitle"
-                                        placeholder="영화 제목을 입력하세요">
+                                        placeholder="영화 제목을 입력하세요" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="movieDirector" class="my-1">감독</label>
                                     <input type="text" class="form-control" id="movieDirector" name="movieDirector"
-                                        placeholder="감독 이름을 입력하세요">
+                                        placeholder="감독 이름을 입력하세요" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="movieActor" class="my-1">배우</label>
                                     <input type="text" class="form-control" id="movieActor" name="movieActor"
-                                        placeholder="배우들을 입력하세요">
+                                        placeholder="배우들을 입력하세요" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="movieGenre" class="my-1">장르</label>
@@ -66,15 +67,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="movieDate" class="my-1">개봉일</label>
-                                    <input type="date" class="form-control" id="movieDate" name="movieDate">
+                                    <input type="date" class="form-control" id="movieDate" name="movieDate" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="movieTime" class="my-1">상영시간</label>
-                                    <input type="text" class="form-control" id="movieTime" name="movieTime">
+                                    <input type="text" class="form-control" id="movieTime" name="movieTime" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="movieRating" class="my-1">심의 등급</label>
-                                    <input type="text" class="form-control" id="movieRating" name="movieRating">
+                                    <input type="number" class="form-control" id="movieRating" name="movieRating"
+                                        min="0" max="18" required>
                                 </div>
                                 <div class="form-group my-2">
                                     <label for="filmSociety" class="form-check-label my-1">필름 소사이어티</label>
@@ -177,8 +179,8 @@
                                     </div>
                                     <div class="form-group my-1">
                                         <label for="movieContent" class="my-1">소개</label>
-                                        <textarea class="form-control" id="movieContent" name="movieContent"
-                                            rows="3"></textarea>
+                                        <textarea class="form-control" id="movieContent" name="movieContent" rows="3"
+                                            required></textarea>
                                     </div>
                                     <div class="row my-3">
                                         <div class="col text-center">

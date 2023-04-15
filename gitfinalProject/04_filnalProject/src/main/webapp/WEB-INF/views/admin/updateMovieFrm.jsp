@@ -29,21 +29,22 @@
                                 <div class="container">
                                     <form action="/updateMovie.do" method="post" enctype="multipart/form-data"
                                         id="updateMovieFrm">
+                                        <input type="hidden" name="movieNo" value="${movie.movieNo}">
                                         <div class="form-group">
                                             <label for="movieTitle" class="my-1">영화 제목</label>
                                             <input type="text" class="form-control" id="movieTitle" name="movieTitle"
-                                                value="${movie.movieTitle}" placeholder="영화 제목을 입력하세요">
+                                                value="${movie.movieTitle}" placeholder="영화 제목을 입력하세요" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="movieDirector" class="my-1">감독</label>
                                             <input type="text" class="form-control" id="movieDirector"
                                                 name="movieDirector" value="${movie.movieDirector}"
-                                                placeholder="감독 이름을 입력하세요">
+                                                placeholder="감독 이름을 입력하세요" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="movieActor" class="my-1">배우</label>
                                             <input type="text" class="form-control" id="movieActor" name="movieActor"
-                                                value="${movie.movieActor}" placeholder="배우들을 입력하세요">
+                                                value="${movie.movieActor}" placeholder="배우들을 입력하세요" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="movieGenre" class="my-1">장르</label>
@@ -190,22 +191,22 @@
                                         <div class="form-group">
                                             <label for="movieDate" class="my-1">개봉일</label>
                                             <input type="date" class="form-control" id="movieDate" name="movieDate"
-                                                value="${movie.movieDate}">
+                                                value="${movie.movieDate}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="movieTime" class="my-1">상영시간</label>
                                             <input type="text" class="form-control" id="movieTime" name="movieTime"
-                                                value="${movie.movieTime}">
+                                                value="${movie.movieTime}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="movieRating" class="my-1">심의 등급</label>
-                                            <input type="text" class="form-control" id="movieRating" name="movieRating"
-                                                value="${movie.movieRating}">
+                                            <input type="number" min="0" max="18" class="form-control" id="movieRating"
+                                                name="movieRating" value="${movie.movieRating}" required>
                                         </div>
                                         <div class="form-group my-2">
                                             <label for="filmSociety" class="form-check-label my-1">필름 소사이어티</label>
                                             <c:choose>
-                                                <c:when test="${movie.filmSociety == 'Y'}">
+                                                <c:when test="${movie.filmSociety eq 'Y'}">
                                                     <input type="checkbox" class="form-check-input my-1"
                                                         id="filmSociety" name="filmSociety" value="Y" checked>
                                                 </c:when>
@@ -217,7 +218,7 @@
 
                                             <label for="classicSociety" class="form-check-label my-1">클래식 소사이어티</label>
                                             <c:choose>
-                                                <c:when test="${movie.classicSociety == 'Y'}">
+                                                <c:when test="${movie.classicSociety eq 'Y'}">
                                                     <input type="checkbox" class="form-check-input my-1"
                                                         id="classicSociety" name="classicSociety" value="Y" checked>
                                                 </c:when>
@@ -229,7 +230,7 @@
 
                                             <label for="specialMovie" class="form-check-label my-1">특별영화</label>
                                             <c:choose>
-                                                <c:when test="${movie.specialMovie == 'Y'}">
+                                                <c:when test="${movie.specialMovie eq 'Y'}">
                                                     <input type="checkbox" class="form-check-input my-1"
                                                         id="specialMovie" name="specialMovie" value="Y" checked>
                                                 </c:when>
@@ -432,7 +433,7 @@
                                             <div class="form-group my-1">
                                                 <label for="movieContent" class="my-1">소개</label>
                                                 <textarea class="form-control" id="movieContent" name="movieContent"
-                                                    rows="3"></textarea>
+                                                    rows="3" required></textarea>
                                             </div>
                                             <div class="row my-3">
                                                 <div class="col text-center">

@@ -60,6 +60,18 @@ public class AdminDao {
 		return result;
 	}
 
+	public int deleteTheater(int theaterNo) {
+		int result = sqlSession.delete("theater.deleteTheater", theaterNo);
+
+		return result;
+	}
+
+	public int updateTheater(Theater theater) {
+		int result = sqlSession.update("theater.updateTheater", theater);
+
+		return result;
+	}
+
 	public ArrayList<Theater> selectTheaterList() {
 		List list = sqlSession.selectList("theater.selectTheaterList");
 
@@ -81,13 +93,7 @@ public class AdminDao {
 
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	public Theater selectOneTheater(int theaterNo) {
 		Theater theater = sqlSession.selectOne("theater.selectOneTheater", theaterNo);
 		return theater;
@@ -97,4 +103,5 @@ public class AdminDao {
 		List list = sqlSession.selectList("theater.selectBranchList", theaterLocal);
 		return (ArrayList<Theater>) list;
 	}
+
 }

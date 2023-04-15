@@ -14,22 +14,23 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">영화관 관리</h1>
+                        <h1 class="mt-4">극장 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">영화관 등록</li>
+                            <li class="breadcrumb-item active">극장 등록</li>
                         </ol>
                     </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            영화관 등록 입력 양식
+                            입력 양식
                         </div>
                         <div class="card-body">
                             <div class="container">
-                                <h1>영화관 등록</h1>
-                                <form action="/registerTheater.do" method="get">
+                                <h1>극장 등록</h1>
+                                <form action="/registerTheater.do" method="post">
+                                    <!-- <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}}"> -->
                                     <div class="form-group">
-                                        <label for="theaterLocal">지역</label>
+                                        <label for="theaterLocal" class="my-2">지역</label>
                                         <select class="form-select" id="theaterLocal" name="theaterLocal"
                                             aria-label="Default select example">
                                             <option value="서울">서울</option>
@@ -42,15 +43,17 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="theaterBranch">지점 입력</label>
-                                        <input type="text" class="form-control" id="theaterBranch" name="theaterBranch">
+                                        <label for="theaterBranch" class="my-2">지점 입력</label>
+                                        <input type="text" class="form-control" id="theaterBranch" name="theaterBranch"
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="theaterAddr">주소 입력</label>
-                                        <input type="text" class="form-control" id="theaterAddr" name="theaterAddr">
+                                        <label for="theaterAddr" class="my-2">주소 입력</label>
+                                        <input type="text" class="form-control" id="theaterAddr" name="theaterAddr"
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="theaterFacility">보유 시설</label>
+                                        <label for="theaterFacility" class="my-2">보유 시설</label>
                                         <select class="form-select" id="theaterFacility" name="theaterFacility"
                                             aria-label="Default select example">
                                             <option value="부티크">부티크</option>
@@ -63,90 +66,33 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="theaterContent">극장 설명</label>
+                                        <label for="theaterContent" class="my-2">극장 설명</label>
                                         <textarea class="form-control" id="theaterContent" name="theaterContent"
-                                            rows="3"></textarea>
+                                            rows="3" required></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col text-center">
-                                            <button class="btn btn-primary" type="submit">상영관 등록</button>
+                                            <button class="btn btn-primary my-3" type="submit">극장 등록</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <%-- <div class="container">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>지역</th>
-                                            <th>상세지역</th>
-                                            <th>관</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${list}" var="theater">
-                                            <tr>
-                                                <td>${theater.theaterNo}</td>
-                                                <td>${theater.theaterLocal}</td>
-                                                <td>${theater.theaterAddr}</td>
-                                                <td>${theater.theaterCode}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                        </div> --%>
+                        </div>
                     </div>
+                </main>
+                <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
             </div>
-            </main>
-            <!-- <div>
-                        <p>${theater.theaterContent}</p>
-                    </div> -->
-            <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
-        </div>
-        <script>
-            $("#theaterContent").summernote({
-                height: 400,
-                lang: "ko-KR",
-                callbacks: {
-                    onImageUpload: function (files) {
-                        uploadImage(files[0], this);
+            <script>
+                $("#theaterContent").summernote({
+                    height: 400,
+                    lang: "ko-KR",
+                    callbacks: {
+                        onImageUpload: function (files) {
+                            uploadImage(files[0], this);
+                        }
                     }
-                }
-            });
-
-                    // $(".theaterAddr").on("click", function () {
-                    //     const theaterLocal = $(this).parent().prev().children().eq(1).val();
-
-                    //     $.ajax({
-                    //         url: "/searchtheaterAddr.do",
-                    //         type: "get",
-                    //         data: { theaterLocal: theaterLocal },
-                    //         success: function (theaterAddrList) {
-                    //             $("[name=theaterAddr]").empty();
-
-                    //             for (let index = 0; index < theaterAddrList.length; index++) {
-                    //                 const option = $("<option>");
-
-                    //                 option.val(theaterAddrList[index].theaterAddr);
-                    //                 option.text(theaterAddrList[index].theaterAddr);
-
-                    //                 $("[name=theaterAddr]").append(option);
-                    //             }
-                    //         },
-                    //         error: function () {
-                    //             alert("서버 연결 실패");
-                    //         }
-                    //     });
-                    // });
-        </script>
-
-        <!-- <div class="form-group">
-                    <label for="theaterAddr">지점</label>
-                    <select class="form-select" id="theaterAddr" name="theaterAddr" aria-label="Default select example">
-                    </select>
-                    <button type="button" class="theaterAddr">지점 조회</button>
-                </div> -->
+                });
+            </script>
     </body>
 
     </html>

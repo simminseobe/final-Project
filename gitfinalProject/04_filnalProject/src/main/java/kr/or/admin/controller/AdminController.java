@@ -99,45 +99,6 @@ public class AdminController {
 		return "admin/movieList";
 	}
 
-	@RequestMapping(value = "/registerTheaterFrm.do")
-	public String registerTheaterFrm(Model model) {
-		ArrayList<Theater> list = service.selectTheaterList();
-//
-		model.addAttribute("list", list);
-
-		return "admin/registerTheaterFrm";
-	}
-
-	@RequestMapping(value = "/registerTheater.do")
-	public String registerTheater(Theater theater) {
-		int result = service.insertTheater(theater);
-
-		if (result > 0) {
-			return "admin/manageTheaterFrm";
-		} else {
-			return "redirect:/";
-		}
-	}
-
-	@RequestMapping(value = "/theaterList.do")
-	public String theaterList(Model model) {
-		ArrayList<Theater> list = service.selectTheaterList();
-
-		model.addAttribute("list", list);
-
-		return "/admin/theaterList";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/searchtheaterAddr.do", produces = "application/json;charset=utf-8")
-	public String searchtheaterAddr(String theaterLocal) {
-		ArrayList<String> theaterAddrList = new ArrayList<String>();
-
-		theaterAddrList = service.selectTheaterAddr(theaterLocal);
-
-		return new Gson().toJson(theaterAddrList);
-	}
-
 	@RequestMapping(value = "/updateMovieFrm.do")
 	public String updateMovieFrm(int movieNo, Model model) {
 		Movie movie = service.selectOneUpdateMovie(movieNo);
@@ -190,7 +151,8 @@ public class AdminController {
 		int result = service.movieUpdate(movie, mainFile, postList, fileNo, videoList);
 
 		// 업데이트 성공 조건, result가 삭제한 파일수 + 추가한 파일수 + 1(boardUpadte)
-		if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) { // 파일도 삭제하고 파일도 첨부하면
+		if (fileNo != null && (result == (postList.size() + fileNo.length + 2 + videoList.size()))) { // 파일도 삭제하고 파일도
+																										// 첨부하면
 			for (String delFile : filepath) {
 				boolean delResult = fileManager.deleteFile(savePath, delFile);
 
@@ -202,10 +164,71 @@ public class AdminController {
 			}
 
 			return "admin/updateMovieFrm";
-		} else if (fileNo == null && (result == (postList.size() + 1))) { // 파일을 삭제안하고 파일만 첨부하거나 첨부 안하면
+		} else if (fileNo == null && (result == (postList.size() + 1 + videoList.size()))) { // 파일을 삭제안하고 파일만 첨부하거나 첨부
+																								// 안하면
 			return "admin/updateMovieFrm";
 		} else {
 			return "ridirect:/";
+		}
+	}
+
+	@RequestMapping(value = "/registerTheaterFrm.do")
+	public String registerTheaterFrm(Model model) {
+		ArrayList<Theater> list = service.selectTheaterList();
+//
+		model.addAttribute("list", list);
+
+		return "admin/registerTheaterFrm";
+	}
+
+	@RequestMapping(value = "/registerTheater.do")
+	public String registerTheater(Theater theater) {
+		int result = service.insertTheater(theater);
+
+		if (result > 0) {
+			return "admin/registerTheaterFrm";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	@RequestMapping(value = "/theaterList.do")
+	public String theaterList(Model model) {
+		ArrayList<Theater> list = service.selectTheaterList();
+
+		model.addAttribute("list", list);
+
+		return "/admin/theaterList";
+	}
+
+	@RequestMapping(value = "/deleteTheater.do")
+	public String deleteTheater(int theaterNo) {
+		int result = service.deleteTheater(theaterNo);
+
+		if (result > 0) {
+			return "redirect:/theaterList.do";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	@RequestMapping(value = "/updateTheaterFrm.do")
+	public String updateTheaterFrm(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheater(theaterNo);
+
+		model.addAttribute("theater", theater);
+
+		return "admin/updateTheaterFrm";
+	}
+
+	@RequestMapping(value = "/updateTheater.do")
+	public String updateTheater(Theater theater) {
+		int result = service.updateTheater(theater);
+
+		if (result > 0) {
+			return "redirect:/theaterList.do";
+		} else {
+			return "redirect:/";
 		}
 	}
 
@@ -214,25 +237,22 @@ public class AdminController {
 		return "admin/allTheater";
 	}
 
-
-	@RequestMapping(value="/selectOneTheater.do")	//임시 (no줘서 이동할거)
+	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
 	public String selectOneTheater(int theaterNo, Model model) {
 		Theater theater = service.selectOntTheater(theaterNo);
-		model.addAttribute("theater",theater);
+		model.addAttribute("theater", theater);
 		return "admin/detailTheater";
 	}
 	/*
-	 * @RequestMapping(value = "/detailTheater.do") // 임시 (no줘서 이동할거) 
-	 * public String detailTheater() { 
-	 * return "admin/detailTheater"; 
-	 * }
+	 * @RequestMapping(value = "/detailTheater.do") // 임시 (no줘서 이동할거) public String
+	 * detailTheater() { return "admin/detailTheater"; }
 	 */
-	
+
 	@ResponseBody
-	@RequestMapping(value="/selectBranchList.do", produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
 	public String selectBranchList(String theaterLocal) {
 		ArrayList<Theater> list = new ArrayList<Theater>();
-		list =	service.selectBranchList(theaterLocal);
+		list = service.selectBranchList(theaterLocal);
 		return new Gson().toJson(list);
 	}
 

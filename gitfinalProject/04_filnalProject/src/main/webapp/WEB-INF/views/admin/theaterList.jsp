@@ -14,26 +14,19 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Tables</h1>
+                            <h1 class="mt-4">극장 관리</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Tables</li>
+                                <li class="breadcrumb-item active">극장 목록</li>
                             </ol>
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below.
-                                    For
-                                    more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables
-                                        documentation</a>
-                                    .
+                                    극장 정보는 실제와 다를 수 있습니다.
                                 </div>
                             </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    리스트
                                 </div>
                                 <div class="card-body">
                                     <table id="datatablesSimple">
@@ -57,17 +50,15 @@
                                                     <td>${theater.theaterFacility}</td>
                                                     <td>${theater.enrollMember}</td>
                                                     <td>
-                                                        <button class="update-movie-btn"
+                                                        <button class="update-movie-btn btn btn-primary text-center"
                                                             onclick="updateMovie(this);">수정</button>
                                                     </td>
                                                     <td>
-                                                        <button class="delete-movie-btn"
+                                                        <button
+                                                            class="delete-movie-btn btn btn-primary justify-content-center"
                                                             onclick=" deleteMovie(this);">삭제</button>
                                                     </td>
-                                                </tr> 
-                                                <div>
-                                                	<c:out value="${theater.theaterContent}" escapeXml="false"/><br>
-                                                </div>                                                                                               
+                                                </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -79,18 +70,20 @@
                 </div>
             </div>
             <script>
+                $(document).ready(function () {
+                    $('#datatablesSimple').DataTable();
+                });
+
                 function updateMovie(button) {
-                    const movieNo = $(button).parent().parent().children().eq(0).text();
+                    const theaterNo = $(button).parent().parent().children().eq(0).text();
 
-                    console.log(movieNo);
-
-                    location.href = "/updateMovieFrm.do?movieNo=" + movieNo;
+                    location.href = "/updateTheaterFrm.do?theaterNo=" + theaterNo;
                 }
 
                 function deleteMovie(button) {
-                    const movieNo = $(button).parent().parent().children().eq(0).text();
+                    const theaterNo = $(button).parent().parent().children().eq(0).text();
 
-                    console.log(movieNo);
+                    location.href = "/deleteTheater.do?theaterNo=" + theaterNo;
                 }
             </script>
         </body>
