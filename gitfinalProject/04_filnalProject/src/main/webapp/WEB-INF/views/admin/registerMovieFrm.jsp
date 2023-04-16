@@ -25,7 +25,7 @@
                         </div>
                         <div class="container">
                             <form action="/registerMovie.do" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}">
+                                <!-- <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}"> -->
                                 <div class="form-group">
                                     <label for="movieTitle" class="my-1">영화 제목</label>
                                     <input type="text" class="form-control" id="movieTitle" name="movieTitle"
@@ -169,12 +169,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="video-div">
                                         <label for="movieVideo" class="my-3">영화 영상 링크</label>
-                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
-                                        <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary my-3"
+                                                id="plusInput">추가</button>
+                                        </span>
                                         <input type="text" class="form-control my-1" id="movieVideo" name="movieVideo">
                                     </div>
                                     <div class="form-group my-1">
@@ -240,6 +240,12 @@
 
                     reader.readAsDataURL(file);
                 });
+            });
+
+            $("#plusInput").on("click", function () {
+                const videoInput = $("<input type='text' class='form-control my-1' id='movieVideo' name='movieVideo' required > ");
+
+                $("#video-div").append(videoInput);
             });
         </script>
     </body>

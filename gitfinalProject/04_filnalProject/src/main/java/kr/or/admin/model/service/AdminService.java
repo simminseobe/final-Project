@@ -53,6 +53,23 @@ public class AdminService {
 		return result;
 	}
 
+	@Transactional
+	public ArrayList<MovieFile> delteMovie(int movieNo) {
+		// 실제로 서버의 파일을 삭제하기 위해서, 한 게시물 삭제하면 여러개의 파일도 같이 삭제
+		// 삭제 하기전에 파일 목록들 불러옴
+		ArrayList<MovieFile> fileList = dao.selectFileList(movieNo);
+
+		System.out.println(fileList.get(0).getMovieNo());
+
+		int result = dao.delteMovie(movieNo);
+
+		if (result > 0) {
+			return fileList;
+		} else {
+			return null;
+		}
+	}
+
 	public ArrayList<String> selectTheaterAddr(String theaterLocal) {
 		ArrayList<String> theaterAddrList = dao.selectTheaterAddrList(theaterLocal);
 
@@ -100,7 +117,7 @@ public class AdminService {
 
 	@Transactional
 	public int movieUpdate(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList, int[] fileNo,
-			ArrayList<MovieVideo> videoList) {
+			ArrayList<MovieVideo> videoList, int[] videoNo) {
 		int result = dao.updateMovie(movie);
 
 		if (result > 0) {
@@ -108,7 +125,13 @@ public class AdminService {
 				result += dao.deleteFile(fileNo);
 			}
 
-			result += dao.insertMainFile(mainFile);
+			if (videoNo != null) {
+				result += dao.deleteVideo(videoNo);
+			}
+
+			if (mainFile.getMovieNo() != 0) {
+				result += dao.insertMainFile(mainFile);
+			}
 
 			// 첨부파일 추가
 			for (MovieFile file : postList) {

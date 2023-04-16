@@ -50,12 +50,11 @@
                                                     <td>${theater.theaterFacility}</td>
                                                     <td>${theater.enrollMember}</td>
                                                     <td>
-                                                        <button class="update-movie-btn btn btn-primary text-center"
+                                                        <button class="update-movie-btn btn btn-primary"
                                                             onclick="updateMovie(this);">수정</button>
                                                     </td>
                                                     <td>
-                                                        <button
-                                                            class="delete-movie-btn btn btn-primary justify-content-center"
+                                                        <button class="delete-movie-btn btn btn-primary"
                                                             onclick=" deleteMovie(this);">삭제</button>
                                                     </td>
                                                 </tr>

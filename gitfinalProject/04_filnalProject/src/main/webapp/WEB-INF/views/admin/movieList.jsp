@@ -14,26 +14,19 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Tables</h1>
+                            <h1 class="mt-4">영화 관리</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Tables</li>
+                                <li class="breadcrumb-item active">영화 목록</li>
                             </ol>
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    DataTables is a third party plugin that is used to generate the demo table below.
-                                    For
-                                    more
-                                    information about DataTables, please visit the
-                                    <a target="_blank" href="https://datatables.net/">official DataTables
-                                        documentation</a>
-                                    .
+                                    살제 영화와 다를 수 있습니다.
                                 </div>
                             </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    DataTable Example
+                                    리스트
                                 </div>
                                 <div class="card-body">
                                     <table id="datatablesSimple">
@@ -47,7 +40,6 @@
                                                 <th>개봉일</th>
                                                 <th>상영시간</th>
                                                 <th>심의등급</th>
-                                                <th>소사이어티</th>
                                                 <th>수정</th>
                                                 <th>삭제</th>
                                             </tr>
@@ -63,13 +55,12 @@
                                                     <td>${movie.movieDate}</td>
                                                     <td>${movie.movieTime}</td>
                                                     <td>${movie.movieRating}</td>
-                                                    <td>${movie.movieRating}</td>
                                                     <td>
-                                                        <button class="update-movie-btn"
+                                                        <button class="update-movie-btn btn btn-primary"
                                                             onclick="updateMovie(this);">수정</button>
                                                     </td>
                                                     <td>
-                                                        <button class="delete-movie-btn"
+                                                        <button class="delete-movie-btn btn btn-primary"
                                                             onclick=" deleteMovie(this);">삭제</button>
                                                     </td>
                                                 </tr>
@@ -87,15 +78,13 @@
                 function updateMovie(button) {
                     const movieNo = $(button).parent().parent().children().eq(0).text();
 
-                    console.log(movieNo);
-
                     location.href = "/updateMovieFrm.do?movieNo=" + movieNo;
                 }
 
                 function deleteMovie(button) {
                     const movieNo = $(button).parent().parent().children().eq(0).text();
 
-                    console.log(movieNo);
+                    location.href = "/deleteMovie.do?movieNo=" + movieNo;
                 }
             </script>
         </body>
