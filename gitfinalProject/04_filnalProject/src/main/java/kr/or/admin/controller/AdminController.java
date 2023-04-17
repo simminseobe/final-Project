@@ -297,7 +297,6 @@ public class AdminController {
 
 	@RequestMapping(value="/selectOneTheater.do")	//임시 (no줘서 이동할거)
 
-	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
 
 	public String selectOneTheater(int theaterNo, Model model) {
 		Theater theater = service.selectOntTheater(theaterNo);
