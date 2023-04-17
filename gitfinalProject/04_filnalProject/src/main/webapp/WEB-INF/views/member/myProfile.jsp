@@ -104,7 +104,7 @@
                             <th>비밀번호<sup> *</sup></th>
                             <td>
                             	<input type="hidden" name="memberPw" value="${sessionScope.m.memberPw }">
-                                <button id="changePw"><a href="/changePw.do">비밀번호 변경</a></button>
+                                <button type="button" id="changePw"><a href="/changePw.do">비밀번호 변경</a></button>
                             </td>
                         </tr>
                     </tbody>

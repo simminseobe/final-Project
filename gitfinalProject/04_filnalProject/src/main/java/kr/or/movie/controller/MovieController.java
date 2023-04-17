@@ -41,8 +41,13 @@ public class MovieController {
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);
 		model.addAttribute("reviewList",reviewList);
 		//실관람평점산출위한 watchPoint조회
-		Movie watchPointAvg = service.onlyWatchPointAvg(movieNo);
+		Review watchPointAvg = service.onlyWatchPointAvg(movieNo);
 		model.addAttribute("watchPointAvg",watchPointAvg);
+		//관람포인트별 합산점수조회
+		WatchPoint watchPointSum=service.watchPointSum(movieNo);
+		model.addAttribute("watchPointSum", watchPointSum);
+		//영화별 관람평 갯수를 위한 초회
+		
 		
 		return "movie/movieDetail";
 	}

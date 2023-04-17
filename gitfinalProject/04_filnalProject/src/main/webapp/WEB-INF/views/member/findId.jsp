@@ -109,14 +109,15 @@
     </div>
     
     <div class="modal-wrapper" id="modal-two" style="display: none">
-        <div class="ok-modal">
+        <div class="ok-modalPw">
             <div class="modal-top">
             </div>
             <div class="modal-content">
                 <h3>알림</h3>
                 <button class="close-btn" onclick="closeClick();"></button>
                 <div class="layer-content">
-                    <p class="text-common">"회원님의 비밀번호는 [<span id="findPw"></span>] 입니다."</p>
+                    <p class="text-common-two">"회원님의 임시 비밀번호를 [&nbsp<span id="findPw"></span>&nbsp]에 전송했습니다."</p>
+                    <p class="text-common-two"> "해당 임시 비밀번호로 로그인을 해주시기 바랍니다."
                     <div class="btn-wrapper">
                         <button type="button" class="okBtn">
                             <a href="/">확인</a>

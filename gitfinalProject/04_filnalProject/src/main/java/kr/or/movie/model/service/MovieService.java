@@ -67,9 +67,14 @@ public ArrayList<Movie> selectMovieAll() {
 		return reviewList;
 	}
 	//watchPoint를 위한 조회
-	public Movie onlyWatchPointAvg(int movieNo) {
-		Movie wpList=dao.onlyWatchPointAvg(movieNo);
+	public Review onlyWatchPointAvg(int movieNo) {
+		Review wpList=dao.onlyWatchPointAvg(movieNo);
 		return wpList;
+	}
+	//watchPointSum(관람포인트별 합계 조회)
+	public WatchPoint watchPointSum(int movieNo) {
+		WatchPoint wpSum=dao.watchPointSum(movieNo);
+		return wpSum;
 	}
 
 }
