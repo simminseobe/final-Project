@@ -39,6 +39,7 @@
 			movie_type as movieType
 		 from movie_tbl
 	</select>
+	<!-- movie_file 메인만 출력 -->
 	<select id="selectMovieFile" resultType="movieFile" parameterType="_int">
 			select 
 			movie_file_no as movieFileNo,
@@ -47,6 +48,16 @@
 			movie_file_category as movieFileCategory,
 			movie_no as movieNo
 			from movie_file where movie_file_category='메인' and movie_no=#{movieNo}
+	</select>
+	<!-- movie_file 전부 출력 -->
+	<select id="selectmovieFileAll" resultType="movieFile" parameterType="_int">
+			select 
+			movie_file_no as movieFileNo,
+			movie_file_name as movieFileName,
+			movie_file_path as movieFilePath,
+			movie_file_category as movieFileCategory,
+			movie_no as movieNo
+			from movie_file where movie_no=#{movieNo}
 	</select>
 	<select id="selectMoviePost" resultType="movieFile" parameterType="_int">
 		select 
@@ -123,7 +134,7 @@
 			video_visual as videoVisual,
 			production as production
 		from review join watch_point using(review_comment_no)
-		where movie_no=#{movieNo}	
+		where movie_no=#{movieNo}			
 	</select>
 	
 	<select id="watchPointAll" parameterType="_int" resultType="reviewWatch">
@@ -156,6 +167,16 @@
 		from review join watch_point using(review_comment_no)
         where movie_no=#{movieNo}	
 	</select>
+	<select id="ReviewListCount" parameterType="_int" resultType="_int">
+		 select 
+		 	count(review_comment_no) as reviewListCount
+		 from review 
+		 where movie_no=#{movieNo}
+	</select>
+	
+	
+	
+	
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
 		select * from movie_tbl where movie_no=#{movieNo}
 	</select>

@@ -298,16 +298,18 @@ cursor: pointer;
     width: 85px;
     height: 84px;
     font-size: 20px;
-    line-height: 40px;
+    line-height: 30px;
     text-align: center;
     background-color: #f8f8fa;
     
-    
 }
+
+
 .reviewTextContent{
     position: absolute;
     left: 255px;
-    border: 1px solid #f8f8fa;
+    box-sizing: border-box;
+    
     display: inline-block;
 }
 
@@ -323,7 +325,7 @@ cursor: pointer;
 .reviewContentWrite2{
     position: absolute;
     left: 920px;
-    width: 70px;
+    width: 80px;
     height: 84px;
     background-color: #f8f8fa;
     text-align: center;
@@ -463,6 +465,7 @@ cursor: pointer;
     position: absolute;
     top: 0;
 }
+
 .moviePostImg>img{
     width: 228px;
     height: 340px;
@@ -482,8 +485,9 @@ cursor: pointer;
 }
 .moviePostImgContent{
     width: 228px;
-    /*height: 150px;*/
+    height: 150px;
     box-sizing: border-box;
+    display: auto;
     position: absolute;
      bottom: 0;
     border: 1px solid lightgrey;
@@ -492,6 +496,7 @@ cursor: pointer;
     border-bottom-right-radius: 10px;
     background-color: #fff;
     padding: 10px 10px;
+    overflow: auto;
 }
 .moviePostImgContent a p{
     padding: 10px 0;

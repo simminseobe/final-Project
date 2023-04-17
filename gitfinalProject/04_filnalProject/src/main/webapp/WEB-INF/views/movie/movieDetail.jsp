@@ -9,12 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!--
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
     
--->
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href= "/resources/css/movieDetail.css">
@@ -201,14 +201,17 @@
                 <li><a href="#">무비포스트</a></li>
                 <li><a href="#">예고편/스틸컷</a></li>
             </ul>
+
             <div class = "detail-content-wrap content-wrap">
                 <div class="importantInfo-content-wrap tabcontent"><!--===================================-->
+
                     <div class = "importantInfo-content detail" style="font-size:18px;">
                    		${mov.movieContent}
                         <div class="bottom-btn toggle">
                             <button type="button" id="more-btn" class="more">더보기</button>
                         </div>
                     </div>
+
                     <div class="movie-detail-info-wrap" style="margin-top: 20px;">
                         <div class="movie-detail-info">
                             <p>상영타입 : ${mov.movieType}</p>
@@ -248,11 +251,13 @@
                             </div>
                         </div>
                     </div>
-                </div><!--========주요정보 끝나는 자리==================================================-->
+                </div>
+                
+                <!--========주요정보 끝나는 자리==================================================-->
                 <div class="reviewAllWrap tabcontent" style="display: none;"><!--실관람평 시작 자리-->
                     <div class="reaviewHeadSawBtnWrap">
                         <div class="reviewHead">
-                            <h2>${mov.movieTitle }에 대한<span style="color:#01738b;">123456</span>개의 이야기가 있어요.</h2>
+                            <h2>${mov.movieTitle }에 대한<span style="color:#01738b;"> ${reviewListCount}</span>개의 이야기가 있어요.</h2>
                         </div>
                         <div class="sawMovie">
                             <button type="button" class="sawMovieBtn">본 영화 등록</button>
@@ -261,7 +266,7 @@
 
                     <div class="reviewAllCountWrap">
                         <div class="reviewAllCount" style="font-weight: bold;">
-                            <button>전체 <span style="color:#01738b;">123456</span>건</button>
+                            <button>전체 <span style="color:#01738b;"> ${reviewListCount}</span>건</button>
                         </div>
                         <div class="reviewSearchBtn">
                             <span><button>최신순</button></span>
@@ -279,12 +284,12 @@
                             "재미있게 보셨나요? 영화의 어떤 점이 좋았는지 이야기해주세요."
                             <br>
                             관람일 기준 7일 이내 등록 시 
-                            <br>
+                            
                             <span>50P</span>
                             가 적립됩니다.
                             <br>
                             포인트는 관람평 최대 10편 지급가능합니다.
-                            <br>
+                            
                         </div>
                         <div class="reviewContentWrite" style="font-size: 15px;">
                         <c:choose>
@@ -297,30 +302,37 @@
                         </c:choose>
                         </div>
                     </div>
+                    
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
+                    <c:forEach  items="${reviewList }" var="review">
+                    <c:choose>
+                    <c:when  test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
                     <div class="infoWap2Top">
                         <div class=" infoWrap2">
                             <div class="userReviewInfo2">
                                 <img src="img/사용자-50.png">
-                                <p class="user-id user-second">${sessionScope.m.memberId}</p>
+                                <p class="user-id user-second">${review.memberId}</p>
                             </div>
                             <div class="Text2 textSecond">
+                            	
                                 <div class="Tit2">
+                              
                                     <p>관람평</p>
+                                
                                 </div>
                                 <div class=" Point2 pointSecond">
-                                    <p>10</p>
+                                    <p>${review.movieScore}</p>
                                 </div>
                                 <div class="PointCom PointComSecond">
                                     <p>연출 외</p>
                                     <p>+4</p>
                                 </div>
                                 <div class="reviewTextContent reviewTextSecond">
-                                    <textarea style="width:595px; height: 84px; resize: none; border-style: none;">정말 재밌어요!!!!</textarea>
+                                    <textarea style="width:595px; height: 84px; resize: none; border-color: #f8fafa; box-sizing: border-box;">${review.reviewContent}</textarea>
                                 </div>
                                 <div class="reviewTextLike">
                                     <img src="img/like-24.png">
-                                    <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px;">
+                                    <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px; top:20px;">
                                         <p>0</p>
                                     </div>
                                 </div>
@@ -333,150 +345,161 @@
                         <div class="reviewDate">
                             <span>몇분전으로 나옴</span>
                         </div>
-                    </div><!--본인작성댓글 끝-->
-                        <!--타인이 작성한 댓글이 시작되는 자리 -->
-                        <c:forEach items="${reviewList }" var="reviewList">
-                              <div class="infoWap2Top" id="ajaxRev">
-                                  <div class=" infoWrap2">
-                                      <div class="userReviewInfo2">
-                                        <img src="img/사용자-50.png">
-                                        <p class="user-id user-third">${reviewList.memberId}</p>
-                                    </div>
-                                    <div class="Text2">
-                                        <div class="Tit2 textThird">
-                                            <p>관람평</p>
-                                        </div>
-                                        <div class=" Point2 pointThird">
-                                            <p>${reviewList.movieScore}</p>
-                                        </div>
-                                        <div class="PointCom PointComThird">
-                                            <p>연출 외</p>
-                                            <p>+4</p>
-                                        </div>
-                                        <div class="reviewTextContent reviewTextContentThird">
-                                            <textarea style="width:595px; height: 84px; resize: none; border-style: none;">${reviewList.reviewContent}</textarea>
-                                        </div>
-                                        <div class="reviewTextLike">
-                                            <img src="img/like-24.png">
-                                            <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px;">
-                                                <p>0</p>
-                                            </div>
-                                        </div>
-                                        <div class="reviewContentWrite2" style="font-size: 15px;">
-                                            <a href="#" style="color: #666666;">수정</a>
-                                            <a href="#" style="color: #666666;">삭제</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="reviewDate reviewDateThird">
-                                    <span>몇분전으로 나옴</span>
-                                </div>
-                            </div><!--타인이 작성한 댓글 끝나는 자리-->
-                            </c:forEach>
-                        </div><!--실관람평 내용 끝나는 자리-->
-                        <div class="moviePostWrap tabcontent" style="display: none;"><!--무비포스트 시작하는 자리-->
-                            <div class="moviePostHead reaviewHeadSawBtnWrap">
-                                <div class="reviewHead">
-                                    <h2><span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
-                                </div>
-                                <div class="morePostMovie sawMovie">
-                                    <button type="button" class="sawMovieBtn morePostMovie">더보기</button>
-                                </div>
-                            </div>
-                            <div class="userReviewInfoWrap moviePostWriteWrap">
-                                <div class="reviewText moviePostText">
-                                    <p>
-                                    <span class="useNameMoviePost">홍길동님</span>
-                                    <span class="reviewTextTit">"영화이름"</span>
-                                    재미있게 보셨나요? <span class="useNameMoviePost">홍길동</span>님만의 무비포스트를 남겨보세요.
-                                    </p>
-                                </div>
-                                <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
-                                    <a href="/moviePostFrm.do?movieNo=${mov.movieNo}" id="open" style="color: #666666;">무비포스트 쓰기</a>
-                                </div>
-                            </div>
-                            <div class="moviePostTotalCnt reviewAllCountWrap">
-                                <div class="moviePostTotalCnt reviewAllCount" style="font-weight: bold;">
-                                    <button>전체 <span style="color:#01738b;">123456</span>건</button>
-                                </div>
-                            </div>
-                            <div class="moviePostContentList">
-                                <div class="moviePostImg"><!--영화 한개 시작-->
-                                    <img src="img/리바운드.jpg">
-                                    <div class="moviePostImgContent">
-                                        <a href="#"><p>userId조회</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
-                                        <a href="#"><!--클릭시 무비포스트 상세보기-->
-                                            <p class="moviePostImgMovieTit">제목</p>
-                                            <p class="moviePostImgMovieCont">내용출내용출력내용출력내용출력내용출력내용출력내용출력력내용출력내용출력내용출력내용출력내용출력내용출력</p>
-                                            <p class="moviePostImgTime">몇분전</p>
-                                        </a>
-                                    </div>
-                                </div><!--영화 한개 끝-->
-                                <div class="postMoreBtnWrap">
-                                    <button class="postMoreBtn" id="load">더보기</button>
-                                </div>
-                            </div>     
-                        </div><!--무비포스트 끝나는 자리-->
-                        <div class="previewWrap tabcontent" style="display: none;"><!--preview예고편 시작-->
-                            <div class="previewTop">
-                                <span>예고편(?)</span>
-                                <span> 스틸컷(?)</span>
-                            </div>
-                            <div class="previewContentWrap">
-                                <div class="previewContentTit">
-                                    <h2 style="font-size: 18px;">런칭 예고편</h2>
-                                </div>
-                                <div class="previewPlayer">
-                                    <!--<c:forEach items="${mvList }" var="mv">
-                                        <video width="300px" height="136px" src="${mv.videoLink }" controls>
-                            
-                                        </video>
-			                        </c:forEach>-->
-                               </div>
-                               <!--
-                               <div class="previewPlayerLine">
-                                    <c:forEach items="${mvList }" var="mv">
-                                        <video width="240px" height="136px" src="${mv.videoLink }" controls>
-                            
-                                        </video>
-			                        </c:forEach>
-                                </div>
-                                -->
-                                <!--
-                                    <div id="carouselExampleControls" class="previewPlayerLine carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                              <img src="cat.png" class="d-block w-100" alt="...">
-                                            </div>
-                                            <div class="carousel-item">
-                                              <img src="dog.png" class="d-block w-100" alt="...">
-                                            </div>
-                                            <div class="carousel-item">
-                                              <img src="bird.png" class="d-block w-100" alt="...">
-                                            </div>
-                                          </div>
-                                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                          </button>
-                                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                          </button>
-                                      </div>
-                                -->
-                            </div>
-                        </div><!--preview예고편 끝-->    
                     </div>
-                </div>
+                    </c:when>
+                    </c:choose>
+			        </c:forEach><!--본인작성댓글 끝-->
+			        
+                    <!--타인이 작성한 댓글이 시작되는 자리 -->
+                    <c:forEach items="${reviewList }" var="review">
+                     <c:choose>
+                     <c:when test="${not empty sessionScope.m && sessionScope.m.memberId ne review.memberId}">
+                            <div class="infoWap2Top" id="ajaxRev">
+                                <div class=" infoWrap2">
+                                    <div class="userReviewInfo2">
+                                    <img src="img/사용자-50.png">
+                                    <p class="user-id user-third">${review.memberId}</p>
+                                </div>
+                                <div class="Text2">
+                                    <div class="Tit2 textThird">
+                                        <p>관람평</p>
+                                    </div>
+                                    <div class=" Point2 pointThird">
+                                        <p>${review.movieScore}</p>
+                                    </div>
+                                    <div class="PointCom PointComThird">
+                                        <p>연출 외</p>
+                                        <p>+4</p>
+                                    </div>
+                                    <div class="reviewTextContent reviewTextContentThird">
+                                        <textarea style="width:595px; height: 84px; resize: none; border-color: #f8fafa;">${review.reviewContent}</textarea>
+                                    </div>
+                                    <div class="reviewTextLike">
+                                        <img src="img/like-24.png">
+                                        <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px;  bottom: 0px; top: 20px;">
+                                            <p>0</p>
+                                        </div>
+                                    </div>
+                                    <div class="reviewContentWrite2" style="font-size: 15px;">
+                                       <a href="#" style="color: #666666;">신고하기</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reviewDate reviewDateThird">
+                                <span>몇분전으로 나옴</span>
+                            </div>
+                        </div><!--타인이 작성한 댓글 끝나는 자리-->
+                        </c:when>
+                         </c:choose>
+                    </c:forEach>
+                 
+                </div><!--실관람평 내용 끝나는 자리-->
+
+                <div class="moviePostWrap tabcontent" style="display: none;"><!--무비포스트 시작하는 자리-->
+                    <div class="moviePostHead reaviewHeadSawBtnWrap">
+                        <div class="reviewHead">
+                            <h2><span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
+                        </div>
+                        <div class="morePostMovie sawMovie">
+                            <button type="button" class="sawMovieBtn morePostMovie">더보기</button>
+                        </div>
+                    </div>
+                    <div class="userReviewInfoWrap moviePostWriteWrap">
+                        <div class="reviewText moviePostText">
+                            <p>
+                            <span class="useNameMoviePost">홍길동님</span>
+                            <span class="reviewTextTit">"영화이름"</span>
+                            재미있게 보셨나요? <span class="useNameMoviePost">홍길동</span>님만의 무비포스트를 남겨보세요.
+                            </p>
+                        </div>
+                        <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
+                            <a href="/moviePostFrm.do?movieNo=${mov.movieNo}" id="open" style="color: #666666;">무비포스트 쓰기</a>
+                        </div>
+                    </div>
+                    <div class="moviePostTotalCnt reviewAllCountWrap">
+                        <div class="moviePostTotalCnt reviewAllCount" style="font-weight: bold;">
+                            <button>전체 <span style="color:#01738b;">123456</span>건</button>
+                        </div>
+                    </div>
+                    <div class="moviePostContentList">
+                        <div class="moviePostImg"><!--영화 한개 시작-->
+                            <img src="img/리바운드.jpg">
+                            <div class="moviePostImgContent">
+                                <a href="#"><p>userId조회</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
+                                <a href="#"><!--클릭시 무비포스트 상세보기-->
+                                    <p class="moviePostImgMovieTit">제목</p>
+                                    <p class="moviePostImgMovieCont">내용출력</p>
+                                    <p class="moviePostImgTime">몇분전</p>
+                                </a>
+                            </div>
+                        </div><!--영화 한개 끝-->       
+                        <div class="postMoreBtnWrap">
+                            <button class="postMoreBtn" id="load">더보기</button>
+                        </div>
+                    </div>       
+                </div><!--무비포스트 끝나는 자리-->
+                <div class="previewWrap tabcontent" ><!--preview예고편 시작-->
+                    <div class="previewTop">
+                        <span>예고편(?)</span>
+                        <span> 스틸컷(?)</span>
+                    </div>
+                    <div class="previewContentWrap">
+                        <div class="previewContentTit">
+                            <h2 style="font-size: 18px;">런칭 예고편</h2>
+                        </div>  
+                        <div style="display:flex; justify-content: center;">
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <c:forEach items="${mvList }" var="mv" varStatus="status">                                     
+                                        <c:choose>
+                                            <c:when test="${status.index eq 1}">
+                                                <div class="carousel-item active">
+                                                    <video width="840px" height="600px" class="d-block" src="${mv.videoLink }" controls>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="carousel-item">
+                                                    <video width="840px" height="600px" class="d-block" src="${mv.videoLink }" controls>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>      
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
+                                <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            </div>
+
+                            <div class="videoList">
+                                <c:forEach items="${mvList }" var="mv" varStatus="status"> 
+                                    <video width="240px" height="136px" src="${mv.videoLink }" controls>
+                                        
+                                    </video>
+                                </c:forEach>
+                            </div>
+                    </div>
+                </div><!--preview예고편 끝-->    
+
             </div>
-            <div class="wpSum" style="display:none;">
-            	<input type="text" class="wpSumStory" value="${watchPointSum.story}">
-            	<input type="text" class="wpSumOST" value="${watchPointSum.ost}"> 
-            	<input type="text" class="wpSumActor" value="${watchPointSum.actor}">
-            	<input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
-            	<input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
-            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="wpSum" style="display:none;">
+        <input type="text" class="wpSumStory" value="${watchPointSum.story}">
+        <input type="text" class="wpSumOST" value="${watchPointSum.ost}"> 
+        <input type="text" class="wpSumActor" value="${watchPointSum.actor}">
+        <input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
+        <input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
+    </div>
            
 
     <script>
