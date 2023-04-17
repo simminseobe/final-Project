@@ -42,7 +42,7 @@
     	    	<button><a href="/joinFrm.do" class="login-form">회원가입</a></button><br>
         	</div>
         	<div class="subBtn">
-        		<button><a href="#" class="login-form">카카오API 로그인</a></button> | 
+        		<a href="https://kauth.kakao.com/oauth/authorize?client_id=43fa485117764c077334f8160b502224&redirect_uri=http://127.0.0.1/oauth/kakao/callback&response_type=code" class="login-form"><img src="/image/kakao_login_medium_wide.png">카카오API 로그인</a> | 
         		<button><a href="#" class="login-form">네이버API 로그인</a></button>
         	</div>
         </div>

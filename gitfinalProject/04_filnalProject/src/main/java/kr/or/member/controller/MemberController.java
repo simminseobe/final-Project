@@ -7,21 +7,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import common.FileManager;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
-import kr.or.member.model.vo.MemberPageData;
 
 @Controller
 public class MemberController {
@@ -290,6 +299,79 @@ public class MemberController {
 //		model.addAttribute("list", mpd.getList());
 //		model.addAttribute("pageNavi", mpd.getPageNavi());
 		return "member/purchaseDetail";
+	}
+	
+	// 카카오 API 로그인
+	@ResponseBody
+	@RequestMapping(value="/auth/kakao/callback")
+	public String kakaoCallback(String code) {
+		// POST 방식으로 key, value 데이터를 요청(KaKaO 쪽으로)
+		RestTemplate rt = new RestTemplate();
+		
+		// HttpHeader 오브젝트 생성
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		// HttpBody 오브젝트 생성
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", "43fa485117764c077334f8160b502224"); // REST API 키
+		params.add("redirect_uri", "http://127.0.0.1/oauth/kakao/callback");
+		params.add("code", code);
+		
+		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String, String>> kakaoRequest = new HttpEntity<MultiValueMap<String,String>>(params, headers);
+		
+		// Http 요청하기 - POST 방식으로, response 변수의 응답을 받음
+		ResponseEntity<String> response = rt.exchange("https://kauth.kakao.com/oauth/token", // 토큰 발급 요청 주소
+				HttpMethod.POST, // 요청 메소드)
+				kakaoRequest, // 데이터
+				String.class // 응답 받을 타입
+		);
+		
+		// Gson, Json Simple, ObjectMapper
+		ObjectMapper objectMapper = new ObjectMapper();
+		OAuthToken oAuthToken = null;
+		
+		try {
+			oAuthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		RestTemplate rt2 = new RestTemplate();
+		
+		// HttpHeader 오브젝트 생성
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.add("Authorization", "Bearer" + oAuthToken.getAccess_token());
+		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest2 = new HttpEntity<>(headers2);
+
+		// Http 요청하기 - POST 방식으로, response 변수의 응답을 받음
+		ResponseEntity<String> response2 = rt2.exchange("https://kapi.kakao.com/v2/user/me", // 토큰 발급 요청 주소
+				HttpMethod.POST, // 요청 메소드)
+				kakaoProfileRequest2, // 데이터
+				String.class // 응답 받을 타입
+		);
+		
+		System.out.println("JSON으로 반환되는 사용자 정보" + response2.getBody());
+
+		// Gson, Json Simple, ObjectMapper
+		ObjectMapper objectMapper2 = new ObjectMapper();
+		KakaoProfile kakaoProfile = null;
+
+		try {
+			oAuthToken = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
