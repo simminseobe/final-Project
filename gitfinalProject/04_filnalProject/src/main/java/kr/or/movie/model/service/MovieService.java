@@ -76,5 +76,13 @@ public ArrayList<Movie> selectMovieAll() {
 		WatchPoint wpSum=dao.watchPointSum(movieNo);
 		return wpSum;
 	}
+	public int selectReviewListCount(int movieNo) {
+		int reviewListCount = dao.selectReviewListCount(movieNo);
+		return reviewListCount;
+	}
+	public ArrayList<MovieFile> selectMovieFileAll(int movieNo) {
+		ArrayList<MovieFile> movieFileAll=dao.selectMovieFileAll(movieNo);
+		return movieFileAll;
+	}
 
 }

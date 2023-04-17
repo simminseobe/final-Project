@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <html>
@@ -27,14 +28,34 @@
                 <div class="postLeftSideTit">
                     <p>원하시는 스틸컷/예고편을 선택해주세요.</p>
                 </div>
-                <div class="postLeftSideContent">
-                    <span><button type="button">스틸컷</button></span>
-                    <span><button type="button">예고편</button></span>
-                    <span><button type="button">내사진</button></span>
-                    <div class="postLeftSideSel">
-                        <ul>
-                            <li>사진돌려볼까?</li>
-                        </ul>    
+                <div class="postLeftSideContent tab-wrap">
+                    <div class="LeftSideContentBtn">
+                        <a href="#"><button type="button" class="tab stillCutBarBtn">스틸컷</button></a>
+                        <a href="#"><button type="button" class="tab proviewBarBtn">예고편</button></a>
+                        <a href="#"><button type="button" class="tab myPhotoBtn" id="myPhotoBtn">내사진</button></a>
+                    </div>
+                    <div class="postLeftSideSel content-wrap">
+                        <div class="tabcontent stillCut">
+                        	<c:forEach items="${movieFileAll}" var="movFile">
+                
+                                <img src="/resources/upload/movie/${movFile.movieFileName}" style="width: 135px; height:194px; margin: 10px 5px;">
+                            
+                            </c:forEach>
+                        </div>
+                        <div class="tabcontent previewCut"style="display: none">
+                            <c:forEach items="${mvList }" var="mv">
+                            	<video width="220px" height="136px" controls>
+                            		<source src="${mv.videoLink }">
+                            	</video>
+			            	</c:forEach>
+                        </div>
+                        <div class="tabcontent myphotoCut" style="display: none;">
+                        	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
+                        	<p>※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
+                           	<div class="myphotoCutBtnWrap">
+                           		<button type="button">등록</button>
+                           	</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,6 +74,14 @@
                 <div class="postRightSideBtn">
                     <button class="postAddBtn">포스트 추가</button>
                 </div>
+            </div>
+        </div>
+        <div class="moviePostBottomBtn">
+            <div class="moviePostEnrollBtn">
+                <button type="button">등록</button>
+            </div>
+            <div class="moviePostCancelBtn">
+                <button type="button">취소</button>
             </div>
         </div>
     </div>

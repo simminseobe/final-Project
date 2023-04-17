@@ -43,7 +43,7 @@
                                 <div class="movie-all-list" style="margin-top: 25px; ">
                                     <div class="movie-list-set" style="overflow: hidden;">
                                         <a href="/movieDetail.do?movieNo=${po.movieNo}">
-                                  
+                                 		
                                             <div class="img-poster">
                                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
                                             </div>

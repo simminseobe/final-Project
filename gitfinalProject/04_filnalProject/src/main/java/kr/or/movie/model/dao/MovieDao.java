@@ -23,12 +23,12 @@ public class MovieDao {
 		return (ArrayList<Movie>) list;
 
 	}
-
+	//movieFile메인
 	public MovieFile selectMovieFile(int movieNum) {
 		MovieFile result = sqlSession.selectOne("movie.selectMovieFile", movieNum);
 		return result;
 	}
-
+	//movieFile포스트
 	public ArrayList<MovieFile> selectMoviePost(int movieNo) {
 		List list = sqlSession.selectList("movie.selectMoviePost", movieNo);
 
@@ -86,6 +86,15 @@ public class MovieDao {
 	public WatchPoint watchPointSum(int movieNo) {
 		WatchPoint wpSum=sqlSession.selectOne("movie.selectWatchPointSum",movieNo);
 		return wpSum;
+	}
+
+	public int selectReviewListCount(int movieNo) {
+		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount",movieNo);
+		return reviewListCount;
+	}
+	public ArrayList<MovieFile> selectMovieFileAll(int movieNo) {
+		List list =sqlSession.selectList("movie.selectmovieFileAll", movieNo);
+		return (ArrayList<MovieFile>)list;
 	}
 
 }

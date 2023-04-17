@@ -25,4 +25,5 @@ public class Review {
 	private int production;
 
 	private int movieScoreAvg;
+	private int reviewListCount;
 }
