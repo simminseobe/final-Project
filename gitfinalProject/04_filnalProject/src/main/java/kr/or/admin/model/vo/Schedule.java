@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Schedule {
+	private String scheduleNo;
 	private String movieTitle;
 	private String theaterBranch;
 	private String scheduleStart;

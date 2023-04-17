@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import kr.or.admin.model.vo.Schedule;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.service.TicketingService;
@@ -40,6 +44,13 @@ public class TicketingController {
 	@RequestMapping(value = "/paymentMethod.do")
 	public String paymentMethod() {
 		return "ticketing/paymentMethod";
+	}
+	@ResponseBody
+	@RequestMapping(value="/choiceDay.do", produces="application/json;charset=utf-8")
+	public String selectSchedule(String dataDay) {
+		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		list = service.selectSchedule(dataDay);
+		return new Gson().toJson(list);
 	}
 
 	//////////////////////////////////////////////////////// 임시

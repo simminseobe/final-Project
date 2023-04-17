@@ -704,31 +704,31 @@
 					if(d == '01'){
 						d=weekOfDay[1];
 						button.classList = "mon";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					} else if(d == '02'){
 						d=weekOfDay[2];
 						button.classList = "mon";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					} else if(d == '03'){
 						d=weekOfDay[3];
 						button.classList = "mon";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					} else if(d == '04'){
 						d=weekOfDay[4];
 						button.classList = "mon";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					} else if(d == '05'){
 						d=weekOfDay[5];
 						button.classList = "mon";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					} else if(d == '06'){
 						d=weekOfDay[6];
 						button.classList ="mon sat";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					} else if(d == '00'){
 						d=weekOfDay[0];
 						button.classList="mon sun";
-						button.setAttribute('data-day',yyyy+mm+dd+d);
+						button.setAttribute('data-day',dd+"/"+mm+"/"+yyyy);
 					}
 					if(i===dayNumber){
 						button.classList="mon active";
@@ -828,6 +828,21 @@
 						}
 					});
 				}
+				
+				$(".mon").on("click",function(){
+					const dataDay = $(this).attr("data-day");
+					console.log(dataDay);
+
+					$.ajax({
+						url : "/choiceDay.do?dataDay="+dataDay,
+						type : "post",
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+						},
+						
+					});
+				});
 				
 				/////////AJAXtest/////////AJAXtest///////////AJAXtest///////////AJAXtest///////
 				$("#jQ5").on("click",function(){

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="schedule">
+<select id="selectSchedule" parameterType="string" resultType="schedule">
+	select
+		schedule_no as scheduleNo,
+		schedule_start as scheduleStart,
+		schedule_end as scheduleEnd,
+		movie_title as movieTitle,
+		theater_branch as theaterBranch
+	from
+		schedule_tbl
+	where
+		to_char(schedule_start, 'dd/mm/yyyy') = #{_parameter}
+</select>
 </mapper>
