@@ -293,7 +293,7 @@
                         </div>
                         <div class="reviewContentWrite" style="font-size: 15px;">
                         <c:choose>
-							<c:when test="${not empty sessionScope.m }">
+							<c:when test="${not empty sessionScope.m}">
 	                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
 							</c:when>
 							<c:otherwise>
@@ -314,11 +314,8 @@
                                 <p class="user-id user-second">${review.memberId}</p>
                             </div>
                             <div class="Text2 textSecond">
-                            	
                                 <div class="Tit2">
-                              
                                     <p>관람평</p>
-                                
                                 </div>
                                 <div class=" Point2 pointSecond">
                                     <p>${review.movieScore}</p>
