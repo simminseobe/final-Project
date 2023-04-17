@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import common.FileManager;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPageData;
 
 @Controller
 public class MemberController {
@@ -284,7 +285,10 @@ public class MemberController {
 	
 	// 예매/구매 내역 페이지 이동
 	@RequestMapping(value="/purchaseList.do")
-	public String purchaseList() {
+	public String purchaseList(int reqPage, Model model) {
+//		MemberPageData mpd = service.selectBookList(reqPage);
+//		model.addAttribute("list", mpd.getList());
+//		model.addAttribute("pageNavi", mpd.getPageNavi());
 		return "member/purchaseDetail";
 	}
 	
