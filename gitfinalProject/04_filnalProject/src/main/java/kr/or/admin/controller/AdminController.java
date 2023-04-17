@@ -209,11 +209,12 @@ public class AdminController {
 		}
 	}
 
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////승훈
 	@RequestMapping(value = "/allTheater.do")
 	public String allTheater() {
 		return "admin/allTheater";
 	}
-
 
 	@RequestMapping(value="/selectOneTheater.do")	//임시 (no줘서 이동할거)
 	public String selectOneTheater(int theaterNo, Model model) {
@@ -235,5 +236,7 @@ public class AdminController {
 		list =	service.selectBranchList(theaterLocal);
 		return new Gson().toJson(list);
 	}
+	
+	
 
 }

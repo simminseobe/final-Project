@@ -31,6 +31,12 @@ public class TicketingController {
 		model.addAttribute("list", list);
 		return "ticketing/ticketing";
 	}
+	@RequestMapping(value="/ticketing2.do")
+	public String ticketing2(Model model) {
+		ArrayList<Movie> list = movieService.selectMovieAll();
+		model.addAttribute("list", list);
+		return "ticketing/ticketing2";
+	}
 	
 	@RequestMapping(value="/choiceSeat.do")
 	public String choiceSeat() {
