@@ -68,6 +68,15 @@
 			movie_no as movieNo
 			from movie_file where movie_file_category='포스트' and movie_no=#{movieNo}
 	</select>
+	<select id="selectFileList" resultType="movieFile" parameterType="_int">
+		select 
+			movie_file_no as movieFileNo,
+			movie_file_name as movieFileName,
+			movie_file_path as movieFilePath,
+			movie_file_category as movieFileCategory,
+			movie_no as movieNo
+		from movie_file where movie_no=#{movieNo}
+	</select>
 	<select id="selectOneMovie" parameterType="_int" resultType="movie">
 				select
 			 	movie_no as movieNo,
@@ -205,10 +214,19 @@
 		movie_title=#{movieTitle}, movie_director=#{movieDirector}, movie_actor=#{movieActor}, movie_genre=#{movieGenre}, movie_time=#{movieTime}, movie_date=#{movieDate}, movie_rating=#{movieRating}, movie_content=#{movieContent}, film_society=#{filmSociety}, classic_society=#{classicSociety}, special_movie=#{specialMovie}, movie_type=#{movieType}
 	where movie_no=#{movieNo}
 </update>
+<delete id="delteMovie" parameterType="_int">
+	delete from movie_tbl where movie_file_no=#{movieNo}
+</delete>
 <delete id="deleteFile" parameterType="map">
 	delete from movie_file where movie_file_no=
 	<foreach collection="fileArray" item="fileno" open="(" close=")" separator=",">
 		#{fileno}
+	</foreach>
+</delete>
+<delete id="deleteVideo" parameterType="map">
+delete from movie_video where movie_video_no=
+	<foreach collection="fileArray" item="videoNo" open="(" close=")" separator=",">
+		#{videoNo}
 	</foreach>
 </delete>
 </mapper>

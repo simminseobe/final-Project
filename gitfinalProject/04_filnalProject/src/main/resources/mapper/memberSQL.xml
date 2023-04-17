@@ -22,26 +22,6 @@
   	from member where member_id=#{memberId} and member_pw=#{memberPw}
   </select>
   
-  <!-- 아이디 중복체크 -->
-  <select id="selectOneId" parameterType="m" resultType="m">
-  	select
-  		member_no as memberNo,
-  		member_id as memberId,
-  		member_pw  as memberPw,
-  		member_name as memberName,
-  		member_phone as memberPhone,
-  		member_birth_year as memberBirthYear,
-  		member_birth_month as memberBirthMonth,
-  		member_birth_day as memberBirthDay,
-  		member_email as memberEmail,
-  		member_level as memberLevel,
-  		enroll_date as enrollDate,
-  		member_gender as memberGender,
-  		member_filename as memberFilename,
-  		member_filepath as memberFilepath
-  	from member where member_id=#{memberId}
-  </select>
-  
   <!-- 회원가입 -->
   <insert id="insertMember" parameterType="m">
   	insert into member values
@@ -52,8 +32,10 @@
   <!-- 비밀번호 찾기 -->
   <select id="selectPw" parameterType="m" resultType="m">
   	select
-  		member_pw as memberPw
-  	from member where member_id=#{memberId} and member_name=#{memberName} and member_email=#{memberEmail}
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		member_email as memberEmail
+  	from member where member_Id=#{memberId}
   </select>
   
   <!-- Modal창 아이디, 가입일 찾기 -->
@@ -99,5 +81,10 @@
   		member_filepath as memberFilepath
   	from member where member_id=#{memberId}
   </select>
+  
+  <!-- 임시비밀번호로 pw 변경 -->
+  <update id="updatePwMember" parameterType="m">
+  	update member set member_pw=#{memberPw} where member_id=#{memberId}
+  </update>
   
 </mapper>

@@ -42,8 +42,28 @@ $("#idChkBtn").on("click", function() {
     }); 
 });
 
+function mailsendPw(){
+    const memberId = $("[name=memberId]").val();
+    const memberName = $("[name=memberName]").val();
+    const email = $("#inputEmail").val();
+    $.ajax({
+        url : "/sendEmailPw.do",
+        type : "post",
+        data : {memberId:memberId, memberName:memberName, email:email},
+        success : function(data){
+            alert("임시 비밀번호가 발송되었습니다.");
+            mailCode = data;
+        },
+        error : function() {
+            console.log("에러");
+        }
+    });
+}
+
 // 비밀번호 찾기 버튼 클릭 시 모달창(pw정보) 띄우기
-$("#pwChkBtn").on("click", function() {
+$("#pwChkBtn").on("click", findPw);
+
+function findPw() {
     const memberId = $("#inputId").val();
     const memberName = $("#inputName2").val();
     const memberEmail = $("#inputEmail").val();
@@ -53,19 +73,19 @@ $("#pwChkBtn").on("click", function() {
         type : "post",
         data : {memberId:memberId, memberName:memberName, memberEmail:memberEmail},
         success : function(data) {
-            console.log(data)
             if(data != null) {
-                $("#findPw").text(data.memberPw);
+                $("#findPw").text(data.memberEmail);
                 $("#modal-two").show();
             } else {
                 $("#modal-four").show();
             }
+            mailsendPw();
         }, 
         error : function() {
             console.log("에러발생");
         }
     });
-});
+}
 
 function closeClick() {
     location.href="/findIdFrm.do";

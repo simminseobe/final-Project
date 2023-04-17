@@ -42,6 +42,18 @@ public class AdminDao {
 		return result;
 	}
 
+	public ArrayList<MovieFile> selectFileList(int movieNo) {
+		List list = sqlSession.selectList("movie.selectFileList", movieNo);
+
+		return (ArrayList<MovieFile>) list;
+	}
+
+	public int delteMovie(int movieNo) {
+		int result = sqlSession.delete("movie.delteMovie", movieNo);
+
+		return result;
+	}
+
 	public ArrayList<String> selectTheaterAddrList(String theaterLocal) {
 		List list = sqlSession.selectList("theater.selectTheaterAddr", theaterLocal);
 
@@ -56,6 +68,18 @@ public class AdminDao {
 
 	public int insertTheater(Theater theater) {
 		int result = sqlSession.insert("theater.insertTheater", theater);
+
+		return result;
+	}
+
+	public int deleteTheater(int theaterNo) {
+		int result = sqlSession.delete("theater.deleteTheater", theaterNo);
+
+		return result;
+	}
+
+	public int updateTheater(Theater theater) {
+		int result = sqlSession.update("theater.updateTheater", theater);
 
 		return result;
 	}
@@ -81,13 +105,7 @@ public class AdminDao {
 
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	public Theater selectOneTheater(int theaterNo) {
 		Theater theater = sqlSession.selectOne("theater.selectOneTheater", theaterNo);
 		return theater;
@@ -96,5 +114,15 @@ public class AdminDao {
 	public ArrayList<Theater> selectBranchList(String theaterLocal) {
 		List list = sqlSession.selectList("theater.selectBranchList", theaterLocal);
 		return (ArrayList<Theater>) list;
+	}
+
+	public int deleteVideo(int[] videoNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("fileArray", videoNo);
+
+		int result = sqlSession.delete("movie.deleteVideo", map);
+
+		return result;
 	}
 }

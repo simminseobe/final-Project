@@ -16,5 +16,6 @@
 		<typeAlias type="kr.or.admin.model.vo.Theater" alias="theater"/>
 		<typeAlias type="kr.or.gift.model.vo.Product" alias="product"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>
+		<typeAlias type="kr.or.ticketing.model.vo.Ticketing" alias="ticketing"/>
 	</typeAliases>
 </configuration>

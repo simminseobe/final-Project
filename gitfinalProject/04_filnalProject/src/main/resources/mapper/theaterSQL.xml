@@ -20,6 +20,12 @@
   	insert into theater_tbl
   	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, 'admin')
   </insert>
+  <delete id="deleteTheater" parameterType="_int">
+  	delete from theater_tbl where theater_no=#{theaterNo}
+  </delete>
+  <update id="updateTheater" parameterType="theater">
+  	update theater_tbl set theater_local=#{theaterLocal}, theater_branch=#{theaterBranch}, theater_facility=#{theaterFacility}, theater_content = #{theaterContent} where theater_no=#{theaterNo}
+  </update>
   <select id="selectOneTheater" parameterType="_int" resultType="theater">
   	select 
 			 	theater_no as theaterNo,

@@ -18,11 +18,6 @@ public class MemberService {
 		return dao.selectOneMember(member);
 	}
 
-	// 아이디 중복체크
-	public Member selectOneId(String memberId) {
-		return dao.selectOneId(memberId);
-	}
-
 	// 회원가입
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
@@ -56,6 +51,11 @@ public class MemberService {
 	// 아이디 중복체크 버튼 클릭
 	public Member selectId(Member m) {
 		return dao.selectId(m);
+	}
+
+	// 임시비밀번호로 pw 변경
+	public int updatePwMember(Member member) {
+		return dao.updatePwMember(member);
 	}
 	
 }

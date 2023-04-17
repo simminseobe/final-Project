@@ -19,12 +19,6 @@ public class MemberDao {
 		return m;
 	}
 
-	// 아이디 중복체크
-	public Member selectOneId(String memberId) {
-		Member m = sqlSession.selectOne("member.selectOneId", memberId);
-		return m;
-	}
-
 	// 회원가입
 	public int insertMember(Member m) {
 		int result = sqlSession.insert("member.insertMember", m);
@@ -66,6 +60,12 @@ public class MemberDao {
 	public Member selectId(Member m) {
 		Member member = sqlSession.selectOne("member.selectId", m);
 		return member;
+	}
+
+	// 임시비밀번호로 pw 변경
+	public int updatePwMember(Member member) {
+		int result = sqlSession.update("member.updatePwMember", member);
+		return result;
 	}
 
 }
