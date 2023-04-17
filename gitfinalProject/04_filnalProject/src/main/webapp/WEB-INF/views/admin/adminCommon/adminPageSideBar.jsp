@@ -55,7 +55,7 @@
                                         <a class="nav-link" href="/registerTheaterFrm.do">극장 등록</a>
                                     </nav>
                                 </div>
-                                <a class="nav-link" href="layout-sidenav-light.html">상영 스케줄 관리</a>
+                                <a class="nav-link" href="/screenSchedule.do">상영 스케줄 관리</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
