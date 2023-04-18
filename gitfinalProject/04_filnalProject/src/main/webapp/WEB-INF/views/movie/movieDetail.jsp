@@ -198,9 +198,7 @@ z-index: 5;
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 모달끝-->
         
-
-
-        <!--모달2 수정하기-->
+        <!--======================-모달2 관람평 수정하기================================-->
         <div class="modal2 hidden2"><!--모달로 댓글 작성 들어가는 자리-->
             <div class="modal_overlay2"></div>
             <div class="modal_content2"><!--모달 댓글 내부화면-->
@@ -240,12 +238,9 @@ z-index: 5;
                         star
                     </span>
                     <div class="modalStar-result modalStar-result2">
-                   
                         <input type="text" name="movieScore" id="star-result3" value="${review.movieScore}" style="display: none;">
                         <span id ="star-result4" style="color:#6543b1">${review.movieScore}</span>
                         <span style="color:#6543b1">점</span>
-                   		
-              
                     </div>
                 </div>
                 <div class="modalTxtArea">
@@ -256,41 +251,26 @@ z-index: 5;
                     <p style="font-size: 18px; margin-top: 5px;">(최대 5개 선택가능)</p>
                 </div>
                 <div class="modalWatchPointChk">
-              
-                
                     <div class="productionDiv">
-		              
         	                <p><label for = "production">연출</label></p>
             	            <input type = "checkbox" name="production" id ="production2" value="1">
-                	
                     </div>
-                  
                     <div class="storyDiv">
-                    
 	                        <p><label for = "story">스토리</label></p>
     	                    <input type = "checkbox" name="story" id = "story2" value="1">
-                    
                     </div>
                     <div class="visualDiv">
-                    
                         <p><label for = "videoVisual">영상미</label></p>
                         <input type = "checkbox" name="videoVisual" id ="videoVisual2" value="1">
-                  
                     </div>
                     <div class="actorDiv">
-                  
                         <p><label for = "actor">배우</label></p>
                         <input type = "checkbox" name="actor" id="actor2" value="1">
-                
                     </div>
                     <div class="OSTDiv">
-                 
                         <p><label for = "ost">OST</label></p>
                         <input type = "checkbox" name="ost" id ="ost2" value="${review.ost}">
-                
                     </div>
-               
-           
                 </div>
                 <div class="modalContentBottom">
                     <button type="button" class="bc1" id="close2" style="margin-right: 5px;">닫기</button>
@@ -302,14 +282,10 @@ z-index: 5;
                 </c:forEach>
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 모달끝-->
-        <!--모달2수정끝-->        
+        <!--==============================모달2 관람평 수정끝================================================-->        
 
 
 
-
-        
-
-        
         
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
@@ -523,7 +499,7 @@ z-index: 5;
                                 </div>
                                 <div class="reviewContentWrite2" style="font-size: 15px;">
                                     <a href="#" id="open2" style="color: #666666;">수정</a>
-                                    <a href="#" style="color: #666666;">삭제</a>
+                                    <a href="/deleteReview.do?reviewCommentNo=${review.reviewCommentNo }&movieNo=${review.movieNo}" style="color: #666666;">삭제</a>
                                 </div>
                             </div>
                         </div>

@@ -98,6 +98,14 @@ public ArrayList<Movie> selectMovieAll() {
 		ArrayList<MovieFile> movieFileAll=dao.selectMovieFileAll(movieNo);
 		return movieFileAll;
 	}
+	//리뷰삭제하기
+	public int deleteReview(int reviewCommentNo) {
+		return dao.deleteReview(reviewCommentNo);
+	}
+	//관람포인트 삭제하기
+	public int deleteWatchPoint(int reviewCommentNo) {
+		return dao.deleteWatchPoint(reviewCommentNo);
+	}
 
 
 	

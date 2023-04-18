@@ -110,5 +110,15 @@ public class MovieDao {
 		return result;
 	}
 
+	public int deleteReview(int reviewCommentNo) {
+		int result = sqlSession.delete("movie.deleteReview",reviewCommentNo);
+		return result;
+	}
+
+	public int deleteWatchPoint(int reviewCommentNo) {
+		int result = sqlSession.delete("movie.deleteWatchPoint",reviewCommentNo);
+		return result;
+	}
+
 
 }

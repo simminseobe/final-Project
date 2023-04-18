@@ -235,6 +235,12 @@ delete from movie_video where movie_video_no=
 <update id="updateWatchPoint" parameterType="watchPoint">
 	update watch_point watch_point set story=#{story},actor=#{actor},ost=#{ost},video_visual=#{videoVisual},production=#{production} where review_comment_no=#{reviewCommentNo}
 </update>
+<delete id="deleteReview" parameterType="_int">
+	delete from review where review_comment_no=#{_parameter}
+</delete>
+<delete id="deleteWatchPoint" parameterType="_int">
+	delete from watch_point where review_comment_no=#{_parameter}
+</delete>
 
 
 </mapper>

@@ -79,7 +79,6 @@ public class MovieController {
 	//실관람평 수정하기
 	@RequestMapping(value="/watchPointUpdate.do")
 	public String reviewUpdate(Review rev, WatchPoint wPoint) {
-		System.out.println(rev+"컨트롤");
 		int result=service.reviewUpdate(rev);
 		int wresult=service.watchPointUpdate(wPoint); 
 		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo();
@@ -87,6 +86,13 @@ public class MovieController {
 		
 	}
 	//실관람평 삭제하기
-	
+	@RequestMapping(value="/deleteReview.do")
+	public String reviewDelete(int reviewCommentNo,int movieNo) {
+		int result = service.deleteReview(reviewCommentNo);
+		int wresult = service.deleteWatchPoint(reviewCommentNo);
+		return  "redirect:/movieDetail.do?movieNo="+movieNo;
+		
+		
+	}
 
 }
