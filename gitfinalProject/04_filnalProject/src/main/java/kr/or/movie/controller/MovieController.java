@@ -20,6 +20,7 @@ import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
+import kr.or.movie.model.vo.ReviewLike;
 import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
 
@@ -44,8 +45,6 @@ public class MovieController {
 		//모든 관람평(review)조회하기
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);
 		model.addAttribute("reviewList",reviewList);
-		//로그인한 사람의 관람평을 조회하기
-		
 		//실관람평점산출위한 watchPoint조회
 		Review watchPointAvg = service.onlyWatchPointAvg(movieNo);
 		model.addAttribute("watchPointAvg",watchPointAvg);
@@ -55,6 +54,8 @@ public class MovieController {
 		//영화별 관람평 갯수를 위한 조회
 		int reviewListCount= service.selectReviewListCount(movieNo);
 		model.addAttribute("reviewListCount", reviewListCount);
+		//댓글 좋아요 조회
+		
 		
 		
 		return "movie/movieDetail";
@@ -91,8 +92,14 @@ public class MovieController {
 		int result = service.deleteReview(reviewCommentNo);
 		int wresult = service.deleteWatchPoint(reviewCommentNo);
 		return  "redirect:/movieDetail.do?movieNo="+movieNo;
-		
+	}
+	/*
+	@ResponseBody
+	@RequestMapping(value="/reviewLikeInsert.do", produces = "application/json;charset=utf-8")
+	public String reviewLikeInsert(int reviewCommentNo, String memberId) {
+		int result = service.reviewLikeInsert();
+		return memberId;
 		
 	}
-
+	 */
 }

@@ -58,13 +58,17 @@ $(function(){
  });
  $(".tabs>li").eq(0).click();
 
+
+
+
+   
  $(".whiteLike").on("click",function(){
     const whiteLike = "img/like-24.png";
     const blackLike = "img/likeBlack-24.png";
     const current  = $(this).attr("src");
     if(current == whiteLike){
         $(this).attr("src",blackLike); 
-       
+        
     }else{
         $(this).attr("src",whiteLike);        
        
@@ -75,14 +79,25 @@ $(".whiteLike2").on("click",function(){
     const whiteLike = "img/like-24.png";
     const blackLike = "img/likeBlack-24.png";
     const current  = $(this).attr("src");
+    
+    const reviewCommentNo=$("[name=reviewLikeReviewCommentNo]").val();
+    const memberId=$("[name=reviewLikeMember]").val();
+    
     if(current == whiteLike){
         $(this).attr("src",blackLike); 
+     	/*$.ajax({
+       		url : "/reviewLikeInsert.do",
+       		type : "post",
+       		data : {reviewCommentNo:reviewCommentNo,memberId:memberId}
+       		success : function(data) {
+				console.log(data+"성공");
+			}
+       	});//ajax끝*/
        
     }else{
         $(this).attr("src",whiteLike);        
        
     }
 });
-
 
 

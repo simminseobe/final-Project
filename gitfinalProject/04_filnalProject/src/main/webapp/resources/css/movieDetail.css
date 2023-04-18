@@ -72,8 +72,10 @@
     width: 1100px;
 }
 .movie-detail-menu>ul{
+    width: 1100px;
     display: flex;
-   
+    padding-right: 32px;
+    
 }
 .movie-detail-menu>ul>li{
     margin-top: 30px;
@@ -86,10 +88,11 @@
 }
 .movie-detail-menu>ul>li>a{
     color: #432e75;
+    text-decoration: none;
 }
 
 .tabs>li>.active-tab{
-    background-color: #432e75;
+    
     border: 1px solid #432e75;
     
 }
