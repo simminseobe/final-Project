@@ -1,5 +1,7 @@
 package kr.or.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -33,9 +35,7 @@ public class MemberDao {
 
 	// Modal 아이디, 가입일 띄우기
 	public Member searchId(Member m) {
-		//System.out.println(m);
 		Member member = sqlSession.selectOne("member.searchId", m);
-		//System.out.println(member);
 		return member;
 	}
 
@@ -51,6 +51,7 @@ public class MemberDao {
 		return result;
 	}
 
+	// 마이페이지 -> 비밀번호 변경
 	public int updatePw(Member member) {
 		int result = sqlSession.update("member.updatePw", member);
 		return result;
@@ -66,6 +67,18 @@ public class MemberDao {
 	public int updatePwMember(Member member) {
 		int result = sqlSession.update("member.updatePwMember", member);
 		return result;
+	}
+
+	// 예매/구매 내역 조회
+	public ArrayList<Member> selectBookList(HashMap<String, Object> map) {
+		List list  = sqlSession.selectList("member.selectBookList", map);
+		return (ArrayList<Member>)list;
+	}
+
+	// 전체 게시물 수 조회
+	public int selectBookListCount() {
+		int totalCount = sqlSession.selectOne("member.totalCount");
+		return totalCount;
 	}
 
 }

@@ -10,7 +10,7 @@
  <div class="menu">
         <ul class="main-menu">
             <li id="myBox"><a href="#">나의 메가박스</a></li>
-            <li><a href="/purchaseList.do">예매/구매내역</a></li>
+            <li><a href="/purchaseList.do?reqPage=1">예매/구매내역</a></li>
             <li>
                 <a href="#">영화/스토어 관람권</a>
                 <ul class="sub-menu">
