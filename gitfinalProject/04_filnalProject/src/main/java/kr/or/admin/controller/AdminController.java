@@ -200,8 +200,6 @@ public class AdminController {
 		}
 	}
 
-
-	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////승훈
 
 	@RequestMapping(value = "/deleteMovie.do")
@@ -288,15 +286,17 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping(value = "/screenSchedule.do")
+	public String screenSchedule() {
+		return "admin/screenSchedule";
+	}
 
 	@RequestMapping(value = "/allTheater.do")
 	public String allTheater() {
 		return "admin/allTheater";
 	}
 
-
-	@RequestMapping(value="/selectOneTheater.do")	//임시 (no줘서 이동할거)
-
+	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
 
 	public String selectOneTheater(int theaterNo, Model model) {
 		Theater theater = service.selectOntTheater(theaterNo);
@@ -315,7 +315,5 @@ public class AdminController {
 		list = service.selectBranchList(theaterLocal);
 		return new Gson().toJson(list);
 	}
-	
-	
 
 }

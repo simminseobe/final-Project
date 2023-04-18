@@ -174,11 +174,10 @@
 		 where movie_no=#{movieNo}
 	</select>
 	
-	
-	
-	
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
-		select * from movie_tbl where movie_no=#{movieNo}
+		select 
+				*
+		from movie_tbl where movie_no=#{movieNo}
 	</select>
 	<resultMap type="movie" id="getMovie">
 	<result column="movie_no" property="movieNo"/>

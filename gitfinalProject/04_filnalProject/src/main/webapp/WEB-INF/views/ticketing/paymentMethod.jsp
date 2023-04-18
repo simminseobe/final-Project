@@ -167,22 +167,106 @@
 	height:130px;
 	background-color: #555;
 }
+.price-wrap{
+	padding: 10px;
+}
+.choice-age{
+	height: 20px;
+	margin-top: 5px;
+}
+.people-age{
+	float: left;
+	margin-right: 5px;
+}
+.people-count{
+	float: left;
+}
+.price-amount-same{
+	float: right;
+}
+.price-box{
+	overflow: hidden;
+	padding-top: 10px;
+    margin-top: 10px;
+	border-top: 1px solid #666;
+}
+.price-tit{
+	height: 40px;
+    line-height: 40px;
+	font-size: 13px;
+	float: left;
+}
+.price-money{
+	overflow: hidden;
+	float: right;
+}
+.price-amount{
+	display: block;
+	float: left;
+	padding: 0 0 0 5px;
+	line-height: 35px;
+	font-size: 15px;
+}
+.price-won{
+	display: block;
+	float: left;
+	padding: 0 0 0 5px;
+	line-height: 35px;
+	font-size: 15px;
+}
+
+
 
 .result-discount {
 	margin: 10px;
-	height: 60px;
+	height: 90px;
 	background-color: #555;
 }
 
+.discount-wrap{
+	padding: 10px;
+}
+.discount-box{
+	overflow: hidden;
+	padding-top: 10px;
+    margin-top: 15px;
+	border-top: 1px solid #666;
+}
+.discount-tit{
+	height: 40px;
+    line-height: 40px;
+	font-size: 13px;
+	float: left;
+}
+.discount-money{
+	overflow: hidden;
+	float: right;
+}
+.discount-amount{
+	display: block;
+	float: left;
+	padding: 0 0 0 5px;
+	line-height: 35px;
+	font-size: 15px;
+}
+.discount-won{
+	display: block;
+	float: left;
+	padding: 0 0 0 5px;
+	line-height: 35px;
+	font-size: 15px;
+}
+
+
+
 .result-pay-wrap {
 	margin: 20px 10px;
-	height: 120px;
 }
 
 .result-pay {
 	width: 260px;
 	margin: 0 auto;
-	padding: 60px 0 10px 0;
+	padding: 50px 0 10px 0;
 	height: 50px;
 }
 
@@ -372,13 +456,31 @@
 					<div class="interim">
 
 						<span class="material-symbols-outlined minus">remove</span>
-						<div class="result-price"></div>
+						<div class="result-price">
+							<div class="price-wrap">
+								<div class="choice-age">
+									<p class="people-age">청소년</p>
+									<p class="people-count">1</p>
+									<div class="price-money-same">
+										<span class="price-amount-same">0</span>
+									</div>
+								</div>
+								<div class="price-box">
+									<p class="price-tit">금액</p>
+										<div class="price-money">
+											<span class="price-amount">0</span>
+											<span class="price-won">원</span>
+										</div>
+								</div>
+							</div>
+						</div>
 						<div class="result-discount">
 							<div class="discount-wrap">
 								<div class="discount-box">
 									<p class="discount-tit">할인적용</p>
-										<div class="discount-box">
-										
+										<div class="discount-money">
+											<span class="discount-amount">0</span>
+											<span class="discount-won">원</span>
 										</div>
 								</div>
 							</div>
