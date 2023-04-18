@@ -316,8 +316,11 @@ public class MemberController {
 	
 	// 카카오 로그인 시 필요한 토큰 발급
 	@RequestMapping(value="/kakaoLogin.do")
-    public String getAccessToken (String code) {
+    public String getAccessToken (String code, Member member, HttpSession session) {
+		
+		// Access_Token 출력
 		System.out.println(code);
+		
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -374,9 +377,26 @@ public class MemberController {
         }
 
         // 로그인 처리
+        // Member VO의 memberId에 email 값을 대입
+        // 이때, memberPw는 Null 값을 갖게 끔 설정
+        // 왜냐하면 email(memberId)의 memberPw가 일치 할 때 로그인 수행
         
-        Member m = service.selectOneMember();
+        //String access_Token = kakao.getAccessToken(code);
+        //HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
         
+        member.setMemberId(email);
+        member.setMemberPw("");
+        Member m = service.selectOneMember(member);
+        if(m != null) {
+        	// 로그인 수행
+            session.setAttribute("userId", userInfo.get("email"));
+            session.setAttribute("access_Token", access_Token);
+        	return "";
+        } else {
+        	// 회원가입 페이지로 이동
+        	// 이때, 회원가입 jsp를 따로 만들어 주어야 함
+        	return "";
+        }
         
         return access_Token;
     }
@@ -421,6 +441,8 @@ public class MemberController {
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
 
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
