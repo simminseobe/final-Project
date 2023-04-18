@@ -1,12 +1,14 @@
 package kr.or.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPageData;
 
 @Service
 public class MemberService {
@@ -56,6 +58,24 @@ public class MemberService {
 	// 임시비밀번호로 pw 변경
 	public int updatePwMember(Member member) {
 		return dao.updatePwMember(member);
+	}
+
+	// 페이징 처리
+	public MemberPageData selectBookList(int reqPage) {
+		int numPerPage = 5;
+		
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		ArrayList<Member> list = dao.selectBookList(map);
+		
+		int totalCount = dao.selectBookListCount();
+		
+		return null;
 	}
 	
 }

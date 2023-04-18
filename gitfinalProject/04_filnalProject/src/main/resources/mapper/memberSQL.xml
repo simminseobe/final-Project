@@ -87,4 +87,30 @@
   	update member set member_pw=#{memberPw} where member_id=#{memberId}
   </update>
   
+  <select id="selectBookList" parameterType="map" resultType="m">
+		select * from
+			(select rownum as rnum, m.* from
+			    (select
+			  		member_no as memberNo,
+			  		member_id as memberId,
+			  		member_pw  as memberPw,
+			  		member_name as memberName,
+			  		member_phone as memberPhone,
+			  		member_birth_year as memberBirthYear,
+			  		member_birth_month as memberBirthMonth,
+			  		member_birth_day as memberBirthDay,
+			  		member_email as memberEmail,
+			  		member_level as memberLevel,
+			  		enroll_date as enrollDate,
+			  		member_gender as memberGender,
+			  		member_filename as memberFilename,
+			  		member_filepath as memberFilepath
+			    from member order by 1 desc) m)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="totalCount" resultType="_int">
+  	select count(*) from member
+  </select>
+  
 </mapper>

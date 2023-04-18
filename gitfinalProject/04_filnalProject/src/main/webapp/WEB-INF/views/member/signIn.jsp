@@ -37,18 +37,46 @@
           <input type="submit" value="로그인" class="input-box3">
         </div>
         <div>
-        	<div class="position">
-	        	<button><a href="/findIdFrm.do" class="login-form">ID/PW 찾기</a></button> | 
-    	    	<button><a href="/joinFrm.do" class="login-form">회원가입</a></button><br>
+        	<div class="position-wrap">
+	        	<div class="position">
+		        	<a href="/findIdFrm.do" class="login-form">ID/PW 찾기</a> <span class="bar">|</span> 
+	    	    	<a href="/joinFrm.do" class="login-form">회원가입</a><br>
+	        	</div>
         	</div>
         	<div class="subBtn">
-        		<button><a href="#" class="login-form">카카오API 로그인</a></button> | 
-        		<button><a href="#" class="login-form">네이버API 로그인</a></button>
+        		<a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.10.32/kakaoLogin.do&response_type=code" class="login-form">
+        			<img src="/image/kakao_login_medium_wide.png" class="kakaoBtn">
+        		</a>
         	</div>
         </div>
       </form>
     </div>
   </div>
-		
+  
+<!-- <script>
+  	/* 카카오 로그인 */
+  	function kakaoLogin() {
+  		$.ajax({
+  			url: "/getKakaoAuthUrl.do",
+  			type : "POST",
+  			async : false,
+  			dataType : "text",
+  			success : function(data) {
+  				location.href = data;
+  			}
+  		});
+  	}
+  	
+  	$(document).ready(function() {
+  		let kakaoInfo = "${kakaoInfo}";
+  		if(kakaoInfo != "") {
+  			let data = JSON.parse(kakaoInfo);
+  			
+  			alert("카카오 로그인 성공 \n accessToken : " + data["accessToken"]);
+  			alert("user : \n" + "email : " + data["email"] + "\n nickname : " + data["nickname"]);
+  		}
+  	});
+  </script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
 </body>
 </html>
