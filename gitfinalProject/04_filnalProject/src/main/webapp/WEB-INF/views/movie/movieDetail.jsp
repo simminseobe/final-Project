@@ -460,7 +460,7 @@ z-index: 5;
                                 <div class="PointCom PointComSecond" style="font-size:16px;">
                                 	<c:choose>
                                 		<c:when test="${review.story eq 1}">
-                                    	<p>스토리 외</p>
+                                    	<p>스토리</p>
                                 		</c:when>
                                 		<c:when test="${review.actor eq 1}">
                                     	<p>배우</p>
@@ -491,8 +491,9 @@ z-index: 5;
                                 <div class="reviewTextContent reviewTextSecond">
                                     <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa; box-sizing: border-box;" readonly>${review.reviewContent}</textarea>
                                 </div>
-                                <div class="reviewTextLike">
-                                    <img src="img/like-24.png">
+                                <div class="reviewTextLike reviewTextLikeSelf">
+                                    <img src="img/like-24.png" class="whiteLike2">
+                                    <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
                                     <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px; top:20px;">
                                         <p>0</p>
                                     </div>
@@ -514,7 +515,7 @@ z-index: 5;
                     <!--타인이 작성한 댓글이 시작되는 자리 -->
                     <c:forEach items="${reviewList }" var="review">
                      <c:choose>
-                     <c:when test="${not empty sessionScope.m && sessionScope.m.memberId ne review.memberId}">
+                     <c:when test="${sessionScope.m.memberId ne review.memberId}">
                             <div class="infoWap2Top" id="ajaxRev">
                                 <div class=" infoWrap2">
                                     <div class="userReviewInfo2">
@@ -561,8 +562,9 @@ z-index: 5;
                                     <div class="reviewTextContent reviewTextContentThird">
                                         <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa;" readonly>${review.reviewContent}</textarea>
                                     </div>
-                                    <div class="reviewTextLike">
-                                        <img src="img/like-24.png">
+                                    <div class="reviewTextLike reviewTextLikeOther">
+                                        <img src="img/like-24.png" class="whiteLike2">
+                                        <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
                                         <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px;  bottom: 0px; top: 20px;">
                                             <p>0</p>
                                         </div>
@@ -770,6 +772,11 @@ const openButton2=document.getElementById("open2");
    closeBtn2.addEventListener("click",closeModal2);
    openButton2.addEventListener("click",openModal2);
 	
+
+
+
+
+
 </script>
 
 <script src = "/resources/js/movieDetail.js"></script>
