@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
@@ -90,6 +91,12 @@ public class AdminDao {
 		return (ArrayList<Theater>) list;
 	}
 
+	public Movie selectOneUpdateMovie(int movieNo) {
+		Movie movie = sqlSession.selectOne("movie.selectOneUpdateMovie", movieNo);
+
+		return movie;
+	}
+
 	public int updateMovie(Movie movie) {
 		int result = sqlSession.update("movie.updateMovie", movie);
 
@@ -125,4 +132,11 @@ public class AdminDao {
 
 		return result;
 	}
+
+	public List<Schedule> selectScheduleCalendar() {
+		List list = sqlSession.selectList("schedule.selectScheduleCalendar");
+
+		return (List) list;
+	}
+
 }

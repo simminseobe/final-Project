@@ -3,7 +3,7 @@
 <mapper namespace="movie">
 	<insert id="insertMovie" parameterType="movie">
 	insert into movie_tbl values
-	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, 'admin', #{movieType})
+	(movie_seq.nextval, #{movieTitle}, #{movieDirector}, #{movieActor}, #{movieGenre}, #{movieTime}, #{movieDate}, #{movieRating}, #{movieContent}, #{filmSociety}, #{classicSociety}, #{specialMovie}, #{enrollMember}, #{movieType})
 	
 	<selectKey resultType="_int" order="AFTER" keyProperty="movieNo">
 		select max(movie_no) from movie_tbl
@@ -174,11 +174,10 @@
 		 where movie_no=#{movieNo}
 	</select>
 	
-	
-	
-	
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
-		select * from movie_tbl where movie_no=#{movieNo}
+		select 
+				*
+		from movie_tbl where movie_no=#{movieNo}
 	</select>
 	<resultMap type="movie" id="getMovie">
 	<result column="movie_no" property="movieNo"/>
@@ -215,7 +214,7 @@
 	where movie_no=#{movieNo}
 </update>
 <delete id="delteMovie" parameterType="_int">
-	delete from movie_tbl where movie_file_no=#{movieNo}
+	delete from movie_tbl where movie_no=#{movieNo}
 </delete>
 <delete id="deleteFile" parameterType="map">
 	delete from movie_file where movie_file_no=
@@ -229,4 +228,19 @@ delete from movie_video where movie_video_no=
 		#{videoNo}
 	</foreach>
 </delete>
+<update id="updateReview" parameterType="review">
+	update review set
+		review_content=#{reviewContent}, movie_score=#{movieScore} where review_comment_no=#{reviewCommentNo} 
+</update>
+<update id="updateWatchPoint" parameterType="watchPoint">
+	update watch_point watch_point set story=#{story},actor=#{actor},ost=#{ost},video_visual=#{videoVisual},production=#{production} where review_comment_no=#{reviewCommentNo}
+</update>
+<delete id="deleteReview" parameterType="_int">
+	delete from review where review_comment_no=#{_parameter}
+</delete>
+<delete id="deleteWatchPoint" parameterType="_int">
+	delete from watch_point where review_comment_no=#{_parameter}
+</delete>
+
+
 </mapper>

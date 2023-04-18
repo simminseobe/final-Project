@@ -190,6 +190,7 @@
                                         <label for="movieDate" class="my-1">개봉일</label>
                                         <input type="date" class="form-control" id="movieDate" name="movieDate"
                                             value="${movie.movieDate}" required>
+                                        <p id="movieDateReg" style="display: none;">${movie.movieDate}</p>
                                     </div>
                                     <div class="form-group">
                                         <label for="movieTime" class="my-1">상영시간</label>
@@ -450,6 +451,13 @@
             </div>
             </div>
             <script>
+                $(document).ready(function () {
+                    const datetimeString = $("#movieDateReg").text();
+                    const dateOnly = datetimeString.split(" ")[0];
+
+                    $("#movieDate").val(dateOnly);
+                });
+
                 $("#movieContent").summernote({
                     height: 400,
                     lang: "ko-KR",

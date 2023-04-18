@@ -17,6 +17,7 @@ import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
+import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
 
 @Service
@@ -56,6 +57,19 @@ public ArrayList<Movie> selectMovieAll() {
 		}
 		return result;
 	}
+	//관람평 업데이트(=리뷰 업데이트)
+		public int reviewUpdate(Review rev) {
+			int result = dao.reviewUpdate(rev);
+			System.out.println(result);
+			return result;
+		}
+		public int watchPointUpdate(WatchPoint wPoint) {
+			int result = dao.watchPointUpdate(wPoint);
+			System.out.println(result);
+			return result;
+		}
+		
+		
 	public Review getReview(String memberId) {
 		// TODO Auto-generated method stub
 		return dao.getReview(memberId);
@@ -84,5 +98,16 @@ public ArrayList<Movie> selectMovieAll() {
 		ArrayList<MovieFile> movieFileAll=dao.selectMovieFileAll(movieNo);
 		return movieFileAll;
 	}
+	//리뷰삭제하기
+	public int deleteReview(int reviewCommentNo) {
+		return dao.deleteReview(reviewCommentNo);
+	}
+	//관람포인트 삭제하기
+	public int deleteWatchPoint(int reviewCommentNo) {
+		return dao.deleteWatchPoint(reviewCommentNo);
+	}
+
+
+	
 
 }

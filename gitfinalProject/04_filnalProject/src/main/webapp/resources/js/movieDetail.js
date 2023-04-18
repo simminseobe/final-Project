@@ -20,6 +20,21 @@ stars.on("mouseover",function(){
     $(".modalStar-result>#star-result2").val(index+1);
 });
 
+/*모달수정 별점표시*/ 
+const stars2 = $(".modal2>.modal_content2>form>.star-wrap1>span");
+stars2.on("mouseover",function(){
+    //별의 최초의 색상을 회색으로 해놓음
+    //그래야 마우스를 치웠을때 회색으로 바뀜
+    stars2.css("color","lightgray");
+    //인덱스를 구해서 마우스를 올린데만 색칠함
+    const index = stars2.index(this);
+    for(let i =0; i<=index;i++){//마우스 올린 곳까지 색칠해야 하므로 <=
+        stars2.eq(i).css("color","gold");
+    }
+    $(".modalStar-result2>#star-result4").text(index+1);
+    $(".modalStar-result2>#star-result3").val(index+1);
+});
+
 
 $(function(){
     $(".moviePostImg").slice(0, 8).show(); // 최초 8개 선택
@@ -42,4 +57,47 @@ $(function(){
 
  });
  $(".tabs>li").eq(0).click();
+
+
+
+
+   
+ $(".whiteLike").on("click",function(){
+    const whiteLike = "img/like-24.png";
+    const blackLike = "img/likeBlack-24.png";
+    const current  = $(this).attr("src");
+    if(current == whiteLike){
+        $(this).attr("src",blackLike); 
+        
+    }else{
+        $(this).attr("src",whiteLike);        
+       
+    }
+});
+
+$(".whiteLike2").on("click",function(){
+    const whiteLike = "img/like-24.png";
+    const blackLike = "img/likeBlack-24.png";
+    const current  = $(this).attr("src");
+    
+    const reviewCommentNo=$("[name=reviewLikeReviewCommentNo]").val();
+    const memberId=$("[name=reviewLikeMember]").val();
+    
+    if(current == whiteLike){
+        $(this).attr("src",blackLike); 
+     	/*$.ajax({
+       		url : "/reviewLikeInsert.do",
+       		type : "post",
+       		data : {reviewCommentNo:reviewCommentNo,memberId:memberId}
+       		success : function(data) {
+				console.log(data+"성공");
+			}
+       	});//ajax끝*/
+       
+    }else{
+        $(this).attr("src",whiteLike);        
+       
+    }
+});
+
 

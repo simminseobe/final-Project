@@ -38,7 +38,7 @@
                         <div class="tabcontent stillCut">
                         	<c:forEach items="${movieFileAll}" var="movFile">
                 
-                                <img src="/resources/upload/movie/${movFile.movieFileName}" style="width: 135px; height:194px; margin: 10px 5px;">
+                                <img class="stillCutImg" src="/resources/upload/movie/${movFile.movieFileName}" style="width: 135px; height:194px; margin: 10px 5px;">
                             
                             </c:forEach>
                         </div>
@@ -49,12 +49,12 @@
                             	</video>
 			            	</c:forEach>
                         </div>
-                        <div class="tabcontent myphotoCut" style="display: none;">
+                        <div class="tabcontent myphotoCut" style="text-align: left; display: none;">
                         	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
                         	<p>※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                           	<div class="myphotoCutBtnWrap">
-                           		<button type="button">등록</button>
-                           	</div>
+                        </div>
+                        <div class="innerBtnWrap">
+                            <button type="button">등록</button>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="postRightSideContent">
                     <div class="postRightSideSel">
-                        <img src="img/bg-img-select.png">
+                        <img class="current-img"  src="img/bg-img-select.png">
                     </div>
                     <div class="postRightSideTxt">
                         <textarea style="padding: 5px; width: 400px; height: 72px; box-sizing: border-box; resize: none;" placeholder="내용을 입력해주세요."></textarea>
