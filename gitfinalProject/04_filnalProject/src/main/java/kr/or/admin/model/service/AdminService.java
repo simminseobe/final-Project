@@ -105,7 +105,7 @@ public class AdminService {
 	}
 
 	public Movie selectOneUpdateMovie(int movieNo) {
-		Movie movie = movieDao.selectOneUpdateMovie(movieNo);
+		Movie movie = dao.selectOneUpdateMovie(movieNo);
 
 		if (movie != null) {
 			MovieFile movieFile = movieDao.selectMovieFile(movieNo);

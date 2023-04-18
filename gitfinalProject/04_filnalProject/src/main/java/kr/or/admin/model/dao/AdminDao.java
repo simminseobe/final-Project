@@ -90,6 +90,12 @@ public class AdminDao {
 		return (ArrayList<Theater>) list;
 	}
 
+	public Movie selectOneUpdateMovie(int movieNo) {
+		Movie movie = sqlSession.selectOne("movie.selectOneUpdateMovie", movieNo);
+
+		return movie;
+	}
+
 	public int updateMovie(Movie movie) {
 		int result = sqlSession.update("movie.updateMovie", movie);
 
@@ -125,4 +131,5 @@ public class AdminDao {
 
 		return result;
 	}
+
 }
