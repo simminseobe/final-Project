@@ -214,7 +214,7 @@
 	where movie_no=#{movieNo}
 </update>
 <delete id="delteMovie" parameterType="_int">
-	delete from movie_tbl where movie_file_no=#{movieNo}
+	delete from movie_tbl where movie_no=#{movieNo}
 </delete>
 <delete id="deleteFile" parameterType="map">
 	delete from movie_file where movie_file_no=
