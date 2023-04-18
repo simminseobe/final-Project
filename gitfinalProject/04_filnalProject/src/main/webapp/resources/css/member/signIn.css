@@ -142,28 +142,62 @@ a {
 
 .input-box1{
 	margin-bottom: 7px;
-	height: 25px;
-	width: 200px;
+	height: 35px;
+	width: 250px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding-left: 10px;
 }
 
 .input-box2{
-	height: 25px;
-	width: 200px; 
+	height: 35px;
+	width: 250px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding-left: 10px;
 }
 
 .input-box3{
 	margin-top: 15px; 
-	width: 210px; 
-	height: 30px; 
-	margin-bottom: 10px;
+	width: 250px; 
+	height: 35px; 
+	margin-bottom: 5px;
+	background-color: #574286;
+	color: #fff;
+	border-radius: 10px;
+	border: none;
+	font-size: 0.8em;
+}
+
+.input-box3:hover{
+	background-color: #351f66;
+	color: #fff;
+	border-radius: 10px;
+	font-size: 0.85em;
 }
 	
 .login-form {
 	text-decoration: none;
 	color: #000;
+	font-size: 0.8em;
+}
+
+.bar{
+	font-size: 0.8em;
+}
+
+.position-wrap{
+	position: relative;
+	padding: 30px;
 }
 
 .position{
-	padding: 30px;
+	position: absolute;
+	top: 3px;
+	right: 50px;	
+}
+
+.kakaoBtn{
+	width: 250px;
 }
 
