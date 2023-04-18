@@ -322,6 +322,12 @@ cursor: pointer;
     text-align: center;
     background-color: #f8f8fa;
 }
+.reviewTextLike>img{
+cursor: pointer;
+}
+.blackLike{
+    content: url(/img/likeBlack-24.png);
+}
 .reviewContentWrite2{
     position: absolute;
     left: 920px;
