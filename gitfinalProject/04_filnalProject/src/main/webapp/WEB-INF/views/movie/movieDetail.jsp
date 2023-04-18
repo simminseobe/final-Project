@@ -9,12 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
-    
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href= "/resources/css/movieDetail.css">
@@ -79,6 +75,51 @@
 .s-yellow{
     color: yellow;
     }
+.modal2 {
+/*position을 absolute에서 fixed로 변경
+        왜냐? fixed를 하면 스크롤을 내려도 그 자리에 고정되어 있기때문에*/
+/*box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        여기에 있던 이것을 modal_content로 이동*/
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center; /*justfy-content는 가로축을 중심축으로 함*/
+align-items: center; /*align-items는 세로축을 중심축으로 함
+                            즉, center를 넣으면 세로축의 중앙으로 정렬하게 됨*/
+z-index: 5;
+}
+
+.modal_overlay2 {
+	/*모달 전체 배경색 설정*/
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+   z-index: 6;
+    
+}
+
+.modal_content2 {
+    z-index: 7;
+	background-color: white;
+	padding: 10px 10px;
+	text-align: center;
+	position: relative;
+	top: 0px;
+	width: 500px;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+		rgba(0, 0, 0, 0.23);
+       
+}
+
+.hidden2 {
+	display: none;
+}
+
 </style>
 </head>
 <body>
@@ -156,6 +197,120 @@
                 </form>
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 모달끝-->
+        
+
+
+        <!--모달2 수정하기-->
+        <div class="modal2 hidden2"><!--모달로 댓글 작성 들어가는 자리-->
+            <div class="modal_overlay2"></div>
+            <div class="modal_content2"><!--모달 댓글 내부화면-->
+                 <c:forEach  items="${reviewList }" var="review">
+                    <c:choose>
+                    <c:when  test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
+                <form name="watchPoint2" action="/watchPointUpdate.do" method="post">
+                <input type="text" name="movieNo" id="movieNo2" value="${mov.movieNo }" style="display:none;">
+                <input type="text" name="memberId" value="${sessionScope.m.memberId}" style="display:none;">
+            	<input type="text" name="reviewCommentNo" value="${review.reviewCommentNo}" style="display:none;">
+            	<input type="text" name="reviewDate" value="${review.reviewDate}" style="display:none;">
+                <input type="text" name="watchPoint" value="${review.watchPointNo}" style="display:none;">
+                <div class="modalClose">
+                    <div class="modalCloseTit">
+                        <span>관람평 작성하기</span>                    
+                    </div>
+                </div>
+                <div class="modal_content_tit">
+                    <p>${mov.movieTitle }</p>
+                    <p>어떠셨나요?</p>
+                </div>
+                
+                <div class = "star-wrap star-wrap1">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <div class="modalStar-result modalStar-result2">
+                   
+                        <input type="text" name="movieScore" id="star-result3" value="${review.movieScore}" style="display: none;">
+                        <span id ="star-result4" style="color:#6543b1">${review.movieScore}</span>
+                        <span style="color:#6543b1">점</span>
+                   		
+              
+                    </div>
+                </div>
+                <div class="modalTxtArea">
+                    <textarea name="reviewContent">${review.reviewContent}</textarea>
+                </div>
+                <div class="modal_content_tit" style="margin-top: 50px;">
+                    <p>관람포인트는 무엇인가요?</p>
+                    <p style="font-size: 18px; margin-top: 5px;">(최대 5개 선택가능)</p>
+                </div>
+                <div class="modalWatchPointChk">
+              
+                
+                    <div class="productionDiv">
+		              
+        	                <p><label for = "production">연출</label></p>
+            	            <input type = "checkbox" name="production" id ="production2" value="1">
+                	
+                    </div>
+                  
+                    <div class="storyDiv">
+                    
+	                        <p><label for = "story">스토리</label></p>
+    	                    <input type = "checkbox" name="story" id = "story2" value="1">
+                    
+                    </div>
+                    <div class="visualDiv">
+                    
+                        <p><label for = "videoVisual">영상미</label></p>
+                        <input type = "checkbox" name="videoVisual" id ="videoVisual2" value="1">
+                  
+                    </div>
+                    <div class="actorDiv">
+                  
+                        <p><label for = "actor">배우</label></p>
+                        <input type = "checkbox" name="actor" id="actor2" value="1">
+                
+                    </div>
+                    <div class="OSTDiv">
+                 
+                        <p><label for = "ost">OST</label></p>
+                        <input type = "checkbox" name="ost" id ="ost2" value="${review.ost}">
+                
+                    </div>
+               
+           
+                </div>
+                <div class="modalContentBottom">
+                    <button type="button" class="bc1" id="close2" style="margin-right: 5px;">닫기</button>
+                    <button type="submit" name="reviewUpdateBtn" id="reviewUpdateBtn" class="updateBtn" style="margin-right: 5px;">수정</button>
+                </div>
+                </form>
+                </c:when>
+                </c:choose>
+                </c:forEach>
+            </div><!--모달 댓글 내부화면 끝-->
+        </div><!--class="modal hidden 모달끝-->
+        <!--모달2수정끝-->        
+
+
+
+
+        
+
+        
+        
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
         <div class="bg-mask">
@@ -291,9 +446,12 @@
                             포인트는 관람평 최대 10편 지급가능합니다.
                             
                         </div>
+                        
+                       
+                      
                         <div class="reviewContentWrite" style="font-size: 15px;">
                         <c:choose>
-							<c:when test="${not empty sessionScope.m}">
+							<c:when test="${not empty sessionScope.m && sessionScope.m.memberId ne review.memberId}">
 	                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
 							</c:when>
 							<c:otherwise>
@@ -301,6 +459,9 @@
 							</c:otherwise>                        
                         </c:choose>
                         </div>
+                      
+                 
+                        
                     </div>
                     
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
@@ -320,12 +481,39 @@
                                 <div class=" Point2 pointSecond">
                                     <p>${review.movieScore}</p>
                                 </div>
-                                <div class="PointCom PointComSecond">
-                                    <p>연출 외</p>
-                                    <p>+4</p>
+                                <div class="PointCom PointComSecond" style="font-size:16px;">
+                                	<c:choose>
+                                		<c:when test="${review.story eq 1}">
+                                    	<p>스토리 외</p>
+                                		</c:when>
+                                		<c:when test="${review.actor eq 1}">
+                                    	<p>배우</p>
+                                		</c:when>
+                                		<c:when test="${review.ost eq 1}">
+                                    	<p>OST</p>
+                                		</c:when>
+                                		<c:when test="${review.videoVisual eq 1}">
+                                    	<p>영상미</p>
+                                		</c:when>
+                                		<c:when test="${review.production eq 1}">
+                                    	<p>연출</p>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<p>관람포인트</p>
+                                		</c:otherwise>
+                                	</c:choose>
+ 									<c:choose>
+ 										<c:when test="${review.story+review.actor+review.ost+review.videoVisual+review.production gt 0}">
+                                    	<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production-1}</p>
+ 										</c:when>
+ 										<c:otherwise>
+ 										<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production}</p>
+ 										</c:otherwise>
+ 									</c:choose>                             
+                                
                                 </div>
                                 <div class="reviewTextContent reviewTextSecond">
-                                    <textarea style="width:595px; height: 84px; resize: none; border-color: #f8fafa; box-sizing: border-box;">${review.reviewContent}</textarea>
+                                    <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa; box-sizing: border-box;" readonly>${review.reviewContent}</textarea>
                                 </div>
                                 <div class="reviewTextLike">
                                     <img src="img/like-24.png">
@@ -334,13 +522,13 @@
                                     </div>
                                 </div>
                                 <div class="reviewContentWrite2" style="font-size: 15px;">
-                                    <a href="#" style="color: #666666;">수정</a>
+                                    <a href="#" id="open2" style="color: #666666;">수정</a>
                                     <a href="#" style="color: #666666;">삭제</a>
                                 </div>
                             </div>
                         </div>
                         <div class="reviewDate">
-                            <span>몇분전으로 나옴</span>
+                            <span>${review.reviewDate}</span>
                         </div>
                     </div>
                     </c:when>
@@ -364,12 +552,38 @@
                                     <div class=" Point2 pointThird">
                                         <p>${review.movieScore}</p>
                                     </div>
-                                    <div class="PointCom PointComThird">
-                                        <p>연출 외</p>
-                                        <p>+4</p>
+                                    <div class="PointCom PointComThird" style="font-size:16px;">
+                                        <c:choose>
+                                		<c:when test="${review.story eq 1}">
+                                    	<p>스토리 </p>
+                                		</c:when>
+                                		<c:when test="${review.actor eq 1}">
+                                    	<p>배우</p>
+                                		</c:when>
+                                		<c:when test="${review.ost eq 1}">
+                                    	<p>OST </p>
+                                		</c:when>
+                                		<c:when test="${review.videoVisual eq 1}">
+                                    	<p>영상미 </p>
+                                		</c:when>
+                                		<c:when test="${review.production eq 1}">
+                                    	<p>연출</p>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<p>관람포인트</p>
+                                		</c:otherwise>
+                                	</c:choose>
+ 									<c:choose>
+ 										<c:when test="${review.story+review.actor+review.ost+review.videoVisual+review.production gt 0}">
+                                    	<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production-1}</p>
+ 										</c:when>
+ 										<c:otherwise>
+ 										<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production}</p>
+ 										</c:otherwise>
+ 									</c:choose>                             
                                     </div>
                                     <div class="reviewTextContent reviewTextContentThird">
-                                        <textarea style="width:595px; height: 84px; resize: none; border-color: #f8fafa;">${review.reviewContent}</textarea>
+                                        <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa;" readonly>${review.reviewContent}</textarea>
                                     </div>
                                     <div class="reviewTextLike">
                                         <img src="img/like-24.png">
@@ -383,7 +597,7 @@
                                 </div>
                             </div>
                             <div class="reviewDate reviewDateThird">
-                                <span>몇분전으로 나옴</span>
+                                <span>${review.reviewDate}</span>
                             </div>
                         </div><!--타인이 작성한 댓글 끝나는 자리-->
                         </c:when>
@@ -490,60 +704,60 @@
 
 
 
-    <div class="wpSum" style="display:none;">
-        <input type="text" class="wpSumStory" value="${watchPointSum.story}">
-        <input type="text" class="wpSumOST" value="${watchPointSum.ost}"> 
-        <input type="text" class="wpSumActor" value="${watchPointSum.actor}">
-        <input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
-        <input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
-    </div>
-           
+<div class="wpSum" style="display:none;">
+    <input type="text" class="wpSumStory" value="${watchPointSum.story}">
+    <input type="text" class="wpSumOST" value="${watchPointSum.ost}"> 
+    <input type="text" class="wpSumActor" value="${watchPointSum.actor}">
+    <input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
+    <input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
+</div>
+       
 
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var story = $(".wpSumStory").val();
-        var ost = $(".wpSumOST").val();
-        var actor = $(".wpSumActor").val();
-        var videoVisual = $(".wpSumVideoVisual").val();
-        var production = $(".wpSumProduction").val();
-        var myChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['영상미', '스토리', '배우', 'OST', '연출'],
-                datasets: [{
-                    label: '영상미,스토리,배우,OST,연출',
-                    data: [videoVisual, story, actor, ost, production],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var story = $(".wpSumStory").val();
+    var ost = $(".wpSumOST").val();
+    var actor = $(".wpSumActor").val();
+    var videoVisual = $(".wpSumVideoVisual").val();
+    var production = $(".wpSumProduction").val();
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['영상미', '스토리', '배우', 'OST', '연출'],
+            datasets: [{
+                label: '영상미,스토리,배우,OST,연출',
+                data: [videoVisual, story, actor, ost, production],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false, 
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }]
-            },
-            options: {
-                responsive: false, 
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
-        });
-/*===========================================================================================================================================*/
+        }
+    });
+
 /*===============모달OPEN=================*/
 const openButton=document.getElementById("open");
    const modal = document.querySelector(".modal");
@@ -561,13 +775,28 @@ const openButton=document.getElementById("open");
    overlay.addEventListener("click",closeModal);
    closeBtn.addEventListener("click",closeModal);
    openButton.addEventListener("click",openModal);
-   
 
+   /*===============모달OPEN2=================*/
+const openButton2=document.getElementById("open2");
+   const modal2 = document.querySelector(".modal2");
+
+   /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
+   const overlay2 = modal2.querySelector(".modal_overlay2");
+   const closeBtn2 = modal2.querySelector("#close2");
+   const openModal2  =() => {
+       modal2.classList.remove("hidden2");
+   }
+
+   const closeModal2 = () => {
+       modal2.classList.add("hidden2");
+   }
+   overlay2.addEventListener("click",closeModal2);
+   closeBtn2.addEventListener("click",closeModal2);
+   openButton2.addEventListener("click",openModal2);
 	
-	
-	
-	</script>
-    <script src = "/resources/js/movieDetail.js"></script>
+</script>
+
+<script src = "/resources/js/movieDetail.js"></script>
 </body>
 </html>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

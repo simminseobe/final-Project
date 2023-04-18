@@ -229,4 +229,13 @@ delete from movie_video where movie_video_no=
 		#{videoNo}
 	</foreach>
 </delete>
+<update id="updateReview" parameterType="review">
+	update review set
+		review_content=#{reviewContent}, movie_score=#{movieScore} where review_comment_no=#{reviewCommentNo} 
+</update>
+<update id="updateWatchPoint" parameterType="watchPoint">
+	update watch_point watch_point set story=#{story},actor=#{actor},ost=#{ost},video_visual=#{videoVisual},production=#{production} where review_comment_no=#{reviewCommentNo}
+</update>
+
+
 </mapper>

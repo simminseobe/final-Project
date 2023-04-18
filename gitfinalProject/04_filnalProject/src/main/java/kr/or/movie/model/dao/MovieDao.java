@@ -11,6 +11,7 @@ import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
+import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
 
 @Repository
@@ -96,5 +97,17 @@ public class MovieDao {
 		List list =sqlSession.selectList("movie.selectmovieFileAll", movieNo);
 		return (ArrayList<MovieFile>)list;
 	}
+	//관람평 업데이트(=리뷰 업데이트)
+	public int reviewUpdate(Review rew) {
+		int result = sqlSession.update("movie.updateReview", rew);
+		return result;
+	}
+	
+	//관람포인트 업데이트(=관람포인트 업데이트)
+	public int watchPointUpdate(WatchPoint wPoint) {
+		int result = sqlSession.update("movie.updateWatchPoint", wPoint);
+		return result;
+	}
+
 
 }

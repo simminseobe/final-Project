@@ -350,7 +350,16 @@ cursor: pointer;
 .star-wrap{
     overflow: hidden;
 }
+.star-wrap2{
+    overflow: hidden;
+}
 .star-wrap>span{
+    float: left;
+    font-size: 30px;
+    color: gray;
+
+}
+.star-wrap2>span{
     float: left;
     font-size: 30px;
     color: gray;
@@ -359,12 +368,16 @@ cursor: pointer;
 .modal_content{
     overflow: hidden;
 }
+.modal_content2{
+    overflow: hidden;
+}
 .star-wrap1{
     margin-top: 10px;
     margin-left: 140px;
     text-align: center;
     float: left;
 }
+
 .modalStar-result{
     font-size: 30px;
     line-height: 30px;
@@ -374,6 +387,7 @@ cursor: pointer;
 .modalClose{
     overflow: hidden;
 }
+
 .modalCloseTit{
     font-size: 18px;
     float: left;
@@ -399,6 +413,7 @@ cursor: pointer;
     height: 70px;
     resize: none;
     border-color: lightgray;
+   
 }
 .modalWatchPointChk{
     margin-top: 10px;

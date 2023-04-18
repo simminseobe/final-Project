@@ -49,12 +49,12 @@
                             	</video>
 			            	</c:forEach>
                         </div>
-                        <div class="tabcontent myphotoCut" style="display: none;">
+                        <div class="tabcontent myphotoCut" style="text-align: left; display: none;">
                         	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
                         	<p>※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                           	<div class="myphotoCutBtnWrap">
-                           		<button type="button">등록</button>
-                           	</div>
+                        </div>
+                        <div class="innerBtnWrap">
+                            <button type="button">등록</button>
                         </div>
                     </div>
                 </div>

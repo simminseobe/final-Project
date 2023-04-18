@@ -20,6 +20,7 @@ import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
+import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
 
 @Controller
@@ -69,18 +70,23 @@ public class MovieController {
 		return "movie/moviePostFrm";
 	}
 	//실관람평 인서트
-	//@ResponseBody
 	@RequestMapping(value="/watchPointInsert.do")
 	public String reviewInsert(Review rev,WatchPoint wPoint) {
 		int result = service.reviewInsert(rev,wPoint);
+
 		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo();
 	}
- /*
-	@RequestMapping(value="/stillCut.do")
-	public String stillCut() {
+	//실관람평 수정하기
+	@RequestMapping(value="/watchPointUpdate.do")
+	public String reviewUpdate(Review rev, WatchPoint wPoint) {
+		System.out.println(rev+"컨트롤");
+		int result=service.reviewUpdate(rev);
+		int wresult=service.watchPointUpdate(wPoint); 
+		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo();
+		
 		
 	}
-	*/
+	//실관람평 삭제하기
 	
-	
+
 }
