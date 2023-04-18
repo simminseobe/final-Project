@@ -1,6 +1,7 @@
 package kr.or.admin.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import common.FileManager;
 import kr.or.admin.model.service.AdminService;
+import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
@@ -316,4 +320,25 @@ public class AdminController {
 		return new Gson().toJson(list);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/selectScheduleCalendar.do", produces = "application/json;charset=utf-8")
+	public String selectScheduleCalendar() {
+		List<Schedule> list = service.selectScheduleCalendar();
+
+		Gson gson = new Gson();
+		JsonArray jsonArray = new JsonArray();
+
+		for (Schedule schedule : list) {
+			JsonObject jsonObject = new JsonObject();
+
+			jsonObject.addProperty("title", schedule.getMovieTitle());
+			jsonObject.addProperty("start", schedule.getScheduleStart());
+			jsonObject.addProperty("end", schedule.getScheduleEnd());
+			jsonObject.addProperty("description", schedule.getTheaterBranch());
+
+			jsonArray.add(jsonObject);
+		}
+
+		return gson.toJson(jsonArray);
+	}
 }

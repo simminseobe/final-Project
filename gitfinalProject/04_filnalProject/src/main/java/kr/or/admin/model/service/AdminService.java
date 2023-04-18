@@ -1,12 +1,14 @@
 package kr.or.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.dao.AdminDao;
+import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
@@ -158,6 +160,10 @@ public class AdminService {
 	public ArrayList<Theater> selectBranchList(String theaterLocal) {
 		ArrayList<Theater> list = dao.selectBranchList(theaterLocal);
 		return list;
+	}
+
+	public List<Schedule> selectScheduleCalendar() {
+		return dao.selectScheduleCalendar();
 	}
 
 }
