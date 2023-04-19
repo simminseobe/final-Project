@@ -44,8 +44,8 @@
 	        	</div>
         	</div>
         	<div class="subBtn">
-        		<a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.0.8/kakaoLogin.do&response_type=code" class="login-form">
-        		<!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.10.32/kakaoLogin.do&response_type=code" class="login-form"> -->
+        		<!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.0.8/kakaoLogin.do&response_type=code" class="login-form"> -->
+        		<a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.10.32/kakaoLogin.do&response_type=code" class="login-form">
         			<img src="/image/kakao_login_medium_wide.png" class="kakaoBtn">
         		</a>
         	</div>

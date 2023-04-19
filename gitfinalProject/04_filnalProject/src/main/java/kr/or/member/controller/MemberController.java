@@ -340,8 +340,8 @@ public class MemberController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=95e454d415a0cf20175203f81771b058"); //본인이 발급받은 REST API key
-            sb.append("&redirect_uri=http://192.168.0.8/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
-            //sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://192.168.0.8/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
             //sb.append("&client_id=REST_API_KEY"); //본인이 발급받은 REST API key
             //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인처리 컨트롤러 주소
             sb.append("&code=" + code);
