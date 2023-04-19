@@ -322,8 +322,9 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "/selectScheduleCalendar.do", produces = "application/json;charset=utf-8")
-	public String selectScheduleCalendar() {
-		List<Schedule> list = service.selectScheduleCalendar();
+	public String selectScheduleCalendar(String theaterBranch) {
+		System.out.println(theaterBranch);
+		List<Schedule> list = service.selectScheduleCalendar(theaterBranch);
 
 		Gson gson = new Gson();
 		JsonArray jsonArray = new JsonArray();

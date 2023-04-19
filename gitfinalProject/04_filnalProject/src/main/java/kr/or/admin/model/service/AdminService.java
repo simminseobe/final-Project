@@ -162,8 +162,8 @@ public class AdminService {
 		return list;
 	}
 
-	public List<Schedule> selectScheduleCalendar() {
-		return dao.selectScheduleCalendar();
+	public List<Schedule> selectScheduleCalendar(String theaterBranch) {
+		return dao.selectScheduleCalendar(theaterBranch);
 	}
 
 }
