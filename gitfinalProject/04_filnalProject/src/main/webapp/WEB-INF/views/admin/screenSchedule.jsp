@@ -67,6 +67,7 @@
                                         <div class="col-sm-2 mb-3" id="movie-branch">
                                             <select class="form-select form-select-lg"
                                                 aria-label=".form-select-lg example" id="movie-branch-selected">
+                                                <option disabled>선택</option>
                                             </select>
                                         </div>
                                     </div>
@@ -80,10 +81,25 @@
             </div>
         </div>
         <script>
-            $(document).ready(function (theaterBranch) {
-                // $("#movie-branch-selected").children().eq(0).prop("selected", true);
+            $(document).ready(function () {
+                const theaterLocal = "서울";
 
-                selectScheduleCalendar();
+                $.ajax({
+                    url: "/selectBranchList.do",
+                    type: "get",
+                    data: { theaterLocal: theaterLocal },
+                    success: function (data) {
+                        const branchSelect = $("#movie-branch-selected");
+                        branchSelect.empty();
+
+                        for (var i = 0; i < data.length; i++) {
+                            const option = $("<option>").val(data[i].theaterBranch).text(data[i].theaterBranch);
+                            branchSelect.append(option);
+                        }
+                    }
+                });
+
+                selectScheduleCalendar("강남");
             });
 
             $("#movie-branch-selected").on("change", function () {

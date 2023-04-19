@@ -94,7 +94,7 @@
                                         <div class="input-group w-50">
                                             <label class="input-group-text" for="movieMain">메인 이미지</label>
                                             <input type="file" class="form-control" id="movieMain" name="movieMain"
-                                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-outline-secondary"
                                                 id="inputGroupFileAddon04" data-bs-toggle="modal"
@@ -134,7 +134,8 @@
                                     <div class="input-group w-50">
                                         <label class="input-group-text" for="moviePoster">포스터 이미지</label>
                                         <input type="file" class="form-control" id="moviePoster" name="moviePoster"
-                                            aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+                                            aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple
+                                            required>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-secondary"
                                             id="inputGroupFileAddon04" data-bs-toggle="modal"
