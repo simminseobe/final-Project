@@ -64,6 +64,7 @@ public class MemberController {
 	@RequestMapping(value="/signIn.do")
 	public String signIn(Member member, HttpSession session, Model model) {
 		Member m = service.selectOneMember(member);
+		System.out.println("로그인 정보 : " + m);
 		if(m != null) {
 			session.setAttribute("m", m);
 		}
@@ -316,7 +317,7 @@ public class MemberController {
 	
 	// 카카오 로그인 시 필요한 토큰 발급
 	@RequestMapping(value="/kakaoLogin.do")
-    public String getAccessToken (String code, Member member, HttpSession session) {
+    public String getAccessToken (String code, Member member, Model model, HttpSession session) {
 		
 		// Access_Token 출력
 		System.out.println(code);
@@ -339,7 +340,8 @@ public class MemberController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=95e454d415a0cf20175203f81771b058"); //본인이 발급받은 REST API key
-            sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            sb.append("&redirect_uri=http://192.168.0.8/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
             //sb.append("&client_id=REST_API_KEY"); //본인이 발급받은 REST API key
             //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인처리 컨트롤러 주소
             sb.append("&code=" + code);
@@ -384,41 +386,31 @@ public class MemberController {
         
         // 로그인 처리
         // Member VO의 memberId에 email 값을 대입
-        // 이때, memberPw는 Null 값을 갖게 끔 설정
-        // 왜냐하면 email(memberId)의 memberPw가 일치 할 때 로그인 수행
+        // 이때, memberPw는 Null 값을 갖게 끔 설정(DB not null -> null 변경)
+        // --> email(memberId)의 memberPw가 일치 할 때 로그인 수행
         
-		String kakao = userInfo.toString();
-		System.out.println("kakao : " + kakao); // ok - 문자열로 나옴
-		
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(kakao);
-        
-        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-        
-        System.out.println("properties : " + properties);
-        System.out.println("kakao_account : " + kakao_account);
-        
-		//필요한 정보 추출하는 코드(여기선 nickname, email)
-        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-        String email = kakao_account.getAsJsonObject().get("email").getAsString();
+        String nickname = (String)userInfo.get("nickname");
+        String email = (String)userInfo.get("email");
         
         System.out.println("nickname : " + nickname);
         System.out.println("email : " + email);
         
+        Member m = service.selectOneMember(member);
         member.setMemberId(email);
         member.setMemberName(nickname);
-        Member m = service.selectOneMember(member);
+        System.out.println("멤버 객체임 : " + m);
         if(m != null) {
         	// 로그인 수행 -> redirect:/ 이동??
-        	session.setAttribute("m", m);
-        	session.setAttribute("access_Token", access_Token);
-        	return "redirect:/";
+            System.out.println("멤버 객체임2 : " + m);
+            model.addAttribute("m", m);
+        	model.addAttribute("access_Token", access_Token);
+        	return "redirect:/purchaseList.do";
         } else {
         	// 회원가입 페이지로 이동
         	// 이때, 회원가입 jsp를 따로 만들어 주어야 함
 			// memberId -- email
 			// return -> 새로만든 회원가입 페이지 jsp로 리턴???
+        	model.addAttribute("m", m);
         	return "member/kakaoJoinFrm";
         }
         
