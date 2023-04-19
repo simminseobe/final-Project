@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.or.admin.model.vo.Schedule;
+import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.service.TicketingService;
@@ -52,7 +53,13 @@ public class TicketingController {
 		list = service.selectSchedule(dataDay);
 		return new Gson().toJson(list);
 	}
-
+	
+	@RequestMapping(value="/selectOneTheaterBrch.do")
+	public String selectOneTheater(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheaterBrch(theaterNo);
+		model.addAttribute("theater", theater);
+		return "admin/ticketing";
+	}
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")
 	public String testPage() {

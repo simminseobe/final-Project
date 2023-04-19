@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
@@ -130,6 +131,12 @@ public class AdminDao {
 		int result = sqlSession.delete("movie.deleteVideo", map);
 
 		return result;
+	}
+
+	public List<Schedule> selectScheduleCalendar() {
+		List list = sqlSession.selectList("schedule.selectScheduleCalendar");
+
+		return (List) list;
 	}
 
 }

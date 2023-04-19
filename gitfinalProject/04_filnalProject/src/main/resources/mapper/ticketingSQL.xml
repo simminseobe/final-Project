@@ -13,4 +13,16 @@
 	where
 		to_char(schedule_start, 'dd/mm/yyyy') = #{_parameter}
 </select>
+<select id="selectOneTheaterBrch" parameterType="_int" resultType="theater">
+  	select 
+			 	theater_no as theaterNo,
+				theater_local as theaterLocal,
+				theater_branch as theaterBranch,
+				theater_addr as theaterAddr,	
+				theater_facility as theaterFacility,
+				theater_content as theaterContent,
+				enroll_member as EnrollMember		
+	  from theater_tbl
+	  where theater_no = #{_parameter}
+  </select>
 </mapper>

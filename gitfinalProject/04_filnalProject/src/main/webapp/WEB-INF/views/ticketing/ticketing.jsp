@@ -1,386 +1,449 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<!DOCTYPE html>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
 
-		<head>
-			<meta charset="UTF-8">
-			<title>Insert title here</title>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-			<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-			<link rel="stylesheet" href="/resources/css/ticketing/screenList.css">
-			<style>
-				.date-list {
-					border-top: 1px solid black;
-				}
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="/resources/css/ticketing/screenList.css">
+<style>
+.date-list {
+	border-top: 1px solid black;
+}
 
-				/*
+/*
 			.date-btn {
 				font-size: 20px;
 			}
 			*/
-				/*날짜부분*/
-				.reserve-date {
-					padding-top: 5px;
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					overflow: scroll;
-					overflow-y: hidden;
-				}
+/*날짜부분*/
+.reserve-date {
+	padding-top: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	overflow: scroll;
+	overflow-y: hidden;
+}
 
-				.movie-date-wrapper {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					padding: 5px 2px;
-					width: 100px;
-					/* 버튼 가로 크기 조정 */
-					/* 기타 버튼 스타일링 속성들 */
-				}
+.movie-date-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 2px;
+	width: 100px;
+	/* 버튼 가로 크기 조정 */
+	/* 기타 버튼 스타일링 속성들 */
+}
 
-				.movie-week-of-day {
-					margin-left: 5px;
-					font-size: 10px;
-					width: 12px;
-					height: 22px;
-					line-height: 22px;
-				}
+.movie-week-of-day {
+	margin-left: 5px;
+	font-size: 10px;
+	width: 12px;
+	height: 22px;
+	line-height: 22px;
+}
 
-				.movie-day {
-					text-align: center;
-					width: 34px;
-					height: 22px;
-					font-size: 17px;
-					font-weight: bold;
-				}
+.movie-day {
+	text-align: center;
+	width: 34px;
+	height: 22px;
+	font-size: 17px;
+	font-weight: bold;
+}
 
-				.saturday {
-					color: #31597E;
-					font-weight: bold;
-				}
+.saturday {
+	color: #31597E;
+	font-weight: bold;
+}
 
-				.sunday {
-					color: #AF2D2D;
-					font-weight: bold;
-				}
+.sunday {
+	color: #AF2D2D;
+	font-weight: bold;
+}
 
-				.movie-date-wrapper {
-					background-color: transparent;
-					border: 0;
-				}
+.movie-date-wrapper {
+	background-color: transparent;
+	border: 0;
+}
 
-				.movie-date-wrapper-active {
-					background-color: #333333;
-				}
+.movie-date-wrapper-active {
+	background-color: #333333;
+}
 
-				.movie-date-wrapper-active>* {
-					color: white;
-				}
+.movie-date-wrapper-active>* {
+	color: white;
+}
 
-				/**/
-				.choice-wrap {
-					overflow: hidden;
-				}
+/**/
+.choice-wrap {
+	overflow: hidden;
+}
 
-				.choice-movie {
-					background-color: antiquewhite;
-					height: 400px;
-					width: 250px;
-					float: left;
-					padding-left: 20px;
-					padding-right: 20px;
-					padding-bottom: 20px;
-				}
-				.movie-list{
-					overflow: scroll;
-					overflow-x: hidden;
-				}
-				.choice-theater {
-					background-color: aqua;
-					height: 400px;
-					width: 300px;
-					float: left;
-					padding-left: 20px;
-					padding-right: 20px;
-					padding-bottom: 20px;
-				}
+.choice-movie {
+	background-color: antiquewhite;
+	height: 400px;
+	width: 250px;
+	float: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
 
-				.choice-time {
-					background-color: brown;
-					height: 400px;
-					width: 450px;
-					float: left;
-					padding-left: 20px;
-					padding-right: 20px;
-					padding-bottom: 20px;
-				}
+.movie-list {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.movie-list::-webkit-scrollbar {
+    width: 10px;
+}
+.movie-list::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.movie-list::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
 
-				.choice-header p {
-					height: 40px;
-					font-size: 20px;
-					padding-top: 5px;
-				}
+.choice-theater {
+	background-color: aqua;
+	height: 400px;
+	width: 300px;
+	float: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
 
-				.content-wrap {
-					margin-bottom: 100px;
-				}
+.choice-time {
+	background-color: brown;
+	height: 400px;
+	width: 450px;
+	float: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
 
-				.scroll-container{
-					position: relative;
+.choice-header p {
+	height: 40px;
+	font-size: 20px;
+	padding-top: 5px;
+}
 
-				}
-				
-				.oneMovie {
-					position: relative;
-					background-color: transparent;
-					width: 100%;
-					height: 20px;
-					padding: 3px 30px 3px 30px;
-					border: 0;
-				}
+.content-wrap {
+	margin-bottom: 100px;
+}
 
-				.age-12 {
-					position: absolute;
-					left: 5px;
-					top: 3px;
-					border: 1px solid orange;
-					width: 20px;
-				}
+.scroll-container {
+	position: relative;
+	height: 100%;
+}
+.scroll-container>ul>li>button{
+	position: relative;
+	background-color: transparent;
+	width: 100%;
+	height: 20px;
+	padding: 3px 30px 3px 30px;
+	border: 0;
+}
 
-				.movie-title {
-					position: absolute;
-					left: 30px;
-					top: 3px;
-				}
+.oneMovie {
+	position: relative;
+	background-color: transparent;
+	width: 100%;
+	height: 20px;
+	padding: 3px 30px 3px 30px;
+	border: 0;
+}
 
-				.heart {
-					position: absolute;
-					right: 5px;
-					top: 3px;
-					display: block;
-					margin: 0 2px 0 0;
-					font-size: 10px;
-					width: 12px;
-					height: 11px;
-					font-variation-settings:
-					'FILL' 0,
-					'wght' 700,
-					'GRAD' 0,
-					'opsz' 20
-				}
-				
-				.theater-list{
-					display: block;
-					width: 100%;
-					height: 320px;
-				}
-				.scroll{
-					overflow: hidden;
-					display: block;
-					width: 100%;
-					height: 100%;
-				}
-				.scroll>ul{
-					position: relative;
-					height: 100%;
-				}
-				.scroll>ul::after{
-					content: '';
-					display: block;
-					position: absolute;
-					left: 50%;
-					top: 0;
-					width: 1px;
-					height: 100%;
-					background-color: #ecf0f4;
-				}
-				.theater-city{
-					
-				}
-				.scroll>ul>li.btn.on{
-					color: #4444;
-					background-color: #ebebeb;
-				}
-				/*
+.age-12 {
+	position: absolute;
+	left: 5px;
+	top: 3px;
+	border: 1px solid orange;
+	width: 20px;
+}
+
+.movie-title {
+	position: absolute;
+	left: 30px;
+	top: 3px;
+}
+
+.heart {
+	position: absolute;
+	right: 5px;
+	top: 3px;
+	display: block;
+	margin: 0 2px 0 0;
+	font-size: 10px;
+	width: 12px;
+	height: 11px;
+	font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 20
+}
+
+.theater-list {
+	display: block;
+	width: 100%;
+	height: 320px;
+}
+
+.scroll {
+	overflow: hidden;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.scroll>ul {
+	position: relative;
+	height: 100%;
+}
+
+.scroll>ul::after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 40%;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background-color: #ecf0f4;
+}
+
+
+
+.scroll>ul>li.btn.on {
+	color: #4444;
+	background-color: #ebebeb;
+}
+/*
 				.scroll>ul>li>button.on{
 					color: #fff;
 					font-weight: 400;
 					background-color: #666;
 				}
 				*/
-				.scroll>ul>li.btn{
-					overflow: visible;
-					position: relative;
-					width: 50%;
-					padding: 0 10px;
-					
-				}
-				.scroll>ul>li>button{
-					display: block;
-					position: relative;
-					width: 100%;
-					min-height: 28px;
-					padding: 3px 20px 3px 20px;
-					text-align: left;
-					background-color: transparent;
-					letter-spacing: 0;
-				}
-				.scroll button{
-					margin: 0;
-					padding: 0;
-					border: 0;
-					letter-spacing: 1px;
-					background-color: transparent;
-				}
-				button{
-					cursor: pointer;
-					overflow: visible;
-				}
-				.scroll>ul>li>button.on:after{
-					content: '';
-					display: block;
-					position: absolute;
-					right: -6px;
-					top: 50%;
-					z-index: 2;
-					width: 6px;
-					height: 11px;
-					margin: -6px 0 0 0;
-				}
-				.scroll>ul>li>button>span{
-					display: inline-block;
-					margin: 0 20px 0 0;
-					vertical-align: middle;
-				}
-				.depth.on{
-					display: block;
-				}
-				.depth{
-					display: none;
-					position: absolute;
-					left: 50%;
-					top: 0;
-					width: 50%;
-					height: 320px;
-					padding: 0;
-				}
-				.detail-list{
-					width: 100%;
-					height: 100%;
-					margin: 0;
-				}
-				.scroll-box{
-					max-height: none;
-					position: relative;
-					overflow: hidden;
-					height: 100%;
-					max-width: 100%;
-					outline: 0;
-					direction: ltr;
-				}
-				.container{
-					margin-right: 5px;
-					overflow: hidden;
-					width: auto;
-					height: auto;
-				}
-				.brch{
-					position: relative;
-					height: 100%;
-				}
-				.brch:after{
-					content: '';
-					display: block;
-					position: absolute;
-					left: 50%;
-					top: 0;
-					width: 1px;
-					height: 100%;
-					background-color: #ecf0f4; 
-				}
-				#btn{
-					padding-left: 12px;
-					padding-right: 0;
-					display: block;
-					position: relative;
-					width: 100%;
-					min-height: 28px;
-					padding: 3px 30px 3px 30px;
-					text-align: left;
-					font-size: .8667em;
-					background-color: transparent;
-					letter-spacing: 0;
-					height: auto;
-				}
-				
-				.scrollTools{
-					width: 5px;
-					opacity: 1;
-					position: absolute;
-					width: 16px;
-					height: auto;
-					left: auto;
-					top: 0;
-					right: 0;
-					bottom: 0;
-				}
-				.draggerContainer{
-					position: absolute;
-					top: 0;
-					left: 0;
-					bottom: 0;
-					right: 0;
-					height: 320px;
-				}
-				.dragger{
-					cursor: pointer;
-					width: 100px;
-					height: 30px;
-					z-index: 1;
-				}
-				.dragger_bar{
-					width: 5px;
-					border-radius: 2px;
-					background-color: #555;
-					position: relative;
-					height: 100%;
-					margin: 0 auto;
-					text-align: center;
-				}
-				.draggerRail{
-					background-color: #ebebeb;
-					width: 5px;
-					border-radius: 2px;
-					height: 100%;
-					margin: 0 auto;
-				}
-				
-				
-			</style>
-		</head>
+.scroll>ul>li.btn {
+	overflow: visible;
+	position: relative;
+	width: 50%;
+	padding: 0 10px;
+}
 
-		<body>
-			<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-			<div class="all-wrap" style="width: 1000px; margin: 0 auto;">
-				<div class="header-line" style="height: 100px;"></div>
-				<div class="header-wrap">
-					<div class="header-title" style="margin-top: 30px; margin-bottom: 30px;">
-						<h1 style="font-size: 30px;">빠른예매</h1>
-						<h1>
-							<a href="/ticketing2.do">예매페이지(test)</a>
-						</h1>
-						<h1>
-							<a href="/choiceSeat.do">좌석선택(test)</a>
-						</h1>
-						<h1>
-							<a href="/paymentMethod.do">결제수단(test)</a>
-						</h1>
-						<button class="test1" id="jQ5">서버에서 리스트 데이터 받기</button>
-						<p class="ajaxResult" id="result5" style="min-height: 100px; border: 2px solid #ccc;"></p>
-						<button class="test2" id="jQ7">서버에서 리스트 데이터 받기</button>
-						<p class="ajaxResult" id="result7" style="min-height: 100px; border: 2px solid #ccc;""></p>
-						<!-- 
+.scroll>ul>li>button {
+	display: block;
+	position: relative;
+	width: 100%;
+	min-height: 28px;
+	padding: 3px 20px 3px 20px;
+	text-align: left;
+	background-color: transparent;
+	letter-spacing: 0;
+}
+
+.scroll button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	letter-spacing: 1px;
+	background-color: transparent;
+}
+
+button {
+	cursor: pointer;
+	overflow: visible;
+}
+
+.scroll>ul>li>button.on:after {
+	content: '';
+	display: block;
+	position: absolute;
+	right: -6px;
+	top: 50%;
+	z-index: 2;
+	width: 6px;
+	height: 11px;
+	margin: -6px 0 0 0;
+}
+
+.scroll>ul>li>button>span {
+	display: inline-block;
+	margin: 0 20px 0 0;
+	vertical-align: middle;
+}
+
+.depth.on {
+	display: block;
+}
+
+.depth {
+	display: none;
+	position: absolute;
+	left: 42%;
+	top: 0;
+	width: 70%;
+	height: 340px;
+	padding: 0;
+}
+
+.detail-list {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.scroll-box {
+	max-height: none;
+	position: relative;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 100%;
+	max-width: 100%;
+	outline: 0;
+	direction: ltr;
+}
+.scroll-box::-webkit-scrollbar {
+    width: 10px;
+}
+.scroll-box::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.scroll-box::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.container {
+	margin-right: 5px;
+	overflow: hidden;
+	width: auto;
+	height: auto;
+}
+.brchNo>li>button{
+	height: 30px;
+}
+/*
+.brch {
+	position: relative;
+	height: 100%;
+}
+
+.brch:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background-color: #ecf0f4;
+}
+*/
+#btn {
+	padding-left: 12px;
+	padding-right: 0;
+	display: block;
+	position: relative;
+	width: 100%;
+	min-height: 28px;
+	padding: 3px 30px 3px 30px;
+	text-align: left;
+	font-size: .8667em;
+	background-color: transparent;
+	letter-spacing: 0;
+	height: auto;
+}
+/*
+.scrollTools {
+	width: 5px;
+	opacity: 1;
+	position: absolute;
+	width: 16px;
+	height: auto;
+	left: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.draggerContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 320px;
+}
+
+.dragger {
+	cursor: pointer;
+	width: 100px;
+	height: 30px;
+	z-index: 1;
+}
+
+.dragger_bar {
+	width: 5px;
+	border-radius: 2px;
+	background-color: #555;
+	position: relative;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.draggerRail {
+	background-color: #ebebeb;
+	width: 5px;
+	border-radius: 2px;
+	height: 100%;
+	margin: 0 auto;
+}
+*/
+</style>
+</head>
+
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<div class="all-wrap" style="width: 1000px; margin: 0 auto;">
+		<div class="header-line" style="height: 100px;"></div>
+		<div class="header-wrap">
+			<div class="header-title"
+				style="margin-top: 30px; margin-bottom: 30px;">
+				<h1 style="font-size: 30px;">빠른예매</h1>
+				<h1>
+					<a href="/ticketing2.do">예매페이지(test)</a>
+				</h1>
+				<h1>
+					<a href="/choiceSeat.do">좌석선택(test)</a>
+				</h1>
+				<h1>
+					<a href="/paymentMethod.do">결제수단(test)</a>
+				</h1>
+				<!--
+				<button class="test1" id="jQ5">서버에서 리스트 데이터 받기</button>
+				<p class="ajaxResult" id="result5"
+					style="min-height: 100px; border: 2px solid #ccc;"></p>
+				<button class="test2" id="jQ7">서버에서 리스트 데이터 받기</button>
+				<p class="ajaxResult" id="result7"
+					style="min-height: 100px; border: 2px solid #ccc;"></p>
+				-->
+				<!-- 
 				<h1>
 					<a href="/testPage.do">테스트페이지(test)</a>
 				</h1>
@@ -388,10 +451,10 @@
 					<a href="/testPage2.do">테스트페이지2(test)</a>
 				</h1>
 				-->
-					</div>
-				</div>
-				<div class="content-wrap">
-					<!-- 
+			</div>
+		</div>
+		<div class="content-wrap">
+			<!-- 
 					<div class="date-list">
 
 
@@ -400,212 +463,234 @@
 							<div class="reserve-date"></div>
 						</div>
 					-->
-					<div class="day">
-						<!-- 페이지 네이션으로 입력할 것 -->
-						<!--일에 따라서 class가 바뀐다. -->
-						<div class="month"></div>
-						<div class="now-day"></div>
+			<div class="day">
+				<!-- 페이지 네이션으로 입력할 것 -->
+				<!--일에 따라서 class가 바뀐다. -->
+				<div class="month"></div>
+				<div class="now-day"></div>
+			</div>
+
+
+
+
+			<div class="choice-wrap">
+				<div class="choice-movie">
+					<div class="choice choice-header">
+						<p>영화</p>
+						<div class="list-area">
+							<div class="movie-list"
+								style="background-color: #fff; height: 340px;">
+								<div class="scroll-container" style="height: 100px;">
+									
+									<ul>
+								<!-- 
+										<c:forEach items="${list }" var="movieList">
+											<li>
+												<button type="button" class="oneMovie">
+													<span class="movie-grade age-12">${movieList.movieRating}</span>
+													<span class="movie-title">${movieList.movieTitle}</span> <i
+														class="material-symbols-outlined heart">favorite</i>
+												</button>
+											</li>
+										</c:forEach>
+								-->
+									</ul>
+								</div>
+
+							</div>
+						</div>
 					</div>
-
-
-
-
-					<div class="choice-wrap">
-						<div class="choice-movie">
-							<div class="choice choice-header">
-								<p>영화</p>
-								<div class="list-area">
-									<div class="movie-list" style="background-color: #fff; height: 340px;">
-										<div class="scroll-container">
-											<ul>
-												<c:forEach items="${list }" var="movieList">
-													<li>
-														<button type="button" class="oneMovie">
-															<span class="movie-grade age-12">${movieList.movieRating}</span>
-															<span class="movie-title">${movieList.movieTitle}</span>
-															<i class="material-symbols-outlined heart">favorite</i>
-														</button>
-													</li>
-												</c:forEach>
-											</ul>
+				</div>
+				<div class="choice-theater">
+					<div class="choice choice-header">
+						<p>극장</p>
+						<div class="theater-list"
+							style="background-color: #fff; height: 340px;">
+							<div class="scroll" id="brchList">
+								<ul>
+									<li class="theater-city active">
+										<button type="button" class="btn">
+											<span class="sel-city seoul">서울</span>
+										</button>
+										<div class="depth on">
+											<div class="detail-list" style="max-height: none;">
+												<div class="scroll-box">
+													<div class="container"
+														style="position: relative; top: 0; left: 0;">
+														<ul class="brchNo">
+															<!--
+															<li>
+																<button id="btn" type="button">강남</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남2</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남3</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남4</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남5</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남6</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남7</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남8</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남2</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남3</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남4</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남5</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남6</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남7</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남8</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남2</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남3</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남4</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남5</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남6</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남7</button>
+															</li>
+															<li>
+																<button id="btn" type="button">강남100</button>
+															</li>
+															-->
+														</ul>
+													</div>
+													<div id="scrollbar_vertical" class="scrollTools"
+														style="display: block;">
+														<div class="draggerContainer">
+															<div id="dragger_vertical" class="dragger"
+																style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
+																<div class="dragger_bar" style="line-height: 30px;"></div>
+															</div>
+															<div class="draggerRail"></div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="choice-theater">
-							<div class="choice choice-header">
-								<p>극장</p>
-								<div class="theater-list" style="background-color: #fff; height: 340px;">
-									<div class="scroll" id="brchList">
-										
-										<ul>
-											<li class="theater-city">
-												<button type="button" class="btn on"><span class="txt">서울</span></button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container" style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<li>
-																		<button id="btn" type="button">강남</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남2</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남3</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남4</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남5</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남6</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남7</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남8</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남2</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남3</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남4</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남5</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남6</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남7</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남8</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남2</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남3</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남4</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남5</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남6</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남7</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">강남8</button>
-																	</li>
-																</ul>
+									</li>
+									<!-- .theater-city -->
+
+									<li class="theater-city">
+										<button type="button" class="btn">
+											<span class="sel-city">경기</span>
+										</button>
+										<div class="depth on">
+											<div class="detail-list" style="max-height: none;">
+												<div class="scroll-box">
+													<div class="container"
+														style="position: relative; top: 0; left: 0;">
+														<ul class="brchNo">
+															<!--
+															<li>
+																<button id="btn" type="button">고양</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양2</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양3</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양4</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양5</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양6</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양7</button>
+															</li>
+															<li>
+																<button id="btn" type="button">고양8</button>
+															</li>
+															-->
+														</ul>
+													</div>
+													<!---->
+													<div id="scrollbar_vertical" class="scrollTools"
+														style="display: block;">
+
+														<div class="draggerContainer">
+															<div id="dragger_vertical" class="dragger"
+																style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
+																<div class="dragger_bar"
+																	style="line-height: 30px;"></div>
 															</div>
-															<div id="scrollbar_vertical" class="scrollTools" style="display: block;">
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger" style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar" style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-															</div>
+															<div class="draggerRail"></div>
 														</div>
+
 													</div>
 												</div>
-											</li><!-- .theater-city -->
-											
-											<li class="theater-city">
-												<button type="button" class="btn on"><span class="txt">경기</span></button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container" style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<li>
-																		<button id="btn" type="button">고양</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양2</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양3</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양4</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양5</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양6</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양7</button>
-																	</li>
-																	<li>
-																		<button id="btn" type="button">고양8</button>
-																	</li>
-																</ul>
-															</div>
-															<div id="scrollbar_vertical" class="scrollTools" style="display: block;">
-																
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger" style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar" style="line-height: 30px; margin-left: 5px;">
-																			
-																		</div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-																
-															</div>
-														</div>
-													</div>
-												</div>
-											</li><!-- .theater-city -->
+											</div>
+										</div>
+									</li>
+									<!-- .theater-city -->
 
 
 
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="choice-time">
-							<div class="choice choice-header">
-								<p>시간</p>
-								<div class="time-check"></div>
-								<div class="movie-check" style="background-color: #fff; height: 298px;"></div>
-								<!--<div class="time-list" style="background-color: #fff; height: 340px;"></div> -->
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				<div class="choice-time">
+					<div class="choice choice-header">
+						<p>시간</p>
+						<div class="time-check"></div>
+						<div class="movie-check"
+							style="background-color: #fff; height: 298px;"></div>
+						<!--<div class="time-list" style="background-color: #fff; height: 340px;"></div> -->
+					</div>
 				</div>
+			</div>
+		</div>
 
-			<script>
+	</div>
+
+	<script>
 				/*
 				const date = new Date();
 				// console.log(date.getFullYear());
@@ -812,6 +897,85 @@
 					}
 			}
 		}
+				var successDay;
+				//날짜 누르면 해당 날짜에 있는 영화들 출력
+				$(".mon").on("click",function(){
+					const dataDay = $(this).attr("data-day");
+					console.log(dataDay);
+
+					$.ajax({
+						url : "/choiceDay.do?dataDay="+dataDay,
+						type : "post",
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+							successDay = data.scheduleStart;
+							console.log(successDay);
+							$(".scroll-container>ul").empty();
+							//$(".scroll-container").text("dataDay: " + dataDay);
+							for(var i=0; i<data.length; i++){
+								console.log(data[i].movieTitle);
+								const li = $("<li>");
+								const btn = $("<button>");
+								
+								li.append(btn);
+								//btn.attr("href","/allMovieList.do?movieNo="+data[i].movieNo);
+								btn.attr("onclick","selMovie(this);");
+								btn.text(data[i].movieTitle);
+								
+								$(".scroll-container>ul").append(li);
+							}
+						}
+					});
+				});
+				//영화 누르면 해당 영화 스케쥴에 있는 지역 나옴
+				function selMovie(button){
+					console.log($(button).text());
+				}
+				
+				
+				
+				//ex)서울 누르면 강남....나옴
+				$(".theater-city").on("click", function () {
+					$(".theater-city").removeClass("active");
+					$(this).addClass("active");
+					const contents = $(".container");
+					contents.hide();
+					const index = $(".theater-city").index(this);
+					contents.eq(index).show();
+				});
+				$(".theater-city").eq(0).click();
+				//서울 누르면 서울 내 있는 지역들 나옴 (ul아래 li,button 생성)
+				$(".btn").on("click", function() {
+					const theaterLocal = $(this).find(".sel-city").text();
+					
+					$.ajax({
+						url : "/selectBranchList.do",
+						type : "get",
+						data : {theaterLocal : theaterLocal},
+						success : function(data) {
+							$(".brchNo").empty();
+							console.log(data);
+							for(var i=0; i<data.length; i++){
+								console.log(data[i]);
+								const li = $("<li>");
+								const btn = $("<button>");
+								
+								li.append(btn);
+								btn.attr("href", "/selectOneTheaterBrch.do?theaterNo=" + data[i].theaterNo);
+								btn.text(data[i].theaterBranch);
+								
+								$(".brchNo").append(li);
+								
+							}
+						}
+					});
+				});
+				$(document).ready(function(){
+					$(".seoul").click();
+				});
+
+				/////////AJAXtest/////////AJAXtest///////////AJAXtest///////////AJAXtest///////
 				function getMega(){
 					console.log("꾹");
 					$.ajax({
@@ -828,23 +992,6 @@
 						}
 					});
 				}
-				
-				$(".mon").on("click",function(){
-					const dataDay = $(this).attr("data-day");
-					console.log(dataDay);
-
-					$.ajax({
-						url : "/choiceDay.do?dataDay="+dataDay,
-						type : "post",
-						dataType : "json",
-						success : function(data){
-							console.log(data);
-						},
-						
-					});
-				});
-				
-				/////////AJAXtest/////////AJAXtest///////////AJAXtest///////////AJAXtest///////
 				$("#jQ5").on("click",function(){
 					const result = $("#result5");
 					result.empty();
@@ -889,40 +1036,11 @@
 				
 
 
-
-				$(".sel-city").on("click", function() {
-					const theaterLocal = $(this).text();
-					
-					$.ajax({
-						url : "/selectBranchList.do",
-						type : "get",
-						data : {theaterLocal : theaterLocal},
-						success : function(data) {
-							$(".brchNo").empty();
-							console.log(data);
-							for(var i=0; i<data.length; i++){
-								console.log(data[i]);
-								const li = $("<li>");
-								const a = $("<a>");
-								
-								li.append(a);
-								a.attr("href", "/selectOneTheater.do?theaterNo=" + data[i].theaterNo);
-								a.text(data[i].theaterBranch);
-								
-								$(".brchNo").append(li);
-								
-							}
-						}
-					});
-				});
-				$(document).ready(function(){
-					$(".seoul").click();
-				});
 	
 				
 			</script>
-			<script src="/resources/js/seat.js"></script>
-			<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-		</body>
+	<script src="/resources/js/seat.js"></script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
 
-		</html>
+</html>
