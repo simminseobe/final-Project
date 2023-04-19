@@ -12,6 +12,7 @@
 </head>
 <body>
 	<div class="moviePostFrmAllWrap" style="width:1100px; margin: 0 auto;">
+	<form action="/moviePostInsert.do" method="post" enctype="multipart/form-data">
         <div class="moviePostTit"  style="margin-top: 100px;">
             <h2>무비포스트 작성</h2>
         </div>
@@ -37,24 +38,24 @@
                     <div class="postLeftSideSel content-wrap">
                         <div class="tabcontent stillCut">
                         	<c:forEach items="${movieFileAll}" var="movFile">
-                
+        
                                 <img class="stillCutImg" src="/resources/upload/movie/${movFile.movieFileName}" style="width: 135px; height:194px; margin: 10px 5px;">
                             
                             </c:forEach>
                         </div>
                         <div class="tabcontent previewCut"style="display: none">
                             <c:forEach items="${mvList }" var="mv">
-                            	<video width="220px" height="136px" controls>
-                            		<source src="${mv.videoLink }">
+                            	<video class="previewCutVideo" width="220px" height="136px" controls>
+                            		<source class="previewCutVideoSource" src="${mv.videoLink }">
                             	</video>
 			            	</c:forEach>
                         </div>
                         <div class="tabcontent myphotoCut" style="text-align: left; display: none;">
                         	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
-                        	<p>※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                        </div>
-                        <div class="innerBtnWrap">
-                            <button type="button">등록</button>
+                        	<p style="margin-top: 10px;">※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
+                            <div class="innerBtnWrap" style="margin-top: 15px; display: flex; justify-content: center;">
+                                <button type="button" id="addMyPhotoImgBtn" onclick="myPhotoUpload();">등록</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,6 +67,9 @@
                 <div class="postRightSideContent">
                     <div class="postRightSideSel">
                         <img class="current-img"  src="img/bg-img-select.png">
+                        <video id="previewCutVideo" width="400px" height="252px" controls style="display: none;">
+                            <source >
+                        </video>
                     </div>
                     <div class="postRightSideTxt">
                         <textarea style="padding: 5px; width: 400px; height: 72px; box-sizing: border-box; resize: none;" placeholder="내용을 입력해주세요."></textarea>
@@ -84,6 +88,7 @@
                 <button type="button">취소</button>
             </div>
         </div>
+        </form><!-- form끝 -->
     </div>
     <script src = "/resources/js/moviePostFrm.js"></script>
 </body>
