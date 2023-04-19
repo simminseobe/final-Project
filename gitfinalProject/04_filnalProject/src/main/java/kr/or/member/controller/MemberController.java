@@ -376,29 +376,53 @@ public class MemberController {
             e.printStackTrace();
         }
 
+        HashMap<String, Object> userInfo = getUserInfo(access_Token);
+        System.out.println("userInfo : " + userInfo);
+		//System.out.println("###access_Token#### : " + access_Token);
+		//System.out.println("###userInfo - nickname#### : " + userInfo.get("nickname"));
+		//System.out.println("###userInfo - email#### : " + userInfo.get("email"));
+        
         // 로그인 처리
         // Member VO의 memberId에 email 값을 대입
         // 이때, memberPw는 Null 값을 갖게 끔 설정
         // 왜냐하면 email(memberId)의 memberPw가 일치 할 때 로그인 수행
         
-        //String access_Token = kakao.getAccessToken(code);
-        //HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+		String kakao = userInfo.toString();
+		System.out.println("kakao : " + kakao); // ok - 문자열로 나옴
+		
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(kakao);
+        
+        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+        
+        System.out.println("properties : " + properties);
+        System.out.println("kakao_account : " + kakao_account);
+        
+		//필요한 정보 추출하는 코드(여기선 nickname, email)
+        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+        String email = kakao_account.getAsJsonObject().get("email").getAsString();
+        
+        System.out.println("nickname : " + nickname);
+        System.out.println("email : " + email);
         
         member.setMemberId(email);
-        member.setMemberPw("");
+        member.setMemberName(nickname);
         Member m = service.selectOneMember(member);
         if(m != null) {
-        	// 로그인 수행
-            session.setAttribute("userId", userInfo.get("email"));
-            session.setAttribute("access_Token", access_Token);
-        	return "";
+        	// 로그인 수행 -> redirect:/ 이동??
+        	session.setAttribute("m", m);
+        	session.setAttribute("access_Token", access_Token);
+        	return "redirect:/";
         } else {
         	// 회원가입 페이지로 이동
         	// 이때, 회원가입 jsp를 따로 만들어 주어야 함
-        	return "";
+			// memberId -- email
+			// return -> 새로만든 회원가입 페이지 jsp로 리턴???
+        	return "member/kakaoJoinFrm";
         }
         
-        return access_Token;
+        //return access_Token;
     }
 	
 	// 카카오 로그인 시 회원의 정보 조회
@@ -416,7 +440,7 @@ public class MemberController {
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            System.out.println("responseCode111111 : " + responseCode);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -441,7 +465,8 @@ public class MemberController {
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
 
-            
+            userInfo.get(email);
+            System.out.println("email");
             
         } catch (IOException e) {
             e.printStackTrace();
