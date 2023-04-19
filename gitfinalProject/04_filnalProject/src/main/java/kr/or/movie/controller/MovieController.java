@@ -102,4 +102,11 @@ public class MovieController {
 		
 	}
 	 */
+	@RequestMapping(value="/moviePostInsert.do")
+	public String moviePostInsert() {
+		return null;
+		
+	}
+	
+	
 }
