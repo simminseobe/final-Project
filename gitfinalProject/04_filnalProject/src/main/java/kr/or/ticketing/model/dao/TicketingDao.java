@@ -1,6 +1,7 @@
 package kr.or.ticketing.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,5 +23,14 @@ public class TicketingDao {
 	public Theater selectOneTheaterBrch(int theaterNo) {
 		Theater theater = sqlSession.selectOne("theater.selectOneTheaterBrch", theaterNo);
 		return theater;
+	}
+
+	public int choiceDayTheater(String movieTitle, String choiceDataDay) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("movieTitle", movieTitle);
+		map.put("choiceDataDay", choiceDataDay);
+		System.out.println(map);
+		int result = sqlSession.selectOne("ticketing.choiceDayTheater",map);
+		return result;
 	}
 }

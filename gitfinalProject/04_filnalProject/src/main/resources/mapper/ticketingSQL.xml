@@ -24,5 +24,15 @@
 				enroll_member as EnrollMember		
 	  from theater_tbl
 	  where theater_no = #{_parameter}
-  </select>
+</select>
+<select id="choiceDayTheater" parameterType="map" resultType="_int">
+	SELECT 
+		COUNT(*) 
+	FROM 
+		THEATER_TBL 
+	JOIN SCHEDULE_TBL USING(THEATER_BRANCH) 
+	WHERE MOVIE_TITLE = #{movieTitle} 
+		AND to_CHAR(SCHEDULE_START, 'DD/MM/YYYY') 
+		= #{choiceDataDay} GROUP BY THEATER_LOCAL
+</select>  
 </mapper>

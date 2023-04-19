@@ -1,6 +1,7 @@
 package kr.or.ticketing.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,14 @@ public class TicketingController {
 	public String selectOneTheater(int theaterNo, Model model) {
 		Theater theater = service.selectOntTheaterBrch(theaterNo);
 		model.addAttribute("theater", theater);
-		return "admin/ticketing";
+		return "admin/detailTheater";
+	}
+	@ResponseBody
+	@RequestMapping(value="/choiceDayTheater.do", produces="application/json;charset=utf-8")
+	public String choiceDayTheater(String movieTitle, String choiceDataDay) {
+		//System.out.println(movieTitle+"&"+choiceDataDay);
+		int result = service.choiceDayTheater(movieTitle,choiceDataDay);
+		return new Gson().toJson(result);
 	}
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")

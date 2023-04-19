@@ -23,4 +23,9 @@ public class TicketingService {
 		Theater theater = dao.selectOneTheaterBrch(theaterNo);
 		return theater;
 	}
+
+	public int choiceDayTheater(String movieTitle, String choiceDataDay) {
+		int result= dao.choiceDayTheater(movieTitle,choiceDataDay);
+		return result;
+	}
 }
