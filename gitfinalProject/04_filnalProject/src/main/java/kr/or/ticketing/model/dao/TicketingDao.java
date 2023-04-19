@@ -10,14 +10,17 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.ticketing.model.vo.TheaterLocalCount;
+
 @Repository
 public class TicketingDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<Schedule> selectSchedule(String dataDay) {
-		List list = sqlSession.selectList("schedule.selectSchedule",dataDay);
-		return (ArrayList<Schedule>)list;
+		List list = sqlSession.selectList("ticketing.selectSchedule", dataDay);
+
+		return (ArrayList<Schedule>) list;
 	}
 
 	public Theater selectOneTheaterBrch(int theaterNo) {
@@ -25,12 +28,9 @@ public class TicketingDao {
 		return theater;
 	}
 
-	public int choiceDayTheater(String movieTitle, String choiceDataDay) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("movieTitle", movieTitle);
-		map.put("choiceDataDay", choiceDataDay);
-		System.out.println(map);
-		int result = sqlSession.selectOne("ticketing.choiceDayTheater",map);
-		return result;
+	public ArrayList<TheaterLocalCount> choiceDayTheater(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("ticketing.choiceDayTheater", map);
+
+		return (ArrayList<TheaterLocalCount>) list;
 	}
 }
