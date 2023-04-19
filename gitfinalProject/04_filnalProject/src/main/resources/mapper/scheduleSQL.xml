@@ -13,7 +13,7 @@
 	where
 		to_char(schedule_start, 'dd/mm/yyyy') = #{_parameter}
 </select>
-<select id="selectScheduleCalendar" resultType="schedule">
+<select id="selectScheduleCalendar" parameterType="String" resultType="schedule">
 	select
 		schedule_no as scheduleNo,
 		schedule_start as scheduleStart,
@@ -22,5 +22,8 @@
 		theater_branch as theaterBranch
 	from
 		schedule_tbl
+		<if test="_parameter != null">
+			where theater_branch = #{_parameter}
+		</if>
 </select>
 </mapper>

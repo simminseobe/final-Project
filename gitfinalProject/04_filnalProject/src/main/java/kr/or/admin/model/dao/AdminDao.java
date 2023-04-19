@@ -133,8 +133,8 @@ public class AdminDao {
 		return result;
 	}
 
-	public List<Schedule> selectScheduleCalendar() {
-		List list = sqlSession.selectList("schedule.selectScheduleCalendar");
+	public List<Schedule> selectScheduleCalendar(String theaterBranch) {
+		List list = sqlSession.selectList("schedule.selectScheduleCalendar", theaterBranch);
 
 		return (List) list;
 	}
