@@ -33,4 +33,16 @@ public class TicketingDao {
 
 		return (ArrayList<TheaterLocalCount>) list;
 	}
+
+	public ArrayList<String> choiceLocalBranch(HashMap<String, Object> map) {
+		System.out.println(map);
+		List list = sqlSession.selectList("ticketing.choiceLocalBranch",map);
+		return (ArrayList<String>) list;
+	}
+
+	public ArrayList<String> choiceBranchSchedule(HashMap<String, Object> map) {
+		System.out.println(map);
+		List list = sqlSession.selectList("ticketing.choiceBranchSchedule",map);
+		return (ArrayList<String>) list;
+	}
 }

@@ -26,5 +26,21 @@
 	where movie_title = #{movieTitle} 
 	and to_char(schedule_start, 'DD/MM/YYYY') = #{choiceDataDay} 
 	group by theater_local
-</select>  
+</select>
+<select id="choiceLocalBranch" parameterType="map" resultType="string">
+	SELECT 
+		THEATER_BRANCH 
+	FROM 
+		THEATER_TBL 
+	JOIN SCHEDULE_TBL USING(THEATER_BRANCH) 
+	WHERE 
+		MOVIE_TITLE = #{movieTitle} 
+		AND 
+		to_CHAR(SCHEDULE_START, 'DD/MM/YYYY') = #{choiceDataDay} 
+		AND 
+		THEATER_LOCAL = #{theaterLocal}
+</select>
+<selet id="choiceBranchSchedule" parameterType="map" resultType="string">
+
+</selet>
 </mapper>

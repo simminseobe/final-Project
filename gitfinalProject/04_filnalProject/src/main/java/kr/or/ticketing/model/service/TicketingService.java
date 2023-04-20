@@ -37,4 +37,29 @@ public class TicketingService {
 
 		return list;
 	}
+
+	public ArrayList<String> choiceLocalBranch(String movieTitle, String choiceDataDay,
+			String theaterLocal) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("movieTitle", movieTitle);
+		map.put("choiceDataDay", choiceDataDay);
+		map.put("theaterLocal", theaterLocal);
+
+		ArrayList<String> list = dao.choiceLocalBranch(map);
+
+		return list;
+	}
+
+	public ArrayList<String> choiceBranchSchedule(String movieTitle, String choiceDataDay, String theaterBranch) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("movieTitle", movieTitle);
+		map.put("choiceDataDay", choiceDataDay);
+		map.put("theaterLocal", theaterBranch);
+
+		ArrayList<String> list = dao.choiceBranchSchedule(map);
+
+		return list;
+	}
 }
