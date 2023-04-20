@@ -211,6 +211,7 @@
 				.scroll>ul {
 					position: relative;
 					height: 100%;
+					overflow: hidden;
 				}
 
 				.scroll>ul::after {
@@ -248,12 +249,17 @@
 				.scroll>ul>li>button {
 					display: block;
 					position: relative;
-					width: 100%;
+					
 					min-height: 28px;
-					padding: 3px 20px 3px 3px;
+					padding: 3px;
 					text-align: left;
 					background-color: transparent;
 					letter-spacing: 0;
+					float: left;
+				}
+				.scroll>ul>li>span{
+					float: left;
+					padding-top: 9px;
 				}
 
 				.scroll button {
@@ -425,6 +431,16 @@
 	margin: 0 auto;
 }
 */
+.scroll>ul>li{
+	overflow: hidden;
+}
+.scroll>ul>li>button{
+	float: left;
+}
+.scroll>ul>li>span{
+	float: left;
+}
+
 			</style>
 		</head>
 
@@ -515,6 +531,7 @@
 								<div class="theater-list" style="background-color: #fff; height: 340px;">
 									<div class="scroll" id="brchList">
 										<ul>
+											<!--
 											<li class="theater-city active">
 												<button type="button" class="btn">
 													<span class="sel-city seoul">서울</span>
@@ -525,82 +542,18 @@
 															<div class="container"
 																style="position: relative; top: 0; left: 0;">
 																<ul class="brchNo">
-																	<!--
 															<li>
 																<button id="btn" type="button">강남</button>
 															</li>
 															<li>
 																<button id="btn" type="button">강남2</button>
 															</li>
-															<li>
-																<button id="btn" type="button">강남3</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남4</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남5</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남6</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남7</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남8</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남2</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남3</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남4</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남5</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남6</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남7</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남8</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남2</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남3</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남4</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남5</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남6</button>
-															</li>
-															<li>
-																<button id="btn" type="button">강남7</button>
-															</li>
+															
 															<li>
 																<button id="btn" type="button">강남100</button>
 															</li>
-															-->
-																</ul>
-															</div>
+														</ul>
+													</div>
 															<div id="scrollbar_vertical" class="scrollTools"
 																style="display: block;">
 																<div class="draggerContainer">
@@ -615,235 +568,16 @@
 														</div>
 													</div>
 												</div>
+												
 											</li>
-											<!-- .theater-city -->
-
-											<li class="theater-city">
-												<button type="button" class="btn">
-													<span class="sel-city">경기</span>
-												</button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<!--
-															<li>
-																<button id="btn" type="button">고양</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양2</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양3</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양4</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양5</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양6</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양7</button>
-															</li>
-															<li>
-																<button id="btn" type="button">고양8</button>
-															</li>
-															-->
-																</ul>
-															</div>
-															<!---->
-															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- .theater-city -->
-
-											<li class="theater-city">
-												<button type="button" class="btn">
-													<span class="sel-city">인천</span>
-												</button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<!--<li><button></button></li>-->
-																</ul>
-															</div>
-															<!---->
-															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- .theater-city -->
-
-											<li class="theater-city">
-												<button type="button" class="btn">
-													<span class="sel-city">대전/충청/세종</span>
-												</button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<!--<li><button></button></li>-->
-																</ul>
-															</div>
-															<!---->
-															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- .theater-city -->
-
-											<li class="theater-city">
-												<button type="button" class="btn">
-													<span class="sel-city">부산/대구/경상</span>
-												</button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<!--<li><button></button></li>-->
-																</ul>
-															</div>
-															<!---->
-															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- .theater-city -->
-
-											<li class="theater-city">
-												<button type="button" class="btn">
-													<span class="sel-city">광주/전라</span>
-												</button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<!--<li><button></button></li>-->
-																</ul>
-															</div>
-															<!---->
-															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- .theater-city -->
-
-											<li class="theater-city">
-												<button type="button" class="btn">
-													<span class="sel-city">강원</span>
-												</button>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
-																	<!--<li><button></button></li>-->
-																</ul>
-															</div>
-															<!---->
-															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- .theater-city -->
-
-
-
-
+											
+											
+											
+											
+											
+											
+											
+										-->
 										</ul>
 									</div>
 								</div>
@@ -1099,10 +833,11 @@
 						}
 					});
 				});
-
-				// 영화 누르면 해당 영화 이름(movieTitle) 출력
+				var movieTitle;
+				var theaterLocal;
+				// 영화 누르면 영화에 저장되어있는 상영지역 출력
 				function selMovie(button) {
-					const movieTitle = $(button).text();
+					movieTitle = $(button).text();
 					$.ajax({
 						url: "/choiceDayTheater.do",
 						type: "post",
@@ -1110,9 +845,41 @@
 						dataType: "json",
 						success: function (data) {
 							console.log(data);
+							$(".scroll>ul").empty();
+							for (var i = 0; i < data.length; i++) {
+								const li = $("<li>");
+								const btn = $("<button>");
+								const span = $("<span>");
+									
+								li.append(btn);
+								li.append(span);
+								
+								btn.text(data[i].theaterLocal);
+								span.text(" ("+data[i].count+")");
+								btn.attr("onclick","selBranch(this);");
+								
+								$(".scroll>ul").append(li);
+								
+
+								theaterLocal = btn.text();
+								console.log(theaterLocal+"이거 누름");
+							}
 						}
 					});
 				}
+				function selBranch(button){
+					theaterBranch = $(button).text();
+					console.log(theaterBranch+"dddd");
+					$.ajax({
+						url : "/choiceLocalBranch.do",
+						type : "post",
+						data : {},
+					});
+				}
+				
+				
+				
+
 
 				//ex)서울 누르면 강남....나옴
 				// $(".theater-city").on("click", function () {
