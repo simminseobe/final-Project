@@ -15,6 +15,7 @@ import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.service.TicketingService;
+import kr.or.ticketing.model.vo.TheaterLocalCount;
 
 @Controller
 public class TicketingController {
@@ -46,20 +47,35 @@ public class TicketingController {
 	public String paymentMethod() {
 		return "ticketing/paymentMethod";
 	}
+
 	@ResponseBody
-	@RequestMapping(value="/choiceDay.do", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/choiceDay.do", produces = "application/json;charset=utf-8")
 	public String selectSchedule(String dataDay) {
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
+
 		list = service.selectSchedule(dataDay);
+
 		return new Gson().toJson(list);
 	}
-	
-	@RequestMapping(value="/selectOneTheaterBrch.do")
+
+	@RequestMapping(value = "/selectOneTheaterBrch.do")
 	public String selectOneTheater(int theaterNo, Model model) {
 		Theater theater = service.selectOntTheaterBrch(theaterNo);
 		model.addAttribute("theater", theater);
-		return "admin/ticketing";
+		return "admin/detailTheater";
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/choiceDayTheater.do", produces = "application/json;charset=utf-8")
+	public String choiceDayTheater(String movieTitle, String choiceDataDay) {
+		ArrayList<TheaterLocalCount> list = service.choiceDayTheater(movieTitle, choiceDataDay);
+
+		System.out.println(movieTitle);
+		System.out.println(choiceDataDay);
+
+		return new Gson().toJson(list);
+	}
+
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")
 	public String testPage() {

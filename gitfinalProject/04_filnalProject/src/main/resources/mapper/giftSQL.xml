@@ -1,34 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper  namespace="gift">
+	<!-- category -->
 	<insert id="insertCategory" parameterType="pc">
-		insert into product_category values (pc_seq.nextval, #{pcCategory}, #{pcNo}, #{pcDepth})
+		insert into product_category values (pc_seq.nextval, #{pcCategory})
+		<selectKey resultType="_int" order="AFTER" keyProperty="pcNo">
+			select max(pc_no) from product_category
+		</selectKey>
 	</insert>
+	<!-- insert product item -->
+	<insert id="insertProduct" parameterType="product">
+		insert into product values(product_seq.nextval, #{pcNo}, #{productName}, #{productPrice}, #{productDetail}, #{productCompany}, #{shipping}, #{productStatus},#{simpleInfo})
+		<selectKey resultType="_int" order="AFTER" keyProperty="productNo">
+			select max(product_no) from product
+		</selectKey>
+	</insert>
+	<insert id="insertProductPhoto" parameterType="pp">
+		insert into product_photo values(pp_seq.nextval, #{productNo}, #{ppOrder}, #{ppPath})
+	</insert>
+	<delete id="deleteCategory" parameterType="pc">
+		delete from product_category where pc_no = #{pcNo}
+	</delete>
+	<delete id="deleteProduct" parameterType="_int">
+		delete from product where product_no = #{_parameter}
+	</delete>
+	<update id="updateCategory" parameterType="pc">
+		update product_category set pc_category = #{pcCategory} where pc_no = #{pcNo}
+	</update>
 	<select id="selectAllCategory" resultType="pc">
 		select 
 			pc_no pcNo,
-			pc_category pcCategory,
-			pc_step pcStep,
-			pc_depth pcDepth
+			pc_category pcCategory
 		from product_category
-		where pc_step is not null
+		order by 1 DESC
+	</select>
+	<select id="selectAllProduct" resultType="product">
+		select
+			product_no as productNo,
+			pc_no as pcNo,
+			product_name as productName,
+			product_price as productPrice,
+			product_company as productCompany,
+			shipping,
+			product_status as productStatus,
+			simple_info as simpleInfo
+		from product
+	</select>
+	<select id="selectOneMainImage" parameterType="_int" resultType="pp">
+		select
+			pp_no as ppNo,
+			product_no as productNo,
+			pp_order as ppOrder,
+			pp_path as ppPath
+		from product_photo
+		where product_no = #{_parameter} and pp_order = 1
+		
 	</select>
 	<select id="selectOneCategory" resultType="pc" parameterType="_int">
 		select 
 			pc_no pcNo,
-			pc_category pcCategory,
-			pc_step pcStep,
-			pc_depth pcDepth
+			pc_category pcCategory
 		from product_category
 		where pc_no = #{_parameter}
 	</select>
 	<select id="selectStepCategoryList" resultType="pc" parameterType="_int">
-		select 
+		select
 			pc_no pcNo,
-			pc_category pcCategory,
-			pc_step pcStep,
-			pc_depth pcDepth
+			pc_category pcCategory
 		from product_category
-		where pc_step = #{_parameter}
+		order by 1 DESC
+	</select>
+	<select id="getCategoryItems" resultType="product" parameterType="_int">
+		select
+			product_no as productNo,
+			pc_no as pcNo,
+			product_name as productName,
+			product_price as productPrice,
+			product_company as productCompany,
+			shipping,
+			product_status as productStatus,
+			simple_info as simpleInfo
+		from product
+		where 
+			pc_no = #{_parameter}
+	</select>
+	<select id="selectOneProduct" parameterType="_int" resultType="product">
+		select
+			product_no as productNo,
+			pc_no as pcNo,
+			product_name as productName,
+			product_price as productPrice,
+			product_company as productCompany,
+			shipping,
+			product_status as productStatus,
+			simple_info as simpleInfo
+		from product
+		where product_no = #{_parameter}
+	</select>
+	<select id="selectAllProductImage" parameterType="_int" resultType="pp">
+		select
+			pp_no as ppNo,
+			product_no as productNo,
+			pp_order as ppOrder,
+			pp_path as ppPath
+		from product_photo
+		where product_no = #{_parameter}
 	</select>
 </mapper>

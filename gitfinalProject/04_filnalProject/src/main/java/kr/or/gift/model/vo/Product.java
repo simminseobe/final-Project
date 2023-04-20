@@ -1,5 +1,7 @@
 package kr.or.gift.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,11 @@ public class Product {
 	private String productDetail;
 	private String productCompany;
 	private int shipping;
+	private int productStatus;
+	private String simpleInfo;
 	
-	private String pcCategory;
+	
+	private ArrayList<ProductCategory> categorys;
+	private ProductPhoto mainImage;
+	private ArrayList<ProductPhoto> images;
 }

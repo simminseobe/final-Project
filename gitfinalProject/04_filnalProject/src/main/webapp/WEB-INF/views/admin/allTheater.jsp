@@ -137,6 +137,7 @@
 					<ul class="theater-tabs">
 						<li class="theater-city active-tab"
 							style="border-top-left-radius: 5px; border-left: #555; border-top: #555;">
+							
 							<button type="button" class="sel-city seoul">서울</button>
 							<div class="tab-content" id="tab-content">
 								<ul class="brchNo">

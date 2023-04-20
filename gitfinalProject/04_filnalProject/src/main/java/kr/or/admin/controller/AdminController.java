@@ -51,7 +51,7 @@ public class AdminController {
 		ArrayList<MovieFile> postList = new ArrayList<MovieFile>();
 
 		// 파일 서버에 업로드
-		if (movieMain != null && !moviePoster[0].isEmpty()) {
+		if (!movieMain.isEmpty() && !moviePoster[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/movie/");
 
 			String mainFilename = movieMain.getOriginalFilename();
@@ -122,7 +122,7 @@ public class AdminController {
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/movie/");
 
 		// 파일 서버에 업로드
-		if (movieMain != null && !moviePoster[0].isEmpty()) {
+		if (!movieMain.isEmpty() && !moviePoster[0].isEmpty()) {
 			String mainFilename = movieMain.getOriginalFilename();
 			String mainFilepath = fileManager.upload(savePath, movieMain);
 
@@ -140,6 +140,26 @@ public class AdminController {
 
 				postList.add(postFile);
 			}
+		} else if (!moviePoster[0].isEmpty()) {
+			for (MultipartFile file : moviePoster) {
+				String filename = file.getOriginalFilename();
+				String upfilepath = fileManager.upload(savePath, file);
+
+				MovieFile postFile = new MovieFile();
+
+				postFile.setMovieFileName(filename);
+				postFile.setMovieFilePath(upfilepath);
+
+				postList.add(postFile);
+			}
+		} else if (!movieMain.isEmpty()) {
+			String mainFilename = movieMain.getOriginalFilename();
+			String mainFilepath = fileManager.upload(savePath, movieMain);
+
+			mainFile.setMovieFileName(mainFilename);
+			mainFile.setMovieFilePath(mainFilepath);
+		} else {
+			System.out.println("파일 추가 없음");
 		}
 
 		if (movieVideo != null) {
@@ -203,8 +223,6 @@ public class AdminController {
 			return "ridirect:/";
 		}
 	}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////승훈
 
 	@RequestMapping(value = "/deleteMovie.do")
 	public String deleteMovie(int movieNo, HttpServletRequest request) {
@@ -295,35 +313,11 @@ public class AdminController {
 		return "admin/screenSchedule";
 	}
 
-	@RequestMapping(value = "/allTheater.do")
-	public String allTheater() {
-		return "admin/allTheater";
-	}
-
-	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
-
-	public String selectOneTheater(int theaterNo, Model model) {
-		Theater theater = service.selectOntTheater(theaterNo);
-		model.addAttribute("theater", theater);
-		return "admin/detailTheater";
-	}
-	/*
-	 * @RequestMapping(value = "/detailTheater.do") // 임시 (no줘서 이동할거) public String
-	 * detailTheater() { return "admin/detailTheater"; }
-	 */
-
-	@ResponseBody
-	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
-	public String selectBranchList(String theaterLocal) {
-		ArrayList<Theater> list = new ArrayList<Theater>();
-		list = service.selectBranchList(theaterLocal);
-		return new Gson().toJson(list);
-	}
-
 	@ResponseBody
 	@RequestMapping(value = "/selectScheduleCalendar.do", produces = "application/json;charset=utf-8")
-	public String selectScheduleCalendar() {
-		List<Schedule> list = service.selectScheduleCalendar();
+	public String selectScheduleCalendar(String theaterBranch) {
+		System.out.println(theaterBranch);
+		List<Schedule> list = service.selectScheduleCalendar(theaterBranch);
 
 		Gson gson = new Gson();
 		JsonArray jsonArray = new JsonArray();
@@ -340,5 +334,26 @@ public class AdminController {
 		}
 
 		return gson.toJson(jsonArray);
+	}
+
+	@RequestMapping(value = "/allTheater.do")
+	public String allTheater() {
+		return "admin/allTheater";
+	}
+
+	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
+
+	public String selectOneTheater(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheater(theaterNo);
+		model.addAttribute("theater", theater);
+		return "admin/detailTheater";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
+	public String selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		list = service.selectBranchList(theaterLocal);
+		return new Gson().toJson(list);
 	}
 }

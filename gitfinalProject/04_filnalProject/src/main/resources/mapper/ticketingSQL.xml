@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ticketing">
-<select id="selectSchedule" parameterType="string" resultType="schedule">
-	select
-		schedule_no as scheduleNo,
-		schedule_start as scheduleStart,
-		schedule_end as scheduleEnd,
-		movuie_title as movieTitle,
-		theater_branch as theaterBranch
-	from
-		schedule_tbl
-	where
-		to_char(schedule_start, 'dd/mm/yyyy') = #{_parameter}
+<select id="selectSchedule" parameterType="string" resultType="map">
+	select distinct movie_title
+	from schedule_tbl 
+	join movie_tbl using(movie_title) 
+	where to_char(schedule_start, 'dd/mm/yyyy') = #{_parameter}
 </select>
 <select id="selectOneTheaterBrch" parameterType="_int" resultType="theater">
   	select 
@@ -24,5 +18,13 @@
 				enroll_member as EnrollMember		
 	  from theater_tbl
 	  where theater_no = #{_parameter}
-  </select>
+</select>
+<select id="choiceDayTheater" parameterType="map" resultType="theaterLocalCount">
+	select count(*) as count, theater_local as theaterLocal
+	from theater_tbl  
+	join schedule_tbl using(theater_branch) 
+	where movie_title = #{movieTitle} 
+	and to_char(schedule_start, 'DD/MM/YYYY') = #{choiceDataDay} 
+	group by theater_local
+</select>  
 </mapper>

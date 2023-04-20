@@ -10,6 +10,4 @@ import lombok.NoArgsConstructor;
 public class ProductCategory {
 	private int pcNo;
 	private String pcCategory;
-	private int pcStep;
-	private int pcDepth;
 }

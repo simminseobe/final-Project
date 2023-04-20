@@ -6,7 +6,7 @@
 <div id="layoutSidenav">
 <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageSideBar.jsp" />
 <div id="admin-main-content">
-    <h1>gift insert form</h1>
+    <h1>기프트샵 상품관리</h1>
 
 </div>
 </div>

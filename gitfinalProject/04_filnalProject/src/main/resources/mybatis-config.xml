@@ -19,5 +19,7 @@
 		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>
 		<typeAlias type="kr.or.ticketing.model.vo.Ticketing" alias="ticketing"/>
 		<typeAlias type="kr.or.admin.model.vo.Schedule" alias="schedule"/>
+		<typeAlias type="kr.or.ticketing.model.vo.TheaterLocalCount" alias="theaterLocalCount"/>
+		<typeAlias type="kr.or.gift.model.vo.ProductPhoto" alias="pp"/>
 	</typeAliases>
 </configuration>
