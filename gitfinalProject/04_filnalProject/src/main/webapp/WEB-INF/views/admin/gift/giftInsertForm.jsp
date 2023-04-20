@@ -75,6 +75,14 @@
                 </td>
             </tr>
             <tr>
+                <th>
+                    상품 간단설명
+                </th>
+                <td>
+                    <input type="text" name="simpleInfo">
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2">상품상세설명</td>
             </tr>
             <tr>
@@ -95,7 +103,7 @@
                 </td>
             </tr>
             <tr>
-                <th colspan="2"><button type="submit">submit</button></th>
+                <th colspan="2"><button class="my-btn my-blue" type="submit">submit</button></th>
             </tr>
         </table>
     </div>
@@ -113,7 +121,6 @@
             start: (e, ui) => {
                 img = ''
                 index = -1
-                console.log(index)
                 const files = document.querySelector('#file-input').files;
                 //이동 시작과 동시에 실행
                 const pickImgLi = ui.item[0]
@@ -125,7 +132,7 @@
                 img = array.splice(index,1)
             },
             change: ui => {
-                console.log(ui)
+                // console.log(ui)
             },
             stop: (e, ui) => {
                 //드래그 종료 시점에서 실행
@@ -144,10 +151,10 @@
                 // 이동 마친 filelist
                 // console.log(document.querySelector('#file-input').files)
             }
-        });
-        $("#sortable").disableSelection();
+        })
+        $("#sortable").disableSelection()
     })
-    //remove image
+    //image handlering
     const handler = {
             init() {
                 const fileInput = document.querySelector('#file-input');
@@ -171,21 +178,21 @@
             },
             removeFile: () => {
                 document.addEventListener('click', (e) => {
-                    if(e.target.className !== 'file-remove') return;
-                    const removeTargetId = e.target.dataset.index;
-                    const removeTarget = document.getElementById(removeTargetId);
-                    const files = document.querySelector('#file-input').files;
+                    if(e.target.className !== 'file-remove') return
+                    const removeTargetId = e.target.dataset.index
+                    const removeTarget = document.getElementById(removeTargetId)
+                    const files = document.querySelector('#file-input').files
                     //file 객체는 그냥 수정이 불가능해서 아래처럼 바로 수정하려니까 안되더라
                     //document.querySelector('#file-input').files = Array.from(files).filter(file => file.lastModified !== removeTarget);
                     //so I used DataTransfer Object 
-                    const dataTranster = new DataTransfer();
+                    const dataTranster = new DataTransfer()
                     Array.from(files)
                         .filter(file => file.lastModified != removeTargetId)
                         .forEach(file => {
                         dataTranster.items.add(file);
-                    });
-                    document.querySelector('#file-input').files = dataTranster.files;
-                    removeTarget.remove();
+                    })
+                    document.querySelector('#file-input').files = dataTranster.files
+                    removeTarget.remove()
                 })
             }
         }

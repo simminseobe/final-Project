@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class ProductPhoto {
 	private int ppNo;
 	private int productNo;
-	private int pp_order;
+	private int ppOrder;
 	private String ppPath;
 }
