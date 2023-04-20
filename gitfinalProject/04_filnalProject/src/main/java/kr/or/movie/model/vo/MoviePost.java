@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MoviePost {
 	private int moviePostNo;
+	private int movieNo;
+	private int movieVideoNo;
+	private int movieFileNo;
 	private String memberId;
 	private String movieTitle;
 	private String moviePostContent;

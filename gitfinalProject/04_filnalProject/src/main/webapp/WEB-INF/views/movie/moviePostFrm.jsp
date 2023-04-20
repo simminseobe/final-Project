@@ -18,9 +18,13 @@
         </div>
         <div class="moviePostSubwrap">
             <div class="postSubLeft">
-                <h2>영화제목</h2>
+                <h2>${mov.movieTitle }</h2>
             </div>
             <div class="postSubRight">
+			<<input type="text" name="movieTitle" value="${mov.movieTitle }" style="display:none;">
+			<input type="text"  name="movieNo" value="${mov.movieNo }" style="display:none;">
+			<input type="text" name="memberId" value="${sessionScope.m.memberId }" style="display:none;">
+			
                 <button type="button">다시선택</button>
             </div>
         </div>
@@ -38,9 +42,8 @@
                     <div class="postLeftSideSel content-wrap">
                         <div class="tabcontent stillCut">
                         	<c:forEach items="${movieFileAll}" var="movFile">
-        
                                 <img class="stillCutImg" src="/resources/upload/movie/${movFile.movieFileName}" style="width: 135px; height:194px; margin: 10px 5px;">
-                            
+                                <input id="movieFileNo1" value="${movFile.movieFileNo }"  disabled>
                             </c:forEach>
                         </div>
                         <div class="tabcontent previewCut"style="display: none">
@@ -48,9 +51,10 @@
                             	<video class="previewCutVideo" width="220px" height="136px" controls>
                             		<source class="previewCutVideoSource" src="${mv.videoLink }">
                             	</video>
+                            	<input id="movieVideoNo1" value="${mv.videoNo }"  disabled>
 			            	</c:forEach>
                         </div>
-                        <div class="tabcontent myphotoCut" style="text-align: left; display: none;">
+                        <div class="tabcontent myphotoCut" style="text-align: left; ">
                         	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
                         	<p style="margin-top: 10px;">※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
                             <div class="innerBtnWrap" style="margin-top: 15px; display: flex; justify-content: center;">
@@ -66,23 +70,25 @@
                 </div>
                 <div class="postRightSideContent">
                     <div class="postRightSideSel">
-                        <img class="current-img"  src="img/bg-img-select.png">
+                        <input type="image" class="current-img"  src="img/bg-img-select.png">
                         <video id="previewCutVideo" width="400px" height="252px" controls style="display: none;">
                             <source >
                         </video>
+                        <input class="movieFileNo" name="movieFileNo">
+                        <input name="movieVideoNo" >
                     </div>
                     <div class="postRightSideTxt">
-                        <textarea style="padding: 5px; width: 400px; height: 72px; box-sizing: border-box; resize: none;" placeholder="내용을 입력해주세요."></textarea>
+                        <textarea name="moviePostContent" style="padding: 5px; width: 400px; height: 72px; box-sizing: border-box; resize: none;" placeholder="내용을 입력해주세요."></textarea>
                     </div>
                 </div>
                 <div class="postRightSideBtn">
-                    <button class="postAddBtn">포스트 추가</button>
+                    <button type="button" class="postAddBtn">포스트 추가</button>
                 </div>
             </div>
         </div>
         <div class="moviePostBottomBtn">
             <div class="moviePostEnrollBtn">
-                <button type="button">등록</button>
+                <button class="postEnrolltBtn" type="submit">등록</button>
             </div>
             <div class="moviePostCancelBtn">
                 <button type="button">취소</button>

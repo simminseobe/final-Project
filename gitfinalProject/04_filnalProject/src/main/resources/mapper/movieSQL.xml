@@ -241,6 +241,45 @@ delete from movie_video where movie_video_no=
 <delete id="deleteWatchPoint" parameterType="_int">
 	delete from watch_point where review_comment_no=#{_parameter}
 </delete>
+<select id="selectReviewList" parameterType="map" resultType="review">
+	select * from 
+		(select rownum as rnum, review.*from
+			(select 
+				review_comment_no as reviewCommentNo,
+				movie_no as movieNo,
+				review_content as reviewContent,
+				movie_score as movieScore,
+				review_date as reviewDate,
+				member_id as memberId,
+				story as story,
+                actor as actor,
+                ost as ost,
+                video_visual as videoVisual,
+                production as production
+			from review join watch_point using(review_comment_no) where movie_no=#{movieNo} order by 1 desc)review)
+		where rnum between #{start} and #{end}
+</select>
+<select id="totalCount" parameterType="review" resultType="_int">
+	select count(*) from review where  movie_no=#{_parmeter}
+</select>
+<insert id="postInsert" parameterType="moviePost">
+	<choose><!-- 동적쿼리문 -->
+		<when test="movieVideoNo != 0 and movieFileNo != 0">
+		insert into movie_post 
+		values(movie_post_seq.nextval, #{movieNo}, #{movieVideoNo}, #{movieFileNo},#{memberId},#{movieTitle},#{moviePostContent}, to_char(sysdate,'yyyy-mm-dd'))
+		</when>
+		<when test="movieVideoNo == 0">
+		insert into movie_post 
+		values(movie_post_seq.nextval, #{movieNo}, null, #{movieFileNo},#{memberId},#{movieTitle},#{moviePostContent}, to_char(sysdate,'yyyy-mm-dd'))
+		</when>
+		<when test="movieFileNo == 0">
+		insert into movie_post 
+		values(movie_post_seq.nextval, #{movieNo}, #{movieVideoNo}, null,#{memberId},#{movieTitle},#{moviePostContent}, to_char(sysdate,'yyyy-mm-dd'))
+		</when>
+	</choose>
+	
+</insert>
+
 
 
 </mapper>

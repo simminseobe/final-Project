@@ -6,6 +6,7 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
+		<typeAlias type="kr.or.movie.model.vo.MoviePost" alias="moviePost"/>
 		<typeAlias type="kr.or.movie.model.vo.WatchPoint" alias="watchPoint"/>
 		<typeAlias type="kr.or.movie.model.vo.ReviewWatch" alias="reviewWatch"/>
 		<typeAlias type="kr.or.movie.model.vo.Review" alias="review"/>
