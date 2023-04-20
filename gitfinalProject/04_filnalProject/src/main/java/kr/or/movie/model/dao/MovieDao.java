@@ -1,6 +1,7 @@
 package kr.or.movie.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MoviePost;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewWatch;
@@ -117,6 +119,22 @@ public class MovieDao {
 
 	public int deleteWatchPoint(int reviewCommentNo) {
 		int result = sqlSession.delete("movie.deleteWatchPoint",reviewCommentNo);
+		return result;
+	}
+
+	public ArrayList<Review> selectReviewList(HashMap<String, Object> map) {
+		List list =sqlSession.selectList("movie.selectReviewList",map);
+		return (ArrayList<Review>)list;
+	}
+
+	public int selectReviewCount(int movieNo) {
+		int totalCount = sqlSession.selectOne("movie.totalCount",movieNo);
+		return totalCount;
+	}
+
+	public int postInsert(MoviePost post) {
+		System.out.println(post);
+		int result = sqlSession.insert("movie.postInsert",post);
 		return result;
 	}
 

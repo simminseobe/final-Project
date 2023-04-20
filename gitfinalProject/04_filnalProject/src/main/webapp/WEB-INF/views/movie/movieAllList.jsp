@@ -42,19 +42,20 @@
                                 <c:forEach items="${list}" var="po">
                                 <div class="movie-all-list" style="margin-top: 25px; ">
                                     <div class="movie-list-set" style="overflow: hidden;">
-                                        <a href="/movieDetail.do?movieNo=${po.movieNo}">
-                                 		
+                                        <a href="/movieDetail.do?movieNo=${po.movieNo}&reqPage=1">
                                             <div class="img-poster">
                                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
                                             </div>
                                             <div class="cover" style=" color:white; padding: 10px;">
-                                                <div class="coverMovieContent" style="font-size: 12px;">
+                                                <div class="coverMovieContent" style="font-size: 10px; margin: 5px 0;">
                                                     <p>${po.movieContent}</p>
                                                 </div>
-                                                <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; padding-top: 10px; margin: 0 auto; text-align: center;">
-                                                    <p style="font-size: 18px;">관람평</p>
+                                                <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
+                                                    
+                                                    <p style="font-size: 18px; margin-top: 5px;">관람평</p>
+                                                    
                                                     <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
-                                                        <p>점수</p>
+                                                        <p>5</p>
                                                     </div>
                                                 </div>
                                             </div>

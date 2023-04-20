@@ -1,6 +1,7 @@
 package kr.or.movie.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,8 +16,10 @@ import org.springframework.ui.Model;
 import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MoviePost;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
+import kr.or.movie.model.vo.ReviewPageData;
 import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
 
@@ -105,6 +108,65 @@ public ArrayList<Movie> selectMovieAll() {
 	//관람포인트 삭제하기
 	public int deleteWatchPoint(int reviewCommentNo) {
 		return dao.deleteWatchPoint(reviewCommentNo);
+	}
+	public ReviewPageData selectReviewList(int movieNo,int reqPage) {
+		//처음에 페이지당 보여줄 게시물의 수는 10개로 함
+		int numPerPage = 10;
+		//reqPage=1인경우 1번 10번 2인경우 11번 20번까지
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end",end);
+		map.put("movieNo",movieNo);
+		ArrayList<Review> list = dao.selectReviewList(map);
+		System.out.println(map);
+		
+		//pageNavi제작시작
+		//먼저 전체 페이지 수 계산하기->전체 게시물 수 조회
+		int totalCount = dao.selectReviewCount(movieNo);
+		System.out.println(totalCount+"전체게시물 수");
+		//전체 게시물로 전체 페이지 수 계산
+		
+		int totalPage=(int)Math.ceil(totalCount/(double)numPerPage);
+		//페이지 네비사이즈
+		int pageNaviSize=5;
+		
+		int pageNo = 1;
+		if(reqPage>3) {
+			pageNo=reqPage-2;
+		}
+		
+		//페이지너비 생성
+		String pageNavi="";
+		//이전버튼 생성
+		if(reqPage != 1) {
+			pageNavi += "<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+(pageNo-1)+"'>[이전]</a>";
+		}
+		//페이지 숫자 생성
+		for(int i =0; i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi+="<span>"+pageNo+"</span>";
+			}else {
+				pageNavi +="<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+pageNo+"' >"+pageNo+"</a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;//더이상 페이지 번호를 만들지 않음
+				
+			}
+		}
+		//다음버튼 생성
+		if(pageNo<=totalPage) {
+			pageNavi += "<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+pageNo+"'>[다음]</a>";
+		}
+		ReviewPageData rpd= new ReviewPageData(list,pageNavi);
+		return rpd;
+	}
+	public int postInsert(MoviePost post) {
+		int result = dao.postInsert(post);
+		return result;
 	}
 
 

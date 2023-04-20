@@ -440,7 +440,7 @@ z-index: 5;
                         
                     </div>
                     
-                    <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
+                    <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 
                     <c:forEach  items="${reviewList }" var="review">
                     <c:choose>
                     <c:when  test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
@@ -510,17 +510,17 @@ z-index: 5;
                     </div>
                     </c:when>
                     </c:choose>
-			        </c:forEach><!--본인작성댓글 끝-->
+			        </c:forEach>--><!--본인작성댓글 끝-->
 			        
                     <!--타인이 작성한 댓글이 시작되는 자리 -->
-                    <c:forEach items="${reviewList }" var="review">
+                    <c:forEach items="${pageList }" var="review" varStatus="i">
                      <c:choose>
                      <c:when test="${sessionScope.m.memberId ne review.memberId}">
                             <div class="infoWap2Top" id="ajaxRev">
                                 <div class=" infoWrap2">
                                     <div class="userReviewInfo2">
                                     <img src="img/사용자-50.png">
-                                    <p class="user-id user-third">${review.memberId}</p>
+                                    <p class="user-id user-third">${i.count} : ${review.memberId}</p>
                                 </div>
                                 <div class="Text2">
                                     <div class="Tit2 textThird">
@@ -584,7 +584,9 @@ z-index: 5;
                         </c:when>
                          </c:choose>
                     </c:forEach>
-                 
+	                    <div class="pageDiv">
+	                    	${pageNavi}
+	                    </div>
                 </div><!--실관람평 내용 끝나는 자리-->
 
                 <div class="moviePostWrap tabcontent" style="display: none;"><!--무비포스트 시작하는 자리-->
