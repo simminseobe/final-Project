@@ -75,14 +75,6 @@
                 </td>
             </tr>
             <tr>
-                <th>
-                    상품 간단설명
-                </th>
-                <td>
-                    <input type="text" name="simpleInfo">
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2">상품상세설명</td>
             </tr>
             <tr>
@@ -92,107 +84,99 @@
             </tr>
             <tr>
                 <th>상품이미지업로드</th>
-                <td><input type="file" name="productPhoto" accept=".jpg,.png,.jpeg" id="file-input" multiple></td>
+                <td><input type="file" name="productPhoto" accept=".jpg,.png,.jpeg" onchange="loadImg(this)" multiple></td>
             </tr>
             <tr>
                 <th>이미지 미리보기</th>
-                <td id="imgTd">
-                    <ul id="sortable">
-
-                    </ul>
-                </td>
+                <td id="imgTd"></td>
             </tr>
             <tr>
-                <th colspan="2"><button class="my-btn my-blue" type="submit">submit</button></th>
+                <th colspan="2"><button type="submit">submit</button></th>
             </tr>
         </table>
     </div>
     </form>
-    <!-- <input type="file" id="file-input" multiple /> -->
+
+    
+    <input type="file" id="file-input" multiple />
+    <h3>업로드된 파일</h3>
+    <ul id="sortable">
+    </ul>
+
+
 </div>
 </div>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
-    let img
-    let index
-    let array
     $(() => {
         $("#sortable").sortable({
-            start: (e, ui) => {
-                img = ''
-                index = -1
-                const files = document.querySelector('#file-input').files;
-                //이동 시작과 동시에 실행
-                const pickImgLi = ui.item[0]
-                //정렬된 li의 값 배열
-                const orderedLi = Object.values(document.querySelectorAll('.imgLi'))
-                //선택한 객체의 시작 위치 index
-                index = orderedLi.indexOf(pickImgLi)
-                array = Array.from(files)
-                img = array.splice(index,1)
+            over: (e, ui) => {
+                console.log(ui)
             },
-            change: ui => {
-                // console.log(ui)
-            },
-            stop: (e, ui) => {
-                //드래그 종료 시점에서 실행
-                //선택한 객체
-                const pickImgLi = ui.item[0]
-                //정렬된 li의 값 배열
-                const orderedLi = Object.values(document.querySelectorAll('.imgLi'))
-                //선택한 객체가 이동한 위치 index
-                index = orderedLi.indexOf(pickImgLi)
-                array.splice(index,0,img[0])
-                const dataTranster = new DataTransfer()
-                array.forEach( file => {
-                    dataTranster.items.add(file)
-                })
-                document.querySelector('#file-input').files = dataTranster.files
-                // 이동 마친 filelist
-                // console.log(document.querySelector('#file-input').files)
+            stop: e => {
+                const fileInput = document.querySelector('#file-input');
+                console.log(2)
             }
-        })
-        $("#sortable").disableSelection()
+        });
+        $("#sortable").disableSelection();
     })
-    //image handlering
+    
+    function loadImg(file) {
+        //일단 다 비우고시작
+        document.querySelector('#imgTd').replaceChildren()
+        //첨부파일이 여러 개 일 수 있어서 배열로 처리 됨
+        //console.log(file.files);
+        //파일 개수가 0개가 아니고 && 첫 파일이 정상 파일이면
+        for(let i=0; i<file.files.length; i++) {
+            if(file.files[i] != 0) {
+                const fileReader = new FileReader();
+                //선택한 파일 정보를 읽어 옴
+                fileReader.readAsDataURL(file.files[i]);
+                //파일 리더가 정보를 다 읽어오면 동작할 함수 (e 매개변수에 읽은 파일 정보 있음)
+                fileReader.onload = function(e) {
+                    const imgTd = $("#imgTd")
+                    const divImg = $("<div>").addClass("img-viewer")
+                    const img = $("<img>").css("width","200px").attr("src",e.target.result)
+                    divImg.append(img)
+                    imgTd.append(divImg)
+                }
+            }
+        }
+    }
+
+    // test
     const handler = {
             init() {
                 const fileInput = document.querySelector('#file-input');
                 const preview = document.querySelector('#sortable');
-                fileInput.addEventListener('change', () => {
-                    //기존 이미지 삭제
-                    document.querySelector('#sortable').replaceChildren()
+                fileInput.addEventListener('change', () => {  
+                    console.dir(fileInput)                  
                     const files = Array.from(fileInput.files)
                     files.forEach(file => {
-                        const fileReader = new FileReader();
-                        //선택한 파일 정보를 읽어 오는 작업, 동시에 읽어온 작업 끝나면 함수바로 실행 (e 매개변수에 읽은 파일 정보 있음)
-                        fileReader.readAsDataURL(file);
-                        fileReader.onload = e =>{
-                            preview.innerHTML += '<li class="ui-state-default imgLi" id="'+file.lastModified+'"> '
-                                                +'<img style="width:200px" src="'+e.target.result+'">'+
-                                                //dataset 사용시 data-index -> dataset.index 
-                                                '<button type="button" data-index='+file.lastModified+' class="file-remove">X</button></li>'
-                        }
+                        preview.innerHTML += '<li class="ui-state-default" id="'+file.lastModified+'"> '+file.name+'<button data-index='+file.lastModified+' class="file-remove">X</button> </li>'
                     });
                 });
             },
+            
             removeFile: () => {
                 document.addEventListener('click', (e) => {
-                    if(e.target.className !== 'file-remove') return
-                    const removeTargetId = e.target.dataset.index
-                    const removeTarget = document.getElementById(removeTargetId)
-                    const files = document.querySelector('#file-input').files
-                    //file 객체는 그냥 수정이 불가능해서 아래처럼 바로 수정하려니까 안되더라
+                    if(e.target.className !== 'file-remove') return;
+                    const removeTargetId = e.target.dataset.index;
+                    const removeTarget = document.getElementById(removeTargetId);
+                    const files = document.querySelector('#file-input').files;
+                    const dataTranster = new DataTransfer();
+
                     //document.querySelector('#file-input').files = Array.from(files).filter(file => file.lastModified !== removeTarget);
-                    //so I used DataTransfer Object 
-                    const dataTranster = new DataTransfer()
+
+
                     Array.from(files)
                         .filter(file => file.lastModified != removeTargetId)
                         .forEach(file => {
                         dataTranster.items.add(file);
-                    })
-                    document.querySelector('#file-input').files = dataTranster.files
-                    removeTarget.remove()
+                    });
+        
+                    document.querySelector('#file-input').files = dataTranster.files;
+                    removeTarget.remove();
                 })
             }
         }

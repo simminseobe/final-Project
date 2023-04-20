@@ -117,8 +117,8 @@
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="/allCategoryList.do">카테고리 리스트</a>
-                                        <a class="nav-link" href="/categoryInsertForm.do">카테고리 상품 추가</a>
-                                        <a class="nav-link" href="password.html">출력 예정입니다</a>
+                                        <a class="nav-link" href="/categoryInsertForm.do">카테고리 추가</a>
+                                        <a class="nav-link" href="password.html">제조사 등록</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -130,9 +130,9 @@
                                 <div class="collapse" id="management" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="/adminGiftList.do">기프트 상품 리스트</a>
-                                        <a class="nav-link" href="/giftInsertForm.do">기프트 상품 등록</a>
-                                        <a class="nav-link" href="500.html">여기다는 뭐넣지</a>
+                                        <a class="nav-link" href="/adminGiftList.do">기프트 리스트</a>
+                                        <a class="nav-link" href="/giftInsertForm.do">기프트 등록</a>
+                                        <a class="nav-link" href="/giftEvent.do">이벤트 관리</a>
                                     </nav>
                                 </div>
                             </nav>

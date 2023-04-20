@@ -1,8 +1,8 @@
 /* 메가박스색상 */
 .mb { color:#503396;}
 /* admin page */
-#admin-main-content { width: 100%; position: relative; top: 56px; min-height: calc(100vh - 56px); padding-left: 225px; }
-
+#admin-main-content { width: 100%; position: relative; top: 56px; min-height: calc(100vh - 69px); padding-left: 225px; }
+a { color: #000; text-decoration: none; }
 
 
 /* input table form */
@@ -15,6 +15,26 @@
 .input-form textarea { width: 100%; height: 95%; border: none; background: none; padding: 5px; outline: none; }
 .input-form input[type=text] { border: none; width: 100%; height: 100%; outline: none; }
 .input-form input:focus { border-right: 1px solid #ddd; border-left: 1px solid #ddd; }
+.input-form input[type=checkbox] { width: 20px; height: 20px; border: 1px solid #000; outline: none; margin-top: 7px; }
 
 /* 추가되는 이미지 사이즈 설정 */
 #imgTd{ display: flex; width: 100%; height: 100%; }
+.admin-list-main-img > img { width: 50px; height: 50px; margin: 10px; }
+
+/* 이미지 미리보기 삭제기능 */
+#sortable { display: flex; }
+.imgLi { position: relative; list-style: none; }
+.imgLi>button { position: absolute; top: 0; right: 0; z-index: 10; }
+
+
+/* 카테고리 추가 모달 */
+#category-insert-modal { display: none; justify-content: center; align-items: center; position: fixed; top: 0;left: 0; width: 100%; height: 100vh; background-color: rgba(0, 0, 0, 0.3); }
+#category-insert-modal>div { background-color: #fff; border: 1px solid #000; padding: 100px; }
+#category-insert-modal p { text-align: center; }
+
+
+/* button */
+.my-btn,#file-upload-button{ color: #fff; padding:5px 10px 5px 10px; margin:5px; display:inline-block; border-radius: 10px; transition:all 0.080s; }
+.my-btn:active{ transform: translateY(3px); }
+.my-btn.my-blue{ background-color: #503396; border-bottom:5px solid #3c2671; }
+.my-btn.my-blue:active{ border-bottom:2px solid #3c2671; margin-bottom: 8px; }
