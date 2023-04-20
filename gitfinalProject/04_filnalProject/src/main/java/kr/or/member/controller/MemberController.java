@@ -328,10 +328,10 @@ public class MemberController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=95e454d415a0cf20175203f81771b058"); //본인이 발급받은 REST API key
-            //sb.append("&redirect_uri=http://192.168.0.8/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
             sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://192.168.35.198/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
             //sb.append("&client_id=REST_API_KEY"); //본인이 발급받은 REST API key
-            //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인 컨트롤러 주소
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -468,10 +468,14 @@ public class MemberController {
     
     // 카카오 로그아웃
     @RequestMapping(value="/kakaoLogout.do")
-    public String kakaoLogout(HttpSession session) {
-    	session.getAttribute("access_Token");
-    	session.removeAttribute("access_Token");
-    	session.invalidate();
+    public String kakaoLogout(Member member, HttpSession session) {
+    	String access_Token = (String)session.getAttribute("access_Token");
+    	
+    	if(access_Token != null && member.getMemberPw() != null) {
+    		session.removeAttribute("access_Token");
+    		session.removeAttribute("memberId");
+    		session.invalidate();
+    	}
     	return "redirect:/";
     }
     
