@@ -27,7 +27,6 @@ body { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; }
 #mega_hd ul li { float: left; text-align: center; height: 49px; line-height: 49px; border-right: 1px solid #C6C6C6; }
 #mega_hd ul li a { display: block; width: 82px; color: #000; font-weight: 700; font-size: 14px;  }
 
-
 /*banner menu area*/
 #banner { position: relative; margin-top: 49px; }
 .banner_menu { z-index: 5; }

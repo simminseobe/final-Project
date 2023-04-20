@@ -128,23 +128,28 @@ public class AdminService {
 				result += dao.deleteVideo(videoNo);
 			}
 
-			if (mainFile.getMovieNo() != 0) {
+			if (mainFile != null) {
+				// 메인 파일 추가
 				result += dao.insertMainFile(mainFile);
 			}
 
-			// 첨부파일 추가
-			for (MovieFile file : postList) {
-				file.setMovieFileNo(movie.getMovieNo());
+			if (!postList.isEmpty()) {
+				// 첨부파일 추가
+				for (MovieFile file : postList) {
+					file.setMovieFileNo(movie.getMovieNo());
 
-				result += dao.insertPostFile(file);
+					result += dao.insertPostFile(file);
+				}
 			}
 
-			// 영상 링크 insert
-			for (MovieVideo video : videoList) {
-				video.setMovieNo(movie.getMovieNo());
+			if (!videoList.isEmpty()) {
+				// 영상 링크 insert
+				for (MovieVideo video : videoList) {
+					video.setMovieNo(movie.getMovieNo());
 
-				if (video.getVideoLink() != null) {
-					result += dao.insertmovieVideo(video);
+					if (video.getVideoLink() != null) {
+						result += dao.insertmovieVideo(video);
+					}
 				}
 			}
 		}
