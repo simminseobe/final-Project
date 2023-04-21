@@ -40,7 +40,18 @@
 		AND 
 		THEATER_LOCAL = #{theaterLocal}
 </select>
-<selet id="choiceBranchSchedule" parameterType="map" resultType="string">
 
-</selet>
+<select id="choiceBranchSchedule" parameterType="map" resultType="string">
+	select 
+		movie_title as movieTitle, 
+		schedule_start as scheduleStart, 
+		theater_branch as theaterBranch
+	from 
+		schedule_tbl 
+	where 
+		movie_title = #{movieTitle} 
+		and to_char(schedule_start, 'DD/MM/YYYY') = #{choiceDataDay} 
+		and theater_branch = #{theaterBranch}
+</select>
+
 </mapper>

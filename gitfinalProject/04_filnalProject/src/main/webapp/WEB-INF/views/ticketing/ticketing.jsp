@@ -203,6 +203,7 @@
 
 				.scroll {
 					overflow: hidden;
+					position: relative;
 					display: block;
 					width: 100%;
 					height: 100%;
@@ -304,8 +305,8 @@
 				.depth {
 					display: none;
 					position: absolute;
-					left: 38%;
-					top: 320px;
+					left: 80px;
+					top: 0;
 					width: 177px;
 					height: 340px;
 					padding: 0;
@@ -925,7 +926,7 @@
 					$.ajax({
 						url : "/choiceBranchSchedule.do",
 						type : "post",
-						data : {movieTitle:movieTitle,choiceDataDay:choiceDataDay,theaterLocal:theaterLocal,theaterBranch:theaterBranch},
+						data : {movieTitle:movieTitle,choiceDataDay:choiceDataDay,theaterBranch:theaterBranch},
 						dataType : "json",
 						success : function(data){
 							console.log(data);

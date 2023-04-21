@@ -56,7 +56,7 @@ public class TicketingService {
 
 		map.put("movieTitle", movieTitle);
 		map.put("choiceDataDay", choiceDataDay);
-		map.put("theaterLocal", theaterBranch);
+		map.put("theaterBranch", theaterBranch);
 
 		ArrayList<String> list = dao.choiceBranchSchedule(map);
 
