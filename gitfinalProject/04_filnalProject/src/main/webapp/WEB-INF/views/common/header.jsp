@@ -28,8 +28,11 @@
 	                <c:when test="${empty sessionScope.m }">
 		                <li><a href="/login.do">로그인</a></li>
 	                </c:when>
-	                <c:otherwise>
+	                <c:when test="${not empty sessionScope.m.memberPw })">
 	                	<li><a href="/logout.do">로그아웃</a></li>
+	                </c:when>
+	                <c:otherwise>
+	                	<li><a href="https://kauth.kakao.com/oauth/logout?client_id=95e454d415a0cf20175203f81771b058&logout_redirect_uri=http://192.168.10.32/kakaoLogout.do">로그아웃</a></li>
 	                </c:otherwise>
                 </c:choose>
                 

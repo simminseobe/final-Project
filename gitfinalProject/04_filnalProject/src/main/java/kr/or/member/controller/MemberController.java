@@ -471,7 +471,7 @@ public class MemberController {
     public String kakaoLogout(Member member, HttpSession session) {
     	String access_Token = (String)session.getAttribute("access_Token");
     	
-    	if(access_Token != null && member.getMemberPw() != null) {
+    	if(access_Token != null && member.getMemberPw() == null) {
     		session.removeAttribute("access_Token");
     		session.removeAttribute("memberId");
     		session.invalidate();
@@ -538,5 +538,6 @@ public class MemberController {
 	    }
 	}
     
+	// 네이버 로그인
     
 }
