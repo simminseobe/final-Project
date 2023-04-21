@@ -203,11 +203,11 @@
                                             name="movieRating" value="${movie.movieRating}" required>
                                     </div>
                                     <div class="form-group my-2">
-                                        <label for="filmSociety" class="form-check-label my-1">필름 소사이어티</label>
+                                        <label for="filmSociety" class="form-check-label my-1">필름 소사이어티</label>                                
                                         <c:choose>
-                                            <c:when test="${movie.filmSociety == 'Y'}">
+                                            <c:when test='${movie.filmSociety eq "Y "}'>
                                                 <input type="checkbox" class="form-check-input my-1" id="filmSociety"
-                                                    name="filmSociety" value="Y">
+                                                    name="filmSociety" value="Y" checked>
                                             </c:when>
                                             <c:otherwise>
                                                 <input type="checkbox" class="form-check-input my-1" id="filmSociety"
@@ -217,7 +217,7 @@
 
                                         <label for="classicSociety" class="form-check-label my-1">클래식 소사이어티</label>
                                         <c:choose>
-                                            <c:when test="${movie.classicSociety eq 'Y'}">
+                                            <c:when test='${movie.classicSociety eq "Y "}'>
                                                 <input type="checkbox" class="form-check-input my-1" id="classicSociety"
                                                     name="classicSociety" value="Y" checked>
                                             </c:when>
@@ -229,7 +229,7 @@
 
                                         <label for="specialMovie" class="form-check-label my-1">특별영화</label>
                                         <c:choose>
-                                            <c:when test="${movie.specialMovie eq 'Y'}">
+                                            <c:when test='${movie.specialMovie eq "Y "}'>
                                                 <input type="checkbox" class="form-check-input my-1" id="specialMovie"
                                                     name="specialMovie" value="Y" checked>
                                             </c:when>

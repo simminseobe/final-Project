@@ -139,4 +139,10 @@ public class AdminDao {
 		return (List) list;
 	}
 
+	public int insertSchedule(HashMap<String, Object> map) {
+		int result = sqlSession.insert("schedule.insertSchedule", map);
+
+		return result;
+	}
+
 }
