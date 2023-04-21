@@ -75,7 +75,30 @@ public class TicketingController {
 
 		return new Gson().toJson(list);
 	}
+	@ResponseBody
+	@RequestMapping(value="/choiceLocalBranch.do", produces = "application/json;charset=utf-8")
+	public String choiceLocalBranch(String movieTitle, String choiceDataDay, String theaterLocal) {
+		ArrayList<String> list = service.choiceLocalBranch(movieTitle, choiceDataDay, theaterLocal);
 
+		System.out.println(movieTitle);
+		System.out.println(choiceDataDay);
+		System.out.println(theaterLocal);
+		System.out.println(list);
+		
+		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value="/choiceBranchSchedule.do", produces = "application/json;charset=utf-8")
+	public String choiceBranchSchedule(String movieTitle, String choiceDataDay, String theaterBranch) {
+		ArrayList<String> list = service.choiceBranchSchedule(movieTitle, choiceDataDay, theaterBranch);
+		
+		System.out.println(movieTitle);
+		System.out.println(choiceDataDay);
+		System.out.println(theaterBranch);
+		System.out.println(list);
+		
+		return new Gson().toJson(list);
+	}
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")
 	public String testPage() {

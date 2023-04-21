@@ -203,18 +203,19 @@
 
 				.scroll {
 					overflow: hidden;
+					position: relative;
 					display: block;
 					width: 100%;
 					height: 100%;
 				}
 
-				.scroll>ul {
+				.mid>ul {
 					position: relative;
 					height: 100%;
 					overflow: hidden;
 				}
 
-				.scroll>ul::after {
+				.mid>ul::after {
 					content: '';
 					display: block;
 					position: absolute;
@@ -227,7 +228,7 @@
 
 
 
-				.scroll>ul>li.btn.on {
+				.mid>ul>li.btn.on {
 					color: #4444;
 					background-color: #ebebeb;
 				}
@@ -239,14 +240,14 @@
 					background-color: #666;
 				}
 				*/
-				.scroll>ul>li.btn {
+				.mid>ul>li.btn {
 					overflow: visible;
 					position: relative;
 					width: 50%;
 					padding: 0 10px;
 				}
 
-				.scroll>ul>li>button {
+				.mid>ul>li>button {
 					display: block;
 					position: relative;
 					
@@ -257,7 +258,7 @@
 					letter-spacing: 0;
 					float: left;
 				}
-				.scroll>ul>li>span{
+				.mid>ul>li>span{
 					float: left;
 					padding-top: 9px;
 				}
@@ -274,8 +275,12 @@
 					cursor: pointer;
 					overflow: visible;
 				}
+				.mid{
+					width: 100%;
+					height: 100%;
+				}
 
-				.scroll>ul>li>button.on:after {
+				.mid>ul>li>button.on:after {
 					content: '';
 					display: block;
 					position: absolute;
@@ -287,7 +292,7 @@
 					margin: -6px 0 0 0;
 				}
 
-				.scroll>ul>li>button>span {
+				.mid>ul>li>button>span {
 					display: inline-block;
 					margin: 0 20px 0 0;
 					vertical-align: middle;
@@ -300,9 +305,9 @@
 				.depth {
 					display: none;
 					position: absolute;
-					left: 42%;
+					left: 80px;
 					top: 0;
-					width: 70%;
+					width: 177px;
 					height: 340px;
 					padding: 0;
 				}
@@ -350,6 +355,19 @@
 
 				.brchNo>li>button {
 					height: 30px;
+					/*#btn*/
+					padding-left: 12px;
+					padding-right: 0;
+					display: block;
+					position: relative;
+					width: 100%;
+					min-height: 28px;
+					padding: 3px 30px 3px 30px;
+					text-align: left;
+					font-size: .8667em;
+					background-color: transparent;
+					letter-spacing: 0;
+					
 				}
 
 				/*
@@ -368,21 +386,9 @@
 	height: 100%;
 	background-color: #ecf0f4;
 }
-*/
-				#btn {
-					padding-left: 12px;
-					padding-right: 0;
-					display: block;
-					position: relative;
-					width: 100%;
-					min-height: 28px;
-					padding: 3px 30px 3px 30px;
-					text-align: left;
-					font-size: .8667em;
-					background-color: transparent;
-					letter-spacing: 0;
-					height: auto;
-				}
+*/		
+					
+				
 
 				/*
 .scrollTools {
@@ -431,13 +437,13 @@
 	margin: 0 auto;
 }
 */
-.scroll>ul>li{
+.mid>ul>li{
 	overflow: hidden;
 }
-.scroll>ul>li>button{
+.mid>ul>li>button{
 	float: left;
 }
-.scroll>ul>li>span{
+.mid>ul>li>span{
 	float: left;
 }
 
@@ -530,18 +536,24 @@
 								<p>극장</p>
 								<div class="theater-list" style="background-color: #fff; height: 340px;">
 									<div class="scroll" id="brchList">
-										<ul>
-											<!--
-											<li class="theater-city active">
-												<button type="button" class="btn">
-													<span class="sel-city seoul">서울</span>
-												</button>
+										<div class="mid">
+
+											<ul>
+												<!--
+													<li class="theater-city active">
+														<button type="button" class="btn">
+															<span class="sel-city seoul">서울</span>
+														</button>
+													-->
+												</ul>
+											</div>
 												<div class="depth on">
 													<div class="detail-list" style="max-height: none;">
 														<div class="scroll-box">
 															<div class="container"
 																style="position: relative; top: 0; left: 0;">
 																<ul class="brchNo">
+															<!--		
 															<li>
 																<button id="btn" type="button">강남</button>
 															</li>
@@ -552,23 +564,29 @@
 															<li>
 																<button id="btn" type="button">강남100</button>
 															</li>
+															-->
 														</ul>
+														
 													</div>
+														<!--
+
 															<div id="scrollbar_vertical" class="scrollTools"
-																style="display: block;">
-																<div class="draggerContainer">
-																	<div id="dragger_vertical" class="dragger"
-																		style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
-																		<div class="dragger_bar"
-																			style="line-height: 30px;"></div>
-																	</div>
-																	<div class="draggerRail"></div>
-																</div>
+															style="display: block;">
+															<div class="draggerContainer">
+																<div id="dragger_vertical" class="dragger"
+																style="position: absolute; min-height: 30px; display: block; top: 0px; height: 183px; max-height: 310px;">
+																<div class="dragger_bar"
+																style="line-height: 30px;"></div>
 															</div>
+															<div class="draggerRail"></div>
+														</div>
+													</div>
+												-->
+
 														</div>
 													</div>
 												</div>
-												
+												<!--
 											</li>
 											
 											
@@ -578,7 +596,6 @@
 											
 											
 										-->
-										</ul>
 									</div>
 								</div>
 							</div>
@@ -845,7 +862,7 @@
 						dataType: "json",
 						success: function (data) {
 							console.log(data);
-							$(".scroll>ul").empty();
+							$(".mid>ul").empty();
 							for (var i = 0; i < data.length; i++) {
 								const li = $("<li>");
 								const btn = $("<button>");
@@ -858,24 +875,65 @@
 								span.text(" ("+data[i].count+")");
 								btn.attr("onclick","selBranch(this);");
 								
-								$(".scroll>ul").append(li);
+								$(".mid>ul").append(li);
 								
 
 								theaterLocal = btn.text();
-								console.log(theaterLocal+"이거 누름");
+								console.log(theaterLocal+" 있음");
+
+								
 							}
 						}
 					});
 				}
+				var theaterBranch;
+				//local선택하면 속해있는 branch 출력
 				function selBranch(button){
-					theaterBranch = $(button).text();
-					console.log(theaterBranch+"dddd");
+					theaterLocal = $(button).text();
+					console.log(theaterLocal+" 누름");
 					$.ajax({
 						url : "/choiceLocalBranch.do",
 						type : "post",
-						data : {},
+						data : {movieTitle:movieTitle,choiceDataDay:choiceDataDay,theaterLocal:theaterLocal},
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+							$(".container>ul").empty();
+							for (var i = 0; i < data.length; i++) {
+								const li = $("<li>");
+								const btn = $("<button>");
+								
+								
+								li.append(btn);
+								
+								btn.text(data[i]);
+								
+								
+								$(".container>ul").append(li);
+								btn.attr("onclick","selSchedule(this);");
+
+								theaterBranch = btn.text();
+								console.log(theaterBranch+" 있음");
+							}
+						}
 					});
 				}
+				var theaterSchedule;
+				//branch클릭하면 스케쥴 출력
+				function selSchedule(button){
+					theaterBranch = $(button).text();
+					console.log(theaterBranch+" 누름");
+					$.ajax({
+						url : "/choiceBranchSchedule.do",
+						type : "post",
+						data : {movieTitle:movieTitle,choiceDataDay:choiceDataDay,theaterBranch:theaterBranch},
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+						}
+					});
+				}
+
 				
 				
 				

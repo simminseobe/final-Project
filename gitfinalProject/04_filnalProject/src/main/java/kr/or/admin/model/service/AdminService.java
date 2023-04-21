@@ -1,6 +1,7 @@
 package kr.or.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +170,19 @@ public class AdminService {
 
 	public List<Schedule> selectScheduleCalendar(String theaterBranch) {
 		return dao.selectScheduleCalendar(theaterBranch);
+	}
+
+	public int insertSchedule(String title, String branch, String startOutput, String endOutput) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("title", title);
+		map.put("branch", branch);
+		map.put("startOutput", startOutput);
+		map.put("endOutput", endOutput);
+
+		int result = dao.insertSchedule(map);
+
+		return result;
 	}
 
 }
