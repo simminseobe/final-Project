@@ -14,16 +14,21 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -470,12 +475,9 @@ public class MemberController {
     @RequestMapping(value="/kakaoLogout.do")
     public String kakaoLogout(Member member, HttpSession session) {
     	String access_Token = (String)session.getAttribute("access_Token");
-    	
-    	if(access_Token != null && member.getMemberPw() == null) {
-    		session.removeAttribute("access_Token");
-    		session.removeAttribute("memberId");
-    		session.invalidate();
-    	}
+		session.removeAttribute("access_Token");
+		session.removeAttribute("memberId");
+		session.invalidate();
     	return "redirect:/";
     }
     
@@ -538,6 +540,67 @@ public class MemberController {
 	    }
 	}
     
+	
 	// 네이버 로그인
-    
+	@RequestMapping(value="/naverLogin.do")
+		public String accessToken (String code, Member member, Model model, HttpSession session) {
+		
+		// Access_Token 출력
+		System.out.println(code);
+		
+		String access_Token = "";
+		String refresh_Token = "";
+		String reqURL = "https://nid.naver.com/oauth2.0/token";
+		
+		try {
+			URL url = new URL(reqURL);
+			
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+			
+            // POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=authorization_code");
+            sb.append("&client_id=95e454d415a0cf20175203f81771b058"); //본인이 발급받은 REST API key
+            sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://192.168.35.198/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            //sb.append("&client_id=REST_API_KEY"); //본인이 발급받은 REST API key
+            //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인 컨트롤러 주소
+            sb.append("&code=" + code);
+            bw.write(sb.toString());
+            bw.flush();
+			
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode );
+			
+            // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+			
+			if (responseCode == 200) { // 정상 호출
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			} else { // 에러 발생
+				br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+			}
+			
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			
+			while ((inputLine = br.readLine()) != null) {
+				response.append(inputLine);
+			}
+			
+			br.close();
+			System.out.println(response.toString());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return "access_Token";
+	}
 }

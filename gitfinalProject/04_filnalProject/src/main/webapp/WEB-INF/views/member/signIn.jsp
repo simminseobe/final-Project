@@ -48,36 +48,16 @@
         		<a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.10.32/kakaoLogin.do&response_type=code" class="login-form">
         			<img src="/image/kakao_login_medium_wide.png" class="kakaoBtn">
         		</a>
+        		<a href="https://nid.naver.com/oauth2.0/authorize?client_id=2bPh_mYXLtkjmaWWo_8B&response_type=code&redirect_uri=http://192.168.10.32/callback.do&state={상태 토큰}">
+        			<img src="/image/btnG.png" class="naverBtn">
+        		</a>
         	</div>
         </div>
       </form>
     </div>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   </div>
   
-<!-- <script>
-  	/* 카카오 로그인 */
-  	function kakaoLogin() {
-  		$.ajax({
-  			url: "/getKakaoAuthUrl.do",
-  			type : "POST",
-  			async : false,
-  			dataType : "text",
-  			success : function(data) {
-  				location.href = data;
-  			}
-  		});
-  	}
-  	
-  	$(document).ready(function() {
-  		let kakaoInfo = "${kakaoInfo}";
-  		if(kakaoInfo != "") {
-  			let data = JSON.parse(kakaoInfo);
-  			
-  			alert("카카오 로그인 성공 \n accessToken : " + data["accessToken"]);
-  			alert("user : \n" + "email : " + data["email"] + "\n nickname : " + data["nickname"]);
-  		}
-  	});
-  </script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
+  
 </body>
 </html>
