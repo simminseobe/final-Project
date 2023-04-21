@@ -28,6 +28,6 @@
 </select>
 <insert id="insertSchedule">
 	insert into schedule_tbl values
-  	(schedule_tbl_seq.nextval, to_date(#{startOutput},'DD/MM/YYYY HH24:MI'), to_date(#{endOutput},'DD/MM/YYYY HH24:MI'), #{title}, #{branch})
+  	(schedule_tbl_seq.nextval, to_date(#{startOutput}, 'YY/MM/DD HH24:MI'), to_date(#{endOutput}, 'YY/MM/DD HH24:MI'), #{title}, #{branch})
 </insert>
 </mapper>

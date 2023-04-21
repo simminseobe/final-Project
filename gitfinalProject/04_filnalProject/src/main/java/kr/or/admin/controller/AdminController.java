@@ -360,6 +360,9 @@ public class AdminController {
 		String startOutput = startDateTime.format(outputFormatter);
 		String endOutput = endDateTime.format(outputFormatter);
 
+		System.out.println(startOutput);
+		System.out.println(endOutput);
+
 		int result = service.insertSchedule(title, branch, startOutput, endOutput);
 
 		return String.valueOf(result);
