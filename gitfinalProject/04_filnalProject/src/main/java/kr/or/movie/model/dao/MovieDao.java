@@ -138,5 +138,16 @@ public class MovieDao {
 		return result;
 	}
 
+	public int totalMovieCount() {
+		int result = sqlSession.selectOne("movie.movieListCount");
+		return result;
+	}
+
+	public ArrayList<MoviePost> selectOneMovieAllPost(int movieNo) {
+		List list = sqlSession.selectList("movie.oneMoviePostAll",movieNo);
+		return (ArrayList<MoviePost>)list;
+	}
+
+
 
 }

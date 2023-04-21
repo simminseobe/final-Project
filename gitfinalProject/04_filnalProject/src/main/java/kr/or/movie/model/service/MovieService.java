@@ -168,6 +168,14 @@ public ArrayList<Movie> selectMovieAll() {
 		int result = dao.postInsert(post);
 		return result;
 	}
+	public int selectMovieListCount() {
+		// TODO Auto-generated method stub
+		return dao.totalMovieCount();
+	}
+	public ArrayList<MoviePost> oneMovieAllPost(int movieNo) {
+		ArrayList<MoviePost> postAllList=dao.selectOneMovieAllPost(movieNo);
+		return postAllList;
+	}
 
 
 	

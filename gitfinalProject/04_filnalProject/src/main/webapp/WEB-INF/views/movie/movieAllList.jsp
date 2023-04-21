@@ -13,12 +13,12 @@
 
         <body>
             <div class="movie-list-wrap" style="width:1100px; margin: 0 auto;">
-                <div class="movieList-title-wrap" style="margin-top: 100px;">
+                <div class="movieList-title-wrap" style=" margin-top: 100px;">
                     <h1 style="font-size:30px;">전체영화</h1>
                 </div>
                 <div class="movie-list-wrap">
-                    <div class="movie-list-menu">
-                        <ul>
+                    <div class="movie-list-menu tabs-wrap">
+                        <ul class="tabs">
                             <li><a href="#">박스오피스</a></li>
                             <li><a href="#">상영예정작</a></li>
                             <li><a href="#">특별상영</a></li>
@@ -30,14 +30,14 @@
                     <div class="movie-list-content-wrap" style="margin-top: 25px;">
                         <div class="movie-list-content-top">
                             <button type="button" title="개봉작만보기" class="btn-onair btnOnAir">개봉작만</button>
-                            <span>총 몇개의 영화가 검색되었습니다.</span>
+                            <span>총 ${movieListCount}의 영화가 검색되었습니다.</span>
                             <div class="searchBox">
                                 <input type="text" id="movieSearch" name="movieSearch" placeholder="영화명 검색">
                                 <img src="img/search-30.png">
                             </div>
                         </div>
                         <div class="movie-list-content-mid active-movie-more clearfix">
-                            <div class="movie-all-list-flex"
+                            <div class="tabcontent movie-all-list-flex"
                                 style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
                                 <c:forEach items="${list}" var="po">
                                 <div class="movie-all-list" style="margin-top: 25px; ">
@@ -47,15 +47,15 @@
                                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
                                             </div>
                                             <div class="cover" style=" color:white; padding: 10px;">
-                                                <div class="coverMovieContent" style="font-size: 10px; margin: 5px 0;">
+                                                <div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
                                                     <p>${po.movieContent}</p>
                                                 </div>
                                                 <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
                                                     
-                                                    <p style="font-size: 18px; margin-top: 5px;">관람평</p>
                                                     
                                                     <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
-                                                        <p>5</p>
+    
+                                                        <p>관람평 ${watchPointAvg.movieScoreAvg}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,7 +89,8 @@
                             <div class="bottom-btn" style="margin-left: 55px; margin-top: 20px;">
                                 <button type="button" id="load">더보기</button>
                             </div>
-                            </div> 
+                            </div>
+                             
                         </div>
                     </div>
                 </div>
@@ -123,7 +124,7 @@
             });
         });
                   
-                  
+ 
                   
        
             

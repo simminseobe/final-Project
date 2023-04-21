@@ -492,6 +492,7 @@ cursor: pointer;
 
 .moviePostImg>img{
     width: 228px;
+   width: 228px;
     height: 340px;
     border-radius: 10px;
 }
@@ -522,6 +523,34 @@ cursor: pointer;
     padding: 10px 10px;
     overflow: auto;
 }
+/* 스크롤바 가로 사이즈 */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* 스크롤바 막대기 */
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #432e75;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #432e75;
+}
+
+/* 스크롤바 백그라운드 */
+::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: #eee;
+}
+
 .moviePostImgContent a p{
     padding: 10px 0;
 }
@@ -569,5 +598,25 @@ cursor: pointer;
 .previewPlayerLine>video{
     padding: 0 50px;
 
+}
+
+/*open3 무비포스트 상세보기*/
+.modal_content_tit>button{
+    width: 130px;
+    height: 48px;
+    background-color: #329eb1;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+
+}
+.modal_content_tit3{
+    display: flex;
+    justify-content: space-between;
+}
+.post-detail-top{
+    width: 798px;
+    height: 113px;
+    border: 1px solid lightgray;
 }
 
