@@ -16,11 +16,27 @@
     list-style:none;
     height: 40px;
     line-height: 40px;
-    background-color: yellow;
     width: calc(100% / 5);
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #503396;
+    border-right: 1px solid #503396;
+    border-left:none ;
+    
+    
 }
+.movie-list-menu>ul>li:first-child{
+    border-left: 1px solid #503396;
+}
+
+
+.movie-list-menu>ul>li.active-tab{
+    box-sizing: border-box;
+    border-bottom: none;
+   color: #503396;
+}
+
+
+
 
 .btn-onair{
     width: 100px;

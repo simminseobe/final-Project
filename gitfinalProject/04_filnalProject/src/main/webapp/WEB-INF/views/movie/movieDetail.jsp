@@ -120,10 +120,65 @@ z-index: 5;
 	display: none;
 }
 
+.modal3 {
+/*position을 absolute에서 fixed로 변경
+        왜냐? fixed를 하면 스크롤을 내려도 그 자리에 고정되어 있기때문에*/
+/*box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        여기에 있던 이것을 modal_content로 이동*/
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center; /*justfy-content는 가로축을 중심축으로 함*/
+align-items: center; /*align-items는 세로축을 중심축으로 함
+                            즉, center를 넣으면 세로축의 중앙으로 정렬하게 됨*/
+z-index: 5;
+}
+
+.modal_overlay3 {
+	/*모달 전체 배경색 설정*/
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+    z-index: 6;
+ 
+}
+
+.modal_content3 {
+    z-index: 7;
+	background-color: white;
+	padding: 10px 10px;
+	text-align: center;
+	position: relative;
+	top: 0px;
+	width: 850px;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+		rgba(0, 0, 0, 0.23);
+    overflow: auto;
+    height: 850px;
+
+       
+}
+
+
+
+
+.hidden3 {
+	display: none;
+}
+
+
 </style>
 </head>
 <body>
     <div class="movie-detail-top"  style="margin: 0 auto; margin-top: 100px;">
+    	
+
+        
         <div class="modal hidden"><!--모달로 댓글 작성 들어가는 자리-->
             <div class="modal_overlay"></div>
             <div class="modal_content"><!--모달 댓글 내부화면-->
@@ -273,7 +328,7 @@ z-index: 5;
                     </div>
                 </div>
                 <div class="modalContentBottom">
-                    <button type="button" class="bc1" id="close2" style="margin-right: 5px;">닫기</button>
+                    <button type="button" id="close2"  style="margin-right: 5px;">닫기</button>
                     <button type="submit" name="reviewUpdateBtn" id="reviewUpdateBtn" class="updateBtn" style="margin-right: 5px;">수정</button>
                 </div>
                 </form>
@@ -285,13 +340,93 @@ z-index: 5;
         <!--==============================모달2 관람평 수정끝================================================-->        
 
 
+	<div class="modal3 hidden3"><!--모달로  무비포스트 상세보기  들어가는 자리-->
+            <div class="modal_overlay3"></div>
+            <div class="modal_content3"><!--모달 댓글 내부화면-->
+                
+                <div class="modalClose">
+                    <div class="modalCloseTit">
+                        <span>무비포스트 상세보기</span>                    
+                    </div>
+                </div>
+                <div class="modal_content_tit modal_content_tit3">
+                    <p>${mov.movieTitle }</p>
+                    <button type="button">예매하기</button>
+                </div>
+                <div class="post-detail-top">
+                	<div class="detail-top-r">
+                		<div class="detail-top-r-img">
+                			<img src="/resources/images/member/nonImg.png">
+                		</div>
+                		<div class="post-info">
+                            <p>아이디</p>
+                            <p>날짜정보</p>
+                		</div>
+                        <div class="subscribe">
+                            <button type="button" class="subscribeBtn">구독하기</button>
+                        </div>
+                	</div>
+                </div>
+                <div class="post-detail-center">
+                    <div class="detail-center-img-area">
+                        <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
+                        <div class="post-detail-content">
+                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-detail-center">
+                    <div class="detail-center-img-area center-video-area">
+                        <video class="previewCutVideo" width="420px" height="320px" controls>
+                            <source class="previewCutVideoSource" src="${mv.videoLink }">
+                        </video>
+                        <div class="post-detail-content">
+                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-detail-center">
+                    <div class="detail-center-img-area center-video-area">
+                        <video class="previewCutVideo" width="420px" height="320px" controls>
+                            <source class="previewCutVideoSource" src="${mv.videoLink }">
+                        </video>
+                    </div>
+                    <div class="detail-center-img-area">
+                        <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
+                        <div class="post-detail-content">
+                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modalTxtArea">
+                    <textarea name="reviewContent"></textarea>
+                </div>
+                <div class="modal_content_tit" style="margin-top: 50px;">
+                    <p>관람포인트는 무엇인가요?</p>
+                    <p style="font-size: 18px; margin-top: 5px;">(최대 5개 선택가능)</p>
+                </div>
+               
+                <div class="modalContentBottom">
+                    <button type="button" id="close3"  style="margin-right: 5px;">닫기</button>
+                    <button type="submit" name=reviewEnroll id="reviewEnroll" class="enrollBtn" style="margin-right: 5px;">등록</button>
+                </div>
+          
+            </div><!--모달 댓글 내부화면 끝-->
+        </div><!--class="modal hidden 무비포스트 상세보기 모달끝 -->
+
+
+
+
+
+
+
 
         
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
         <div class="bg-mask">
             <div class="movie-detail-top-content" style="position: relative;">
-                <p class="d-day" style="float: left;">예매D-1</p>
+                <p class="d-day" style="float: left;">${mov.movieDate}</p>
                 <p class="contents-type" style="font-size: 22px; width: 300px; margin-left: 10px; display: inline-block;">#무비아일랜드토크 #무대인사</p>
                 <p class="title" style="font-size: 54px; position: absolute; left: 0; top: 100px;">${mov.movieTitle }</p>
                 <div class="btn-like" style="position: absolute; top: 35%;">
@@ -428,19 +563,24 @@ z-index: 5;
                         <div class="reviewContentWrite" style="font-size: 15px;">
                         <c:choose>
 							<c:when test="${not empty sessionScope.m && sessionScope.m.memberId ne review.memberId}">
-	                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
+	                            <a href="#" class="open" style="color: #666666;">관람평 쓰기</a>
 							</c:when>
 							<c:otherwise>
-								<a href="/login.do" style="color: #666666;">관람평 쓰기</a>
+								<a href="/login.do" style="color: #666666;">로그인하기</a>
 							</c:otherwise>                        
                         </c:choose>
+                        <c:forEach items="${reviewList }" var="review">
+                        	<c:if test="${review.memberId eq sessionScope.m.memberId }">
+                        	<a href="/login.do" style="color: #666666;">작성완료</a>
+                        	</c:if>
+                        </c:forEach>
                         </div>
                       
                  
                         
                     </div>
                     
-                    <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 
+                    <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
                     <c:forEach  items="${reviewList }" var="review">
                     <c:choose>
                     <c:when  test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
@@ -607,7 +747,15 @@ z-index: 5;
                             </p>
                         </div>
                         <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
-                            <a href="/moviePostFrm.do?movieNo=${mov.movieNo}" id="open" style="color: #666666;">무비포스트 쓰기</a>
+                        	<c:choose>
+	                            <c:when  test="${not empty sessionScope.m}">
+		                            <a href="/moviePostFrm.do?movieNo=${mov.movieNo}" style="color: #666666;">무비포스트 쓰기</a>
+	                            </c:when>
+	                            
+								<c:otherwise>
+									<a href="/login.do" style="color: #666666;">로그인 하기</a>
+								</c:otherwise>    
+                        	</c:choose>
                         </div>
                     </div>
                     <div class="moviePostTotalCnt reviewAllCountWrap">
@@ -616,17 +764,30 @@ z-index: 5;
                         </div>
                     </div>
                     <div class="moviePostContentList">
+                    <c:forEach items="${oneMoviepostAll}" var="oneMoivePost">
                         <div class="moviePostImg"><!--영화 한개 시작-->
-                            <img src="img/리바운드.jpg">
+                        	<c:choose>
+                        	<c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
+	                            <img src="/resources/upload/movie/${oneMoivePost.movieFilePath}">
+                        	</c:when>
+                            <c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink ne null}">
+	                            <img src="/resources/upload/movie/${oneMoivePost.movieFilePath}">
+                        	</c:when>
+                        	<c:when test="${oneMoivePost.movieFilePath eq null && oneMoivePost.videoLink ne null}">
+                        		<img src="/resources/upload/movie/${mov.mainFile.movieFileName}">
+                            </c:when>
+                            </c:choose>
+                            
                             <div class="moviePostImgContent">
-                                <a href="#"><p>userId조회</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
-                                <a href="#"><!--클릭시 무비포스트 상세보기-->
-                                    <p class="moviePostImgMovieTit">제목</p>
-                                    <p class="moviePostImgMovieCont">내용출력</p>
-                                    <p class="moviePostImgTime">몇분전</p>
+                                <a href="#"><p>${oneMoivePost.memberId }</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
+                                <a href="#" class="open3"><!--클릭시 무비포스트 상세보기 -->
+                                    <p class="moviePostImgMovieTit" >${oneMoivePost.movieTitle }</p>
+                                    <p class="moviePostImgMovieCont"><p>${oneMoivePost.moviePostContent}</p>
+                                    <p class="moviePostImgTime" ><p>${oneMoivePost.moviePostDate}</p>
                                 </a>
                             </div>
-                        </div><!--영화 한개 끝-->       
+                        </div><!--영화 한개 끝-->                           
+                    </c:forEach>
                         <div class="postMoreBtnWrap">
                             <button class="postMoreBtn" id="load">더보기</button>
                         </div>
@@ -742,11 +903,15 @@ z-index: 5;
     });
 
 /*===============모달OPEN=================*/
-const openButton=document.getElementById("open");
+
+
+
+
+	const openButton=document.querySelector(".open");
    const modal = document.querySelector(".modal");
 
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
-   const overlay = modal.querySelector(".modal_overlay");
+  const overlay = modal.querySelector(".modal_overlay");
    const closeBtn = modal.querySelector("#close1");
    const openModal  =() => {
        modal.classList.remove("hidden");
@@ -758,8 +923,11 @@ const openButton=document.getElementById("open");
    overlay.addEventListener("click",closeModal);
    closeBtn.addEventListener("click",closeModal);
    openButton.addEventListener("click",openModal);
-
+ 	console.log(openButton); 
+ 	
+ 	
    /*===============모달OPEN2=================*/
+   
 const openButton2=document.getElementById("open2");
    const modal2 = document.querySelector(".modal2");
 
@@ -778,6 +946,35 @@ const openButton2=document.getElementById("open2");
    openButton2.addEventListener("click",openModal2);
 	
    
+   /*========모달 open3 무비포스트 상세보기=================*/
+   
+   const modal3 = document.querySelector(".modal3");
+ 
+
+   $(".open3").on("click",function(){
+	   $(this);
+	   
+	   
+	   
+	   $(".modal3").removeClass("hidden3");//아작스가 필요하다면 아작스 내부에서 마지막 코드가 됨
+   });
+
+	$("#close3").on("click",function(){
+		$(".modal3").addClass("hidden3");
+	});    
+	   
+   /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
+   const overlay3 = modal3.querySelector(".modal_overlay3");
+   const closeBtn3 = modal3.querySelector("#close3");
+   
+
+   const closeModal3 = () => {
+       modal3.classList.add("hidden3");
+   }
+   
+   overlay3.addEventListener("click",closeModal3);
+   
+
    
 
 

@@ -14,28 +14,16 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -64,6 +52,7 @@ public class MemberController {
 	@RequestMapping(value="/signIn.do")
 	public String signIn(Member member, HttpSession session, Model model) {
 		Member m = service.selectOneMember(member);
+		System.out.println("로그인 정보 : " + m);
 		if(m != null) {
 			session.setAttribute("m", m);
 		}
@@ -316,8 +305,11 @@ public class MemberController {
 	
 	// 카카오 로그인 시 필요한 토큰 발급
 	@RequestMapping(value="/kakaoLogin.do")
-    public String getAccessToken (String code) {
+    public String getAccessToken (String code, Member member, Model model, HttpSession session) {
+		
+		// Access_Token 출력
 		System.out.println(code);
+		
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -337,8 +329,9 @@ public class MemberController {
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=95e454d415a0cf20175203f81771b058"); //본인이 발급받은 REST API key
             sb.append("&redirect_uri=http://192.168.10.32/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://192.168.35.198/kakaoLogin.do"); // 로그인처리 컨트롤러 주소
             //sb.append("&client_id=REST_API_KEY"); //본인이 발급받은 REST API key
-            //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인처리 컨트롤러 주소
+            //sb.append("&redirect_uri=http://아이피주소/컨트롤러주소"); // 로그인 컨트롤러 주소
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -373,12 +366,43 @@ public class MemberController {
             e.printStackTrace();
         }
 
+        HashMap<String, Object> userInfo = getUserInfo(access_Token);
+        System.out.println("userInfo : " + userInfo);
+		//System.out.println("###access_Token#### : " + access_Token);
+		//System.out.println("###userInfo - nickname#### : " + userInfo.get("nickname"));
+		//System.out.println("###userInfo - email#### : " + userInfo.get("email"));
+        
         // 로그인 처리
+        // Member VO의 memberId에 email 값을 대입
+        // 이때, memberPw는 Null 값을 갖게 끔 설정(DB not null -> null 변경)
+        // --> email(memberId)의 memberPw가 일치 할 때 로그인 수행
         
-        Member m = service.selectOneMember();
+        String nickname = (String)userInfo.get("nickname");
+        String email = (String)userInfo.get("email");
         
+        System.out.println("nickname : " + nickname);
+        System.out.println("email : " + email);
         
-        return access_Token;
+        member.setMemberId(email);
+        member.setMemberName(nickname);
+        Member m = service.selectOneMember(member);
+        System.out.println("멤버 객체임 : " + m);
+        if(m != null) {
+        	// 로그인 수행 -> redirect:/ 이동??
+            session.setAttribute("m", m);
+        	session.setAttribute("access_Token", access_Token);
+        	return "redirect:/";
+        } else {
+        	// 회원가입 페이지로 이동
+        	// 이때, 회원가입 jsp를 따로 만들어 주어야 함
+			// memberId -- email
+			// return -> 새로만든 회원가입 페이지 jsp로 리턴???
+        	model.addAttribute("email", email);
+        	model.addAttribute("nickname", nickname);
+        	return "member/kakaoJoinFrm";
+        }
+        
+        //return access_Token;
     }
 	
 	// 카카오 로그인 시 회원의 정보 조회
@@ -396,7 +420,7 @@ public class MemberController {
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            System.out.println("responseCode111111 : " + responseCode);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -421,10 +445,99 @@ public class MemberController {
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
 
+            userInfo.get(email);
+            System.out.println("email");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return userInfo;
     }
+    
+    // 카카오 회원가입
+    @RequestMapping(value="/kakaoJoin.do")
+    public String kakaoJoin(Member m) {
+    	int result = service.insertMember(m);
+    	if(result > 0) {
+    		return "redirect:/";
+    	} else {
+    		return "redirect:/login.do";
+    	}
+    }
+    
+    // 카카오 로그아웃
+    @RequestMapping(value="/kakaoLogout.do")
+    public String kakaoLogout(Member member, HttpSession session) {
+    	String access_Token = (String)session.getAttribute("access_Token");
+    	
+    	if(access_Token != null && member.getMemberPw() == null) {
+    		session.removeAttribute("access_Token");
+    		session.removeAttribute("memberId");
+    		session.invalidate();
+    	}
+    	return "redirect:/";
+    }
+    
+	public void kakaoLogout(String access_Token) {
+	    String reqURL = "https://kapi.kakao.com/v1/user/logout";
+	    try {
+	        URL url = new URL(reqURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        int responseCode = conn.getResponseCode();
+	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	// 카카오 로그아웃(연결 끊기)
+	@RequestMapping(value="/kakaounlink")
+	public String kakaoUnlink(HttpSession session) {
+		session.getAttribute("access_token");
+		session.removeAttribute("access_Token");
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	public void kakaoUnlink(String access_Token) {
+	    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+	    try {
+	        URL url = new URL(reqURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        int responseCode = conn.getResponseCode();
+	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+    
+	// 네이버 로그인
+    
 }

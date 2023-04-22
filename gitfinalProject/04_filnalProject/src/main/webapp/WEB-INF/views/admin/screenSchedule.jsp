@@ -128,44 +128,75 @@
             });
 
             function selectScheduleCalendar(theaterBranch) {
+                var calendarDiv = document.getElementById('calendar');
+                var initialLocaleCode = 'ko';
+                var localeSelectorEl = $('#locale-selector');
+
                 $.ajax({
-                    url: "/selectScheduleCalendar.do", // 변경하기
+                    url: "/selectScheduleCalendar.do",
                     method: "GET",
                     dataType: "json",
                     data: { theaterBranch: theaterBranch },
                     success: function (data) {
-                        console.log(data); // log 로 데이터 찍어주기.
                         let today = new Date();
 
-                        var calendarEl = document.getElementById('calendar');
-
-                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                        var calendar = new FullCalendar.Calendar(calendarDiv, {
                             initialDate: today,
-                            initialView: 'dayGridMonth',
+                            initialView: 'timeGridWeek',
                             headerToolbar: {
                                 left: 'prev,next today',
                                 center: 'title',
                                 right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                             },
+                            navLinks: true,
                             editable: true,
-                            droppable: true, // this allows things to be dropped onto the calendar
-                            drop: function (arg) {
-                                // is the "remove after drop" checkbox checked?
-                                if (document.getElementById('drop-remove').checked) {
-                                    // if so, remove the element from the "Draggable Events" list
-                                    arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                                }
+                            selectable: true,
+                            droppable: true,
+
+                            eventAdd: function () {
+                                console.log();
                             },
-                            /**
-                             * data 로 값이 넘어온다. log 값 전달.
-                             */
+
+                            select: function (arg) {
+                                var title = prompt('영화를 입력해주세요.');
+                                var branch = prompt('상영관(지점)을 입력해주세요.');
+
+                                if (title) {
+                                    calendar.addEvent({
+                                        title: title,
+                                        start: arg.start,
+                                        end: arg.end,
+                                        allDay: arg.allDay,
+                                    });
+                                }
+
+                                var obj = new Object();
+
+                                obj.title = title;
+                                obj.start = arg.start;
+                                obj.end = arg.end;
+                                obj.branch = branch;
+
+                                $.ajax({
+                                    url: "/registerSchedule.do",
+                                    method: "POST",
+                                    dataType: "json",
+                                    data: JSON.stringify(obj),
+                                    contentType: 'application/json',
+                                    success: function (result) {
+                                        if (result > 0) {
+                                            alert("삽입 완료");
+                                        }
+                                    },
+                                });
+
+                                calendar.unselect();
+                            },
+
                             events: data
                         });
 
                         calendar.render();
-                    },
-                    error: function (jqXHR, textStatus) {
-                        alert("Request failed: " + textStatus);
                     }
                 });
             };

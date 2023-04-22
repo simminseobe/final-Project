@@ -1,5 +1,7 @@
 package kr.or.admin.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import common.FileManager;
 import kr.or.admin.model.service.AdminService;
@@ -334,6 +339,33 @@ public class AdminController {
 		}
 
 		return gson.toJson(jsonArray);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "registerSchedule.do")
+	public String registerSchedule(@RequestBody String param, Model model) {
+		JsonElement element = JsonParser.parseString(param);
+
+		String title = element.getAsJsonObject().get("title").getAsString();
+		String branch = element.getAsJsonObject().get("branch").getAsString();
+		String start = element.getAsJsonObject().get("start").getAsString();
+		String end = element.getAsJsonObject().get("end").getAsString();
+		// fullCalander 시간을 DB형식에 맞게 Format
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
+		// fullCalander가 미국시라서 시차 15시간 빼주기
+		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter).minusHours(15);
+		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter).minusHours(15);
+
+		String startOutput = startDateTime.format(outputFormatter);
+		String endOutput = endDateTime.format(outputFormatter);
+
+		System.out.println(startOutput);
+		System.out.println(endOutput);
+
+		int result = service.insertSchedule(title, branch, startOutput, endOutput);
+
+		return String.valueOf(result);
 	}
 
 	@RequestMapping(value = "/allTheater.do")

@@ -36,6 +36,11 @@ public class MovieController {
 		
 		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
+		
+		int movieListCount= service.selectMovieListCount();
+		model.addAttribute("movieListCount", movieListCount);
+		
+		
 		return "movie/movieAllList";
 	}
 	
@@ -47,12 +52,16 @@ public class MovieController {
 		model.addAttribute("pageList",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 		//3번없음
-	
-		//4번없음
+		
+		//4.무비포스트 리스트(무비포스트 리스트)
+		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
+		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
 		
 		//모든 관람평(review)조회하기()
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
 		model.addAttribute("reviewList",reviewList);
+		
+		
 		//관람포인트별 합산점수조회
 		WatchPoint watchPointSum=service.watchPointSum(movieNo);//(5-1.관람포인트 합산)
 		model.addAttribute("watchPointSum", watchPointSum);
@@ -73,7 +82,8 @@ public class MovieController {
 		//영화별 관람평 갯수를 위한 조회
 		int reviewListCount= service.selectReviewListCount(movieNo);
 		model.addAttribute("reviewListCount", reviewListCount);
-		//페이징 처리
+		
+		
 		
 		
 		
@@ -134,6 +144,12 @@ public class MovieController {
 		return "redirect:/movieDetail.do?movieNo="+post.getMovieNo()+"&reqPage=1";
 		
 	}
-	
+	//무비포스트 상세보기
+	@RequestMapping(value="moviePostDetail.do")
+	public String moviePostDetail(int moviePostNo,Model model) {
+		return null;
+		
+	}
+
 	
 }

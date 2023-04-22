@@ -16,4 +16,6 @@ public class MoviePost {
 	private String movieTitle;
 	private String moviePostContent;
 	private String moviePostDate;
+	private String movieFilePath;
+	private String videoLink;
 }
