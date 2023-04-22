@@ -240,9 +240,24 @@
 					height: 200px;
 				}
 				.numberOfPeople{
-					background-color: aqua;
+					overflow: hidden;
 					height: 30px;
-					margin: 20px 0 0 20px;
+					margin: 25px 0 0 20px;
+					padding: 10px 0;
+				}
+				.numberOfPeople>div>span{
+					color: #c4c4c4;
+				}
+				.numArea1{
+					float: left;
+					padding-right: 10px;
+				}
+				.numArea2{
+					float: left;
+					padding-right: 10px;
+				}
+				.numArea3{
+					float: left;
 				}
 				.result-pay {
 					width: 260px;
@@ -324,7 +339,7 @@
 					<div class="content-title-wrap">
 						<div class="content-title">
 							<p class="title-p">관람인원선택</p>
-							<button type="button" onclick="resetBtn()" id="reset-btn">초기화</button>
+							<button type="button" id="reset-btn">초기화</button>
 						</div>
 					</div>
 
@@ -527,7 +542,9 @@
 
 							</div>
 							<div class="numberOfPeople">
-
+								<div class="numArea1"></div>
+								<div class="numArea2"></div>
+								<div class="numArea3"></div>
 							</div>
 							<div class="result-pay">
 								<p class="pay-tit">최종결제금액</p>
@@ -543,7 +560,7 @@
 							</div>
 						</div>
 					</div>
-				<button class="nowTotal">선택된 인원 수 : 0</button>
+				<button class="nowTotal">선택된 인원 수 : </button>
 				</div>
 
 			</div>
@@ -667,11 +684,11 @@
 						specCount(); //specCount()함수호출 : 우대 수
 					});
 				});
-
-				function resetBtn() {
+				
+				$("#reset-btn").on("click",function(){
 					$('.now').text('0');
 					nowTotal(); // nowTotal() 함수 호출
-				}
+				});
 				
 				$(".pageNext").on("click",function(){
 					if($("#memberYN").val() == ''){
@@ -680,44 +697,65 @@
 						location.href = "/paymentMethod.do";
 					}
 				});
-//////////////////////////////////////////////////////////
+
 				var adultCountResult;
 				var teenCountResult;
 				var specCountResult;
+				var allPeopleCount;
 				//.now1(성인)의 인원 수 구하는 함수
 				function adultCount(){
 					var adultCount = parseInt($('#now1').text());
 					console.log("성인 "+adultCount);
-					$(".numberOfPeople").empty();
-					const span = $("<span>");
+					$(".numberOfPeople>div.numArea1").empty();
+					if(adultCount === 0){
+						return;
+					}
+					const span = $("<span>").addClass("adultSpan");
 					span.text("성인 "+adultCount);
-					$(".numberOfPeople").append(span);
-					adultCountResult = span.text();
+					$(".numberOfPeople>div.numArea1").append(span);
+					adultCountResult = $(".adultSpan").text();
 				}
 				//.now2(청소년)의 인원 수 구하는 함수
 				function teenCount(){
 					var teenCount = parseInt($('#now2').text());
 					console.log("청소년 "+teenCount);
+					$(".numberOfPeople>div.numArea2").empty();
+					if(teenCount === 0){
+						return;
+					}
+					const span = $("<span>").addClass("teenSpan");
+					span.text("청소년 "+teenCount);
+					$(".numberOfPeople>div.numArea2").append(span);
+					teenCountResult = $(".teentSpan").text();
 				}
 				//.now3(우대)의 인원 수 구하는 함수
 				function specCount(){
 					var specCount = parseInt($('#now3').text());
 					console.log("우대 "+specCount);
-				}
-
-				function numOfPeopleCount(){
-					
+					$(".numberOfPeople>div.numArea3").empty();
+					if(specCount === 0){
+						return;
+					}
+					const span = $("<span>").addClass("specSpan");
+					span.text("우대 "+specCount);
+					$(".numberOfPeople>div.numArea3").append(span);
+					specCountResult = $(".specSpan").text();
 				}
 ////////////////////////////////////////////////////////////			
-
+				
+				
+				
+				
+////////////////////////////////////////////////////////////			
 				// .now 값을 합치고 버튼의 텍스트를 업데이트하는 함수
 				function nowTotal() {
 				var now1 = parseInt($('#now1').text());
 				var now2 = parseInt($('#now2').text());
 				var now3 = parseInt($('#now3').text());
-				var nowTotal = now1 + now2 + now3;
+				allPeopleCount = now1 + now2 + now3;
 				// 버튼의 텍스트를 업데이트
-				$('.nowTotal').text('선택된 인원 수 : ' + nowTotal);
+				$('.nowTotal').text('선택된 인원 수 : ' + allPeopleCount);
+				
 				}
 
 				
