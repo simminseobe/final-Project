@@ -143,8 +143,8 @@ z-index: 5;
 	width: 100%;
 	height: 100%;
 	position: absolute;
-   z-index: 6;
-    
+    z-index: 6;
+ 
 }
 
 .modal_content3 {
@@ -158,8 +158,14 @@ z-index: 5;
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
+    overflow: auto;
+    height: 850px;
+
        
 }
+
+
+
 
 .hidden3 {
 	display: none;
@@ -348,8 +354,49 @@ z-index: 5;
                     <button type="button">예매하기</button>
                 </div>
                 <div class="post-detail-top">
-                
-                
+                	<div class="detail-top-r">
+                		<div class="detail-top-r-img">
+                			<img src="/resources/images/member/nonImg.png">
+                		</div>
+                		<div class="post-info">
+                            <p>아이디</p>
+                            <p>날짜정보</p>
+                		</div>
+                        <div class="subscribe">
+                            <button type="button" class="subscribeBtn">구독하기</button>
+                        </div>
+                	</div>
+                </div>
+                <div class="post-detail-center">
+                    <div class="detail-center-img-area">
+                        <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
+                        <div class="post-detail-content">
+                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-detail-center">
+                    <div class="detail-center-img-area center-video-area">
+                        <video class="previewCutVideo" width="420px" height="320px" controls>
+                            <source class="previewCutVideoSource" src="${mv.videoLink }">
+                        </video>
+                        <div class="post-detail-content">
+                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-detail-center">
+                    <div class="detail-center-img-area center-video-area">
+                        <video class="previewCutVideo" width="420px" height="320px" controls>
+                            <source class="previewCutVideoSource" src="${mv.videoLink }">
+                        </video>
+                    </div>
+                    <div class="detail-center-img-area">
+                        <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
+                        <div class="post-detail-content">
+                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="modalTxtArea">
                     <textarea name="reviewContent"></textarea>
