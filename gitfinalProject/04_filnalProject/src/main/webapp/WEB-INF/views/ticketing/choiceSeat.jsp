@@ -206,9 +206,10 @@
 					overflow: hidden;
 					position: relative;
 					margin-left: 20px;
-					padding: 0 0 0 28px;
+					padding: 5px 0 0 10px;
 					border-bottom: 1px solid #434343;
 					height: 50px;
+					font-size: 19px;
 				}
 
 				.result-info {
@@ -220,7 +221,15 @@
 					border-bottom: 1px solid #434343;
 					height: 120px;
 				}
-
+				.info-branch{
+					padding: 10px;
+					font-size: 15px;
+					color: #c4c4c4;
+				}
+				.info-time{
+					padding: 10px;
+					font-size: 15px;
+				}
 				.result-seat {
 					overflow: hidden;
 					position: relative;
@@ -497,10 +506,17 @@
 					<div class="choice-result">
 						<div class="result-wrap">
 							<div class="result-title">
-								
+								${schedule.movieTitle}
 							</div>
 							<div class="result-info">
-
+								<div class="info-branch">
+									${schedule.theaterBranch}<br><br>
+									<p class="toDate">${choiceDataDay.choiceDataDay}</p>
+								</div>
+								<div class="info-time">
+									${schedule.scheduleStart}
+									${schedule.scheduleEnd}
+								</div>
 							</div>
 							<div class="result-seat">
 
