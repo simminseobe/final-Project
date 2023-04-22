@@ -233,17 +233,21 @@
 				.result-seat {
 					overflow: hidden;
 					position: relative;
-					min-height: 230px;
+					min-height: 200px;
 					margin: 10px 0 0 20px;
 					border-radius: 5px;
 					border: 1px solid #434343;
-					height: 230px;
+					height: 200px;
 				}
-
+				.numberOfPeople{
+					background-color: aqua;
+					height: 30px;
+					margin: 20px 0 0 20px;
+				}
 				.result-pay {
 					width: 260px;
-					margin: 15px 0 0 20px;
-					padding: 10px 0;
+					margin: 5px 0 0 20px;
+					
 					height: 50px;
 				}
 				.pay-tit{
@@ -327,7 +331,7 @@
 					<div class="content-wrap">
 						<div class="how-many">
 							<div class="cell">
-								<p class="select-many-people">성인</p>
+								<p class="select-many-people adult">성인</p>
 								<div class="count">
 									<!--버튼 시작-->
 									<button type="button" class="down">-</button>
@@ -344,7 +348,7 @@
 								</div>
 							</div>
 							<div class="cell">
-								<p class="select-many-people">청소년</p>
+								<p class="select-many-people teen">청소년</p>
 								<div class="count">
 									<!--버튼 시작-->
 									<button type="button" class="down">-</button>
@@ -361,7 +365,7 @@
 								</div>
 							</div>
 							<div class="cell" style="padding-left: 10px;">
-								<p class="select-many-people">우대</p>
+								<p class="select-many-people spec">우대</p>
 								<div class="count">
 									<!--버튼 시작-->
 									<button type="button" class="down">-</button>
@@ -377,9 +381,10 @@
 									<!--버튼 끝-->
 								</div>
 							</div>
+						</div>
 
 							
-						</div>
+
 						<div class="seat-wrap">
 							<div class="screen">
 								<img src="img/screen.png">
@@ -521,6 +526,9 @@
 							<div class="result-seat">
 
 							</div>
+							<div class="numberOfPeople">
+
+							</div>
 							<div class="result-pay">
 								<p class="pay-tit">최종결제금액</p>
 								<div class="money">
@@ -610,6 +618,7 @@
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
 							nowTotal(); // nowTotal() 함수 호출
+							adultCount(); //adultCount()함수호출 : 성인 수
 						}
 					});
 					$('.how-many .cell:nth-child(1) .up').click(function () {
@@ -617,6 +626,7 @@
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
 						nowTotal(); // nowTotal() 함수 호출
+						adultCount(); //adultCount()함수호출 : 성인 수
 					});
 
 					// 청소년 버튼
@@ -627,6 +637,7 @@
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
 							nowTotal(); // nowTotal() 함수 호출
+							teenCount(); //teenCount()함수호출 : 청소년 수
 						}
 					});
 					$('.how-many .cell:nth-child(2) .up').click(function () {
@@ -634,6 +645,7 @@
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
 						nowTotal(); // nowTotal() 함수 호출
+						teenCount(); //teenCount()함수호출 : 청소년 수
 					});
 
 					// 우대 버튼
@@ -644,6 +656,7 @@
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
 							nowTotal(); // nowTotal() 함수 호출
+							specCount(); //specCount()함수호출 : 우대 수
 						}
 					});
 					$('.how-many .cell:nth-child(3) .up').click(function () {
@@ -651,6 +664,7 @@
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
 						nowTotal(); // nowTotal() 함수 호출
+						specCount(); //specCount()함수호출 : 우대 수
 					});
 				});
 
@@ -666,9 +680,35 @@
 						location.href = "/paymentMethod.do";
 					}
 				});
+//////////////////////////////////////////////////////////
+				var adultCountResult;
+				var teenCountResult;
+				var specCountResult;
+				//.now1(성인)의 인원 수 구하는 함수
+				function adultCount(){
+					var adultCount = parseInt($('#now1').text());
+					console.log("성인 "+adultCount);
+					$(".numberOfPeople").empty();
+					const span = $("<span>");
+					span.text("성인 "+adultCount);
+					$(".numberOfPeople").append(span);
+					adultCountResult = span.text();
+				}
+				//.now2(청소년)의 인원 수 구하는 함수
+				function teenCount(){
+					var teenCount = parseInt($('#now2').text());
+					console.log("청소년 "+teenCount);
+				}
+				//.now3(우대)의 인원 수 구하는 함수
+				function specCount(){
+					var specCount = parseInt($('#now3').text());
+					console.log("우대 "+specCount);
+				}
 
-				
-				
+				function numOfPeopleCount(){
+					
+				}
+////////////////////////////////////////////////////////////			
 
 				// .now 값을 합치고 버튼의 텍스트를 업데이트하는 함수
 				function nowTotal() {
