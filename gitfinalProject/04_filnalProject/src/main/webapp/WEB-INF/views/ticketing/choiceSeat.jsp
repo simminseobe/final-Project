@@ -549,7 +549,7 @@
 							<div class="result-pay">
 								<p class="pay-tit">최종결제금액</p>
 								<div class="money">
-									<span class="amount">15,000</span>
+									<span class="amount">0</span>
 									<span class="won">원</span>
 								</div>
 							</div>
@@ -698,53 +698,88 @@
 					}
 				});
 
-				var adultCountResult;
+				var adultCountResult;//연령종류:수(성인 : 1)
 				var teenCountResult;
 				var specCountResult;
-				var allPeopleCount;
+
+				var countAdult;	//인원 수 
+				var countTeen;
+				var countSpecial;
+
+				var amountAdult; //금액
+				var amountTeen;
+				var amountSpecial;
 				//.now1(성인)의 인원 수 구하는 함수
 				function adultCount(){
-					var adultCount = parseInt($('#now1').text());
-					console.log("성인 "+adultCount);
+					countAdult = parseInt($('#now1').text());
+					console.log("성인 "+countAdult);
 					$(".numberOfPeople>div.numArea1").empty();
-					if(adultCount === 0){
+					if(countAdult === 0){
 						return;
 					}
 					const span = $("<span>").addClass("adultSpan");
-					span.text("성인 "+adultCount);
+					span.text("성인 "+countAdult);
 					$(".numberOfPeople>div.numArea1").append(span);
 					adultCountResult = $(".adultSpan").text();
 				}
 				//.now2(청소년)의 인원 수 구하는 함수
 				function teenCount(){
-					var teenCount = parseInt($('#now2').text());
-					console.log("청소년 "+teenCount);
+					countTeen = parseInt($('#now2').text());
+					console.log("청소년 "+countTeen);
 					$(".numberOfPeople>div.numArea2").empty();
-					if(teenCount === 0){
+					if(countTeen === 0){
 						return;
 					}
 					const span = $("<span>").addClass("teenSpan");
-					span.text("청소년 "+teenCount);
+					span.text("청소년 "+countTeen);
 					$(".numberOfPeople>div.numArea2").append(span);
-					teenCountResult = $(".teentSpan").text();
+					teenCountResult = $(".teenSpan").text();
 				}
 				//.now3(우대)의 인원 수 구하는 함수
 				function specCount(){
-					var specCount = parseInt($('#now3').text());
-					console.log("우대 "+specCount);
+					countSpecial = parseInt($('#now3').text());
+					console.log("우대 "+countSpecial);
 					$(".numberOfPeople>div.numArea3").empty();
-					if(specCount === 0){
+					if(countSpecial === 0){
 						return;
 					}
 					const span = $("<span>").addClass("specSpan");
-					span.text("우대 "+specCount);
+					span.text("우대 "+countSpecial);
 					$(".numberOfPeople>div.numArea3").append(span);
 					specCountResult = $(".specSpan").text();
+					
 				}
-////////////////////////////////////////////////////////////			
-				
-				
-				
+
+				//왜 감싸고 있는 div.how-many에 클릭을 걸어야 제대로 작동하는지 질문하기
+				/*
+				버튼이 아니라 감싸고 있는 div.how-many에 
+				클릭을 걸어야 하는 이유 :
+				*/
+				//calculateAmount()함수 호출
+				$(".how-many").on("click",function(){
+					calculateAmount();
+				});
+				//span.amount에 (연령대*금액)합계금액 출력 (천 단위에서 ,찍기위해 .toLocaleString()추가)
+				function calculateAmount() {
+					const adultPrice = 18000;
+					const teenPrice = 12000;
+					const specPrice = 7000;
+
+					const adultCount = parseInt($('#now1').text());
+					const teenCount = parseInt($('#now2').text());
+					const specCount = parseInt($('#now3').text());
+
+					const adultAmount = adultCount * adultPrice;
+					const teenAmount = teenCount * teenPrice;
+					const specAmount = specCount * specPrice;
+
+					const totalAmount = adultAmount + teenAmount + specAmount;
+					console.log(totalAmount);
+					console.log(totalAmount.toLocaleString());
+					
+					$(".amount").text(totalAmount.toLocaleString());
+				}
+////////////////////////////////////////////////////////////
 				
 ////////////////////////////////////////////////////////////			
 				// .now 값을 합치고 버튼의 텍스트를 업데이트하는 함수
