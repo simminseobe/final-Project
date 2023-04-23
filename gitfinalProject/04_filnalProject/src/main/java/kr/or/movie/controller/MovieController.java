@@ -51,6 +51,7 @@ public class MovieController {
 		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
 		model.addAttribute("pageList",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
+
 		//3번없음
 		
 		//4.무비포스트 리스트(무비포스트 리스트)
@@ -61,6 +62,8 @@ public class MovieController {
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
 		model.addAttribute("reviewList",reviewList);
 		
+		//아이디로 관람평 조회
+		//Review oneReview = service.selectOneReview();
 		
 		//관람포인트별 합산점수조회
 		WatchPoint watchPointSum=service.watchPointSum(movieNo);//(5-1.관람포인트 합산)
@@ -145,11 +148,16 @@ public class MovieController {
 		
 	}
 	//무비포스트 상세보기
-	@RequestMapping(value="moviePostDetail.do")
-	public String moviePostDetail(int moviePostNo,Model model) {
-		return null;
+	@ResponseBody
+	@RequestMapping(value="/moviePostDetail.do",produces = "application/json;charset=utf-8")
+	public String moviePostDetail(int movieNo,int moviePostNo,Model model) {
+		MoviePost moviePostOne= service.selectDetailPost(moviePostNo);
+		System.out.println(moviePostOne+"성공");
+		
+		return new Gson().toJson(moviePostOne);
+		
 		
 	}
-
+	
 	
 }

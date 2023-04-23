@@ -554,8 +554,8 @@ cursor: pointer;
     display: none;
     }
 
-.moviePostImgContent a p{
-    padding: 10px 0;
+.moviePostImgContent a>:nth-child(5){
+    padding-bottom: 5px;
 }
 
 .postMoreBtn{
@@ -638,10 +638,26 @@ cursor: pointer;
 .post-info{
     color: black;
     float: left;
+    
     height: 67px;
     margin-left: 10px;
     text-align: left;
+   
 }
+.post-info-first-input{
+    margin-top: 5px;
+}
+
+.postDetailTextInput{
+    width: 420px;
+    height: 117px;
+    resize: none;
+    border: none;
+    background-color: #ecf0f4;
+    text-align: center;
+}
+
+
 .subscribe{
     padding-top: 15px;
     display: flex;
@@ -683,4 +699,19 @@ cursor: pointer;
 .video-img{
     display:flex;
     align-items: stretch;
+}
+.post-detail-txt{
+    background-color: ecf0f4;
+}
+.post-detail-txt>.postReviewBtn{
+    width:810px;
+    height: 40px;
+    background-color: #432e75;
+    color: #fff;
+}
+
+.modalContentBottom>#close3{
+    background-color: transparent;
+    color: #432e75;
+    border-color: #432e75;
 }

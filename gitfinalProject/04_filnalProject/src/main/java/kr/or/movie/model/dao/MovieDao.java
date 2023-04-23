@@ -148,6 +148,12 @@ public class MovieDao {
 		return (ArrayList<MoviePost>)list;
 	}
 
+	public MoviePost selectDetailPost(int moviePostNo) {
+			MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost", moviePostNo);
+		
+		return moviePostOne;
+	}
+
 
 
 }

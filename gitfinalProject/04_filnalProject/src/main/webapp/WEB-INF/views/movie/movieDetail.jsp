@@ -339,11 +339,10 @@ z-index: 5;
         </div><!--class="modal hidden 모달끝-->
         <!--==============================모달2 관람평 수정끝================================================-->        
 
-
+	<!-- =================================모달3 무비포스트 상세보기============================================= -->
 	<div class="modal3 hidden3"><!--모달로  무비포스트 상세보기  들어가는 자리-->
             <div class="modal_overlay3"></div>
             <div class="modal_content3"><!--모달 댓글 내부화면-->
-                
                 <div class="modalClose">
                     <div class="modalCloseTit">
                         <span>무비포스트 상세보기</span>                    
@@ -359,58 +358,68 @@ z-index: 5;
                 			<img src="/resources/images/member/nonImg.png">
                 		</div>
                 		<div class="post-info">
-                            <p>아이디</p>
-                            <p>날짜정보</p>
+                            <div class="post-info-first-input">
+                			    <input type="text" class="detailmemberId" style="border:none;" readonly>
+                			</div>
+                            <div class="post-info-first-input">
+                                <input type="text" class="postDate" style="border:none;" readonly>
+                            </div>
                 		</div>
                         <div class="subscribe">
                             <button type="button" class="subscribeBtn">구독하기</button>
                         </div>
                 	</div>
                 </div>
+                
+                <!-- 이미지1개만 있을때 -->
+                <input type="text" class="dataImgCheck">
+                <input type="text" class="dataVideoCheck">
+                
                 <div class="post-detail-center">
                     <div class="detail-center-img-area">
-                        <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
+                        <img class="post-detail-center-img">
                         <div class="post-detail-content">
-                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                            <textarea class="postDetailTextInput" readonly></textarea>
                         </div>
                     </div>
                 </div>
+                
+                <!-- 비디오1개만 나왔을때 -->
                 <div class="post-detail-center">
                     <div class="detail-center-img-area center-video-area">
                         <video class="previewCutVideo" width="420px" height="320px" controls>
-                            <source class="previewCutVideoSource" src="${mv.videoLink }">
+                            <source class="previewCutVideoSource">
                         </video>
                         <div class="post-detail-content">
-                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                            <textarea class="postDetailTextInput" readonly></textarea>
                         </div>
                     </div>
                 </div>
+                
+                <!-- 이미지와 비디오 같이 있을때 -->
                 <div class="post-detail-center">
                     <div class="detail-center-img-area center-video-area">
                         <video class="previewCutVideo" width="420px" height="320px" controls>
-                            <source class="previewCutVideoSource" src="${mv.videoLink }">
+                            <source class="previewCutVideoSource">
                         </video>
                     </div>
                     <div class="detail-center-img-area">
                         <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
                         <div class="post-detail-content">
-                            <p>스토리는 뻔하지만, 주옥같은 명대사가 좋아요</p>
+                            <textarea class="postDetailTextInput" readonly></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="modalTxtArea">
-                    <textarea name="reviewContent"></textarea>
+                
+                <!-- 무비포스트 댓글작성 하는곳-->
+                <div class="modalTxtArea post-detail-txt" style="background-color: #ecf0f4;">
+                    <textarea name="reviewContent"  style="width:810px;"></textarea>
+                    <button type="button"class="postReviewBtn">댓글등록</button>
                 </div>
-                <div class="modal_content_tit" style="margin-top: 50px;">
-                    <p>관람포인트는 무엇인가요?</p>
-                    <p style="font-size: 18px; margin-top: 5px;">(최대 5개 선택가능)</p>
-                </div>
-               
+
                 <div class="modalContentBottom">
                     <button type="button" id="close3"  style="margin-right: 5px;">닫기</button>
-                    <button type="submit" name=reviewEnroll id="reviewEnroll" class="enrollBtn" style="margin-right: 5px;">등록</button>
                 </div>
-          
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 무비포스트 상세보기 모달끝 -->
 
@@ -491,7 +500,7 @@ z-index: 5;
                         </div>
                     </div>
                     <div class="detail-chart" style="margin-top: 20px; position: relative; width: 100%;">
-                        <div class="col"style="border: 1px solid black; position: absolute; top: 0px; width: 366.33px; height:380px; display:inline-block; float:left;">
+                        <div class="col"style="position: absolute; top: 0px; width: 366.33px; height:380px; display:inline-block; float:left;">
                             <div class="pointTxt" style="padding-top: 50px; font-size: 18px; line-height: 18px;">
                                 <h2>관람포인트</h2>
                             </div>
@@ -499,7 +508,7 @@ z-index: 5;
                                 <canvas id="myChart" width="216" height="216" style="margin:0 auto;"></canvas>
                             </div>
                         </div>
-                        <div class="col" style="position: absolute; top: 0px; left:366px; border: 1px solid black; width: 366.33px; height:380px;">
+                        <div class="col" style="position: absolute; top: 0px; left:366px; width: 366.33px; height:380px;">
                             <div class="pointTxt" style=" margin: 0 auto; padding-top: 50px; text-align: center; font-size: 18px; line-height: 18px;">
                                 <h2>실관람평점</h2>
                                 <div class="circle" style="margin: 0 auto; margin-top: 30px; vertical-align: center; z-index: 12; width: 120px; height: 120px; line-height: 120px; background-color: #6543b1;  border-radius: 120px; color:#fff;">
@@ -511,7 +520,7 @@ z-index: 5;
                                 </div>    
                             </div>
                         </div>
-                        <div class="col" style="position: absolute; top: 0px; right: 0; border: 1px solid black; width: 366px; height:380px;">
+                        <div class="col" style="position: absolute; top: 0px; right: 0;  width: 366px; height:380px;">
                             <div class="pointTxt" style="padding-top: 50px; font-size: 18px; line-height: 18px;">
                                 <h2>누적관객수</h2>
                             </div>
@@ -561,19 +570,19 @@ z-index: 5;
                        
                       
                         <div class="reviewContentWrite" style="font-size: 15px;">
+                       <c:forEach items="${reviewList}" var="review">
                         <c:choose>
 							<c:when test="${not empty sessionScope.m && sessionScope.m.memberId ne review.memberId}">
 	                            <a href="#" class="open" style="color: #666666;">관람평 쓰기</a>
+							</c:when>
+							<c:when test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
+								 <a href="#" class="open" style="color: #666666;">작성완료</a>
 							</c:when>
 							<c:otherwise>
 								<a href="/login.do" style="color: #666666;">로그인하기</a>
 							</c:otherwise>                        
                         </c:choose>
-                        <c:forEach items="${reviewList }" var="review">
-                        	<c:if test="${review.memberId eq sessionScope.m.memberId }">
-                        	<a href="/login.do" style="color: #666666;">작성완료</a>
-                        	</c:if>
-                        </c:forEach>
+                    	</c:forEach>
                         </div>
                       
                  
@@ -781,7 +790,12 @@ z-index: 5;
                             <div class="moviePostImgContent">
                                 <a href="#"><p>${oneMoivePost.memberId }</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
                                 <a href="#" class="open3"><!--클릭시 무비포스트 상세보기 -->
-                                    <p class="moviePostImgMovieTit" >${oneMoivePost.movieTitle }</p>
+	                                <input type="text" name="movieNo" value="${oneMoivePost.movieNo }" style="display:none;">
+	                                <input type="text" name="moviePostNo" value="${oneMoivePost.moviePostNo}" style="display:none;">
+                                    <input type="text" name="movieFilePath" value="${oneMoivePost.movieFilePath }" style="display:none;">
+	                                <input type="text" name="videoLink" value="${oneMoivePost.videoLink}" style="display:none;">
+                                   
+                                    <p class="moviePostImgMovieTit">${oneMoivePost.movieTitle }</p>
                                     <p class="moviePostImgMovieCont"><p>${oneMoivePost.moviePostContent}</p>
                                     <p class="moviePostImgTime" ><p>${oneMoivePost.moviePostDate}</p>
                                 </a>
@@ -922,7 +936,7 @@ z-index: 5;
    }
    overlay.addEventListener("click",closeModal);
    closeBtn.addEventListener("click",closeModal);
-   openButton.addEventListener("click",openModal);
+  openButton.addEventListener("click",openModal);
  	console.log(openButton); 
  	
  	
@@ -943,7 +957,7 @@ const openButton2=document.getElementById("open2");
    }
    overlay2.addEventListener("click",closeModal2);
    closeBtn2.addEventListener("click",closeModal2);
-   openButton2.addEventListener("click",openModal2);
+    openButton2.addEventListener("click",openModal2);
 	
    
    /*========모달 open3 무비포스트 상세보기=================*/
@@ -952,7 +966,55 @@ const openButton2=document.getElementById("open2");
  
 
    $(".open3").on("click",function(){
-	   $(this);
+	   const movieNo = $(this).children().eq(0).val();
+	   const moviePostNo=$(this).children().eq(1).val();
+	   
+	   
+	   
+	   //멤버 아이디와 무비포스트 날짜를 받기 위함
+	   const detailmemberId=$(".detailmemberId");
+	   const postDate=$(".postDate");
+	   
+	   //무비포스트 텍스트 내용을  input으로 받기 위함
+	   const postDetailTextInput=$(".postDetailTextInput");
+	   
+	   //이미지를 받기 위함
+	   const postDetailCenterImg=$(".post-detail-center-img");
+	   
+	   //비디오를 받기위함
+	   const previewCutVideoSource=$(".previewCutVideoSource");
+	   
+	   //이미지가 있는지 비디오가 있는지 값 체크를 위해 선언
+	   const dataImgCheck=$(".dataImgCheck");
+	   const dataVideoCheck=$(".dataVideoCheck");
+	   
+	   
+
+		$.ajax({
+			  url :"/moviePostDetail.do",
+			  type : "post",
+			  data : {movieNo:movieNo,moviePostNo:moviePostNo},
+			  success : function(data){
+					  if(data != null && data.videoLink!="" && data.movieFilePath!=""){
+						  $(".post-detail-center")[0].css("display","none");
+						  $(".post-detail-center")[1].css("display","none");
+						  $(".post-detail-center")[2].css("display","block");
+						  dataVideoCheck.val(data.videoLink);
+						  dataImgCheck.val(data.movieFilePath);
+						  const detailMemberIdVal=detailmemberId.val(data.memberId);
+						  const postDateVal=postDate.val(data.moviePostDate);
+						  postDetailTextInput.val(data.moviePostContent);
+						  
+						  postDetailCenterImg.attr("src","/resources/upload/movie/"+data.movieFilePath);
+						  
+						  previewCutVideoSource.attr("src",data.videoLink);
+						  
+				  	}else if(data==null){
+					  console.log("실패");
+					}
+				  
+			  }
+			  });	
 	   
 	   
 	   
@@ -974,9 +1036,24 @@ const openButton2=document.getElementById("open2");
    
    overlay3.addEventListener("click",closeModal3);
    
-
+   
+   /*댓글 새로고침을 방지하기 위해 주소에stat을 넣음*/
+   window.onload=function(){
+	const urlParams = new URL(location.href).searchParams;
+	const stat = urlParams.get('stat');
+	console.log(stat);
+	if(stat == 1){
+	    const contents = $(".tabcontent");
+	    contents.hide();
+    	contents.eq(1).show();
+    }
+}
    
 
+  
+		
+
+			 
 
 
 

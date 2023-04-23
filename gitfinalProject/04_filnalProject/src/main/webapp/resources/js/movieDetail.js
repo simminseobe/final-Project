@@ -56,7 +56,8 @@ $(function(){
     contents.eq(index).show();
 
  });
- $(".tabs>li").eq(0).click();
+$(".tabs>li").eq(0).click();
+
 
 
 
