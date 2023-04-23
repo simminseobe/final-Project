@@ -206,9 +206,10 @@
 					overflow: hidden;
 					position: relative;
 					margin-left: 20px;
-					padding: 0 0 0 28px;
+					padding: 5px 0 0 10px;
 					border-bottom: 1px solid #434343;
 					height: 50px;
+					font-size: 19px;
 				}
 
 				.result-info {
@@ -220,21 +221,48 @@
 					border-bottom: 1px solid #434343;
 					height: 120px;
 				}
-
+				.info-branch{
+					padding: 10px;
+					font-size: 15px;
+					color: #c4c4c4;
+				}
+				.info-time{
+					padding: 10px;
+					font-size: 15px;
+				}
 				.result-seat {
 					overflow: hidden;
 					position: relative;
-					min-height: 230px;
+					min-height: 200px;
 					margin: 10px 0 0 20px;
 					border-radius: 5px;
 					border: 1px solid #434343;
-					height: 230px;
+					height: 200px;
 				}
-
+				.numberOfPeople{
+					overflow: hidden;
+					height: 30px;
+					margin: 25px 0 0 20px;
+					padding: 10px 0;
+				}
+				.numberOfPeople>div>span{
+					color: #c4c4c4;
+				}
+				.numArea1{
+					float: left;
+					padding-right: 10px;
+				}
+				.numArea2{
+					float: left;
+					padding-right: 10px;
+				}
+				.numArea3{
+					float: left;
+				}
 				.result-pay {
 					width: 260px;
-					margin: 15px 0 0 20px;
-					padding: 10px 0;
+					margin: 5px 0 0 20px;
+					
 					height: 50px;
 				}
 				.pay-tit{
@@ -311,14 +339,14 @@
 					<div class="content-title-wrap">
 						<div class="content-title">
 							<p class="title-p">관람인원선택</p>
-							<button type="button" onclick="resetBtn()" id="reset-btn">초기화</button>
+							<button type="button" id="reset-btn">초기화</button>
 						</div>
 					</div>
 
 					<div class="content-wrap">
 						<div class="how-many">
 							<div class="cell">
-								<p class="select-many-people">성인</p>
+								<p class="select-many-people adult">성인</p>
 								<div class="count">
 									<!--버튼 시작-->
 									<button type="button" class="down">-</button>
@@ -335,7 +363,7 @@
 								</div>
 							</div>
 							<div class="cell">
-								<p class="select-many-people">청소년</p>
+								<p class="select-many-people teen">청소년</p>
 								<div class="count">
 									<!--버튼 시작-->
 									<button type="button" class="down">-</button>
@@ -352,7 +380,7 @@
 								</div>
 							</div>
 							<div class="cell" style="padding-left: 10px;">
-								<p class="select-many-people">우대</p>
+								<p class="select-many-people spec">우대</p>
 								<div class="count">
 									<!--버튼 시작-->
 									<button type="button" class="down">-</button>
@@ -368,9 +396,10 @@
 									<!--버튼 끝-->
 								</div>
 							</div>
+						</div>
 
 							
-						</div>
+
 						<div class="seat-wrap">
 							<div class="screen">
 								<img src="img/screen.png">
@@ -497,18 +526,30 @@
 					<div class="choice-result">
 						<div class="result-wrap">
 							<div class="result-title">
-								
+								${schedule.movieTitle}
 							</div>
 							<div class="result-info">
-
+								<div class="info-branch">
+									${schedule.theaterBranch}<br><br>
+									<p class="toDate">${choiceDataDay.choiceDataDay}</p>
+								</div>
+								<div class="info-time">
+									${schedule.scheduleStart}
+									${schedule.scheduleEnd}
+								</div>
 							</div>
 							<div class="result-seat">
 
 							</div>
+							<div class="numberOfPeople">
+								<div class="numArea1"></div>
+								<div class="numArea2"></div>
+								<div class="numArea3"></div>
+							</div>
 							<div class="result-pay">
 								<p class="pay-tit">최종결제금액</p>
 								<div class="money">
-									<span class="amount">15,000</span>
+									<span class="amount">0</span>
 									<span class="won">원</span>
 								</div>
 							</div>
@@ -519,7 +560,7 @@
 							</div>
 						</div>
 					</div>
-				<button class="nowTotal">선택된 인원 수 : 0</button>
+				<button class="nowTotal">선택된 인원 수 : </button>
 				</div>
 
 			</div>
@@ -594,6 +635,7 @@
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
 							nowTotal(); // nowTotal() 함수 호출
+							adultCount(); //adultCount()함수호출 : 성인 수
 						}
 					});
 					$('.how-many .cell:nth-child(1) .up').click(function () {
@@ -601,6 +643,7 @@
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
 						nowTotal(); // nowTotal() 함수 호출
+						adultCount(); //adultCount()함수호출 : 성인 수
 					});
 
 					// 청소년 버튼
@@ -611,6 +654,7 @@
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
 							nowTotal(); // nowTotal() 함수 호출
+							teenCount(); //teenCount()함수호출 : 청소년 수
 						}
 					});
 					$('.how-many .cell:nth-child(2) .up').click(function () {
@@ -618,6 +662,7 @@
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
 						nowTotal(); // nowTotal() 함수 호출
+						teenCount(); //teenCount()함수호출 : 청소년 수
 					});
 
 					// 우대 버튼
@@ -628,6 +673,7 @@
 						if (nowVal > 0) {
 							$now.text(nowVal - 1);
 							nowTotal(); // nowTotal() 함수 호출
+							specCount(); //specCount()함수호출 : 우대 수
 						}
 					});
 					$('.how-many .cell:nth-child(3) .up').click(function () {
@@ -635,13 +681,14 @@
 						var $now = $count.find('.now');
 						$now.text(parseInt($now.text()) + 1);
 						nowTotal(); // nowTotal() 함수 호출
+						specCount(); //specCount()함수호출 : 우대 수
 					});
 				});
-
-				function resetBtn() {
+				
+				$("#reset-btn").on("click",function(){
 					$('.now').text('0');
 					nowTotal(); // nowTotal() 함수 호출
-				}
+				});
 				
 				$(".pageNext").on("click",function(){
 					if($("#memberYN").val() == ''){
@@ -651,17 +698,99 @@
 					}
 				});
 
-				
-				
+				var adultCountResult;//연령종류:수(성인 : 1)
+				var teenCountResult;
+				var specCountResult;
 
+				var countAdult;	//인원 수 
+				var countTeen;
+				var countSpecial;
+
+				var amountAdult; //금액
+				var amountTeen;
+				var amountSpecial;
+				//.now1(성인)의 인원 수 구하는 함수
+				function adultCount(){
+					countAdult = parseInt($('#now1').text());
+					console.log("성인 "+countAdult);
+					$(".numberOfPeople>div.numArea1").empty();
+					if(countAdult === 0){
+						return;
+					}
+					const span = $("<span>").addClass("adultSpan");
+					span.text("성인 "+countAdult);
+					$(".numberOfPeople>div.numArea1").append(span);
+					adultCountResult = $(".adultSpan").text();
+				}
+				//.now2(청소년)의 인원 수 구하는 함수
+				function teenCount(){
+					countTeen = parseInt($('#now2').text());
+					console.log("청소년 "+countTeen);
+					$(".numberOfPeople>div.numArea2").empty();
+					if(countTeen === 0){
+						return;
+					}
+					const span = $("<span>").addClass("teenSpan");
+					span.text("청소년 "+countTeen);
+					$(".numberOfPeople>div.numArea2").append(span);
+					teenCountResult = $(".teenSpan").text();
+				}
+				//.now3(우대)의 인원 수 구하는 함수
+				function specCount(){
+					countSpecial = parseInt($('#now3').text());
+					console.log("우대 "+countSpecial);
+					$(".numberOfPeople>div.numArea3").empty();
+					if(countSpecial === 0){
+						return;
+					}
+					const span = $("<span>").addClass("specSpan");
+					span.text("우대 "+countSpecial);
+					$(".numberOfPeople>div.numArea3").append(span);
+					specCountResult = $(".specSpan").text();
+					
+				}
+
+				//왜 감싸고 있는 div.how-many에 클릭을 걸어야 제대로 작동하는지 질문하기
+				/*
+				버튼이 아니라 감싸고 있는 div.how-many에 
+				클릭을 걸어야 하는 이유 :
+				*/
+				//calculateAmount()함수 호출
+				$(".how-many").on("click",function(){
+					calculateAmount();
+				});
+				//span.amount에 (연령대*금액)합계금액 출력 (천 단위에서 ,찍기위해 .toLocaleString()추가)
+				function calculateAmount() {
+					const adultPrice = 18000;
+					const teenPrice = 12000;
+					const specPrice = 7000;
+
+					const adultCount = parseInt($('#now1').text());
+					const teenCount = parseInt($('#now2').text());
+					const specCount = parseInt($('#now3').text());
+
+					const adultAmount = adultCount * adultPrice;
+					const teenAmount = teenCount * teenPrice;
+					const specAmount = specCount * specPrice;
+
+					const totalAmount = adultAmount + teenAmount + specAmount;
+					console.log(totalAmount);
+					console.log(totalAmount.toLocaleString());
+					
+					$(".amount").text(totalAmount.toLocaleString());
+				}
+////////////////////////////////////////////////////////////
+				
+////////////////////////////////////////////////////////////			
 				// .now 값을 합치고 버튼의 텍스트를 업데이트하는 함수
 				function nowTotal() {
 				var now1 = parseInt($('#now1').text());
 				var now2 = parseInt($('#now2').text());
 				var now3 = parseInt($('#now3').text());
-				var nowTotal = now1 + now2 + now3;
+				allPeopleCount = now1 + now2 + now3;
 				// 버튼의 텍스트를 업데이트
-				$('.nowTotal').text('선택된 인원 수 : ' + nowTotal);
+				$('.nowTotal').text('선택된 인원 수 : ' + allPeopleCount);
+				
 				}
 
 				

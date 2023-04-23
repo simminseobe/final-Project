@@ -185,4 +185,34 @@ public class AdminService {
 		return result;
 	}
 
+	public int updateSchedule(String startOutput, String endOutput, String scheduleNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("startOutput", startOutput);
+		map.put("endOutput", endOutput);
+		map.put("scheduleNo", scheduleNo);
+
+		int result = dao.updateSchedule(map);
+
+		return result;
+	}
+
+	public int selectscheduleNo(String oldTitle, String oldBranch, String startOutput, String endOutput) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("title", oldTitle);
+		map.put("branch", oldBranch);
+		map.put("startOutput", startOutput);
+		map.put("endOutput", endOutput);
+
+		int scheduleNo = dao.selectscheduleNo(map);
+
+		return scheduleNo;
+	}
+
+	public int deleteSchedule(String scheduleNo) {
+		int result = dao.deleteSchedule(scheduleNo);
+
+		return result;
+	}
 }

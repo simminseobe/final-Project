@@ -10,6 +10,7 @@ import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.TicketingSchedule;
 
 @Service
 public class TicketingService {
@@ -51,14 +52,14 @@ public class TicketingService {
 		return list;
 	}
 
-	public ArrayList<String> choiceBranchSchedule(String movieTitle, String choiceDataDay, String theaterBranch) {
+	public ArrayList<TicketingSchedule> choiceBranchSchedule(String movieTitle, String choiceDataDay, String theaterBranch) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		map.put("movieTitle", movieTitle);
 		map.put("choiceDataDay", choiceDataDay);
 		map.put("theaterBranch", theaterBranch);
 
-		ArrayList<String> list = dao.choiceBranchSchedule(map);
+		ArrayList<TicketingSchedule> list = dao.choiceBranchSchedule(map);
 
 		return list;
 	}

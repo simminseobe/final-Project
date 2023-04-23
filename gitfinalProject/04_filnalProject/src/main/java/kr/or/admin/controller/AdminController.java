@@ -321,7 +321,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/selectScheduleCalendar.do", produces = "application/json;charset=utf-8")
 	public String selectScheduleCalendar(String theaterBranch) {
-		System.out.println(theaterBranch);
 		List<Schedule> list = service.selectScheduleCalendar(theaterBranch);
 
 		Gson gson = new Gson();
@@ -343,19 +342,26 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "registerSchedule.do")
-	public String registerSchedule(@RequestBody String param, Model model) {
+	public String registerSchedule(@RequestBody String param) {
 		JsonElement element = JsonParser.parseString(param);
 
 		String title = element.getAsJsonObject().get("title").getAsString();
 		String branch = element.getAsJsonObject().get("branch").getAsString();
 		String start = element.getAsJsonObject().get("start").getAsString();
 		String end = element.getAsJsonObject().get("end").getAsString();
+
+		System.out.println(start);
+		System.out.println(end);
 		// fullCalander 시간을 DB형식에 맞게 Format
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
-		// fullCalander가 미국시라서 시차 15시간 빼주기
-		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter).minusHours(15);
-		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter).minusHours(15);
+
+		// fullCalander가 미국시라서 시차 9시간 더해주기ㅏ.minusHours(15)
+		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter).plusHours(9);
+		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter).plusHours(9);
+
+		System.out.println(startDateTime);
+		System.out.println(endDateTime);
 
 		String startOutput = startDateTime.format(outputFormatter);
 		String endOutput = endDateTime.format(outputFormatter);
@@ -364,6 +370,67 @@ public class AdminController {
 		System.out.println(endOutput);
 
 		int result = service.insertSchedule(title, branch, startOutput, endOutput);
+
+		return String.valueOf(result);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectscheduleNo.do")
+	public String selectscheduleNo(@RequestBody String param) {
+		JsonElement element = JsonParser.parseString(param);
+
+		String oldTitle = element.getAsJsonObject().get("oldTitle").getAsString();
+		String oldBranch = element.getAsJsonObject().get("oldBranch").getAsString();
+		String oldStart = element.getAsJsonObject().get("oldStart").getAsString();
+		String oldEnd = element.getAsJsonObject().get("oldEnd").getAsString();
+
+		// fullCalander 시간을 DB형식에 맞게 Format
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
+		// fullCalander가 미국시라서 시차 9시간 더해주기ㅏ.minusHours(15)
+		LocalDateTime startDateTime = LocalDateTime.parse(oldStart, inputFormatter);
+		LocalDateTime endDateTime = LocalDateTime.parse(oldEnd, inputFormatter);
+
+		String startOutput = startDateTime.format(outputFormatter);
+		String endOutput = endDateTime.format(outputFormatter);
+
+		int schduleNo = service.selectscheduleNo(oldTitle, oldBranch, startOutput, endOutput);
+
+		return String.valueOf(schduleNo);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/updateSchedule.do")
+	public String updateSchedule(@RequestBody String param) {
+		JsonElement element = JsonParser.parseString(param);
+
+		String start = element.getAsJsonObject().get("start").getAsString();
+		String end = element.getAsJsonObject().get("end").getAsString();
+		String scheduleNo = element.getAsJsonObject().get("scheduleNo").getAsString();
+
+		// fullCalander 시간을 DB형식에 맞게 Format
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
+		// fullCalander가 미국시라서 시차 9시간 더해주기ㅏ.minusHours(15)
+		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter);
+		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter);
+
+		String startOutput = startDateTime.format(outputFormatter);
+		String endOutput = endDateTime.format(outputFormatter);
+
+		int result = service.updateSchedule(startOutput, endOutput, scheduleNo);
+
+		return String.valueOf(result);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteSchedule.do")
+	public String deleteSchedule(@RequestBody String param) {
+		JsonElement element = JsonParser.parseString(param);
+
+		String scheduleNo = element.getAsJsonObject().get("scheduleNo").getAsString();
+
+		int result = service.deleteSchedule(scheduleNo);
 
 		return String.valueOf(result);
 	}

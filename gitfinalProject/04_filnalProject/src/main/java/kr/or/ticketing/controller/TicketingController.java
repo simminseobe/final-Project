@@ -15,7 +15,9 @@ import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.service.TicketingService;
+import kr.or.ticketing.model.vo.ChoiceDataDay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.TicketingSchedule;
 
 @Controller
 public class TicketingController {
@@ -39,8 +41,10 @@ public class TicketingController {
 	}
 
 	@RequestMapping(value = "/choiceSeat.do")
-	public String choiceSeat() {
-		return "ticketing/seat";
+	public String choiceOneticket(Schedule schedule, ChoiceDataDay choiceDataDay, Model model) {
+		model.addAttribute("choiceDataDay",choiceDataDay);
+		model.addAttribute("schedule",schedule);
+		return "ticketing/choiceSeat";
 	}
 
 	@RequestMapping(value = "/paymentMethod.do")
@@ -90,7 +94,7 @@ public class TicketingController {
 	@ResponseBody
 	@RequestMapping(value="/choiceBranchSchedule.do", produces = "application/json;charset=utf-8")
 	public String choiceBranchSchedule(String movieTitle, String choiceDataDay, String theaterBranch) {
-		ArrayList<String> list = service.choiceBranchSchedule(movieTitle, choiceDataDay, theaterBranch);
+		ArrayList<TicketingSchedule> list = service.choiceBranchSchedule(movieTitle, choiceDataDay, theaterBranch);
 		
 		System.out.println(movieTitle);
 		System.out.println(choiceDataDay);

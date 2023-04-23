@@ -123,6 +123,10 @@
                             const option = $("<option>").val(data[i].theaterBranch).text(data[i].theaterBranch);
                             branchSelect.append(option);
                         }
+
+                        let firstBranch = branchSelect.children().eq(0).val();
+
+                        selectScheduleCalendar(firstBranch);
                     }
                 });
             });
@@ -141,6 +145,7 @@
                         let today = new Date();
 
                         var calendar = new FullCalendar.Calendar(calendarDiv, {
+                            timeZone: 'local',
                             initialDate: today,
                             initialView: 'timeGridWeek',
                             headerToolbar: {
@@ -159,7 +164,6 @@
 
                             select: function (arg) {
                                 var title = prompt('영화를 입력해주세요.');
-                                var branch = prompt('상영관(지점)을 입력해주세요.');
 
                                 if (title) {
                                     calendar.addEvent({
@@ -175,7 +179,7 @@
                                 obj.title = title;
                                 obj.start = arg.start;
                                 obj.end = arg.end;
-                                obj.branch = branch;
+                                obj.branch = theaterBranch;
 
                                 $.ajax({
                                     url: "/registerSchedule.do",
@@ -185,7 +189,9 @@
                                     contentType: 'application/json',
                                     success: function (result) {
                                         if (result > 0) {
-                                            alert("삽입 완료");
+                                            console.log(result);
+
+                                            selectScheduleCalendar(theaterBranch);
                                         }
                                     },
                                 });
@@ -193,6 +199,149 @@
                                 calendar.unselect();
                             },
 
+                            eventDrop: function (info) {
+                                if (confirm("'" + info.event.title + "'의 일정을 수정하시겠습니까 ?")) {
+                                    var obj = new Object();
+
+                                    obj.oldTitle = info.oldEvent._def.title;
+                                    obj.oldBranch = theaterBranch;
+                                    obj.oldStart = info.oldEvent._instance.range.start;
+                                    obj.oldEnd = info.oldEvent._instance.range.end;
+
+                                    var scheduleNo;
+
+                                    $.ajax({
+                                        url: "/selectscheduleNo.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        async: false,
+                                        success: function (data) {
+                                            scheduleNo = data;
+                                        },
+                                    });
+
+                                    var obj = new Object();
+
+                                    obj.start = info.event._instance.range.start;
+                                    obj.end = info.event._instance.range.end;
+                                    obj.scheduleNo = scheduleNo;
+
+                                    $.ajax({
+                                        url: "/updateSchedule.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        success: function (result) {
+                                            if (result > 0) {
+                                                console.log(result);
+
+                                                selectScheduleCalendar(theaterBranch);
+                                            }
+                                        },
+                                    });
+
+                                } else {
+                                    selectScheduleCalendar(theaterBranch);
+                                }
+                            },
+
+                            eventResize: function (info) {
+                                if (confirm("'" + info.event.title + "'의 일정을 수정하시겠습니까 ?")) {
+                                    var obj = new Object();
+
+                                    obj.oldTitle = info.oldEvent._def.title;
+                                    obj.oldBranch = theaterBranch;
+                                    obj.oldStart = info.oldEvent._instance.range.start;
+                                    obj.oldEnd = info.oldEvent._instance.range.end;
+
+                                    var scheduleNo;
+
+                                    $.ajax({
+                                        url: "/selectscheduleNo.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        async: false,
+                                        success: function (data) {
+                                            scheduleNo = data;
+                                        },
+                                    });
+
+                                    var obj = new Object();
+
+                                    obj.start = info.event._instance.range.start;
+                                    obj.end = info.event._instance.range.end;
+                                    obj.scheduleNo = scheduleNo;
+
+                                    $.ajax({
+                                        url: "/updateSchedule.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        success: function (result) {
+                                            if (result > 0) {
+                                                console.log(result);
+
+                                                selectScheduleCalendar(theaterBranch);
+                                            }
+                                        },
+                                    });
+                                } else {
+                                    selectScheduleCalendar(theaterBranch);
+                                }
+                            },
+                            // 클릭으로 일정 삭제
+                            eventClick: function (info) {
+                                if (confirm("'" + info.event.title + "' 의 일정을 삭제하시겠습니까 ?")) {
+                                    // 확인 클릭 시
+                                    info.event.remove();
+
+                                    var obj = new Object();
+
+                                    obj.oldTitle = info.event._def.title;
+                                    obj.oldBranch = theaterBranch;
+                                    obj.oldStart = info.event._instance.range.start;
+                                    obj.oldEnd = info.event._instance.range.end;
+
+                                    var scheduleNo;
+
+                                    $.ajax({
+                                        url: "/selectscheduleNo.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        async: false,
+                                        success: function (data) {
+                                            scheduleNo = data;
+                                        },
+                                    });
+
+                                    var obj = new Object();
+
+                                    obj.scheduleNo = scheduleNo;
+
+                                    $.ajax({
+                                        url: "/deleteSchedule.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        success: function (result) {
+                                            if (result > 0) {
+                                                selectScheduleCalendar(theaterBranch);
+                                            }
+                                        }
+                                    })
+                                } else {
+                                    selectScheduleCalendar(theaterBranch);
+                                }
+                            },
                             events: data
                         });
 

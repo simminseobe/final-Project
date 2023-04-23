@@ -41,16 +41,18 @@
 		THEATER_LOCAL = #{theaterLocal}
 </select>
 
-<select id="choiceBranchSchedule" parameterType="map" resultType="string">
+<select id="choiceBranchSchedule" parameterType="map" resultType="ticketingSchedule">
 	select 
 		movie_title as movieTitle, 
-		schedule_start as scheduleStart, 
+		to_char(schedule_start,'hh24:mi') as scheduleStart, 
+        to_char(schedule_end,'hh24:mi') as scheduleEnd,
 		theater_branch as theaterBranch
 	from 
 		schedule_tbl 
 	where 
 		movie_title = #{movieTitle} 
-		and to_char(schedule_start, 'DD/MM/YYYY') = #{choiceDataDay} 
+		and to_char(schedule_start, 'DD/MM/YYYY') = #{choiceDataDay}
+		and to_char(schedule_end, 'DD/MM/YYYY') = #{choiceDataDay} 
 		and theater_branch = #{theaterBranch}
 </select>
 

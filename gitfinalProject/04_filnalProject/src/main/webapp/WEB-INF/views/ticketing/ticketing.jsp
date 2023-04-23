@@ -85,13 +85,14 @@
 				}
 
 				.choice-movie {
-					background-color: antiquewhite;
+					
 					height: 400px;
 					width: 250px;
 					float: left;
 					padding-left: 20px;
 					padding-right: 20px;
 					padding-bottom: 20px;
+					border: 1px solid rgb(207, 204, 204);
 				}
 
 				.movie-list {
@@ -117,23 +118,25 @@
 				}
 
 				.choice-theater {
-					background-color: aqua;
+					
 					height: 400px;
 					width: 300px;
 					float: left;
 					padding-left: 20px;
 					padding-right: 20px;
 					padding-bottom: 20px;
+					border: 1px solid rgb(207, 204, 204);
 				}
 
 				.choice-time {
-					background-color: brown;
+					
 					height: 400px;
 					width: 450px;
 					float: left;
 					padding-left: 20px;
 					padding-right: 20px;
 					padding-bottom: 20px;
+					border: 1px solid rgb(207, 204, 204);
 				}
 
 				.choice-header p {
@@ -150,13 +153,15 @@
 					position: relative;
 					height: 100%;
 				}
-
+				.scroll-container>ul>li{
+					padding: 3px 0;
+				}
 				.scroll-container>ul>li>button {
 					position: relative;
 					background-color: transparent;
-					width: 100%;
+					font-size: 15px;
 					height: 20px;
-					padding: 3px 30px 3px 30px;
+					
 					border: 0;
 				}
 
@@ -212,7 +217,7 @@
 				.mid>ul {
 					position: relative;
 					height: 100%;
-					overflow: hidden;
+
 				}
 
 				.mid>ul::after {
@@ -250,17 +255,19 @@
 				.mid>ul>li>button {
 					display: block;
 					position: relative;
-					
+					font-size: 15px;;
 					min-height: 28px;
-					padding: 3px;
+					
 					text-align: left;
 					background-color: transparent;
 					letter-spacing: 0;
 					float: left;
 				}
-				.mid>ul>li>span{
+
+				.mid>ul>li>span {
 					float: left;
-					padding-top: 9px;
+					font-size: 15px;
+					padding-top: 7px;
 				}
 
 				.scroll button {
@@ -275,7 +282,8 @@
 					cursor: pointer;
 					overflow: visible;
 				}
-				.mid{
+
+				.mid {
 					width: 100%;
 					height: 100%;
 				}
@@ -292,10 +300,10 @@
 					margin: -6px 0 0 0;
 				}
 
-				.mid>ul>li>button>span {
-					display: inline-block;
-					margin: 0 20px 0 0;
-					vertical-align: middle;
+
+				.mid>ul>li {
+					overflow: hidden;
+					padding: 3px 0;
 				}
 
 				.depth.on {
@@ -362,14 +370,13 @@
 					position: relative;
 					width: 100%;
 					min-height: 28px;
-					padding: 3px 30px 3px 30px;
+					padding: 8px 30px 3px 30px;
 					text-align: left;
 					font-size: .8667em;
 					background-color: transparent;
 					letter-spacing: 0;
-					
+					font-size: 12px;
 				}
-
 				/*
 .brch {
 	position: relative;
@@ -386,9 +393,9 @@
 	height: 100%;
 	background-color: #ecf0f4;
 }
-*/		
-					
-				
+*/
+
+
 
 				/*
 .scrollTools {
@@ -437,16 +444,45 @@
 	margin: 0 auto;
 }
 */
-.mid>ul>li{
-	overflow: hidden;
-}
-.mid>ul>li>button{
-	float: left;
-}
-.mid>ul>li>span{
-	float: left;
-}
+				
 
+				.result{
+					overflow-y: auto;
+					overflow-x: hidden;
+				}
+				.result>ul>li{
+					height: 50px;
+					overflow: hidden;
+					border-top: 1px solid #ebebeb;
+				}
+				.result>ul>li:hover{
+					cursor: pointer;
+				}
+				.timeSpan{
+					display: block;
+					float: left;
+					width: 30px;
+					margin: 5px 20px 5px 10px;
+				}
+				.timeSpan>strong{
+					display: block;
+					font-size: 18px;
+					font-weight: bold;
+				}
+				.timeSpan>em{
+					display: block;
+					padding-top: 5px;
+				}
+				.titleSpan{
+					display: block;
+					padding: 13px;
+					float: left;
+					font-size: 16px;
+				}
+				.brchSpan{
+					float: right;
+					padding-top: 10px;
+				}
 			</style>
 		</head>
 
@@ -509,7 +545,7 @@
 							<div class="choice choice-header">
 								<p>영화</p>
 								<div class="list-area">
-									<div class="movie-list" style="background-color: #fff; height: 340px;">
+									<div class="movie-list" style=" height: 340px;">
 										<div class="scroll-container" style="height: 100px;">
 
 											<ul>
@@ -545,14 +581,13 @@
 															<span class="sel-city seoul">서울</span>
 														</button>
 													-->
-												</ul>
-											</div>
-												<div class="depth on">
-													<div class="detail-list" style="max-height: none;">
-														<div class="scroll-box">
-															<div class="container"
-																style="position: relative; top: 0; left: 0;">
-																<ul class="brchNo">
+											</ul>
+										</div>
+										<div class="depth on">
+											<div class="detail-list" style="max-height: none;">
+												<div class="scroll-box">
+													<div class="container" style="position: relative; top: 0; left: 0;">
+														<ul class="brchNo">
 															<!--		
 															<li>
 																<button id="btn" type="button">강남</button>
@@ -566,9 +601,9 @@
 															</li>
 															-->
 														</ul>
-														
+
 													</div>
-														<!--
+													<!--
 
 															<div id="scrollbar_vertical" class="scrollTools"
 															style="display: block;">
@@ -583,10 +618,10 @@
 													</div>
 												-->
 
-														</div>
-													</div>
 												</div>
-												<!--
+											</div>
+										</div>
+										<!--
 											</li>
 											
 											
@@ -604,7 +639,11 @@
 							<div class="choice choice-header">
 								<p>시간</p>
 								<div class="time-check"></div>
-								<div class="movie-check" style="background-color: #fff; height: 298px;"></div>
+								<div class="result" style="background-color: #fff; height: 298px;">
+									<ul>
+
+									</ul>
+								</div>
 								<!--<div class="time-list" style="background-color: #fff; height: 340px;"></div> -->
 							</div>
 						</div>
@@ -836,7 +875,7 @@
 							//$(".scroll-container").text("dataDay: " + dataDay);
 							for (var i = 0; i < data.length; i++) {
 								const li = $("<li>");
-								const btn = $("<button>");
+								const btn = $("<button>").addClass("selMovie");
 
 								li.append(btn);
 								//btn.attr("href","/allMovieList.do?movieNo="+data[i].movieNo);
@@ -850,6 +889,7 @@
 						}
 					});
 				});
+
 				var movieTitle;
 				var theaterLocal;
 				// 영화 누르면 영화에 저장되어있는 상영지역 출력
@@ -867,76 +907,111 @@
 								const li = $("<li>");
 								const btn = $("<button>");
 								const span = $("<span>");
-									
+
 								li.append(btn);
 								li.append(span);
-								
+
 								btn.text(data[i].theaterLocal);
-								span.text(" ("+data[i].count+")");
-								btn.attr("onclick","selBranch(this);");
-								
+								span.text(" (" + data[i].count + ")");
+								btn.attr("onclick", "selBranch(this);");
+
 								$(".mid>ul").append(li);
-								
+
 
 								theaterLocal = btn.text();
-								console.log(theaterLocal+" 있음");
+								console.log(theaterLocal + " 있음");
 
-								
+
 							}
 						}
 					});
 				}
 				var theaterBranch;
 				//local선택하면 속해있는 branch 출력
-				function selBranch(button){
+				function selBranch(button) {
 					theaterLocal = $(button).text();
-					console.log(theaterLocal+" 누름");
+					console.log(theaterLocal + " 누름");
 					$.ajax({
-						url : "/choiceLocalBranch.do",
-						type : "post",
-						data : {movieTitle:movieTitle,choiceDataDay:choiceDataDay,theaterLocal:theaterLocal},
-						dataType : "json",
-						success : function(data){
+						url: "/choiceLocalBranch.do",
+						type: "post",
+						data: { movieTitle: movieTitle, choiceDataDay: choiceDataDay, theaterLocal: theaterLocal },
+						dataType: "json",
+						success: function (data) {
 							console.log(data);
 							$(".container>ul").empty();
 							for (var i = 0; i < data.length; i++) {
 								const li = $("<li>");
 								const btn = $("<button>");
-								
-								
+
+
 								li.append(btn);
-								
+
 								btn.text(data[i]);
-								
-								
+
+
 								$(".container>ul").append(li);
-								btn.attr("onclick","selSchedule(this);");
+								btn.attr("onclick", "selSchedule(this);");
 
 								theaterBranch = btn.text();
-								console.log(theaterBranch+" 있음");
+								console.log(theaterBranch + " 있음");
 							}
 						}
 					});
 				}
 				var theaterSchedule;
+				var scheduleStart;
+				var scheduleEnd;
 				//branch클릭하면 스케쥴 출력
-				function selSchedule(button){
+				function selSchedule(button) {
 					theaterBranch = $(button).text();
-					console.log(theaterBranch+" 누름");
+					console.log(theaterBranch + " 누름");
 					$.ajax({
-						url : "/choiceBranchSchedule.do",
-						type : "post",
-						data : {movieTitle:movieTitle,choiceDataDay:choiceDataDay,theaterBranch:theaterBranch},
-						dataType : "json",
-						success : function(data){
-							console.log(data);
+						url: "/choiceBranchSchedule.do",
+						type: "post",
+						data: { movieTitle: movieTitle, choiceDataDay: choiceDataDay, theaterBranch: theaterBranch },
+						dataType: "json",
+						success: function (data) {
+							console.log(data); //영화제목,상영시간(시작시간,끝시간),상영지점
+							console.log(choiceDataDay+"dddd");	//날짜형식로 출력하기 위해
+							$(".result>ul").empty();
+							for (var i = 0; i < data.length; i++) {
+								const li = $("<li>");
+								const span1 = $("<span>").addClass("timeSpan");
+								const span1Strong = $("<strong>");
+								const span1Em = $("<em>");
+								const span2 = $("<span>").addClass("titleSpan");
+								const span3 = $("<span>").addClass("brchSpan");
+
+								$(".result>ul").append(li);
+								li.append(span1);
+								span1.append(span1Strong);
+								span1.append(span1Em);
+								li.append(span2);
+								li.append(span3);
+
+								span1Strong.text(data[i].scheduleStart);
+								span1Em.text("~" + data[i].scheduleEnd);
+								span2.text(data[i].movieTitle);
+								span3.text(data[i].theaterBranch);
+								scheduleStart = span1Strong.text();
+								scheduleEnd = span1Em.text();
+
+								console.log("scheduleStart: "+scheduleStart);
+								console.log("scheduleEnd: "+scheduleEnd);
+
+								// li 클릭 시 /choiceSeat.do 페이지로 이동 (값 전달)
+								li.click(function () {
+									window.location.href = "/choiceSeat.do?movieTitle=" + movieTitle + "&scheduleStart=" + scheduleStart + "&scheduleEnd=" + scheduleEnd + "&theaterBranch=" + theaterBranch +"&choiceDataDay="+choiceDataDay;
+
+								});
+							}
 						}
 					});
 				}
 
-				
-				
-				
+
+
+
 
 
 				//ex)서울 누르면 강남....나옴

@@ -30,6 +30,7 @@ button.mon.active{
 .theater-all-button.active{
 	background-color: #CBD9DB;
 }
+
 .mon{
     background-color:white;
     border: 1px white;
@@ -49,9 +50,7 @@ strong{
     width:1000px;
     box-sizing: border-box;
 }
-.now-day{
-	margin-top: 10px;
-}
+
 
 .explain-button{
 	text-align: center;
@@ -121,7 +120,7 @@ strong{
     overflow: auto;
     width: 200px;
     height: 315px;
-    border: 1px solid rgb(207, 204, 204);
+    
 }
 .movie-list::-webkit-scrollbar {
     width: 10px;
@@ -380,7 +379,7 @@ p>.detail-check{
 .time-check{
     border-top: 1px solid rgb(207, 204, 204);
     border-bottom: 1px solid rgb(207, 204, 204);
-    margin-bottom: 10px;
+    
 }
 .movie-check{
     overflow: auto;

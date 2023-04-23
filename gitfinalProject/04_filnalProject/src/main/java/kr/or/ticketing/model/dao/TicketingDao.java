@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.TicketingSchedule;
 
 @Repository
 public class TicketingDao {
@@ -40,9 +41,9 @@ public class TicketingDao {
 		return (ArrayList<String>) list;
 	}
 
-	public ArrayList<String> choiceBranchSchedule(HashMap<String, Object> map) {
+	public ArrayList<TicketingSchedule> choiceBranchSchedule(HashMap<String, Object> map) {
 		System.out.println(map);
 		List list = sqlSession.selectList("ticketing.choiceBranchSchedule",map);
-		return (ArrayList<String>) list;
+		return (ArrayList<TicketingSchedule>) list;
 	}
 }
