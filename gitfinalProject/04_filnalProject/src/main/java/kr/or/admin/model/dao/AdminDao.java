@@ -145,4 +145,22 @@ public class AdminDao {
 		return result;
 	}
 
+	public int updateSchedule(HashMap<String, Object> map) {
+		int result = sqlSession.update("schedule.updateSchedule", map);
+
+		return result;
+	}
+
+	public int selectscheduleNo(HashMap<String, Object> map) {
+		int scheduleNo = sqlSession.selectOne("schedule.selectscheduleNo", map);
+
+		return scheduleNo;
+	}
+
+	public int deleteSchedule(String scheduleNo) {
+		int result = sqlSession.delete("schedule.deleteSchedule", scheduleNo);
+
+		return result;
+	}
+
 }
