@@ -179,8 +179,9 @@ public class AdminController {
 
 		// board: board 내용 업데이트, fileList 사진 업데이트, fileNo 삭제
 		int result = service.movieUpdate(movie, mainFile, postList, fileNo, videoList, videoNo);
-		// 파일도 삭제 비디오도 삭제
-		if (fileNo != null && videoNo != null && (result == (postList.size() + fileNo.length + 2 + videoList.size()))) {
+		// 파일 삭제 동작 = 삭제 파일 이 있고 && 다 성공 하면
+		if (fileNo != null && (result == (postList.size() + videoList.size() + fileNo.length + videoNo.length + 2))) {
+			// 파일 삭제
 			for (String delFile : filepath) {
 				boolean delResult = fileManager.deleteFile(savePath, delFile);
 
@@ -190,39 +191,10 @@ public class AdminController {
 					System.out.println("파일 삭제 실패");
 				}
 			}
-
+			// 리턴
 			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
-			// 파일만 삭제
-		} else if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) {
-			for (String delFile : filepath) {
-				boolean delResult = fileManager.deleteFile(savePath, delFile);
-
-				if (delResult) {
-					System.out.println("파일 삭제 성공");
-				} else {
-					System.out.println("파일 삭제 실패");
-				}
-			}
-
-			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
-		}
-
-		// 파일이 DB에 삭제 되야 실제 물리적 파일도 제거
-		if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) { // 2는 movieFile +
-																					// movie
-			for (String delFile : filepath) {
-				boolean delResult = fileManager.deleteFile(savePath, delFile);
-
-				if (delResult) {
-					System.out.println("파일 삭제 성공");
-				} else {
-					System.out.println("파일 삭제 실패");
-				}
-			}
-
-			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
-		} else if (fileNo == null && (result == (postList.size() + 1 + videoList.size()))) { // 파일을 삭제안하고 파일만 첨부하거나 첨부
-																								// 안하면
+			// 파일 삭제 동작 != 삭제 파일 이 없고 && 다 성공 하면 - 파일 삭제 수
+		} else if (fileNo == null && (result == (postList.size() + videoList.size() + videoNo.length + 2))) {
 			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
 		} else {
 			return "ridirect:/";
@@ -311,6 +283,27 @@ public class AdminController {
 		} else {
 			return "redirect:/";
 		}
+	}
+
+	@RequestMapping(value = "/allTheater.do")
+	public String allTheater() {
+		return "admin/allTheater";
+	}
+
+	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
+
+	public String selectOneTheater(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheater(theaterNo);
+		model.addAttribute("theater", theater);
+		return "admin/detailTheater";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
+	public String selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		list = service.selectBranchList(theaterLocal);
+		return new Gson().toJson(list);
 	}
 
 	@RequestMapping(value = "/screenSchedule.do")
@@ -435,24 +428,8 @@ public class AdminController {
 		return String.valueOf(result);
 	}
 
-	@RequestMapping(value = "/allTheater.do")
-	public String allTheater() {
-		return "admin/allTheater";
-	}
-
-	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
-
-	public String selectOneTheater(int theaterNo, Model model) {
-		Theater theater = service.selectOntTheater(theaterNo);
-		model.addAttribute("theater", theater);
-		return "admin/detailTheater";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
-	public String selectBranchList(String theaterLocal) {
-		ArrayList<Theater> list = new ArrayList<Theater>();
-		list = service.selectBranchList(theaterLocal);
-		return new Gson().toJson(list);
+	@RequestMapping(value = "/adminCaht.do")
+	public String adminCaht() {
+		return "admin/adminChat";
 	}
 }
