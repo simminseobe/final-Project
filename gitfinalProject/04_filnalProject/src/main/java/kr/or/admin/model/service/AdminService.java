@@ -129,7 +129,9 @@ public class AdminService {
 				result += dao.deleteVideo(videoNo);
 			}
 
-			if (mainFile != null) {
+			System.out.println(mainFile);
+
+			if (mainFile.getMovieFileName() != null) {
 				// 메인 파일 추가
 				result += dao.insertMainFile(mainFile);
 			}
