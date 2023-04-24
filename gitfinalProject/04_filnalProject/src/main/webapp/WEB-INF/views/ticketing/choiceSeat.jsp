@@ -1,6 +1,7 @@
 <%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 		<!DOCTYPE html>
 		<html>
 
@@ -322,6 +323,13 @@
 					font-size: 20px;
 					text-align: center;
 				}
+				.choice-seat-area>p{
+					padding: 5px;
+				}
+				.mySeat{
+					width: 40px;
+					height: 35px;
+				}
 			</style>
 		</head>
 
@@ -539,7 +547,19 @@
 								</div>
 							</div>
 							<div class="result-seat">
-
+								<div class="choice-seat-area">
+									<p>선택좌석</p>
+									<div class="selectedSeats-area">
+										<div class="mySeat seat1"></div>
+										<div class="mySeat seat2"></div>
+										<div class="mySeat seat3"></div>
+										<div class="mySeat seat4"></div>
+										<div class="mySeat seat5"></div>
+										<div class="mySeat seat6"></div>
+										<div class="mySeat seat7"></div>
+										<div class="mySeat seat8"></div>
+									</div>
+								</div>
 							</div>
 							<div class="numberOfPeople">
 								<div class="numArea1"></div>
@@ -549,7 +569,7 @@
 							<div class="result-pay">
 								<p class="pay-tit">최종결제금액</p>
 								<div class="money">
-									<span class="amount">0</span>
+									<span class="amount"></span>
 									<span class="won">원</span>
 								</div>
 							</div>
@@ -616,10 +636,12 @@
 			                    })
 			                }
 			                console.log(selectedSeats);
+							$(".mySeat").eq(i).text(selectedSeats[i])
 			            })
 			        }
 			    }
-
+				
+				
 			    function mapping(input, i, j) {
 			        const row = String.fromCharCode(65 + i); // A부터 G까지의 알파벳을 구합니다.
 			        const seatNumber = j + 1; // 0부터 6까지의 숫자에 1을 더하여 좌석 번호를 구합니다.
@@ -684,10 +706,15 @@
 						specCount(); //specCount()함수호출 : 우대 수
 					});
 				});
+
 				
 				$("#reset-btn").on("click",function(){
 					$('.now').text('0');
 					nowTotal(); // nowTotal() 함수 호출
+					calculateAmount();
+					adultCount();
+					teenCount();
+					specCount();
 				});
 				
 				$(".pageNext").on("click",function(){
@@ -706,9 +733,7 @@
 				var countTeen;
 				var countSpecial;
 
-				var amountAdult; //금액
-				var amountTeen;
-				var amountSpecial;
+				//우측 선택된 인원 수 출력
 				//.now1(성인)의 인원 수 구하는 함수
 				function adultCount(){
 					countAdult = parseInt($('#now1').text());
@@ -750,11 +775,7 @@
 					
 				}
 
-				//왜 감싸고 있는 div.how-many에 클릭을 걸어야 제대로 작동하는지 질문하기
-				/*
-				버튼이 아니라 감싸고 있는 div.how-many에 
-				클릭을 걸어야 하는 이유 :
-				*/
+				
 				//calculateAmount()함수 호출
 				$(".how-many").on("click",function(){
 					calculateAmount();
@@ -775,7 +796,7 @@
 
 					const totalAmount = adultAmount + teenAmount + specAmount;
 					console.log(totalAmount);
-					console.log(totalAmount.toLocaleString());
+					console.log(totalAmount);
 					
 					$(".amount").text(totalAmount.toLocaleString());
 				}
@@ -783,6 +804,7 @@
 				
 ////////////////////////////////////////////////////////////			
 				// .now 값을 합치고 버튼의 텍스트를 업데이트하는 함수
+				var allPeopleCount;
 				function nowTotal() {
 				var now1 = parseInt($('#now1').text());
 				var now2 = parseInt($('#now2').text());
@@ -792,7 +814,31 @@
 				$('.nowTotal').text('선택된 인원 수 : ' + allPeopleCount);
 				
 				}
+				
 
+				////////////////////////////////////////////////////////////
+				
+				$(document).ready(function() {
+					// 인원 수 선택 버튼이 클릭될 때마다 좌석 선택 버튼을 활성화하거나 비활성화합니다.
+					$('.how-many .count').on('click', function() {
+						// 선택한 성인, 청소년, 우대 인원 수를 가져옵니다.
+						var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
+						var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
+						var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
+
+						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
+						var total = adultCount + teenCount + specCount;
+						$('.seat').prop('disabled', false);
+						$('.seat').slice(total).prop('disabled', true);
+					});
+					// reset 버튼 클릭 시 모든 좌석 활성화
+					$('#reset-btn').on('click', function() {
+						$('.seat').prop('disabled', false);
+					});
+				});
+				
+				
+				////////////////////////////////////////////////////////////	
 				
 
 			</script>
