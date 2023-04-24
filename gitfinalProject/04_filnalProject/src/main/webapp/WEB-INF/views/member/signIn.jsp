@@ -48,9 +48,12 @@
         		<a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.10.32/kakaoLogin.do&response_type=code" class="login-form">
         			<img src="/image/kakao_login_medium_wide.png" class="kakaoBtn">
         		</a>
-        		<a href="https://nid.naver.com/oauth2.0/authorize?client_id=2bPh_mYXLtkjmaWWo_8B&response_type=code&redirect_uri=http://192.168.10.32/callback.do&state={상태 토큰}">
-        			<img src="/image/btnG.png" class="naverBtn">
-        		</a>
+				<!-- 네이버 로그인 창으로 이동 -->
+				<div id="naver_id_login" style="text-align:center">
+					<!-- <a href="/naverLogin.do"> -->
+					<%-- <a href="${naverUrl }"> --%>
+					<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=2bPh_mYXLtkjmaWWo_8B&state=vKHZagAtTC&redirect_uri=http://192.168.10.32/callback.do">
+					<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
         	</div>
         </div>
       </form>
