@@ -179,8 +179,9 @@ public class AdminController {
 
 		// board: board 내용 업데이트, fileList 사진 업데이트, fileNo 삭제
 		int result = service.movieUpdate(movie, mainFile, postList, fileNo, videoList, videoNo);
+
 		// 파일 삭제 동작 = 삭제 파일 이 있고 && 다 성공 하면
-		if (fileNo != null && (result == (postList.size() + videoList.size() + fileNo.length + videoNo.length + 2))) {
+		if (fileNo != null && result > 0) {
 			// 파일 삭제
 			for (String delFile : filepath) {
 				boolean delResult = fileManager.deleteFile(savePath, delFile);
@@ -194,7 +195,7 @@ public class AdminController {
 			// 리턴
 			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
 			// 파일 삭제 동작 != 삭제 파일 이 없고 && 다 성공 하면 - 파일 삭제 수
-		} else if (fileNo == null && (result == (postList.size() + videoList.size() + videoNo.length + 2))) {
+		} else if (fileNo == null && result > 0) {
 			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
 		} else {
 			return "ridirect:/";

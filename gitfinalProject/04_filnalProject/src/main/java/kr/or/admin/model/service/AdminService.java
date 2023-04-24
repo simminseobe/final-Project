@@ -45,8 +45,6 @@ public class AdminService {
 
 				video.setMovieNo(movie.getMovieNo());
 
-				System.out.println(video.getVideoLink());
-
 				if (video.getVideoLink() != null) {
 					result += dao.insertmovieVideo(video);
 				}
@@ -129,17 +127,17 @@ public class AdminService {
 				result += dao.deleteVideo(videoNo);
 			}
 
-			System.out.println(mainFile);
-
 			if (mainFile.getMovieFileName() != null) {
 				// 메인 파일 추가
+				mainFile.setMovieNo(movie.getMovieNo());
+
 				result += dao.insertMainFile(mainFile);
 			}
 
 			if (!postList.isEmpty()) {
 				// 첨부파일 추가
 				for (MovieFile file : postList) {
-					file.setMovieFileNo(movie.getMovieNo());
+					file.setMovieNo(movie.getMovieNo());
 
 					result += dao.insertPostFile(file);
 				}
