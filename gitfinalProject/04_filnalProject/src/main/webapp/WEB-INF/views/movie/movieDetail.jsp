@@ -343,6 +343,10 @@ z-index: 5;
 	<div class="modal3 hidden3"><!--모달로  무비포스트 상세보기  들어가는 자리-->
             <div class="modal_overlay3"></div>
             <div class="modal_content3"><!--모달 댓글 내부화면-->
+            <form action="/insertPostComment.do" method="post"><!-- form태그 시작하는 자리 -->
+            	<!--  <input type="text" class="dataImgCheck">
+                <input type="text" class="dataVideoCheck">  -->
+                <input type="text" class="modalPostNo" name="moviePostNo">  
                 <div class="modalClose">
                     <div class="modalCloseTit">
                         <span>무비포스트 상세보기</span>                    
@@ -350,6 +354,7 @@ z-index: 5;
                 </div>
                 <div class="modal_content_tit modal_content_tit3">
                     <p>${mov.movieTitle }</p>
+                    <input type="text" class="modalMovieTitle" name="movieTitle" value="${mov.movieTitle}" style="display:none;">
                     <button type="button">예매하기</button>
                 </div>
                 <div class="post-detail-top">
@@ -359,7 +364,7 @@ z-index: 5;
                 		</div>
                 		<div class="post-info">
                             <div class="post-info-first-input">
-                			    <input type="text" class="detailmemberId" style="border:none;" readonly>
+                			    <input type="text" class="detailmemberId" name="memberId" style="border:none;" readonly>
                 			</div>
                             <div class="post-info-first-input">
                                 <input type="text" class="postDate" style="border:none;" readonly>
@@ -372,14 +377,17 @@ z-index: 5;
                 </div>
                 
                 <!-- 이미지1개만 있을때 -->
-                <input type="text" class="dataImgCheck">
-                <input type="text" class="dataVideoCheck">
                 
                 <div class="post-detail-center">
                     <div class="detail-center-img-area">
                         <img class="post-detail-center-img">
                         <div class="post-detail-content">
-                            <textarea class="postDetailTextInput" readonly></textarea>
+                            <textarea class="postDetailTextInput" name="moviePostContent" readonly></textarea>
+                        </div>
+                        <div class="post-detail-like">
+                            <img src="img/like-24.png" class="whiteLike2">
+                            <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
+                            <span>0</span>
                         </div>
                     </div>
                 </div>
@@ -391,7 +399,12 @@ z-index: 5;
                             <source class="previewCutVideoSource">
                         </video>
                         <div class="post-detail-content">
-                            <textarea class="postDetailTextInput" readonly></textarea>
+                            <textarea class="postDetailTextInput" name="moviePostContent" readonly></textarea>
+                        </div>
+                        <div class="post-detail-like">
+                            <img src="img/like-24.png" class="whiteLike2">
+                            <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
+                            <span>0</span>
                         </div>
                     </div>
                 </div>
@@ -406,20 +419,29 @@ z-index: 5;
                     <div class="detail-center-img-area">
                         <img class="post-detail-center-img" src="/resources/images/member/nonImg.png">
                         <div class="post-detail-content">
-                            <textarea class="postDetailTextInput" readonly></textarea>
+                            <textarea class="postDetailTextInput" name="moviePostContent" readonly></textarea>
+                        </div>
+                        <div class="post-detail-like">
+                            <img src="img/like-24.png" class="whiteLike2">
+                            <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
+                            <span>0</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 무비포스트 댓글작성 하는곳-->
                 <div class="modalTxtArea post-detail-txt" style="background-color: #ecf0f4;">
-                    <textarea name="reviewContent"  style="width:810px;"></textarea>
-                    <button type="button"class="postReviewBtn">댓글등록</button>
+                    <textarea class="postComment" name="moviePostComment"  style="width:810px;"></textarea>
+                    <button type="button"class="postReviewBtn postCommentBtn">댓글등록</button>
                 </div>
-
+                <!--무비포스트 댓글리스트 출력하는 곳-->
+                <div class="post-comment-list">
+              
+                </div>
                 <div class="modalContentBottom">
                     <button type="button" id="close3"  style="margin-right: 5px;">닫기</button>
                 </div>
+            	</form><!-- form태그 끝나는 자리-->
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 무비포스트 상세보기 모달끝 -->
 
@@ -860,8 +882,6 @@ z-index: 5;
     </div>
 
 
-
-
 <div class="wpSum" style="display:none;">
     <input type="text" class="wpSumStory" value="${watchPointSum.story}">
     <input type="text" class="wpSumOST" value="${watchPointSum.ost}"> 
@@ -917,11 +937,7 @@ z-index: 5;
     });
 
 /*===============모달OPEN=================*/
-
-
-
-
-	const openButton=document.querySelector(".open");
+   const openButton=document.querySelector(".open");
    const modal = document.querySelector(".modal");
 
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
@@ -988,17 +1004,20 @@ const openButton2=document.getElementById("open2");
 	   const dataImgCheck=$(".dataImgCheck");
 	   const dataVideoCheck=$(".dataVideoCheck");
 	   
-	   
+	   const modalPostNo=$(".modalPostNo");
 
 		$.ajax({
 			  url :"/moviePostDetail.do",
 			  type : "post",
 			  data : {movieNo:movieNo,moviePostNo:moviePostNo},
 			  success : function(data){
-					  if(data != null && data.videoLink!="" && data.movieFilePath!=""){
-						  $(".post-detail-center")[0].css("display","none");
-						  $(".post-detail-center")[1].css("display","none");
-						  $(".post-detail-center")[2].css("display","block");
+					  if(data != null && data.videoLink!=undefined && data.movieFilePath!=undefined){
+						  $(".post-detail-center").eq(0).css("display","none");
+						  $(".post-detail-center").eq(1).css("display","none");
+						  $(".post-detail-center").eq(2).css("display","block");
+						  
+						  modalPostNo.val(moviePostNo);
+						  
 						  dataVideoCheck.val(data.videoLink);
 						  dataImgCheck.val(data.movieFilePath);
 						  const detailMemberIdVal=detailmemberId.val(data.memberId);
@@ -1008,15 +1027,46 @@ const openButton2=document.getElementById("open2");
 						  postDetailCenterImg.attr("src","/resources/upload/movie/"+data.movieFilePath);
 						  
 						  previewCutVideoSource.attr("src",data.videoLink);
+						  const video = document.querySelectorAll(".previewCutVideo");
+						  video[1].load();//비디오 재생이 안될때 video.load()를 한번 해줘야함 
 						  
-				  	}else if(data==null){
-					  console.log("실패");
+						  for(let i = 0; data.moviePostComment.length;i++){
+							
+							  
+						  }
+						  
+						  
+						  
+				  	}else if(data != null && data.videoLink != undefined && data.movieFilePath == undefined){
+					  	  $(".post-detail-center").eq(0).css("display","none");
+						  $(".post-detail-center").eq(1).css("display","block");
+						  $(".post-detail-center").eq(2).css("display","none");
+						  
+						  modalPostNo.val(moviePostNo);
+						  
+						  dataVideoCheck.val(data.videoLink);
+						  const detailMemberIdVal=detailmemberId.val(data.memberId);
+						  const postDateVal=postDate.val(data.moviePostDate);
+						  postDetailTextInput.val(data.moviePostContent);
+						  previewCutVideoSource.attr("src",data.videoLink);
+						  const video = document.querySelectorAll(".previewCutVideo");
+						  video[0].load();//비디오 재생이 안될때 video.load()를 한번 해줘야함 
+					}else if(data != null && data.videoLink == undefined && data.movieFilePath != undefined){
+					  	  $(".post-detail-center").eq(0).css("display","block");
+						  $(".post-detail-center").eq(1).css("display","none");
+						  $(".post-detail-center").eq(2).css("display","none");
+						  
+						  modalPostNo.val(moviePostNo);
+						  
+						  dataImgCheck.val(data.movieFilePath);
+						  const detailMemberIdVal=detailmemberId.val(data.memberId);
+						  const postDateVal=postDate.val(data.moviePostDate);
+						  postDetailTextInput.val(data.moviePostContent);
+						  postDetailCenterImg.attr("src","/resources/upload/movie/"+data.movieFilePath);
 					}
 				  
 			  }
 			  });	
-	   
-	   
 	   
 	   $(".modal3").removeClass("hidden3");//아작스가 필요하다면 아작스 내부에서 마지막 코드가 됨
    });
@@ -1049,9 +1099,29 @@ const openButton2=document.getElementById("open2");
     }
 }
    
-
-  
+	 //무비포스트 댓글 등록
+	$(".postCommentBtn").on("click",function(){
+		const moviePostNo =$(".modalPostNo").val();
+		const movieTitle=$(".modalMovieTitle").val();
+		const memberId=$(".detailmemberId").val();
+		const PostComment=$(".postComment").val();
+	$.ajax({
+			url:"/insertPostComment.do",
+			type:"post",
+			data:{moviePostNo:moviePostNo,movieTitle:movieTitle,memberId:memberId,PostComment:PostComment},
+			success:function(data){
+				if(data != null){
+					console.log("성공");
+				}else{
+					console.log("실패");
+				}
+			}
+			
+		}); 
 		
+	});
+  
+		 
 
 			 
 

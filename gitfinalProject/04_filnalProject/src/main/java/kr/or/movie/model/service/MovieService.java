@@ -17,6 +17,7 @@ import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MoviePost;
+import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewPageData;
@@ -174,12 +175,24 @@ public ArrayList<Movie> selectMovieAll() {
 	}
 	public ArrayList<MoviePost> oneMovieAllPost(int movieNo) {
 		ArrayList<MoviePost> postAllList=dao.selectOneMovieAllPost(movieNo);
+		
+		
 		return postAllList;
 	}
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne=dao.selectDetailPost(moviePostNo);
-		return moviePostOne;
+		
+		if(moviePostOne != null) {
+			ArrayList<MoviePostComment> mpc= dao.selectPostComment(moviePostNo);
+			moviePostOne.setMoviePostComment(mpc);
+		}
+		 return moviePostOne; 
 	}
+	public int insertPostComment(MoviePostComment mpc) {
+		int result = dao.insertPostComment(mpc);
+		return result;
+	}
+
 
 
 	

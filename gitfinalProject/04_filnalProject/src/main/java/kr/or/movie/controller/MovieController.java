@@ -19,12 +19,14 @@ import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MoviePost;
+import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewLike;
 import kr.or.movie.model.vo.ReviewPageData;
 import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
+import sun.util.logging.resources.logging;
 
 @Controller
 public class MovieController {
@@ -57,6 +59,9 @@ public class MovieController {
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
 		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
+	
+		
+		
 		
 		//모든 관람평(review)조회하기()
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
@@ -141,7 +146,6 @@ public class MovieController {
 	//무비포스트 등록
 	@RequestMapping(value="/moviePostInsert.do")
 	public String moviePostInsert(MoviePost post) {
-		System.out.println(post);
 		int result = service.postInsert(post);
 		
 		return "redirect:/movieDetail.do?movieNo="+post.getMovieNo()+"&reqPage=1";
@@ -149,15 +153,25 @@ public class MovieController {
 	}
 	//무비포스트 상세보기
 	@ResponseBody
-	@RequestMapping(value="/moviePostDetail.do",produces = "application/json;charset=utf-8")
+	@RequestMapping(value="/moviePostDetail.do", produces = "application/json;charset=utf-8")
 	public String moviePostDetail(int movieNo,int moviePostNo,Model model) {
 		MoviePost moviePostOne= service.selectDetailPost(moviePostNo);
-		System.out.println(moviePostOne+"성공");
+		
+		System.out.println(moviePostOne);
 		
 		return new Gson().toJson(moviePostOne);
 		
 		
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="/insertPostComment.do")
+	public String insertPostComment(MoviePostComment mpc) {
+		System.out.println(mpc);
+		int result =service.insertPostComment(mpc);
+
+		return new Gson().toJson(result);
+		
+		
+	}
 	
 }

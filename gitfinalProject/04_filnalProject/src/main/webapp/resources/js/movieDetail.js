@@ -1,4 +1,15 @@
 
+ $(".tabs>li").on("click", function(){
+    $(".tabs>li").removeClass("active-tab");
+    $(this).addClass("active-tab");
+    const contents = $(".tabcontent");
+    contents.hide();
+    const index = $(".tabs>li").index(this);
+    contents.eq(index).show();
+
+ });
+$(".tabs>li").eq(0).click();
+
 const moreBtn = document.querySelector("#more-btn");
 moreBtn.addEventListener("click",function(){
     const importantInfoContent = document.querySelector(".importantInfo-content");
@@ -46,17 +57,6 @@ $(function(){
     }
     });
     });
-
- $(".tabs>li").on("click", function(){
-    $(".tabs>li").removeClass("active-tab");
-    $(this).addClass("active-tab");
-    const contents = $(".tabcontent");
-    contents.hide();
-    const index = $(".tabs>li").index(this);
-    contents.eq(index).show();
-
- });
-$(".tabs>li").eq(0).click();
 
 
 
