@@ -615,28 +615,32 @@
 			            mapping(input, i, j);
 			            div.append(input);
 			            input.addEventListener('click', function(e) {
-			                console.log(e.target.value);
 			                //중복방지 함수
-			                selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+			                	selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
 
 			                //click class가 존재할때(제거해주는 toggle)
-			                if (input.classList.contains("clicked")) {
-			                    input.classList.remove("clicked");
-			                    clicked = document.querySelectorAll(".clicked");
-			                    selectedSeats.splice(selectedSeats.indexOf(e.target.value), 1);
+			                if ($(this).hasClass("clicked")) {
+								$(this).removeClass("clicked")
+								clicked = document.querySelectorAll(".clicked");
 			                    clicked.forEach((data) => {
 			                        selectedSeats.push(data.value);
-			                    });
+			                    })
+								$(".mySeat").empty()
+								selectedSeats.forEach(function(s, i){
+									$(".mySeat").eq(i).text(s)
+								})
 			                    //click class가 존재하지 않을때 (추가해주는 toggle)
 			                } else {
-			                    input.classList.add("clicked");
+			                    $(this).addClass("clicked");
 			                    clicked = document.querySelectorAll(".clicked");
 			                    clicked.forEach((data) => {
 			                        selectedSeats.push(data.value);
 			                    })
+								selectedSeats.forEach(function(s, i){
+									$(".mySeat").eq(i).text(s)
+								})
 			                }
-			                console.log(selectedSeats);
-							$(".mySeat").eq(i).text(selectedSeats[i])
+							console.log(selectedSeats)
 			            })
 			        }
 			    }
