@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MoviePost;
+import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewWatch;
@@ -148,6 +149,25 @@ public class MovieDao {
 		return (ArrayList<MoviePost>)list;
 	}
 
+	public MoviePost selectDetailPost(int moviePostNo) {
+			MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost",moviePostNo);
+		
+		return moviePostOne;
+	}
+
+	public int insertPostComment(MoviePostComment mpc) {
+		
+		int result = sqlSession.insert("movie.insertPostComment",mpc);
+		return result;
+		
+	}
+
+	public ArrayList<MoviePostComment> selectPostComment(int moviePostNo) {
+		List list = sqlSession.selectList("movie.selectPostComment",moviePostNo);
+		return (ArrayList<MoviePostComment>) list;
+	}
+
+	
 
 
 }

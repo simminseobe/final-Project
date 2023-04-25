@@ -142,7 +142,7 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
                             공지사항 관리
                         </a>
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="/adminCaht.do">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
                             1대1 문의
                         </a>

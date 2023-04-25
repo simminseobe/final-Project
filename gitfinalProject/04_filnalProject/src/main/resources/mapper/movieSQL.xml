@@ -298,7 +298,35 @@ delete from movie_video where movie_video_no=
     left join movie_file f on(p.movie_file_no=f.movie_file_no) 
     left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.movie_no=#{_parameter}
 </select>
-
+<select id="detailPost" resultType="moviePost">
+	select
+		movie_post_no as moviePostNo,
+		p.movie_no as movieNo,
+		p.movie_video_no as movieVideoNo,
+		p.movie_file_no as movieFileNo,
+		member_id as memberId,
+		movie_title as movieTitle,
+		movie_post_content as moviePostContent,
+		movie_post_date as moviePostDate,
+		movie_file_path as movieFilePath,
+        movie_video_link as videoLink
+    from movie_post p 
+    left join movie_file f on(p.movie_file_no=f.movie_file_no) 
+    left join movie_video v on(p.movie_video_no=v.movie_video_no) where movie_post_no=#{_parameter}
+</select>
+<insert id="insertPostComment" parameterType="moviePostComment">
+	insert into movie_post_comment
+		values(movie_post_comment_seq.nextval,#{moviePostNo},#{movieTitle},#{memberId},#{postComment},to_char(sysdate,'yyyy-mm-dd'))
+</insert>
+<select id="selectPostComment" resultType="moviePostComment">
+	select movie_post_comment_no as moviePostCommentNo,
+			movie_post_no as moviePostNo,
+			movie_title as movieTitle,
+			member_id as memberId,
+			post_comment as postComment,
+			movie_post_comment_date as moviePostCommentDate
+	from movie_post_comment where movie_post_no=#{_parameter}
+</select>
 
 
 </mapper>

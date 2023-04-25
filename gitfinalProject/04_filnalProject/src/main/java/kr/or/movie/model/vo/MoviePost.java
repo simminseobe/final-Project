@@ -1,5 +1,7 @@
 package kr.or.movie.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +20,5 @@ public class MoviePost {
 	private String moviePostDate;
 	private String movieFilePath;
 	private String videoLink;
+	private ArrayList<MoviePostComment> moviePostComment;
 }

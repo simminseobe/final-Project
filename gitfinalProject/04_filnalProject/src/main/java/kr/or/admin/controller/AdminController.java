@@ -179,8 +179,10 @@ public class AdminController {
 
 		// board: board 내용 업데이트, fileList 사진 업데이트, fileNo 삭제
 		int result = service.movieUpdate(movie, mainFile, postList, fileNo, videoList, videoNo);
-		// 파일도 삭제 비디오도 삭제
-		if (fileNo != null && videoNo != null && (result == (postList.size() + fileNo.length + 2 + videoList.size()))) {
+
+		// 파일 삭제 동작 = 삭제 파일 이 있고 && 다 성공 하면
+		if (fileNo != null && result > 0) {
+			// 파일 삭제
 			for (String delFile : filepath) {
 				boolean delResult = fileManager.deleteFile(savePath, delFile);
 
@@ -190,39 +192,10 @@ public class AdminController {
 					System.out.println("파일 삭제 실패");
 				}
 			}
-
+			// 리턴
 			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
-			// 파일만 삭제
-		} else if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) {
-			for (String delFile : filepath) {
-				boolean delResult = fileManager.deleteFile(savePath, delFile);
-
-				if (delResult) {
-					System.out.println("파일 삭제 성공");
-				} else {
-					System.out.println("파일 삭제 실패");
-				}
-			}
-
-			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
-		}
-
-		// 파일이 DB에 삭제 되야 실제 물리적 파일도 제거
-		if (fileNo != null && (result == (postList.size() + fileNo.length + 2))) { // 2는 movieFile +
-																					// movie
-			for (String delFile : filepath) {
-				boolean delResult = fileManager.deleteFile(savePath, delFile);
-
-				if (delResult) {
-					System.out.println("파일 삭제 성공");
-				} else {
-					System.out.println("파일 삭제 실패");
-				}
-			}
-
-			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
-		} else if (fileNo == null && (result == (postList.size() + 1 + videoList.size()))) { // 파일을 삭제안하고 파일만 첨부하거나 첨부
-																								// 안하면
+			// 파일 삭제 동작 != 삭제 파일 이 없고 && 다 성공 하면 - 파일 삭제 수
+		} else if (fileNo == null && result > 0) {
 			return "redirect:/updateMovieFrm.do?movieNo=" + movie.getMovieNo();
 		} else {
 			return "ridirect:/";
@@ -313,6 +286,27 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping(value = "/allTheater.do")
+	public String allTheater() {
+		return "admin/allTheater";
+	}
+
+	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
+
+	public String selectOneTheater(int theaterNo, Model model) {
+		Theater theater = service.selectOntTheater(theaterNo);
+		model.addAttribute("theater", theater);
+		return "admin/detailTheater";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
+	public String selectBranchList(String theaterLocal) {
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		list = service.selectBranchList(theaterLocal);
+		return new Gson().toJson(list);
+	}
+
 	@RequestMapping(value = "/screenSchedule.do")
 	public String screenSchedule() {
 		return "admin/screenSchedule";
@@ -321,7 +315,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/selectScheduleCalendar.do", produces = "application/json;charset=utf-8")
 	public String selectScheduleCalendar(String theaterBranch) {
-		System.out.println(theaterBranch);
 		List<Schedule> list = service.selectScheduleCalendar(theaterBranch);
 
 		Gson gson = new Gson();
@@ -343,19 +336,26 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "registerSchedule.do")
-	public String registerSchedule(@RequestBody String param, Model model) {
+	public String registerSchedule(@RequestBody String param) {
 		JsonElement element = JsonParser.parseString(param);
 
 		String title = element.getAsJsonObject().get("title").getAsString();
 		String branch = element.getAsJsonObject().get("branch").getAsString();
 		String start = element.getAsJsonObject().get("start").getAsString();
 		String end = element.getAsJsonObject().get("end").getAsString();
+
+		System.out.println(start);
+		System.out.println(end);
 		// fullCalander 시간을 DB형식에 맞게 Format
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
-		// fullCalander가 미국시라서 시차 15시간 빼주기
-		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter).minusHours(15);
-		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter).minusHours(15);
+
+		// fullCalander가 미국시라서 시차 9시간 더해주기ㅏ.minusHours(15)
+		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter).plusHours(9);
+		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter).plusHours(9);
+
+		System.out.println(startDateTime);
+		System.out.println(endDateTime);
 
 		String startOutput = startDateTime.format(outputFormatter);
 		String endOutput = endDateTime.format(outputFormatter);
@@ -368,24 +368,69 @@ public class AdminController {
 		return String.valueOf(result);
 	}
 
-	@RequestMapping(value = "/allTheater.do")
-	public String allTheater() {
-		return "admin/allTheater";
-	}
+	@ResponseBody
+	@RequestMapping(value = "/selectscheduleNo.do")
+	public String selectscheduleNo(@RequestBody String param) {
+		JsonElement element = JsonParser.parseString(param);
 
-	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
+		String oldTitle = element.getAsJsonObject().get("oldTitle").getAsString();
+		String oldBranch = element.getAsJsonObject().get("oldBranch").getAsString();
+		String oldStart = element.getAsJsonObject().get("oldStart").getAsString();
+		String oldEnd = element.getAsJsonObject().get("oldEnd").getAsString();
 
-	public String selectOneTheater(int theaterNo, Model model) {
-		Theater theater = service.selectOntTheater(theaterNo);
-		model.addAttribute("theater", theater);
-		return "admin/detailTheater";
+		// fullCalander 시간을 DB형식에 맞게 Format
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
+		// fullCalander가 미국시라서 시차 9시간 더해주기ㅏ.minusHours(15)
+		LocalDateTime startDateTime = LocalDateTime.parse(oldStart, inputFormatter);
+		LocalDateTime endDateTime = LocalDateTime.parse(oldEnd, inputFormatter);
+
+		String startOutput = startDateTime.format(outputFormatter);
+		String endOutput = endDateTime.format(outputFormatter);
+
+		int schduleNo = service.selectscheduleNo(oldTitle, oldBranch, startOutput, endOutput);
+
+		return String.valueOf(schduleNo);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/selectBranchList.do", produces = "application/json;charset=utf-8")
-	public String selectBranchList(String theaterLocal) {
-		ArrayList<Theater> list = new ArrayList<Theater>();
-		list = service.selectBranchList(theaterLocal);
-		return new Gson().toJson(list);
+	@RequestMapping(value = "/updateSchedule.do")
+	public String updateSchedule(@RequestBody String param) {
+		JsonElement element = JsonParser.parseString(param);
+
+		String start = element.getAsJsonObject().get("start").getAsString();
+		String end = element.getAsJsonObject().get("end").getAsString();
+		String scheduleNo = element.getAsJsonObject().get("scheduleNo").getAsString();
+
+		// fullCalander 시간을 DB형식에 맞게 Format
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
+		// fullCalander가 미국시라서 시차 9시간 더해주기ㅏ.minusHours(15)
+		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter);
+		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter);
+
+		String startOutput = startDateTime.format(outputFormatter);
+		String endOutput = endDateTime.format(outputFormatter);
+
+		int result = service.updateSchedule(startOutput, endOutput, scheduleNo);
+
+		return String.valueOf(result);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteSchedule.do")
+	public String deleteSchedule(@RequestBody String param) {
+		JsonElement element = JsonParser.parseString(param);
+
+		String scheduleNo = element.getAsJsonObject().get("scheduleNo").getAsString();
+
+		int result = service.deleteSchedule(scheduleNo);
+
+		return String.valueOf(result);
+	}
+
+	@RequestMapping(value = "/adminCaht.do")
+	public String adminCaht() {
+		return "admin/adminChat";
 	}
 }

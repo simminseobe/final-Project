@@ -1,3 +1,5 @@
+
+
 $(function(){
     $(".movie-list-set").slice(0, 4).show(); // 최초 8개 선택
     $("#load").click(function(e){ // Load More를 위한 클릭 이벤트e

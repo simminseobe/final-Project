@@ -17,6 +17,7 @@ import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MoviePost;
+import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewPageData;
@@ -142,14 +143,14 @@ public ArrayList<Movie> selectMovieAll() {
 		String pageNavi="";
 		//이전버튼 생성
 		if(reqPage != 1) {
-			pageNavi += "<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+(pageNo-1)+"'>[이전]</a>";
+			pageNavi += "<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+(pageNo-1)+"&stat=1'>[이전]</a>";
 		}
 		//페이지 숫자 생성
 		for(int i =0; i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi+="<span>"+pageNo+"</span>";
 			}else {
-				pageNavi +="<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+pageNo+"' >"+pageNo+"</a>";
+				pageNavi +="<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+pageNo+"&stat=1'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -159,7 +160,7 @@ public ArrayList<Movie> selectMovieAll() {
 		}
 		//다음버튼 생성
 		if(pageNo<=totalPage) {
-			pageNavi += "<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+pageNo+"'>[다음]</a>";
+			pageNavi += "<a href='/movieDetail.do?movieNo="+movieNo+"&reqPage="+pageNo+"&stat=1'>[다음]</a>";
 		}
 		ReviewPageData rpd= new ReviewPageData(list,pageNavi);
 		return rpd;
@@ -174,8 +175,24 @@ public ArrayList<Movie> selectMovieAll() {
 	}
 	public ArrayList<MoviePost> oneMovieAllPost(int movieNo) {
 		ArrayList<MoviePost> postAllList=dao.selectOneMovieAllPost(movieNo);
+		
+		
 		return postAllList;
 	}
+	public MoviePost selectDetailPost(int moviePostNo) {
+		MoviePost moviePostOne=dao.selectDetailPost(moviePostNo);
+		
+		if(moviePostOne != null) {
+			ArrayList<MoviePostComment> mpc= dao.selectPostComment(moviePostNo);
+			moviePostOne.setMoviePostComment(mpc);
+		}
+		 return moviePostOne; 
+	}
+	public int insertPostComment(MoviePostComment mpc) {
+		int result = dao.insertPostComment(mpc);
+		return result;
+	}
+
 
 
 	

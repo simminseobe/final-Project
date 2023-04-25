@@ -19,12 +19,14 @@ import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MoviePost;
+import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewLike;
 import kr.or.movie.model.vo.ReviewPageData;
 import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
+import sun.util.logging.resources.logging;
 
 @Controller
 public class MovieController {
@@ -51,16 +53,22 @@ public class MovieController {
 		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
 		model.addAttribute("pageList",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
+
 		//3번없음
 		
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
 		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
+	
+		
+		
 		
 		//모든 관람평(review)조회하기()
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
 		model.addAttribute("reviewList",reviewList);
 		
+		//아이디로 관람평 조회
+		//Review oneReview = service.selectOneReview();
 		
 		//관람포인트별 합산점수조회
 		WatchPoint watchPointSum=service.watchPointSum(movieNo);//(5-1.관람포인트 합산)
@@ -138,18 +146,32 @@ public class MovieController {
 	//무비포스트 등록
 	@RequestMapping(value="/moviePostInsert.do")
 	public String moviePostInsert(MoviePost post) {
-		System.out.println(post);
 		int result = service.postInsert(post);
 		
 		return "redirect:/movieDetail.do?movieNo="+post.getMovieNo()+"&reqPage=1";
 		
 	}
 	//무비포스트 상세보기
-	@RequestMapping(value="moviePostDetail.do")
-	public String moviePostDetail(int moviePostNo,Model model) {
-		return null;
+	@ResponseBody
+	@RequestMapping(value="/moviePostDetail.do", produces = "application/json;charset=utf-8")
+	public String moviePostDetail(int movieNo,int moviePostNo,Model model) {
+		MoviePost moviePostOne= service.selectDetailPost(moviePostNo);
+		
+		System.out.println(moviePostOne);
+		
+		return new Gson().toJson(moviePostOne);
+		
 		
 	}
+	@ResponseBody
+	@RequestMapping(value="/insertPostComment.do")
+	public String insertPostComment(MoviePostComment mpc) {
+		System.out.println(mpc);
+		int result =service.insertPostComment(mpc);
 
+		return new Gson().toJson(result);
+		
+		
+	}
 	
 }

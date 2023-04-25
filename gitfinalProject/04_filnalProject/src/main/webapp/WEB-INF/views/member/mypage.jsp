@@ -21,7 +21,7 @@
 </style>
 <table>
 <td>
-<div class=".menubar">
+<div class="menubar">
 <jsp:include page="/WEB-INF/views/common/menubar.jsp"></jsp:include>
 </div>
 </td>
