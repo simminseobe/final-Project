@@ -1002,7 +1002,7 @@
 								// li 클릭 시 /choiceSeat.do 페이지로 이동 (값 전달)
 								li.click(function () {
 									window.location.href = "/choiceSeat.do?movieTitle=" + movieTitle + "&scheduleStart=" + scheduleStart + "&scheduleEnd=" + scheduleEnd + "&theaterBranch=" + theaterBranch +"&choiceDataDay="+choiceDataDay;
-
+									
 								});
 							}
 						}

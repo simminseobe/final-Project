@@ -22,6 +22,7 @@
 		<typeAlias type="kr.or.ticketing.model.vo.TheaterLocalCount" alias="theaterLocalCount"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductPhoto" alias="pp"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TicketingSchedule" alias="ticketingSchedule"/>
+		<typeAlias type="kr.or.ticketing.model.vo.TicketingInfo" alias="ticketingInfo"/>
 		
 	</typeAliases>
 </configuration>
