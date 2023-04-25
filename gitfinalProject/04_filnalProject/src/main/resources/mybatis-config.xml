@@ -12,6 +12,8 @@
 		<typeAlias type="kr.or.movie.model.vo.ReviewWatch" alias="reviewWatch"/>
 		<typeAlias type="kr.or.movie.model.vo.Review" alias="review"/>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
 		<typeAlias type="kr.or.movie.model.vo.Movie" alias="movie"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieFile" alias="movieFile"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieVideo" alias="movieVideo"/>

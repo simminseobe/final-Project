@@ -221,6 +221,7 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage";
 	}
+	//잔여포인트 조회
 	
 	// 개인정보 수정 페이지 이동
 	@RequestMapping(value="/myProfile.do")
