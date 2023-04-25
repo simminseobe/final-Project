@@ -9,7 +9,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/resources/css/member/purchaseDetail.css">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<table>
+<td>
+<div class="menubar">
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+	</div>
+	<td>
 	<div class="wrapper">
 		<div class="booklist-wrap">
 			<div class="booklist-header">
@@ -77,6 +82,8 @@
 						</tr>
 					</tbody>
 				</table>
+				</td>
+</table>
 
 				<p>
 					<!--btn-primary -->
