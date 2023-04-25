@@ -16,7 +16,7 @@
 	    apiURL += "&client_id=" + clientId;
 	    apiURL += "&redirect_uri=" + redirectURI;
 	    apiURL += "&state=" + state;
-	    session.setAttribute("state", state);	
+	    session.setAttribute("state", state);
 	</script>
 </body>
 </html>

@@ -50,10 +50,8 @@
         		</a>
 				<!-- 네이버 로그인 창으로 이동 -->
 				<div id="naver_id_login" style="text-align:center">
-					<!-- <a href="/naverLogin.do"> -->
-					<%-- <a href="${naverUrl }"> --%>
 					<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=2bPh_mYXLtkjmaWWo_8B&state=vKHZagAtTC&redirect_uri=http://192.168.10.32/callback.do">
-					<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
+					<img width="250px" height="37.5px" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
         	</div>
         </div>
       </form>

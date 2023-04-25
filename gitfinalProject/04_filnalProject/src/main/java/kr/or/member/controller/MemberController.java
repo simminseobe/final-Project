@@ -316,12 +316,12 @@ public class MemberController {
 
 		String access_Token = "";
 		String refresh_Token = "";
-		String reqURL = "https://kauth.kakao.com/oauth/token";
+		String reqURL ="https://kauth.kakao.com/oauth/token";
 
 		try {
 			URL url = new URL(reqURL);
 
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
 
 			// URL연결은 입출력에 사용 될 수 있고, POST 혹은 PUT 요청을 하려면 setDoOutput을 true로 설정해야함
 			conn.setRequestMethod("POST");
@@ -391,7 +391,7 @@ public class MemberController {
 
 		member.setMemberId(email);
 		member.setMemberName(nickname);
-		Member m = service.selectOneMember(member);
+		Member m = service.selectOneKaKao(member);
 		System.out.println("멤버 객체임 : " + m);
 		if (m != null) {
 			// 로그인 수행 -> redirect:/ 이동??
@@ -416,16 +416,16 @@ public class MemberController {
 
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		String reqURL="https://kapi.kakao.com/v2/user/me";
 		try {
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("GET");
 
 			// 요청에 필요한 Header에 포함될 내용
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
-			int responseCode = conn.getResponseCode();
+			int responseCode=conn.getResponseCode();
 			System.out.println("responseCode111111 : " + responseCode);
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -475,18 +475,16 @@ public class MemberController {
 	// 카카오 로그아웃
 	@RequestMapping(value = "/kakaoLogout.do")
 	public String kakaoLogout(Member member, HttpSession session) {
-		String access_Token = (String) session.getAttribute("access_Token");
-		session.removeAttribute("access_Token");
-		session.removeAttribute("memberId");
 		session.invalidate();
 		return "redirect:/";
 	}
 
+	// 카카오 로그아웃
 	public void kakaoLogout(String access_Token) {
-		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+		String reqURL="https://kapi.kakao.com/v1/user/logout";
 		try {
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn=(HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
@@ -507,20 +505,21 @@ public class MemberController {
 		}
 	}
 
-	// 카카오 로그아웃(연결 끊기)
+	// 카카오 로그아웃(링크연결 끊기)
 	@RequestMapping(value = "/kakaounlink")
 	public String kakaoUnlink(HttpSession session) {
-		session.getAttribute("access_token");
-		session.removeAttribute("access_Token");
+		//session.getAttribute("access_token");
+		//session.removeAttribute("access_Token");
 		session.invalidate();
 		return "redirect:/";
 	}
 
+	// 카카오 로그아웃(링크연결 끊기)
 	public void kakaoUnlink(String access_Token) {
-		String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+		String reqURL="https://kapi.kakao.com/v1/user/unlink";
 		try {
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
@@ -548,25 +547,25 @@ public class MemberController {
 	@RequestMapping(value="/naverLogin.do")
 	public String userLogin(Model model, HttpSession session) {
 		System.out.println("userLogin");
-		String naverAuthUrl = naverloginbo.getAuthorizationUrl(session);
+		String naverAuthUrl=naverloginbo.getAuthorizationUrl(session);
 		System.out.println("naverAuthUrl " + naverAuthUrl);
 		model.addAttribute("naverUrl", naverAuthUrl);
 		return "member/naverLogin";
 	}
 	
-	// 네이버 로그인
-	@RequestMapping(value="/callback.do",  method = {RequestMethod.GET,RequestMethod.POST})
-	public String userNaverLoginPro(Model model, Member member, @RequestParam Map<String,Object> paramMap, @RequestParam String code, @RequestParam String state, HttpSession session) throws SQLException, Exception {
+	// 네이버 로그인(access_Token/refresh_Token) 발급 받는 API
+	@RequestMapping(value="/callback.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public String userNaverLoginPro(Model model, Member member, @RequestParam HashMap<String,Object> paramMap, @RequestParam String code, @RequestParam String state, HttpSession session) throws SQLException, Exception {
 		System.out.println("paramMap:" + paramMap);
 
 		String access_Token = "";
 		String refresh_Token = "";
-		String reqURL = "https://nid.naver.com/oauth2.0/token";
+		String reqURL="https://nid.naver.com/oauth2.0/token";
 		
 		try {
 			URL url = new URL(reqURL);
 
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
 
 			// URL연결은 입출력에 사용 될 수 있고, POST 혹은 PUT 요청을 하려면 setDoOutput을 true로 설정해야함
 			conn.setRequestMethod("POST");
@@ -586,7 +585,7 @@ public class MemberController {
 			bw.flush();
 
 			// 결과 코드가 200이라면 성공
-			int responseCode = conn.getResponseCode();
+			int responseCode=conn.getResponseCode();
 			System.out.println("responseCode : " + responseCode);
 
 			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
@@ -597,7 +596,8 @@ public class MemberController {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body : " + result);
+			// access_Token, refresh_Token 발급 확인
+			//System.out.println("response body : " + result);
 
 			// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
 			JsonParser parser = new JsonParser();
@@ -606,8 +606,9 @@ public class MemberController {
 			access_Token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 
-			System.out.println("access_token : " + access_Token);
-			System.out.println("refresh_token : " + refresh_Token);
+			// access_Token, refresh_Token 발급 확인
+			//System.out.println("access_token : " + access_Token);
+			//System.out.println("refresh_token : " + refresh_Token);
 
 			br.close();
 			bw.close();
@@ -615,66 +616,43 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		HashMap<String, Object> naverInfo = getUserInfo(access_Token);
-		System.out.println("userInfo : " + access_Token);
-		System.out.println("userInfo 의 모든 key / value 값 : " + naverInfo);
-		System.out.println("###userInfo - nickname#### : " + naverInfo.get("email"));
-		System.out.println("###userInfo - email#### : " + naverInfo.get("phone"));
+		HashMap<String, Object> naverInfo = naverGetUserInfo(access_Token);
+		// HashMap - naverInfo 에서 토큰을 통해 프로필 정보 얻기
+		String naverEmail = (String)naverInfo.get("naverEmail");
+		String mobile = (String)naverInfo.get("mobile");
 		
-		String userName = (String) naverInfo.get("userName");
-		String phone = (String) naverInfo.get("phone");
-		
-		System.out.println("userName : " + userName);
-		System.out.println("phone : " + phone);
+		System.out.println("naverInfo 정보 : " + naverInfo);
+		System.out.println("naverEmail : " + naverEmail);
+		System.out.println("mobile : " + mobile);
 		
 		// 해당 정보가 있으면 login 수행
 		// 해당 정보가 없으면 회원가입 페이지로 이동
-		// HashMap userInfo 에서 네아로에서 체크한 정보를 꺼내서 member 객체에 set
 		
-		// ex1) String 회원이름 변수명 = (String)userInfo.get("userName");
-		// ex1-1) String 휴대전화번호 변수명 = (String)userInfo.get("phone");
-		
-		// ex2) member.setMemberName("회원이름 변수명");
-		// ex2-1) member.setMemberName("휴대전화번호 변수명");
-		
-		/*
-		//Map<String, Object> naverConnectionCheck = userservice.naverConnectionCheck(apiJson); 
-		
-		//1. 이미 일반 회원가입을 통해 가입한 이메일이고, 네이버 연동을 하는 경우
-		//일치하는 이메일 없으면 가입
-		if(naverConnectionCheck == null) { 
-			model.addAttribute("email",apiJson.get("email"));
-			model.addAttribute("password",apiJson.get("id"));
-			model.addAttribute("phone",apiJson.get("mobile"));
-			return "user/setNickname";
-			
-		//2. 회원가입을 하지 않은 이메일인 경우
-		}else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
-			userservice.setNaverConnection(apiJson);
-			Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
-			session.setAttribute("userInfo", loginCheck);
-			
-		//3. 회원가입 및 네이버 연동이 된 이메일인 경우
-		//모두 연동 되어있을시
-		}else { 
-			Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
-			session.setAttribute("userInfo", loginCheck);
+		member.setMemberId(naverEmail);
+		member.setMemberPhone(mobile);		
+		Member m = service.selectOneNaver(member);
+		if(m != null) {
+			session.setAttribute("m", m);
+			session.setAttribute("access_Token", access_Token);
+			return "redirect:/";
+		} else {
+			model.addAttribute("naverEmail", naverEmail);
+			model.addAttribute("mobile", mobile);
+			return "member/naverJoinFrm";
 		}
-		*/
 
-		return access_Token;
+		//return access_Token;
 	}
 	
-	// 네이버 로그인 시 회원의 정보 조회
+	// 네이버 로그인 시 발급받은 access_Token으로 회원정보 조회
 	public HashMap<String, Object> naverGetUserInfo(String access_Token) {
 		
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		System.out.println("userInfo 회원정보 조회 : " + userInfo);
-		String reqURL = "https://openapi.naver.com/v1/nid/me";
+		HashMap<String, Object> naverInfo = new HashMap<String, Object>();
+		String reqURL="https://openapi.naver.com/v1/nid/me";
 		try {
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn =(HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("GET");
 
 			// 요청에 필요한 Header에 포함될 내용
@@ -696,29 +674,49 @@ public class MemberController {
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 
-			// 수정
+			// response/email(사용자 이메일), response/mobile(휴대전화번호)
 			// 
 			JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
-			JsonObject response2 = element.getAsJsonObject().get("response").getAsJsonObject();
+			System.out.println("response : " + response);
 			
 			// 필요한 정보 추출하는 코드(여기선 사용자 이름, 핸드폰 번호 추출)
-			String userName = response.getAsJsonObject().get("name").getAsString();
-			String phone = response2.getAsJsonObject().get("phone").getAsString();
+			String naverEmail = response.getAsJsonObject().get("email").getAsString();
+			String mobile = response.getAsJsonObject().get("mobile").getAsString();
 
-			userInfo.put("accessToken", access_Token);
-			userInfo.put("userName", userName);
-			userInfo.put("phone", phone);
+			naverInfo.put("accessToken", access_Token);
+			naverInfo.put("naverEmail", naverEmail);
+			naverInfo.put("mobile", mobile);
 
-			userInfo.get(phone);
-			System.out.println("phone" + phone);
-			System.out.println("userName" + userName);
-
+			naverInfo.get(naverEmail);
+			naverInfo.get(mobile);
+			System.out.println("사용자 정보 확인 email : " + naverEmail);
+			System.out.println("사용자 정보 확인 mobile : " + mobile);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return userInfo;
+		return naverInfo;
 	}
+	
+	// 네이버 회원가입
+	@RequestMapping(value="/naverJoin.do")
+	public String naverJoin(Member m) {
+		int result = service.insertMember(m);
+		if(result > 0) {
+			return "redirect:/";
+		} else {
+			return "redirect:/login.do";
+		}
+	}
+	
+	// 네이버 로그아웃
+	@RequestMapping(value="/naverLogout.do")
+	public String naverLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+
 	
 
 }
