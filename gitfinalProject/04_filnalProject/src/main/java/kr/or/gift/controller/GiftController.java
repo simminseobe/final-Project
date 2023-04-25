@@ -17,6 +17,7 @@ import common.FileManager;
 import kr.or.gift.model.service.GiftService;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Controller
@@ -136,6 +137,7 @@ public class GiftController {
 	public String giftDetail(Model model, int productNo) {
 		Product product = sv.getOneProduct(productNo);
 		product.setImages(sv.getAllProductImage(productNo));
+		product.setProductOptions(sv.getProductOptions(productNo));
 		model.addAttribute("p",product);
 		
 		return "gift/giftDetail";
@@ -145,6 +147,7 @@ public class GiftController {
 	public String adminGiftDetail(Model model, int productNo) {
 		Product p = sv.getOneProduct(productNo);
 		p.setImages(sv.getAllProductImage(productNo));
+		p.setProductOptions(sv.getProductOptions(productNo));
 		model.addAttribute("p",p);
 		return "admin/gift/adminGiftDetail";
 	}
@@ -162,6 +165,27 @@ public class GiftController {
 			}
 			return "redirect:/adminGiftList.do";
 		}
+	}
+	
+	@RequestMapping(value = "/insertOption.do")
+	public String insertOption(String[] poName, String[] poPrice, int productNo) {
+		ArrayList<ProductOption> options = new ArrayList<ProductOption>();
+		for(int i=0; i<poName.length;i++) {
+			ProductOption option = new ProductOption();
+			option.setPoName(poName[i]);
+			option.setPoPrice(Integer.parseInt(poPrice[i]));
+			option.setProductNo(productNo);
+			options.add(option);
+		}
+		int result = sv.insertOption(options);
+		System.out.println("result : " + result);
+		return "redirect:/adminGiftDetail.do?productNo="+productNo;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/deleteOption.do", produces = "application/json;charset=utf-8")
+	public String deleteOption(int poNo) {
+		int result = sv.deleteOption(poNo);
+		return result + "";
 	}
 	
 } 

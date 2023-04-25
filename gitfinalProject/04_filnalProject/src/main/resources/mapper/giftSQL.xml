@@ -18,8 +18,15 @@
 	<insert id="insertProductPhoto" parameterType="pp">
 		insert into product_photo values(pp_seq.nextval, #{productNo}, #{ppOrder}, #{ppPath})
 	</insert>
+	<insert id="insertOption" parameterType="po">
+		insert into product_option values(po_seq.nextval, #{productNo}, #{poName}, #{poPrice})
+	</insert>
+	
 	<delete id="deleteCategory" parameterType="pc">
 		delete from product_category where pc_no = #{pcNo}
+	</delete>
+	<delete id="deleteOption" parameterType="_int">
+		delete from product_option where po_no = #{_parameter}
 	</delete>
 	<delete id="deleteProduct" parameterType="_int">
 		delete from product where product_no = #{_parameter}
@@ -27,6 +34,22 @@
 	<update id="updateCategory" parameterType="pc">
 		update product_category set pc_category = #{pcCategory} where pc_no = #{pcNo}
 	</update>
+	<!-- select -->
+	<select id="selectOneProduct" parameterType="_int" resultType="product">
+		
+		select
+			product_no as productNo,
+			pc_no as pcNo,
+			product_name as productName,
+			product_price as productPrice,
+			product_company as productCompany,
+			shipping,
+			product_status as productStatus,
+			simple_info as simpleInfo,
+            (select count(*) from product_like where product_no = 16) as productLikeCount
+		from product
+		where product_no = #{_parameter}
+	</select>
 	<select id="selectAllCategory" resultType="pc">
 		select 
 			pc_no pcNo,
@@ -84,19 +107,6 @@
 		where 
 			pc_no = #{_parameter}
 	</select>
-	<select id="selectOneProduct" parameterType="_int" resultType="product">
-		select
-			product_no as productNo,
-			pc_no as pcNo,
-			product_name as productName,
-			product_price as productPrice,
-			product_company as productCompany,
-			shipping,
-			product_status as productStatus,
-			simple_info as simpleInfo
-		from product
-		where product_no = #{_parameter}
-	</select>
 	<select id="selectAllProductImage" parameterType="_int" resultType="pp">
 		select
 			pp_no as ppNo,
@@ -106,4 +116,14 @@
 		from product_photo
 		where product_no = #{_parameter}
 	</select>
+	<select id="selectAllProductOptions" resultType="po" parameterType="_int">
+		select
+			po_no as poNo,
+			product_no as productNo,
+			po_name as poName,
+			po_price as poPrice
+		from product_option
+		where product_no = #{_parameter}
+	</select>
+	
 </mapper>
