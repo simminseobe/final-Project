@@ -17,6 +17,7 @@ import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.service.TicketingService;
 import kr.or.ticketing.model.vo.ChoiceDataDay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.TicketingInfo;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
 @Controller
@@ -48,7 +49,8 @@ public class TicketingController {
 	}
 
 	@RequestMapping(value = "/paymentMethod.do")
-	public String paymentMethod() {
+	public String paymentMethod(TicketingInfo ticketingInfo, Model model) {
+		model.addAttribute("TicketingInfo",ticketingInfo);
 		return "ticketing/paymentMethod";
 	}
 
