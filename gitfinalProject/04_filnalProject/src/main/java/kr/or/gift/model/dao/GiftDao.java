@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Repository
@@ -89,6 +90,22 @@ public class GiftDao {
 	public int deleteProduct(int productNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("gift.deleteProduct",productNo);
+	}
+
+	public int insertOption(ProductOption option) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertOption", option);
+	}
+
+	public ArrayList<ProductOption> getProductOptions(int productNo) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("gift.selectAllProductOptions",productNo);
+		return (ArrayList<ProductOption>) list;
+	}
+
+	public int deleteOption(int poNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("gift.deleteOption",poNo);
 	}
 
 }

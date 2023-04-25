@@ -14,11 +14,12 @@
 		<typeAlias type="kr.or.movie.model.vo.MovieFile" alias="movieFile"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieVideo" alias="movieVideo"/>
 		<typeAlias type="kr.or.admin.model.vo.Theater" alias="theater"/>
-		<typeAlias type="kr.or.gift.model.vo.Product" alias="product"/>
-		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>
 		<typeAlias type="kr.or.ticketing.model.vo.Ticketing" alias="ticketing"/>
 		<typeAlias type="kr.or.admin.model.vo.Schedule" alias="schedule"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TheaterLocalCount" alias="theaterLocalCount"/>
+		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>
+		<typeAlias type="kr.or.gift.model.vo.ProductOption" alias="po"/>
+		<typeAlias type="kr.or.gift.model.vo.Product" alias="product"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductPhoto" alias="pp"/>
 	</typeAliases>
 </configuration>
