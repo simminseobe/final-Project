@@ -77,5 +77,15 @@ public class MemberService {
 		
 		return null;
 	}
+
+	// 카카오 로그인
+	public Member selectOneKaKao(Member member) {
+		return dao.selectOneKaKao(member);
+	}
+
+	// 네이버 로그인
+	public Member selectOneNaver(Member member) {
+		return dao.selectOneNaver(member);
+	}
 	
 }
