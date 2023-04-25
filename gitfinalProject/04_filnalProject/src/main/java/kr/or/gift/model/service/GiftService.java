@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.gift.model.dao.GiftDao;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Service
@@ -86,6 +87,25 @@ public class GiftService {
 		int result = dao.deleteProduct(productNo);
 		if(result > 0) return images;
 		else return null;
+	}
+
+	public int insertOption(ArrayList<ProductOption> options) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		for(ProductOption option : options) {
+			result += dao.insertOption(option);
+		}
+		return result;
+	}
+
+	public ArrayList<ProductOption> getProductOptions(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.getProductOptions(productNo);
+	}
+
+	public int deleteOption(int poNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteOption(poNo);
 	}
 
 }

@@ -82,8 +82,6 @@
 						</tr>
 					</tbody>
 				</table>
-				</td>
-</table>
 
 				<p>
 					<!--btn-primary -->
@@ -169,6 +167,8 @@
 			<!-- 페이징 처리 -->
 		</div>
 	</div>
+				</td>
+</table>
 
 	<script src="/resources/js/member/purchaseDetail.js" ></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
