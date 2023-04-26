@@ -494,6 +494,8 @@
 				<div class="header-wrap">
 					<div class="header-title" style="margin-top: 30px; margin-bottom: 30px;">
 						<h1 style="font-size: 30px;">빠른예매</h1>
+						<h1><a href="/ticketingComplete.do">예매완료페이지(test)</a></h1>
+						<!--
 						<h1>
 							<a href="/ticketing2.do">예매페이지(test)</a>
 						</h1>
@@ -503,6 +505,7 @@
 						<h1>
 							<a href="/paymentMethod.do">결제수단(test)</a>
 						</h1>
+						-->
 						<!--
 				<button class="test1" id="jQ5">서버에서 리스트 데이터 받기</button>
 				<p class="ajaxResult" id="result5"

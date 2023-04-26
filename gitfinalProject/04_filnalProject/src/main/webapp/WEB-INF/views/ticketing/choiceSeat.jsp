@@ -886,14 +886,43 @@
 					var choiceDtDay = $(".toDate").text();// 상영시간
 					
 					var joinSeats = selectedSeats.join("/"); //좌석 구분자 "/" 추가
-					var numOfPeople = $(".numberOfPeople").text();//연령
+					//var numOfPeople = $(".numberOfPeople").text();//연령
 					var totalAmount = $(".amount").text();
 					var scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
+					//console.log("자르기 전 "+numOfPeople);//
+					
+					//////////////////////////////////////////////////////////////////////////////
+					//regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+					
+					// 변수 초기화
+					var wordNum = $(".numberOfPeople").text();
+					// 문자열과 숫자 분리
+					
+					var letters = wordNum.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
+					var numbers = wordNum.replace(/[^0-9]/g, "");
+					// 출력
+					console.log("문자열: " + letters);
+					console.log("숫자: " + numbers);
+					//var joinLetters = letters.join("/");
+					//console.log("joinLetters : "+joinLetters);
+					var cut1 = letters.substr(0,2);//성인
+					var cut2 = letters.substr(2,3);//청소년
+					var cut3 = letters.substr(5,7);//우대
+					console.log("cut1:" + cut1);
+					console.log("cut2:" + cut2);
+					console.log("cut3:" + cut3);
+					var cut1d = cut1.repeat(2);
+					console.log(cut1d);//성인성인
+					
+
+
+
+					////////////////////////////////////////////////////////////////////////////////////
 					console.log(scheduleNo);
 					console.log(theaterBranch);
 					console.log(choiceDtDay);
 					console.log("joinSeats : "+joinSeats);
-					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
+					//location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 				});
 			</script>
 
