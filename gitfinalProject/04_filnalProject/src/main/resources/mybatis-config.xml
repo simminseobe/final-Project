@@ -25,9 +25,12 @@
 		<typeAlias type="kr.or.gift.model.vo.ProductOption" alias="po"/>
 		<typeAlias type="kr.or.gift.model.vo.Product" alias="product"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductPhoto" alias="pp"/>
+		<typeAlias type="kr.or.gift.model.vo.ProductOrderSheet" alias="pos"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TicketingSchedule" alias="ticketingSchedule"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TicketingInfo" alias="ticketingInfo"/>
 		<typeAlias type="kr.or.gift.model.vo.GiftTicket" alias="giftTicket"/>
 		<typeAlias type="kr.or.ticketing.model.vo.Pay" alias="pay"/>
+		<typeAlias type="kr.or.giftticket.model.vo.GiftTicket" alias="giftTicket"/>
+
 	</typeAliases>
 </configuration>

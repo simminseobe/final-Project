@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
-import kr.or.gift.model.vo.GiftTicket;
+import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;

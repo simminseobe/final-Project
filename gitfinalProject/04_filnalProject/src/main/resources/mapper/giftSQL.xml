@@ -21,7 +21,9 @@
 	<insert id="insertOption" parameterType="po">
 		insert into product_option values(po_seq.nextval, #{productNo}, #{poName}, #{poPrice})
 	</insert>
-	
+	<insert id="insertOrderSheet" parameterType="pos">
+		insert into product_order_sheet values(pos_seq.nextval, null, #{productNo},#{poNo},#{orderCount})
+	</insert>
 	<delete id="deleteCategory" parameterType="pc">
 		delete from product_category where pc_no = #{pcNo}
 	</delete>

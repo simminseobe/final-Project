@@ -194,6 +194,20 @@ public ArrayList<Movie> selectMovieAll() {
 	}
 
 
+	public int updatePostComment(MoviePostComment mpc) {
+		int result = dao.updatePostComment(mpc);
+		return result;
+	}
+	public int moviePostCount(int movieNo) {
+		int moviePostCount = dao.selectMoviePostCount(movieNo);
+		return moviePostCount;
+	}
+	public int deletePostComment(int moviePostCommentNo) {
+		int deletePostComment=dao.deletePostComment(moviePostCommentNo);
+		return deletePostComment;
+	}
+
+
 
 	
 

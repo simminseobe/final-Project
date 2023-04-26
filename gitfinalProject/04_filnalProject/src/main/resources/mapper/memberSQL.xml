@@ -18,7 +18,8 @@
   		enroll_date as enrollDate,
   		member_gender as memberGender,
   		member_filename as memberFilename,
-  		member_filepath as memberFilepath
+  		member_filepath as memberFilepath,
+  		social as social
   	from member where member_id=#{memberId} and member_pw=#{memberPw}
   </select>
   
@@ -26,7 +27,7 @@
   <insert id="insertMember" parameterType="m">
   	insert into member values
   	(member_seq.nextval, #{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberBirthYear}, #{memberBirthMonth}, #{memberBirthDay},
-  	#{memberEmail}, 1, to_char(sysdate,'yyyy-mm-dd'), #{memberGender}, NULL, NULL)
+  	#{memberEmail}, 1, to_char(sysdate,'yyyy-mm-dd'), #{memberGender}, NULL, NULL, #{social})
   </insert>
   
   <!-- 비밀번호 찾기 -->
@@ -129,7 +130,8 @@
   		enroll_date as enrollDate,
   		member_gender as memberGender,
   		member_filename as memberFilename,
-  		member_filepath as memberFilepath
+  		member_filepath as memberFilepath,
+  		social as social
   	from member where member_id=#{memberId}
   </select>
   
@@ -149,7 +151,8 @@
   		enroll_date as enrollDate,
   		member_gender as memberGender,
   		member_filename as memberFilename,
-  		member_filepath as memberFilepath
+  		member_filepath as memberFilepath,
+  		social as social
   	from member where member_id=#{memberId}
   </select>
   
