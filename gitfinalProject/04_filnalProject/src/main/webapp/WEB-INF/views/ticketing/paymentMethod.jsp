@@ -415,7 +415,7 @@
 				</div>
 
 				<div class="content-wrap">
-					<div class="discount-wrap">
+					<div class="discount-wrap mega-point">
 						<div class="discount-type">
 							<p>메가박스 포인트/쿠폰</p>
 							<span class="material-symbols-outlined more">expand_more</span>
@@ -424,15 +424,10 @@
 							<div class="sub-discount">
 								<p>메가박스 멤버쉽 포인트</p>
 							</div>
-							<div class="sub-discount">
-								<p>메가박스 할인쿠폰</p>
-							</div>
-							<div class="sub-discount">
-								<p>메가박스 VIP영화쿠폰</p>
-							</div>
+							
 						</div>
 					</div>
-					<div class="discount-wrap">
+					<div class="discount-wrap voucher">
 						<div class="discount-type">
 							<p>관람권/모바일상품권</p>
 							<span class="material-symbols-outlined more">expand_more</span>
@@ -441,27 +436,16 @@
 							<div class="sub-discount">
 								<p>메가박스 관람권</p>
 							</div>
-							<div class="sub-discount">
-								<p>메가박스/페이즈 금액권</p>
-							</div>
+							
 							<div class="sub-discount">
 								<p>스토어교환권</p>
 							</div>
-							<div class="sub-discount">
-								<p>모바일 관람권</p>
-							</div>
-							<div class="sub-discount">
-								<p>도서문화상품권</p>
-							</div>
-							<div class="sub-discount">
-								<p>컬쳐랜드 모바일 문화상품권</p>
-							</div>
-							<div class="sub-discount">
-								<p>메가박스 아너스카드</p>
-							</div>
+							
+							
 						</div>
 					</div>
-					<div class="discount-wrap">
+					<!--
+					<div class="discount-wrap etc-point">
 						<div class="discount-type">
 							<p>제휴포인트</p>
 							<span class="material-symbols-outlined more">expand_more</span>
@@ -508,7 +492,7 @@
 							</div>
 						</div>
 					</div>
-
+					-->
 
 				</div>
 
@@ -560,6 +544,7 @@
 										<p class="discount-tit">할인적용</p>
 										<div class="discount-money">
 											<span class="discount-amount">0</span>
+											<input type="hidden" id="dc-amount">
 											<span class="discount-won">원</span>
 										</div>
 									</div>
@@ -571,7 +556,7 @@
 								<p class="pay-tit">최종결제금액</p>
 								<div class="money">
 									<span class="amount">0</span> 
-									<input type="hidden" id="final-amont">
+									<input type="hidden" id="finalAmount">
 									<span class="won">원</span>
 								</div>
 							</div>
@@ -599,10 +584,11 @@
 			 */
 			/*하나가 열리면 다른건 닫힘*/
 
-			$(".sub-discount>p").on("click",function(){
-				
-			});
 
+
+			
+			
+			
 
 			$(".more").on("click", function () {
 				var subDiv = $(this).parent().next(".sub-div");
@@ -616,19 +602,44 @@
 				; // 현재 클릭한 .discount-type의 다음 .sub-div 요소를 슬라이드 업/다운
 				event.stopPropagation(); //이벤트버블링 막기
 			});
+			var payPrice;	//최종결제금엑
 			const totalAmount = $(".price-amount").text();
 			const discountAmount = $('.discount-amount').text();
+			console.log(totalAmount+"?");
+			console.log(discountAmount+"?");
 			
 			const numericTotalAmount = totalAmount.replace(/[^0-9.-]+/g,"");
 			const numericDiscountAmount = discountAmount.replace(/[^0-9.-]+/g,"");
-			const result = numericTotalAmount - numericDiscountAmount;
-			$('span.amount').text(result.toLocaleString());
-			$("#final-amont").val(result);
+			const finalAmount = numericTotalAmount - numericDiscountAmount;
+			$('span.amount').text(finalAmount.toLocaleString());
+			console.log("화면에 출력되는 최종결제금액 : "+totalAmount);
+			$("#finalAmount").val(finalAmount);
+			console.log("전달될 최종결제금액 : "+finalAmount);
 
 			$(".pagePrevious").on("click",function(){
 				location.href="/ticketing.do";
 			});
-			
+
+			var voucherDiscount;
+			$(".voucher>div").on("click",function(){
+				$(".discount-amount") = finalAmount;
+				console.log(finalAmount);
+			});
+			/*
+			$(".paying").on("click",function(){
+				payPrice = $("#finalAmount").val();	//input안의 값은 val() / 태그사이 값은 text()
+				console.log(payPrice +" <-결제로 보낼 금액 재확인");
+				$.ajax({
+					url : "/paymentPage.do",
+					type : "post",
+					data : {payPrice:payPrice},
+					dataType : "json",
+					success : function(data){
+
+					}
+				});
+			});
+			*/
 		</script>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</body>
