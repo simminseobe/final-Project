@@ -36,7 +36,11 @@ public ArrayList<Movie> selectMovieAll() {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
 			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
 		}
+		System.out.println(list);
+		
 		return list;
 		
 	}

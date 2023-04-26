@@ -475,11 +475,6 @@ z-index: 5;
 
 
 
-
-
-
-
-
         
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
@@ -622,9 +617,6 @@ z-index: 5;
 								 <a href="login.do" class="open" style="color: #666666;">로그인</a>
 							</c:if>
                         </div>
-                      
-                 
-                        
                     </div>
                     
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
