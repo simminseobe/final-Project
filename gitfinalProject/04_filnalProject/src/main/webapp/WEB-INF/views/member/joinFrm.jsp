@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/resources/css/member/joinFrm.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="join-wrapper">
 		<div class="join-wrap">
 			<div class="join-title">
@@ -565,6 +566,7 @@
 		</div>
 	</div>
 
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="/resources/js/member/joinFrm.js"></script>
 </body>
 </html>
