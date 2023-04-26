@@ -68,4 +68,8 @@
 	where
 	    member_no = #{_parameter}
 </select>
+<insert id="insertPay" parameterType="pay">
+	insert into pay values
+		(pay_seq.nextval, #{payPrice},to_char(sysdate,'yyyy-mm-dd/hh24:mi'),1,#{memberNo})
+</insert>
 </mapper>

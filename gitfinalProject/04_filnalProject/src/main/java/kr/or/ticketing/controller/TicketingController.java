@@ -120,10 +120,16 @@ public class TicketingController {
 	
 	 @ResponseBody
 	 @RequestMapping(value = "/paymentPage.do", produces = "application/json;charset=utf-8") 
-	 public String paying(Pay pay) { 
-	 int result = service.paying(pay);
-	 
-	 return new Gson().toJson(result); }
+	 public String insertPay(Pay pay) { 
+	 int result = service.insertPay(pay);
+	 	
+	 	if(result>0) {
+	 		
+			return "success";
+		}else {
+			return "fail";
+		} 
+	 }
 	 
 
 	//////////////////////////////////////////////////////// 임시

@@ -689,45 +689,7 @@
 								}
 								
 								
-								/*
-								//중복방지 함수
-									selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
-
-								//click class가 존재할때(제거해주는 toggle)
-								if ($(this).hasClass("clicked")) {
-									$(this).removeClass("clicked")
-									clicked = document.querySelectorAll(".clicked");
-									clicked.forEach((data) => {
-										selectedSeats.push(data.value);
-									})
-									$(".mySeat").empty();
-									selectedSeats.forEach(function(s, i){
-										$(".mySeat").eq(i).text(s)
-									})
-									//click class가 존재하지 않을때 (추가해주는 toggle)
-								} else {
-									$(this).addClass("clicked");
-									clicked = document.querySelectorAll(".clicked");
-									clicked.forEach((data) => {
-										selectedSeats.push(data.value);
-										var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
-										var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
-										var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
-
-										// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
-										var total = adultCount + teenCount + specCount;
-										if(clicked.length == total || clicked.length == 8){
-											$('.seat:not(.clicked)').prop('disabled', true );
-										}
-									})
-									$(".mySeat").empty()
-									selectedSeats.forEach(function(s, i){
-										const div = $("<div>").addClass("mySeat")
-										div.text(s)
-										$(".selectedSeats-area").append(div)
-									})
-								}
-								*/
+								
 							})
 						}
 					}
@@ -858,9 +820,9 @@
 				});
 				//span.amount에 (연령대*금액)합계금액 출력 (천 단위에서 ,찍기위해 .toLocaleString()추가)
 				function calculateAmount() {
-					const adultPrice = 18000;
-					const teenPrice = 12000;
-					const specPrice = 1000;//7000
+					const adultPrice = 100;//18000
+					const teenPrice = 100;//12000
+					const specPrice = 7000;//7000
 
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());

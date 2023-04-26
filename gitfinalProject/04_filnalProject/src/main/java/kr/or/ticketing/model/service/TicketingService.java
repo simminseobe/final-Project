@@ -72,9 +72,14 @@ public class TicketingService {
 	}
 
 	
-	public int paying(Pay pay) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+
+	public int insertPay(Pay pay) {
+		int result = dao.insertPay(pay);
+		if(result>0) {
+			
+		}
+		return result;
 	}
 
 	
