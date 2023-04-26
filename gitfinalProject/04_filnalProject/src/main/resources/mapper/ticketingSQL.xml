@@ -9,13 +9,13 @@
 </select>
 <select id="selectOneTheaterBrch" parameterType="_int" resultType="theater">
   	select 
-			 	theater_no as theaterNo,
-				theater_local as theaterLocal,
-				theater_branch as theaterBranch,
-				theater_addr as theaterAddr,	
-				theater_facility as theaterFacility,
-				theater_content as theaterContent,
-				enroll_member as EnrollMember		
+		 	theater_no as theaterNo,
+			theater_local as theaterLocal,
+			theater_branch as theaterBranch,
+			theater_addr as theaterAddr,	
+			theater_facility as theaterFacility,
+			theater_content as theaterContent,
+			enroll_member as EnrollMember		
 	  from theater_tbl
 	  where theater_no = #{_parameter}
 </select>
@@ -54,6 +54,17 @@
 		and to_char(schedule_start, 'DD/MM/YYYY') = #{choiceDataDay}
 		and to_char(schedule_end, 'DD/MM/YYYY') = #{choiceDataDay} 
 		and theater_branch = #{theaterBranch}
+</select> 
+<select id="selectGiftTicket" parameterType="_int" resultType="giftTicket">
+	select
+	    gift_ticket_no as giftTicketNo,
+	    gift_ticket_serial as giftTicketSerial,
+	    gift_ticket_name as giftTicketName,
+	    gift_ticket_date as giftTicketDate,
+	    gift_ticket_status as giftTicketStatus
+	from
+	    gift_ticket
+	where
+	    member_no = #{_parameter}
 </select>
-
 </mapper>
