@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.gift.model.vo.ProductOption;
+import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Repository
@@ -106,6 +107,11 @@ public class GiftDao {
 	public int deleteOption(int poNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("gift.deleteOption",poNo);
+	}
+
+	public int insertOrderSheet(ProductOrderSheet pos) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertOrderSheet",pos);
 	}
 
 }

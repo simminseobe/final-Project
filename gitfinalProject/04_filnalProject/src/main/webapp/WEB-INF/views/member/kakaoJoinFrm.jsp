@@ -16,7 +16,9 @@
 	<div class="join-wrapper">
 		<div class="join-wrap">
 			<div class="join-title">
-				<h2>KaKaO 회원가입</h2>
+				<h2>
+					<img src="/image/kakao.jpg" width="245px" height="100px">
+				</h2>
 			</div>
 			<div class="essential">
 				<span>
@@ -25,6 +27,7 @@
         </span>
 			</div>
 			<form action="/kakaoJoin.do" method="post">
+			<input type="hidden" name="social" value=1>
 				<div class="join-content">
 					<table>
 						<tr>
@@ -40,12 +43,12 @@
                     <label for="name">이름</label> <sup>*</sup>
                 </th>
                 <td>
-                    <input type="text" id="name" class="input-text" name="memberName" value="${nickname}" readonly>
+                    <input type="text" id="name" class="input-text" name="memberName" value="${nickname}" autocomplete=off readonly>
 				</tr>
 				<tr>
 					<th>
                         <label for="phone">전화번호</label> <sup>*</sup>
-                    </td>
+                    </th>
 					<td>
                     <input type="text" id="phone" class="input-text" name="memberPhone" minlength="11" maxlength="11" required placeholder="'-'없이 숫자만 입력" autocomplete=off>
                     <div class="comment" id="phoneCheck"></div></td>
@@ -127,12 +130,13 @@
                         <option value="29">29일</option>
                         <option value="30">30일</option>
                         <option value="31">31일</option>
+                    </select>
                     </td>
                 </tr>
                 <tr>
                 <th>
                     <label for="memberGender">성별</label> <sup>*</sup>
-                </td>
+                </th>
                 <td>
                     <input type="radio" id="memberGender" name="memberGender" value="M">
                     <label for="memberGender">남자</label>
@@ -146,10 +150,10 @@
                 </th>
                 <td>
                     <input type="text" class="email-input-text" name="memberEmail" id="inputEmail" id="memberEmail" required placeholder="예: movieIsland@naver.com" autocomplete=off>
-                    <input type="text" class="input-text" name="checkEmail" id="checkEmail" required placeholder="인증번호" autocomplete=off>						
+<!--                     <input type="text" class="input-text" name="checkEmail" id="checkEmail" required placeholder="인증번호" autocomplete=off>						
                     <button type="button" class="check_email" id="emailCheck">이메일인증</button>
                     <button type="button" class="emailCheck" id="check" style="display:none;">확인</button>
-					<div class="timeEmail" id="email-time"></div>
+					<div class="timeEmail" id="email-time"></div> -->
 				</td>
 				</tr>
 			</table>
@@ -531,27 +535,7 @@
                 <h3>알림</h3>
                 <button class="close-btn" onclick="closeClick();"></button>
                 <div class="layer-content">
-                    <p class="text-common">"회원님의 이메일로 인증코드를 발송했습니다."</p>
-                    <div class="btn-wrapper">
-                        <button type="button" class="okBtn" onclick="okClose();">
-                            	확인
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-wrapper" id="modal-two" style="display: none">
-        <div class="ok-modal">
-            <div class="modal-top">
-            </div>
-            <div class="modal-content">
-                <h3>알림</h3>
-                <button class="close-btn" onclick="closeClick();"></button>
-                <div class="layer-content">
-                    <p class="text-common-two">"이메일 발송 오류"</p>
-                    <span>"이메일을 다시 입력해주세요."</span>
+                    <p class="text-common">"필수 입력사항을 작성해 주시기 바랍니다."</p>
                     <div class="btn-wrapper">
                         <button type="button" class="okBtn" onclick="okClose();">
                             	확인

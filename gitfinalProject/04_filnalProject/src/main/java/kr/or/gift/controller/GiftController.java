@@ -18,6 +18,7 @@ import kr.or.gift.model.service.GiftService;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.gift.model.vo.ProductOption;
+import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Controller
@@ -187,5 +188,24 @@ public class GiftController {
 		int result = sv.deleteOption(poNo);
 		return result + "";
 	}
-	
+	@RequestMapping(value = "/takeOrderSheet.do")
+	public String takeOrderSheet(Model model,String[] poNo, String[] orderCount, int productNo) {
+		ArrayList<ProductOrderSheet> posList = new ArrayList<ProductOrderSheet>();
+//		1. 주문 요청한 회원의 장바구니에 있는 주문 번호를 다 가져와서
+//		2. 해당 주문번호의 상품 번호가 주문 요청 상품번호와 일치하면 
+//		3. 상품 주문서를 새로 작성하지 말고 기존 주문서를 업데이트하고
+//		4. 주문결제시 -> 장바구니 삭제
+//		5. 주문 취소시 장바구니 업데이트
+		for(int i=0; i<poNo.length;i++) {
+			ProductOrderSheet pos = new ProductOrderSheet();
+			pos.setProductNo(productNo);
+			pos.setPoNo(Integer.parseInt(poNo[i]));
+			pos.setOrderCount(Integer.parseInt(orderCount[i]));
+			posList.add(pos);
+		}
+		int result = sv.insertOrderSheet(posList);
+		System.out.println("result : " + result);
+		model.addAttribute("posList", posList);
+		return "";
+	}
 } 
