@@ -1,0 +1,169 @@
+.post-rank-box{
+   
+    width: 100%;
+    height: 331px;
+    padding: 29px 0 0 0;
+    background:url(https://img.megabox.co.kr/static/pc/images/movie/bg-movie-post-top.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.post-rank-box>.post-inner-box{
+    width: 1100px;
+    margin: 0 auto;
+}
+.inner-box-top-head h2{
+    font-size: 32px;
+}
+.post-box-btn button{
+    width: 123px;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    background: #503396;
+    border: 0;
+    border-radius: 5px;
+}
+.inner-box-top{
+    display: flex;
+    justify-content: space-between;
+}
+.post-rank-box .post-rank{
+    float: left;
+    height: 194px;
+    margin: 0 0 0 -58px;
+}
+.post-rank-box .post-rank li {
+    position: relative;
+    float: left;
+    margin-left: 58px;
+}
+.post-rank-box .post-rank li a {
+    display: block;
+    width: 135px;
+    height: 194px;
+}
+a:link {
+    color: #444;
+    text-decoration: none;
+}
+
+a {
+    background-color: transparent;
+}
+
+.post-rank-box .post-rank li a .rank {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    font-size: 1.6em;
+    line-height: 1em;
+    color: #fff;
+    font-family: Roboto;
+    font-weight: 300;
+    font-style: italic;
+}
+.post-rank-box p {
+    margin: 0;
+    padding: 0;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+}
+
+.post-rank-box .post-rank li a .post-count {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 135px;
+    height: 194px;
+    padding-top: 73px;
+    background-color: rgba(0,0,0,.6);
+    text-align: center;
+}
+a:link {
+    color: #444;
+    text-decoration: none;
+}
+.post-rank-box .post-rank li a .post-count .tit {
+    font-size: .8667em;
+    line-height: 1.1;
+    color: #fff;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.post-rank-box .post-rank li a .post-count .count {
+    font-size: 2.1333em;
+    font-family: Roboto;
+    color: #fff;
+    font-weight: 300;
+}
+.post-rank-box .post-rank li a .img img {
+    width: 135px!important;
+    height: 194px!important;
+}
+img {
+    border: 0;
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+.post-lank-box .mypost-box {
+    position: relative;
+    right: 0;
+    float: left;
+    width: 135px;
+    height: 194px;
+    margin: 0 0 0 58px;
+    
+}
+.post-rank-box .mypost-box .before {
+    width: 100%;
+    height: 100%;
+    background: url(https://img.megabox.co.kr/static/pc/images/movie/bg-movie-post-no-login.png) no-repeat 0 0;
+}
+.post-rank-box .mypost-box .post-count {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 135px;
+    height: 194px;
+    padding-top: 73px;
+    background-color: rgba(0,0,0,.6);
+    text-align: center;
+}
+
+.post-rank-box .mypost-box .post-count .tit {
+    font-size: .8667em;
+    line-height: 1.1;
+    color: #fff;
+}
+.post-rank-box p {
+    margin: 0;
+    padding: 0;
+}
+.post-rank-box .mypost-box .post-count a.txt-login {
+    display: inline-block;
+    padding: 10px 0 0 0;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    text-decoration: none;
+}

@@ -163,8 +163,24 @@ public class MovieDao {
 	}
 
 	public ArrayList<MoviePostComment> selectPostComment(int moviePostNo) {
+		System.out.println("dao postNo : "+moviePostNo);
 		List list = sqlSession.selectList("movie.selectPostComment",moviePostNo);
 		return (ArrayList<MoviePostComment>) list;
+	}
+
+	public int updatePostComment(MoviePostComment mpc) {
+		int result = sqlSession.update("movie.updatePostComment",mpc);
+		return result;
+	}
+
+	public int selectMoviePostCount(int movieNo) {
+		int moviePostCount = sqlSession.selectOne("movie.moviePostCount", movieNo);
+		return moviePostCount;
+	}
+
+	public int deletePostComment(int moviePostCommentNo) {
+		int deletePostComment=sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
+		return deletePostComment;
 	}
 
 	
