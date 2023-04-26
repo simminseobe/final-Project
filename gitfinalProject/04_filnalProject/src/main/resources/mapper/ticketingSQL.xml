@@ -43,6 +43,7 @@
 
 <select id="choiceBranchSchedule" parameterType="map" resultType="ticketingSchedule">
 	select 
+		schedule_no as scheduleNo,
 		movie_title as movieTitle, 
 		to_char(schedule_start,'hh24:mi') as scheduleStart, 
         to_char(schedule_end,'hh24:mi') as scheduleEnd,
@@ -67,4 +68,8 @@
 	where
 	    member_no = #{_parameter}
 </select>
+<insert id="insertPay" parameterType="pay">
+	insert into pay values
+		(pay_seq.nextval, #{payPrice},to_char(sysdate,'yyyy-mm-dd/hh24:mi'),1,#{memberNo})
+</insert>
 </mapper>

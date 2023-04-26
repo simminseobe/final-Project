@@ -14,6 +14,10 @@
     position: relative;
 }
 
+.table-wrap{
+	margin: 0px;
+}
+
 .mypage-wrap{
 	margin: 0 auto;
     padding-top: 80px;
@@ -47,7 +51,7 @@
 .input-text{
     width: 450px;
     height: 45px;
-    font-size: 16px;
+    font-size: 1.2em;
     margin-left: 7px;
     padding-left: 7px;
     border: none;
@@ -66,11 +70,13 @@
     height: 30px;
     width: 45px;
     border: none;
+    font-size: 1.2em;
 }
 
 .input-birthDetail{
 	border: none;
     width: 15px;
+    font-size: 1.2em;
 }
 
 select{
@@ -224,11 +230,15 @@ sup{
     border-radius: 10px;
 }
 
+
 #changePw:hover{
-    color: #fff;
-    background-color: #351c6f;
+	background-color: #351c6f;
     cursor: pointer;
     border-radius: 10px;
+}
+
+#changePw:hover>a{
+    color: #fff;
 }
 
 #changePw>a{
@@ -244,7 +254,7 @@ sup{
 
 #cancelBtn{
     position: absolute;
-    top: 10px;
+    top: 0px;
     left: 300px;
     width: 75px;
     height: 45px;
@@ -264,7 +274,7 @@ sup{
 
 #enrollBtn{
     position: absolute;
-    top: 10px;
+    top: 0px;
     left: 400px;
     width: 75px;
     height: 45px;

@@ -36,10 +36,30 @@ public ArrayList<Movie> selectMovieAll() {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
 			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
 		}
+		System.out.println(list);
+		
 		return list;
 		
 	}
+
+
+	public ArrayList<Movie> expectedMovie() {
+		ArrayList<Movie> expectedList =dao.expectedMovie();
+		for(Movie movie : expectedList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+
+		}
+		System.out.println(expectedList);
+		
+		return expectedList;
+	}
+	
+
 	public Movie selectOneMovie(int movieNo) {
 		Movie mov = dao.selectOneMovie(movieNo);
 		 if(mov !=null) {
@@ -191,6 +211,20 @@ public ArrayList<Movie> selectMovieAll() {
 	public int insertPostComment(MoviePostComment mpc) {
 		int result = dao.insertPostComment(mpc);
 		return result;
+	}
+
+
+	public int updatePostComment(MoviePostComment mpc) {
+		int result = dao.updatePostComment(mpc);
+		return result;
+	}
+	public int moviePostCount(int movieNo) {
+		int moviePostCount = dao.selectMoviePostCount(movieNo);
+		return moviePostCount;
+	}
+	public int deletePostComment(int moviePostCommentNo) {
+		int deletePostComment=dao.deletePostComment(moviePostCommentNo);
+		return deletePostComment;
 	}
 
 

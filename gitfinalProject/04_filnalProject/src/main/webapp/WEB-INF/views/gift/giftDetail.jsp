@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="right-info">
-        <form action="#">
+        <form action="/takeOrderSheet.do">
+        <input type="hidden" name="productNo" value="${p.productNo}">
             <div class="productInfo">
                 <h2>product Info <span> 상품정보</span></h2>
                 <table>
@@ -88,8 +89,8 @@
                     </tr>
                     <tr id="option-select-tr">
                         <td colspan="2">
-                            <select name="productOption" id="productOption">
-                                <option value="##" selected>- 옵션을 선택해 주세요 - [필수] </option>
+                            <select name="#" id="productOption">
+                                <option value="#" selected>- 옵션을 선택해 주세요 - [필수] </option>
                                 <c:forEach items="${p.productOptions}" var="option">
                                     <c:if test="${p.productOptions == '[]'}">
                                         <option value="null" >${p.productName}</option>
@@ -104,7 +105,7 @@
                     </tr>
                     <tr>
                         <th colspan="2">
-                            <button type="button">바로구매</button>
+                            <button type="submit">바로구매</button>
                             <button type="button"><span class="material-symbols-outlined"> favorite </span></button>
                             <button type="button">장바구니 담기</button>
                         </th>
@@ -122,9 +123,26 @@
     const totalPriceView = document.querySelector('#totalPriceView')
 
     optionSelect.addEventListener('change', e => {
-        // tr
+        const isTr = document.querySelectorAll(".selected-options")
+        let isDuplicate = false 
+        if(isTr.length != 0) {
+            isTr.forEach(element => {
+                //console.log("선택한 항목 값 : "+e.target.value + "기존에 올라와 있는 tr 값 : " + element.dataset.id)
+                if(element.dataset.id == e.target.value) {
+                    alert("이미 선택된 항목입니다")
+                    isDuplicate = true
+                    return
+                }
+            });
+        }
+        if(isDuplicate) {
+            optionSelect.selectedIndex = 0
+            return
+        }
+        // 
         const tr = document.createElement("tr");
-        tr.id = "selected-options";
+        tr.className = "selected-options";
+        tr.dataset.id = e.target.value
         // th
         const th = document.createElement("th");
         th.colSpan = 2;
@@ -136,6 +154,7 @@
         const optDiv = document.createElement("div");
         optDiv.className = "opt";
         const input = document.createElement("input");
+        input.name = "poNo"
         input.type = "hidden";
         input.value = e.target.value;
         optDiv.appendChild(input);
@@ -160,6 +179,7 @@
         increaseBtn.type = "button";
         increaseBtn.id = "increase";
         increaseBtn.onclick = () => {
+            totalPriceView.innerText = Number(totalPriceView.innerText) + selectPrice
             quantityInput.value++
         }
         const decreaseBtn = document.createElement("button");
@@ -167,6 +187,7 @@
         decreaseBtn.id = "decrease";
         decreaseBtn.onclick = () => {
             if(quantityInput.value > 1) {
+                totalPriceView.innerText = Number(totalPriceView.innerText) - selectPrice
                 quantityInput.value--
             }
         }
@@ -181,12 +202,15 @@
         const priceDiv = document.createElement("div");
         priceDiv.className = "price";
         const priceSpan = document.createElement("span");
-        priceSpan.appendChild(document.createTextNode(e.target.options[e.target.selectedIndex].dataset.price + '원'));
+        const selectPrice = Number(e.target.options[e.target.selectedIndex].dataset.price)
+        priceSpan.appendChild(document.createTextNode(selectPrice + '원'));
         priceDiv.appendChild(priceSpan);
         // 삭제 버튼
         const deleteBtn = document.createElement("button");
         deleteBtn.type = "button";
         deleteBtn.onclick = () => {
+            //버튼 삭제시 총금액 줄여버리기
+            totalPriceView.innerText = Number(totalPriceView.innerText) - (selectPrice * quantityInput.value)
             tr.remove()
         }
         deleteBtn.appendChild(document.createTextNode("x"));
@@ -200,7 +224,8 @@
         tr.appendChild(th);
         
         $('#totalPriceViewTr').before($(tr))
-
+        //토탈금액 증가
+        totalPriceView.innerText = Number(totalPriceView.innerText) + Number(selectPrice)
         //항상 기본 0번 option을 select해놓은 상태로 만듬
         optionSelect.selectedIndex = 0
 

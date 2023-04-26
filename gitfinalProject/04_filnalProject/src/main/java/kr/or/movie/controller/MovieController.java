@@ -35,12 +35,17 @@ public class MovieController {
 	
 	@RequestMapping(value="/allMovieList.do")
 	public String allMovieList(Model model) {
-		
+		//영화전체 조회와 관람평이 들어가 있음
 		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
+		
+		//상영예정작 조회와 관람평이 들어가 있음
+		ArrayList<Movie> expectedList = service.expectedMovie();
+		model.addAttribute("expectedList",expectedList);
+		
 		
 		
 		return "movie/movieAllList";
@@ -56,12 +61,15 @@ public class MovieController {
 
 		//3번없음
 		
+		
+		
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
 		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
 	
-		
-		
+		//무비포스트 총 개수
+		int moviePostCount=service.moviePostCount(movieNo);
+		model.addAttribute("moviePostCount",moviePostCount);
 		
 		//모든 관람평(review)조회하기()
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
@@ -90,10 +98,6 @@ public class MovieController {
 		//영화별 관람평 갯수를 위한 조회
 		int reviewListCount= service.selectReviewListCount(movieNo);
 		model.addAttribute("reviewListCount", reviewListCount);
-		
-		
-		
-		
 		
 		
 		return "movie/movieDetail";
@@ -154,10 +158,9 @@ public class MovieController {
 	//무비포스트 상세보기
 	@ResponseBody
 	@RequestMapping(value="/moviePostDetail.do", produces = "application/json;charset=utf-8")
-	public String moviePostDetail(int movieNo,int moviePostNo,Model model) {
+	public String moviePostDetail(int moviePostNo,Model model) {
 		MoviePost moviePostOne= service.selectDetailPost(moviePostNo);
 		
-		System.out.println(moviePostOne);
 		
 		return new Gson().toJson(moviePostOne);
 		
@@ -169,9 +172,47 @@ public class MovieController {
 		System.out.println(mpc);
 		int result =service.insertPostComment(mpc);
 
-		return new Gson().toJson(result);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updatePostComment.do")
+	public String updatePostComment(MoviePostComment mpc) {
+		int result=service.updatePostComment(mpc);
+		System.out.println(mpc);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="deletePostComment.do")
+	public String deletePostComment(int moviePostCommentNo) {
+		int result=service.deletePostComment(moviePostCommentNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 		
 		
 	}
+	
+	
+	/* @RequestMapping(value="/deletePostComment.do?") */
+	
+	@RequestMapping (value="/postAllList.do")
+	public String postAllList() {
+		return "movie/moviePostAll";
+		
+	}
+	
 	
 }

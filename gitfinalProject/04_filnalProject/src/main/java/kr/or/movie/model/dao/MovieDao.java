@@ -87,6 +87,7 @@ public class MovieDao {
 		return movie;
 	}
 
+	
 	public WatchPoint watchPointSum(int movieNo) {
 		WatchPoint wpSum = sqlSession.selectOne("movie.selectWatchPointSum", movieNo);
 		return wpSum;
@@ -163,9 +164,31 @@ public class MovieDao {
 	}
 
 	public ArrayList<MoviePostComment> selectPostComment(int moviePostNo) {
+		System.out.println("dao postNo : "+moviePostNo);
 		List list = sqlSession.selectList("movie.selectPostComment",moviePostNo);
 		return (ArrayList<MoviePostComment>) list;
 	}
+
+	public int updatePostComment(MoviePostComment mpc) {
+		int result = sqlSession.update("movie.updatePostComment",mpc);
+		return result;
+	}
+
+	public int selectMoviePostCount(int movieNo) {
+		int moviePostCount = sqlSession.selectOne("movie.moviePostCount", movieNo);
+		return moviePostCount;
+	}
+
+	public int deletePostComment(int moviePostCommentNo) {
+		int deletePostComment=sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
+		return deletePostComment;
+	}
+	//상영예정작 리스트 조회를 위함
+	public ArrayList<Movie> expectedMovie() {
+		List list = sqlSession.selectList("movie.expectedMovie");
+		return (ArrayList<Movie>) list;
+	}
+
 
 	
 

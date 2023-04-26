@@ -1,4 +1,4 @@
-package kr.or.gift.model.vo;
+package kr.or.giftticket.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
