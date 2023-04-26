@@ -42,6 +42,9 @@ public class MovieController {
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
+	
+		
+		
 		
 		return "movie/movieAllList";
 	}
@@ -168,9 +171,9 @@ public class MovieController {
 		int result =service.insertPostComment(mpc);
 
 		if(result>0) {
-			return "성공";
+			return "success";
 		}else {
-			return "실패";
+			return "fail";
 		}
 		
 	}
@@ -181,9 +184,9 @@ public class MovieController {
 		int result=service.updatePostComment(mpc);
 		System.out.println(mpc);
 		if(result>0) {
-			return "성공";
+			return "success";
 		}else {
-			return "실패";
+			return "fail";
 		}
 		
 	}
@@ -192,9 +195,9 @@ public class MovieController {
 	public String deletePostComment(int moviePostCommentNo) {
 		int result=service.deletePostComment(moviePostCommentNo);
 		if(result>0) {
-			return "성공";
+			return "success";
 		}else {
-			return "실패";
+			return "fail";
 		}
 		
 		

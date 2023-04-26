@@ -87,6 +87,7 @@ public class MovieDao {
 		return movie;
 	}
 
+	
 	public WatchPoint watchPointSum(int movieNo) {
 		WatchPoint wpSum = sqlSession.selectOne("movie.selectWatchPointSum", movieNo);
 		return wpSum;
@@ -182,6 +183,7 @@ public class MovieDao {
 		int deletePostComment=sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
 		return deletePostComment;
 	}
+
 
 	
 

@@ -28,4 +28,5 @@ public class Movie {
 	private ArrayList<MovieFile> moviePost;
 	private ArrayList<String> movieLink;
 	private ArrayList<MovieVideo> movieVideos;
+	private Review movieScoreAvg;
 }

@@ -57,13 +57,13 @@
                                                     
                                                     <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
     
-                                                        <p>관람평 ${watchPointAvg.movieScoreAvg}</p>
+                                                        <p>관람평<span style="color:#ffcb05">${po.movieScoreAvg.movieScoreAvg}</span></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                         </a>
-                                        <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
+                                        <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
                                             <p class="movie-title" >${po.movieTitle }</p>
                                             <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                                         </div>
@@ -77,7 +77,7 @@
                                             <button type="button"
                                                 style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
                                                     src="img/pink_heart.png"
-                                                    style="width:18px; height:18px;">1234</button>
+                                                    style="width:18px; height:18px;"></button>
                                         </div>
                                         <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                         <button type=" button"
@@ -93,6 +93,7 @@
                             </div>
                             </div>
                              <!--============================================================-->
+                             <!-- 상영예정작 들어갈자리 -->
                              <div class="tabcontent movie-all-list-flex"
                              style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
                              <c:forEach items="${list}" var="po">
@@ -117,7 +118,7 @@
                                          </div>
                                          
                                      </a>
-                                     <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
+                                     <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
                                          <p class="movie-title" >${po.movieTitle }</p>
                                          <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                                      </div>
@@ -131,7 +132,7 @@
                                          <button type="button"
                                              style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
                                                  src="img/pink_heart.png"
-                                                 style="width:18px; height:18px;">1234</button>
+                                                 style="width:18px; height:18px;"></button>
                                      </div>
                                      <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                      <button type=" button"
@@ -171,7 +172,7 @@
                                      </div>
                                      
                                  </a>
-                                 <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
+                                 <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
                                      <p class="movie-title" >${po.movieTitle }</p>
                                      <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                                  </div>
@@ -185,7 +186,7 @@
                                      <button type="button"
                                          style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
                                              src="img/pink_heart.png"
-                                             style="width:18px; height:18px;">1234</button>
+                                             style="width:18px; height:18px;"></button>
                                  </div>
                                  <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                  <button type=" button"
@@ -225,8 +226,8 @@
                                  </div>
                                  
                              </a>
-                             <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
-                                 <p class="movie-title" >${po.movieTitle }</p>
+                             <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
+                                 <p class="movie-title">${po.movieTitle }</p>
                                  <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                              </div>
                              <div class="reserve-rate" style="font-size: 18px;">
@@ -239,7 +240,7 @@
                                  <button type="button"
                                      style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
                                          src="img/pink_heart.png"
-                                         style="width:18px; height:18px;">1234</button>
+                                         style="width:18px; height:18px;"></button>
                              </div>
                              <div class="movieAllList-reserve" style="margin-top: 10px;"">
                              <button type=" button"
@@ -279,7 +280,7 @@
                              </div>
                              
                          </a>
-                         <div class="movie-title-wrap" style="margin-top: 20px; font-size: 24px;">
+                         <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
                              <p class="movie-title" >${po.movieTitle }</p>
                              <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                          </div>
@@ -293,7 +294,7 @@
                              <button type="button"
                                  style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
                                      src="img/pink_heart.png"
-                                     style="width:18px; height:18px;">1234</button>
+                                     style="width:18px; height:18px;"></button>
                          </div>
                          <div class="movieAllList-reserve" style="margin-top: 10px;"">
                          <button type=" button"
