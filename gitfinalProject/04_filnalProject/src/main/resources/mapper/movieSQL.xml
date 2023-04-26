@@ -44,7 +44,7 @@
 		 from movie_tbl
 	</select>
 	<!-- 상영예정작 조회를 위함 -->
-		<select id="selectMovieAll" resultType="movie">
+	<select id="expectedMovie" resultType="movie">
 		select 
 		 	movie_no as movieNo,
 			movie_title as movieTitle,
@@ -62,7 +62,63 @@
 			movie_type as movieType
 		 from movie_tbl where movie_date > to_char(sysdate,'yyyy-mm-dd')
 	</select>
-
+		<!-- 특별상영작 조회를 위함 -->
+	<select id="specialMovieList" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where special_movie is not null
+	</select>
+	<!-- 필름소사이어티 조회를 위함 -->
+		<select id="filmSocietyList" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where film_society is not null
+	</select>
+	<!-- 클래식소사이어티 조회를 위함 -->
+			<select id="classicSocietyList" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where classic_society is not null
+	</select>
 	
 	<!-- movie_file 메인만 출력 -->
 	<select id="selectMovieFile" resultType="movieFile" parameterType="_int">

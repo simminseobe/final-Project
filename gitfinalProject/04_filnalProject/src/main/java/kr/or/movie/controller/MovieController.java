@@ -35,18 +35,28 @@ public class MovieController {
 	
 	@RequestMapping(value="/allMovieList.do")
 	public String allMovieList(Model model) {
-		//영화전체 조회와 관람평이 들어가 있음
+		//영화전체 조회와 관람평점이 들어가 있음
 		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
-		//상영예정작 조회와 관람평이 들어가 있음
+		//상영예정작 조회와 관람평점이 들어가 있음
 		ArrayList<Movie> expectedList = service.expectedMovie();
 		model.addAttribute("expectedList",expectedList);
 		
+		//특별상영 조회와 관람평점
+		ArrayList<Movie> specialList = service.specialMovie();
+		model.addAttribute("specialList",specialList);
 		
+		//필름소사이어티 조회와 관람평점
+		ArrayList<Movie> filmSocietyList = service.filmSocietyList();
+		model.addAttribute("filmSocietyList",filmSocietyList);
+		
+		//클래식소사이어티 조회와 관람평점
+		ArrayList<Movie> classicSocietyList = service.classicSocietyList();
+		model.addAttribute("classicSocietyList",classicSocietyList);
 		
 		return "movie/movieAllList";
 	}

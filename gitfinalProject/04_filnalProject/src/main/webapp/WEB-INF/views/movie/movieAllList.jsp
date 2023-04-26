@@ -108,25 +108,22 @@
                                                  <p>${expected.movieContent}</p>
                                              </div>
                                              <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
-                                                 
-                                                 
-                                                 <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px; display:none;" >
- 
-                                                     <p>관람평 ${watchPointAvg.movieScoreAvg}</p>
+                                                 <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;" >
+                                                     <p>관람평<span style="color:#ffcb05"> ${expected.movieScoreAvg.movieScoreAvg}</span></p>
                                                  </div>
                                              </div>
                                          </div>
                                          
                                      </a>
                                      <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
-                                         <p class="movie-title" >${po.movieTitle }</p>
-                                         <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
+                                         <p class="movie-title" >${expected.movieTitle }</p>
+                                         <input class="inputMovieTitle" style="display:none;" value="${expected.movieTitle }">
                                      </div>
                                      <div class="reserve-rate" style="font-size: 18px;">
                                          <p>예매율%</p>
                                      </div>
                                      <div class="start-date" style="font-size: 18px;">
-                                         <p>${po.movieDate}</p>
+                                         <p>${expected.movieDate}</p>
                                      </div>
                                      <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                          <button type="button"
@@ -147,40 +144,36 @@
                              <button type="button" id="load">더보기</button>
                          </div>
                          </div>
-                         <!--==============================-->
+                         <!--==============특별상영 들어갈 자리================-->
                          <div class="tabcontent movie-all-list-flex"
                          style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                         <c:forEach items="${list}" var="po">
+                         <c:forEach items="${specialList}" var="special">
                          <div class="movie-all-list" style="margin-top: 25px; ">
                              <div class="movie-list-set" style="overflow: hidden;">
-                                 <a href="/movieDetail.do?movieNo=${po.movieNo}&reqPage=1">
+                                 <a href="/movieDetail.do?movieNo=${special.movieNo}&reqPage=1">
                                      <div class="img-poster">
-                                         <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
+                                         <img src="/resources/upload/movie/${special.mainFile.movieFileName}" style="width: 230px; height:331px;">
                                      </div>
                                      <div class="cover" style=" color:white; padding: 10px;">
                                          <div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
-                                             <p>${po.movieContent}</p>
+                                             <p>${special.movieContent}</p>
                                          </div>
                                          <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
-                                             
-                                             
                                              <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
-
-                                                 <p>관람평 ${watchPointAvg.movieScoreAvg}</p>
+												 <p>관람평<span style="color:#ffcb05"> ${special.movieScoreAvg.movieScoreAvg}</span></p>
                                              </div>
                                          </div>
                                      </div>
-                                     
                                  </a>
                                  <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
-                                     <p class="movie-title" >${po.movieTitle }</p>
-                                     <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
+                                     <p class="movie-title" >${special.movieTitle }</p>
+                                     <input class="inputMovieTitle" style="display:none;" value="${special.movieTitle }">
                                  </div>
                                  <div class="reserve-rate" style="font-size: 18px;">
                                      <p>예매율%</p>
                                  </div>
                                  <div class="start-date" style="font-size: 18px;">
-                                     <p>${po.movieDate}</p>
+                                     <p>${special.movieDate}</p>
                                  </div>
                                  <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                      <button type="button"
@@ -201,40 +194,36 @@
                          <button type="button" id="load">더보기</button>
                      </div>
                      </div>
-                     <!--==================================-->
+                     <!--===============필름소사이어티===================-->
                      <div class="tabcontent movie-all-list-flex"
                      style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                     <c:forEach items="${list}" var="po">
+                     <c:forEach items="${filmSocietyList}" var="filmSociety">
                      <div class="movie-all-list" style="margin-top: 25px; ">
                          <div class="movie-list-set" style="overflow: hidden;">
-                             <a href="/movieDetail.do?movieNo=${po.movieNo}&reqPage=1">
+                             <a href="/movieDetail.do?movieNo=${filmSociety.movieNo}&reqPage=1">
                                  <div class="img-poster">
-                                     <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
+                                     <img src="/resources/upload/movie/${filmSociety.mainFile.movieFileName}" style="width: 230px; height:331px;">
                                  </div>
                                  <div class="cover" style=" color:white; padding: 10px;">
                                      <div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
-                                         <p>${po.movieContent}</p>
+                                         <p>${filmSociety.movieContent}</p>
                                      </div>
                                      <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
-                                         
-                                         
                                          <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
-
-                                             <p>관람평 ${watchPointAvg.movieScoreAvg}</p>
+                                             <p>관람평<span style="color:#ffcb05"> ${filmSociety.movieScoreAvg.movieScoreAvg}</span></p>
                                          </div>
                                      </div>
                                  </div>
-                                 
                              </a>
                              <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
-                                 <p class="movie-title">${po.movieTitle }</p>
-                                 <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
+                                 <p class="movie-title">${filmSociety.movieTitle }</p>
+                                 <input class="inputMovieTitle" style="display:none;" value="${filmSociety.movieTitle }">
                              </div>
                              <div class="reserve-rate" style="font-size: 18px;">
                                  <p>예매율%</p>
                              </div>
                              <div class="start-date" style="font-size: 18px;">
-                                 <p>${po.movieDate}</p>
+                                 <p>${filmSociety.movieDate}</p>
                              </div>
                              <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                  <button type="button"
@@ -255,40 +244,37 @@
                      <button type="button" id="load">더보기</button>
                  </div>
                  </div>
-                 <!--===========================================-->
+                 <!--=====================클래식소사이어티======================-->
                  <div class="tabcontent movie-all-list-flex"
                  style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                 <c:forEach items="${list}" var="po">
+                 <c:forEach items="${classicSocietyList}" var="classicSociety">
                  <div class="movie-all-list" style="margin-top: 25px; ">
                      <div class="movie-list-set" style="overflow: hidden;">
-                         <a href="/movieDetail.do?movieNo=${po.movieNo}&reqPage=1">
+                         <a href="/movieDetail.do?movieNo=${classicSociety.movieNo}&reqPage=1">
                              <div class="img-poster">
-                                 <img src="/resources/upload/movie/${po.mainFile.movieFileName}" style="width: 230px; height:331px;">
+                                 <img src="/resources/upload/movie/${classicSociety.mainFile.movieFileName}" style="width: 230px; height:331px;">
                              </div>
                              <div class="cover" style=" color:white; padding: 10px;">
                                  <div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
-                                     <p>${po.movieContent}</p>
+                                     <p>${classicSociety.movieContent}</p>
                                  </div>
                                  <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
-                                     
-                                     
                                      <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
-
-                                         <p>관람평 ${watchPointAvg.movieScoreAvg}</p>
+                                        <p>관람평<span style="color:#ffcb05"> ${classicSociety.movieScoreAvg.movieScoreAvg}</span></p>
                                      </div>
                                  </div>
                              </div>
                              
                          </a>
                          <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
-                             <p class="movie-title" >${po.movieTitle }</p>
-                             <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
+                             <p class="movie-title" >${classicSociety.movieTitle }</p>
+                             <input class="inputMovieTitle" style="display:none;" value="${classicSociety.movieTitle }">
                          </div>
                          <div class="reserve-rate" style="font-size: 18px;">
                              <p>예매율%</p>
                          </div>
                          <div class="start-date" style="font-size: 18px;">
-                             <p>${po.movieDate}</p>
+                             <p>${classicSociety.movieDate}</p>
                          </div>
                          <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                              <button type="button"

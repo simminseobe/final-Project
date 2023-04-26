@@ -30,7 +30,7 @@ public class MovieService {
 	private MovieDao dao;
 
 public ArrayList<Movie> selectMovieAll() {
-		
+		//영화 전체조회
 		ArrayList<Movie> list =dao.selectMovieAll();
 		for(Movie movie : list) {
 			int movieNum= movie.getMovieNo();
@@ -39,25 +39,67 @@ public ArrayList<Movie> selectMovieAll() {
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
 		}
-		System.out.println(list);
 		
 		return list;
 		
 	}
-
-
+	//상영예정작 조회
 	public ArrayList<Movie> expectedMovie() {
 		ArrayList<Movie> expectedList =dao.expectedMovie();
 		for(Movie movie : expectedList) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
 			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
 
 		}
-		System.out.println(expectedList);
 		
 		return expectedList;
 	}
+	//특별상영작 조회
+	public ArrayList<Movie> specialMovie() {
+		ArrayList<Movie> specialMovieList =dao.specialMovie();
+		for(Movie movie : specialMovieList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		
+		return specialMovieList;
+	}
+	//필름소사이어티 조회
+	public ArrayList<Movie> filmSocietyList() {
+		ArrayList<Movie> filmSocietyList =dao.filmSocietyList();
+		for(Movie movie : filmSocietyList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		
+		return filmSocietyList;
+	}
+	//클래식소사이어티조회
+	public ArrayList<Movie> classicSocietyList() {
+		ArrayList<Movie> classicSocietyList =dao.classicSocietyList();
+		for(Movie movie : classicSocietyList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		
+		return classicSocietyList;
+	}
+	
 	
 
 	public Movie selectOneMovie(int movieNo) {
@@ -226,6 +268,9 @@ public ArrayList<Movie> selectMovieAll() {
 		int deletePostComment=dao.deletePostComment(moviePostCommentNo);
 		return deletePostComment;
 	}
+
+
+
 
 
 
