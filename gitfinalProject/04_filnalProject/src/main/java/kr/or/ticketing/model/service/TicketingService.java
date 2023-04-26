@@ -10,6 +10,7 @@ import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.ticketing.model.dao.TicketingDao;
+import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
@@ -68,6 +69,12 @@ public class TicketingService {
 	public ArrayList<GiftTicket> selectGiftTicket(int memberNo) {
 		ArrayList<GiftTicket> giftList = dao.selectGiftTicket(memberNo);
 		return (ArrayList<GiftTicket>) giftList;
+	}
+
+	
+	public int paying(Pay pay) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	
