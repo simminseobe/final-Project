@@ -464,6 +464,7 @@ public class MemberController {
 	// 카카오 회원가입
 	@RequestMapping(value = "/kakaoJoin.do")
 	public String kakaoJoin(Member m) {
+		m.setSocial(1);
 		int result = service.insertMember(m);
 		if (result > 0) {
 			return "redirect:/";
@@ -629,7 +630,7 @@ public class MemberController {
 		// 해당 정보가 없으면 회원가입 페이지로 이동
 		
 		member.setMemberId(naverEmail);
-		member.setMemberPhone(mobile);		
+		member.setMemberPhone(mobile);
 		Member m = service.selectOneNaver(member);
 		if(m != null) {
 			session.setAttribute("m", m);
@@ -702,6 +703,7 @@ public class MemberController {
 	// 네이버 회원가입
 	@RequestMapping(value="/naverJoin.do")
 	public String naverJoin(Member m) {
+		m.setSocial(2);
 		int result = service.insertMember(m);
 		if(result > 0) {
 			return "redirect:/";
