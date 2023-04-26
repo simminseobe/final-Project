@@ -8,4 +8,9 @@ import org.springframework.stereotype.Repository;
 public class GiftTicketDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	public int addGiftTicket(String ticketSerial) {
+		int result = sqlSession.update("member.addGiftTicket",ticketSerial);
+		return result;
+	}
 }

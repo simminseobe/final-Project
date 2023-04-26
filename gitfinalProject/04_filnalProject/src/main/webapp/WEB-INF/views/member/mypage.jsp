@@ -32,7 +32,7 @@
 	<div>관람평: </div>
 	<div>보고싶어: </div>
 	<div>무비포스트: </div>
-	<div>관람권등록 <input type="text" name="giftTicket"><button id="addGiftTicket"><a href="/addGiftTicket.do">클릭</a></button></div>
+	<div>관람권등록 <input type="text" name="ticketSerial"><button id="addGiftTicket"><a href="/addGiftTicket.do">클릭</a></button></div>
 	<div>문의내역</div>
 	
 </div>
@@ -46,14 +46,15 @@
 </script>
 </head>
 <body>
-
     <script>
     $("#addGiftTicket").on("click",function(){
+    	const ticketSerial = $("[name=ticketSerial]").val();
 		$.ajax({
 			url : "/addGiftTicket.do",
 			type: "get",
-			data: {giftTicket:giftTicket},
+			data: {ticketSerial:ticketSerial},
 			success : function(data){
+				console.log(data)
 				if(data=="ok"){
 					alert("등록에 성공하였습니다.");
 				}else{

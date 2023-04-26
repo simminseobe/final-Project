@@ -9,4 +9,8 @@ import kr.or.giftticket.model.dao.GiftTicketDao;
 public class GiftTicketService {
 	@Autowired
 	private GiftTicketDao dao;
+
+	public int addGiftTicket(String ticketSerial) {
+		return dao.addGiftTicket(ticketSerial);
+	}
 }

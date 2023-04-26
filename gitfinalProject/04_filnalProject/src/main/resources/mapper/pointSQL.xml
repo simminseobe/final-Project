@@ -12,7 +12,7 @@
 		point_detail as pointDetail ,
 		point_date as pointDate
 	from point_tbl 
-	where member_no = #{memberNo};
+	where member_no = #{memberNo}
 </select>
 
 <!-- 포인트 사용 -->
