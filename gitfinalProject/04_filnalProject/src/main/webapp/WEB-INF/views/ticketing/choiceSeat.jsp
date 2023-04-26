@@ -286,7 +286,7 @@
 				}
 				.won{
 					display: block;
-					float: left;
+					float: right;
 					padding: 0 0 0 5px;
 					line-height: 35px;
 					font-size: 15px;

@@ -351,7 +351,7 @@
 
 			.won {
 				display: block;
-				float: left;
+				float: right;
 				padding: 0 0 0 5px;
 				line-height: 35px;
 				font-size: 15px;
@@ -433,7 +433,7 @@
 							<span class="material-symbols-outlined more">expand_more</span>
 						</div>
 						<div class="sub-div">
-							<div class="sub-discount">
+							<div class="sub-discount mega-voucher">
 								<p>메가박스 관람권</p>
 							</div>
 							
@@ -602,11 +602,13 @@
 				; // 현재 클릭한 .discount-type의 다음 .sub-div 요소를 슬라이드 업/다운
 				event.stopPropagation(); //이벤트버블링 막기
 			});
-			var payPrice;	//최종결제금엑
-			const totalAmount = $(".price-amount").text();
-			const discountAmount = $('.discount-amount').text();
-			console.log(totalAmount+"?");
-			console.log(discountAmount+"?");
+			/*
+			var totalAmount;
+			totalAmount = $(".price-amount").text();
+			var discountAmount;
+			discountAmount = $('.discount-amount').text();
+			console.log(totalAmount+": 윗블럭 금액(,포함)");
+			console.log(discountAmount+": 아래블럭 할인적용(,포함)");
 			
 			const numericTotalAmount = totalAmount.replace(/[^0-9.-]+/g,"");
 			const numericDiscountAmount = discountAmount.replace(/[^0-9.-]+/g,"");
@@ -620,11 +622,70 @@
 				location.href="/ticketing.do";
 			});
 
-			var voucherDiscount;
-			$(".voucher>div").on("click",function(){
-				$(".discount-amount") = finalAmount;
-				console.log(finalAmount);
+			$(".voucher div.sub-div>.mega-voucher").on("click",function(){
+				$(".discount-amount").text(totalAmount);
+				console.log("관람권이라 "+totalAmount+" 원 전액할인");
+				const numericTotalAmount = totalAmount.replace(/[^0-9.-]+/g,"");
+				const numericDiscountAmount = discountAmount.replace(/[^0-9.-]+/g,"");
+				const finalAmount = numericTotalAmount - numericDiscountAmount;
+				$('span.amount').text(finalAmount.toLocaleString());
+				console.log("화면에 출력되는 최종결제금액 : "+totalAmount);
+				$("#finalAmount").val(finalAmount);
+				console.log("전달될 최종결제금액 : "+finalAmount);
 			});
+			*/
+			var totalAmount;	//윗블럭의 인원 수 옆 금액(,있음)
+			var discountAmount;	//아랫블럭의 할인적용 금액
+			//var topBlockAmount; // 윗블럭금액(,있음)
+			var filterTopBlockAmount; // 윗블럭금액(,없음)
+			//var bottomBlockAmount; // 아랫블럭금액(할인금액)(,있음)
+			var filterBottomBlockAmount; // 아랫블럭금액(할인금액)(,없음)
+			var finalAmount;	//최종결제금액(,있음)
+			var notFilterFinalAmount;
+			var filterFinalAmount; //최종결제금액(,없음)
+
+			
+				
+			totalAmount = $(".price-amount-same").text();
+			discountAmount = $(".discount-amount").text();
+			filterTotalAmount = totalAmount.replace(/[^0-9.-]+/g,"");
+			filterDiscountAmount = discountAmount.replace(/[^0-9.-]+/g,"");
+			console.log("totalAmount :"+totalAmount);	//30,000
+			console.log("discountAmount :"+discountAmount); //0
+			console.log("filterTotalAmount :"+filterTotalAmount);//30000
+			console.log("filterDiscountAmount :"+filterDiscountAmount); //0
+			//finalAmount = totalAmount - discountAmount;
+			//console.log("finalAmount :"+finalAmount);//30000
+			filterFinalAmount = filterTotalAmount - filterDiscountAmount;
+			console.log("filterFinalAmount :"+filterFinalAmount);//30000
+			$('span.amount').text(filterFinalAmount.toLocaleString());
+			$('#finalAmount').val(filterFinalAmount);
+			console.log("filterFinalAmount :"+filterFinalAmount);//30000
+			
+			//관람권 사용 시 (100% 할인)
+			$(".voucher div.sub-div>.mega-voucher").on("click",function(){
+				const priceAmountSame = $(".price-amount-same").text();
+				const buttonAfterTotalAmont = $(".price-amount").text();
+				const buttonAfterDiscountAmont = $(".discount-amount").text(priceAmountSame);
+				console.log("나와라 좀"+priceAmountSame);	//18,000
+				console.log("나와라 좀"+buttonAfterTotalAmont);//18,000
+				console.log("나와라 좀"+buttonAfterDiscountAmont.text());//18,000
+				const buttonAfterDiscountAmontt = buttonAfterDiscountAmont.text();
+				console.log("나와라 좀"+buttonAfterDiscountAmontt);//18,000
+				
+				filterButtonAfterTotalAmont = buttonAfterTotalAmont.toString().replace(',', '');
+				filterButtonAfterDiscountAmont = buttonAfterDiscountAmontt.toString().replace(',', '');
+				console.log("나와라 좀 제발"+filterButtonAfterTotalAmont);//18000
+				console.log("나와라 좀 제발"+filterButtonAfterDiscountAmont);//18000
+
+				const buttonAfterFinalAmount = filterButtonAfterTotalAmont - filterButtonAfterDiscountAmont;
+				console.log(buttonAfterFinalAmount);
+				$('span.amount').text(buttonAfterFinalAmount); // 0이기 떄문에 .toLocaleString() 생략
+				$('#finalAmount').val(buttonAfterFinalAmount);
+			});
+
+			//
+
 			/*
 			$(".paying").on("click",function(){
 				payPrice = $("#finalAmount").val();	//input안의 값은 val() / 태그사이 값은 text()
