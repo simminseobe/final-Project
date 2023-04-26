@@ -318,7 +318,7 @@ delete from movie_video where movie_video_no=
 	insert into movie_post_comment
 		values(movie_post_comment_seq.nextval,#{moviePostNo},#{movieTitle},#{memberId},#{postComment},to_char(sysdate,'yyyy-mm-dd'))
 </insert>
-<select id="selectPostComment" resultType="moviePostComment">
+<select id="selectPostComment" parameterType="_int" resultType="moviePostComment">
 	select movie_post_comment_no as moviePostCommentNo,
 			movie_post_no as moviePostNo,
 			movie_title as movieTitle,
@@ -327,6 +327,18 @@ delete from movie_video where movie_video_no=
 			movie_post_comment_date as moviePostCommentDate
 	from movie_post_comment where movie_post_no=#{_parameter}
 </select>
+
+<update id="updatePostComment" parameterType="moviePostComment">
+		update movie_post_comment set
+			post_comment=#{postComment} where movie_post_comment_no=#{moviePostCommentNo}
+</update>
+<select id="moviePostCount" parameterType="moviePost" resultType="_int">
+	select count(*) from movie_post where movie_no=#{movieNo}
+</select>
+<delete id="deletePostComment" parameterType="moviePostComment">
+	delete from movie_post_comment where movie_post_comment_no=#{moviePostCommentNo}
+</delete>
+
 
 
 </mapper>

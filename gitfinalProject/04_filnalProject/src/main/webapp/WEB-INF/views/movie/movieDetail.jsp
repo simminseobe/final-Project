@@ -246,7 +246,7 @@ z-index: 5;
                     </div>
                 </div>
                 <div class="modalContentBottom">
-                    <button type="button" class="bc1" id="close1" style="margin-right: 5px;">닫기</button>
+                    <button type="button" id="close1" style="margin-right: 5px;">닫기</button>
                     <button type="submit" name=reviewEnroll id="reviewEnroll" class="enrollBtn" style="margin-right: 5px;">등록</button>
                 </div>
                 </form>
@@ -343,10 +343,10 @@ z-index: 5;
 	<div class="modal3 hidden3"><!--모달로  무비포스트 상세보기  들어가는 자리-->
             <div class="modal_overlay3"></div>
             <div class="modal_content3"><!--모달 댓글 내부화면-->
-            <form action="/insertPostComment.do" method="post"><!-- form태그 시작하는 자리 -->
+           
             	<!--  <input type="text" class="dataImgCheck">
                 <input type="text" class="dataVideoCheck">  -->
-                <input type="text" class="modalPostNo" name="moviePostNo">  
+                <input type="text" class="modalPostNo" name="moviePostNo" style="display:none;">  
                 <div class="modalClose">
                     <div class="modalCloseTit">
                         <span>무비포스트 상세보기</span>                    
@@ -377,7 +377,6 @@ z-index: 5;
                 </div>
                 
                 <!-- 이미지1개만 있을때 -->
-                
                 <div class="post-detail-center">
                     <div class="detail-center-img-area">
                         <img class="post-detail-center-img">
@@ -428,20 +427,49 @@ z-index: 5;
                         </div>
                     </div>
                 </div>
-                
+            
                 <!-- 무비포스트 댓글작성 하는곳-->
+               
                 <div class="modalTxtArea post-detail-txt" style="background-color: #ecf0f4;">
+                	<input value="${sessionScope.m.memberId}" class="loginId" name="memberId" style="display:none;">
                     <textarea class="postComment" name="moviePostComment"  style="width:810px;"></textarea>
                     <button type="button"class="postReviewBtn postCommentBtn">댓글등록</button>
                 </div>
+            	
+                <div class="post-comment-list"></div>
                 <!--무비포스트 댓글리스트 출력하는 곳-->
+                <!--
                 <div class="post-comment-list">
-              
+                    <div class="detail-top-r comment-list-img">
+                		<div class="detail-top-r-img comment-list-r-img">
+                			<img class="r-img-src comment-list-r-img-src" src="/resources/images/member/nonImg.png">
+                		</div>
+                		<div class="post-info">
+                            <div class="post-info-first-input commentWriter">
+                			  <p>댓글 작성자</p>
+                			</div>
+                            <div class="post-info-first-input commentDate">
+                                <p>댓글 작성 날짜</p>
+                            </div>
+                		</div>
+                        <div class="postCommentArea">
+                            <textarea>재밌어요</textarea>
+                        </div>
+                        <div class="btnWrap">8
+                            <div class="updateBtn">9
+                                <button>수정</button>
+                            </div>
+                            <div class="deleteBtn">10
+                                <button>삭제</button>
+                            </div>
+                        </div>
+                	</div>
                 </div>
+                -->
+                   
                 <div class="modalContentBottom">
                     <button type="button" id="close3"  style="margin-right: 5px;">닫기</button>
                 </div>
-            	</form><!-- form태그 끝나는 자리-->
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 무비포스트 상세보기 모달끝 -->
 
@@ -563,7 +591,7 @@ z-index: 5;
 
                     <div class="reviewAllCountWrap">
                         <div class="reviewAllCount" style="font-weight: bold;">
-                            <button>전체 <span style="color:#01738b;"> ${reviewListCount}</span>건</button>
+                            <button>전체 <span color:#01738b;"> ${reviewListCount}</span>건</button>
                         </div>
                         <div class="reviewSearchBtn">
                             <span><button>최신순</button></span>
@@ -580,31 +608,19 @@ z-index: 5;
                             <span class="reviewTextTit" style="color: #329eb1;">${mov.movieTitle }</span>
                             "재미있게 보셨나요? 영화의 어떤 점이 좋았는지 이야기해주세요."
                             <br>
-                            관람일 기준 7일 이내 등록 시 
-                            
+                                                 관람일 기준 7일 이내 등록 시 
                             <span>50P</span>
-                            가 적립됩니다.
+                           	 가 적립됩니다.
                             <br>
-                            포인트는 관람평 최대 10편 지급가능합니다.
-                            
+                           	 포인트는 관람평 최대 10편 지급가능합니다.
                         </div>
-                        
-                       
-                      
                         <div class="reviewContentWrite" style="font-size: 15px;">
-                       <c:forEach items="${reviewList}" var="review">
-                        <c:choose>
-							<c:when test="${not empty sessionScope.m && sessionScope.m.memberId ne review.memberId}">
-	                            <a href="#" class="open" style="color: #666666;">관람평 쓰기</a>
-							</c:when>
-							<c:when test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
-								 <a href="#" class="open" style="color: #666666;">작성완료</a>
-							</c:when>
-							<c:otherwise>
-								<a href="/login.do" style="color: #666666;">로그인하기</a>
-							</c:otherwise>                        
-                        </c:choose>
-                    	</c:forEach>
+							<c:if test="${not empty sessionScope.m}">
+	                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
+							</c:if>
+							<c:if test="${empty sessionScope.m}">
+								 <a href="login.do" class="open" style="color: #666666;">로그인</a>
+							</c:if>
                         </div>
                       
                  
@@ -681,17 +697,17 @@ z-index: 5;
                     </div>
                     </c:when>
                     </c:choose>
-			        </c:forEach>--><!--본인작성댓글 끝-->
+			        </c:forEach><!--본인작성댓글 끝-->
 			        
                     <!--타인이 작성한 댓글이 시작되는 자리 -->
-                    <c:forEach items="${pageList }" var="review" varStatus="i">
+                    <c:forEach items="${pageList }" var="review">
                      <c:choose>
                      <c:when test="${sessionScope.m.memberId ne review.memberId}">
                             <div class="infoWap2Top" id="ajaxRev">
                                 <div class=" infoWrap2">
                                     <div class="userReviewInfo2">
                                     <img src="img/사용자-50.png">
-                                    <p class="user-id user-third">${i.count} : ${review.memberId}</p>
+                                    <p class="user-id user-third"> ${review.memberId}</p>
                                 </div>
                                 <div class="Text2">
                                     <div class="Tit2 textThird">
@@ -755,7 +771,7 @@ z-index: 5;
                         </c:when>
                          </c:choose>
                     </c:forEach>
-	                    <div class="pageDiv">
+	                    <div class="pageDiv" style="margin:0 auto;">
 	                    	${pageNavi}
 	                    </div>
                 </div><!--실관람평 내용 끝나는 자리-->
@@ -763,19 +779,30 @@ z-index: 5;
                 <div class="moviePostWrap tabcontent" style="display: none;"><!--무비포스트 시작하는 자리-->
                     <div class="moviePostHead reaviewHeadSawBtnWrap">
                         <div class="reviewHead">
-                            <h2><span style="color:#01738b;">123456</span>건의 무비포스트가 있어요.</h2>
+                            <h2><span style="color:#01738b;">${moviePostCount}</span>건의 무비포스트가 있어요.</h2>
                         </div>
                         <div class="morePostMovie sawMovie">
-                            <button type="button" class="sawMovieBtn morePostMovie">더보기</button>
+                            <button type="button" class="sawMovieBtn morePostMovie"><a href="/postAllList.do">더보기</a></button>
                         </div>
                     </div>
                     <div class="userReviewInfoWrap moviePostWriteWrap">
                         <div class="reviewText moviePostText">
-                            <p>
-                            <span class="useNameMoviePost">홍길동님</span>
-                            <span class="reviewTextTit">"영화이름"</span>
-                            재미있게 보셨나요? <span class="useNameMoviePost">홍길동</span>님만의 무비포스트를 남겨보세요.
-                            </p>
+                        	<c:choose>
+                        		<c:when test="${not empty sessionScope.m && sessionScope.m.memberId}">
+		                            <p>
+				                    <span class="useNameMoviePost">${sessionScope.m.memberName }</span>
+		                            <span class="reviewTextTit">"${mov.movieTitle}"</span>
+		                            	재미있게 보셨나요? <span class="useNameMoviePost">${sessionScope.m.memberName }</span>님의 무비포스트를 남겨보세요.
+		                            </p>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<p>
+		                            <span class="reviewTextTit">"${mov.movieTitle}"</span>
+		                            	재미있게 보셨나요? <span>무비포스트를 남겨보세요.</span>
+		                            </p>
+                        		
+                        		</c:otherwise>
+                        	</c:choose>
                         </div>
                         <div class="reviewContentWrite moviePosttWrite " style="font-size: 15px;">
                         	<c:choose>
@@ -791,7 +818,7 @@ z-index: 5;
                     </div>
                     <div class="moviePostTotalCnt reviewAllCountWrap">
                         <div class="moviePostTotalCnt reviewAllCount" style="font-weight: bold;">
-                            <button>전체 <span style="color:#01738b;">123456</span>건</button>
+                            <button>전체 <span style="color:#01738b;">${moviePostCount}</span>건</button>
                         </div>
                     </div>
                     <div class="moviePostContentList">
@@ -889,9 +916,13 @@ z-index: 5;
     <input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
     <input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
 </div>
+<div class="session">
+	<input type="text" class="sessionId" value="${sessionScope.m.memberId}" style="display:none;">
+</div>
        
 
 <script>
+
     var ctx = document.getElementById('myChart').getContext('2d');
     var story = $(".wpSumStory").val();
     var ost = $(".wpSumOST").val();
@@ -937,29 +968,33 @@ z-index: 5;
     });
 
 /*===============모달OPEN=================*/
-   const openButton=document.querySelector(".open");
-   const modal = document.querySelector(".modal");
-
+   const openButton=document.getElementById("open");
+   const modal = document.querySelector(".modal"); 
+	
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
-  const overlay = modal.querySelector(".modal_overlay");
+   const overlay = modal.querySelector(".modal_overlay");
    const closeBtn = modal.querySelector("#close1");
    const openModal  =() => {
        modal.classList.remove("hidden");
    }
 
+   console.log(openButton);
    const closeModal = () => {
        modal.classList.add("hidden");
    }
    overlay.addEventListener("click",closeModal);
    closeBtn.addEventListener("click",closeModal);
-  openButton.addEventListener("click",openModal);
- 	console.log(openButton); 
+   if(openButton){
+	   
+   openButton.addEventListener("click",openModal);
+   }
+   
  	
  	
    /*===============모달OPEN2=================*/
    
-const openButton2=document.getElementById("open2");
-   const modal2 = document.querySelector(".modal2");
+   const openButton2=document.getElementById("open2");
+   const modal2 = document.querySelector(".modal2"); 
 
    /*x버튼을 누르거나 배경 눌렀을때 화면이 닫히도록하기 위함*/
    const overlay2 = modal2.querySelector(".modal_overlay2");
@@ -972,10 +1007,16 @@ const openButton2=document.getElementById("open2");
        modal2.classList.add("hidden2");
    }
    overlay2.addEventListener("click",closeModal2);
+   if(closeBtn2){
    closeBtn2.addEventListener("click",closeModal2);
+	   
+   }
+   if(openButton2){
     openButton2.addEventListener("click",openModal2);
+	   
+   }
 	
-   
+    
    /*========모달 open3 무비포스트 상세보기=================*/
    
    const modal3 = document.querySelector(".modal3");
@@ -984,9 +1025,8 @@ const openButton2=document.getElementById("open2");
    $(".open3").on("click",function(){
 	   const movieNo = $(this).children().eq(0).val();
 	   const moviePostNo=$(this).children().eq(1).val();
-	   
-	   
-	   
+	   const postComment=$(".postComment").val("");
+
 	   //멤버 아이디와 무비포스트 날짜를 받기 위함
 	   const detailmemberId=$(".detailmemberId");
 	   const postDate=$(".postDate");
@@ -1004,19 +1044,22 @@ const openButton2=document.getElementById("open2");
 	   const dataImgCheck=$(".dataImgCheck");
 	   const dataVideoCheck=$(".dataVideoCheck");
 	   
-	   const modalPostNo=$(".modalPostNo");
-
+	   const modalMoviePostNo=$(".modalPostNo");
+	   
+	   const sessionId=$(".sessionId").val();
+	   
+	
 		$.ajax({
 			  url :"/moviePostDetail.do",
 			  type : "post",
-			  data : {movieNo:movieNo,moviePostNo:moviePostNo},
+			  data : {moviePostNo:moviePostNo},
 			  success : function(data){
 					  if(data != null && data.videoLink!=undefined && data.movieFilePath!=undefined){
 						  $(".post-detail-center").eq(0).css("display","none");
 						  $(".post-detail-center").eq(1).css("display","none");
 						  $(".post-detail-center").eq(2).css("display","block");
 						  
-						  modalPostNo.val(moviePostNo);
+						  modalMoviePostNo.val(moviePostNo);
 						  
 						  dataVideoCheck.val(data.videoLink);
 						  dataImgCheck.val(data.movieFilePath);
@@ -1029,20 +1072,14 @@ const openButton2=document.getElementById("open2");
 						  previewCutVideoSource.attr("src",data.videoLink);
 						  const video = document.querySelectorAll(".previewCutVideo");
 						  video[1].load();//비디오 재생이 안될때 video.load()를 한번 해줘야함 
-						  
-						  for(let i = 0; data.moviePostComment.length;i++){
-							
-							  
-						  }
-						  
-						  
+
 						  
 				  	}else if(data != null && data.videoLink != undefined && data.movieFilePath == undefined){
 					  	  $(".post-detail-center").eq(0).css("display","none");
 						  $(".post-detail-center").eq(1).css("display","block");
 						  $(".post-detail-center").eq(2).css("display","none");
 						  
-						  modalPostNo.val(moviePostNo);
+						  modalMoviePostNo.val(moviePostNo);
 						  
 						  dataVideoCheck.val(data.videoLink);
 						  const detailMemberIdVal=detailmemberId.val(data.memberId);
@@ -1051,12 +1088,14 @@ const openButton2=document.getElementById("open2");
 						  previewCutVideoSource.attr("src",data.videoLink);
 						  const video = document.querySelectorAll(".previewCutVideo");
 						  video[0].load();//비디오 재생이 안될때 video.load()를 한번 해줘야함 
+
+						  
 					}else if(data != null && data.videoLink == undefined && data.movieFilePath != undefined){
 					  	  $(".post-detail-center").eq(0).css("display","block");
 						  $(".post-detail-center").eq(1).css("display","none");
 						  $(".post-detail-center").eq(2).css("display","none");
 						  
-						  modalPostNo.val(moviePostNo);
+						  modalMoviePostNo.val(moviePostNo);
 						  
 						  dataImgCheck.val(data.movieFilePath);
 						  const detailMemberIdVal=detailmemberId.val(data.memberId);
@@ -1064,13 +1103,142 @@ const openButton2=document.getElementById("open2");
 						  postDetailTextInput.val(data.moviePostContent);
 						  postDetailCenterImg.attr("src","/resources/upload/movie/"+data.movieFilePath);
 					}
-				  
+					 
+					  	$(".post-comment-list").empty();
+						for(let i = 0; i<data.moviePostComment.length;i++){
+						  
+						  const div1 = $(".post-comment-list");
+						  
+					
+						  const div2 = $("<div>").addClass("detail-top-r").addClass("comment-list-img");
+						  const div3 = $("<div>").addClass("detail-top-r-img").addClass("comment-list-r-img");
+						  
+						  const img1=$("<img>").addClass("r-img-src").addClass("comment-list-r-img-src");
+						  img1.attr("src","/resources/images/member/nonImg.png");
+						  
+						  const div4=$("<div>");
+						  const div5=$("<div>");
+						  
+						  div4.addClass("post-info");
+						  div5.addClass("post-info-first-input").addClass("commentWriter");
+						  
+						  const postCommentMemberId=data.moviePostComment[i].memberId;
+						  const p1=$("<p>");
+						  p1.text(postCommentMemberId);
+						  
+						  const div6=$("<div>");
+						  const p2=$("<p>");
+						  //작성날짜 값 받아오기
+						  const moviePostCommentDate=data.moviePostComment[i].moviePostCommentDate;
+						  p2.text(moviePostCommentDate);
+						  
+						  const div7=$("<div>");
+						  div7.addClass("postCommentArea");
+						  const textarea=$("<textarea>");
+						  textarea.attr("name","postComment").attr("readonly",true);
+						  const postComment=data.moviePostComment[i].postComment;	
+						  textarea.val(postComment);
+						  div7.append(textarea);
+						  
+						  const updateBtn=$("<button>");
+						  updateBtn.addClass("updateBtn");
+						  updateBtn.text("수정");
+						  updateBtn.attr("onclick","updatePostComment(this,"+data.moviePostComment[i].moviePostCommentNo+");");
+						  const div9=$("<div>");
+						  div9.addClass("updateBtn");
+						  div9.append(updateBtn);
+						  const div8=$("<div>");
+						  div8.addClass("btnWrap");
+						  div8.append(div9);
+						  
+						  div8.css("display","none");//수정버튼 숨김
+						 						  
+						  const div10 =$("<div>");
+						  div10.addClass("deleteBtn");
+						  const deleteBtn=$("<button>");
+						  deleteBtn.attr("onclick","deletePostComment(this,"+data.moviePostComment[i].moviePostCommentNo+");");
+						  deleteBtn.text("삭제");
+						  deleteBtn.append(div10);
+						  div8.append(div10); 
+						  div10.append(deleteBtn);
+						  
+						  div10.css("display","none");//삭제버튼 숨김
+						  
+						  
+						  div1.append(div2);
+						  div2.append(div3);
+						  div3.append(img1);
+						  div2.append(div4);
+						  div4.append(div5);
+						  div5.append(p1);
+						  div4.append(div6);
+						  div6.append(p2);
+						  div2.append(div7);
+						  div2.append(div8);
+						  		  
+						 
+						   if(sessionId==postCommentMemberId){
+							   	 /* const btnWrap=$(".btnWrap");
+							     const deleteBtn=$(".deleteBtn"); */
+							     div8.css("display","block");
+							     div10.css("display","block");
+							     textarea.attr("readonly",false);
+							  }else{
+								  div8.css("display","none");
+								  div10.css("display","none");
+						}
+			  
+							  }
+			  
 			  }
+			
 			  });	
-	   
-	   $(".modal3").removeClass("hidden3");//아작스가 필요하다면 아작스 내부에서 마지막 코드가 됨
-   });
 
+	   			$(".modal3").removeClass("hidden3");//아작스가 필요하다면 아작스 내부에서 마지막 코드가 됨
+	   			//openModal();
+	   
+	  			
+	   			
+	   
+   });
+   
+   
+
+    
+	function updatePostComment(obj,moviePostCommentNo){
+		
+		const postComment=$(obj).parent().parent().prev().children().val();
+	
+		$.ajax({
+			  url :"/updatePostComment.do",
+			  type : "post",
+			  data : {moviePostCommentNo:moviePostCommentNo,postComment:postComment},
+			  success : function(data){
+				  $(".modal3").addClass("hidden3");
+					
+			  }
+			  
+		});
+		
+		
+		
+	}
+	
+	
+	function deletePostComment(obj,moviePostCommentNo){
+
+		$.ajax({
+			  url :"/deletePostComment.do",
+			  type : "post",
+			  data : {moviePostCommentNo:moviePostCommentNo},
+			  success : function(data){
+				  $(".modal3").addClass("hidden3");
+			  }
+		});
+		
+		
+	}
+	
 	$("#close3").on("click",function(){
 		$(".modal3").addClass("hidden3");
 	});    
@@ -1083,53 +1251,43 @@ const openButton2=document.getElementById("open2");
    const closeModal3 = () => {
        modal3.classList.add("hidden3");
    }
-   
    overlay3.addEventListener("click",closeModal3);
    
    
    /*댓글 새로고침을 방지하기 위해 주소에stat을 넣음*/
    window.onload=function(){
+	   
+	   
 	const urlParams = new URL(location.href).searchParams;
 	const stat = urlParams.get('stat');
-	console.log(stat);
-	if(stat == 1){
-	    const contents = $(".tabcontent");
-	    contents.hide();
-    	contents.eq(1).show();
-    }
-}
+	
+		if(stat == 1){
+		    const contents = $(".tabcontent");
+		    contents.hide();
+	    	contents.eq(1).show();
+	    }
+	}
    
 	 //무비포스트 댓글 등록
 	$(".postCommentBtn").on("click",function(){
 		const moviePostNo =$(".modalPostNo").val();
 		const movieTitle=$(".modalMovieTitle").val();
-		const memberId=$(".detailmemberId").val();
+		const memberId=$(".loginId").val();
 		const PostComment=$(".postComment").val();
 	$.ajax({
 			url:"/insertPostComment.do",
 			type:"post",
 			data:{moviePostNo:moviePostNo,movieTitle:movieTitle,memberId:memberId,PostComment:PostComment},
 			success:function(data){
-				if(data != null){
-					console.log("성공");
-				}else{
-					console.log("실패");
-				}
+				$(".modal3").addClass("hidden3");
 			}
 			
 		}); 
 		
 	});
   
-		 
-
-			 
-
-
-
 
 </script>
-
 <script src = "/resources/js/movieDetail.js"></script>
 </body>
 </html>

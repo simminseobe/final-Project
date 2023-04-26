@@ -101,4 +101,3 @@ $(".whiteLike2").on("click",function(){
     }
 });
 
-
