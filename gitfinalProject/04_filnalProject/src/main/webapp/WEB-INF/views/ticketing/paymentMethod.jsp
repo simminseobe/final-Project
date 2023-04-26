@@ -504,24 +504,26 @@
 						</div>
 					</div>
 					-->
-					<div class="hidden">
+					<div class="hidden" style="display: none;">
 						<span class="ssMemberNo">${sessionScope.m.memberNo}</span>
 						<span class="sNum">${ticketingInfo.scheduleNo}</span>
+						<span class="seats">${ticketingInfo.joinSeats}</span>
 					</div>
 
 				</div>
 							<!--
-								const pp =payPrice;
-								const ssMemberNo = $(".ssMemberNo");
-								const mvTime = $(".result-day>p").text();
-								const tAge = $(".people-age").text();
-								const sNum = 스케쥴넘버
+								var payPrice;
+								var movieTitle;
+								var choiceDtDay;
+								var sNum;
 								
-								console.log(pp);
-								console.log(ssMemberNo);	//세션에 저장된 멤버no
-								console.log(mvTime);
-								console.log(tAge);
-								console.log(pp);			//쿼리문에서 
+								movieTitle =  $(".result-title>p").text();
+								memberNo = $(".ssMemberNo").text();
+								choiceDtDay = $(".result-day>p").text();
+								sNum = $(".sNum").text();
+								const tAge = $(".people-age").text();
+								
+								
 							-->
 
 				<div class="content-result">
@@ -720,7 +722,7 @@
 			
 			var payPrice;
 			var movieTitle;
-			var memberNumber;
+			
 			
 			$(".paying").on("click", function () {
 				payPrice = $("#finalAmount").val();	//input안의 값은 val() / 태그사이 값은 text()
@@ -733,13 +735,16 @@
 				if (payPrice == 0) {
 					
 				} else {
-					//var payMethod ="card";
 					movieTitle =  $(".result-title>p").text();
-					memberNumber = $(".ssMemberNo").text();
+					memberNo = $(".ssMemberNo").text();
+					choiceDtDay = $(".result-day>p").text();
+					scheduleNo = $(".sNum").text();
+					joinSeats = $(".seats").text();
+					numOfPeople = $(".people-age").text();
+					console.log(payPrice+","+memberNo+","+choiceDtDay+","+scheduleNo+","+joinSeats+","+numOfPeople);
 					IMP.init("imp04040307");
 					IMP.request_pay({
 						pg: "html5_inicis",
-						//pay_method: payMethod,
 						merchant_uid: "상품번호_" + date,	//상점에서 관리하는 주문번호
 						name: movieTitle,	//결제이름
 						amount: payPrice,		//결제금액
@@ -753,9 +758,12 @@
 							$.ajax({
 								url: "/paymentPage.do",
 								type: "post",
-								data: { payPrice:payPrice, memberNumber:memberNumber },
+								data: { payPrice:payPrice, memberNo:memberNo, choiceDtDay:choiceDtDay, payPrice:payPrice, scheduleNo:scheduleNo, joinSeats:joinSeats, numOfPeople:payPrinumOfPeople},
 								dataType: "json",
 								success: function (data) {
+									alert("결제등록성공");
+									
+									
 
 								}
 							});
