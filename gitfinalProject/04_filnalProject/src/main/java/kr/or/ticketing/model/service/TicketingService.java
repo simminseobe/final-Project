@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
-import kr.or.gift.model.vo.GiftTicket;
+import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
 import kr.or.ticketing.model.vo.TicketingSchedule;

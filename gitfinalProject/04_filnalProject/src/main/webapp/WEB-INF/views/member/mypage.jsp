@@ -21,7 +21,7 @@
 
 	<div>이름: ${sessionScope.m.memberName }</div>
 	<div>잔여포인트: </div>
-	<div>등급: </div>
+	<div>등급: ${sessionScope.m.memberLevel }</div>
 	<div>다음 Gold 등급까지 6000P</div>
 	<div>적립예정: </div>
 	<div>당월소멸예정: </div>
@@ -32,9 +32,8 @@
 	<div>관람평: </div>
 	<div>보고싶어: </div>
 	<div>무비포스트: </div>
-	<div>관람권등록 <button>클릭</button></div>
-	<div>이벤트응모내역: </div>
-	<div>문의내역: </div>
+	<div>관람권등록 <input type="text" name="giftTicket"><button id="addGiftTicket"><a href="/addGiftTicket.do">클릭</a></button></div>
+	<div>문의내역</div>
 	
 </div>
 	
@@ -49,10 +48,20 @@
 <body>
 
     <script>
-    $(".sub-menu").prev().append("<span class='more'>+</span>");
-    $(".more").on("click",function(event){
-        $(this).parent().next().slideToggle();
-        $(this).toggleClass("active");
-        event.stopPropagation();
-    });
+    $("#addGiftTicket").on("click",function(){
+		$.ajax({
+			url : "/addGiftTicket.do",
+			type: "get",
+			data: {giftTicket:giftTicket},
+			success : function(data){
+				if(data=="ok"){
+					alert("등록에 성공하였습니다.");
+				}else{
+					alert("이미 등록된 관람권입니다.");
+				}
+				
+			}
+			
+		});	
+	});
 
