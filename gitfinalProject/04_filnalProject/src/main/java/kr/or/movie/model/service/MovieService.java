@@ -44,6 +44,22 @@ public ArrayList<Movie> selectMovieAll() {
 		return list;
 		
 	}
+
+
+	public ArrayList<Movie> expectedMovie() {
+		ArrayList<Movie> expectedList =dao.expectedMovie();
+		for(Movie movie : expectedList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+
+		}
+		System.out.println(expectedList);
+		
+		return expectedList;
+	}
+	
+
 	public Movie selectOneMovie(int movieNo) {
 		Movie mov = dao.selectOneMovie(movieNo);
 		 if(mov !=null) {
