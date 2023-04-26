@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="consultation">
+	<insert id="insertConsultation" parameterType="consultation">
+		insert into consultation_tbl
+  		values (consultation_tbl_seq.nextval, #{consultationTitle}, 'Y', sysdate, #{consultationMember})
+	</insert>
+	<select id="selectConsultation" resultType="consultation">
+		select
+			consultation_no as consultationNo,
+			consultation_title as consultationTitle,
+			consultation_status as consultationStatus,
+			consultation_date as consultationDate,
+			consultation_member as consultationMember
+		from consultation_tbl
+	</select>
+</mapper>

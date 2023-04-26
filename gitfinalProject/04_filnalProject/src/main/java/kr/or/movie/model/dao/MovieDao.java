@@ -183,6 +183,11 @@ public class MovieDao {
 		int deletePostComment=sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
 		return deletePostComment;
 	}
+	//상영예정작 리스트 조회를 위함
+	public ArrayList<Movie> expectedMovie() {
+		List list = sqlSession.selectList("movie.expectedMovie");
+		return (ArrayList<Movie>) list;
+	}
 
 
 	

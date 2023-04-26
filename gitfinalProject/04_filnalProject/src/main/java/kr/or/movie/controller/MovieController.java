@@ -35,14 +35,16 @@ public class MovieController {
 	
 	@RequestMapping(value="/allMovieList.do")
 	public String allMovieList(Model model) {
-		
+		//영화전체 조회와 관람평이 들어가 있음
 		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
-	
+		//상영예정작 조회와 관람평이 들어가 있음
+		ArrayList<Movie> expectedList = service.expectedMovie();
+		model.addAttribute("expectedList",expectedList);
 		
 		
 		
