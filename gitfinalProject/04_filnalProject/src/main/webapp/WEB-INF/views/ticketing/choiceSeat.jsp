@@ -537,6 +537,7 @@
 							<div class="result-title">
 								${schedule.movieTitle}
 							</div>
+							
 							<div class="result-info">
 								<div class="info-branch">
 									<p class="tBrch">${schedule.theaterBranch}</p>
@@ -575,6 +576,7 @@
 						</div>
 					</div>
 				<button class="nowTotal">선택된 인원 수 : </button>
+				<span class="hiddenSpan" title="선택한영화의 scheduleNo" style="display: none;">${schedule.scheduleNo}</span>
 				</div>
 
 			</div>
@@ -655,6 +657,39 @@
 							mapping(input, i, j);
 							div.append(input);
 							input.addEventListener('click', function(e) {
+								
+								const now = $(".now");
+								let totalCount = 0;
+								now.each(function(no,item){
+									totalCount += Number($(item).text());
+								});
+
+								console.log(totalCount);
+								if(totalCount > $(".mySeat").length){
+									if($(this).hasClass("clicked")) {
+										$(this).removeClass("clicked");
+										const index = selectedSeats.indexOf($(this).val());
+										selectedSeats.splice(index,1);
+									}else{
+										$(this).addClass("clicked");
+										selectedSeats.push($(this).val());
+										selectedSeats.sort();
+									}
+									console.log(selectedSeats);
+									$(".selectedSeats-area").empty();
+									
+									$(selectedSeats).each(function(no,item){
+										const div = $("<div>").addClass("mySeat")
+										div.text(item)
+										$(".selectedSeats-area").append(div)
+									});
+									if(totalCount ==  $(".mySeat").length){
+										$('.seat:not(.clicked)').prop('disabled', true );
+									}
+								}
+								
+								
+								/*
 								//중복방지 함수
 									selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
 
@@ -665,7 +700,7 @@
 									clicked.forEach((data) => {
 										selectedSeats.push(data.value);
 									})
-									$(".mySeat").empty()
+									$(".mySeat").empty();
 									selectedSeats.forEach(function(s, i){
 										$(".mySeat").eq(i).text(s)
 									})
@@ -692,6 +727,7 @@
 										$(".selectedSeats-area").append(div)
 									})
 								}
+								*/
 							})
 						}
 					}
@@ -824,7 +860,7 @@
 				function calculateAmount() {
 					const adultPrice = 18000;
 					const teenPrice = 12000;
-					const specPrice = 7000;
+					const specPrice = 1000;//7000
 
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());
@@ -882,16 +918,20 @@
 				});
 				
 				$(".pageNext").on("click",function(){
-					var movieTitle = $(".result-title").text();
+					var movieTitle = $(".result-title").text();	
 					var theaterBranch = $(".tBrch").text();
 					var scheduleStartEnd = $(".info-time").text();
-					var choiceDtDay = $(".toDate").text();
-					var selectedSeats = $(".selectedSeats-area").text();
-					var numOfPeople = $(".numberOfPeople").text();
+					var choiceDtDay = $(".toDate").text();// 상영시간
+					
+					var joinSeats = selectedSeats.join("/"); //좌석 구분자 "/" 추가
+					var numOfPeople = $(".numberOfPeople").text();//연령
 					var totalAmount = $(".amount").text();
+					var scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
+					console.log(scheduleNo);
 					console.log(theaterBranch);
 					console.log(choiceDtDay);
-					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&selectedSeats="+selectedSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount;
+					console.log("joinSeats : "+joinSeats);
+					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 				});
 			</script>
 

@@ -43,6 +43,7 @@
 
 <select id="choiceBranchSchedule" parameterType="map" resultType="ticketingSchedule">
 	select 
+		schedule_no as scheduleNo,
 		movie_title as movieTitle, 
 		to_char(schedule_start,'hh24:mi') as scheduleStart, 
         to_char(schedule_end,'hh24:mi') as scheduleEnd,
