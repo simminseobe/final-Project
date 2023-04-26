@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
@@ -46,4 +47,11 @@ public class TicketingDao {
 		List list = sqlSession.selectList("ticketing.choiceBranchSchedule",map);
 		return (ArrayList<TicketingSchedule>) list;
 	}
+
+	public ArrayList<GiftTicket> selectGiftTicket(int memberNo) {
+		List giftList = sqlSession.selectList("ticketing.selectGiftTicket",memberNo);
+		return (ArrayList<GiftTicket>) giftList;
+	}
+
+	
 }

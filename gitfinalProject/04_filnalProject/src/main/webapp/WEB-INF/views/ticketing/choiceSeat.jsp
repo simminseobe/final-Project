@@ -226,6 +226,9 @@
 					font-size: 15px;
 					color: #c4c4c4;
 				}
+				.tBrch{
+					padding-bottom: 15px;
+				}
 				.info-time{
 					padding: 10px;
 					font-size: 15px;
@@ -283,7 +286,7 @@
 				}
 				.won{
 					display: block;
-					float: left;
+					float: right;
 					padding: 0 0 0 5px;
 					line-height: 35px;
 					font-size: 15px;
@@ -298,11 +301,12 @@
 				}
 
 				.pagePrevious {
+					border: 0;
 					display: block;
 					float: left;
 					margin: 0;
 					width: 150px;
-					height: 50px;
+					height: 40px;
 					line-height: 40px;
 					background-color: #53565b;
 					color: #fff;
@@ -311,17 +315,22 @@
 				}
 
 				.pageNext {
+					border: 0;
 					display: block;
 					float: left;
 					margin: 0;
 					width: 150px;
-					height: 50px;
+					height: 40px;
 					line-height: 40px;
 					background-color: #e0e0e0;	/*좌석선택 후 다음버튼 color:#fff , bg-color:#329eb1*/
 					color: #aaaaaa;
 					font-size: 20px;
 					text-align: center;
 				}
+				.choice-seat-area>p{
+					padding: 5px;
+				}
+				
 			</style>
 		</head>
 
@@ -530,7 +539,7 @@
 							</div>
 							<div class="result-info">
 								<div class="info-branch">
-									${schedule.theaterBranch}<br><br>
+									<p class="tBrch">${schedule.theaterBranch}</p>
 									<p class="toDate">${choiceDataDay.choiceDataDay}</p>
 								</div>
 								<div class="info-time">
@@ -539,7 +548,12 @@
 								</div>
 							</div>
 							<div class="result-seat">
-
+								<div class="choice-seat-area">
+									<p>선택좌석</p>
+									<div class="selectedSeats-area">
+										
+									</div>
+								</div>
 							</div>
 							<div class="numberOfPeople">
 								<div class="numArea1"></div>
@@ -549,14 +563,14 @@
 							<div class="result-pay">
 								<p class="pay-tit">최종결제금액</p>
 								<div class="money">
-									<span class="amount">0</span>
+									<span class="amount"></span>
 									<span class="won">원</span>
 								</div>
 							</div>
 							<div class="result-btn">
-								<a href="/ticketing.do" class="pagePrevious">이전</a>
-								<a href="javascript:void(0)" class="pageNext">다음</a>
-								<input type="hidden" id="memberYN" value="${sessionScope.m.memberId }">
+								<button type="button" class="pagePrevious">이전</button>
+								<button type="button" class="pageNext">다음</button>
+								<!--<input type="hidden" id="memberYN" value="${sessionScope.m.memberId }">-->
 							</div>
 						</div>
 					</div>
@@ -565,152 +579,12 @@
 
 			</div>
 			<script>
-				/*
-				var seatContainer = $('.seat-container');
-				for (var i = 1; i <= 15; i++) {
-					seatContainer.append('<span class="seat-condition" id="repeat' + i + '" style="width:20px; height:20px; border:1px solid #02bfd3; background-color:#555; color: #fff; justify-content:center; align-items:center; display:flex;">' + i + '</span>');
-				}
-				seatContainer.css({
-					'display': 'flex',
-					'flex-direction': 'row'
-				});
-				*/
-				
-				let test = [];
-			    let selectedSeats = new Array();
-			    let selectedSeatsMap = [];
-			    const seatWrapper = document.querySelector(".seat-wrapper");
-			    let clicked = "";
-			    let div = "";
-
-			    for (let i = 0; i < 10; i++) {
-			        div = document.createElement("div");
-			        seatWrapper.append(div);
-			        for (let j = 0; j < 10; j++) {
-			            const input = document.createElement('input');
-			            input.type = "button";
-			            input.name = "seats"
-			            input.classList = "seat";
-			            //3중포문을 사용하지 않기위해 
-			            mapping(input, i, j);
-			            div.append(input);
-			            input.addEventListener('click', function(e) {
-			                console.log(e.target.value);
-			                //중복방지 함수
-			                selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
-
-			                //click class가 존재할때(제거해주는 toggle)
-			                if (input.classList.contains("clicked")) {
-			                    input.classList.remove("clicked");
-			                    clicked = document.querySelectorAll(".clicked");
-			                    selectedSeats.splice(selectedSeats.indexOf(e.target.value), 1);
-			                    clicked.forEach((data) => {
-			                        selectedSeats.push(data.value);
-			                    });
-			                    //click class가 존재하지 않을때 (추가해주는 toggle)
-			                } else {
-			                    input.classList.add("clicked");
-			                    clicked = document.querySelectorAll(".clicked");
-			                    clicked.forEach((data) => {
-			                        selectedSeats.push(data.value);
-			                    })
-			                }
-			                console.log(selectedSeats);
-			            })
-			        }
-			    }
-
-			    function mapping(input, i, j) {
-			        const row = String.fromCharCode(65 + i); // A부터 G까지의 알파벳을 구합니다.
-			        const seatNumber = j + 1; // 0부터 6까지의 숫자에 1을 더하여 좌석 번호를 구합니다.
-			        input.value = row + seatNumber; // 알파벳과 숫자를 조합하여 좌석 값을 설정합니다.
-			    }
-				
-				$(document).ready(function () {
-					// 성인 버튼
-					$('.how-many .cell:nth-child(1) .down').click(function () {
-						var $count = $(this).closest('.count');
-						var $now = $count.find('.now');
-						var nowVal = parseInt($now.text());
-						if (nowVal > 0) {
-							$now.text(nowVal - 1);
-							nowTotal(); // nowTotal() 함수 호출
-							adultCount(); //adultCount()함수호출 : 성인 수
-						}
-					});
-					$('.how-many .cell:nth-child(1) .up').click(function () {
-						var $count = $(this).closest('.count');
-						var $now = $count.find('.now');
-						$now.text(parseInt($now.text()) + 1);
-						nowTotal(); // nowTotal() 함수 호출
-						adultCount(); //adultCount()함수호출 : 성인 수
-					});
-
-					// 청소년 버튼
-					$('.how-many .cell:nth-child(2) .down').click(function () {
-						var $count = $(this).closest('.count');
-						var $now = $count.find('.now');
-						var nowVal = parseInt($now.text());
-						if (nowVal > 0) {
-							$now.text(nowVal - 1);
-							nowTotal(); // nowTotal() 함수 호출
-							teenCount(); //teenCount()함수호출 : 청소년 수
-						}
-					});
-					$('.how-many .cell:nth-child(2) .up').click(function () {
-						var $count = $(this).closest('.count');
-						var $now = $count.find('.now');
-						$now.text(parseInt($now.text()) + 1);
-						nowTotal(); // nowTotal() 함수 호출
-						teenCount(); //teenCount()함수호출 : 청소년 수
-					});
-
-					// 우대 버튼
-					$('.how-many .cell:nth-child(3) .down').click(function () {
-						var $count = $(this).closest('.count');
-						var $now = $count.find('.now');
-						var nowVal = parseInt($now.text());
-						if (nowVal > 0) {
-							$now.text(nowVal - 1);
-							nowTotal(); // nowTotal() 함수 호출
-							specCount(); //specCount()함수호출 : 우대 수
-						}
-					});
-					$('.how-many .cell:nth-child(3) .up').click(function () {
-						var $count = $(this).closest('.count');
-						var $now = $count.find('.now');
-						$now.text(parseInt($now.text()) + 1);
-						nowTotal(); // nowTotal() 함수 호출
-						specCount(); //specCount()함수호출 : 우대 수
-					});
-				});
-				
-				$("#reset-btn").on("click",function(){
-					$('.now').text('0');
-					nowTotal(); // nowTotal() 함수 호출
-				});
-				
-				$(".pageNext").on("click",function(){
-					if($("#memberYN").val() == ''){
-						location.href = "/login.do";
-					}else{
-						location.href = "/paymentMethod.do";
-					}
-				});
-
-				var adultCountResult;//연령종류:수(성인 : 1)
-				var teenCountResult;
-				var specCountResult;
-
 				var countAdult;	//인원 수 
 				var countTeen;
 				var countSpecial;
-
-				var amountAdult; //금액
-				var amountTeen;
-				var amountSpecial;
+				//우측 선택된 인원 수 출력
 				//.now1(성인)의 인원 수 구하는 함수
-				function adultCount(){
+				function getAdultCount(){
 					countAdult = parseInt($('#now1').text());
 					console.log("성인 "+countAdult);
 					$(".numberOfPeople>div.numArea1").empty();
@@ -723,7 +597,7 @@
 					adultCountResult = $(".adultSpan").text();
 				}
 				//.now2(청소년)의 인원 수 구하는 함수
-				function teenCount(){
+				function getTeenCount(){
 					countTeen = parseInt($('#now2').text());
 					console.log("청소년 "+countTeen);
 					$(".numberOfPeople>div.numArea2").empty();
@@ -736,7 +610,7 @@
 					teenCountResult = $(".teenSpan").text();
 				}
 				//.now3(우대)의 인원 수 구하는 함수
-				function specCount(){
+				function getSpecCount(){
 					countSpecial = parseInt($('#now3').text());
 					console.log("우대 "+countSpecial);
 					$(".numberOfPeople>div.numArea3").empty();
@@ -749,11 +623,198 @@
 					specCountResult = $(".specSpan").text();
 					
 				}
-
-				//왜 감싸고 있는 div.how-many에 클릭을 걸어야 제대로 작동하는지 질문하기
 				/*
-				버튼이 아니라 감싸고 있는 div.how-many에 
-				클릭을 걸어야 하는 이유 :
+				var seatContainer = $('.seat-container');
+				for (var i = 1; i <= 15; i++) {
+					seatContainer.append('<span class="seat-condition" id="repeat' + i + '" style="width:20px; height:20px; border:1px solid #02bfd3; background-color:#555; color: #fff; justify-content:center; align-items:center; display:flex;">' + i + '</span>');
+				}
+				seatContainer.css({
+					'display': 'flex',
+					'flex-direction': 'row'
+				});
+				*/
+					var adultCountResult;//연령종류:수(성인 : 1)
+					var teenCountResult;
+					var specCountResult;
+					let test = [];
+					let selectedSeats = new Array();
+					let selectedSeatsMap = [];
+					const seatWrapper = document.querySelector(".seat-wrapper");
+					let clicked = "";
+					let div = "";
+
+				for (let i = 0; i < 10; i++) {
+						div = document.createElement("div");
+						seatWrapper.append(div);
+						for (let j = 0; j < 10; j++) {
+							const input = document.createElement('input');
+							input.type = "button";
+							input.name = "seats"
+							input.classList = "seat";
+							//3중포문을 사용하지 않기위해 
+							mapping(input, i, j);
+							div.append(input);
+							input.addEventListener('click', function(e) {
+								//중복방지 함수
+									selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+
+								//click class가 존재할때(제거해주는 toggle)
+								if ($(this).hasClass("clicked")) {
+									$(this).removeClass("clicked")
+									clicked = document.querySelectorAll(".clicked");
+									clicked.forEach((data) => {
+										selectedSeats.push(data.value);
+									})
+									$(".mySeat").empty()
+									selectedSeats.forEach(function(s, i){
+										$(".mySeat").eq(i).text(s)
+									})
+									//click class가 존재하지 않을때 (추가해주는 toggle)
+								} else {
+									$(this).addClass("clicked");
+									clicked = document.querySelectorAll(".clicked");
+									clicked.forEach((data) => {
+										selectedSeats.push(data.value);
+										var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
+										var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
+										var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
+
+										// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
+										var total = adultCount + teenCount + specCount;
+										if(clicked.length == total || clicked.length == 8){
+											$('.seat:not(.clicked)').prop('disabled', true );
+										}
+									})
+									$(".mySeat").empty()
+									selectedSeats.forEach(function(s, i){
+										const div = $("<div>").addClass("mySeat")
+										div.text(s)
+										$(".selectedSeats-area").append(div)
+									})
+								}
+							})
+						}
+					}
+				
+				
+					function mapping(input, i, j) {
+						const row = String.fromCharCode(65 + i); // A부터 G까지의 알파벳을 구합니다.
+						const seatNumber = j + 1; // 0부터 6까지의 숫자에 1을 더하여 좌석 번호를 구합니다.
+						input.value = row + seatNumber; // 알파벳과 숫자를 조합하여 좌석 값을 설정합니다.
+					}
+
+					// 성인 버튼
+					$('.how-many .cell:nth-child(1) .down').click(function () {
+						var $count = $(this).closest('.count');
+						var $now = $count.find('.now');
+						var nowVal = parseInt($now.text());
+						if (nowVal > 0) {
+							$now.text(nowVal - 1);
+							nowTotal(); // nowTotal() 함수 호출
+							getAdultCount(); //adultCount()함수호출 : 성인 수
+						}
+					});
+					$('.how-many .cell:nth-child(1) .up').click(function () {
+						var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
+						var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
+						var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
+
+						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
+						var total = adultCount + teenCount + specCount;
+						if(total < 8){
+							var $count = $(this).closest('.count');
+							var $now = $count.find('.now');
+							$now.text(parseInt($now.text()) + 1);
+							nowTotal(); // nowTotal() 함수 호출
+							getAdultCount(); //adultCount()함수호출 : 성인 수
+							$('.seat:not(.clicked)').prop('disabled', false );
+						} else {
+							alert("8명 제한입니다");
+						}						
+					});
+
+					// 청소년 버튼
+					$('.how-many .cell:nth-child(2) .down').click(function () {
+						var $count = $(this).closest('.count');
+						var $now = $count.find('.now');
+						var nowVal = parseInt($now.text());
+						if (nowVal > 0) {
+							$now.text(nowVal - 1);
+							nowTotal(); // nowTotal() 함수 호출
+							getTeenCount(); //teenCount()함수호출 : 청소년 수
+						}
+					});
+					$('.how-many .cell:nth-child(2) .up').click(function () {
+						var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
+						var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
+						var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
+
+						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
+						var total = adultCount + teenCount + specCount;
+						if(total < 8){
+							var $count = $(this).closest('.count');
+							var $now = $count.find('.now');
+							$now.text(parseInt($now.text()) + 1);
+							nowTotal(); // nowTotal() 함수 호출
+							getTeenCount(); //teenCount()함수호출 : 청소년 수
+							$('.seat:not(.clicked)').prop('disabled', false );
+						} else {
+							alert("8명 제한입니다");
+						}
+					});
+
+					// 우대 버튼
+					$('.how-many .cell:nth-child(3) .down').click(function () {
+						var $count = $(this).closest('.count');
+						var $now = $count.find('.now');
+						var nowVal = parseInt($now.text());
+						if (nowVal > 0) {
+							$now.text(nowVal - 1);
+							nowTotal(); // nowTotal() 함수 호출
+							getSpecCount() //specCount()함수호출 : 우대 수
+						}
+					});
+					$('.how-many .cell:nth-child(3) .up').click(function () {
+						var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
+						var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
+						var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
+
+						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
+						var total = adultCount + teenCount + specCount;
+						if(total < 8){
+							var $count = $(this).closest('.count');
+							var $now = $count.find('.now');
+							$now.text(parseInt($now.text()) + 1);
+							nowTotal(); // nowTotal() 함수 호출
+							getSpecCount() //specCount()함수호출 : 우대 수
+							$('.seat:not(.clicked)').prop('disabled', false );
+						} else {
+							alert("8명 제한입니다");
+						}
+					});
+
+
+				
+				$("#reset-btn").on("click",function(){
+					$('.now').text('0');
+					nowTotal(); // nowTotal() 함수 호출
+					calculateAmount();
+					getAdultCount();
+					getTeenCount();
+					getSpecCount()
+					$(".selectedSeats-area").empty();
+					const input = $("input");
+					input.removeClass("clicked")
+					$('.seat').prop('disabled', true );
+				});
+				/*
+				$(".pageNext").on("click",function(){
+					if($("#memberYN").val() == ''){
+						location.href = "/login.do";
+					}else{
+						location.href = "/paymentMethod.do";
+					}
+				});
 				*/
 				//calculateAmount()함수 호출
 				$(".how-many").on("click",function(){
@@ -775,7 +836,7 @@
 
 					const totalAmount = adultAmount + teenAmount + specAmount;
 					console.log(totalAmount);
-					console.log(totalAmount.toLocaleString());
+					console.log(totalAmount);
 					
 					$(".amount").text(totalAmount.toLocaleString());
 				}
@@ -783,6 +844,7 @@
 				
 ////////////////////////////////////////////////////////////			
 				// .now 값을 합치고 버튼의 텍스트를 업데이트하는 함수
+				var allPeopleCount;
 				function nowTotal() {
 				var now1 = parseInt($('#now1').text());
 				var now2 = parseInt($('#now2').text());
@@ -792,9 +854,45 @@
 				$('.nowTotal').text('선택된 인원 수 : ' + allPeopleCount);
 				
 				}
-
 				
 
+				////////////////////////////////////////////////////////////
+				
+				$(document).ready(function() {
+					// 인원 수 선택 버튼이 클릭될 때마다 좌석 선택 버튼을 활성화하거나 비활성화합니다.
+					$('.how-many .count').on('click', function() {
+						// 선택한 성인, 청소년, 우대 인원 수를 가져옵니다.
+						var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
+						var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
+						var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
+
+						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
+						var total = adultCount + teenCount + specCount;
+						$('.seat').prop('disabled', false);
+						//$('.seat').slice(total).prop('disabled', true );
+					});
+
+					$('.seat').prop('disabled', true );
+				});
+				
+				
+				////////////////////////////////////////////////////////////	
+				$(".pagePrevious").on("click",function(){
+					location.href="/ticketing.do";
+				});
+				
+				$(".pageNext").on("click",function(){
+					var movieTitle = $(".result-title").text();
+					var theaterBranch = $(".tBrch").text();
+					var scheduleStartEnd = $(".info-time").text();
+					var choiceDtDay = $(".toDate").text();
+					var selectedSeats = $(".selectedSeats-area").text();
+					var numOfPeople = $(".numberOfPeople").text();
+					var totalAmount = $(".amount").text();
+					console.log(theaterBranch);
+					console.log(choiceDtDay);
+					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&selectedSeats="+selectedSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount;
+				});
 			</script>
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

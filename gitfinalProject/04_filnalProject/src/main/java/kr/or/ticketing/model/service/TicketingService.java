@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
 import kr.or.ticketing.model.vo.TicketingSchedule;
@@ -63,4 +64,11 @@ public class TicketingService {
 
 		return list;
 	}
+
+	public ArrayList<GiftTicket> selectGiftTicket(int memberNo) {
+		ArrayList<GiftTicket> giftList = dao.selectGiftTicket(memberNo);
+		return (ArrayList<GiftTicket>) giftList;
+	}
+
+	
 }

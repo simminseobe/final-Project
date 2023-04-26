@@ -7,7 +7,7 @@
 }
 
 .join-wrapper{
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -169,7 +169,7 @@ label{
 }
 
 .accordion-body{
-    font-size: 0.7em;
+    font-size: 1.0em;
     max-height: 225px;
     overflow: auto;
     transition: max-height 0.2s ease-out;

@@ -34,16 +34,18 @@ public class PasswordEncAdvice {
 		String methodName = jp.getSignature().getName();
 		//System.out.println("비밀번호 암호화 동작 메소드 : " + methodName);
 		// 매개변수 꺼내기(항상 Object[] 타입)
-		Object[] args = jp.getArgs(); 
+		Object[] args = jp.getArgs();
 		Member member = (Member)args[0];
 		
 		String memberPw = member.getMemberPw();
 		//System.out.println("사용자 입력 비밀번호 : " + memberPw);
-		
-		String encPw = passEnc.encDate(memberPw);
-		//System.out.println("암호화 비밀번호 : " + encPw);
-		
-		member.setMemberPw(encPw);
+		if(memberPw != null) {
+			
+			String encPw = passEnc.encDate(memberPw);
+			//System.out.println("암호화 비밀번호 : " + encPw);
+			
+			member.setMemberPw(encPw);
+		}
 	}
 	
 	@Pointcut(value="execution(* kr.or.member.model.service.MemberService.updatePw(..))")
@@ -61,5 +63,4 @@ public class PasswordEncAdvice {
 		String encPw = passEnc.encDate(member.getMemberPw());
 		member.setMemberPw(encPw);
 	}
-	
 }

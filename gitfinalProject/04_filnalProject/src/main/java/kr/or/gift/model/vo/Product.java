@@ -20,8 +20,12 @@ public class Product {
 	private int productStatus;
 	private String simpleInfo;
 	
-	
 	private ArrayList<ProductCategory> categorys;
+	private ArrayList<ProductOption> productOptions;
 	private ProductPhoto mainImage;
 	private ArrayList<ProductPhoto> images;
+	
+	
+	
+	private int productLikeCount;
 }

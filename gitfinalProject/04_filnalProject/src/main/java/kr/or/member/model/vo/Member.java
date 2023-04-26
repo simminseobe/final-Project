@@ -22,4 +22,5 @@ public class Member {
 	private String memberGender;
 	private String memberFilename;
 	private String memberFilepath;
+	private int social;
 }

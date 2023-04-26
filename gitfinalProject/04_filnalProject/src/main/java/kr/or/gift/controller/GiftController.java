@@ -17,6 +17,8 @@ import common.FileManager;
 import kr.or.gift.model.service.GiftService;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductOption;
+import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Controller
@@ -136,6 +138,7 @@ public class GiftController {
 	public String giftDetail(Model model, int productNo) {
 		Product product = sv.getOneProduct(productNo);
 		product.setImages(sv.getAllProductImage(productNo));
+		product.setProductOptions(sv.getProductOptions(productNo));
 		model.addAttribute("p",product);
 		
 		return "gift/giftDetail";
@@ -145,6 +148,7 @@ public class GiftController {
 	public String adminGiftDetail(Model model, int productNo) {
 		Product p = sv.getOneProduct(productNo);
 		p.setImages(sv.getAllProductImage(productNo));
+		p.setProductOptions(sv.getProductOptions(productNo));
 		model.addAttribute("p",p);
 		return "admin/gift/adminGiftDetail";
 	}
@@ -164,4 +168,44 @@ public class GiftController {
 		}
 	}
 	
+	@RequestMapping(value = "/insertOption.do")
+	public String insertOption(String[] poName, String[] poPrice, int productNo) {
+		ArrayList<ProductOption> options = new ArrayList<ProductOption>();
+		for(int i=0; i<poName.length;i++) {
+			ProductOption option = new ProductOption();
+			option.setPoName(poName[i]);
+			option.setPoPrice(Integer.parseInt(poPrice[i]));
+			option.setProductNo(productNo);
+			options.add(option);
+		}
+		int result = sv.insertOption(options);
+		System.out.println("result : " + result);
+		return "redirect:/adminGiftDetail.do?productNo="+productNo;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/deleteOption.do", produces = "application/json;charset=utf-8")
+	public String deleteOption(int poNo) {
+		int result = sv.deleteOption(poNo);
+		return result + "";
+	}
+	@RequestMapping(value = "/takeOrderSheet.do")
+	public String takeOrderSheet(Model model,String[] poNo, String[] orderCount, int productNo) {
+		ArrayList<ProductOrderSheet> posList = new ArrayList<ProductOrderSheet>();
+//		1. 주문 요청한 회원의 장바구니에 있는 주문 번호를 다 가져와서
+//		2. 해당 주문번호의 상품 번호가 주문 요청 상품번호와 일치하면 
+//		3. 상품 주문서를 새로 작성하지 말고 기존 주문서를 업데이트하고
+//		4. 주문결제시 -> 장바구니 삭제
+//		5. 주문 취소시 장바구니 업데이트
+		for(int i=0; i<poNo.length;i++) {
+			ProductOrderSheet pos = new ProductOrderSheet();
+			pos.setProductNo(productNo);
+			pos.setPoNo(Integer.parseInt(poNo[i]));
+			pos.setOrderCount(Integer.parseInt(orderCount[i]));
+			posList.add(pos);
+		}
+		int result = sv.insertOrderSheet(posList);
+		System.out.println("result : " + result);
+		model.addAttribute("posList", posList);
+		return "";
+	}
 } 

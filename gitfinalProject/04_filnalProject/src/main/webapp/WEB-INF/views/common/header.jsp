@@ -27,14 +27,18 @@
                 <li><a href="/allGiftList.do">스토어</a></li>
                 <li><a href="#">이벤트</a></li>
                 <c:choose>
-	                <c:when test="${empty sessionScope.m }">
+	                <c:when test="${empty sessionScope.m}">
 		                <li><a href="/login.do">로그인</a></li>
 	                </c:when>
-	                <c:when test="${not empty sessionScope.m.memberPw })">
+	                <c:when test="${sessionScope.m.social eq 0}">
 	                	<li><a href="/logout.do">로그아웃</a></li>
 	                </c:when>
+	                <c:when test="${sessionScope.m.social eq 1}">
+	                <!-- https://kauth.kakao.com/oauth/logout?client_id=95e454d415a0cf20175203f81771b058&logout_redirect_uri=http://192.168.10.32/kakaoLogout.do -->
+	                	<li><a href="https://kauth.kakao.com/oauth/logout?client_id=95e454d415a0cf20175203f81771b058&logout_redirect_uri=http://192.168.10.32/kakaoLogout.do">로그아웃</a></li>	                
+	                </c:when>
 	                <c:otherwise>
-	                	<li><a href="https://kauth.kakao.com/oauth/logout?client_id=95e454d415a0cf20175203f81771b058&logout_redirect_uri=http://192.168.10.32/kakaoLogout.do">로그아웃</a></li>
+	                	<li><a href="/naverLogout.do"></a></li>
 	                </c:otherwise>
                 </c:choose>
                 
