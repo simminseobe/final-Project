@@ -130,6 +130,8 @@
                 index = orderedLi.indexOf(pickImgLi)
                 array = Array.from(files)
                 img = array.splice(index,1)
+                console.log(document.querySelector('#file-input').files)
+                console.log(index)
             },
             change: ui => {
                 // console.log(ui)
@@ -149,7 +151,16 @@
                 })
                 document.querySelector('#file-input').files = dataTranster.files
                 // 이동 마친 filelist
-                // console.log(document.querySelector('#file-input').files)
+                console.log(document.querySelector('#file-input').files)
+                console.log(index)
+                // 문제점 1. 사진이 파일리스트에 등록되어있는 순서대로
+                // 미리보기에 등록되는게 아님.
+                // 그래서 정렬 시 실제 이동하는 파일과,
+                // 드래그 드랍으로 이동시키는 파일 미리보기가 일치하지 않으므로
+                // 오류가 발생 .
+                // 해결안 : 
+                // 파일 미리보기가 파일리스트 index대로 출력될 수 있게
+                // 수정할 필요가 있음
             }
         })
         $("#sortable").disableSelection()

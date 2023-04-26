@@ -11,6 +11,6 @@ public class ProductOrderSheet {
 	private int posNo;
 	private int orderNo;
 	private int productNo;
-	private int optionNo;
+	private int poNo;
 	private int orderCount;
 }

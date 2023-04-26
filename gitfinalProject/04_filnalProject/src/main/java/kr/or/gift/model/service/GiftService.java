@@ -9,6 +9,7 @@ import kr.or.gift.model.dao.GiftDao;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.gift.model.vo.ProductOption;
+import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
 
 @Service
@@ -106,6 +107,15 @@ public class GiftService {
 	public int deleteOption(int poNo) {
 		// TODO Auto-generated method stub
 		return dao.deleteOption(poNo);
+	}
+
+	public int insertOrderSheet(ArrayList<ProductOrderSheet> posList) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		for(ProductOrderSheet pos : posList) {
+			result += dao.insertOrderSheet(pos);
+		}
+		return result;
 	}
 
 }
