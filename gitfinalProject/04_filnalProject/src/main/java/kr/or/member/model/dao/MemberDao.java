@@ -81,4 +81,15 @@ public class MemberDao {
 		return totalCount;
 	}
 
+	// 카카오 로그인
+	public Member selectOneKaKao(Member member) {
+		Member m = sqlSession.selectOne("member.selectOneKakao", member);
+		return m;
+	}
+
+	public Member selectOneNaver(Member member) {
+		Member m = sqlSession.selectOne("member.selectOneNaver", member);
+		return m;
+	}
+
 }

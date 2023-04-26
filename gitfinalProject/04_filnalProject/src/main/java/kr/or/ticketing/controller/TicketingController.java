@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.gift.model.vo.GiftTicket;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.service.TicketingService;
@@ -49,8 +52,11 @@ public class TicketingController {
 	}
 
 	@RequestMapping(value = "/paymentMethod.do")
-	public String paymentMethod(TicketingInfo ticketingInfo, Model model) {
+	public String paymentMethod(TicketingInfo ticketingInfo, Model model, @SessionAttribute(required=false)Member m) {
 		model.addAttribute("TicketingInfo",ticketingInfo);
+		int memberNo = m.getMemberNo();
+		ArrayList<GiftTicket> giftList = service.selectGiftTicket(memberNo);
+		System.out.println("giftList : "+giftList);
 		return "ticketing/paymentMethod";
 	}
 
@@ -105,6 +111,16 @@ public class TicketingController {
 		
 		return new Gson().toJson(list);
 	}
+
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/paymentPage.do", produces =
+	 * "application/json;charset=utf-8") public String paying(int payPrice) { int
+	 * result = service.paying(payPrice);
+	 * 
+	 * return new Gson().toJson(result); }
+	 */
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")
 	public String testPage() {

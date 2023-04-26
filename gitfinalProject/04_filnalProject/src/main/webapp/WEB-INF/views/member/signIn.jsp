@@ -48,36 +48,17 @@
         		<a href="https://kauth.kakao.com/oauth/authorize?client_id=95e454d415a0cf20175203f81771b058&redirect_uri=http://192.168.10.32/kakaoLogin.do&response_type=code" class="login-form">
         			<img src="/image/kakao_login_medium_wide.png" class="kakaoBtn">
         		</a>
+				<!-- 네이버 로그인 창으로 이동 -->
+				<div id="naver_id_login" style="text-align:center">
+					<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=2bPh_mYXLtkjmaWWo_8B&state=vKHZagAtTC&redirect_uri=http://192.168.10.32/callback.do">
+					<img width="250px" height="37.5px" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
         	</div>
         </div>
       </form>
     </div>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   </div>
   
-<!-- <script>
-  	/* 카카오 로그인 */
-  	function kakaoLogin() {
-  		$.ajax({
-  			url: "/getKakaoAuthUrl.do",
-  			type : "POST",
-  			async : false,
-  			dataType : "text",
-  			success : function(data) {
-  				location.href = data;
-  			}
-  		});
-  	}
-  	
-  	$(document).ready(function() {
-  		let kakaoInfo = "${kakaoInfo}";
-  		if(kakaoInfo != "") {
-  			let data = JSON.parse(kakaoInfo);
-  			
-  			alert("카카오 로그인 성공 \n accessToken : " + data["accessToken"]);
-  			alert("user : \n" + "email : " + data["email"] + "\n nickname : " + data["nickname"]);
-  		}
-  	});
-  </script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
+  
 </body>
 </html>
