@@ -1,5 +1,7 @@
 package kr.or.member.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,4 +25,5 @@ public class Member {
 	private String memberFilename;
 	private String memberFilepath;
 	private int social;
+	private ArrayList<ShoppingAddress> shopAdd;
 }

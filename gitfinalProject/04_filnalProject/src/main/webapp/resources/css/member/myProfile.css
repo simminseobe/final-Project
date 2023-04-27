@@ -21,16 +21,14 @@
 .mypage-wrap{
 	margin: 0 auto;
     padding-top: 80px;
-    width: 100vh;
     position: absolute;
     left: 450px;
-    height: 100vh;
 }
 
 .mypage-header>h2{
-    padding: 30px 0 15px 0;
+	padding: 15px 0 15px 0;
     font-weight: bold;
-    font-size: 28px;
+	font-size: 2.0em;
     color: #222222;
 }
 
@@ -42,7 +40,7 @@
 .profile-content>tbody>tr>th{
     background-color: #f7f8f9;
     padding: 20px;
-    font-size: 18px;
+	font-size: 1.2em;
     font-weight: bold;
     width: 200px;
     text-align: left;
@@ -201,9 +199,9 @@ th:first-child, td:first-child {
 }
 
 .left>h2{
-	font-size: 28px;
+	font-size: 2.0em;
 	font-weight: bold;
-    margin: 65px 0px 15px 0px;
+	margin: 30px 0px 0px 0px;
 }
 
 .right{
@@ -212,9 +210,7 @@ th:first-child, td:first-child {
 }
 
 .profile-essential{
-    position: absolute;
-	left: 770px;
-    top: 10px;
+	float: right;
 }
 
 sup{
@@ -247,15 +243,13 @@ sup{
 }
 
 .btn-wrap{
-    position: relative;
-    margin: 50px 0px 50px 0px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
     height: 50px;
 }
 
 #cancelBtn{
-    position: absolute;
-    top: 0px;
-    left: 300px;
     width: 75px;
     height: 45px;
     border-radius: 10px;
@@ -265,6 +259,7 @@ sup{
     font-size: 16px;
     font-weight: bold;
     border: none;
+    margin-right: 15px;
 }
 
 #cancelBtn:hover{
@@ -273,9 +268,6 @@ sup{
 }
 
 #enrollBtn{
-    position: absolute;
-    top: 0px;
-    left: 400px;
     width: 75px;
     height: 45px;
     border-radius: 10px;
@@ -291,3 +283,46 @@ sup{
     color: #fff;
     background: #351c6f;
 }
+
+.delivery{
+	margin: 15px 0px 15px 0px;
+	font-size: 2.0em;
+	font-weight: bold;
+}
+
+.profile-content-two>tbody>tr>th{
+	background-color: #f7f8f9;
+    padding: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 200px;
+    text-align: left;
+}
+
+.profile-content-two>tbody>tr>th:nth-child(1) {
+	width: 110px;
+}
+
+.profile-content-two>tbody>tr>th:nth-child(2) {
+	width: 400px;
+}
+
+.profile-content-two>tbody>tr>th:nth-child(3) {
+	width: 120px;
+}
+
+.profile-content-two>tbody>tr>th:nth-child(4) {
+	width: 170px;
+}
+
+.profile-content-two>tbody>tr>td {
+	font-size: 1.2em;
+	margin-left: 7px;
+    padding-left: 7px;
+    border: none;
+}
+
+.my-btn,#file-upload-button{ color: #fff; padding:5px 10px 5px 10px; margin:5px; display:inline-block; border-radius: 10px; transition:all 0.080s; }
+.my-btn:active{ transform: translateY(3px); }
+.my-btn.my-blue{ background-color: #503396; border-bottom:5px solid #3C2671; }
+.my-btn.my-blue:active{ border-bottom:2px solid #3C2671; margin-bottom: 8px; }

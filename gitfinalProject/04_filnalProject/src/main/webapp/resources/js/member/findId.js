@@ -51,7 +51,6 @@ function mailsendPw(){
         type : "post",
         data : {memberId:memberId, memberName:memberName, email:email},
         success : function(data){
-            alert("임시 비밀번호가 발송되었습니다.");
             mailCode = data;
         },
         error : function() {
