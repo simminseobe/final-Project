@@ -21,7 +21,7 @@
 
 	<div>이름: ${sessionScope.m.memberName }</div>
 	<input type="text" name="memberNo" value=${sessionScope.m.memberNo }>
-	<div>잔여포인트: <div id="memberPoint">${p.memberPoint }</div></div>
+	<div>잔여포인트:${point.memberPoint }</div>
 	<div>등급: ${sessionScope.m.memberLevel }</div>
 	<div>다음 Gold 등급까지 6000P</div>
 	<div>적립예정: </div>
