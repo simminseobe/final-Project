@@ -7,7 +7,7 @@
   	set
   		member_no=#{memberNo}
   	where
-  		gift_ticket_serial=#{giftTicketSerial} and member_no is null
+  		gift_ticket_serial=#{giftTicketSerial} and gift_ticket_status='사용가능' and member_no is null
   </update>
   
   <update id="useGiftTicket" parameterType="kr.or.giftticket.model.vo.TicketVO">
