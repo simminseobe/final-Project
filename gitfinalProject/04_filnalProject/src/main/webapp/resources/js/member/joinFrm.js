@@ -51,6 +51,12 @@ $("#idChkBtn").on("click", function() {
 
 function closeClick() {
     $("#modal").hide();
+    $("#modal-two").hide();
+}
+
+function okClose() {
+    $("#modal").hide();
+    $("#modal-two").hide();
 }
 
 $("#buttonOk").on("click", function() {
@@ -132,13 +138,13 @@ $("#emailCheck").on("click", function() {
         type : "POST",
         data : {email:email},
         success : function(data) {
-            alert("인증번호가 발송되었습니다.");
             mailCode = data;
+            $("#modal-two").show();
             $("#email-time").text();
+            $("#emailCheck").hide();
             authTime();
         },
-        error : function() {
-            alert("인증번호 이메일 발송 실패");
+        error : function() {          
         }
     });
 });
