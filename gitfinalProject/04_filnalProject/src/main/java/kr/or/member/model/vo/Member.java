@@ -26,4 +26,5 @@ public class Member {
 	private String memberFilepath;
 	private int social;
 	private ArrayList<ShoppingAddress> shopAdd;
+	private ArrayList<MemberPoint> memberPoint;
 }

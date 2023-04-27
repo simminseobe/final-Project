@@ -33,5 +33,19 @@
         </ul>
     </div>
     </div>
-    
+    <script>
+    $(".menu a").on("click",function(){
+        $(".menu a").css("color","#808080");
+        $(".menu a").css("font-weight","400");
+        $("#myBox>a").css("color","#fff");
+        $("#myBox>a").css("font-weight","bold");
+        $(this).css("color","#008040");
+        $(this).css("font-weight","bold");
+    });
+
+    $("#myBox>a").on("click",function(){
+        $("#myBox>a").css("color","#fff");
+        $("#myBox>a").css("font-weight","bold");
+    });
+    </script>
 </menubar>
