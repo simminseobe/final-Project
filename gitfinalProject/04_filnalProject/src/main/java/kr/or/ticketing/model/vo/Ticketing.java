@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Ticketing {
 	private int ticketingNo;
-	private String ticketingTime;
-	private int ticketingPrice;
-	private int ticketingEa;
-	private int seat;
-	private int scheduleNo;
+	private String ticketingTime;//
+	private int ticketingAge;
+	private String seat;
+	private int payNo;//
+	private int scheduleNo;//
 }

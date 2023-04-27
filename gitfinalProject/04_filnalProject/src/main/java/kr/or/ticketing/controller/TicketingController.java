@@ -21,6 +21,8 @@ import kr.or.ticketing.model.service.TicketingService;
 import kr.or.ticketing.model.vo.ChoiceDataDay;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.Ticketing;
+import kr.or.ticketing.model.vo.TicketingComplete;
 import kr.or.ticketing.model.vo.TicketingInfo;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
@@ -56,7 +58,7 @@ public class TicketingController {
 	public String paymentMethod(TicketingInfo ticketingInfo, Model model,
 			@SessionAttribute(required = false) Member m) {
 		model.addAttribute("TicketingInfo", ticketingInfo);
-		int memberNo = m.getMemberNo();
+		int memberNo = m.getMemberNo();	//로그인 안되어있으면 에러남
 		ArrayList<GiftTicket> giftList = service.selectGiftTicket(memberNo);
 
 		System.out.println("giftList : " + giftList);
@@ -119,22 +121,32 @@ public class TicketingController {
 
 	
 	 @ResponseBody
-	 @RequestMapping(value = "/paymentPage.do", produces = "application/json;charset=utf-8") 
-	 public String insertPay(Pay pay) { 
-	 int result = service.insertPay(pay);
-	 	
+	 @RequestMapping(value = "/paymentPage.do") 
+	 public String insertPay(Pay pay, TicketingInfo ticketingInfo) { 
+	 int result = service.insertPay(pay, ticketingInfo);
+	 	System.out.println(pay);
+	 	System.out.println("ticketingInfo :" +ticketingInfo);
+	 	System.out.println("result :"+result);
 	 	if(result>0) {
 	 		
+	 		System.out.println("return 통과");
 			return "success";
 		}else {
 			return "fail";
 		} 
 	 }
 	 @RequestMapping(value = "/ticketingComplete.do")
-	 public String ticketingComplete() {
+	 public String ticketingComplete(TicketingComplete ticketingComplete, Model model) {
+		 model.addAttribute("ticketingComplete",ticketingComplete);
+		 System.out.println(ticketingComplete);
 		 return "ticketing/ticketingComplete";
 	 }
-	 
+	 @ResponseBody
+	 @RequestMapping(value="/holdSeat.do", produces = "application/json;charset=utf-8")
+	 public String selectSeat(int scheduleNo) {
+		 ArrayList<Schedule> list = service.selectSeat(scheduleNo);
+		 return new Gson().toJson(list);
+	 }
 
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")

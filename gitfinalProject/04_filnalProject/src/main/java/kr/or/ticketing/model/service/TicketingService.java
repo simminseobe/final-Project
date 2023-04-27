@@ -12,6 +12,8 @@ import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.Ticketing;
+import kr.or.ticketing.model.vo.TicketingInfo;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
 @Service
@@ -74,13 +76,47 @@ public class TicketingService {
 	
 	
 
-	public int insertPay(Pay pay) {
-		int result = dao.insertPay(pay);
+	public int insertPay(Pay pay, TicketingInfo ticketingInfo) {
+		int result = dao.insertPay(pay, ticketingInfo);
+		int payNo = dao.selectLatestPay();
+		System.out.println(payNo);
+		ticketingInfo.getChoiceDtDay();	//상영시간(날짜형식->+시간형식)
+		ticketingInfo.getScheduleNo();	//스케쥴넘버
+		/*
+		ticketingInfo.getNumOfPeople();	//연령(성인2청소년1)
+		ticketingInfo.getJoinSeats();	//좌석(
+		 */
+		Ticketing ticketing = new Ticketing();
+		ticketing.setTicketingTime(ticketingInfo.getChoiceDtDay());
+		ticketing.setPayNo(payNo);
+		ticketing.setScheduleNo(ticketingInfo.getScheduleNo());
+		String[] seatArr = ticketingInfo.getJoinSeats().split("/");
+		String[] peopleArr = ticketingInfo.getCountArr().split("/");
+		
+		for(int i=0;i<seatArr.length;i++) {
+			ticketing.setSeat(seatArr[i]);
+			String age = peopleArr[i];
+			ticketing.setTicketingAge(Integer.parseInt(age));
+			
+			result += dao.insertTicketing(ticketing);
+		}
+		
+		
+		/*
 		if(result>0) {
 			
 		}
+		*/
 		return result;
+		
 	}
+
+	public ArrayList<Schedule> selectSeat(int scheduleNo) {
+		ArrayList<Schedule> list = dao.selectSeat(scheduleNo);
+		return list;
+	}
+
+	
 
 	
 }
