@@ -231,7 +231,6 @@ public class MemberController {
 	public String myProfile(@SessionAttribute(required = false) Member m , Model model) {
 		// 배송지 정보 조회
 		ArrayList<ShoppingAddress> address = service.shopAddress(m.getMemberNo());
-		System.out.println("address: " + address);
 		if(!address.isEmpty()) {
 			model.addAttribute("address", address);
 		}
@@ -725,6 +724,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
 	
 
 }
