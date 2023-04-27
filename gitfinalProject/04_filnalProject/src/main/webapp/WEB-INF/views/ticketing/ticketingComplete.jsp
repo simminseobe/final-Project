@@ -163,13 +163,19 @@
 								</div>
 								<div class="content-ct">
 									<ul>
-										<li>리바운드</li>
-										<li></li>
-										<li></li>
-										<li></li>
-										<li></li>
-										<li></li>
-										<li></li>
+										<li>${ticketingComplete.movieTitle}</li>
+										<li>${ticketingComplete.theaterBranch}</li>
+										<li>
+											<span style="padding-right: 10px;">${ticketingComplete.choiceDtDay}</span>
+											<span>${ticketingComplete.scheduleStart}</span>
+										</li>
+										<li>${ticketingComplete.numOfPeople}</li>
+										<li>${ticketingComplete.joinSeats}</li>
+										<li>${ticketingComplete.memberPhone}</li>
+										<li>
+											<span style="color: #59bec9; font-size: 22px;">${ticketingComplete.payPrice}</span>
+											<span>원</span>
+										</li>
 									</ul>
 								</div>
 							</div>

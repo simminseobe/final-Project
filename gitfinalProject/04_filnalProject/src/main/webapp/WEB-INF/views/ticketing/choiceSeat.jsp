@@ -581,6 +581,29 @@
 
 			</div>
 			<script>
+				
+				var scheduleNo = $(".hiddenSpan").text();
+				$(function(){
+					$.ajax({
+						url : "/holdSeat.do",
+						type : "post",
+						data : {scheduleNo:scheduleNo},
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+							for(let i = 0; i<data.length;i++){
+								const seats = $(".seat");
+								seats.each(function(index,item){
+									if($(item).val() == data[i]){
+										$(item).prop("disabled",true);
+										$(item).addClass("reserved");
+										$(item).off("click");
+									}
+								})
+							}
+						}
+					});
+				});
 				var countAdult;	//인원 수 
 				var countTeen;
 				var countSpecial;
@@ -656,7 +679,7 @@
 							//3중포문을 사용하지 않기위해 
 							mapping(input, i, j);
 							div.append(input);
-							input.addEventListener('click', function(e) {
+							$(input).on('click', function(e) {
 								
 								const now = $(".now");
 								let totalCount = 0;
@@ -685,6 +708,8 @@
 									});
 									if(totalCount ==  $(".mySeat").length){
 										$('.seat:not(.clicked)').prop('disabled', true );
+										
+										
 									}
 								}
 								
@@ -725,7 +750,11 @@
 							$now.text(parseInt($now.text()) + 1);
 							nowTotal(); // nowTotal() 함수 호출
 							getAdultCount(); //adultCount()함수호출 : 성인 수
+							
 							$('.seat:not(.clicked)').prop('disabled', false );
+							
+							$('.reserved').prop('disabled', true );
+							console.log("aaaa", $(".reserved").eq(0).prop("disabled"));
 						} else {
 							alert("8명 제한입니다");
 						}						
@@ -756,6 +785,7 @@
 							nowTotal(); // nowTotal() 함수 호출
 							getTeenCount(); //teenCount()함수호출 : 청소년 수
 							$('.seat:not(.clicked)').prop('disabled', false );
+							
 						} else {
 							alert("8명 제한입니다");
 						}
@@ -786,6 +816,7 @@
 							nowTotal(); // nowTotal() 함수 호출
 							getSpecCount() //specCount()함수호출 : 우대 수
 							$('.seat:not(.clicked)').prop('disabled', false );
+							
 						} else {
 							alert("8명 제한입니다");
 						}
@@ -822,7 +853,7 @@
 				function calculateAmount() {
 					const adultPrice = 100;//18000
 					const teenPrice = 100;//12000
-					const specPrice = 7000;//7000
+					const specPrice = 100;//7000
 
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());
@@ -867,6 +898,8 @@
 						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
 						var total = adultCount + teenCount + specCount;
 						$('.seat').prop('disabled', false);
+						$('.reserved').prop('disabled', true );
+						console.log("aaaa", $(".reserved").eq(0).prop("disabled"));
 						//$('.seat').slice(total).prop('disabled', true );
 					});
 
@@ -886,34 +919,27 @@
 					var choiceDtDay = $(".toDate").text();// 상영시간
 					
 					var joinSeats = selectedSeats.join("/"); //좌석 구분자 "/" 추가
-					//var numOfPeople = $(".numberOfPeople").text();//연령
+					var numOfPeople = $(".numberOfPeople").text();//연령
 					var totalAmount = $(".amount").text();
-					var scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
-					//console.log("자르기 전 "+numOfPeople);//
+					scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
+					console.log("자르기 전 "+numOfPeople);//
 					
 					//////////////////////////////////////////////////////////////////////////////
 					//regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
 					
-					// 변수 초기화
-					var wordNum = $(".numberOfPeople").text();
-					// 문자열과 숫자 분리
-					
-					var letters = wordNum.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
-					var numbers = wordNum.replace(/[^0-9]/g, "");
-					// 출력
-					console.log("문자열: " + letters);
-					console.log("숫자: " + numbers);
-					//var joinLetters = letters.join("/");
-					//console.log("joinLetters : "+joinLetters);
-					var cut1 = letters.substr(0,2);//성인
-					var cut2 = letters.substr(2,3);//청소년
-					var cut3 = letters.substr(5,7);//우대
-					console.log("cut1:" + cut1);
-					console.log("cut2:" + cut2);
-					console.log("cut3:" + cut3);
-					var cut1d = cut1.repeat(2);
-					console.log(cut1d);//성인성인
-					
+					const adultCount = parseInt($('#now1').text());
+					const teenCount = parseInt($('#now2').text());
+					const specCount = parseInt($('#now3').text());
+					const countArr = new Array();
+					for(let i=0;i<adultCount;i++){
+						countArr.push(1);
+					}
+					for(let i=0;i<teenCount;i++){
+						countArr.push(2);
+					}
+					for(let i=0;i<specCount;i++){
+						countArr.push(3);
+					}
 
 
 
@@ -921,8 +947,10 @@
 					console.log(scheduleNo);
 					console.log(theaterBranch);
 					console.log(choiceDtDay);
+					console.log(numOfPeople);//성인,청소년,우대
+					console.log(countArr);//1,2,3
 					console.log("joinSeats : "+joinSeats);
-					//location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
+					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&countArr="+countArr.join("/")+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 				});
 			</script>
 

@@ -506,6 +506,7 @@
 					-->
 					<div class="hidden" style="display: none;">
 						<span class="ssMemberNo">${sessionScope.m.memberNo}</span>
+						<span class="ssMemberPhone">${sessionScope.m.memberPhone}</span>
 						<span class="sNum">${ticketingInfo.scheduleNo}</span>
 						<span class="seats">${ticketingInfo.joinSeats}</span>
 					</div>
@@ -553,6 +554,7 @@
 								<div class="price-wrap">
 									<div class="choice-age">
 										<p class="people-age">${ticketingInfo.numOfPeople}</p>
+										<p class="hidden-pp-age" style="display: none;">${ticketingInfo.countArr}</p>
 
 										<div class="price-money-same">
 											<span class="price-amount-same">${ticketingInfo.totalAmount}</span>
@@ -722,7 +724,10 @@
 			
 			var payPrice;
 			var movieTitle;
-			
+			var theaterBranch;
+
+			var scheduleStart;
+			var memberPhone;
 			
 			$(".paying").on("click", function () {
 				payPrice = $("#finalAmount").val();	//input안의 값은 val() / 태그사이 값은 text()
@@ -730,17 +735,30 @@
 				const d = new Date();
 				const date = d.getFullYear() + "" + (d.getMonth() + 1) + "" + d.getDate()
 					+ "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
-
+				theaterBranch = $(".result-branch>p").text();
+				scheduleStart = $(".result-time>p").text().substr(0,5);
+				memberPhone = $(".ssMemberPhone").text();
+				
+				movieTitle =  $(".result-title>p").text();
+				memberNo = $(".ssMemberNo").text();
+				choiceDtDay = $(".result-day>p").text();
+				scheduleNo = $(".sNum").text();
+				joinSeats = $(".seats").text();
+				numOfPeople = $(".people-age").text();
+				countArr = $(".hidden-pp-age").text();
+				
+				console.log(movieTitle);
+				console.log(theaterBranch);
+				console.log(choiceDtDay);
+				console.log(scheduleStart);
+				console.log(numOfPeople);
+				console.log(joinSeats);
+				console.log(memberPhone);
+				console.log(payPrice);
 
 				if (payPrice == 0) {
-					
+					location.href = "/ticketingComplete.do?movieTitle="+ movieTitle +"&theaterBranch="+theaterBranch+"&choiceDtDay="+choiceDtDay+"&scheduleStart="+scheduleStart+"&numOfPeople="+numOfPeople+"&joinSeats="+joinSeats+"&memberPhone="+memberPhone+"&payPrice="+payPrice;
 				} else {
-					movieTitle =  $(".result-title>p").text();
-					memberNo = $(".ssMemberNo").text();
-					choiceDtDay = $(".result-day>p").text();
-					scheduleNo = $(".sNum").text();
-					joinSeats = $(".seats").text();
-					numOfPeople = $(".people-age").text();
 					console.log(payPrice+","+memberNo+","+choiceDtDay+","+scheduleNo+","+joinSeats+","+numOfPeople);
 					IMP.init("imp04040307");
 					IMP.request_pay({
@@ -758,11 +776,12 @@
 							$.ajax({
 								url: "/paymentPage.do",
 								type: "post",
-								data: { payPrice:payPrice, memberNo:memberNo, choiceDtDay:choiceDtDay, payPrice:payPrice, scheduleNo:scheduleNo, joinSeats:joinSeats, numOfPeople:payPrinumOfPeople},
-								dataType: "json",
+								data: { payPrice:payPrice, memberNo:memberNo, choiceDtDay:choiceDtDay, countArr:countArr, joinSeats:joinSeats, scheduleNo:scheduleNo },
+								
 								success: function (data) {
 									alert("결제등록성공");
-									
+									console.log(data);
+									location.href = "/ticketingComplete.do?movieTitle="+ movieTitle +"&theaterBranch="+theaterBranch+"&choiceDtDay="+choiceDtDay+"&scheduleStart="+scheduleStart+"&numOfPeople="+numOfPeople+"&joinSeats="+joinSeats+"&memberPhone="+memberPhone+"&payPrice="+payPrice;
 									
 
 								}
