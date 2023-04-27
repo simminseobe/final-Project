@@ -61,6 +61,21 @@ public class MemberService {
 		return dao.updatePwMember(member);
 	}
 
+	// 카카오 로그인
+	public Member selectOneKaKao(Member member) {
+		return dao.selectOneKaKao(member);
+	}
+
+	// 네이버 로그인
+	public Member selectOneNaver(Member member) {
+		return dao.selectOneNaver(member);
+	}
+
+	// 배송지 정보 조회
+	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
+		return dao.shopAddress(memberNo);
+	}
+	
 	// 페이징 처리
 	public MemberPageData selectBookList(int reqPage) {
 		int numPerPage = 5;
@@ -79,19 +94,5 @@ public class MemberService {
 		return null;
 	}
 
-	// 카카오 로그인
-	public Member selectOneKaKao(Member member) {
-		return dao.selectOneKaKao(member);
-	}
-
-	// 네이버 로그인
-	public Member selectOneNaver(Member member) {
-		return dao.selectOneNaver(member);
-	}
-
-	// 배송지 정보 조회
-	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
-		return dao.shopAddress(memberNo);
-	}
 	
 }

@@ -71,18 +71,6 @@ public class MemberDao {
 		return result;
 	}
 
-	// 예매/구매 내역 조회
-	public ArrayList<Member> selectBookList(HashMap<String, Object> map) {
-		List list  = sqlSession.selectList("member.selectBookList", map);
-		return (ArrayList<Member>)list;
-	}
-
-	// 전체 게시물 수 조회
-	public int selectBookListCount() {
-		int totalCount = sqlSession.selectOne("member.totalCount");
-		return totalCount;
-	}
-
 	// 카카오 로그인
 	public Member selectOneKaKao(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneKakao", member);
@@ -99,6 +87,18 @@ public class MemberDao {
 	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
 		List list = sqlSession.selectList("member.shopAddress", memberNo);
 		return (ArrayList<ShoppingAddress>)list;
+	}
+	
+	// 예매/구매 내역 조회
+	public ArrayList<Member> selectBookList(HashMap<String, Object> map) {
+		List list  = sqlSession.selectList("member.selectBookList", map);
+		return (ArrayList<Member>)list;
+	}
+
+	// 전체 게시물 수 조회
+	public int selectBookListCount() {
+		int totalCount = sqlSession.selectOne("member.totalCount");
+		return totalCount;
 	}
 
 

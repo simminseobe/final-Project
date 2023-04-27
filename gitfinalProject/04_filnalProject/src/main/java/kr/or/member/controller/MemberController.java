@@ -304,15 +304,6 @@ public class MemberController {
 		return new Gson().toJson(member);
 	}
 
-	// 예매/구매 내역 페이지 이동
-	@RequestMapping(value = "/purchaseList.do")
-	public String purchaseList(int reqPage, Model model) {
-//		MemberPageData mpd = service.selectBookList(reqPage);
-//		model.addAttribute("list", mpd.getList());
-//		model.addAttribute("pageNavi", mpd.getPageNavi());
-		return "member/purchaseDetail";
-	}
-
 	// 카카오 로그인 시 필요한 토큰 발급
 	@RequestMapping(value = "/kakaoLogin.do")
 	public String getAccessToken(String code, Member member, Model model, HttpSession session) {
@@ -723,6 +714,15 @@ public class MemberController {
 	public String naverLogout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	// 예매/구매 내역 페이지 이동
+	@RequestMapping(value = "/purchaseList.do")
+	public String purchaseList(int reqPage, Model model) {
+//		MemberPageData mpd = service.selectBookList(reqPage);
+//		model.addAttribute("list", mpd.getList());
+//		model.addAttribute("pageNavi", mpd.getPageNavi());
+		return "member/purchaseDetail";
 	}
 	
 	
