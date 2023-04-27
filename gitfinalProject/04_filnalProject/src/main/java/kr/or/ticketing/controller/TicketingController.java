@@ -130,6 +130,10 @@ public class TicketingController {
 			return "fail";
 		} 
 	 }
+	 @RequestMapping(value = "/ticketingComplete.do")
+	 public String ticketingComplete() {
+		 return "ticketing/ticketingComplete";
+	 }
 	 
 
 	//////////////////////////////////////////////////////// 임시
