@@ -695,7 +695,17 @@
 
 			//포인트 사용 시(선택금액)
 			$(".mMoint div.sub-div>.mega-point").on("click", function () {
-				console.log("포인트");
+				const priceAmountSame = $(".price-amount-same").text();
+				const filterPriceAmountSame = priceAmountSame.toString().replace(',', '');
+				const usePoint = filterPriceAmountSame*0.6;
+				$(".discount-amount").text(usePoint.toLocaleString());
+				const usePointAfterAmount = filterPriceAmountSame-usePoint;
+				console.log(priceAmountSame);
+				console.log(filterPriceAmountSame);
+				console.log(usePoint);
+				console.log(usePointAfterAmount);
+				$(".amount").text(usePointAfterAmount.toLocaleString());
+				$("#finalAmount").text(usePointAfterAmount);
 			});
 
 			//관람권 사용 시 (100% 할인)
