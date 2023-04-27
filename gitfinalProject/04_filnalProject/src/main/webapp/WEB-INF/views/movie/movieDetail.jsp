@@ -626,7 +626,7 @@ z-index: 5;
                     <div class="infoWap2Top">
                         <div class=" infoWrap2">
                             <div class="userReviewInfo2">
-                                <img src="img/사용자-50.png">
+                                <img src="/resources/images/member/nonImg.png">
                                 <p class="user-id user-second">${review.memberId}</p>
                             </div>
                             <div class="Text2 textSecond">
@@ -698,7 +698,7 @@ z-index: 5;
                             <div class="infoWap2Top" id="ajaxRev">
                                 <div class=" infoWrap2">
                                     <div class="userReviewInfo2">
-                                    <img src="img/사용자-50.png">
+                                    <img src="/resources/images/member/nonImg.png">
                                     <p class="user-id user-third"> ${review.memberId}</p>
                                 </div>
                                 <div class="Text2">

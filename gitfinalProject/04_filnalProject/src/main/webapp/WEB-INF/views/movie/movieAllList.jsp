@@ -76,7 +76,7 @@
                                         <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                             <button type="button"
                                                 style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                    src="img/pink_heart.png"
+                                                    src="img/bin-heart.png"
                                                     style="width:18px; height:18px;"></button>
                                         </div>
                                         <div class="movieAllList-reserve" style="margin-top: 10px;"">

@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -232,7 +229,6 @@ public ArrayList<Movie> selectMovieAll() {
 		return result;
 	}
 	public int selectMovieListCount() {
-		// TODO Auto-generated method stub
 		return dao.totalMovieCount();
 	}
 	public ArrayList<MoviePost> oneMovieAllPost(int movieNo) {
