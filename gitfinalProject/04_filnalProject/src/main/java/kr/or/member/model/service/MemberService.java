@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.member.model.vo.ShoppingAddress;
 
 @Service
 public class MemberService {
@@ -86,6 +87,11 @@ public class MemberService {
 	// 네이버 로그인
 	public Member selectOneNaver(Member member) {
 		return dao.selectOneNaver(member);
+	}
+
+	// 배송지 정보 조회
+	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
+		return dao.shopAddress(memberNo);
 	}
 	
 }

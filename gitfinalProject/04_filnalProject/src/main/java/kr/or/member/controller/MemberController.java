@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -43,6 +44,7 @@ import com.google.gson.JsonParser;
 import common.FileManager;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.ShoppingAddress;
 
 @Controller
 public class MemberController {
@@ -56,14 +58,13 @@ public class MemberController {
 	// 로그인 폼 이동
 	@RequestMapping(value = "/login.do")
 	public String login(Member member) {
-		return "member/signIn";
+		return "member/signIn2";
 	}
 
 	// 로그인
 	@RequestMapping(value = "/signIn.do")
 	public String signIn(Member member, HttpSession session, Model model) {
 		Member m = service.selectOneMember(member);
-		System.out.println("로그인 정보 : " + m);
 		if (m != null) {
 			session.setAttribute("m", m);
 		}
@@ -227,7 +228,13 @@ public class MemberController {
 
 	// 개인정보 수정 페이지 이동
 	@RequestMapping(value = "/myProfile.do")
-	public String myProfile() {
+	public String myProfile(@SessionAttribute(required = false) Member m , Model model) {
+		// 배송지 정보 조회
+		ArrayList<ShoppingAddress> address = service.shopAddress(m.getMemberNo());
+		System.out.println("address: " + address);
+		if(!address.isEmpty()) {
+			model.addAttribute("address", address);
+		}
 		return "member/myProfile";
 	}
 
@@ -718,7 +725,6 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
 	
 
 }
