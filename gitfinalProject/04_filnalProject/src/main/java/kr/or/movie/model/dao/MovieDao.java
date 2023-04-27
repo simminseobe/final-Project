@@ -204,6 +204,21 @@ public class MovieDao {
 		return (ArrayList<Movie>) list;
 
 	}
+
+	public MoviePost selectOneMoviePost(int moviePostNo) {
+		MoviePost moviePost = sqlSession.selectOne("movie.selectOneMoviePost", moviePostNo);
+		return moviePost;
+	}
+
+	public int postUpdate(MoviePost moviePost) {
+		int result =sqlSession.update("movie.postUpdate",moviePost);
+		return result;
+	}
+
+	public int postDelete(MoviePost moviePost) {
+		int result =sqlSession.delete("movie.postDelete",moviePost);
+		return result;
+	}
 	
 
 

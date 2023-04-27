@@ -215,14 +215,39 @@ public class MovieController {
 		
 	}
 	
-	
-	/* @RequestMapping(value="/deletePostComment.do?") */
-	
 	@RequestMapping (value="/postAllList.do")
 	public String postAllList() {
 		return "movie/moviePostAll";
 		
 	}
 	
+	@RequestMapping(value="moviePostUpdateFrm.do")
+	public String postUpdateFrm(int moviePostNo,int movieNo,Model model) {
+		MoviePost moviePost=service.selectOneMoviePost(moviePostNo);
+		model.addAttribute("moviePost", moviePost);
+		//movie_file조회해오기
+				ArrayList<MovieFile> movieFileAll=service.selectMovieFileAll(movieNo);
+				model.addAttribute("movieFileAll",movieFileAll);
+				ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
+				model.addAttribute("mvList", mvList);
+				Movie mov = service.selectOneMovie(movieNo);
+				model.addAttribute("mov", mov);
+		return "movie/moviePostUpdateFrm";
+		
+	}
+	
+	@RequestMapping(value="/updatePost.do")
+	public String postUpdate(MoviePost moviePost,int movieNo) {
+		int result = service.postUpdate(moviePost);
+		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	}
+	
+	@RequestMapping(value="/moviePostDelete.do")
+	public String postDelete(MoviePost moviePost, int movieNo) {
+		int result = service.postDelete(moviePost);
+		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	}
 	
 }

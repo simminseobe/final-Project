@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+
+.moviePostTit>h2{
+  font-size: 32px;
+}
+.moviePostSubwrap{
+    margin-top: 20px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+}
+.postSubLeft{
+    font-size: 28px;
+}
+.postSubRight>button{
+    width: 110px;
+    height: 36px;
+}
+.moviePostSideAll{
+    width: 1100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.moviePostLeftSide{
+    box-sizing: border-box;
+    width: 530px;
+    height: 650px;
+    border: 1px solid #503396;
+   font-size: 18px;
+   padding-top: 10px;
+   background-color: #503396;
+}
+.postLeftSideTit{
+    color: #fff;
+}
+.postLeftSideContent{
+    width: 530px;
+   
+    border: 1px solid #fff;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+   
+   
+}
+.postLeftSideContent>.tab>a button{
+    background-color: transparent;
+    color: #fff;
+    padding-bottom: 5px;
+    border-style: none;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+.moviePostRightSide{
+    width: 530px;
+    height: 650px;
+   
+
+}
+.moviePostRightSide{
+    box-sizing: border-box;
+    width: 530px;
+    height: 650px;
+    border: 1px solid #503396;
+    background-color: #503396;;
+    color: #fff;
+   font-size: 18px;
+   padding-top: 10px;
+   position: relative;
+   overflow: auto;
+}
+.postRightSideContent{
+    width: 528px;
+    height: 392px;
+  box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
+    padding:10px 0;
+    background-color: #503396;
+   
+}
+
+.postRightSideSel{
+    margin: 20px 0;
+}
+.postRightSideTxt{
+padding-bottom: 20px;
+}
+
+.postRightSideBtn{
+    padding-top: 30px;
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    left: 35%;
+}
+.postRightSideBtn>button{
+    border: 2px dashed lightgrey;
+    background-color: #fff;
+    border-radius: 23px;
+    width: 150px;
+    height:46px;
+    color: #503396;
+}   
+.postLeftSideSel{
+    margin-top: 20px;
+    border: 1px solid lightgray;
+    height: 525px;
+    overflow: auto;
+    background-color: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+.moviePostBottomBtn{
+    text-align: center;
+    margin-top: 50px;
+}
+.moviePostBottomBtn div{
+    display: inline-block;
+}
+.moviePostBottomBtn button{
+    width: 86px;
+    height: 46px;
+}
+.moviePostBottomBtn>.moviePostEnrollBtn{
+    margin-right: 20px;
+
+}
+.innerBtnWrap{
+    margin-top: 50px;
+
+}
+
