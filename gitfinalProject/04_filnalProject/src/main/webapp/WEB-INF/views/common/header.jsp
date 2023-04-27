@@ -20,7 +20,7 @@
         <h1><a href="/">Megabox</a></h1>
         <nav class="clearfix">
             <ul>
-                <li><a href="/allMovieList.do?">영화</a></li>
+                <li><a href="/allMovieList.do">영화</a></li>
                 <li><a href="#">큐레이션</a></li>
                 <li><a href="/allTheater.do">영화관</a></li>
                 <li><a href="#">특별관</a></li>

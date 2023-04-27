@@ -24,3 +24,17 @@ $(".tabs>li").on("click",function(){
 });
 $(".tabs>li").eq(0).click();
 
+$(".movieAllList-like>button>img").on("click",function(){
+    const binHeart="img/bin-heart.png";
+    const blackHeart="img/black-heart.png";
+    const current  = $(this).attr("src");
+    
+    if(current == binHeart){
+        $(this).attr("src",blackHeart); 
+
+    }else{
+        $(this).attr("src",binHeart);        
+       
+    }
+
+});

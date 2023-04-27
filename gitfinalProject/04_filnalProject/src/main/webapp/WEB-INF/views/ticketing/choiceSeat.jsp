@@ -537,6 +537,7 @@
 							<div class="result-title">
 								${schedule.movieTitle}
 							</div>
+							
 							<div class="result-info">
 								<div class="info-branch">
 									<p class="tBrch">${schedule.theaterBranch}</p>
@@ -575,6 +576,7 @@
 						</div>
 					</div>
 				<button class="nowTotal">선택된 인원 수 : </button>
+				<span class="hiddenSpan" title="선택한영화의 scheduleNo" style="display: none;">${schedule.scheduleNo}</span>
 				</div>
 
 			</div>
@@ -655,43 +657,39 @@
 							mapping(input, i, j);
 							div.append(input);
 							input.addEventListener('click', function(e) {
-								//중복방지 함수
-									selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+								
+								const now = $(".now");
+								let totalCount = 0;
+								now.each(function(no,item){
+									totalCount += Number($(item).text());
+								});
 
-								//click class가 존재할때(제거해주는 toggle)
-								if ($(this).hasClass("clicked")) {
-									$(this).removeClass("clicked")
-									clicked = document.querySelectorAll(".clicked");
-									clicked.forEach((data) => {
-										selectedSeats.push(data.value);
-									})
-									$(".mySeat").empty()
-									selectedSeats.forEach(function(s, i){
-										$(".mySeat").eq(i).text(s)
-									})
-									//click class가 존재하지 않을때 (추가해주는 toggle)
-								} else {
-									$(this).addClass("clicked");
-									clicked = document.querySelectorAll(".clicked");
-									clicked.forEach((data) => {
-										selectedSeats.push(data.value);
-										var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
-										var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
-										var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
-
-										// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
-										var total = adultCount + teenCount + specCount;
-										if(clicked.length == total || clicked.length == 8){
-											$('.seat:not(.clicked)').prop('disabled', true );
-										}
-									})
-									$(".mySeat").empty()
-									selectedSeats.forEach(function(s, i){
+								console.log(totalCount);
+								if(totalCount > $(".mySeat").length){
+									if($(this).hasClass("clicked")) {
+										$(this).removeClass("clicked");
+										const index = selectedSeats.indexOf($(this).val());
+										selectedSeats.splice(index,1);
+									}else{
+										$(this).addClass("clicked");
+										selectedSeats.push($(this).val());
+										selectedSeats.sort();
+									}
+									console.log(selectedSeats);
+									$(".selectedSeats-area").empty();
+									
+									$(selectedSeats).each(function(no,item){
 										const div = $("<div>").addClass("mySeat")
-										div.text(s)
+										div.text(item)
 										$(".selectedSeats-area").append(div)
-									})
+									});
+									if(totalCount ==  $(".mySeat").length){
+										$('.seat:not(.clicked)').prop('disabled', true );
+									}
 								}
+								
+								
+								
 							})
 						}
 					}
@@ -822,9 +820,9 @@
 				});
 				//span.amount에 (연령대*금액)합계금액 출력 (천 단위에서 ,찍기위해 .toLocaleString()추가)
 				function calculateAmount() {
-					const adultPrice = 18000;
-					const teenPrice = 12000;
-					const specPrice = 7000;
+					const adultPrice = 100;//18000
+					const teenPrice = 100;//12000
+					const specPrice = 7000;//7000
 
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());
@@ -882,16 +880,49 @@
 				});
 				
 				$(".pageNext").on("click",function(){
-					var movieTitle = $(".result-title").text();
+					var movieTitle = $(".result-title").text();	
 					var theaterBranch = $(".tBrch").text();
 					var scheduleStartEnd = $(".info-time").text();
-					var choiceDtDay = $(".toDate").text();
-					var selectedSeats = $(".selectedSeats-area").text();
-					var numOfPeople = $(".numberOfPeople").text();
+					var choiceDtDay = $(".toDate").text();// 상영시간
+					
+					var joinSeats = selectedSeats.join("/"); //좌석 구분자 "/" 추가
+					//var numOfPeople = $(".numberOfPeople").text();//연령
 					var totalAmount = $(".amount").text();
+					var scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
+					//console.log("자르기 전 "+numOfPeople);//
+					
+					//////////////////////////////////////////////////////////////////////////////
+					//regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+					
+					// 변수 초기화
+					var wordNum = $(".numberOfPeople").text();
+					// 문자열과 숫자 분리
+					
+					var letters = wordNum.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
+					var numbers = wordNum.replace(/[^0-9]/g, "");
+					// 출력
+					console.log("문자열: " + letters);
+					console.log("숫자: " + numbers);
+					//var joinLetters = letters.join("/");
+					//console.log("joinLetters : "+joinLetters);
+					var cut1 = letters.substr(0,2);//성인
+					var cut2 = letters.substr(2,3);//청소년
+					var cut3 = letters.substr(5,7);//우대
+					console.log("cut1:" + cut1);
+					console.log("cut2:" + cut2);
+					console.log("cut3:" + cut3);
+					var cut1d = cut1.repeat(2);
+					console.log(cut1d);//성인성인
+					
+
+
+
+					////////////////////////////////////////////////////////////////////////////////////
+					console.log(scheduleNo);
 					console.log(theaterBranch);
 					console.log(choiceDtDay);
-					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&selectedSeats="+selectedSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount;
+					console.log("joinSeats : "+joinSeats);
+					//location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 				});
 			</script>
 

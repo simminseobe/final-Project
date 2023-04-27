@@ -35,13 +35,28 @@ public class MovieController {
 	
 	@RequestMapping(value="/allMovieList.do")
 	public String allMovieList(Model model) {
-		
+		//영화전체 조회와 관람평점이 들어가 있음
 		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
+		//상영예정작 조회와 관람평점이 들어가 있음
+		ArrayList<Movie> expectedList = service.expectedMovie();
+		model.addAttribute("expectedList",expectedList);
+		
+		//특별상영 조회와 관람평점
+		ArrayList<Movie> specialList = service.specialMovie();
+		model.addAttribute("specialList",specialList);
+		
+		//필름소사이어티 조회와 관람평점
+		ArrayList<Movie> filmSocietyList = service.filmSocietyList();
+		model.addAttribute("filmSocietyList",filmSocietyList);
+		
+		//클래식소사이어티 조회와 관람평점
+		ArrayList<Movie> classicSocietyList = service.classicSocietyList();
+		model.addAttribute("classicSocietyList",classicSocietyList);
 		
 		return "movie/movieAllList";
 	}
@@ -168,9 +183,9 @@ public class MovieController {
 		int result =service.insertPostComment(mpc);
 
 		if(result>0) {
-			return "성공";
+			return "success";
 		}else {
-			return "실패";
+			return "fail";
 		}
 		
 	}
@@ -181,9 +196,9 @@ public class MovieController {
 		int result=service.updatePostComment(mpc);
 		System.out.println(mpc);
 		if(result>0) {
-			return "성공";
+			return "success";
 		}else {
-			return "실패";
+			return "fail";
 		}
 		
 	}
@@ -192,16 +207,13 @@ public class MovieController {
 	public String deletePostComment(int moviePostCommentNo) {
 		int result=service.deletePostComment(moviePostCommentNo);
 		if(result>0) {
-			return "성공";
+			return "success";
 		}else {
-			return "실패";
+			return "fail";
 		}
 		
 		
 	}
-	
-	
-	/* @RequestMapping(value="/deletePostComment.do?") */
 	
 	@RequestMapping (value="/postAllList.do")
 	public String postAllList() {
@@ -209,5 +221,33 @@ public class MovieController {
 		
 	}
 	
+	@RequestMapping(value="moviePostUpdateFrm.do")
+	public String postUpdateFrm(int moviePostNo,int movieNo,Model model) {
+		MoviePost moviePost=service.selectOneMoviePost(moviePostNo);
+		model.addAttribute("moviePost", moviePost);
+		//movie_file조회해오기
+				ArrayList<MovieFile> movieFileAll=service.selectMovieFileAll(movieNo);
+				model.addAttribute("movieFileAll",movieFileAll);
+				ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
+				model.addAttribute("mvList", mvList);
+				Movie mov = service.selectOneMovie(movieNo);
+				model.addAttribute("mov", mov);
+		return "movie/moviePostUpdateFrm";
+		
+	}
+	
+	@RequestMapping(value="/updatePost.do")
+	public String postUpdate(MoviePost moviePost,int movieNo) {
+		int result = service.postUpdate(moviePost);
+		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	}
+	
+	@RequestMapping(value="/moviePostDelete.do")
+	public String postDelete(MoviePost moviePost, int movieNo) {
+		int result = service.postDelete(moviePost);
+		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	}
 	
 }

@@ -371,7 +371,9 @@ z-index: 5;
                             </div>
                 		</div>
                         <div class="subscribe">
-                            <button type="button" class="subscribeBtn">구독하기</button>
+		              		  <button type="button" class="subscribeBtn">구독하기</button>
+		              		  <button type="button" class="postUpdateBtn" style="display:none;"><a class="postUpdateAtag">수정하기</a></button>
+		              		  <button type="button" class="postDeleteBtn" style="display:none;"><a class="postDeleteAtag">삭제하기</a></button>
                         </div>
                 	</div>
                 </div>
@@ -472,11 +474,6 @@ z-index: 5;
                 </div>
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 무비포스트 상세보기 모달끝 -->
-
-
-
-
-
 
 
 
@@ -622,9 +619,6 @@ z-index: 5;
 								 <a href="login.do" class="open" style="color: #666666;">로그인</a>
 							</c:if>
                         </div>
-                      
-                 
-                        
                     </div>
                     
                     <!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
@@ -634,7 +628,7 @@ z-index: 5;
                     <div class="infoWap2Top">
                         <div class=" infoWrap2">
                             <div class="userReviewInfo2">
-                                <img src="img/사용자-50.png">
+                                <img src="/resources/images/member/nonImg.png">
                                 <p class="user-id user-second">${review.memberId}</p>
                             </div>
                             <div class="Text2 textSecond">
@@ -706,7 +700,7 @@ z-index: 5;
                             <div class="infoWap2Top" id="ajaxRev">
                                 <div class=" infoWrap2">
                                     <div class="userReviewInfo2">
-                                    <img src="img/사용자-50.png">
+                                    <img src="/resources/images/member/nonImg.png">
                                     <p class="user-id user-third"> ${review.memberId}</p>
                                 </div>
                                 <div class="Text2">
@@ -1027,6 +1021,8 @@ z-index: 5;
 	   const moviePostNo=$(this).children().eq(1).val();
 	   const postComment=$(".postComment").val("");
 
+	   console.log(moviePostNo);
+	   
 	   //멤버 아이디와 무비포스트 날짜를 받기 위함
 	   const detailmemberId=$(".detailmemberId");
 	   const postDate=$(".postDate");
@@ -1189,6 +1185,20 @@ z-index: 5;
 						}
 			  
 							  }
+						const subscribeBtn=$(".subscribeBtn");
+						console.log(data.memberId);
+						if(sessionId==data.memberId){
+							subscribeBtn.css("display","none");
+							$(".postUpdateBtn").css("display","block");
+							$(".postDeleteBtn").css("display","block");
+							$(".postUpdateAtag").attr("href","/moviePostUpdateFrm.do?moviePostNo="+moviePostNo+"&movieNo="+movieNo);
+							$(".postDeleteAtag").attr("href","/moviePostDelete.do?moviePostNo="+moviePostNo+"&movieNo="+movieNo);
+						
+						}else{
+							subscribeBtn.css("display","block");
+							$(".postUpdateBtn").css("display","none");
+							$(".postDeleteBtn").css("display","none");
+						}
 			  
 			  }
 			
@@ -1285,6 +1295,8 @@ z-index: 5;
 		}); 
 		
 	});
+	
+	 
   
 
 </script>

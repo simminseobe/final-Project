@@ -19,7 +19,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		super.afterConnectionEstablished(session);
+
 	}
 
 	@Override

@@ -12,7 +12,8 @@ public class TicketingInfo {
 	private String theaterBranch;
 	private String scheduleStartEnd;
 	private String choiceDtDay;
-	private String selectedSeats;
+	private String joinSeats;
 	private String numOfPeople;
 	private String totalAmount;
+	private int scheduleNo;
 }

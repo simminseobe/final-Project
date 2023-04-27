@@ -23,6 +23,7 @@ import com.google.gson.JsonParser;
 
 import common.FileManager;
 import kr.or.admin.model.service.AdminService;
+import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.service.MovieService;
@@ -292,7 +293,6 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/selectOneTheater.do") // 임시 (no줘서 이동할거)
-
 	public String selectOneTheater(int theaterNo, Model model) {
 		Theater theater = service.selectOntTheater(theaterNo);
 		model.addAttribute("theater", theater);
@@ -429,8 +429,27 @@ public class AdminController {
 		return String.valueOf(result);
 	}
 
-	@RequestMapping(value = "/adminCaht.do")
-	public String adminCaht() {
+	@RequestMapping(value = "/adminConsultation.do")
+	public String adminConsultation(Model model) {
+		ArrayList<Consultation> consultationsList = service.selectConsultation();
+
+		model.addAttribute("consultationsList", consultationsList);
+
+		return "admin/adminConsultation";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/registerConsultation.do", produces = "application/json;charset=utf-8")
+	public String registerConsultation(Consultation consultation) {
+		int result = service.insertConsultation(consultation);
+
+		return String.valueOf(result);
+	}
+
+	@RequestMapping(value = "/adminChat.do")
+	public String adminChat(Consultation consultation, Model model) {
+		model.addAttribute("consultation", consultation);
+
 		return "admin/adminChat";
 	}
 }
