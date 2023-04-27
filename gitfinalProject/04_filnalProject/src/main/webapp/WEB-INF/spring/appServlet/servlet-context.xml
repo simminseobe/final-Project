@@ -100,4 +100,6 @@
 	<context:component-scan base-package="kr.or.ticketing" />
 	<context:component-scan base-package="kr.or.admin" />
 	<context:component-scan base-package="kr.or.gift" />
+	<context:component-scan base-package="kr.or.point" />
+	<context:component-scan base-package="kr.or.giftticket" />
 </beans:beans>

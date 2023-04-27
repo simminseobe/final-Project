@@ -20,7 +20,8 @@
 <div class="content">
 
 	<div>이름: ${sessionScope.m.memberName }</div>
-	<div>잔여포인트: </div>
+	<input type="text" name="memberNo" value=${sessionScope.m.memberNo }>
+	<div>잔여포인트: <div id="memberPoint">${p.memberPoint }</div></div>
 	<div>등급: ${sessionScope.m.memberLevel }</div>
 	<div>다음 Gold 등급까지 6000P</div>
 	<div>적립예정: </div>
@@ -32,7 +33,8 @@
 	<div>관람평: </div>
 	<div>보고싶어: </div>
 	<div>무비포스트: </div>
-	<div>관람권등록 <input type="text" name="ticketSerial"><button id="addGiftTicket"><a href="/addGiftTicket.do">클릭</a></button></div>
+	<div>관람권등록 <input type="text" name="addGiftTicketSerial"><button id="addGiftTicket">클릭</button></div>
+	<div>관람권사용 <input type="text" name="useGiftTicketSerial"><button id="useGiftTicket">클릭</button></div>
 	<div>문의내역</div>
 	
 </div>
@@ -43,16 +45,15 @@
 </table>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-</script>
-</head>
-<body>
-    <script>
-    $("#addGiftTicket").on("click",function(){
-    	const ticketSerial = $("[name=ticketSerial]").val();
+<script>
+   $("#addGiftTicket").on("click",function(){
+    	const giftTicketSerial = $("[name=addGiftTicketSerial]").val();
+    	const memberNo = $("[name=memberNo]").val();
+    	console.log(memberNo);
 		$.ajax({
 			url : "/addGiftTicket.do",
 			type: "get",
-			data: {ticketSerial:ticketSerial},
+			data: {giftTicketSerial:giftTicketSerial , memberNo:memberNo},
 			success : function(data){
 				console.log(data)
 				if(data=="ok"){
@@ -65,4 +66,35 @@
 			
 		});	
 	});
+   
+   $("#useGiftTicket").on("click",function(){
+   	const giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+   	const memberNo = $("[name=memberNo]").val();
+   	console.log(memberNo);
+		$.ajax({
+			url : "/useGiftTicket.do",
+			type: "get",
+			data: {giftTicketSerial:giftTicketSerial , memberNo:memberNo},
+			success : function(data){
+				console.log(data)
+				if(data=="ok"){
+					alert("사용성공.");
+				}else{
+					alert("사용실패.");
+				}
+				
+			}
+			
+		});	
+	});
+   
+   $(document).ready(function(){
+	   
+	   
+	});
+   
+</script>
+</head>
+<body>
+   
 

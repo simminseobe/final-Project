@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="giftTicket">
-<update id="addGiftTicket" parameterType="_int">
+<update id="addGiftTicket" parameterType="kr.or.giftticket.model.vo.TicketVO">
   	update 
   		gift_ticket 
   	set
-  		member_no=68
+  		member_no=#{memberNo}
   	where
-  		gift_ticket_serial=#{ticketSerial} and member_no is null
+  		gift_ticket_serial=#{giftTicketSerial} and member_no is null
+  </update>
+  
+  <update id="useGiftTicket" parameterType="kr.or.giftticket.model.vo.TicketVO">
+  	update 
+  		gift_ticket 
+  	set
+  		gift_ticket_status='사용완료'
+  	where
+  		gift_ticket_serial=#{giftTicketSerial} and gift_ticket_status='사용가능' and member_no=#{memberNo}
   </update>
 </mapper>
