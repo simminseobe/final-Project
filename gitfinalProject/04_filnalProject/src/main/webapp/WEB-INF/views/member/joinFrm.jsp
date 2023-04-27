@@ -565,6 +565,26 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal-wrapper" id="modal-two" style="display: none">
+        <div class="ok-modal">
+            <div class="modal-top">
+            </div>
+            <div class="modal-content">
+                <h3>알림</h3>
+                <button class="close-btn" onclick="closeClick();"></button>
+                <div class="layer-content">
+                    <p class="text-common">"회원님의 이메일 주소로 인증번호를 발송드렸습니다."</p>
+                    <p class="text-common">"해당 인증번호를 작성해주시기 바랍니다."
+                    <div class="btn-wrapper">
+                        <button type="button" class="okBtn" onclick="okClose();">
+                            	확인
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="/resources/js/member/joinFrm.js"></script>

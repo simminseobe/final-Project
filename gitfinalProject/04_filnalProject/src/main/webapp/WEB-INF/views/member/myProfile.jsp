@@ -53,7 +53,7 @@
                         </tr>
                     </tbody>
                 </table>
-
+				
                 <div class="left">
 	                <h2>기본정보</h2>
 	            </div>
@@ -71,17 +71,7 @@
                         </tr>
                         <tr>
                             <th>생년월일<sup> *</sup></th>
-                            <td>
-								<%-- <select>
-									<option readonly>${sessionScope.m.memberBirthYear } 년</option>
-								</select>
-								<select>
-									<option readonly>${sessionScope.m.memberBirthMonth } 월</option>
-								</select>
-								<select>
-									<option readonly>${sessionScope.m.memberBirthDay } 일</option>
-								</select> --%>
-								
+                            <td>								
 								<input type="text" class="input-birth" value="${sessionScope.m.memberBirthYear }"><input type="text" class="input-birthDetail" value="년">
 								<input type="text" class="input-birth" value="${sessionScope.m.memberBirthMonth }"><input type="text" class="input-birthDetail" value="월">
 								<input type="text" class="input-birth" value="${sessionScope.m.memberBirthDay }"><input type="text" class="input-birthDetail" value="일">
@@ -108,6 +98,29 @@
                             </td>
                         </tr>
                     </tbody>
+                </table>
+                
+                <h2 class="delivery">배송지 관리</h2>
+                <table class="profile-content-two">
+                	<tbody>
+                		<tr>
+                			<th>배송지 명</th>
+                			<th>주소</th>
+                			<th>연락처</th>
+                			<th></th>
+                		</tr>
+                		<tr>
+                		<c:forEach items="${address}" var="a">
+                			<td>${a.addressName }</td>
+                			<td>${a.addressNew }</td>
+                			<td>${a.addressPhone }</td>
+                		</c:forEach>
+                			<td>
+                				<button type="button" class="my-btn my-blue">수정</button>
+                				<button type="button" class="my-btn my-blue">삭제</button>
+                			</td> 
+                		</tr>
+                	</tbody>
                 </table>
             <div class="btn-wrap">
                 <button type="button" id="cancelBtn">취소</button>

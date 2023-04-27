@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GiftTicket {
-	private int giftTicketNo;
+public class TicketVO {
 	private String giftTicketSerial;
-	private String giftTicketName;
-	private String giftTicketDate;
-	private String giftTicketStatus;
 	private int memberNo;
 }

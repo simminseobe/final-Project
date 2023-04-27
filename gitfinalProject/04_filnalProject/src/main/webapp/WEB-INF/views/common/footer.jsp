@@ -36,18 +36,6 @@
     </div>
     <!--wrap-->
 </footer>
-<script>
-    	$(".menu a").on("click",function(){
-    		const noClick = $(".sub-menu").prev();
-    		$(".menu a").removeClass("on");
-    		$(this).addClass("on");
-    		if(noClick.hasClass("on")){
-    			$(this).removeClass("on");
-    			$(this).next().children().eq(0).children().eq(0).addClass("on");
-    		}
-    		
-    	});
-    </script>
 </body>
 </html>
 

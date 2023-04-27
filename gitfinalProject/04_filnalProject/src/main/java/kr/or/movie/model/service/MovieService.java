@@ -264,6 +264,19 @@ public ArrayList<Movie> selectMovieAll() {
 		int deletePostComment=dao.deletePostComment(moviePostCommentNo);
 		return deletePostComment;
 	}
+	public MoviePost selectOneMoviePost(int moviePostNo) {
+		MoviePost moviePost=dao.selectOneMoviePost(moviePostNo);
+		System.out.println(moviePost);
+		return moviePost;
+	}
+	public int postUpdate(MoviePost moviePost) {
+		int result = dao.postUpdate(moviePost);
+		return result;
+	}
+	public int postDelete(MoviePost moviePost) {
+		int result = dao.postDelete(moviePost);
+		return result;
+	}
 
 
 
