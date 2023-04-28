@@ -116,6 +116,11 @@ public class TicketingService {
 		return list;
 	}
 
+	public String getMovieFile(String movieTitle) {
+		
+		return dao.getMovieFile(movieTitle);
+	}
+
 	
 
 	

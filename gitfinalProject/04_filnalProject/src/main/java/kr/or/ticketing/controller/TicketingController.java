@@ -49,6 +49,9 @@ public class TicketingController {
 
 	@RequestMapping(value = "/choiceSeat.do")
 	public String choiceOneticket(Schedule schedule, ChoiceDataDay choiceDataDay, Model model) {
+		System.out.println("무비타이틀 : "+schedule.getMovieTitle());
+		String mfp = service.getMovieFile(schedule.getMovieTitle());
+		model.addAttribute("mfp",mfp);
 		model.addAttribute("choiceDataDay", choiceDataDay);
 		model.addAttribute("schedule", schedule);
 		return "ticketing/choiceSeat";
@@ -124,7 +127,7 @@ public class TicketingController {
 	 @RequestMapping(value = "/paymentPage.do") 
 	 public String insertPay(Pay pay, TicketingInfo ticketingInfo) { 
 	 int result = service.insertPay(pay, ticketingInfo);
-	 	System.out.println(pay);
+	 	System.out.println("pay : "+pay);
 	 	System.out.println("ticketingInfo :" +ticketingInfo);
 	 	System.out.println("result :"+result);
 	 	if(result>0) {
@@ -137,6 +140,9 @@ public class TicketingController {
 	 }
 	 @RequestMapping(value = "/ticketingComplete.do")
 	 public String ticketingComplete(TicketingComplete ticketingComplete, Model model) {
+		 ticketingComplete.getMovieTitle();
+		 String mfp = service.getMovieFile(ticketingComplete.getMovieTitle());
+		 model.addAttribute("mfp",mfp);
 		 model.addAttribute("ticketingComplete",ticketingComplete);
 		 System.out.println(ticketingComplete);
 		 return "ticketing/ticketingComplete";
