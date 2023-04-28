@@ -72,7 +72,16 @@
                                         </div>
                                         <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                             <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
-                                            	<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                            	
+                                            	<c:choose>
+                                            	<c:when test="${po.likeCheck eq 1}">
+	                                            	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            		<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                            	</c:otherwise>
+                                            	</c:choose>
+                                            	
                                             	<span>${po.likeCount}</span>
                                             </button>
                                             <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
@@ -284,7 +293,7 @@
                                                     style="width:18px; height:18px;"></button>
                                <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                          </div>
-                         <div class="movieAllList-reserve" style="margin-top: 10px;"">
+                         <div class="movieAllList-reserve" style="margin-top: 10px;">
                          <button type=" button"
                              style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
                              예약하기
@@ -303,13 +312,13 @@
             </div>
             </div>
             <div class="sessionInfo">
-            	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo }">
+            	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo}">
             </div>
             <script>
+
+ 
             $(".movieAllList-like>button>img").on("click",function(){
-            
-            	
-            	
+            	if($(".sessionMemberNo").val() !=""){
             	
             	const movieNo=$(this).parent().next().val();
                 const memberNo=$(".sessionMemberNo").val();
@@ -322,8 +331,6 @@
 				const icon = $(this);
 				
 				const likeCount=$(this).next();
-				
-				
 				
                 if(current == binHeart){
 		        	
@@ -340,38 +347,17 @@
                 			likeCount.text(likeCountString);
                 			console.log(likeCount.text(likeCountString));
                 			
-                			
                 			icon.attr("src",blackHeart); 
+                		
+                		
                 		}else{
                 			console.log("fail"); 
-                			
                 			
                 		}
                 	}
                 	
                 });//ajax끝나는 지점
                 
-                
-   /*              $.ajax({
-                	url :"/movieLikeCount.do",
-                	type:"post",
-                	data:{movieNo:movieNo,memberNo:memberNo},
-                	success:function(data){
-                		if(data != null){
-                			console.log(data);
-                			likeCount.text(data);
-                			
-
-                		}else{
-                			console.log("likeCount fail");
-                			
-                			
-                		}
-                	}
-                	
-                });//ajax끝나는 지점 */
-                
-   
 		        	
 		        }else{
 		                $.ajax({
@@ -396,18 +382,18 @@
 		                	
 		                });//ajax끝나는 지점
 		        		
-		        		
-		            	   
-		                   
+
 		            } 
 		            	
-  
+            	}else{
+            		alert("로그인 해주세요");
+            	}
 
             });//on click function끝나는 곳
             
         
             
-            
+      
             
             
 

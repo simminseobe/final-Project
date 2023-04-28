@@ -23,10 +23,9 @@
 	</select>
 	<select id="movieListCount" resultType="_int">
 		select count(*) from movie_tbl
-	
 	</select>
 	<select id="selectMovieAll" resultType="movie" parameterType="_int">
-		select 
+    select 
 		 	movie_no as movieNo,
 			movie_title as movieTitle,
 			movie_director as movieDirector,
@@ -41,8 +40,8 @@
 			special_movie as specialMovie,
 			enroll_member as enrollMember,
 			movie_type as movieType,
-			(select count(*) from movie_like ml where ml.movie_no=m.movie_no) as likeCount,
-            (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=0) as likeCheck
+           (select count(*) from movie_like ml where ml.movie_no=m.movie_no) as likeCount,
+            (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo}) as likeCheck
 		 from movie_tbl m
 	</select>
 	<!-- 상영예정작 조회를 위함 -->
