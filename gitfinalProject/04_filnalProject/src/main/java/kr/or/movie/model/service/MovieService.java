@@ -26,15 +26,16 @@ public class MovieService {
 	@Autowired
 	private MovieDao dao;
 
-public ArrayList<Movie> selectMovieAll() {
+public ArrayList<Movie> selectMovieAll(int memberNo) {
 		//영화 전체조회
-		ArrayList<Movie> list =dao.selectMovieAll();
+		ArrayList<Movie> list =dao.selectMovieList(memberNo);
 		for(Movie movie : list) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			
 		}
 		
 		return list;
@@ -120,7 +121,7 @@ public ArrayList<Movie> selectMovieAll() {
 		}
 		return result;
 	}
-	//관람평 업데이트(=리뷰 업데이트)
+		//관람평 업데이트(=리뷰 업데이트)
 		public int reviewUpdate(Review rev) {
 			int result = dao.reviewUpdate(rev);
 			System.out.println(result);
@@ -276,6 +277,29 @@ public ArrayList<Movie> selectMovieAll() {
 	public int postDelete(MoviePost moviePost) {
 		int result = dao.postDelete(moviePost);
 		return result;
+	}
+	public int movieLikeInsert(int movieNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo",memberNo);
+		map.put("movieNo",movieNo);
+		
+		int result= dao.movieLikeInsert(map);
+		return result;
+	}
+	public int movieLikeDelete(int movieNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo",memberNo);
+		map.put("movieNo",movieNo);
+		
+		System.out.println(map+": map");
+		int result= dao.movieLikeDelete(map);
+		System.out.println(result+"service");
+		return result;
+	}
+	public int movieLikeCount(int movieNo) {
+		int likeCount =dao.movieLikeCount(movieNo);
+		System.out.println(likeCount);
+		return likeCount;
 	}
 
 

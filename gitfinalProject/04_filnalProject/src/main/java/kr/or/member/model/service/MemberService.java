@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
-import kr.or.member.model.vo.MemberPageData;
+import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.ticketing.model.vo.Reservation;
+import kr.or.ticketing.model.vo.ReservationCancel;
+import kr.or.ticketing.model.vo.ReservationCancelPageData;
+import kr.or.ticketing.model.vo.ReservationPageData;
 
 @Service
 public class MemberService {
@@ -61,24 +65,6 @@ public class MemberService {
 		return dao.updatePwMember(member);
 	}
 
-	// 페이징 처리
-	public MemberPageData selectBookList(int reqPage) {
-		int numPerPage = 5;
-		
-		int end = reqPage * numPerPage;
-		int start = end - numPerPage + 1;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		
-		ArrayList<Member> list = dao.selectBookList(map);
-		
-		int totalCount = dao.selectBookListCount();
-		
-		return null;
-	}
-
 	// 카카오 로그인
 	public Member selectOneKaKao(Member member) {
 		return dao.selectOneKaKao(member);
@@ -93,5 +79,145 @@ public class MemberService {
 	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
 		return dao.shopAddress(memberNo);
 	}
+	
+	//포인트 정보 조회
+	public ArrayList<MemberPoint> memberPoint(int memberNo) {
+		return dao.memberPoint(memberNo);
+	}
+	
+	//잔여포인트 조회
+	
+	public int mpAmount(int memberNo) {
+		return dao.mpAmount(memberNo);
+	}
+	
+	// 페이징 처리
+	public ReservationPageData selectBookList(int reqPage, int memberNo) {
+		int numPerPage = 5;
+		
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("memberNo",  memberNo);
+		
+		ArrayList<Reservation> list = dao.selectBookList(map);
+		
+		int totalCount = dao.selectBookListCount();
+		
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		
+		// 페이지 네비 사이즈
+		// 1, 2, 3, 4, 5
+		int pageNaviSize = 5;
+		
+		int pageNo = 1;
+		if(reqPage > 3) {
+			// 1,2 페이지 외 다른 페이지들은 가운데 부터 시작
+			pageNo = reqPage - 2;
+		}
+		
+		// 페이지 네비 생성시작
+		String pageNavi = "";
+		
+		// 이전버튼 생성
+		if(pageNo != 1) {
+			pageNavi += "<a href='/purchaseList.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'>[이전]</a>";
+			// pageNavi = "" + "<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+			// pageNavi = <a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>;
+		}
+		
+		// 페이지 숫자 생성
+		
+		// 웹페에지 하단에 보이는 페이지 번호
+		// 1, 2, 3, 4, 5
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<span>"+pageNo+"</span>";
+			} else {
+				pageNavi += "<a href='/purchaseList.do?reqPage="+pageNo+"&memberNo="+memberNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				// pageNavi를 만들지 않게 break
+				break;
+			}
+		}
+		
+		// 다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/purchaseList.do?reqPage="+pageNo+"&memberNo="+memberNo+"'>[다음]</a>";
+		}
+		
+		ReservationPageData rpd = new ReservationPageData(list, pageNavi);
+		return rpd;
+	}
+
+	// 예매 취소 내역
+	public ReservationCancelPageData selectCancelBookList(int reqPage, int memberNo) {
+		int numPerPage = 5;
+		
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("memberNo",  memberNo);
+		
+		ArrayList<ReservationCancel> list = dao.selectCancelBookList(map);
+		
+		int totalCount = dao.selectCancelBookListCount();
+		
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		
+		// 페이지 네비 사이즈
+		// 1, 2, 3, 4, 5
+		int pageNaviSize = 5;
+		
+		int pageNo = 1;
+		if(reqPage > 3) {
+			// 1,2 페이지 외 다른 페이지들은 가운데 부터 시작
+			pageNo = reqPage - 2;
+		}
+		
+		// 페이지 네비 생성시작
+		String pageNavi = "";
+		
+		// 이전버튼 생성
+		if(pageNo != 1) {
+			pageNavi += "&nbsp<a href='/purchaseList.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'> [이전] </a>";
+			// pageNavi = "" + "<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+			// pageNavi = <a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>;
+		}
+		
+		// 페이지 숫자 생성
+		
+		// 웹페에지 하단에 보이는 페이지 번호
+		// 1, 2, 3, 4, 5
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<span>"+pageNo+"</span>";
+			} else {
+				pageNavi += "<a href='/purchaseList.do?reqPage="+pageNo+"&memberNo="+memberNo+"'>&nbsp" +pageNo+ "&nbsp</a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				// pageNavi를 만들지 않게 break
+				break;
+			}
+		}
+		
+		// 다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/purchaseList.do?reqPage="+pageNo+"&memberNo="+memberNo+"'> [다음] </a>";
+		}
+		
+		ReservationCancelPageData rcpd = new ReservationCancelPageData(list, pageNavi);
+		return rcpd;
+	}
+
 	
 }

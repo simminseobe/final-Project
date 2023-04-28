@@ -3,16 +3,16 @@
  <mapper namespace="point">
 
 <!-- 포인트이용내역 -->
-<select id="totalPoint" parameterType="m" resultType="p">
+<select id="memberPoint" parameterType="_int" resultType="point">
 	select 
 		point_no as pointNo ,
 		member_no as memberNo ,
-		sum(point_amount) as pointAmount ,
+		point_amount as pointAmount ,
 		point_status as pointStatus ,
 		point_detail as pointDetail ,
 		point_date as pointDate
 	from point_tbl 
-	where member_no = #{memberNo}
+	where member_no=#{memberNo}
 </select>
 
 <!-- 포인트 사용 -->

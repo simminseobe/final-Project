@@ -13,4 +13,5 @@ public class ProductOrderSheet {
 	private int productNo;
 	private int poNo;
 	private int orderCount;
+	private int memberNo;
 }

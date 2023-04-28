@@ -76,6 +76,12 @@ public class TicketingDao {
 		return (ArrayList<Schedule>)list;
 	}
 
+	public String getMovieFile(String movieTitle) {
+		String mfp = sqlSession.selectOne("ticketing.getMovieFile",movieTitle);
+		System.out.println("mfp : "+mfp);
+		return mfp;
+	}
+
 	
 
 	

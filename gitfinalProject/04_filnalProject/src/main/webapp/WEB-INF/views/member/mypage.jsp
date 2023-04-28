@@ -6,7 +6,6 @@
 <style>
 
 	
-	
 </style>
 <div class="table-wrap">
 <table class="table">
@@ -20,10 +19,34 @@
 <div class="content">
 
 	<div>이름: ${sessionScope.m.memberName }</div>
-	<input type="text" name="memberNo" value=${sessionScope.m.memberNo }>
-	<div>잔여포인트:${p.pointAmount }</div>
-	<div>등급: ${sessionScope.m.memberLevel }</div>
-	<div>다음 Gold 등급까지 6000P</div>
+	<input type="hidden" name="memberNo" value=${sessionScope.m.memberNo }>
+	<div>잔여포인트:${mpAmount }</div>
+	<div>등급: 
+	<c:choose> 
+	<c:when test="${sessionScope.m.memberLevel } == 3"> 
+		VIP
+	</c:when> 
+	<c:when test="${sessionScope.m.memberLevel } == 2"> 
+		GOLD
+	</c:when> 
+	<c:otherwise> 
+		WHITE
+	</c:otherwise> 
+</c:choose> 
+	</div>
+	<div class="nextGrade">
+	<c:choose> 
+	<c:when test="${sessionScope.m.memberLevel } == 3"> 
+		VIP
+	</c:when> 
+	<c:when test="${sessionScope.m.memberLevel } == 2"> 
+		다음 VIP 등급까지 ${6000-mpAmount } P 남았습니다.
+	</c:when> 
+	<c:otherwise> 
+		다음 GOLD 등급까지  ${6000-mpAmount } P 남았습니다.
+	</c:otherwise> 
+</c:choose> 
+	</div>
 	<div>적립예정: </div>
 	<div>당월소멸예정: </div>
 	<div>이용내역: </div>
@@ -35,6 +58,8 @@
 	<div>무비포스트: </div>
 	<div>관람권등록 <input type="text" name="addGiftTicketSerial"><button id="addGiftTicket">클릭</button></div>
 	<div>관람권사용 <input type="text" name="useGiftTicketSerial"><button id="useGiftTicket">클릭</button></div>
+	<div>포인트적립 <input type="text" name="addPoint"><button id="addPoint">클릭</button></div>
+	<div>포인트사용 <input type="text" name="usePoint"><button id="usePoint">클릭</button></div>
 	<div>문의내역</div>
 	
 </div>
@@ -87,6 +112,48 @@
 			
 		});	
 	});
+   
+   $("#addPoint").on("click",function(){
+   	const addPoint = $("[name=addPoint]").val();
+   	const memberNo = $("[name=memberNo]").val();
+   	console.log(memberNo);
+		$.ajax({
+			url : "/addPoint.do",
+			type: "get",
+			data: {addPoint:addPoint , memberNo:memberNo},
+			success : function(data){
+				console.log(data)
+				if(data=="ok"){
+					alert("적립성공");
+				}else{
+					alert("실패");
+				}
+				
+			}
+			
+		});	
+	});
+   
+   $("#usePoint").on("click",function(){
+	   	const usePoint = $("[name=usePoint]").val();
+	   	const memberNo = $("[name=memberNo]").val();
+	   	console.log(memberNo);
+			$.ajax({
+				url : "/usePoint.do",
+				type: "get",
+				data: {usePoint:usePoint , memberNo:memberNo},
+				success : function(data){
+					console.log(data)
+					if(data=="ok"){
+						alert("사용성공");
+					}else{
+						alert("실패");
+					}
+					
+				}
+				
+			});	
+		});
    
    $(document).ready(function(){
 	   

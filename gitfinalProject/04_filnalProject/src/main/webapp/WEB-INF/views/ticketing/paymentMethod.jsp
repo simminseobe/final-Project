@@ -428,7 +428,7 @@
 				<div class="content-wrap">
 					<div class="discount-wrap mMoint">
 						<div class="discount-type">
-							<p>메가박스 포인트/쿠폰</p>
+							<p>메가박스 포인트</p>
 							<span class="material-symbols-outlined more">expand_more</span>
 						</div>
 						<div class="sub-div">
@@ -455,6 +455,7 @@
 
 						</div>
 					</div>
+					<div class="hiddennn" style="width: 100px; height: 100px;">${payNo.payNo}</div>
 					<!--
 					<div class="discount-wrap etc-point">
 						<div class="discount-type">
@@ -512,7 +513,7 @@
 					</div>
 
 				</div>
-							<!--
+				<!--
 								var payPrice;
 								var movieTitle;
 								var choiceDtDay;
@@ -536,6 +537,7 @@
 							<div class="result-branch">
 								<p>${ticketingInfo.theaterBranch}</p>
 							</div>
+
 							<div class="dayAndTime">
 								<div class="result-day">
 									<p>${ticketingInfo.choiceDtDay}</p>
@@ -695,11 +697,20 @@
 
 			//포인트 사용 시(선택금액)
 			$(".mMoint div.sub-div>.mega-point").on("click", function () {
+				
+				$.ajax({
+					url : "/selectPoint.do",
+					type : "post",
+					data : {memberNo:memberNo},
+				});
+
+
+
 				const priceAmountSame = $(".price-amount-same").text();
 				const filterPriceAmountSame = priceAmountSame.toString().replace(',', '');
-				const usePoint = filterPriceAmountSame*0.6;
+				const usePoint = filterPriceAmountSame * 0.6;
 				$(".discount-amount").text(usePoint.toLocaleString());
-				const usePointAfterAmount = filterPriceAmountSame-usePoint;
+				const usePointAfterAmount = filterPriceAmountSame - usePoint;
 				console.log(priceAmountSame);
 				console.log(filterPriceAmountSame);
 				console.log(usePoint);
@@ -731,14 +742,14 @@
 			});
 
 
-			
+
 			var payPrice;
 			var movieTitle;
 			var theaterBranch;
 
 			var scheduleStart;
 			var memberPhone;
-			
+
 			$(".paying").on("click", function () {
 				payPrice = $("#finalAmount").val();	//input안의 값은 val() / 태그사이 값은 text()
 				console.log(payPrice + " <-결제로 보낼 금액 재확인");
@@ -746,17 +757,19 @@
 				const date = d.getFullYear() + "" + (d.getMonth() + 1) + "" + d.getDate()
 					+ "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
 				theaterBranch = $(".result-branch>p").text();
-				scheduleStart = $(".result-time>p").text().substr(0,5);
+				scheduleStart = $(".result-time>p").text().substr(0, 5);
 				memberPhone = $(".ssMemberPhone").text();
-				
-				movieTitle =  $(".result-title>p").text();
+				memberPhone = memberPhone.substr(0,3)+"-"+memberPhone.substr(3, 4) + "-" + phone.substr(7, 4);
+				document.write("<li>" + memberPhone + "</li>");
+
+				movieTitle = $(".result-title>p").text();
 				memberNo = $(".ssMemberNo").text();
 				choiceDtDay = $(".result-day>p").text();
 				scheduleNo = $(".sNum").text();
 				joinSeats = $(".seats").text();
 				numOfPeople = $(".people-age").text();
 				countArr = $(".hidden-pp-age").text();
-				
+
 				console.log(movieTitle);
 				console.log(theaterBranch);
 				console.log(choiceDtDay);
@@ -767,9 +780,9 @@
 				console.log(payPrice);
 
 				if (payPrice == 0) {
-					location.href = "/ticketingComplete.do?movieTitle="+ movieTitle +"&theaterBranch="+theaterBranch+"&choiceDtDay="+choiceDtDay+"&scheduleStart="+scheduleStart+"&numOfPeople="+numOfPeople+"&joinSeats="+joinSeats+"&memberPhone="+memberPhone+"&payPrice="+payPrice;
+					location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
 				} else {
-					console.log(payPrice+","+memberNo+","+choiceDtDay+","+scheduleNo+","+joinSeats+","+numOfPeople);
+					console.log(payPrice + "," + memberNo + "," + choiceDtDay + "," + scheduleNo + "," + joinSeats + "," + numOfPeople);
 					IMP.init("imp04040307");
 					IMP.request_pay({
 						pg: "html5_inicis",
@@ -782,17 +795,25 @@
 					}, function (rsp) {
 						if (rsp.success) {
 							alert("결제성공");
-							
+
 							$.ajax({
 								url: "/paymentPage.do",
 								type: "post",
-								data: { payPrice:payPrice, memberNo:memberNo, choiceDtDay:choiceDtDay, countArr:countArr, joinSeats:joinSeats, scheduleNo:scheduleNo },
-								
+								data: { payPrice: payPrice, memberNo: memberNo, choiceDtDay: choiceDtDay, countArr: countArr, joinSeats: joinSeats, scheduleNo: scheduleNo },
+								dataType:"json",	
 								success: function (data) {
-									alert("결제등록성공");
-									console.log(data);
-									location.href = "/ticketingComplete.do?movieTitle="+ movieTitle +"&theaterBranch="+theaterBranch+"&choiceDtDay="+choiceDtDay+"&scheduleStart="+scheduleStart+"&numOfPeople="+numOfPeople+"&joinSeats="+joinSeats+"&memberPhone="+memberPhone+"&payPrice="+payPrice;
-									
+									if(data =='fail'){
+										alert('결제실패')
+									} else{
+										alert("결제등록성공");
+										console.log(data);
+										console.log(data.payNo);
+										const payNo = data.payNo
+										location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
+										
+										
+									}
+
 
 								}
 							});
@@ -802,22 +823,22 @@
 					});
 				}
 			});
-				
 
 
 
-				/*
-				$.ajax({
-					url : "/paymentPage.do",
-					type : "post",
-					data : {payPrice:payPrice},
-					dataType : "json",
-					success : function(data){
 
-					}
-				});
+			/*
+			$.ajax({
+				url : "/paymentPage.do",
+				type : "post",
+				data : {payPrice:payPrice},
+				dataType : "json",
+				success : function(data){
+
+				}
 			});
-			*/
+		});
+		*/
 
 		</script>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

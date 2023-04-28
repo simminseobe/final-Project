@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.request.SessionScope;
 
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
+import kr.or.movie.model.vo.MovieLike;
 import kr.or.movie.model.vo.MoviePost;
 import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
@@ -34,9 +36,15 @@ public class MovieController {
 	private MovieService service;
 	
 	@RequestMapping(value="/allMovieList.do")
-	public String allMovieList(Model model) {
+	public String allMovieList(Model model, @SessionAttribute(required = false) Member m) {
 		//영화전체 조회와 관람평점이 들어가 있음
-		ArrayList<Movie> list = service.selectMovieAll();
+		int memberNo = 0;
+		if(m!=null) {
+			memberNo = m.getMemberNo();
+			
+		}
+		
+		ArrayList<Movie> list = service.selectMovieAll(memberNo);
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
@@ -57,6 +65,9 @@ public class MovieController {
 		//클래식소사이어티 조회와 관람평점
 		ArrayList<Movie> classicSocietyList = service.classicSocietyList();
 		model.addAttribute("classicSocietyList",classicSocietyList);
+		
+		//예매율 조회하기
+		
 		
 		return "movie/movieAllList";
 	}
@@ -239,6 +250,7 @@ public class MovieController {
 	@RequestMapping(value="/updatePost.do")
 	public String postUpdate(MoviePost moviePost,int movieNo) {
 		int result = service.postUpdate(moviePost);
+		System.out.println(moviePost);
 		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 		
 	}
@@ -249,5 +261,37 @@ public class MovieController {
 		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 		
 	}
+	@ResponseBody
+	@RequestMapping(value="/movieLikeInsert.do")
+	public String movieLikeInsert(int movieNo, int memberNo) {
+		int result = service.movieLikeInsert(movieNo,memberNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/movieLikeDelete.do")
+	public String movieLikeDelete(int movieNo,int memberNo) {
+		int result = service.movieLikeDelete(movieNo,memberNo);
+		System.out.println(movieNo);
+		System.out.println(memberNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/movieLikeCount.do") public int movieLikeCount(int
+	 * movieNo,int memberNo) { System.out.println("likeCount"+movieNo); int
+	 * likeCount=service.movieLikeCount(movieNo); return likeCount; }
+	 */
+	
 	
 }

@@ -175,10 +175,11 @@
 				font-size: 10px;
 				width: 30px;
 				height: 30px;
+				border: 0.5px solid #c1c1c1;
 				}
 
 				.clicked {
-					background-color: #503396;
+					background-color: #574286;
 					color: white;
 				}
 				.reserved{
@@ -213,7 +214,8 @@
 					overflow: hidden;
 					position: relative;
 					margin-left: 20px;
-					padding: 5px 0 0 10px;
+					padding-top: 7px;
+					padding-left: 5px;
 					border-bottom: 1px solid #434343;
 					height: 50px;
 					font-size: 19px;
@@ -221,24 +223,44 @@
 
 				.result-info {
 					position: relative;
+					overflow: hidden;
 					min-height: 121px;
 					margin-left: 20px;
-					padding: 0 104px 0 0;
+					padding: 0;
 					font-size: .8667em;
 					border-bottom: 1px solid #434343;
 					height: 120px;
 				}
+				
+				.movie-img-box{
+					float: right;
+					
+					height: 120px; 
+					width: 140px;
+				}
+				.movie-img{
+					padding: 3px 0;
+					margin: 0 auto;
+					height: 120px;
+					width: 100px;
+				}
 				.info-branch{
+					float: left;
 					padding: 10px;
 					font-size: 15px;
 					color: #c4c4c4;
 				}
 				.tBrch{
 					padding-bottom: 15px;
+					width: 100px;
+				}
+				.toDate{
+					width: 100px;
 				}
 				.info-time{
-					padding: 10px;
-					font-size: 15px;
+					padding: 40px 0 0 0;
+					font-size: 13px;
+					width: 100px;
 				}
 				.result-seat {
 					overflow: hidden;
@@ -248,6 +270,94 @@
 					border-radius: 5px;
 					border: 1px solid #434343;
 					height: 200px;
+				}
+				.seat-condition{
+					position: relative;
+					float: left;
+					border-right: 1px solid #434343;
+					width: 120px;
+					height: 200px;
+				}
+				.condition-list{
+					position: absolute;
+					left: 20px;
+					top: 30px;
+				}
+				.condition-list>li{
+					padding: 10px 0;
+				}
+				.c-li1{
+					overflow: hidden;
+				}
+				.condition1{
+					width: 20px;
+					height: 20px;
+					background-color: #574286;
+					float: left;
+					margin-right: 5px;
+				}
+				.c-li1>em{
+					float: left;
+					font-size: 15px;
+					line-height: 18px;
+					color: #c4c4c4;
+				}
+				.c-li2{
+					overflow: hidden;
+				}
+				.condition2{
+					width: 20px;
+					height: 20px;
+					background-image: url(https://img.megabox.co.kr/static/pc/images/common/bg/bg-seat-condition-finish.png)!important;
+					background-size: 100%;
+					float: left;
+					margin-right: 5px;
+				}
+				.c-li2>em{
+					float: left;
+					font-size: 15px;
+					line-height: 18px;
+					color: #c4c4c4;
+				}
+				.c-li3{
+					overflow: hidden;
+				}
+				.condition3{
+					width: 20px;
+					height: 20px;
+					background-color: #ccc;
+					float: left;
+					margin-right: 5px;
+				}
+				.c-li3>em{
+					float: left;
+					font-size: 15px;
+					line-height: 18px;
+					color: #c4c4c4;
+				}
+				.choice-seat-area{
+					float: left;
+					width: 138px;
+					height: 30px;
+					line-height: 30px;
+					text-align: center;
+					font-size: 15px;
+					color: #c4c4c4;
+					margin-top: 10px;
+				}
+				.selectedSeats-area{
+					height: 135px;
+				}
+				.mySeat{
+					width: 59px;
+					float: left;
+					height: 35px;
+					padding: 0;
+					line-height: 32px;
+					font-size: .9333em;
+					border: 1px solid #5c5c5c;
+					text-align: center;
+					font-weight: 300;
 				}
 				.numberOfPeople{
 					overflow: hidden;
@@ -334,9 +444,7 @@
 					font-size: 20px;
 					text-align: center;
 				}
-				.choice-seat-area>p{
-					padding: 5px;
-				}
+				
 				
 			</style>
 		</head>
@@ -539,30 +647,48 @@
 							-->
 						</div>
 					</div>
+					
 					<div class="choice-result">
 						<div class="result-wrap">
 							<div class="result-title">
 								${schedule.movieTitle}
+								
 							</div>
-							
+
 							<div class="result-info">
 								<div class="info-branch">
 									<p class="tBrch">${schedule.theaterBranch}</p>
 									<p class="toDate">${choiceDataDay.choiceDataDay}</p>
+									<div class="info-time">
+										${schedule.scheduleStart}
+										${schedule.scheduleEnd}
+									</div>
 								</div>
-								<div class="info-time">
-									${schedule.scheduleStart}
-									${schedule.scheduleEnd}
-								</div>
-							</div>
-							<div class="result-seat">
-								<div class="choice-seat-area">
-									<p>선택좌석</p>
-									<div class="selectedSeats-area">
-										
+								<div class="movie-img-box">
+									<div class="movie-img">
+										<img src="/resources/upload/movie/${mfp}" style="width: 100px; height:114px;">
 									</div>
 								</div>
 							</div>
+
+							<div class="result-seat">
+								<div class="seat-condition">
+									<ul class="condition-list">
+										<li class="c-li1"><div class="condition1"></div><em>선택</em></li>
+										<li class="c-li2"><div class="condition2"></div><em>예매완료</em></li>
+										<li class="c-li3"><div class="condition3"></div><em>선택가능</em></li>
+									</ul>
+								</div>
+								<div class="choice-seat-area">
+									<p>선택좌석</p>
+									<div style="padding: 10px;">
+										<div class="selectedSeats-area">
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<div class="numberOfPeople">
 								<div class="numArea1"></div>
 								<div class="numArea2"></div>
@@ -582,7 +708,7 @@
 							</div>
 						</div>
 					</div>
-				<button class="nowTotal">선택된 인원 수 : </button>
+				<button class="nowTotal" style="display: none;">선택된 인원 수 : </button>
 				<span class="hiddenSpan" title="선택한영화의 scheduleNo" style="display: none;">${schedule.scheduleNo}</span>
 				</div>
 
@@ -727,7 +853,7 @@
 						}
 					}
 				
-				
+					
 					function mapping(input, i, j) {
 						const row = String.fromCharCode(65 + i); // A부터 G까지의 알파벳을 구합니다.
 						const seatNumber = j + 1; // 0부터 6까지의 숫자에 1을 더하여 좌석 번호를 구합니다.
@@ -958,6 +1084,8 @@
 					console.log(numOfPeople);//성인,청소년,우대
 					console.log(countArr);//1,2,3
 					console.log("joinSeats : "+joinSeats);
+					$(this).css("backgroundColor","#329eb1");
+					$(this).css("color","#fff");
 					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&countArr="+countArr.join("/")+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 				});
 			</script>
