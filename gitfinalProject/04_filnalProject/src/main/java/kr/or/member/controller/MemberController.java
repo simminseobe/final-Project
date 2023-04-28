@@ -44,6 +44,7 @@ import com.google.gson.JsonParser;
 import common.FileManager;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
 
 @Controller
@@ -222,7 +223,15 @@ public class MemberController {
 
 	// 마이페이지 이동
 	@RequestMapping(value = "/mypage.do")
-	public String mypage() {
+	public String mypage(@SessionAttribute(required = false) Member m , Model model) {
+		//포인트 정보 조회
+		//ArrayList<MemberPoint> memberPoint = service.memberPoint(m.getMemberNo());
+		//System.out.println("memberPoint: " + memberPoint);
+		//model.addAttribute("memberPoint", memberPoint);
+		
+		//잔여포인트 조회
+		int mpAmount = service.mpAmount(m.getMemberNo());
+		model.addAttribute("mpAmount", mpAmount);
 		return "member/mypage";
 	}
 
@@ -726,5 +735,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+
 
 }

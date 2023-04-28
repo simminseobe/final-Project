@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
 
 @Repository
@@ -101,6 +102,18 @@ public class MemberDao {
 		return (ArrayList<ShoppingAddress>)list;
 	}
 
+	//포인트 정보 조회
+	public ArrayList<MemberPoint> memberPoint(int memberNo) {
+		List list = sqlSession.selectList("member.memberPoint",memberNo);
+		return (ArrayList<MemberPoint>)list;
+	}
 
+	//잔여포인트 조회
+	
+	public int mpAmount(int memberNo) {
+		int mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
+		return mpAmount;
+	}
+	
 
 }

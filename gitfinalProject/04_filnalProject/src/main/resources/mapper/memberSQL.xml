@@ -14,7 +14,7 @@
   		member_birth_month as memberBirthMonth,
   		member_birth_day as memberBirthDay,
   		member_email as memberEmail,
-  		member_level as memberLevel,
+  		decode(member_level, 1,'WHITE', 2,'GOLD', 3,'VIP') as memberLevel,
   		enroll_date as enrollDate,
   		member_gender as memberGender,
   		member_filename as memberFilename,
@@ -167,4 +167,22 @@
   	FROM SHIPPING_ADDRESS WHERE MEMBER_NO=#{memberNo}
   </select>
   
+  <!-- 포인트 정보조회 -->
+<select id="memberPoint" parameterType="_int" resultType="mp">
+	select 
+		point_no as pointNo ,
+		member_no as memberNo ,
+		point_amount as pointAmount ,
+		point_status as pointStatus ,
+		point_detail as pointDetail ,
+		point_date as pointDate
+	from point_tbl 
+	where member_no=#{memberNo}
+</select>
+ <select id="mpAmount" parameterType="_int" resultType="_int">
+ select 
+		sum(point_amount) as pointAmount 
+	from point_tbl 
+	where member_no=#{memberNo}
+ </select>
 </mapper>
