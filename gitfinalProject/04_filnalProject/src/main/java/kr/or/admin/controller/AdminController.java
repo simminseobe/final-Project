@@ -23,6 +23,7 @@ import com.google.gson.JsonParser;
 
 import common.FileManager;
 import kr.or.admin.model.service.AdminService;
+import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
@@ -447,8 +448,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/adminChat.do")
-	public String adminChat(Consultation consultation, Model model) {
-		model.addAttribute("consultation", consultation);
+	public String adminChat(Chat chat, Model model) {
+		model.addAttribute("chat", chat);
 
 		return "admin/adminChat";
 	}
