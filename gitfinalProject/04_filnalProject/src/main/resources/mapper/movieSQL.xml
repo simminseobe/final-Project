@@ -25,7 +25,7 @@
 		select count(*) from movie_tbl
 	
 	</select>
-	<select id="selectMovieAll" resultType="movie">
+	<select id="selectMovieAll" resultType="movie" parameterType="_int">
 		select 
 		 	movie_no as movieNo,
 			movie_title as movieTitle,
@@ -40,8 +40,10 @@
 			classic_society as classicSociety,
 			special_movie as specialMovie,
 			enroll_member as enrollMember,
-			movie_type as movieType
-		 from movie_tbl
+			movie_type as movieType,
+			(select count(*) from movie_like ml where ml.movie_no=m.movie_no) as likeCount,
+            (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=0) as likeCheck
+		 from movie_tbl m
 	</select>
 	<!-- 상영예정작 조회를 위함 -->
 	<select id="expectedMovie" resultType="movie">
@@ -447,22 +449,28 @@ delete from movie_video where movie_video_no=
 <delete id="postDelete" parameterType="moviePost">
 		delete from movie_post where movie_post_no=#{moviePostNo}
 </delete>
-<!-- 영화 좋아요 인서트 -->
+<!-- 영화 좋아요 insert -->
 <insert id="movieLikeInsert" parameterType="map">
 	insert into movie_like values(movie_like_seq.nextval,#{movieNo},#{memberNo})
 </insert>
 <!--영화 좋아요 delete  -->
-<!-- <delete id="movieLikeDelete" parameterType="map">
-	delete from movie_like where movie_no = #{movie_no} and member_no=#{memberNo}
+<delete id="movieLikeDelete" parameterType="map">
+	delete from movie_like where movie_no=#{movieNo} and member_no=#{memberNo}
 </delete>
+<!-- 영화 좋아요 수 -->
+<!-- <select id="movieLikeCount"  parameterType="_int" resultType="movieLike">
+select count(*) from movie_like where movie_no=#{movieNo}
+</select>
+ -->
+<!-- 
 영화 좋아요 수 
-<select id="deletenset"></select>
+<select id="deletenset">
 select count(*) from movie_like where movie_no=#{movieNo} as like_cnt
-
+</select>
 
 <select id="likeCheck" resultType="_int">
 	select count(*) from movie_like where movie_no=#{movie_no} and member_no=#{member_no}
-</select> -->
+</select>  -->
 
 
 </mapper>
