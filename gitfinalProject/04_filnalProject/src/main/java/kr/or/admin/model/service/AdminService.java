@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.dao.AdminDao;
+import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
@@ -227,5 +228,11 @@ public class AdminService {
 		ArrayList<Consultation> list = dao.selectConsultation();
 
 		return list;
+	}
+
+	public int insertChat(Chat chat) {
+		int result = dao.insertChat(chat);
+
+		return result;
 	}
 }

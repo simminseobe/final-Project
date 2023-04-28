@@ -5,101 +5,109 @@
 
         <head>
             <meta charset="UTF-8">
-            <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-            <!-- <script src="/resources/js/admin/adminChatting.js"></script> -->
-            <title>상담 채팅 입장</title>
+            <title>맴버끼리 채팅</title>
+            <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+            <script src="/resources/js/admin/adminChatting.js"></script>
             <style>
-                .chatting-area {
-                    margin: auto;
-                    height: 600px;
-                    width: 800px;
-                    margin-top: 50px;
-                    margin-bottom: 500px;
+                .chatting {
+                    width: 500px;
+                    display: none;
                 }
 
-                #exit-area {
-                    text-align: right;
-                    margin-bottom: 10px;
-                }
-
-                .display-chatting {
-                    width: 100%;
-                    height: 450px;
-                    border: 1px solid gold;
-                    overflow: auto;
-                    /*스크롤 처럼*/
-                    list-style: none;
-                    padding: 10px 10px;
-                    background: lightblue;
-                    z-index: 1;
-                    positon: absoulte;
-                }
-
-                .chat {
-                    display: inline-block;
-                    border-radius: 5px;
-                    padding: 5px;
-                    background-color: #eee;
-                }
-
-                .input-area {
-                    width: 100%;
+                .messageArea {
+                    overflow-y: auto;
+                    border: 1px solid black;
+                    height: 500px;
                     display: flex;
+                    flex-direction: column;
+                    background-color: #b2c7d9;
                 }
 
-                #inputChatting {
-                    width: 80%;
-                    resize: none;
+                .messageArea>p {
+                    text-align: center;
+                    width: 100%;
                 }
 
-                #send {
+                #sendMsg {
+                    width: 75%;
+                }
+
+                #sendBtn {
                     width: 20%;
                 }
 
-                .myChat {
-                    text-align: right;
+                .chat {
+                    margin-bottom: 10px;
+                    padding: 8px;
+                    border-radius: 3px;
                 }
 
-                .myChat>p {
-                    background-color: gold;
-                }
-
-                .chatDate {
-                    font-size: 10px;
-                }
-
-                .img {
-                    width: 100%;
-                    height: 100%;
+                .left {
                     position: relative;
-                    z-index: -100;
+                    max-width: 300px;
+                    align-self: flex-start;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    margin-left: 16px;
+                    padding: 15px;
+                }
+
+                .left:after {
+                    content: '';
+                    position: absolute;
+                    border-style: solid;
+                    border-width: 15px 15px 15px 0;
+                    border-color: transparent #fff;
+                    display: block;
+                    width: 0;
+                    z-index: 1;
+                    left: -15px;
+                    top: 12px;
+                }
+
+                .right {
+                    position: relative;
+                    max-width: 300px;
+                    align-self: flex-end;
+                    background-color: #ffeb33;
+                    border-radius: 10px;
+                    margin-right: 16px;
+                    padding: 15px;
+                }
+
+                .right:after {
+                    content: '';
+                    position: absolute;
+                    border-style: solid;
+                    border-width: 15px 0 15px 15px;
+                    border-color: transparent #ffeb33;
+                    display: block;
+                    width: 0;
+                    z-index: 1;
+                    right: -15px;
+                    top: 12px;
                 }
             </style>
         </head>
 
         <body>
-            <div class="chatting-area">
-                <br><br>
-                <div id="exit-area">
-                    <button class="btn btn-outline-danger" id="exit-btn">나가기</button>
+            <input type="hidden" id="consultationNo" value="${chat.consultationNo}">
+            <input type="hidden" id="chatMember" value="${chat.chatMember}">
+            <input type="hidden" id="memberLevel" value="${chat.memberLevel}">
+            <h1>전체채팅</h1>
+            <hr>
+            <br>
+            <div class="chatting">
+                <div class="messageArea">
+                    <p>채팅방에 입장했습니다.</p>
                 </div>
-                <ul class="display-chatting">
-                    <!-- <img src="" /> -->
-                    <li class="myChat">
-                        <span class="chatDate">이름</span>
-                        <p class="chat">메세지</p>
-                    </li>
-                    <li>
-                        <b>이름</b>
-                        <p class="chat">메세지</p>
-                        <span class="chatDate">2022</span>
-                </ul>
-                <div class="input-area">
-                    <textarea id="inputChatting" rows="3"></textarea>
-                    <button type="button" onclick="send();">보내기</button>
+                <div class="sendBox">
+                    <input type="text" id="sendMsg">
+                    <button id="sendBtn" onclick="sendMsg();">전송</button>
                 </div>
-
             </div>
+            <hr>
+            <a href="/">메인으로 돌아가기</a>
         </body>
 
         </html>
