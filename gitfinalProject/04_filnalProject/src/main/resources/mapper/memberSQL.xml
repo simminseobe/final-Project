@@ -88,32 +88,6 @@
   	update member set member_pw=#{memberPw} where member_id=#{memberId}
   </update>
   
-  <select id="selectBookList" parameterType="map" resultType="m">
-		select * from
-			(select rownum as rnum, m.* from
-			    (select
-			  		member_no as memberNo,
-			  		member_id as memberId,
-			  		member_pw  as memberPw,
-			  		member_name as memberName,
-			  		member_phone as memberPhone,
-			  		member_birth_year as memberBirthYear,
-			  		member_birth_month as memberBirthMonth,
-			  		member_birth_day as memberBirthDay,
-			  		member_email as memberEmail,
-			  		member_level as memberLevel,
-			  		enroll_date as enrollDate,
-			  		member_gender as memberGender,
-			  		member_filename as memberFilename,
-			  		member_filepath as memberFilepath
-			    from member order by 1 desc) m)
-		where rnum between #{start} and #{end}
-  </select>
-  
-  <select id="totalCount" resultType="_int">
-  	select count(*) from member
-  </select>
-  
   <!-- 카카오 로그인 -->
   <select id="selectOneKakao" parameterType="m" resultType="m">
     	select 
@@ -167,22 +141,56 @@
   	FROM SHIPPING_ADDRESS WHERE MEMBER_NO=#{memberNo}
   </select>
   
-  <!-- 포인트 정보조회 -->
-<select id="memberPoint" parameterType="_int" resultType="mp">
-	select 
-		point_no as pointNo ,
-		member_no as memberNo ,
-		point_amount as pointAmount ,
-		point_status as pointStatus ,
-		point_detail as pointDetail ,
-		point_date as pointDate
-	from point_tbl 
-	where member_no=#{memberNo}
-</select>
- <select id="mpAmount" parameterType="_int" resultType="_int">
- select 
-		sum(point_amount) as pointAmount 
-	from point_tbl 
-	where member_no=#{memberNo}
- </select>
+  <!-- 예매/구매 내역 조회 -->
+  <select id="selectBookList" parameterType="map" resultMap="selectInfo">
+		select * from
+			(select rownum as rnum, r.* from
+			    (select 
+				    pay_no,
+				    pay_price,
+				    (select movie_title from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) movie_title,
+				    (select to_char(schedule_start,'yyyy-mm-dd') from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) movie_date,
+				(select to_char(schedule_start,'hh24:mi') from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) start_time,
+				(select to_char(schedule_end,'hh24:mi') from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) end_timeDate,
+				(select theater_branch from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) as theater_branch
+				from pay p
+				where member_no=68 and pay_status=1 order by 1 desc) r)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="selectPeople" parameterType="_int" resultType="people">
+  	select decode(ticketing_age,1,'성인',2,'청소년',3,'우대') as people ,count(ticketing_age) as cnt from ticketing_tbl where pay_no=#{_parameter} group by ticketing_age order by ticketing_age
+  </select>
+  
+  <select id="selectSeat" parameterType="_int" resultType="string">
+  	select seat from ticketing_tbl where pay_no=#{_parameter}
+  </select>
+  
+  <resultMap type="reservation" id="selectInfo">
+  	<result column="pay_no" property="payNo" />
+  	<result column="pay_price" property="payPrice" />
+  	<result column="movie_title" property="movieTitle" />
+  	<result column="movie_date" property="movieDate" />
+  	<result column="start_time" property="startTime" />
+  	<result column="end_timeDate" property="endTime" />
+  	<result column="theater_branch" property="theaterBranch" />
+  	<collection property="list"
+  				select="selectPeople"
+  				column="pay_no"
+  				ofType="people"
+  				javaType="java.util.ArrayList" />
+  	
+  	<collection property="seat"
+  				select="selectSeat"
+  				column="pay_no"
+  				ofType="string"
+  				javaType="java.util.ArrayList"/>
+  </resultMap>
+  
+  
+  <!-- 전체 예매 내역 수 조회 -->
+  <select id="totalCount" resultType="_int">
+  	select count(*) from TICKETING_TBL
+  </select>
+  
 </mapper>

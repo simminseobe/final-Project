@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="/resources/css/member/purchaseDetail.css">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<table>
-<td>
-<div class="menubar">
-	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
-	</div>
+	<td>
+	<div class="menubar">
+		<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+		</div>
 	<td>
 	<div class="wrapper">
 		<div class="booklist-wrap">
@@ -27,7 +27,6 @@
 				</ul>
 			</div>
 
-
 			<div class="tab-content">
 				<table>
 					<tbody>
@@ -37,7 +36,6 @@
 							<th>상영관</th>
 							<th>좌석번호</th>
 							<th>상영시간</th>
-							<th>인원 수</th>
 							<th>결제금액</th>
 						</tr>
 						<tr>
@@ -46,11 +44,11 @@
 							<td>서울</td>
 							<td>7번</td>
 							<td>2023-01-01</td>
-							<td>2</td>
 							<td>14,000</td>
 						</tr>
 						<tr>
-							<th colspan="7">${pageNavi }</th>
+						<!-- 페이징 처리 -->
+							<th colspan="6">${pageNavi }</th>
 						</tr>
 					</tbody>
 				</table>
@@ -78,6 +76,7 @@
 							<td>14,000</td>
 						</tr>
 						<tr>
+						<!-- 페이징 처리 -->
 							<th colspan="5">${pageNavi }</th>
 						</tr>
 					</tbody>
@@ -110,12 +109,7 @@
 				</div>
 
 			</div>
-			<!-- 페이징 처리 -->
-
-
-
 			<div class="tab-content">
-				<!-- 페이징 처리 -->
 
 				<div class="second-header">
 					<h2>구매내역</h2>
@@ -135,7 +129,7 @@
 							<td>팝콘</td>
 							<td>14,000</td>
 							<td>
-								<button type="button" class="cancelBtn">구매취소</button>
+								<button type="button" class="my-btn my-blue">구매취소</button>
 							</td>
 						</tr>
 						<tr>
