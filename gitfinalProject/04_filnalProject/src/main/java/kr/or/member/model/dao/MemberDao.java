@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.ticketing.model.vo.Reservation;
 
 @Repository
 public class MemberDao {
@@ -90,9 +91,9 @@ public class MemberDao {
 	}
 	
 	// 예매/구매 내역 조회
-	public ArrayList<Member> selectBookList(HashMap<String, Object> map) {
+	public ArrayList<Reservation> selectBookList(HashMap<String, Object> map) {
 		List list  = sqlSession.selectList("member.selectBookList", map);
-		return (ArrayList<Member>)list;
+		return (ArrayList<Reservation>)list;
 	}
 
 	// 전체 게시물 수 조회

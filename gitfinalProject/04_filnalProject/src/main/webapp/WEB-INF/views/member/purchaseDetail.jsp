@@ -36,7 +36,6 @@
 							<th>상영관</th>
 							<th>좌석번호</th>
 							<th>상영시간</th>
-							<th>인원 수</th>
 							<th>결제금액</th>
 						</tr>
 						<tr>
@@ -45,12 +44,11 @@
 							<td>서울</td>
 							<td>7번</td>
 							<td>2023-01-01</td>
-							<td>2</td>
 							<td>14,000</td>
 						</tr>
 						<tr>
 						<!-- 페이징 처리 -->
-							<th colspan="7">${pageNavi }</th>
+							<th colspan="6">${pageNavi }</th>
 						</tr>
 					</tbody>
 				</table>

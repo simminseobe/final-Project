@@ -31,5 +31,7 @@
 		<typeAlias type="kr.or.ticketing.model.vo.Pay" alias="pay"/>
 		<typeAlias type="kr.or.giftticket.model.vo.GiftTicket" alias="giftTicket"/>
 		<typeAlias type="kr.or.member.model.vo.ShoppingAddress" alias="sa"/>
+		<typeAlias type="kr.or.ticketing.model.vo.Reservation" alias="reservation"/>
+		<typeAlias type="kr.or.ticketing.model.vo.People" alias="people"/>
 	</typeAliases>
 </configuration>

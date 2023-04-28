@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
-import kr.or.member.model.vo.MemberPageData;
 import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.ticketing.model.vo.Reservation;
+import kr.or.ticketing.model.vo.ReservationPageData;
 
 @Service
 public class MemberService {
@@ -77,7 +78,7 @@ public class MemberService {
 	}
 	
 	// 페이징 처리
-	public MemberPageData selectBookList(int reqPage) {
+	public ReservationPageData selectBookList(int reqPage, int memberNo) {
 		int numPerPage = 5;
 		
 		int end = reqPage * numPerPage;
@@ -86,12 +87,58 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("memberNo",  memberNo);
 		
-		ArrayList<Member> list = dao.selectBookList(map);
+		ArrayList<Reservation> list = dao.selectBookList(map);
 		
 		int totalCount = dao.selectBookListCount();
 		
-		return null;
+		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+		
+		// 페이지 네비 사이즈
+		// 1, 2, 3, 4, 5
+		int pageNaviSize = 5;
+		
+		int pageNo = 1;
+		if(reqPage > 3) {
+			// 1,2 페이지 외 다른 페이지들은 가운데 부터 시작
+			pageNo = reqPage - 2;
+		}
+		
+		// 페이지 네비 생성시작
+		String pageNavi = "";
+		
+		// 이전버튼 생성
+		if(pageNo != 1) {
+			pageNavi += "<a href='/purchaseDetail.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+			// pageNavi = "" + "<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+			// pageNavi = <a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>;
+		}
+		
+		// 페이지 숫자 생성
+		
+		// 웹페에지 하단에 보이는 페이지 번호
+		// 1, 2, 3, 4, 5
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<span>"+pageNo+"</span>";
+			} else {
+				pageNavi += "<a href='/purchaseDetail.do?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				// pageNavi를 만들지 않게 break
+				break;
+			}
+		}
+		
+		// 다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/purchaseDetail.do?reqPage="+pageNo+"'>[다음]</a>";
+		}
+		
+		ReservationPageData rpd = new ReservationPageData(list, pageNavi);
+		return rpd;
 	}
 
 	

@@ -1,4 +1,4 @@
-package kr.or.member.model.vo;
+package kr.or.ticketing.model.vo;
 
 import java.util.ArrayList;
 
@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class MemberPageData {
-	private ArrayList<Member> list;
+@AllArgsConstructor
+public class ReservationPageData {
+	private ArrayList<Reservation> list;
 	private String pageNavi;
 }

@@ -89,7 +89,7 @@ th, td {
 .btn{
     background-color: #f3f4f6;
     border: none;
-    width: 100vh;
+	width: 745px;
     text-align: left;
     padding-left: 12px;
     font-size: 1.1em;
@@ -104,6 +104,10 @@ th, td {
 
 #collapseExample{
     font-size: 0.95em;
+}
+
+.card{
+    width: 745px;
 }
 
 .my-btn,#file-upload-button{ color: #fff; padding:5px 10px 5px 10px; margin:5px; display:inline-block; border-radius: 10px; transition:all 0.080s; }
