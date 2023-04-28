@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
@@ -174,6 +175,12 @@ public class AdminDao {
 		List list = sqlSession.selectList("consultation.selectConsultation");
 
 		return (ArrayList<Consultation>) list;
+	}
+
+	public int insertChat(Chat chat) {
+		int result = sqlSession.insert("chat.insertChat", chat);
+
+		return result;
 	}
 
 }
