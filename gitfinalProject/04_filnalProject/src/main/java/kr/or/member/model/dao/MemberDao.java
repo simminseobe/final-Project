@@ -124,8 +124,8 @@ public class MemberDao {
 
 	//잔여포인트 조회
 	
-	public int mpAmount(int memberNo) {
-		int mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
+	public Integer mpAmount(int memberNo) {
+		Integer mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
 		return mpAmount;
 	}
 

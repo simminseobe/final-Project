@@ -234,8 +234,14 @@ public class MemberController {
 		//잔여포인트 조회
 		//int mpAmount = service.mpAmount(m.getMemberNo());
 		//model.addAttribute("mpAmount", mpAmount);
-		int mpAmount = service.mpAmount(m.getMemberNo());
-		model.addAttribute("mpAmount", mpAmount);
+		Integer mpAmount = service.mpAmount(m.getMemberNo()); //최초 회원가입시 포인트내역 없음(null) -> 단순 int로 선언 시 에러
+
+		if(mpAmount==null) {
+			model.addAttribute("mpAmount", mpAmount);
+		}else {
+			int mpAmountInt = mpAmount.intValue();  
+			model.addAttribute("mpAmount", mpAmountInt);
+		}
 		
 		return "member/mypage";
 	}

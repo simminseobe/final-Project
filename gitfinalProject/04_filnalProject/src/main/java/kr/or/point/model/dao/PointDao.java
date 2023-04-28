@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
+import kr.or.point.model.vo.AddUsePoint;
 import kr.or.point.model.vo.Point;
 
 @Repository
@@ -17,14 +18,14 @@ public class PointDao {
 	private SqlSessionTemplate sqlSession;
 
 	//포인트사용
-	public int usePoint(Point uPoint) {
-		int result = sqlSession.selectOne("point.usePoint", uPoint);
+	public int usePoint(AddUsePoint use) {
+		int result = sqlSession.insert("point.usePoint", use);
 		return result;
 	}
 	
 	//포인트적립
-	public int savePoint(Point sPoint) {
-		int result = sqlSession.selectOne("point.savePoint", sPoint);
+	public int addPoint(AddUsePoint add) {
+		int result = sqlSession.insert("point.addPoint", add);
 		return result;
 	}
 	

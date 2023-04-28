@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
 import kr.or.point.model.dao.PointDao;
+import kr.or.point.model.vo.AddUsePoint;
 import kr.or.point.model.vo.Point;
 
 @Service
@@ -18,14 +19,14 @@ public class PointService {
 	private PointDao dao;
 	
 	//포인트사용
-	public int usePoint(Point uPoint) {
-		int result = dao.usePoint(uPoint);
-		return result;
+	public int usePoint(int usePoint, int memberNo) {
+		AddUsePoint use = new AddUsePoint(usePoint, memberNo);
+		return dao.usePoint(use);
 	}
 	//포인트적립
-	public int savePoint(Point sPoint) {
-		int result = dao.savePoint(sPoint);
-		return result;
+	public int addPoint(int addPoint, int memberNo) {
+		AddUsePoint add = new AddUsePoint(addPoint, memberNo);
+		return dao.addPoint(add);
 	}
 	//포인트이용내력
 	public Point memberPoint(Member m) {

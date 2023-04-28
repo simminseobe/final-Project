@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberPointAmount {
-	private int mpAmount;
+	private Integer mpAmount;
+	private int mpAmountInt;
 }

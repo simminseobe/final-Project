@@ -87,7 +87,7 @@ public class MemberService {
 	
 	//잔여포인트 조회
 	
-	public int mpAmount(int memberNo) {
+	public Integer mpAmount(int memberNo) {
 		return dao.mpAmount(memberNo);
 	}
 	
