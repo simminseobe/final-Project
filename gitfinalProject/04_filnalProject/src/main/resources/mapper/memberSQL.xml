@@ -14,7 +14,7 @@
   		member_birth_month as memberBirthMonth,
   		member_birth_day as memberBirthDay,
   		member_email as memberEmail,
-  		decode(member_level, 1,'WHITE', 2,'GOLD', 3,'VIP') as memberLevel,
+  		member_level as memberLevel,
   		enroll_date as enrollDate,
   		member_gender as memberGender,
   		member_filename as memberFilename,

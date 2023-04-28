@@ -232,6 +232,7 @@ public class MemberController {
 		//잔여포인트 조회
 		int mpAmount = service.mpAmount(m.getMemberNo());
 		model.addAttribute("mpAmount", mpAmount);
+		
 		return "member/mypage";
 	}
 
