@@ -152,6 +152,26 @@ public class TicketingController {
 		 ArrayList<Schedule> list = service.selectSeat(scheduleNo);
 		 return new Gson().toJson(list);
 	 }
+	 @ResponseBody
+	 @RequestMapping(value="/selectPoint.do", produces = "application/json;charset=utf-8")
+	 public String selectPoint(int memberNo) {
+		 
+		 return null;
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")

@@ -697,7 +697,7 @@
 
 			//포인트 사용 시(선택금액)
 			$(".mMoint div.sub-div>.mega-point").on("click", function () {
-				
+				var memberNo = $(".ssMemberNo").text();
 				$.ajax({
 					url : "/selectPoint.do",
 					type : "post",
