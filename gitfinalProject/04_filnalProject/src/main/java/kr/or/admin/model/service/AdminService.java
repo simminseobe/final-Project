@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.dao.AdminDao;
+import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.dao.MovieDao;
@@ -214,5 +215,17 @@ public class AdminService {
 		int result = dao.deleteSchedule(scheduleNo);
 
 		return result;
+	}
+
+	public int insertConsultation(Consultation consultation) {
+		int result = dao.insertConsultation(consultation);
+
+		return result;
+	}
+
+	public ArrayList<Consultation> selectConsultation() {
+		ArrayList<Consultation> list = dao.selectConsultation();
+
+		return list;
 	}
 }

@@ -156,5 +156,15 @@
   	from member where member_id=#{memberId}
   </select>
   
+  <!-- 배송지 정보 조회 -->
+  <select id="shopAddress" parameterType="_int" resultType="sa">
+  	select
+  		SA_NO as saNo,
+  		MEMBER_NO as memberNo,
+  		ADDRESS_NEW as addressNew,
+  		ADDRESS_NAME as addressName,
+  		ADDRESS_PHONE as addressPhone
+  	FROM SHIPPING_ADDRESS WHERE MEMBER_NO=#{memberNo}
+  </select>
   
 </mapper>

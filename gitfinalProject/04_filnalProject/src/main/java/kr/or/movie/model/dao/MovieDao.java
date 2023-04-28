@@ -87,6 +87,7 @@ public class MovieDao {
 		return movie;
 	}
 
+	
 	public WatchPoint watchPointSum(int movieNo) {
 		WatchPoint wpSum = sqlSession.selectOne("movie.selectWatchPointSum", movieNo);
 		return wpSum;
@@ -163,10 +164,61 @@ public class MovieDao {
 	}
 
 	public ArrayList<MoviePostComment> selectPostComment(int moviePostNo) {
+		System.out.println("dao postNo : "+moviePostNo);
 		List list = sqlSession.selectList("movie.selectPostComment",moviePostNo);
 		return (ArrayList<MoviePostComment>) list;
 	}
 
+	public int updatePostComment(MoviePostComment mpc) {
+		int result = sqlSession.update("movie.updatePostComment",mpc);
+		return result;
+	}
+
+	public int selectMoviePostCount(int movieNo) {
+		int moviePostCount = sqlSession.selectOne("movie.moviePostCount", movieNo);
+		return moviePostCount;
+	}
+
+	public int deletePostComment(int moviePostCommentNo) {
+		int deletePostComment=sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
+		return deletePostComment;
+	}
+	//상영예정작 리스트 조회를 위함
+	public ArrayList<Movie> expectedMovie() {
+		List list = sqlSession.selectList("movie.expectedMovie");
+		return (ArrayList<Movie>) list;
+	}
+	//특별상영작 리스트를  조회하기 위함
+	public ArrayList<Movie> specialMovie() {
+		List list = sqlSession.selectList("movie.specialMovieList");
+		return (ArrayList<Movie>) list;
+	}
+	//필름소사이어티 리스트를 조회하기 위함
+	public ArrayList<Movie> filmSocietyList() {
+		List list = sqlSession.selectList("movie.filmSocietyList");
+		return (ArrayList<Movie>) list;
+	}
+	//클래식소사이어티 리스트를 조회하기 위함
+	public ArrayList<Movie> classicSocietyList() {
+		List list = sqlSession.selectList("movie.classicSocietyList");
+		return (ArrayList<Movie>) list;
+
+	}
+
+	public MoviePost selectOneMoviePost(int moviePostNo) {
+		MoviePost moviePost = sqlSession.selectOne("movie.selectOneMoviePost", moviePostNo);
+		return moviePost;
+	}
+
+	public int postUpdate(MoviePost moviePost) {
+		int result =sqlSession.update("movie.postUpdate",moviePost);
+		return result;
+	}
+
+	public int postDelete(MoviePost moviePost) {
+		int result =sqlSession.delete("movie.postDelete",moviePost);
+		return result;
+	}
 	
 
 

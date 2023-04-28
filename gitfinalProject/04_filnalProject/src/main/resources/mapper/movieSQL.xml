@@ -43,6 +43,83 @@
 			movie_type as movieType
 		 from movie_tbl
 	</select>
+	<!-- 상영예정작 조회를 위함 -->
+	<select id="expectedMovie" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where movie_date > to_char(sysdate,'yyyy-mm-dd')
+	</select>
+		<!-- 특별상영작 조회를 위함 -->
+	<select id="specialMovieList" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where special_movie is not null
+	</select>
+	<!-- 필름소사이어티 조회를 위함 -->
+		<select id="filmSocietyList" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where film_society is not null
+	</select>
+	<!-- 클래식소사이어티 조회를 위함 -->
+			<select id="classicSocietyList" resultType="movie">
+		select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl where classic_society is not null
+	</select>
+	
 	<!-- movie_file 메인만 출력 -->
 	<select id="selectMovieFile" resultType="movieFile" parameterType="_int">
 			select 
@@ -318,7 +395,7 @@ delete from movie_video where movie_video_no=
 	insert into movie_post_comment
 		values(movie_post_comment_seq.nextval,#{moviePostNo},#{movieTitle},#{memberId},#{postComment},to_char(sysdate,'yyyy-mm-dd'))
 </insert>
-<select id="selectPostComment" resultType="moviePostComment">
+<select id="selectPostComment" parameterType="_int" resultType="moviePostComment">
 	select movie_post_comment_no as moviePostCommentNo,
 			movie_post_no as moviePostNo,
 			movie_title as movieTitle,
@@ -327,6 +404,40 @@ delete from movie_video where movie_video_no=
 			movie_post_comment_date as moviePostCommentDate
 	from movie_post_comment where movie_post_no=#{_parameter}
 </select>
+
+<update id="updatePostComment" parameterType="moviePostComment">
+		update movie_post_comment set
+			post_comment=#{postComment} where movie_post_comment_no=#{moviePostCommentNo}
+</update>
+<select id="moviePostCount" parameterType="moviePost" resultType="_int">
+	select count(*) from movie_post where movie_no=#{movieNo}
+</select>
+<delete id="deletePostComment" parameterType="moviePostComment">
+	delete from movie_post_comment where movie_post_comment_no=#{moviePostCommentNo}
+</delete>
+<select id="selectOneMoviePost" parameterType="_int" resultType="moviePost">
+	select
+		movie_post_no as moviePostNo,
+		p.movie_no as movieNo,
+		p.movie_video_no as movieVideoNo,
+		p.movie_file_no as movieFileNo,
+		member_id as memberId,
+		movie_title as movieTitle,
+		movie_post_content as moviePostContent,
+		movie_post_date as moviePostDate,
+		movie_file_path as movieFilePath,
+        movie_video_link as videoLink
+    from movie_post p 
+    left join movie_file f on(p.movie_file_no=f.movie_file_no) 
+    left join movie_video v on(p.movie_video_no=v.movie_video_no) where movie_post_no=#{_parameter}
+</select>
+<update id="postUpdate" parameterType="moviePost">
+		update movie_post set
+			movie_video_no=#{movieVideoNo},movie_file_no=#{movieFileNo},movie_post_content=#{moviePostContent} where movie_post_no=#{moviePostNo}
+</update>
+<delete id="postDelete" parameterType="moviePost">
+		delete from movie_post where movie_post_no=#{moviePostNo}
+</delete>
 
 
 </mapper>

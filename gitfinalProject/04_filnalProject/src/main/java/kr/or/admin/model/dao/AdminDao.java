@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.movie.model.vo.Movie;
@@ -161,6 +162,18 @@ public class AdminDao {
 		int result = sqlSession.delete("schedule.deleteSchedule", scheduleNo);
 
 		return result;
+	}
+
+	public int insertConsultation(Consultation consultation) {
+		int result = sqlSession.insert("consultation.insertConsultation", consultation);
+
+		return result;
+	}
+
+	public ArrayList<Consultation> selectConsultation() {
+		List list = sqlSession.selectList("consultation.selectConsultation");
+
+		return (ArrayList<Consultation>) list;
 	}
 
 }

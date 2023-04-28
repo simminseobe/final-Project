@@ -35,8 +35,7 @@
         <!--logo copy-->
     </div>
     <!--wrap-->
-</footer>
-<script>
+    <script>
     	$(".menu a").on("click",function(){
     		const noClick = $(".sub-menu").prev();
     		$(".menu a").removeClass("on");
@@ -48,6 +47,7 @@
     		
     	});
     </script>
+</footer>
 </body>
 </html>
 

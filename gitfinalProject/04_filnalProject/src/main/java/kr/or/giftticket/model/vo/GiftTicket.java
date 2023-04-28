@@ -1,4 +1,4 @@
-package kr.or.gift.model.vo;
+package kr.or.giftticket.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,5 +13,5 @@ public class GiftTicket {
 	private String giftTicketName;
 	private String giftTicketDate;
 	private String giftTicketStatus;
-	private String memberNo;
+	private int memberNo;
 }

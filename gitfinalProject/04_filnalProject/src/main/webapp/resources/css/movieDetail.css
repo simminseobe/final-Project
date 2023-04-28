@@ -697,6 +697,7 @@ cursor: pointer;
     margin-top: 5px;
 }
 
+
 .postDetailTextInput{
     width: 420px;
     height: 100px;
@@ -705,7 +706,17 @@ cursor: pointer;
     background-color: #ecf0f4;
     text-align: center;
 }
+.postCommentTxt>textarea{
+    width: 400px;
+    height: 60px;
+    margin-bottom: 60px;
+}
 
+.post-comment-list{
+    margin-top: 10px;
+    padding-top: 10px;
+    position: relative;
+}
 
 .subscribe{
     padding-top: 15px;
@@ -721,6 +732,25 @@ cursor: pointer;
     border-radius: 5px;
     border: none;
 }
+
+.subscribe>.btnWrap>.updateBtnDiv>.subscribeBtn{
+    width: 70px;
+    height: 28px;
+    background-color: #432e75;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+
+.subscribe>.btnWrap>.deleteBtnDiv>.subscribeBtn{
+    width: 70px;
+    height: 28px;
+    background-color: #432e75;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+
 .modalClose{
     background-color: #432e75;
     color: #fff;
@@ -769,4 +799,51 @@ cursor: pointer;
     background-color: transparent;
     color: #432e75;
     border-color: #432e75;
+}
+
+
+.post-comment-list>.comment-list-img{
+    background-color: #ecf0f4;
+    padding-bottom: 5px;
+}
+
+.postCommentArea>textarea{
+    width: 500px;
+    height: 55px;
+    resize: none;
+}
+.comment-list-img{
+    position: relative;
+}
+.btnWrap{
+    position: absolute;
+    right: 5px;
+    top: 20px;
+   
+}
+.btnWrap>.updateBtn>button{
+    width: 50px;
+    height: 28px;
+    background-color: #432e75;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+.btnWrap>.deleteBtn>button{
+    width: 50px;
+    height: 28px;
+    background-color: #432e75;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+.btnWrap>.deleteBtn{
+    margin-top: 5px;
+}
+.commentWriter>p{
+ margin-bottom: 3px;
+}
+.videoList{
+   padding-left: 180px;
+    margin-top: 10px;
 }

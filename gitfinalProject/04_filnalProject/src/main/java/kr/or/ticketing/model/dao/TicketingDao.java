@@ -10,8 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
-import kr.or.gift.model.vo.GiftTicket;
+import kr.or.giftticket.model.vo.GiftTicket;
+import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
+import kr.or.ticketing.model.vo.Ticketing;
+import kr.or.ticketing.model.vo.TicketingInfo;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
 @Repository
@@ -52,6 +55,28 @@ public class TicketingDao {
 		List giftList = sqlSession.selectList("ticketing.selectGiftTicket",memberNo);
 		return (ArrayList<GiftTicket>) giftList;
 	}
+
+	public int insertPay(Pay pay, TicketingInfo ticketingInfo) {
+		int result = sqlSession.insert("ticketing.insertPay",pay);
+		return result;
+	}
+
+	public int selectLatestPay() {
+		int payNo = sqlSession.selectOne("ticketing.selectLatestPay");
+		return payNo;
+	}
+
+	public int insertTicketing(Ticketing ticketing) {
+		int result = sqlSession.insert("ticketing.insertTicketing",ticketing);
+		return result;
+	}
+
+	public ArrayList<Schedule> selectSeat(int scheduleNo) {
+		List list = sqlSession.selectList("schedule.selectSeat",scheduleNo);
+		return (ArrayList<Schedule>)list;
+	}
+
+	
 
 	
 }

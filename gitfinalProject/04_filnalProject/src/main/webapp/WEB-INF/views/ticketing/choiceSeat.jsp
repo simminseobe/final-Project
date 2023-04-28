@@ -173,14 +173,21 @@
 				*/
 				.seat {
 				font-size: 10px;
-	            width: 30px;
-	            height: 30px;
-	        	}
-	        
-		        .clicked {
-		            background-color: red;
-		            color: white;
-		        }
+				width: 30px;
+				height: 30px;
+				}
+
+				.clicked {
+					background-color: #503396;
+					color: white;
+				}
+				.reserved{
+					background-image: url(https://img.megabox.co.kr/static/pc/images/common/bg/bg-seat-condition-finish.png)!important;
+					background-size: 100%;
+				}
+				.seat:not(.reserved, .clicked){
+					background-color: #ccc;
+				}
 				.choice-result {
 					overflow: hidden;
 					position: absolute;
@@ -537,6 +544,7 @@
 							<div class="result-title">
 								${schedule.movieTitle}
 							</div>
+							
 							<div class="result-info">
 								<div class="info-branch">
 									<p class="tBrch">${schedule.theaterBranch}</p>
@@ -575,10 +583,35 @@
 						</div>
 					</div>
 				<button class="nowTotal">선택된 인원 수 : </button>
+				<span class="hiddenSpan" title="선택한영화의 scheduleNo" style="display: none;">${schedule.scheduleNo}</span>
 				</div>
 
 			</div>
 			<script>
+				
+				var scheduleNo = $(".hiddenSpan").text();
+				$(function(){
+					$.ajax({
+						url : "/holdSeat.do",
+						type : "post",
+						data : {scheduleNo:scheduleNo},
+						dataType : "json",
+						success : function(data){
+							console.log(data);
+							for(let i = 0; i<data.length;i++){
+								const seats = $(".seat");
+								seats.each(function(index,item){
+									if($(item).val() == data[i]){
+										$(item).prop("disabled",true);
+										$(item).addClass("reserved");
+										$(item).off("click");
+										
+									}
+								})
+							}
+						}
+					});
+				});
 				var countAdult;	//인원 수 
 				var countTeen;
 				var countSpecial;
@@ -654,44 +687,42 @@
 							//3중포문을 사용하지 않기위해 
 							mapping(input, i, j);
 							div.append(input);
-							input.addEventListener('click', function(e) {
-								//중복방지 함수
-									selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+							$(input).on('click', function(e) {
+								
+								const now = $(".now");
+								let totalCount = 0;
+								now.each(function(no,item){
+									totalCount += Number($(item).text());
+								});
 
-								//click class가 존재할때(제거해주는 toggle)
-								if ($(this).hasClass("clicked")) {
-									$(this).removeClass("clicked")
-									clicked = document.querySelectorAll(".clicked");
-									clicked.forEach((data) => {
-										selectedSeats.push(data.value);
-									})
-									$(".mySeat").empty()
-									selectedSeats.forEach(function(s, i){
-										$(".mySeat").eq(i).text(s)
-									})
-									//click class가 존재하지 않을때 (추가해주는 toggle)
-								} else {
-									$(this).addClass("clicked");
-									clicked = document.querySelectorAll(".clicked");
-									clicked.forEach((data) => {
-										selectedSeats.push(data.value);
-										var adultCount = parseInt($('.how-many .cell:nth-child(1) .now').text());
-										var teenCount = parseInt($('.how-many .cell:nth-child(2) .now').text());
-										var specCount = parseInt($('.how-many .cell:nth-child(3) .now').text());
-
-										// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
-										var total = adultCount + teenCount + specCount;
-										if(clicked.length == total || clicked.length == 8){
-											$('.seat:not(.clicked)').prop('disabled', true );
-										}
-									})
-									$(".mySeat").empty()
-									selectedSeats.forEach(function(s, i){
+								console.log(totalCount);
+								if(totalCount > $(".mySeat").length){
+									if($(this).hasClass("clicked")) {
+										$(this).removeClass("clicked");
+										const index = selectedSeats.indexOf($(this).val());
+										selectedSeats.splice(index,1);
+									}else{
+										$(this).addClass("clicked");
+										selectedSeats.push($(this).val());
+										selectedSeats.sort();
+									}
+									console.log(selectedSeats);
+									$(".selectedSeats-area").empty();
+									
+									$(selectedSeats).each(function(no,item){
 										const div = $("<div>").addClass("mySeat")
-										div.text(s)
+										div.text(item)
 										$(".selectedSeats-area").append(div)
-									})
+									});
+									if(totalCount ==  $(".mySeat").length){
+										$('.seat:not(.clicked)').prop('disabled', true );
+										
+										
+									}
 								}
+								
+								
+								
 							})
 						}
 					}
@@ -727,7 +758,11 @@
 							$now.text(parseInt($now.text()) + 1);
 							nowTotal(); // nowTotal() 함수 호출
 							getAdultCount(); //adultCount()함수호출 : 성인 수
+							
 							$('.seat:not(.clicked)').prop('disabled', false );
+							
+							$('.reserved').prop('disabled', true );
+							console.log("aaaa", $(".reserved").eq(0).prop("disabled"));
 						} else {
 							alert("8명 제한입니다");
 						}						
@@ -758,6 +793,7 @@
 							nowTotal(); // nowTotal() 함수 호출
 							getTeenCount(); //teenCount()함수호출 : 청소년 수
 							$('.seat:not(.clicked)').prop('disabled', false );
+							
 						} else {
 							alert("8명 제한입니다");
 						}
@@ -788,6 +824,7 @@
 							nowTotal(); // nowTotal() 함수 호출
 							getSpecCount() //specCount()함수호출 : 우대 수
 							$('.seat:not(.clicked)').prop('disabled', false );
+							
 						} else {
 							alert("8명 제한입니다");
 						}
@@ -822,9 +859,9 @@
 				});
 				//span.amount에 (연령대*금액)합계금액 출력 (천 단위에서 ,찍기위해 .toLocaleString()추가)
 				function calculateAmount() {
-					const adultPrice = 18000;
-					const teenPrice = 12000;
-					const specPrice = 7000;
+					const adultPrice = 100;//18000
+					const teenPrice = 100;//12000
+					const specPrice = 100;//7000
 
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());
@@ -869,6 +906,8 @@
 						// 선택한 인원 수와 같은 개수의 좌석 선택 버튼을 활성화합니다.
 						var total = adultCount + teenCount + specCount;
 						$('.seat').prop('disabled', false);
+						$('.reserved').prop('disabled', true );
+						console.log("aaaa", $(".reserved").eq(0).prop("disabled"));
 						//$('.seat').slice(total).prop('disabled', true );
 					});
 
@@ -882,16 +921,44 @@
 				});
 				
 				$(".pageNext").on("click",function(){
-					var movieTitle = $(".result-title").text();
+					var movieTitle = $(".result-title").text();	
 					var theaterBranch = $(".tBrch").text();
 					var scheduleStartEnd = $(".info-time").text();
-					var choiceDtDay = $(".toDate").text();
-					var selectedSeats = $(".selectedSeats-area").text();
-					var numOfPeople = $(".numberOfPeople").text();
+					var choiceDtDay = $(".toDate").text();// 상영시간
+					
+					var joinSeats = selectedSeats.join("/"); //좌석 구분자 "/" 추가
+					var numOfPeople = $(".numberOfPeople").text();//연령
 					var totalAmount = $(".amount").text();
+					scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
+					console.log("자르기 전 "+numOfPeople);//
+					
+					//////////////////////////////////////////////////////////////////////////////
+					//regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+					
+					const adultCount = parseInt($('#now1').text());
+					const teenCount = parseInt($('#now2').text());
+					const specCount = parseInt($('#now3').text());
+					const countArr = new Array();
+					for(let i=0;i<adultCount;i++){
+						countArr.push(1);
+					}
+					for(let i=0;i<teenCount;i++){
+						countArr.push(2);
+					}
+					for(let i=0;i<specCount;i++){
+						countArr.push(3);
+					}
+
+
+
+					////////////////////////////////////////////////////////////////////////////////////
+					console.log(scheduleNo);
 					console.log(theaterBranch);
 					console.log(choiceDtDay);
-					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&selectedSeats="+selectedSeats+"&numOfPeople="+numOfPeople+"&totalAmount="+totalAmount;
+					console.log(numOfPeople);//성인,청소년,우대
+					console.log(countArr);//1,2,3
+					console.log("joinSeats : "+joinSeats);
+					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&countArr="+countArr.join("/")+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 				});
 			</script>
 

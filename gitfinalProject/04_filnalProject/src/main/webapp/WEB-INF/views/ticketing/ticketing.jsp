@@ -483,6 +483,7 @@
 					float: right;
 					padding-top: 10px;
 				}
+				
 			</style>
 		</head>
 
@@ -493,6 +494,8 @@
 				<div class="header-wrap">
 					<div class="header-title" style="margin-top: 30px; margin-bottom: 30px;">
 						<h1 style="font-size: 30px;">빠른예매</h1>
+						<h1><a href="/ticketingComplete.do">예매완료페이지(test)</a></h1>
+						<!--
 						<h1>
 							<a href="/ticketing2.do">예매페이지(test)</a>
 						</h1>
@@ -502,6 +505,7 @@
 						<h1>
 							<a href="/paymentMethod.do">결제수단(test)</a>
 						</h1>
+						-->
 						<!--
 				<button class="test1" id="jQ5">서버에서 리스트 데이터 받기</button>
 				<p class="ajaxResult" id="result5"
@@ -961,6 +965,7 @@
 				var theaterSchedule;
 				var scheduleStart;
 				var scheduleEnd;
+				
 				//branch클릭하면 스케쥴 출력
 				function selSchedule(button) {
 					theaterBranch = $(button).text();
@@ -981,6 +986,7 @@
 								const span1Em = $("<em>");
 								const span2 = $("<span>").addClass("titleSpan");
 								const span3 = $("<span>").addClass("brchSpan");
+								const span4 = $("<span>").addClass("hiddenSpan").hide();
 
 								$(".result>ul").append(li);
 								li.append(span1);
@@ -988,20 +994,24 @@
 								span1.append(span1Em);
 								li.append(span2);
 								li.append(span3);
+								li.append(span4);
 
 								span1Strong.text(data[i].scheduleStart);
 								span1Em.text("~" + data[i].scheduleEnd);
 								span2.text(data[i].movieTitle);
 								span3.text(data[i].theaterBranch);
+								span4.text(data[i].scheduleNo);
 								scheduleStart = span1Strong.text();
 								scheduleEnd = span1Em.text();
 
 								console.log("scheduleStart: "+scheduleStart);
 								console.log("scheduleEnd: "+scheduleEnd);
+								
 
 								// li 클릭 시 /choiceSeat.do 페이지로 이동 (값 전달)
 								li.click(function () {
-									window.location.href = "/choiceSeat.do?movieTitle=" + movieTitle + "&scheduleStart=" + scheduleStart + "&scheduleEnd=" + scheduleEnd + "&theaterBranch=" + theaterBranch +"&choiceDataDay="+choiceDataDay;
+									var scheduleNo = li.children(".hiddenSpan").text();
+									window.location.href = "/choiceSeat.do?movieTitle=" + movieTitle + "&scheduleStart=" + scheduleStart + "&scheduleEnd=" + scheduleEnd + "&theaterBranch=" + theaterBranch +"&choiceDataDay="+choiceDataDay + "&scheduleNo="+ scheduleNo;
 									
 								});
 							}

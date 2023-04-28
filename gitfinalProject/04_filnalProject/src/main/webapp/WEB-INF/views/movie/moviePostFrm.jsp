@@ -43,7 +43,7 @@
                         <div class="tabcontent stillCut">
                         	<c:forEach items="${movieFileAll}" var="movFile">
                                 <img class="stillCutImg" src="/resources/upload/movie/${movFile.movieFileName}" style="width: 135px; height:194px; margin: 10px 5px;">
-                                <input id="movieFileNo1" value="${movFile.movieFileNo }"  disabled>
+                                <input id="movieFileNo1" value="${movFile.movieFileNo }" style="display:none;" disabled>
                             </c:forEach>
                         </div>
                         <div class="tabcontent previewCut"style="display: none">
@@ -51,7 +51,7 @@
                             	<video class="previewCutVideo" width="220px" height="136px" controls>
                             		<source class="previewCutVideoSource" src="${mv.videoLink }">
                             	</video>
-                            	<input id="movieVideoNo1" value="${mv.videoNo }"  disabled>
+                            	<input id="movieVideoNo1" value="${mv.videoNo }" style="display:none;" disabled>
 			            	</c:forEach>
                         </div>
                         <div class="tabcontent myphotoCut" style="text-align: left; ">
@@ -74,15 +74,15 @@
                         <video id="previewCutVideo" width="400px" height="252px" controls style="display: none;">
                             <source >
                         </video>
-                        <input class="movieFileNo" name="movieFileNo">
-                        <input name="movieVideoNo" >
+                        <input class="movieFileNo" style="display:none;"name="movieFileNo">
+                        <input name="movieVideoNo" style="display:none;">
                     </div>
                     <div class="postRightSideTxt">
                         <textarea name="moviePostContent" style="padding: 5px; width: 400px; height: 72px; box-sizing: border-box; resize: none;" placeholder="내용을 입력해주세요."></textarea>
                     </div>
                 </div>
                 <div class="postRightSideBtn">
-                    <button type="button" class="postAddBtn">포스트 추가</button>
+                    <button type="button" style="display:none;" class="postAddBtn">포스트 추가</button>
                 </div>
             </div>
         </div>

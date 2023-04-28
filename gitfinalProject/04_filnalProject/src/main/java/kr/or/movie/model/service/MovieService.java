@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -30,16 +27,78 @@ public class MovieService {
 	private MovieDao dao;
 
 public ArrayList<Movie> selectMovieAll() {
-		
+		//영화 전체조회
 		ArrayList<Movie> list =dao.selectMovieAll();
 		for(Movie movie : list) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
 			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
 		}
+		
 		return list;
 		
 	}
+	//상영예정작 조회
+	public ArrayList<Movie> expectedMovie() {
+		ArrayList<Movie> expectedList =dao.expectedMovie();
+		for(Movie movie : expectedList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+
+		}
+		
+		return expectedList;
+	}
+	//특별상영작 조회
+	public ArrayList<Movie> specialMovie() {
+		ArrayList<Movie> specialMovieList =dao.specialMovie();
+		for(Movie movie : specialMovieList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		
+		return specialMovieList;
+	}
+	//필름소사이어티 조회
+	public ArrayList<Movie> filmSocietyList() {
+		ArrayList<Movie> filmSocietyList =dao.filmSocietyList();
+		for(Movie movie : filmSocietyList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		
+		return filmSocietyList;
+	}
+	//클래식소사이어티조회
+	public ArrayList<Movie> classicSocietyList() {
+		ArrayList<Movie> classicSocietyList =dao.classicSocietyList();
+		for(Movie movie : classicSocietyList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		
+		return classicSocietyList;
+	}
+	
+	
+
 	public Movie selectOneMovie(int movieNo) {
 		Movie mov = dao.selectOneMovie(movieNo);
 		 if(mov !=null) {
@@ -170,7 +229,6 @@ public ArrayList<Movie> selectMovieAll() {
 		return result;
 	}
 	public int selectMovieListCount() {
-		// TODO Auto-generated method stub
 		return dao.totalMovieCount();
 	}
 	public ArrayList<MoviePost> oneMovieAllPost(int movieNo) {
@@ -192,6 +250,36 @@ public ArrayList<Movie> selectMovieAll() {
 		int result = dao.insertPostComment(mpc);
 		return result;
 	}
+
+
+	public int updatePostComment(MoviePostComment mpc) {
+		int result = dao.updatePostComment(mpc);
+		return result;
+	}
+	public int moviePostCount(int movieNo) {
+		int moviePostCount = dao.selectMoviePostCount(movieNo);
+		return moviePostCount;
+	}
+	public int deletePostComment(int moviePostCommentNo) {
+		int deletePostComment=dao.deletePostComment(moviePostCommentNo);
+		return deletePostComment;
+	}
+	public MoviePost selectOneMoviePost(int moviePostNo) {
+		MoviePost moviePost=dao.selectOneMoviePost(moviePostNo);
+		System.out.println(moviePost);
+		return moviePost;
+	}
+	public int postUpdate(MoviePost moviePost) {
+		int result = dao.postUpdate(moviePost);
+		return result;
+	}
+	public int postDelete(MoviePost moviePost) {
+		int result = dao.postDelete(moviePost);
+		return result;
+	}
+
+
+
 
 
 

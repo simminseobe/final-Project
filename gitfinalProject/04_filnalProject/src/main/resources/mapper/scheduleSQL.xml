@@ -33,6 +33,9 @@
 		schedule_tbl
 			where to_char(schedule_start, 'YY/MM/DD HH24:MI') = #{startOutput} and to_char(schedule_end, 'YY/MM/DD HH24:MI') = #{endOutput} and movie_title = #{title} and theater_branch = #{branch}
 </select>
+<select id="selectSeat" parameterType="_int" resultType="string">
+	select seat from ticketing_tbl where schedule_no = #{scheduleNo}
+</select>
 <insert id="insertSchedule">
 	insert into schedule_tbl values
   	(schedule_tbl_seq.nextval, to_date(#{startOutput}, 'YY/MM/DD HH24:MI'), to_date(#{endOutput}, 'YY/MM/DD HH24:MI'), #{title}, #{branch})

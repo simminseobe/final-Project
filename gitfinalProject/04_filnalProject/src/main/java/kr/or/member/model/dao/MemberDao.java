@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.gift.model.vo.ProductCategory;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.ShoppingAddress;
 
 @Repository
 public class MemberDao {
@@ -87,9 +89,18 @@ public class MemberDao {
 		return m;
 	}
 
+	// 네이버 로그인
 	public Member selectOneNaver(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneNaver", member);
 		return m;
 	}
+
+	// 배송지 정보 조회
+	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
+		List list = sqlSession.selectList("member.shopAddress", memberNo);
+		return (ArrayList<ShoppingAddress>)list;
+	}
+
+
 
 }

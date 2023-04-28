@@ -35,13 +35,28 @@ public class MovieController {
 	
 	@RequestMapping(value="/allMovieList.do")
 	public String allMovieList(Model model) {
-		
+		//영화전체 조회와 관람평점이 들어가 있음
 		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
+		//상영예정작 조회와 관람평점이 들어가 있음
+		ArrayList<Movie> expectedList = service.expectedMovie();
+		model.addAttribute("expectedList",expectedList);
+		
+		//특별상영 조회와 관람평점
+		ArrayList<Movie> specialList = service.specialMovie();
+		model.addAttribute("specialList",specialList);
+		
+		//필름소사이어티 조회와 관람평점
+		ArrayList<Movie> filmSocietyList = service.filmSocietyList();
+		model.addAttribute("filmSocietyList",filmSocietyList);
+		
+		//클래식소사이어티 조회와 관람평점
+		ArrayList<Movie> classicSocietyList = service.classicSocietyList();
+		model.addAttribute("classicSocietyList",classicSocietyList);
 		
 		return "movie/movieAllList";
 	}
@@ -56,12 +71,15 @@ public class MovieController {
 
 		//3번없음
 		
+		
+		
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
 		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
 	
-		
-		
+		//무비포스트 총 개수
+		int moviePostCount=service.moviePostCount(movieNo);
+		model.addAttribute("moviePostCount",moviePostCount);
 		
 		//모든 관람평(review)조회하기()
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
@@ -90,10 +108,6 @@ public class MovieController {
 		//영화별 관람평 갯수를 위한 조회
 		int reviewListCount= service.selectReviewListCount(movieNo);
 		model.addAttribute("reviewListCount", reviewListCount);
-		
-		
-		
-		
 		
 		
 		return "movie/movieDetail";
@@ -154,10 +168,9 @@ public class MovieController {
 	//무비포스트 상세보기
 	@ResponseBody
 	@RequestMapping(value="/moviePostDetail.do", produces = "application/json;charset=utf-8")
-	public String moviePostDetail(int movieNo,int moviePostNo,Model model) {
+	public String moviePostDetail(int moviePostNo,Model model) {
 		MoviePost moviePostOne= service.selectDetailPost(moviePostNo);
 		
-		System.out.println(moviePostOne);
 		
 		return new Gson().toJson(moviePostOne);
 		
@@ -169,8 +182,71 @@ public class MovieController {
 		System.out.println(mpc);
 		int result =service.insertPostComment(mpc);
 
-		return new Gson().toJson(result);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updatePostComment.do")
+	public String updatePostComment(MoviePostComment mpc) {
+		int result=service.updatePostComment(mpc);
+		System.out.println(mpc);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="deletePostComment.do")
+	public String deletePostComment(int moviePostCommentNo) {
+		int result=service.deletePostComment(moviePostCommentNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+		
+	}
+	
+	@RequestMapping (value="/postAllList.do")
+	public String postAllList() {
+		return "movie/moviePostAll";
+		
+	}
+	
+	@RequestMapping(value="moviePostUpdateFrm.do")
+	public String postUpdateFrm(int moviePostNo,int movieNo,Model model) {
+		MoviePost moviePost=service.selectOneMoviePost(moviePostNo);
+		model.addAttribute("moviePost", moviePost);
+		//movie_file조회해오기
+				ArrayList<MovieFile> movieFileAll=service.selectMovieFileAll(movieNo);
+				model.addAttribute("movieFileAll",movieFileAll);
+				ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);
+				model.addAttribute("mvList", mvList);
+				Movie mov = service.selectOneMovie(movieNo);
+				model.addAttribute("mov", mov);
+		return "movie/moviePostUpdateFrm";
+		
+	}
+	
+	@RequestMapping(value="/updatePost.do")
+	public String postUpdate(MoviePost moviePost,int movieNo) {
+		int result = service.postUpdate(moviePost);
+		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	}
+	
+	@RequestMapping(value="/moviePostDelete.do")
+	public String postDelete(MoviePost moviePost, int movieNo) {
+		int result = service.postDelete(moviePost);
+		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 		
 	}
 	
