@@ -16,4 +16,5 @@ public class TicketingComplete {
 	private String joinSeats;
 	private String memberPhone;
 	private int payPrice;
+	private int payNo;
 }

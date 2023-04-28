@@ -126,14 +126,14 @@ public class TicketingController {
 	 @ResponseBody
 	 @RequestMapping(value = "/paymentPage.do") 
 	 public String insertPay(Pay pay, TicketingInfo ticketingInfo) { 
-	 int result = service.insertPay(pay, ticketingInfo);
+		Ticketing ticketing = service.insertPay(pay, ticketingInfo);
 	 	System.out.println("pay : "+pay);
 	 	System.out.println("ticketingInfo :" +ticketingInfo);
-	 	System.out.println("result :"+result);
-	 	if(result>0) {
-	 		
+	 	if(ticketing != null) {
 	 		System.out.println("return 통과");
-			return "success";
+	 		Gson gson = new Gson();
+	 		String json = gson.toJson(ticketing);
+			return json;
 		}else {
 			return "fail";
 		} 

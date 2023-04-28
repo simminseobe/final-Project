@@ -83,6 +83,9 @@
 <insert id="insertPay" parameterType="pay">
 	insert into pay values
 		(pay_seq.nextval, #{payPrice},to_char(sysdate,'yyyy-mm-dd/hh24:mi'),1,#{memberNo})
+		<selectKey resultType="_int" order="AFTER" keyProperty="payNo">
+			select max(pay_no) from pay
+		</selectKey>
 </insert>
 <insert id="insertTicketing" parameterType="ticketing">
 	insert into ticketing_tbl values

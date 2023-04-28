@@ -428,7 +428,7 @@
 				<div class="content-wrap">
 					<div class="discount-wrap mMoint">
 						<div class="discount-type">
-							<p>메가박스 포인트/쿠폰</p>
+							<p>메가박스 포인트</p>
 							<span class="material-symbols-outlined more">expand_more</span>
 						</div>
 						<div class="sub-div">
@@ -455,6 +455,7 @@
 
 						</div>
 					</div>
+					<div class="hiddennn" style="width: 100px; height: 100px;">${payNo.payNo}</div>
 					<!--
 					<div class="discount-wrap etc-point">
 						<div class="discount-type">
@@ -696,6 +697,15 @@
 
 			//포인트 사용 시(선택금액)
 			$(".mMoint div.sub-div>.mega-point").on("click", function () {
+				
+				$.ajax({
+					url : "/selectPoint.do",
+					type : "post",
+					data : {memberNo:memberNo},
+				});
+
+
+
 				const priceAmountSame = $(".price-amount-same").text();
 				const filterPriceAmountSame = priceAmountSame.toString().replace(',', '');
 				const usePoint = filterPriceAmountSame * 0.6;
@@ -749,6 +759,8 @@
 				theaterBranch = $(".result-branch>p").text();
 				scheduleStart = $(".result-time>p").text().substr(0, 5);
 				memberPhone = $(".ssMemberPhone").text();
+				memberPhone = memberPhone.substr(0,3)+"-"+memberPhone.substr(3, 4) + "-" + phone.substr(7, 4);
+				document.write("<li>" + memberPhone + "</li>");
 
 				movieTitle = $(".result-title>p").text();
 				memberNo = $(".ssMemberNo").text();
@@ -788,11 +800,19 @@
 								url: "/paymentPage.do",
 								type: "post",
 								data: { payPrice: payPrice, memberNo: memberNo, choiceDtDay: choiceDtDay, countArr: countArr, joinSeats: joinSeats, scheduleNo: scheduleNo },
-
+								dataType:"json",	
 								success: function (data) {
-									alert("결제등록성공");
-									console.log(data);
-									location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
+									if(data =='fail'){
+										alert('결제실패')
+									} else{
+										alert("결제등록성공");
+										console.log(data);
+										console.log(data.payNo);
+										const payNo = data.payNo
+										location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
+										
+										
+									}
 
 
 								}

@@ -647,10 +647,12 @@
 							-->
 						</div>
 					</div>
+					
 					<div class="choice-result">
 						<div class="result-wrap">
 							<div class="result-title">
 								${schedule.movieTitle}
+								
 							</div>
 
 							<div class="result-info">
