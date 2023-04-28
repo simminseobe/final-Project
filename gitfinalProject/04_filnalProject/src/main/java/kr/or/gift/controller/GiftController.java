@@ -189,23 +189,44 @@ public class GiftController {
 		return result + "";
 	}
 	@RequestMapping(value = "/takeOrderSheet.do")
-	public String takeOrderSheet(Model model,String[] poNo, String[] orderCount, int productNo) {
+	public String takeOrderSheet(Model model,String[] poNo, String[] orderCount, int productNo, int memberNo) {
 		ArrayList<ProductOrderSheet> posList = new ArrayList<ProductOrderSheet>();
-//		1. 주문 요청한 회원의 장바구니에 있는 주문 번호를 다 가져와서
-//		2. 해당 주문번호의 상품 번호가 주문 요청 상품번호와 일치하면 
-//		3. 상품 주문서를 새로 작성하지 말고 기존 주문서를 업데이트하고
-//		4. 주문결제시 -> 장바구니 삭제
-//		5. 주문 취소시 장바구니 업데이트
+//		1. 기존 장바구니에 상품이 이미 존재하면
+//		2. 상품 새로 작성하기 전 기존 해당 상품 장바구니 삭제 
+		ArrayList<ProductOrderSheet> posOldList = sv.getPosList(memberNo);
+		System.out.println("product number : " + productNo);
+		for(ProductOrderSheet pos : posOldList) {
+			System.out.println(pos);
+			if(pos.getOrderNo() == 0 && pos.getProductNo() == productNo) {
+				System.out.println("미 결제 상품 (장바구니 상품)");
+				sv.deletePos(pos.getPosNo());
+			} 
+		}
 		for(int i=0; i<poNo.length;i++) {
 			ProductOrderSheet pos = new ProductOrderSheet();
 			pos.setProductNo(productNo);
 			pos.setPoNo(Integer.parseInt(poNo[i]));
 			pos.setOrderCount(Integer.parseInt(orderCount[i]));
+			pos.setMemberNo(memberNo);
 			posList.add(pos);
 		}
+//		배송지 가져오기
+//		상품 가져오기
+		Product product = sv.getOneProduct(productNo);
+		product.setMainImage(sv.getMainImage(productNo));
+//		선택한 옵션 설정
+		ArrayList<ProductOption> options = sv.getProductOptions(productNo);
+		ArrayList<ProductOption> selectOptions = new ArrayList<ProductOption>();
+		for(ProductOption option : options) {
+			for(ProductOrderSheet pos : posList) if(option.getPoNo() == pos.getPoNo()) selectOptions.add(option);
+		}
+		product.setProductOptions(selectOptions);
+//		product.setProductOptions();
 		int result = sv.insertOrderSheet(posList);
 		System.out.println("result : " + result);
 		model.addAttribute("posList", posList);
-		return "";
+		model.addAttribute("product", product);
+		return "gift/productOrderSheet";
 	}
+	
 } 

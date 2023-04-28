@@ -72,7 +72,7 @@
                     <div class="postRightSideSel">
                         <input type="image" class="current-img"  src="img/bg-img-select.png">
                         <video id="previewCutVideo" width="400px" height="252px" controls style="display: none;">
-                            <source >
+                            <source>
                         </video>
                         <input class="movieFileNo" style="display:none;"name="movieFileNo">
                         <input name="movieVideoNo" style="display:none;">

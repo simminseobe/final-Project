@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="right-info">
-        <form action="/takeOrderSheet.do">
+        <form action="/takeOrderSheet.do" id="orderT" type="POST">
+        <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
         <input type="hidden" name="productNo" value="${p.productNo}">
             <div class="productInfo">
                 <h2>product Info <span> 상품정보</span></h2>
@@ -103,14 +104,12 @@
                     <tr id="totalPriceViewTr">
                         <th colspan="2" style="width: 100%;"><span>총 상품 금액</span> <span id="totalPriceView" style="margin-left: 100px;">0</span> 원</th>
                     </tr>
-                    <tr>
-                        <th colspan="2">
-                            <button type="submit">바로구매</button>
-                            <button type="button"><span class="material-symbols-outlined"> favorite </span></button>
-                            <button type="button">장바구니 담기</button>
-                        </th>
-                    </tr>
                 </table>
+                <div class="product-btn-box">
+                    <button type="button" onclick="nowBuyBtn()">바로구매</button>
+                    <button type="button"><span class="material-symbols-outlined"> favorite </span></button>
+                    <button type="button"><span class="material-symbols-outlined">shopping_cart</span></button>
+                </div>
             </div>
         </form>
         </div>
@@ -229,7 +228,20 @@
         //항상 기본 0번 option을 select해놓은 상태로 만듬
         optionSelect.selectedIndex = 0
 
-
     })
+
+    const nowBuyBtn = () => {
+        console.log('${sessionScope.m.memberNo}')
+        if('${sessionScope.m.memberNo}' == '') {
+            alert('로그인 후 구매 가능합니다')
+            location.href = '/login.do'
+        } else {
+            if($('.selected-options').length == 0) {
+                alert('옵션을 선택해 주세요')
+            } else {
+                document.querySelector('#orderT').submit()
+            }
+        }
+    }
 </script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="/resources/css/member/purchaseDetail.css">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<table>
-<td>
-<div class="menubar">
-	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
-	</div>
+	<td>
+	<div class="menubar">
+		<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+		</div>
 	<td>
 	<div class="wrapper">
 		<div class="booklist-wrap">
@@ -27,30 +27,36 @@
 				</ul>
 			</div>
 
-
 			<div class="tab-content">
 				<table>
 					<tbody>
+						<c:forEach items="${list}" var="p" varStatus="i">
 						<tr>
 							<th>예매번호</th>
 							<th>영화제목</th>
 							<th>상영관</th>
 							<th>좌석번호</th>
-							<th>상영시간</th>
-							<th>인원 수</th>
+							<th>상영날짜</th>
+							<th>영화 시작시간</th>
+							<th>영화 종료시간</th>
+							<th>인원수</th>
 							<th>결제금액</th>
 						</tr>
 						<tr>
-							<td>1</td>
-							<td>영화1</td>
-							<td>서울</td>
-							<td>7번</td>
-							<td>2023-01-01</td>
-							<td>2</td>
-							<td>14,000</td>
+							<td>${p.payNo }</td>
+							<td>${p.movieTitle }</td>
+							<td>${p.theaterBranch }</td>
+							<td>${p.seat }</td>
+							<td>${p.movieDate }</td>
+							<td>${p.startTime }</td>
+							<td>${p.endTime }</td>
+							<td>${p.list }</td>
+							<td>${p.payPrice }</td>
 						</tr>
+						</c:forEach>							
 						<tr>
-							<th colspan="7">${pageNavi }</th>
+						<!-- 페이징 처리 -->
+							<th colspan="9">${pageNavi }</th>
 						</tr>
 					</tbody>
 				</table>
@@ -63,22 +69,29 @@
 				</ul>
 				<table>
 					<tbody>
+					<c:forEach items="${list2}" var="p2" varStatus="i">
 						<tr>
-							<th>취소일시</th>
-							<th>영화명</th>
-							<th>극장</th>
-							<th>상영일시</th>
+							<th>예매번호</th>
+							<th>영화제목</th>
+							<th>상영관</th>
+							<th>좌석번호</th>
+							<th>상영날짜</th>
+							<th>인원수</th>
 							<th>취소금액</th>
 						</tr>
 						<tr>
-							<td>2023-01-01</td>
-							<td>영화1</td>
-							<td>강남1관</td>
-							<td>2023-01-01</td>
-							<td>14,000</td>
+							<td>${p2.payNo }</td>
+							<td>${p2.movieTitle }</td>
+							<td>${p2.theaterBranch }</td>
+							<td>${p2.seat }</td>
+							<td>${p2.movieDate }</td>
+							<td>${p2.list }</td>
+							<td>${p2.payPrice }</td>
 						</tr>
+					</c:forEach>
 						<tr>
-							<th colspan="5">${pageNavi }</th>
+						<!-- 페이징 처리 -->
+							<th colspan="7">${pageNavi }</th>
 						</tr>
 					</tbody>
 				</table>
@@ -110,12 +123,7 @@
 				</div>
 
 			</div>
-			<!-- 페이징 처리 -->
-
-
-
 			<div class="tab-content">
-				<!-- 페이징 처리 -->
 
 				<div class="second-header">
 					<h2>구매내역</h2>
@@ -135,7 +143,7 @@
 							<td>팝콘</td>
 							<td>14,000</td>
 							<td>
-								<button type="button" class="cancelBtn">구매취소</button>
+								<button type="button" class="my-btn my-blue">구매취소</button>
 							</td>
 						</tr>
 						<tr>

@@ -53,10 +53,7 @@
                                                     <p>${po.movieContent}</p>
                                                 </div>
                                                 <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
-                                                    
-                                                    
                                                     <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;">
-    
                                                         <p>관람평<span style="color:#ffcb05">${po.movieScoreAvg.movieScoreAvg}</span></p>
                                                     </div>
                                                 </div>
@@ -74,10 +71,11 @@
                                             <p>${po.movieDate}</p>
                                         </div>
                                         <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                            <button type="button"
+                                            <button type="button" class="likeCount"
                                                 style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
                                                     src="img/bin-heart.png"
-                                                    style="width:18px; height:18px;"></button>
+                                                    style="width:18px; height:18px; font-size:10px;">0</button>
+                                            <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                                         </div>
                                         <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                         <button type=" button"
@@ -126,10 +124,11 @@
                                          <p>${expected.movieDate}</p>
                                      </div>
                                      <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                         <button type="button"
-                                             style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                 src="img/pink_heart.png"
-                                                 style="width:18px; height:18px;"></button>
+                                          <button type="button"
+                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
+                                                    src="img/bin-heart.png"
+                                                    style="width:18px; height:18px;"></button>
+                                          <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                                      </div>
                                      <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                      <button type=" button"
@@ -177,9 +176,10 @@
                                  </div>
                                  <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                      <button type="button"
-                                         style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                             src="img/pink_heart.png"
-                                             style="width:18px; height:18px;"></button>
+                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
+                                                    src="img/bin-heart.png"
+                                                    style="width:18px; height:18px;"></button>
+                                       <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                                  </div>
                                  <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                  <button type=" button"
@@ -226,10 +226,11 @@
                                  <p>${filmSociety.movieDate}</p>
                              </div>
                              <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                 <button type="button"
-                                     style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                         src="img/pink_heart.png"
-                                         style="width:18px; height:18px;"></button>
+                                  <button type="button"
+                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
+                                                    src="img/bin-heart.png"
+                                                    style="width:18px; height:18px;"></button>
+                                   <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                              </div>
                              <div class="movieAllList-reserve" style="margin-top: 10px;"">
                              <button type=" button"
@@ -277,10 +278,11 @@
                              <p>${classicSociety.movieDate}</p>
                          </div>
                          <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                             <button type="button"
-                                 style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                     src="img/pink_heart.png"
-                                     style="width:18px; height:18px;"></button>
+                              <button type="button"
+                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
+                                                    src="img/bin-heart.png"
+                                                    style="width:18px; height:18px;"></button>
+                               <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                          </div>
                          <div class="movieAllList-reserve" style="margin-top: 10px;"">
                          <button type=" button"
@@ -300,8 +302,57 @@
                 </div>
             </div>
             </div>
+            <div class="sessionInfo">
+            	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo }">
+            </div>
             <script>
-     
+            $(".movieAllList-like>button>img").on("click",function(){
+            
+            	const movieNo=$(this).parent().next().val();
+                const memberNo=$(".sessionMemberNo").val();
+				console.log(memberNo);
+                console.log(movieNo);
+                
+            	const binHeart="img/bin-heart.png";
+                const blackHeart="img/black-heart.png";
+                const current  = $(this).attr("src");
+
+                /*if(current == binHeart){
+		        	$(this).attr("src",blackHeart); 
+		        	
+		        	}else{
+		        		
+		            	$(this).attr("src",binHeart);        
+		                   
+		            	}  */
+		            	
+                  $.ajax({
+                	url :"/movieLikeInsert.do",
+                	type:"post",
+                	data:{movieNo:movieNo,memberNo:memberNo},
+                	success:function(data){
+                		if(data != null && current == binHeart){
+                			console.log(data);
+
+                			$(this).attr("src",blackHeart); 
+            		    
+                			
+							
+                		}else{
+                			console.log("fail"); 
+                			
+                			
+                		}
+                	}
+                	
+                });//ajax끝나는 지점
+                  
+		             
+		                    
+
+                
+
+            });//on click function끝나는 곳
        
             
 

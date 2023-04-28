@@ -118,4 +118,14 @@ public class GiftService {
 		return result;
 	}
 
+	public ArrayList<ProductOrderSheet> getPosList(int memberNo) {
+		// TODO Auto-generated method stub
+		return dao.getPosList(memberNo);
+	}
+
+	public int deletePos(int posNo) {
+		// TODO Auto-generated method stub
+		return dao.deletePos(posNo);
+	}
+
 }

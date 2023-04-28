@@ -114,4 +114,15 @@ public class GiftDao {
 		return sqlSession.insert("gift.insertOrderSheet",pos);
 	}
 
+	public ArrayList<ProductOrderSheet> getPosList(int memberNo) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("gift.getPosList",memberNo);
+		return (ArrayList<ProductOrderSheet>) list;
+	}
+
+	public int deletePos(int posNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("gift.deletePos",posNo);
+	}
+
 }
