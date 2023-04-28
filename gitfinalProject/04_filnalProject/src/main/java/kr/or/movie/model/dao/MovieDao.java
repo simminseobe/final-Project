@@ -184,23 +184,23 @@ public class MovieDao {
 		return deletePostComment;
 	}
 	//상영예정작 리스트 조회를 위함
-	public ArrayList<Movie> expectedMovie() {
-		List list = sqlSession.selectList("movie.expectedMovie");
+	public ArrayList<Movie> expectedMovie(int memberNo) {
+		List list = sqlSession.selectList("movie.expectedMovie",memberNo);
 		return (ArrayList<Movie>) list;
 	}
 	//특별상영작 리스트를  조회하기 위함
-	public ArrayList<Movie> specialMovie() {
-		List list = sqlSession.selectList("movie.specialMovieList");
+	public ArrayList<Movie> specialMovie(int memberNo) {
+		List list = sqlSession.selectList("movie.specialMovieList",memberNo);
 		return (ArrayList<Movie>) list;
 	}
 	//필름소사이어티 리스트를 조회하기 위함
-	public ArrayList<Movie> filmSocietyList() {
-		List list = sqlSession.selectList("movie.filmSocietyList");
+	public ArrayList<Movie> filmSocietyList(int memberNo) {
+		List list = sqlSession.selectList("movie.filmSocietyList",memberNo);
 		return (ArrayList<Movie>) list;
 	}
 	//클래식소사이어티 리스트를 조회하기 위함
-	public ArrayList<Movie> classicSocietyList() {
-		List list = sqlSession.selectList("movie.classicSocietyList");
+	public ArrayList<Movie> classicSocietyList(int memberNo) {
+		List list = sqlSession.selectList("movie.classicSocietyList",memberNo);
 		return (ArrayList<Movie>) list;
 
 	}
@@ -234,6 +234,7 @@ public class MovieDao {
 		int result = sqlSession.selectOne("movie.movieLikeCount",movieNo);
 		return result;
 	}
+
 	
 
 

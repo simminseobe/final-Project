@@ -572,7 +572,7 @@ z-index: 5;
                                 <h2>누적관객수</h2>
                             </div>
                              <div class="chart" style="text-align: center;">
-                                <canvas id="myChart" width="216" height="216" style="margin:0 auto;"></canvas>
+                                <canvas id="myChart2" width="216" height="216" style="margin:0 auto;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -913,19 +913,39 @@ z-index: 5;
     <input type="text" class="wpSumVideoVisual" value="${watchPointSum.videoVisual}">
     <input type="text" class="wpSumProduction" value="${watchPointSum.production}">               
 </div>
-<div class="session">
-	<input type="text" class="sessionId" value="${sessionScope.m.memberId}" style="display:none;">
+<div class="session"  style="display:none;">
+	<input type="text" class="sessionId" value="${sessionScope.m.memberId}">
 </div>
        
 
 <script>
+	//누적관객수 차트
+	
+	
+	
+	
+	var ctx = document.getElementById('myChart2').getContext('2d');
+	var chart = new Chart(ctx, {
+    // 만들기 원하는 차트의 유형
+    type: 'line',
 
+    // 데이터 집합을 위한 데이터
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: '월별 누적관객수 단위(만)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
 
-
-
-
-
-
+    // 설정은 여기서 하세요
+    options: {}
+});
+	
+	
+	//관람포인트 차트
     var ctx = document.getElementById('myChart').getContext('2d');
     var story = $(".wpSumStory").val();
     var ost = $(".wpSumOST").val();
@@ -993,7 +1013,6 @@ z-index: 5;
    }
    
  	
- 	
    /*===============모달OPEN2=================*/
    
    const openButton2=document.getElementById("open2");
@@ -1019,11 +1038,8 @@ z-index: 5;
 	   
    }
 	
-    
    /*========모달 open3 무비포스트 상세보기=================*/
-   
    const modal3 = document.querySelector(".modal3");
- 
 
    $(".open3").on("click",function(){
 	   const movieNo = $(this).children().eq(0).val();
@@ -1216,14 +1232,8 @@ z-index: 5;
 	   			$(".modal3").removeClass("hidden3");//아작스가 필요하다면 아작스 내부에서 마지막 코드가 됨
 	   			//openModal();
 	   
-	  			
-	   			
-	   
    });
    
-   
-
-    
 	function updatePostComment(obj,moviePostCommentNo){
 		
 		const postComment=$(obj).parent().parent().prev().children().val();
@@ -1239,10 +1249,7 @@ z-index: 5;
 			  
 		});
 		
-		
-		
 	}
-	
 	
 	function deletePostComment(obj,moviePostCommentNo){
 
@@ -1254,8 +1261,6 @@ z-index: 5;
 				  $(".modal3").addClass("hidden3");
 			  }
 		});
-		
-		
 	}
 	
 	$("#close3").on("click",function(){
@@ -1266,16 +1271,13 @@ z-index: 5;
    const overlay3 = modal3.querySelector(".modal_overlay3");
    const closeBtn3 = modal3.querySelector("#close3");
    
-
    const closeModal3 = () => {
        modal3.classList.add("hidden3");
    }
    overlay3.addEventListener("click",closeModal3);
    
-   
    /*댓글 새로고침을 방지하기 위해 주소에stat을 넣음*/
    window.onload=function(){
-	   
 	   
 	const urlParams = new URL(location.href).searchParams;
 	const stat = urlParams.get('stat');
@@ -1286,7 +1288,6 @@ z-index: 5;
 	    	contents.eq(1).show();
 	    }
 	}
-   
 	 //무비포스트 댓글 등록
 	$(".postCommentBtn").on("click",function(){
 		const moviePostNo =$(".modalPostNo").val();
@@ -1305,8 +1306,7 @@ z-index: 5;
 		
 	});
 	
-	 
-  
+
 
 </script>
 <script src = "/resources/js/movieDetail.js"></script>

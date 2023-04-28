@@ -41,7 +41,6 @@ public class MovieController {
 		int memberNo = 0;
 		if(m!=null) {
 			memberNo = m.getMemberNo();
-			
 		}
 		
 		ArrayList<Movie> list = service.selectMovieAll(memberNo);
@@ -51,22 +50,20 @@ public class MovieController {
 		model.addAttribute("movieListCount", movieListCount);
 		
 		//상영예정작 조회와 관람평점이 들어가 있음
-		ArrayList<Movie> expectedList = service.expectedMovie();
+		ArrayList<Movie> expectedList = service.expectedMovie(memberNo);
 		model.addAttribute("expectedList",expectedList);
 		
 		//특별상영 조회와 관람평점
-		ArrayList<Movie> specialList = service.specialMovie();
+		ArrayList<Movie> specialList = service.specialMovie(memberNo);
 		model.addAttribute("specialList",specialList);
 		
 		//필름소사이어티 조회와 관람평점
-		ArrayList<Movie> filmSocietyList = service.filmSocietyList();
+		ArrayList<Movie> filmSocietyList = service.filmSocietyList(memberNo);
 		model.addAttribute("filmSocietyList",filmSocietyList);
 		
 		//클래식소사이어티 조회와 관람평점
-		ArrayList<Movie> classicSocietyList = service.classicSocietyList();
+		ArrayList<Movie> classicSocietyList = service.classicSocietyList(memberNo);
 		model.addAttribute("classicSocietyList",classicSocietyList);
-		
-		//예매율 조회하기
 		
 		
 		return "movie/movieAllList";
@@ -108,9 +105,12 @@ public class MovieController {
 		model.addAttribute("mvList", mvList);
 		
 		//8.리뷰좋아요 없음
+		
+		
 		//9.예매율 없음
-		//10.누적관객수 없음
-		//11.영화 좋아요 없음
+		//10.누적관객수 조회
+		
+		
 		
 		//실관람평점산출위한 watchPoint조회
 		Review watchPointAvg = service.onlyWatchPointAvg(movieNo);//(12.실관람평점영화평점)
@@ -285,13 +285,7 @@ public class MovieController {
 		}
 	}
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/movieLikeCount.do") public int movieLikeCount(int
-	 * movieNo,int memberNo) { System.out.println("likeCount"+movieNo); int
-	 * likeCount=service.movieLikeCount(movieNo); return likeCount; }
-	 */
+
 	
 	
 }
