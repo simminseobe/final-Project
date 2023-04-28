@@ -72,7 +72,6 @@
                                         </div>
                                         <div class="movieAllList-like" style="margin-top: 10px; float: left;">
                                             <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
-                                            	
                                             	<c:choose>
                                             	<c:when test="${po.likeCheck eq 1}">
 	                                            	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
@@ -81,7 +80,6 @@
                                             		<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
                                             	</c:otherwise>
                                             	</c:choose>
-                                            	
                                             	<span>${po.likeCount}</span>
                                             </button>
                                             <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
@@ -89,7 +87,7 @@
                                         <div class="movieAllList-reserve" style="margin-top: 10px;">
                                         <button type=" button"
                                             style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
-                                            예약하기
+                                           	 예약하기
                                         </button>
                                         </div>
                                     </div>
@@ -133,16 +131,23 @@
                                          <p>${expected.movieDate}</p>
                                      </div>
                                      <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                          <button type="button"
-                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                    src="img/bin-heart.png"
-                                                    style="width:18px; height:18px;"></button>
-                                          <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
+                                      <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                      	<c:choose>
+                                        <c:when test="${expected.likeCheck eq 1}">
+	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:when>
+                                        <c:otherwise>
+                                        	<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:otherwise>
+                                        </c:choose>
+                                      	<span>${expected.likeCount}</span>
+                                      </button>
+                                          <input type=text class="likeMovieNo" value="${expected.movieNo}" style="display:none">
                                      </div>
-                                     <div class="movieAllList-reserve" style="margin-top: 10px;"">
+                                     <div class="movieAllList-reserve" style="margin-top: 10px;>
                                      <button type=" button"
                                          style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
-                                         예약하기
+                                        	 예약하기
                                      </button>
                                      </div>
                                  </div>
@@ -184,16 +189,23 @@
                                      <p>${special.movieDate}</p>
                                  </div>
                                  <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                     <button type="button"
-                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                    src="img/bin-heart.png"
-                                                    style="width:18px; height:18px;"></button>
-                                       <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
+                                    <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                      	<c:choose>
+                                        <c:when test="${special.likeCheck eq 1}">
+	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:when>
+                                        <c:otherwise>
+                                        	<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:otherwise>
+                                        </c:choose>
+                                      	<span>${special.likeCount}</span>
+                                      </button>
+                                       <input type=text class="likeMovieNo" value="${special.movieNo}" style="display:none">
                                  </div>
                                  <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                  <button type=" button"
                                      style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
-                                     예약하기
+                                    	 예약하기
                                  </button>
                                  </div>
                              </div>
@@ -235,13 +247,20 @@
                                  <p>${filmSociety.movieDate}</p>
                              </div>
                              <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                  <button type="button"
-                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                    src="img/bin-heart.png"
-                                                    style="width:18px; height:18px;"></button>
-                                   <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
+                                   <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                      	<c:choose>
+                                        <c:when test="${filmSociety.likeCheck eq 1}">
+	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:when>
+                                        <c:otherwise>
+                                        	<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:otherwise>
+                                        </c:choose>
+                                      	<span>${filmSociety.likeCount}</span>
+                                      </button>
+                                   <input type=text class="likeMovieNo" value="${filmSociety.movieNo}" style="display:none">
                              </div>
-                             <div class="movieAllList-reserve" style="margin-top: 10px;"">
+                             <div class="movieAllList-reserve" style="margin-top: 10px;">
                              <button type=" button"
                                  style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
                                  예약하기
@@ -287,11 +306,18 @@
                              <p>${classicSociety.movieDate}</p>
                          </div>
                          <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                              <button type="button"
-                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                    src="img/bin-heart.png"
-                                                    style="width:18px; height:18px;"></button>
-                               <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
+                              <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                      	<c:choose>
+                                        <c:when test="${classicSociety.likeCheck eq 1}">
+	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:when>
+                                        <c:otherwise>
+                                        	<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                        </c:otherwise>
+                                        </c:choose>
+                                      	<span>${classicSociety.likeCount}</span>
+                                      </button>
+                               <input type=text class="likeMovieNo" value="${classicSociety.movieNo}" style="display:none">
                          </div>
                          <div class="movieAllList-reserve" style="margin-top: 10px;">
                          <button type=" button"
@@ -311,12 +337,11 @@
                 </div>
             </div>
             </div>
-            <div class="sessionInfo">
+            <div class="sessionInfo" style="display:none;">
             	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo}">
             </div>
             <script>
 
- 
             $(".movieAllList-like>button>img").on("click",function(){
             	if($(".sessionMemberNo").val() !=""){
             	

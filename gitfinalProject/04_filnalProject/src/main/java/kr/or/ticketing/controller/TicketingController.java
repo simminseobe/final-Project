@@ -30,23 +30,22 @@ import kr.or.ticketing.model.vo.TicketingSchedule;
 public class TicketingController {
 	@Autowired
 	private TicketingService service;
-	@Autowired
-	private MovieService movieService;
+	
 
 	@RequestMapping(value = "/ticketing.do")
 	public String ticketing(Model model) {
-		ArrayList<Movie> list = movieService.selectMovieAll();
+		ArrayList<Movie> list = service.selectMovieAll();
 		model.addAttribute("list", list);
 		return "ticketing/ticketing";
 	}
-
+	/*
 	@RequestMapping(value = "/ticketing2.do")
 	public String ticketing2(Model model) {
 		ArrayList<Movie> list = movieService.selectMovieAll();
 		model.addAttribute("list", list);
 		return "ticketing/ticketing2";
 	}
-
+	*/
 	@RequestMapping(value = "/choiceSeat.do")
 	public String choiceOneticket(Schedule schedule, ChoiceDataDay choiceDataDay, Model model) {
 		System.out.println("무비타이틀 : "+schedule.getMovieTitle());
@@ -153,6 +152,26 @@ public class TicketingController {
 		 ArrayList<Schedule> list = service.selectSeat(scheduleNo);
 		 return new Gson().toJson(list);
 	 }
+	 @ResponseBody
+	 @RequestMapping(value="/selectPoint.do", produces = "application/json;charset=utf-8")
+	 public String selectPoint(int memberNo) {
+		 
+		 return null;
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
 	//////////////////////////////////////////////////////// 임시
 	@RequestMapping(value = "/testPage.do")

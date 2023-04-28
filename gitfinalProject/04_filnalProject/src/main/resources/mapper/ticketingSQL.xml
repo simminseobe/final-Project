@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ticketing">
+<select id="selectMovieAll" resultType="Movie">
+	select
+	 	movie_no as movieNo,
+		movie_title as movieTitle,
+		movie_director as movieDirector,
+		movie_actor as movieActor,
+		movie_genre as movieGenre,
+		movie_time as movieTime,
+		to_char(movie_date,'yyyy-mm-dd') as movieDate,
+		movie_rating as movieRating,
+		movie_content as movieContent,
+		film_society as filmSociety,
+		classic_society as classicSociety,
+		special_movie as specialMovie,
+		enroll_member as enrollMember,
+		movie_type as movieType
+	 from movie_tbl
+</select>
 <select id="selectSchedule" parameterType="string" resultType="map">
 	select distinct movie_title
 	from schedule_tbl 
