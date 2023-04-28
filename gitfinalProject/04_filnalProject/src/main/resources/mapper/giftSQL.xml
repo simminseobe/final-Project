@@ -22,7 +22,7 @@
 		insert into product_option values(po_seq.nextval, #{productNo}, #{poName}, #{poPrice})
 	</insert>
 	<insert id="insertOrderSheet" parameterType="pos">
-		insert into product_order_sheet values(pos_seq.nextval, null, #{productNo},#{poNo},#{orderCount})
+		insert into product_order_sheet values(pos_seq.nextval, null, #{productNo},#{poNo},#{orderCount},#{memberNo})
 	</insert>
 	<delete id="deleteCategory" parameterType="pc">
 		delete from product_category where pc_no = #{pcNo}
@@ -32,6 +32,9 @@
 	</delete>
 	<delete id="deleteProduct" parameterType="_int">
 		delete from product where product_no = #{_parameter}
+	</delete>
+	<delete id="deletePos" parameterType="_int">
+		delete from product_order_sheet where pos_no = #{_parameter}
 	</delete>
 	<update id="updateCategory" parameterType="pc">
 		update product_category set pc_category = #{pcCategory} where pc_no = #{pcNo}
@@ -127,5 +130,15 @@
 		from product_option
 		where product_no = #{_parameter}
 	</select>
-	
+	<select id="getPosList" parameterType="_int" resultType="pos">
+		select
+			pos_no as posNo,
+			order_no as orderNo,
+			product_no as productNo,
+			po_no as poNo,
+			order_count as orderCount,
+			member_no as memberNo
+		from product_order_sheet
+		where member_no = #{_parameter}
+	</select>
 </mapper>
