@@ -219,6 +219,11 @@ public class MovieDao {
 		int result =sqlSession.delete("movie.postDelete",moviePost);
 		return result;
 	}
+
+	public int movieLikeInsert(HashMap<String, Object> map) {
+		int result = sqlSession.insert("movie.movieLikeInsert",map);
+		return result;
+	}
 	
 
 

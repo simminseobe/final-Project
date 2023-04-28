@@ -120,7 +120,7 @@ public ArrayList<Movie> selectMovieAll() {
 		}
 		return result;
 	}
-	//관람평 업데이트(=리뷰 업데이트)
+		//관람평 업데이트(=리뷰 업데이트)
 		public int reviewUpdate(Review rev) {
 			int result = dao.reviewUpdate(rev);
 			System.out.println(result);
@@ -275,6 +275,14 @@ public ArrayList<Movie> selectMovieAll() {
 	}
 	public int postDelete(MoviePost moviePost) {
 		int result = dao.postDelete(moviePost);
+		return result;
+	}
+	public int movieLikeInsert(int movieNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo",memberNo);
+		map.put("movieNo",movieNo);
+		
+		int result= dao.movieLikeInsert(map);
 		return result;
 	}
 

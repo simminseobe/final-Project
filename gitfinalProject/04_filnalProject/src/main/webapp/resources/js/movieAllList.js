@@ -1,5 +1,3 @@
-
-
 $(function(){
     $(".movie-list-set").slice(0, 4).show(); // 최초 8개 선택
     $("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
@@ -24,17 +22,3 @@ $(".tabs>li").on("click",function(){
 });
 $(".tabs>li").eq(0).click();
 
-$(".movieAllList-like>button>img").on("click",function(){
-    const binHeart="img/bin-heart.png";
-    const blackHeart="img/black-heart.png";
-    const current  = $(this).attr("src");
-    
-    if(current == binHeart){
-        $(this).attr("src",blackHeart); 
-
-    }else{
-        $(this).attr("src",binHeart);        
-       
-    }
-
-});
