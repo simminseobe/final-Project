@@ -13,6 +13,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
 import kr.or.ticketing.model.vo.Reservation;
+import kr.or.ticketing.model.vo.ReservationCancel;
 
 @Repository
 public class MemberDao {
@@ -102,6 +103,18 @@ public class MemberDao {
 		int totalCount = sqlSession.selectOne("member.totalCount");
 		return totalCount;
 	}
+	
+	// 예매/구매 취소내역 조회
+	public ArrayList<ReservationCancel> selectCancelBookList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.selectCancelBookList", map);
+		return (ArrayList<ReservationCancel>)list;
+	}
+	
+	// 취소 전체 게시물 수 조회
+	public int selectCancelBookListCount() {
+		int totalCount = sqlSession.selectOne("member.totalCancelCount");
+		return totalCount;
+	}
 
 	//포인트 정보 조회
 	public ArrayList<MemberPoint> memberPoint(int memberNo) {
@@ -115,6 +128,10 @@ public class MemberDao {
 		int mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
 		return mpAmount;
 	}
+
+
+
+
 	
 
 }

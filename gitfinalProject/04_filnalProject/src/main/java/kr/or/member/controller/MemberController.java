@@ -46,6 +46,7 @@ import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.ticketing.model.vo.ReservationCancelPageData;
 import kr.or.ticketing.model.vo.ReservationPageData;
 
 @Controller
@@ -231,8 +232,8 @@ public class MemberController {
 		//model.addAttribute("memberPoint", memberPoint);
 		
 		//잔여포인트 조회
-		int mpAmount = service.mpAmount(m.getMemberNo());
-		model.addAttribute("mpAmount", mpAmount);
+		//int mpAmount = service.mpAmount(m.getMemberNo());
+		//model.addAttribute("mpAmount", mpAmount);
 		return "member/mypage";
 	}
 
@@ -734,9 +735,10 @@ public class MemberController {
 		System.out.println(rpd.getList());
 		model.addAttribute("pageNavi", rpd.getPageNavi());
 		
-//		MemberPageData mpd = service.selectBookList(reqPage);
-//		model.addAttribute("list", mpd.getList());
-//		model.addAttribute("pageNavi", mpd.getPageNavi());
+		ReservationCancelPageData rcpd = service.selectCancelBookList(reqPage, memberNo);
+		model.addAttribute("list2", rcpd.getList());
+		System.out.println("취소내역 : " + rcpd.getList());
+		model.addAttribute("pageNavi", rcpd.getPageNavi());
 		return "member/purchaseDetail";
 	}
 	
