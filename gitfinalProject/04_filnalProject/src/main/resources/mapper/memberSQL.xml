@@ -173,7 +173,7 @@
 				(select to_char(schedule_end,'hh24:mi') from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) end_timeDate,
 				(select theater_branch from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) as theater_branch
 				from pay p
-				where member_no=68 and pay_status=1 order by 1 desc) r)
+				where member_no=#{memberNo} and pay_status=1 order by 1 desc) r)
 		where rnum between #{start} and #{end}
   </select>
   
@@ -204,11 +204,57 @@
   				column="pay_no"
   				ofType="string"
   				javaType="java.util.ArrayList"/>
-  </resultMap>
-  
+  </resultMap>  
   
   <!-- 전체 예매 내역 수 조회 -->
   <select id="totalCount" resultType="_int">
+  	select count(*) from TICKETING_TBL
+  </select>
+  
+      <!-- 예매/구매 취소내역 조회 -->
+  <select id="selectCancelBookList" parameterType="map" resultMap="selectInfo2">
+		select * from
+			(select rownum as rnum, r.* from
+			    (select 
+				    pay_no,
+				    pay_price,
+				    (select movie_title from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) movie_title,
+				    (select to_char(schedule_start,'yyyy-mm-dd') from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) movie_date,
+				(select theater_branch from schedule_tbl where schedule_no=(select distinct schedule_no from ticketing_tbl s where s.pay_no=p.pay_no)) as theater_branch
+				from pay p
+				where member_no=#{memberNo} and pay_status=2 order by 1 desc) r)
+		where rnum between #{start} and #{end}
+  </select>
+  
+  <select id="selectPeople2" parameterType="_int" resultType="people">
+  	select decode(ticketing_age,1,'성인',2,'청소년',3,'우대') as people ,count(ticketing_age) as cnt from ticketing_tbl where pay_no=#{_parameter} group by ticketing_age order by ticketing_age
+  </select>
+  
+  <select id="selectSeat2" parameterType="_int" resultType="string">
+  	select seat from ticketing_tbl where pay_no=#{_parameter}
+  </select>
+  
+  <resultMap type="reservationCancel" id="selectInfo2">
+  	<result column="pay_no" property="payNo" />
+  	<result column="pay_price" property="payPrice" />
+  	<result column="movie_title" property="movieTitle" />
+  	<result column="movie_date" property="movieDate" />
+  	<result column="theater_branch" property="theaterBranch" />
+  	<collection property="list"
+  				select="selectPeople2"
+  				column="pay_no"
+  				ofType="people"
+  				javaType="java.util.ArrayList" />
+  	
+  	<collection property="seat"
+  				select="selectSeat2"
+  				column="pay_no"
+  				ofType="string"
+  				javaType="java.util.ArrayList"/>
+  </resultMap>
+  
+  <!-- 전체 취소 예매 내역 수 조회 -->
+    <select id="totalCancelCount" resultType="_int">
   	select count(*) from TICKETING_TBL
   </select>
   

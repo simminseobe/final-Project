@@ -29,4 +29,6 @@ public class Movie {
 	private ArrayList<String> movieLink;
 	private ArrayList<MovieVideo> movieVideos;
 	private Review movieScoreAvg;
+	private int likeCount;
+	private int likeCheck;
 }

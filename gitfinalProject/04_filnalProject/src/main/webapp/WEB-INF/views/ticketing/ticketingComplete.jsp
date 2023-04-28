@@ -26,18 +26,32 @@
 		width: 300px; 
 		height: 400px; 
 		background-color: #444;
-		padding: 50px;
+		
+	}
+	.t-num{
+		overflow: hidden;
+		width: 300px;
+		margin: 30px 60px;
 	}
 	.t-num>p{
+		margin-right: 10px;
 		text-align: center;
 		font-size: 18px;
 		color: #c4c4c4;
-		margin-bottom: 10px;
+		float: left;
 	}
 	.t-num>p:last-child{
 		text-align: center;
 		color: #59bec9;
 		font-size: 20px;
+		font-weight: bold;
+		float: left;
+	}
+	.t-img>img{
+		display: block;
+		width: 180px;
+		height: 250px;
+		margin: 0 auto;
 	}
 	.ticket-body-right{
 		float: left;
@@ -110,6 +124,7 @@
 
 	.announce{
 		border: 1px solid #c4c4c4;
+		border-radius: 5px;
 		padding: 10px;
 		font-size: 13px;
 		margin: 0 auto;
@@ -156,9 +171,15 @@
 				<div class="ticket-body-wrap">
 					<div class="top-white-circle"></div>
 					<div class="ticket-body-left">
+						
 						<div class="t-num">
-							<p>티켓 예매번호</p>
-							<p></p>
+							<p>티켓 결제번호</p>
+							<p>${ticketingComplete.payNo}</p>
+						</div>
+						
+						
+						<div class="t-img" style="margin-top: 10px;">
+							<img src="/resources/upload/movie/${mfp}">
 						</div>
 					</div>
 					<div class="ticket-body-right">
@@ -242,5 +263,8 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	<script>
+		
+	</script>
 </body>
 </html>

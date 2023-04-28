@@ -71,13 +71,22 @@
                                             <p>${po.movieDate}</p>
                                         </div>
                                         <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                            <button type="button" class="likeCount"
-                                                style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;"><img
-                                                    src="img/bin-heart.png"
-                                                    style="width:18px; height:18px; font-size:10px;">0</button>
+                                            <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                            	
+                                            	<c:choose>
+                                            	<c:when test="${po.likeCheck eq 1}">
+	                                            	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            		<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                                            	</c:otherwise>
+                                            	</c:choose>
+                                            	
+                                            	<span>${po.likeCount}</span>
+                                            </button>
                                             <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                                         </div>
-                                        <div class="movieAllList-reserve" style="margin-top: 10px;"">
+                                        <div class="movieAllList-reserve" style="margin-top: 10px;">
                                         <button type=" button"
                                             style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
                                             예약하기
@@ -284,7 +293,7 @@
                                                     style="width:18px; height:18px;"></button>
                                <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                          </div>
-                         <div class="movieAllList-reserve" style="margin-top: 10px;"">
+                         <div class="movieAllList-reserve" style="margin-top: 10px;">
                          <button type=" button"
                              style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
                              예약하기
@@ -303,59 +312,90 @@
             </div>
             </div>
             <div class="sessionInfo">
-            	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo }">
+            	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo}">
             </div>
             <script>
+
+ 
             $(".movieAllList-like>button>img").on("click",function(){
-            
+            	if($(".sessionMemberNo").val() !=""){
+            	
             	const movieNo=$(this).parent().next().val();
                 const memberNo=$(".sessionMemberNo").val();
-				console.log(memberNo);
-                console.log(movieNo);
+				console.log(memberNo + "스크립트에서 memberNo");
+                console.log(movieNo + "스크립트에서 movieNo");
                 
             	const binHeart="img/bin-heart.png";
                 const blackHeart="img/black-heart.png";
                 const current  = $(this).attr("src");
-
-                /*if(current == binHeart){
-		        	$(this).attr("src",blackHeart); 
+				const icon = $(this);
+				
+				const likeCount=$(this).next();
+				
+                if(current == binHeart){
 		        	
-		        	}else{
-		        		
-		            	$(this).attr("src",binHeart);        
-		                   
-		            	}  */
-		            	
                   $.ajax({
                 	url :"/movieLikeInsert.do",
                 	type:"post",
                 	data:{movieNo:movieNo,memberNo:memberNo},
                 	success:function(data){
-                		if(data != null && current == binHeart){
+                		if(data != null){
                 			console.log(data);
-
-                			$(this).attr("src",blackHeart); 
-            		    
-                			
 							
+							const likeCountNumPlus=Number(likeCount.text())+1;
+                			const likeCountString=likeCountNumPlus.toString();
+                			likeCount.text(likeCountString);
+                			console.log(likeCount.text(likeCountString));
+                			
+                			icon.attr("src",blackHeart); 
+                		
+                		
                 		}else{
                 			console.log("fail"); 
-                			
                 			
                 		}
                 	}
                 	
                 });//ajax끝나는 지점
-                  
-		             
-		                    
-
                 
+		        	
+		        }else{
+		                $.ajax({
+		                	url :"/movieLikeDelete.do",
+		                	type:"post",
+		                	data:{movieNo:movieNo,memberNo:memberNo},
+		                	success:function(data){
+		                		if(data != null){
+		                			console.log(data);
+		                			const likeCountNumMinus=Number(likeCount.text())-1;
+		                			const likeCountString=likeCountNumMinus.toString();
+		                			likeCount.text(likeCountString);
+		                			console.log(likeCount.text(likeCountString));
+		                			
+		                			icon.attr("src",binHeart); 
+		            		    
+		                		}else{
+		                			console.log("fail"); 
+		                			
+		                		}
+		                	}
+		                	
+		                });//ajax끝나는 지점
+		        		
+
+		            } 
+		            	
+            	}else{
+            		alert("로그인 해주세요");
+            	}
 
             });//on click function끝나는 곳
-       
             
-
+        
+            
+      
+            
+            
 
 
             </script>

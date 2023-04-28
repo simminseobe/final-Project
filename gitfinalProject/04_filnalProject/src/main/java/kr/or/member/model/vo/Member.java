@@ -27,5 +27,6 @@ public class Member {
 	private int social;
 	private ArrayList<ShoppingAddress> shopAdd;
 	private ArrayList<MemberPoint> memberPoint;
+	
 	private int mpAmount;
 }

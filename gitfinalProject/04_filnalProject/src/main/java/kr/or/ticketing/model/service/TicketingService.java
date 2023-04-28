@@ -13,6 +13,7 @@ import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
 import kr.or.ticketing.model.vo.Ticketing;
+import kr.or.ticketing.model.vo.TicketingComplete;
 import kr.or.ticketing.model.vo.TicketingInfo;
 import kr.or.ticketing.model.vo.TicketingSchedule;
 
@@ -76,7 +77,7 @@ public class TicketingService {
 	
 	
 
-	public int insertPay(Pay pay, TicketingInfo ticketingInfo) {
+	public Ticketing insertPay(Pay pay, TicketingInfo ticketingInfo) {
 		int result = dao.insertPay(pay, ticketingInfo);
 		int payNo = dao.selectLatestPay();
 		System.out.println(payNo);
@@ -101,19 +102,23 @@ public class TicketingService {
 			result += dao.insertTicketing(ticketing);
 		}
 		
-		
-		/*
 		if(result>0) {
-			
+	 		System.out.println("return 통과");
+	 		return ticketing;
+		} else {
+			return null;
 		}
-		*/
-		return result;
 		
 	}
 
 	public ArrayList<Schedule> selectSeat(int scheduleNo) {
 		ArrayList<Schedule> list = dao.selectSeat(scheduleNo);
 		return list;
+	}
+
+	public String getMovieFile(String movieTitle) {
+		
+		return dao.getMovieFile(movieTitle);
 	}
 
 	

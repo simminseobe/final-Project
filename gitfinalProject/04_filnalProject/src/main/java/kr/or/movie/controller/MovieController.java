@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.request.SessionScope;
 
 import com.google.gson.Gson;
@@ -35,9 +36,15 @@ public class MovieController {
 	private MovieService service;
 	
 	@RequestMapping(value="/allMovieList.do")
-	public String allMovieList(Model model) {
+	public String allMovieList(Model model, @SessionAttribute(required = false) Member m) {
 		//영화전체 조회와 관람평점이 들어가 있음
-		ArrayList<Movie> list = service.selectMovieAll();
+		int memberNo = 0;
+		if(m!=null) {
+			memberNo = m.getMemberNo();
+			
+		}
+		
+		ArrayList<Movie> list = service.selectMovieAll(memberNo);
 		model.addAttribute("list", list);
 		
 		int movieListCount= service.selectMovieListCount();
@@ -255,7 +262,7 @@ public class MovieController {
 		
 	}
 	@ResponseBody
-	@RequestMapping(value="movieLikeInsert.do")
+	@RequestMapping(value="/movieLikeInsert.do")
 	public String movieLikeInsert(int movieNo, int memberNo) {
 		int result = service.movieLikeInsert(movieNo,memberNo);
 		if(result>0) {
@@ -264,6 +271,27 @@ public class MovieController {
 			return "fail";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/movieLikeDelete.do")
+	public String movieLikeDelete(int movieNo,int memberNo) {
+		int result = service.movieLikeDelete(movieNo,memberNo);
+		System.out.println(movieNo);
+		System.out.println(memberNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/movieLikeCount.do") public int movieLikeCount(int
+	 * movieNo,int memberNo) { System.out.println("likeCount"+movieNo); int
+	 * likeCount=service.movieLikeCount(movieNo); return likeCount; }
+	 */
 	
 	
 }
