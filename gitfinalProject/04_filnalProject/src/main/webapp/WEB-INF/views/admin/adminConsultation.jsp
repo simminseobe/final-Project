@@ -17,6 +17,7 @@
 				<jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageSideBar.jsp"></jsp:include>
 				<div id="layoutSidenav_content">
 					<main>
+						<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
 						<div class="container-fluid px-4">
 							<h1 class="mt-4">상담 관리</h1>
 							<ol class="breadcrumb mb-4">
@@ -58,8 +59,8 @@
 																${consultation.consultationTitle }
 																<c:if test="${!empty sessionScope.m }">
 																	<button class="btn btn-primary"
-																		onclick="location.href = '/adminChat.do?consultationNo='+'${consultation.consultationNo }'+'&consultationMember='+'${sessionScope.m.memberId }'">
-																		입장
+																		onclick="location.href = '/adminChat.do?consultationNo='+'${consultation.consultationNo }'+'&chatMember='+'${sessionScope.m.memberId }'+'&memberLevel'+'${sessionScope.m.memberLevel }'">
+																		상담하기
 																	</button>
 																</c:if>
 															</td>
@@ -125,6 +126,7 @@
 				function registerConsultation() {
 					let consultationTitle = $("#title").val();
 					let consultationMember = $("#memberId").val();
+					let memberLevel = $("#memberLevel").val();
 
 					console.log(consultationTitle);
 					console.log(consultationMember);
@@ -132,10 +134,10 @@
 					$.ajax({
 						url: "/registerConsultation.do",
 						method: "POST",
-						data: { consultationTitle: consultationTitle, consultationMember: consultationMember },
+						data: { consultationTitle: consultationTitle, consultationMember: consultationMember, memberLevel: memberLevel },
 						async: false,
-						success: function (data) {
-							console.log(data);
+						success: function (result) {
+							console.log(result);
 						},
 					});
 				}

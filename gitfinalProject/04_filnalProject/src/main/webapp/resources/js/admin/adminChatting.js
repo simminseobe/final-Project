@@ -1,8 +1,15 @@
+// 웹소켓 객체를 저장하는 변수
 let ws;
-let consultationNo = "${consultation.consultationNo}";
-let consultationMember = "${consultation.consultationMember}";
+// 회원 아이디를 저장하는 변수
+let consultationNo;
+let chatMember;
+let memberLevel
 
 $(document).ready(function () {
+    consultationNo = $("#consultationNo").val();
+    chatMember = $("#chatMember").val();
+    memberLevel = $("#memberLevel").val();
+
     // 웹 소켓 연결 시도
     ws = new WebSocket("ws://192.168.10.11/adminChatSocket.do");
     // 웹 소켓 연결 성공시 실행할 함수 지정
@@ -11,6 +18,8 @@ $(document).ready(function () {
     ws.onmessage = receiveMsg;
     // 웹소켓 연결이 종료되면 실행될 함수 지정
     ws.onclose = endChat;
+
+    $(".chatting").slideDown();
 });
 
 function startChat() {
@@ -19,22 +28,48 @@ function startChat() {
     // 정해진게 아니라 그냥 키 값임
     const data = {
         type: "enter",
-        msg: consultationMember
+        msg: chatMember,
+        consultationNo: consultationNo
     };
     // send()는 인수가 문자열
     // 그래서 json형태를 잠깐 문자열로 바꿔서 전송
     ws.send(JSON.stringify(data));
 }
 
-// function receiveMsg(param) {
-//     appendChat(param.data);
-// }
+function receiveMsg(param) {
+    // 데이터는 json형태로 왔다 갔다.
+    appendChat(param.data);
+}
 
-// function endChat() {
+function endChat() {
+    console.log("웹소켓 연결 종료");
+}
 
-// }
+function sendMsg() {
+    const msg = $("#sendMsg").val();
 
-// function appendChat(chatMsg) {
-//     $(".messageArea").append(chatMsg);
-//     $(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
-// }
+    if (msg != '') {
+        const data = {
+            type: "chat",
+            msg: msg,
+            consultationNo: consultationNo
+        };
+
+        ws.send(JSON.stringify(data));
+
+        appendChat("<div class='chat right'>" + msg + "</div>");
+
+        $("#sendMsg").val('');
+    }
+}
+
+$("#sendMsg").on("keyup", function (e) {
+    if (e.keyCode == 13) {
+        sendMsg();
+    }
+});
+
+function appendChat(chatMsg) {
+    $(".messageArea").append(chatMsg);
+    $(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
+}

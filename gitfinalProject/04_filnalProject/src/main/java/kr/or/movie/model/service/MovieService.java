@@ -35,6 +35,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			String movieTitle = movie.getMovieTitle();
 			
 		}
 		
@@ -42,8 +43,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 	}
 	//상영예정작 조회
-	public ArrayList<Movie> expectedMovie() {
-		ArrayList<Movie> expectedList =dao.expectedMovie();
+	public ArrayList<Movie> expectedMovie(int memberNo) {
+		ArrayList<Movie> expectedList =dao.expectedMovie(memberNo);
 		for(Movie movie : expectedList) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
@@ -56,8 +57,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return expectedList;
 	}
 	//특별상영작 조회
-	public ArrayList<Movie> specialMovie() {
-		ArrayList<Movie> specialMovieList =dao.specialMovie();
+	public ArrayList<Movie> specialMovie(int memberNo) {
+		ArrayList<Movie> specialMovieList =dao.specialMovie(memberNo);
 		for(Movie movie : specialMovieList) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
@@ -70,8 +71,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return specialMovieList;
 	}
 	//필름소사이어티 조회
-	public ArrayList<Movie> filmSocietyList() {
-		ArrayList<Movie> filmSocietyList =dao.filmSocietyList();
+	public ArrayList<Movie> filmSocietyList(int memberNo) {
+		ArrayList<Movie> filmSocietyList =dao.filmSocietyList(memberNo);
 		for(Movie movie : filmSocietyList) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
@@ -84,8 +85,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return filmSocietyList;
 	}
 	//클래식소사이어티조회
-	public ArrayList<Movie> classicSocietyList() {
-		ArrayList<Movie> classicSocietyList =dao.classicSocietyList();
+	public ArrayList<Movie> classicSocietyList(int memberNo) {
+		ArrayList<Movie> classicSocietyList =dao.classicSocietyList(memberNo);
 		for(Movie movie : classicSocietyList) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
@@ -301,6 +302,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		System.out.println(likeCount);
 		return likeCount;
 	}
+	
 
 
 
