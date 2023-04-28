@@ -12,6 +12,6 @@ public class MovieLike {
 	private int movieLike;
 	private int movieNo;
 	private int memberNo;
-	private int likeCount;
+	
 	
 }

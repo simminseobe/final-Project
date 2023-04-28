@@ -22,8 +22,8 @@ public class MovieDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Movie> selectMovieAll() {
-		List list = sqlSession.selectList("movie.selectMovieAll");
+	public ArrayList<Movie> selectMovieList(int memberNo) {
+		List list = sqlSession.selectList("movie.selectMovieAll",memberNo);
 		return (ArrayList<Movie>) list;
 
 	}
@@ -222,6 +222,16 @@ public class MovieDao {
 
 	public int movieLikeInsert(HashMap<String, Object> map) {
 		int result = sqlSession.insert("movie.movieLikeInsert",map);
+		return result;
+	}
+
+	public int movieLikeDelete(HashMap<String, Object> map) {
+		int result = sqlSession.delete("movie.movieLikeDelete",map);
+		return result;
+	}
+
+	public int movieLikeCount(int movieNo) {
+		int result = sqlSession.selectOne("movie.movieLikeCount",movieNo);
 		return result;
 	}
 	
