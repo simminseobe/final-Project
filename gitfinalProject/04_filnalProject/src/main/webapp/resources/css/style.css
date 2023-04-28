@@ -22,7 +22,7 @@ body { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; }
 /*header area*/
 #mega_hd { width: 100%; height: 49px; z-index: 10; background-color: #fff; border-bottom: 1px solid #C6C6C6; position: fixed; left: 0; top: 0; }
 #mega_hd h1 { float: left; margin-top: 11px; }
-#mega_hd h1 a { display: block; text-indent: -9999px; width: 280px; height: 28px; background-image: url("/resources/images/common/mega_logo.png"); background-size:  cover; background-repeat: no-repeat; } 
+#mega_hd h1 a { display: block; text-indent: -9999px; width: 350px; height: 30px; background-image: url("/resources/images/common/movieIsland_logo.PNG"); background-size:  cover; background-repeat: no-repeat; } 
 #mega_hd ul { float: right; border-left: 1px solid #C6C6C6; }
 #mega_hd ul li { float: left; text-align: center; height: 49px; line-height: 49px; border-right: 1px solid #C6C6C6; }
 #mega_hd ul li a { display: block; width: 82px; color: #000; font-weight: 700; font-size: 14px;  }

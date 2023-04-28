@@ -37,8 +37,7 @@
 							<th>상영관</th>
 							<th>좌석번호</th>
 							<th>상영날짜</th>
-							<th>영화 시작시간</th>
-							<th>영화 종료시간</th>
+							<th>영화시간</th>
 							<th>인원수</th>
 							<th>결제금액</th>
 						</tr>
@@ -48,15 +47,21 @@
 							<td>${p.theaterBranch }</td>
 							<td>${p.seat }</td>
 							<td>${p.movieDate }</td>
-							<td>${p.startTime }</td>
-							<td>${p.endTime }</td>
-							<td>${p.list }</td>
+							<td>${p.startTime } ~ ${p.endTime }</td>
+							<td>
+								<c:forEach items="${p.list}" var="peo">
+								<div>
+									<span>${peo.people }</span>
+									<span>${peo.cnt }</span>
+								</div>
+								</c:forEach>
+							</td>
 							<td>${p.payPrice }</td>
 						</tr>
 						</c:forEach>							
 						<tr>
 						<!-- 페이징 처리 -->
-							<th colspan="9">${pageNavi }</th>
+							<th colspan="8">${pageNavi }</th>
 						</tr>
 					</tbody>
 				</table>
@@ -83,15 +88,28 @@
 							<td>${p2.payNo }</td>
 							<td>${p2.movieTitle }</td>
 							<td>${p2.theaterBranch }</td>
-							<td>${p2.seat }</td>
+							<td>
+								<c:forEach items="${p2.list}" var="s">
+									<div>
+										<span>${p2.seat}</span>
+									</div>
+								</c:forEach>
+							</td>
 							<td>${p2.movieDate }</td>
-							<td>${p2.list }</td>
+							<td>
+								<c:forEach items="${p2.list}" var="peo">
+								<div>
+									<span>${peo.people }</span>
+									<span>${peo.cnt }</span>
+								</div>
+								</c:forEach>
+							</td>
 							<td>${p2.payPrice }</td>
 						</tr>
 					</c:forEach>
 						<tr>
 						<!-- 페이징 처리 -->
-							<th colspan="7">${pageNavi }</th>
+							<th colspan="7">${pageNavi2 }</th>
 						</tr>
 					</tbody>
 				</table>
@@ -131,17 +149,17 @@
 				<table>
 					<tbody>
 						<tr>
-							<th>결제일시</th>
-							<th>구분</th>
+							<th>주문번호</th>
 							<th>상품명</th>
 							<th>결제금액</th>
+							<th>주문날짜</th>
 							<th>상태</th>
 						</tr>
 						<tr>
-							<td>2023-01-01</td>
-							<td>스토어</td>
-							<td>팝콘</td>
-							<td>14,000</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 							<td>
 								<button type="button" class="my-btn my-blue">구매취소</button>
 							</td>

@@ -188,7 +188,7 @@ public class MemberService {
 		
 		// 이전버튼 생성
 		if(pageNo != 1) {
-			pageNavi += "&nbsp<a href='/purchaseList.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'> [이전] </a>";
+			pageNavi += "<a href='/purchaseList.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'> [이전] </a>";
 			// pageNavi = "" + "<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
 			// pageNavi = <a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>;
 		}
@@ -201,7 +201,7 @@ public class MemberService {
 			if(pageNo == reqPage) {
 				pageNavi += "<span>"+pageNo+"</span>";
 			} else {
-				pageNavi += "<a href='/purchaseList.do?reqPage="+pageNo+"&memberNo="+memberNo+"'>&nbsp" +pageNo+ "&nbsp</a>";
+				pageNavi += "<a href='/purchaseList.do?reqPage="+pageNo+"&memberNo="+memberNo+"'>" +pageNo+ "</a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
