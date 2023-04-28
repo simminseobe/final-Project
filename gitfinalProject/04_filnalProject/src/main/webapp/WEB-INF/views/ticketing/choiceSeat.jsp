@@ -173,14 +173,21 @@
 				*/
 				.seat {
 				font-size: 10px;
-	            width: 30px;
-	            height: 30px;
-	        	}
-	        
-		        .clicked {
-		            background-color: red;
-		            color: white;
-		        }
+				width: 30px;
+				height: 30px;
+				}
+
+				.clicked {
+					background-color: #503396;
+					color: white;
+				}
+				.reserved{
+					background-image: url(https://img.megabox.co.kr/static/pc/images/common/bg/bg-seat-condition-finish.png)!important;
+					background-size: 100%;
+				}
+				.seat:not(.reserved, .clicked){
+					background-color: #ccc;
+				}
 				.choice-result {
 					overflow: hidden;
 					position: absolute;
@@ -598,6 +605,7 @@
 										$(item).prop("disabled",true);
 										$(item).addClass("reserved");
 										$(item).off("click");
+										
 									}
 								})
 							}

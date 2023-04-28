@@ -25,7 +25,7 @@
 			<input type="text"  name="movieNo" value="${moviePost.movieNo }" style="display:none;">
 			<input type="text" name="memberId" value="${sessionScope.m.memberId }" style="display:none;">
 			
-                <button type="button">다시선택</button>
+                <button type="button" class="reselect">다시선택</button>
             </div>
         </div>
          <form action="/updatePost.do" method="post">
@@ -74,11 +74,11 @@
                 <div class="postRightSideContent">
                     <div class="postRightSideSel">
                         <input type="image" class="current-img"  src="/resources/upload/movie/${moviePost.movieFilePath}">
-                        <video id="previewCutVideo" width="400px" height="252px" controls style="display: none;">
-                            <source src="${moviePost.videoLink }">
+                        <video id="previewCutVideo currentPreviewVideo" width="400px" height="252px" controls style="display: none;">
+                            <source class="currentSource" src="${moviePost.videoLink }">
                         </video>
-                        <input class="movieFileNo" style="display:none;"name="movieFileNo">
-                        <input name="movieVideoNo" style="display:none;">
+                        <input class="movieFileNo" style="display:none;" name="movieFileNo" value="${moviePost.movieFileNo}">
+                        <input class="movieVideoNo" style="display:none;" value="${moviePost.movieVideoNo}">
                     </div>
                     <div class="postRightSideTxt">
                         <textarea name="moviePostContent" style="padding: 5px; width: 400px; height: 72px; box-sizing: border-box; resize: none;" placeholder="내용을 입력해주세요.">${moviePost.moviePostContent}</textarea>
@@ -99,6 +99,46 @@
         </div>
 		</form>
     </div>
+    <script>
+	    window.onload=function(){
+     	const movieFileNo=$(".movieFileNo").val();
+    	const movieVideoNo=$(".movieVideoNo").val();
+    	const stillCutBarBtn=$(".stillCutBarBtn");
+    	const proviewBarBtn=$(".proviewBarBtn");
+    	
+    	console.log(movieFileNo);
+    	console.log(movieVideoNo);
+    	const currentImg=$(".current-img");
+        if(movieFileNo ==0 && movieVideoNo !=""){
+        	currentImg.attr("src","img/bg-img-select.png");
+        	proviewBarBtn.click();
+        }else if(movieFileNo !="" && movieVideoNo ==0){
+        	stillCutBarBtn.click();
+        }else if(movieFileNo !="" && movieVideoNo !=""){
+        	stillCutBarBtn.click();
+        } 
+    }   
+    
+	
+	$(".reselect").on("click",function(){
+		const currentImg=$(".current-img");
+		currentImg.attr("src","img/bg-img-select.png");
+		  $(".postRightSideSel>video").remove();
+	      $(".postRightSideSel").append(video);
+		
+	});
+	
+	$(".moviePostCancelBtn").on("click",function(){
+		
+		const movieNo=$("[name=movieNo]").val();
+		
+		location.href="/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	});
+	
+   
+    
+    </script>
     <script src = "/resources/js/moviePostUpdateFrm.js"></script>
 </body>
 </html>

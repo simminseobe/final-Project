@@ -571,6 +571,9 @@ z-index: 5;
                             <div class="pointTxt" style="padding-top: 50px; font-size: 18px; line-height: 18px;">
                                 <h2>누적관객수</h2>
                             </div>
+                             <div class="chart" style="text-align: center;">
+                                <canvas id="myChart" width="216" height="216" style="margin:0 auto;"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -916,6 +919,12 @@ z-index: 5;
        
 
 <script>
+
+
+
+
+
+
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var story = $(".wpSumStory").val();

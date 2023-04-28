@@ -112,7 +112,7 @@
 		border: 1px solid #c4c4c4;
 		padding: 10px;
 		font-size: 13px;
-		margin: 0 190px 0 134px;
+		margin: 0 auto;
 		width: 990px;
 	}
 	.announce>ul>li>ul>li>p{
@@ -124,6 +124,23 @@
 	.a-li>p{
 		padding: 2px 0 2px 10px;
 	}
+	.bottom-wrap{
+		margin-bottom: 200px;
+	}
+	
+	.goHome-btn{
+		display: block;
+		border-radius: 5px;
+		border: 1px solid #503396;
+		background-color: #503396;
+		color: #fff;
+		width: 100px;
+		height: 40px;
+		line-height: 35px;
+		font-size: 15px;
+		text-align: center;
+		margin: 0 auto;
+	}
 </style>
 </head>
 <body>
@@ -133,7 +150,7 @@
 		<div class="header-wrap">
 			<div class="header-title"
 				style="margin-top: 30px; margin-bottom: 30px;">
-				<h1 style="font-size: 30px;">예매완료</h1>
+				<h1 style="font-size: 30px; color: #503396;">예매완료</h1>
 			</div>
 			<div class="ticket-body-all-wrap">
 				<div class="ticket-body-wrap">
@@ -206,9 +223,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="announce">
-		<ul>
-			<li>상영안내</li>
+	<div class="btn-wrap" style="height: 55px;">
+		<a href="/" class="goHome-btn">홈으로</a>
+	</div>
+	<div class="bottom-wrap">
+		<div class="announce">
+			<ul>
+				<li>상영안내</li>
 				<ul>
 					<li class="a-li">
 						<p>- 쾌적한 관람 환경을 위해 상영시간 이전에 입장 부탁드립니다.</p>
@@ -216,7 +237,10 @@
 						<p>- 상영시간 20분전까지 취소 가능하며, 캡쳐화면으로는 입장하실 수 없습니다.</p>
 					</li>
 				</ul>
-		</ul>
+			</ul>
+		</div>
 	</div>
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>
