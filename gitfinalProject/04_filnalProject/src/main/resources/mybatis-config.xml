@@ -12,7 +12,7 @@
 		<typeAlias type="kr.or.movie.model.vo.ReviewWatch" alias="reviewWatch"/>
 		<typeAlias type="kr.or.movie.model.vo.Review" alias="review"/>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
-		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
+		<typeAlias type="kr.or.point.model.vo.Point" alias="point"/>
 		<typeAlias type="kr.or.movie.model.vo.Movie" alias="movie"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieFile" alias="movieFile"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieVideo" alias="movieVideo"/>
@@ -33,5 +33,7 @@
 		<typeAlias type="kr.or.member.model.vo.ShoppingAddress" alias="sa"/>
 		<typeAlias type="kr.or.ticketing.model.vo.Reservation" alias="reservation"/>
 		<typeAlias type="kr.or.ticketing.model.vo.People" alias="people"/>
+		<typeAlias type="kr.or.member.model.vo.MemberPoint" alias="mp"/>
+		<typeAlias type="kr.or.member.model.vo.MemberPointAmount" alias="mpa"/>
 	</typeAliases>
 </configuration>

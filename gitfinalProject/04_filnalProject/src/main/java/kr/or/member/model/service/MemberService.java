@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
 import kr.or.ticketing.model.vo.Reservation;
 import kr.or.ticketing.model.vo.ReservationPageData;
@@ -75,6 +76,17 @@ public class MemberService {
 	// 배송지 정보 조회
 	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
 		return dao.shopAddress(memberNo);
+	}
+	
+	//포인트 정보 조회
+	public ArrayList<MemberPoint> memberPoint(int memberNo) {
+		return dao.memberPoint(memberNo);
+	}
+	
+	//잔여포인트 조회
+	
+	public int mpAmount(int memberNo) {
+		return dao.mpAmount(memberNo);
 	}
 	
 	// 페이징 처리
