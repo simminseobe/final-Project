@@ -209,7 +209,8 @@
 										</li>
 										<li>${ticketingComplete.numOfPeople}</li>
 										<li>${ticketingComplete.joinSeats}</li>
-										<li>${ticketingComplete.memberPhone}</li>
+										<li>${ticketingComplete.memberHyphenPhone}</li>
+										<li style="display: none;">${ticketingComplete.memberPhone}</li>
 										<li>
 											<span style="color: #59bec9; font-size: 22px;">${ticketingComplete.payPrice}</span>
 											<span>원</span>

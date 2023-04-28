@@ -702,6 +702,10 @@
 					url : "/selectPoint.do",
 					type : "post",
 					data : {memberNo:memberNo},
+					dataType : "json",
+					success : function(data){
+						console.log(data);
+					}
 				});
 
 
@@ -746,7 +750,7 @@
 			var payPrice;
 			var movieTitle;
 			var theaterBranch;
-
+			var memberNo;
 			var scheduleStart;
 			var memberPhone;
 
@@ -758,31 +762,34 @@
 					+ "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
 				theaterBranch = $(".result-branch>p").text();
 				scheduleStart = $(".result-time>p").text().substr(0, 5);
-				memberPhone = $(".ssMemberPhone").text();
-				memberPhone = memberPhone.substr(0,3)+"-"+memberPhone.substr(3, 4) + "-" + phone.substr(7, 4);
-				document.write("<li>" + memberPhone + "</li>");
-
-				movieTitle = $(".result-title>p").text();
 				memberNo = $(".ssMemberNo").text();
+				memberPhone = $(".ssMemberPhone").text();
+				//하이픈(-) 제거
+				memberHyphenPhone = $(".ssMemberPhone").text().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-");;
+				
+				
+				movieTitle = $(".result-title>p").text();
 				choiceDtDay = $(".result-day>p").text();
 				scheduleNo = $(".sNum").text();
 				joinSeats = $(".seats").text();
 				numOfPeople = $(".people-age").text();
 				countArr = $(".hidden-pp-age").text();
 
-				console.log(movieTitle);
-				console.log(theaterBranch);
-				console.log(choiceDtDay);
-				console.log(scheduleStart);
-				console.log(numOfPeople);
-				console.log(joinSeats);
-				console.log(memberPhone);
-				console.log(payPrice);
+				console.log("movieTitle :" +movieTitle);
+				console.log("theaterBranch :" +theaterBranch);
+				console.log("choiceDtDay :" +choiceDtDay);
+				console.log("scheduleStart :" +scheduleStart);
+				console.log("numOfPeople :" +numOfPeople);
+				console.log("joinSeats :" +joinSeats);
+				console.log("memberNo :" +memberNo);
+				console.log("memberPhone :" +memberPhone);//하이픈(-) 없음
+				console.log("memberHyphenPhone :" +memberHyphenPhone);//하이픈(-) 있음
+				console.log("payPrice :" +payPrice);
 
 				if (payPrice == 0) {
 					location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
 				} else {
-					console.log(payPrice + "," + memberNo + "," + choiceDtDay + "," + scheduleNo + "," + joinSeats + "," + numOfPeople);
+					//console.log(payPrice + "," + memberNo + "," + choiceDtDay + "," + scheduleNo + "," + joinSeats + "," + numOfPeople);
 					IMP.init("imp04040307");
 					IMP.request_pay({
 						pg: "html5_inicis",
@@ -809,7 +816,7 @@
 										console.log(data);
 										console.log(data.payNo);
 										const payNo = data.payNo
-										location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
+										location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
 										
 										
 									}

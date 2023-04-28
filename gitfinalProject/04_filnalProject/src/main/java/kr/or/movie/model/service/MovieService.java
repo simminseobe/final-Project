@@ -301,6 +301,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		System.out.println(likeCount);
 		return likeCount;
 	}
+	
 
 
 

@@ -234,6 +234,8 @@ public class MovieDao {
 		int result = sqlSession.selectOne("movie.movieLikeCount",movieNo);
 		return result;
 	}
+
+	
 	
 
 

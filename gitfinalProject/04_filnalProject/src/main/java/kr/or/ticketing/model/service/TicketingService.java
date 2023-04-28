@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.giftticket.model.vo.GiftTicket;
+import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
@@ -119,6 +120,11 @@ public class TicketingService {
 	public String getMovieFile(String movieTitle) {
 		
 		return dao.getMovieFile(movieTitle);
+	}
+
+	public ArrayList<Movie> selectMovieAll() {
+		ArrayList<Movie> list = dao.selectMovieAll();
+		return list;
 	}
 
 	
