@@ -6,7 +6,6 @@
 <style>
 
 	
-	
 </style>
 <div class="table-wrap">
 <table class="table">
@@ -21,9 +20,33 @@
 
 	<div>이름: ${sessionScope.m.memberName }</div>
 	<input type="text" name="memberNo" value=${sessionScope.m.memberNo }>
-	<div>잔여포인트:${p.pointAmount }</div>
-	<div>등급: ${sessionScope.m.memberLevel }</div>
-	<div>다음 Gold 등급까지 6000P</div>
+	<div>잔여포인트:${mpAmount }</div>
+	<div>등급: 
+	<c:choose> 
+	<c:when test="${sessionScope.m.memberLevel } == 3"> 
+		VIP
+	</c:when> 
+	<c:when test="${sessionScope.m.memberLevel } == 2"> 
+		GOLD
+	</c:when> 
+	<c:otherwise> 
+		WHITE
+	</c:otherwise> 
+</c:choose> 
+	</div>
+	<div class="nextGrade">
+	<c:choose> 
+	<c:when test="${sessionScope.m.memberLevel } == 3"> 
+		VIP
+	</c:when> 
+	<c:when test="${sessionScope.m.memberLevel } == 2"> 
+		다음 VIP 등급까지 ${12000-mpAmount } P 남았습니다.
+	</c:when> 
+	<c:otherwise> 
+		다음 GOLD 등급까지  ${6000-mpAmount } P 남았습니다.
+	</c:otherwise> 
+</c:choose> 
+	</div>
 	<div>적립예정: </div>
 	<div>당월소멸예정: </div>
 	<div>이용내역: </div>

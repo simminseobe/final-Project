@@ -10,7 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.ticketing.model.vo.Reservation;
+import kr.or.ticketing.model.vo.ReservationCancel;
 
 @Repository
 public class MemberDao {
@@ -71,18 +74,6 @@ public class MemberDao {
 		return result;
 	}
 
-	// 예매/구매 내역 조회
-	public ArrayList<Member> selectBookList(HashMap<String, Object> map) {
-		List list  = sqlSession.selectList("member.selectBookList", map);
-		return (ArrayList<Member>)list;
-	}
-
-	// 전체 게시물 수 조회
-	public int selectBookListCount() {
-		int totalCount = sqlSession.selectOne("member.totalCount");
-		return totalCount;
-	}
-
 	// 카카오 로그인
 	public Member selectOneKaKao(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneKakao", member);
@@ -100,7 +91,47 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.shopAddress", memberNo);
 		return (ArrayList<ShoppingAddress>)list;
 	}
+	
+	// 예매/구매 내역 조회
+	public ArrayList<Reservation> selectBookList(HashMap<String, Object> map) {
+		List list  = sqlSession.selectList("member.selectBookList", map);
+		return (ArrayList<Reservation>)list;
+	}
+
+	// 전체 게시물 수 조회
+	public int selectBookListCount() {
+		int totalCount = sqlSession.selectOne("member.totalCount");
+		return totalCount;
+	}
+	
+	// 예매/구매 취소내역 조회
+	public ArrayList<ReservationCancel> selectCancelBookList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.selectCancelBookList", map);
+		return (ArrayList<ReservationCancel>)list;
+	}
+	
+	// 취소 전체 게시물 수 조회
+	public int selectCancelBookListCount() {
+		int totalCount = sqlSession.selectOne("member.totalCancelCount");
+		return totalCount;
+	}
+
+	//포인트 정보 조회
+	public ArrayList<MemberPoint> memberPoint(int memberNo) {
+		List list = sqlSession.selectList("member.memberPoint",memberNo);
+		return (ArrayList<MemberPoint>)list;
+	}
+
+	//잔여포인트 조회
+	
+	public int mpAmount(int memberNo) {
+		int mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
+		return mpAmount;
+	}
 
 
+
+
+	
 
 }

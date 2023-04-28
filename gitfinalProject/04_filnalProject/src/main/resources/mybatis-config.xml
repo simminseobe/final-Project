@@ -6,14 +6,13 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
-		<typeAlias type="kr.or.movie.model.vo.MovieLike" alias="movieLike"/>
-		<typeAlias type="kr.or.movie.model.vo.MoviePostComment" alias="moviePostComment"/>
+	<typeAlias type="kr.or.movie.model.vo.MoviePostComment" alias="moviePostComment"/>
 		<typeAlias type="kr.or.movie.model.vo.MoviePost" alias="moviePost"/>
 		<typeAlias type="kr.or.movie.model.vo.WatchPoint" alias="watchPoint"/>
 		<typeAlias type="kr.or.movie.model.vo.ReviewWatch" alias="reviewWatch"/>
 		<typeAlias type="kr.or.movie.model.vo.Review" alias="review"/>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
-		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
+		<typeAlias type="kr.or.point.model.vo.Point" alias="point"/>
 		<typeAlias type="kr.or.movie.model.vo.Movie" alias="movie"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieFile" alias="movieFile"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieVideo" alias="movieVideo"/>
@@ -22,7 +21,6 @@
 		<typeAlias type="kr.or.ticketing.model.vo.Ticketing" alias="ticketing"/>
 		<typeAlias type="kr.or.admin.model.vo.Schedule" alias="schedule"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TheaterLocalCount" alias="theaterLocalCount"/>
-		<typeAlias type="kr.or.gift.model.vo.ProductOrderSheet" alias="pos"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductOption" alias="po"/>
 		<typeAlias type="kr.or.gift.model.vo.Product" alias="product"/>
@@ -33,5 +31,10 @@
 		<typeAlias type="kr.or.ticketing.model.vo.Pay" alias="pay"/>
 		<typeAlias type="kr.or.giftticket.model.vo.GiftTicket" alias="giftTicket"/>
 		<typeAlias type="kr.or.member.model.vo.ShoppingAddress" alias="sa"/>
+		<typeAlias type="kr.or.ticketing.model.vo.Reservation" alias="reservation"/>
+		<typeAlias type="kr.or.ticketing.model.vo.ReservationCancel" alias="reservationCancel"/>
+		<typeAlias type="kr.or.ticketing.model.vo.People" alias="people"/>
+		<typeAlias type="kr.or.member.model.vo.MemberPoint" alias="mp"/>
+		<typeAlias type="kr.or.member.model.vo.MemberPointAmount" alias="mpa"/>
 	</typeAliases>
 </configuration>

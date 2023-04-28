@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
    <!doctype html>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <div class="cs2" onclick="allMenuClose();"></div>
@@ -133,7 +134,14 @@
         <div class="right">
             <ul>
                 <li><a href="#">고객센터</a></li>
-                <li><a href="/mypage.do">마이페이지</a></li>
+                <c:choose>
+                	<c:when test="${sessionScope.m.memberLevel eq 1 }">
+	                	<li><a href="/mypage.do">마이페이지</a></li>
+                	</c:when>
+                	<c:when test="${sessionScope.m.memberLevel eq 0 }">
+                		<li><a href="/adminPage.do">관리자페이지</a>
+                	</c:when>
+                </c:choose>
             </ul>
             <button type="button" onclick="alert('준비중입니다.')">상영시간표</button>
             <button type="button" onclick="qTicketing();">빠른예매</button>

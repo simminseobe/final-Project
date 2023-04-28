@@ -131,6 +131,7 @@
     </form>
    </div>
    
-   <script src="/resources/js/member/myProfile.js"></script>
+   
    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+   <script src="/resources/js/member/myProfile.js"></script>
 </body>

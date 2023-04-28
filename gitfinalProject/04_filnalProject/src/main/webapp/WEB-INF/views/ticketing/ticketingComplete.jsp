@@ -156,9 +156,14 @@
 				<div class="ticket-body-wrap">
 					<div class="top-white-circle"></div>
 					<div class="ticket-body-left">
+						<!--
 						<div class="t-num">
 							<p>티켓 예매번호</p>
 							<p></p>
+						</div>
+						-->
+						<div class="t-img" style="margin-top: 10px;">
+							<img src="/resources/upload/movie/${mfp}" style="width: 100%; height:100%;">
 						</div>
 					</div>
 					<div class="ticket-body-right">
