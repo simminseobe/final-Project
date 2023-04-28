@@ -46,6 +46,7 @@ import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
 import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.ticketing.model.vo.ReservationPageData;
 
 @Controller
 public class MemberController {
@@ -240,7 +241,6 @@ public class MemberController {
 	public String myProfile(@SessionAttribute(required = false) Member m , Model model) {
 		// 배송지 정보 조회
 		ArrayList<ShoppingAddress> address = service.shopAddress(m.getMemberNo());
-		System.out.println("address: " + address);
 		if(!address.isEmpty()) {
 			model.addAttribute("address", address);
 		}
@@ -312,15 +312,6 @@ public class MemberController {
 		Member member = service.selectId(m);
 		System.out.println(member);
 		return new Gson().toJson(member);
-	}
-
-	// 예매/구매 내역 페이지 이동
-	@RequestMapping(value = "/purchaseList.do")
-	public String purchaseList(int reqPage, Model model) {
-//		MemberPageData mpd = service.selectBookList(reqPage);
-//		model.addAttribute("list", mpd.getList());
-//		model.addAttribute("pageNavi", mpd.getPageNavi());
-		return "member/purchaseDetail";
 	}
 
 	// 카카오 로그인 시 필요한 토큰 발급
@@ -734,6 +725,21 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	// 예매/구매 내역 페이지 이동
+	@RequestMapping(value = "/purchaseList.do")
+	public String purchaseList(int reqPage, Model model, int memberNo) {
+		ReservationPageData rpd = service.selectBookList(reqPage, memberNo);
+		model.addAttribute("list", rpd.getList());
+		System.out.println(rpd.getList());
+		model.addAttribute("pageNavi", rpd.getPageNavi());
+		
+//		MemberPageData mpd = service.selectBookList(reqPage);
+//		model.addAttribute("list", mpd.getList());
+//		model.addAttribute("pageNavi", mpd.getPageNavi());
+		return "member/purchaseDetail";
+	}
+	
 	
 
 
