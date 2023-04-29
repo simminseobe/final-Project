@@ -9,16 +9,21 @@ $(function(){
     });
     });
 
-
 $(".tabs>li").on("click",function(){
     $(".tabs>li").removeClass("active-tab");
     $(this).addClass("active-tab");
     
     const contents = $(".tabcontent");
     contents.hide();
+
+    const span =$(".tabcontent1");
+    span.hide();
+
+
     //요소배열.index(요소)요소배열중 요소가 몇번째인지 찾아줌
     const index = $(".tabs>li").index(this);
     contents.eq(index).show();
+    span.eq(index).show();
 });
 $(".tabs>li").eq(0).click();
 

@@ -275,7 +275,6 @@ z-index: 5;
                     <p>${mov.movieTitle }</p>
                     <p>어떠셨나요?</p>
                 </div>
-                
                 <div class = "star-wrap star-wrap1">
                     <span class="material-symbols-outlined">
                         star
@@ -431,7 +430,6 @@ z-index: 5;
                 </div>
             
                 <!-- 무비포스트 댓글작성 하는곳-->
-               
                 <div class="modalTxtArea post-detail-txt" style="background-color: #ecf0f4;">
                 	<input value="${sessionScope.m.memberId}" class="loginId" name="memberId" style="display:none;">
                     <textarea class="postComment" name="moviePostComment"  style="width:810px;"></textarea>
@@ -508,7 +506,6 @@ z-index: 5;
                 <div class="poster-img" style="position: absolute; top: 10%; right: 0;">
                     <img src="/resources/upload/movie/${mov.mainFile.movieFileName}" style="border-radius: 10px; width: 260px; height: 375px;">
                 </div>
-               
                 <div class="detailReservBtnWap" style="position: absolute; bottom: 7%; right: 0;">
                     <button type="button" style="width: 260px; height: 46px; border-radius: 5px; background-color: #329eb1; color: white; font-size: 18px;">예약하기</button>
                 </div>
@@ -751,13 +748,13 @@ z-index: 5;
                                         <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
                                         <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px;  bottom: 0px; top: 20px;">
                                             <span>0</span>
-                                            
                                             <input type="text" name="reviewLikeMember" value="${review.memberId}" style="display: none;">
                                             <input type="text" name="reviewLikeReviewCommentNo" value="${review.reviewCommentNo }"style="display: none;">
+                                            <input type="text" name="reviewCommentNo" value="${review.reviewCommentNo}" style="display: none;">
                                         </div>
                                     </div>
                                     <div class="reviewContentWrite2" style="font-size: 15px;">
-                                       <a href="#" style="color: #666666;">신고하기</a>
+	                                	<a href="javascript:void(0)" style="color: #666666;">신고하기</a>
                                     </div>
                                 </div>
                             </div>
@@ -1305,6 +1302,15 @@ z-index: 5;
 		}); 
 		
 	});
+	 
+	 $(".reviewContentWrite2>a").on("click",function(){
+		 const sessionMemberId=$(".sessionId").val();
+		 if(sessionMemberId !=""){
+			 alert("신고완료");
+		 }else{
+			 alert("로그인해주세요");
+		 }
+	 })
 	
 
 

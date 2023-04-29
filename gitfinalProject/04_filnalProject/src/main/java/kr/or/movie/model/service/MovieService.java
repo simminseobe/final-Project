@@ -99,6 +99,20 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return classicSocietyList;
 	}
 	
+	//사용자 선호영화 리스트조회
+	public ArrayList<Movie> selectFavoriteMovie(int memberNo) {
+		ArrayList<Movie> favoriteMovieList =dao.favoriteMovieList(memberNo);
+		for(Movie movie : favoriteMovieList) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		return favoriteMovieList;
+	}
+	
 	
 
 	public Movie selectOneMovie(int movieNo) {
@@ -297,10 +311,34 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		System.out.println(result+"service");
 		return result;
 	}
-	public int movieLikeCount(int movieNo) {
-		int likeCount =dao.movieLikeCount(movieNo);
-		System.out.println(likeCount);
-		return likeCount;
+	
+	/*
+	 * public int movieLikeCount(int movieNo) { int likeCount
+	 * =dao.movieLikeCount(movieNo); System.out.println(likeCount); return
+	 * likeCount; }
+	 */
+	
+	//상영예정작 총 갯수 조회를 위함
+	public int selectExpectedMovieCount() {
+		int result =dao.totalExpectedMovieCount();
+		return result;
+	}
+	//특별상영작 총 갯수 조회를 위함
+	public int selectSpecialMovieCount() {
+		return dao.totalSpecialMovieCount();
+	}
+	//필름소사이어티 총 갯수 조회를 위함
+	public int selectFilmSocietyCount() {
+		return dao.totalFilmSocietyCount();
+	}
+	//클래식 소사이어트 총 갯수 조회를 위함
+	public int selectclassicSocietyCount() {
+		return dao.totalClassicSocietyCount();
+	}
+	//사용자 영화 총 갯수 조회를 위함
+	public int selectFavoriteMovieCount(int memberNo) {
+		return dao.totalFavoriteMovieCount(memberNo);
+		
 	}
 	
 

@@ -44,8 +44,9 @@
             (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo}) as likeCheck
 		 from movie_tbl m
 	</select>
-	<select id="selectMovieList" resultType="movie">
-		  select 
+	<!-- 사용자 선호 영화 조회를 위함 -->
+	<select id="favoriteMovieList" resultType="movie" parameterType="_int">
+	  select 
 		 	movie_no as movieNo,
 			movie_title as movieTitle,
 			movie_director as movieDirector,
@@ -59,8 +60,10 @@
 			classic_society as classicSociety,
 			special_movie as specialMovie,
 			enroll_member as enrollMember,
-			movie_type as movieType
-		 from movie_tbl 
+			movie_type as movieType,
+           	(select count(*) from movie_like ml where ml.movie_no=m.movie_no) as likeCount,
+            (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo}) as likeCheck
+		 from movie_tbl m where (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo})=1
 	</select>
 	<!-- 상영예정작 조회를 위함 -->
 	<select id="expectedMovie" resultType="movie" parameterType="_int">
@@ -482,11 +485,54 @@ delete from movie_video where movie_video_no=
 <delete id="movieLikeDelete" parameterType="map">
 	delete from movie_like where movie_no=#{movieNo} and member_no=#{memberNo}
 </delete>
+<!-- 상영예정작 총 갯수 조회를 위함 -->
+<select id="expectedMovieCount" resultType="_int">
+	select count(*) from movie_tbl where movie_date > to_char(sysdate,'yyyy-mm-dd')
+</select>
+<!-- 특별상영작 총 갯수 조회를 위함 -->
+<select id="specialMovieCount" resultType="_int">
+	select count(*) from movie_tbl where special_movie is not null
+</select>
+<!-- 필름 소사이어티 총 갯수 조회를 위함 -->
+<select id="fileSocietyCount" resultType="_int">
+	select count(*) from movie_tbl where film_society is not null
+</select>
+<!-- 클래식 소사이어티 총 갯수 조회를 위함 -->
+<select id="classicSocietyCount" resultType="_int">
+	select count(*) from movie_tbl where classic_society is not null
+</select>
+<!-- 사용자 선호영화 총 갯수 조회를 위함 -->
+<select id="favoriteMovieCount" resultType="_int" parameterType="_int">
+select count(*) from
+	  (select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType,
+           	(select count(*) from movie_like ml where ml.movie_no=m.movie_no) as likeCount,
+            (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo}) as likeCheck
+		 from movie_tbl m where (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo})=1)
+</select>
+ 
+
+
+
+
 <!-- 영화 좋아요 수 -->
 <!-- <select id="movieLikeCount"  parameterType="_int" resultType="movieLike">
-select count(*) from movie_like where movie_no=#{movieNo}
-</select>
- -->
+	select count(*) from movie_like where movie_no=#{movieNo}
+</select> -->
+
 <!-- 
 영화 좋아요 수 
 <select id="deletenset">
