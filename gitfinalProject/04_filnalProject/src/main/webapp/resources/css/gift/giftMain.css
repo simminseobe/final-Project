@@ -103,7 +103,7 @@ a { color: #000; }
 .top-area p { font-size: 0.8rem; font-weight: 600; color: #999; }
 .top-area p span { color: #000; margin: 0 5px; }
 
-.info h2 { font-size: 1.2rem; margin: 30px 0 5px; }
+.info h2 { font-size: 1.2rem; margin: 30px 0 10px; }
 
 /* table 공통요소 */
 .order table { width: 100%; }
@@ -111,14 +111,56 @@ a { color: #000; }
 .order table tr:last-of-type { border-bottom: 1px solid #ddd; }
 .order table th { height: 45px; }
 
+/* 배송정보 */
+.shpping-info tr:last-of-type { height: 80px; }
+.shpping-info th { width: 220px; }
+#ship-request-input { display: block; width: 450px; margin-top: 10px; }
+
+/* 상품정보 */
 .product-info-row { }
 .product-info td { text-align: center; }
 .product-info td:first-of-type { text-align: left; }
-.product-info-row > img { max-height: 90px; float: left; margin: 10px; }
-.product-info-row > div { float: left; height: 110px; padding: 10px; width: 85%; }
+.product-info-row > img { max-width: 90px; float: left; margin: 10px; }
+.product-info-row > div { float: left; height: 110px; padding: 10px; width: 80%; }
 .product-info-row > div > p { margin: 10px 0; }
 .product-option-info { height: 30px; width: 100; line-height: 30px; background-color: #f5f5f5; padding-left: 10px; border: 1px solid #ddd; }
 
 /* 배송안내사항 */
 .shpping-info2 { margin: 65px 0 30px; }
 .shpping-info2 li { color: #999; line-height: 1.5rem; }
+
+/* 금액안내 */
+.price-info { }
+.price-info th {width: 220px;}
+.price-info td { padding-left: 30px;}
+
+/* 결제 */
+.payment-info {  }
+.payment-info th{ width: 220px; }
+.payment-info td { padding: 20px; }
+.payment-info .info-ul { margin: 5px;}
+.payment-info .info-ul li { color: #999; list-style: inside; height: 20px; }
+
+
+.pay-type-radio li { display: flex; align-items: center; height: 20px; }
+
+
+.pay-type { display: none; }
+.selectPayment { display: block; }
+.selectPayment input[type=radio] { display: none; }
+.pay-method-select-btns { display: flex; }
+.pay-method-select-btns label { display: block; box-sizing: border-box; text-align: center; height: 40px; line-height: 40px; width: 95px; border: 1px solid #ddd; border-radius: 5px; margin-right: 5px; }
+/* 선택한 결제수단 강조  */
+.pay-method-select-btns label:hover { background-color: #f5f5f5; cursor: pointer; }
+.pay-method-select-btns input[type=radio]:checked + label { border: 1px solid #503396; }
+
+.selectPayment .info-ul { margin-top: 10px; }
+
+/* agree */
+.agreeP { display: flex; align-items: center; }
+.agreeP * { display: block; height: 20px; line-height: 18px;}
+.agreeP label {margin-left: 5px;}
+
+/* 결제 */
+#takeOrder { width: 300px; height: 50px; display: block; background-color: #503396; color: #FFF; border: none; margin: 50px auto; }
+#takeOrder:hover { cursor: pointer; }
