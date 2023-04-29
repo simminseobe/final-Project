@@ -19,7 +19,7 @@
                 </ul>
             </li>
             <li><a href="#">메가박스 쿠폰</a></li>
-           <li><a href="#">멤버십 포인트</a></li>
+           <li><a href="/myPoint.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">멤버십 포인트</a></li>
            <li><a href="#">나의 무비스토리</a></li>
            <li><a href="#">나의 이벤트 응모내역</a></li>
            <li><a href="#">나의 문의내역</a></li>

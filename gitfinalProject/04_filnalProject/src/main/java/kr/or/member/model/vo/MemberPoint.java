@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class MemberPoint {
 	private int pointNo;
 	private int memberNo;
-	private int pointAmount;
+	private Integer pointAmount;
 	private String pointStatus;
 	private String pointDetail;
 	private String pointDate;

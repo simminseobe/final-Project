@@ -21,12 +21,12 @@
 	<div>이름: ${sessionScope.m.memberName }</div>
 	<input type="hidden" name="memberNo" value=${sessionScope.m.memberNo }>
 	<div>잔여포인트:${mpAmount }</div>
-	<div>등급: 
-	<c:choose> 
-	<c:when test="${sessionScope.m.memberLevel } == 3"> 
+	<div>등급: ${sessionScope.m.memberLevel }
+	<c:choose>
+	<c:when test="${sessionScope.m.memberLevel eq 3 } "> 
 		VIP
 	</c:when> 
-	<c:when test="${sessionScope.m.memberLevel } == 2"> 
+	<c:when test="${sessionScope.m.memberLevel eq 2 } "> 
 		GOLD
 	</c:when> 
 	<c:otherwise> 
@@ -35,21 +35,28 @@
 </c:choose> 
 	</div>
 	<div class="nextGrade">
-	<c:choose> 
-	<c:when test="${sessionScope.m.memberLevel } == 3"> 
-		VIP
-	</c:when> 
-	<c:when test="${sessionScope.m.memberLevel } == 2"> 
-		다음 VIP 등급까지 ${6000-mpAmount } P 남았습니다.
-	</c:when> 
+<c:choose>
+	<c:when test="${mpAmount eq null } "> 
+		다음  GOLD 등급까지 6000P 남았습니다.
+	</c:when>
 	<c:otherwise> 
-		다음 GOLD 등급까지  ${6000-mpAmount } P 남았습니다.
+		<c:choose> 
+			<c:when test="${sessionScope.m.memberLevel eq 3 }"> 
+				VIP
+			</c:when> 
+			<c:when test="${sessionScope.m.memberLevel eq 2 }"> 
+				다음 VIP 등급까지 ${6000-mpAmount } P 남았습니다.
+			</c:when> 
+			<c:otherwise> 
+				다음 GOLD 등급까지  ${6000-mpAmount } P 남았습니다.
+			</c:otherwise> 
+		</c:choose> 
 	</c:otherwise> 
-</c:choose> 
+</c:choose>
 	</div>
 	<div>적립예정: </div>
 	<div>당월소멸예정: </div>
-	<div>이용내역: </div>
+	<div>이용내역:</div>
 	<div>관람권 및 쿠폰: </div>
 	<div>나의 무비스토리</div>
 	<div>본영화: </div>
@@ -114,7 +121,7 @@
 	});
    
    $("#addPoint").on("click",function(){
-   	const addPoint = $("[name=addPoint]").val();
+   	var addPoint = $("[name=addPoint]").val();
    	const memberNo = $("[name=memberNo]").val();
    	console.log(memberNo);
 		$.ajax({
@@ -135,7 +142,7 @@
 	});
    
    $("#usePoint").on("click",function(){
-	   	const usePoint = $("[name=usePoint]").val();
+	   	var usePoint = $("[name=usePoint]").val();
 	   	const memberNo = $("[name=memberNo]").val();
 	   	console.log(memberNo);
 			$.ajax({

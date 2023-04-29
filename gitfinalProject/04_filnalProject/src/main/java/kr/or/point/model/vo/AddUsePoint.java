@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddUsePoint {
-	private int memberNo;
 	private int pointAmount;
+	private int memberNo;
 }

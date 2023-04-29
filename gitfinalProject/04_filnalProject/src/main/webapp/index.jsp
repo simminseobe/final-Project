@@ -138,6 +138,12 @@
                 	<c:when test="${sessionScope.m.memberLevel eq 1 }">
 	                	<li><a href="/mypage.do">마이페이지</a></li>
                 	</c:when>
+                	<c:when test="${sessionScope.m.memberLevel eq 2 }">
+	                	<li><a href="/mypage.do">마이페이지</a></li>
+                	</c:when>
+                	<c:when test="${sessionScope.m.memberLevel eq 3 }">
+	                	<li><a href="/mypage.do">마이페이지</a></li>
+                	</c:when>
                 	<c:when test="${sessionScope.m.memberLevel eq 0 }">
                 		<li><a href="/adminPage.do">관리자페이지</a>
                 	</c:when>

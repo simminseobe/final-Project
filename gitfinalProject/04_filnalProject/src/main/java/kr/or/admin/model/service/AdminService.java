@@ -93,7 +93,7 @@ public class AdminService {
 	}
 
 	public ArrayList<Movie> selectMovieList() {
-		ArrayList<Movie> list = movieDao.selectMovieAll();
+		ArrayList<Movie> list = movieDao.selectMovieList();
 
 		return list;
 	}

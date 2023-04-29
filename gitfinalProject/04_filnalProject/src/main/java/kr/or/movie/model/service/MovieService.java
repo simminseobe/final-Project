@@ -340,6 +340,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return dao.totalFavoriteMovieCount(memberNo);
 		
 	}
+	
 
 
 
