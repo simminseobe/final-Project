@@ -204,7 +204,12 @@ public class MovieDao {
 		return (ArrayList<Movie>) list;
 
 	}
-
+	//사용자 선호 영화조회를 위함
+	public ArrayList<Movie> favoriteMovieList(int memberNo) {
+		List list = sqlSession.selectList("movie.favoriteMovieList",memberNo);
+		return (ArrayList<Movie>) list;
+	}
+	
 	public MoviePost selectOneMoviePost(int moviePostNo) {
 		MoviePost moviePost = sqlSession.selectOne("movie.selectOneMoviePost", moviePostNo);
 		return moviePost;
@@ -229,11 +234,39 @@ public class MovieDao {
 		int result = sqlSession.delete("movie.movieLikeDelete",map);
 		return result;
 	}
-
-	public int movieLikeCount(int movieNo) {
-		int result = sqlSession.selectOne("movie.movieLikeCount",movieNo);
+	//상영예정작 총 갯수
+	public int totalExpectedMovieCount() {
+		int result =sqlSession.selectOne("movie.expectedMovieCount");
 		return result;
 	}
+	//특별영화 총 갯수
+	public int totalSpecialMovieCount() {
+		int result = sqlSession.selectOne("movie.specialMovieCount");
+		return result;
+	}
+	//필름 소사이어티 영화 총갯수
+	public int totalFilmSocietyCount() {
+		int result =sqlSession.selectOne("movie.fileSocietyCount");
+		return result;
+	}
+	//클래식 소사이어티 영화 총 갯수
+	public int totalClassicSocietyCount() {
+		int result =sqlSession.selectOne("movie.classicSocietyCount");
+		return result;
+	}
+	//사용자 영화 총갯수
+	public int totalFavoriteMovieCount(int memberNo) {
+		int result =sqlSession.selectOne("movie.favoriteMovieCount", memberNo);
+		return result;
+		
+	}
+
+
+
+	/*
+	 * public int movieLikeCount(int movieNo) { int result =
+	 * sqlSession.selectOne("movie.movieLikeCount",movieNo); return result; }
+	 */
 
 	
 

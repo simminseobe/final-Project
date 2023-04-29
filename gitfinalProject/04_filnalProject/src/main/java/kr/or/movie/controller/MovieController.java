@@ -49,22 +49,44 @@ public class MovieController {
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
+		//사용자선호 영화
+		ArrayList<Movie> favoriteMovieList =service.selectFavoriteMovie(memberNo);
+		model.addAttribute("favoriteMovieList", favoriteMovieList);
+		//사용자 선호 영화  총 갯수 조회를 위함
+		int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
+		model.addAttribute("favoriteMovieCount",favoriteMovieCount);
+		 
+		
+		
+		
 		//상영예정작 조회와 관람평점이 들어가 있음
 		ArrayList<Movie> expectedList = service.expectedMovie(memberNo);
 		model.addAttribute("expectedList",expectedList);
+		//상영예정작 총 갯수 조회를 위함
+		int expectedMovieCount = service.selectExpectedMovieCount();
+		model.addAttribute("expectedMovieCount",expectedMovieCount);
 		
 		//특별상영 조회와 관람평점
 		ArrayList<Movie> specialList = service.specialMovie(memberNo);
 		model.addAttribute("specialList",specialList);
+		//특별상영작 총 갯수 조회를 위함
+		int specialMovieCount=service.selectSpecialMovieCount();
+		model.addAttribute("specialMovieCount",specialMovieCount);
+		
 		
 		//필름소사이어티 조회와 관람평점
 		ArrayList<Movie> filmSocietyList = service.filmSocietyList(memberNo);
 		model.addAttribute("filmSocietyList",filmSocietyList);
+		//필름소사이어트 총 갯수 조회를 위함
+		int filmSocietyCount=service.selectFilmSocietyCount();
+		model.addAttribute("filmSocietyCount",filmSocietyCount);
 		
 		//클래식소사이어티 조회와 관람평점
 		ArrayList<Movie> classicSocietyList = service.classicSocietyList(memberNo);
 		model.addAttribute("classicSocietyList",classicSocietyList);
-		
+		//클래식소사이어티 총 갯수 조회를 위함
+		int classicSocietyCount=service.selectclassicSocietyCount();
+		model.addAttribute("classicSocietyCount",classicSocietyCount);
 		
 		return "movie/movieAllList";
 	}
@@ -78,8 +100,14 @@ public class MovieController {
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 
 		//3번없음
+		//영화좋아요 갯수 조회
 		
 		
+		
+		/*
+		 * int movieLikeCount=service.movieLikeCount(movieNo);
+		 * model.addAttribute("movieLikeCount",movieLikeCount);
+		 */
 		
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);

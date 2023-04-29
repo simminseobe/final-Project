@@ -81,23 +81,48 @@ $(".whiteLike2").on("click",function(){
     const blackLike = "img/likeBlack-24.png";
     const current  = $(this).attr("src");
     
-    const reviewCommentNo=$("[name=reviewLikeReviewCommentNo]").val();
+    const reviewCommentNo=$(this).next().next().children().eq(2).val();
     const memberId=$("[name=reviewLikeMember]").val();
     
     if(current == whiteLike){
+        
+        /*	
+        $.ajax({
+            url :"/reviewLikeInsert.do",
+            type:"post",
+            data:{reviewNo:reviewNo,memberNo:memberNo},
+            success:function(data){
+                if(data != null){
+                    console.log(data);
+                    
+                    const likeCountNumPlus=Number(likeCount.text())+1;
+                    const likeCountString=likeCountNumPlus.toString();
+                    likeCount.text(likeCountString);
+                    console.log(likeCount.text(likeCountString));
+                    
+                    icon.attr("src",blackHeart); 
+                
+                
+                }else{
+                    console.log("fail"); 
+                    
+                }
+            }
+            
+        });//ajax끝나는 지점
+        
+        */   
+        
+        
         $(this).attr("src",blackLike); 
-     	/*$.ajax({
-       		url : "/reviewLikeInsert.do",
-       		type : "post",
-       		data : {reviewCommentNo:reviewCommentNo,memberId:memberId}
-       		success : function(data) {
-				console.log(data+"성공");
-			}
-       	});//ajax끝*/
-       
+        
     }else{
         $(this).attr("src",whiteLike);        
        
+
+
+
+
     }
 });
 

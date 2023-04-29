@@ -19,20 +19,24 @@
                 <div class="movie-list-wrap">
                     <div class="movie-list-menu tabs-wrap">
                         <ul class="tabs">
-                            <li><a href="#">박스오피스</a></li>
-                            <li><a href="#">상영예정작</a></li>
-                            <li><a href="#">특별상영</a></li>
-                            <li><a href="#">필름소사이어티</a></li>
-                            <li><a href="#">클래식소사이어티</a></li>
-                            <c:if test="${not empty sessionScope.m && sessionScope.m.memberId }">
-	                            <li><a href="#">사용자 선호장르영화</a></li>
+                            <li><a href="javascript:void(0);">박스오피스</a></li>
+                            <li><a href="#javascript:void(0);">상영예정작</a></li>
+                            <li><a href="javascript:void(0);">특별상영</a></li>
+                            <li><a href="javascript:void(0);">필름소사이어티</a></li>
+                            <li><a href="javascript:void(0);">클래식소사이어티</a></li>
+                            <c:if test="${not empty sessionScope.m}">
+	                            <li><a href="javascript:void(0);">사용자 선호장르영화</a></li>
                             </c:if>
                         </ul>
                     </div>
                     <div class="movie-list-content-wrap" style="margin-top: 25px;">
                         <div class="movie-list-content-top">
-                            <button type="button" title="개봉작만보기" class="btn-onair btnOnAir">개봉작만</button>
-                            <span>총 ${movieListCount}의 영화가 검색되었습니다.</span>
+                            <span class="tabcontent1">개봉작만 총 <span style="color: #329eb1;">${movieListCount}</span>개의 영화가 검색되었습니다.</span>
+                            <span class="tabcontent1" style="display:none;">예정작만 총 <span style="color: #329eb1;">${expectedMovieCount}</span>개의 영화가 검색되었습니다. </span>
+                            <span class="tabcontent1" style="display:none;">특별상영만 총 <span style="color: #329eb1;">${specialMovieCount}</span>개의 영화가 검색되었습니다.</span>
+                            <span class="tabcontent1" style="display:none;">필름소사이어티만 총 <span style="color: #329eb1;">${filmSocietyCount}</span>개의 영화가 검색되었습니다.</span>
+                            <span class="tabcontent1" style="display:none;">클래식소사이어티만 총 <span style="color: #329eb1;">${classicSocietyCount}</span>개의 영화가 검색되었습니다.</span>
+                            <span class="tabcontent1" style="display:none;">사용자 선호영화만 총 <span style="color: #329eb1;">${favoriteMovieCount}</span>개의 영화가 검색되었습니다.</span>
                             <div class="searchBox">
                                 <input type="text" id="movieSearch" name="movieSearch" placeholder="영화명 검색">
                                 <img src="img/search-30.png">
@@ -71,7 +75,7 @@
                                             <p>${po.movieDate}</p>
                                         </div>
                                         <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                            <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                            <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid #503396; background-color: #fff;">
                                             	<c:choose>
                                             	<c:when test="${po.likeCheck eq 1}">
 	                                            	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
@@ -84,9 +88,9 @@
                                             </button>
                                             <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                                         </div>
-                                        <div class="movieAllList-reserve" style="margin-top: 10px;">
+                                        <div class="movieAllList-reserve" style="margin-top: 10px; margin-left: 5px;">
                                         <button type=" button"
-                                            style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
+                                            style="width: 150px; height: 40px; font-size: 18px; border: 1px solid #503396; background-color: #503396;  color:#fff; vertical-align: center;">
                                            	 예약하기
                                         </button>
                                         </div>
@@ -131,7 +135,7 @@
                                          <p>${expected.movieDate}</p>
                                      </div>
                                      <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                      <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                      <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
                                       	<c:choose>
                                         <c:when test="${expected.likeCheck eq 1}">
 	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
@@ -144,16 +148,16 @@
                                       </button>
                                           <input type=text class="likeMovieNo" value="${expected.movieNo}" style="display:none">
                                      </div>
-                                     <div class="movieAllList-reserve" style="margin-top: 10px;>
+                                     <div class="movieAllList-reserve" style="margin-top: 10px;">
                                      <button type=" button"
-                                         style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
+                                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;">
                                         	 예약하기
                                      </button>
                                      </div>
                                  </div>
                              </div>
                          </c:forEach>
-                         <div class="bottom-btn" style="margin-left: 55px; margin-top: 20px;">
+                         <div class="bottom-btn" style="margin: 0 auto; margin-left: 55px; margin-top: 20px;">
                              <button type="button" id="load">더보기</button>
                          </div>
                          </div>
@@ -189,7 +193,7 @@
                                      <p>${special.movieDate}</p>
                                  </div>
                                  <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                    <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                    <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
                                       	<c:choose>
                                         <c:when test="${special.likeCheck eq 1}">
 	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
@@ -204,7 +208,7 @@
                                  </div>
                                  <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                  <button type=" button"
-                                     style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
+                                     style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;">
                                     	 예약하기
                                  </button>
                                  </div>
@@ -247,7 +251,7 @@
                                  <p>${filmSociety.movieDate}</p>
                              </div>
                              <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                                   <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                                   <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
                                       	<c:choose>
                                         <c:when test="${filmSociety.likeCheck eq 1}">
 	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
@@ -262,7 +266,7 @@
                              </div>
                              <div class="movieAllList-reserve" style="margin-top: 10px;">
                              <button type=" button"
-                                 style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
+                                 style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;">
                                  예약하기
                              </button>
                              </div>
@@ -306,7 +310,7 @@
                              <p>${classicSociety.movieDate}</p>
                          </div>
                          <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                              <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px;">
+                              <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
                                       	<c:choose>
                                         <c:when test="${classicSociety.likeCheck eq 1}">
 	                                    	<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
@@ -321,7 +325,7 @@
                          </div>
                          <div class="movieAllList-reserve" style="margin-top: 10px;">
                          <button type=" button"
-                             style="width: 150px; height: 40px; font-size: 18px; border: 1px solid lightgray; background-color: transparent; border-radius: 5px; vertical-align: center;">
+                             style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;">
                              예약하기
                          </button>
                          </div>
@@ -332,6 +336,65 @@
                  <button type="button" id="load">더보기</button>
              </div>
              </div>
+             <!-- 사용자 선호영화(로그인시에만 보임) 들어갈자리 -->
+             <div class="tabcontent movie-all-list-flex"
+             style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
+             <c:forEach items="${favoriteMovieList}" var="favorite">
+             <div class="movie-all-list" style="margin-top: 25px; ">
+                 <div class="movie-list-set" style="overflow: hidden;">
+                     <a href="/movieDetail.do?movieNo=${favorite.movieNo}&reqPage=1">
+                         <div class="img-poster">
+                             <img src="/resources/upload/movie/${favorite.mainFile.movieFileName}" style="width: 230px; height:331px;">
+                         </div>
+                         <div class="cover" style=" color:white; padding: 10px;">
+                             <div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
+                                 <p>${favorite.movieContent}</p>
+                             </div>
+                             <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
+                                 <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;" >
+                                     <p>관람평<span style="color:#ffcb05"> ${favorite.movieScoreAvg.movieScoreAvg}</span></p>
+                                 </div>
+                             </div>
+                         </div>
+                         
+                     </a>
+                     <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
+                         <p class="movie-title" >${favorite.movieTitle }</p>
+                         <input class="inputMovieTitle" style="display:none;" value="${favorite.movieTitle }">
+                     </div>
+                     <div class="reserve-rate" style="font-size: 18px;">
+                         <p>예매율%</p>
+                     </div>
+                     <div class="start-date" style="font-size: 18px;">
+                         <p>${favorite.movieDate}</p>
+                     </div>
+                     <div class="movieAllList-like" style="margin-top: 10px; float: left;">
+                      <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
+                          <c:choose>
+                        <c:when test="${favorite.likeCheck eq 1}">
+                            <img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                        </c:otherwise>
+                        </c:choose>
+                          <span>${favorite.likeCount}</span>
+                      </button>
+                          <input type=text class="likeMovieNo" value="${favorite.movieNo}" style="display:none">
+                     </div>
+                     <div class="movieAllList-reserve" style="margin-top: 10px;">
+                     <button type=" button"
+                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;">
+                             예약하기
+                     </button>
+                     </div>
+                 </div>
+             </div>
+         </c:forEach>
+         <div class="bottom-btn" style="margin: 0 auto; margin-left: 55px; margin-top: 20px;">
+             <button type="button" id="load">더보기</button>
+         </div>
+         </div>
                         </div>
                     </div>
                 </div>

@@ -34,21 +34,33 @@
     border-bottom: none;
    color: #503396;
 }
-
-
-
-
-.btn-onair{
-    width: 100px;
-    height: 20px;
-
+.movieAllList-like>.likeCount{
+    border: 1px solid #503396;
+   background-color: #fff;
+    cursor: pointer;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 }
+.movieAllList-reserve>button{
+    cursor: pointer;
+    border: 1px solid #503396; 
+    background-color: #503396;
+    color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
 .movie-list-content-top{
     overflow: hidden;
 }
+.movie-list-content-top span{
+    font-size: 24px;
+}
+
 .searchBox{
     position: relative;
-    border: 1px solid lightgray;
+    border: 1px solid rgb(54, 34, 34);
     border-radius: 5px;
     float: right;
 }
@@ -114,8 +126,14 @@
     margin-left: 60px;
 }
 .bottom-btn>button{
-    width: 1100px;
-    height: 30px;
+    width: 1220px;
+    height: 50px;
+    border: 1px solid #503396;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
 
 
