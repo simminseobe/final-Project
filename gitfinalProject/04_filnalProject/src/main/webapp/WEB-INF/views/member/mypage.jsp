@@ -37,7 +37,7 @@
 	<div class="nextGrade">
 <c:choose>
 	<c:when test="${mpAmount } eq null"> 
-		다음 GOLD 등급까지 6000P 남았습니다.
+		다음 등급까지 6000P 남았습니다.
 	</c:when>
 	<c:otherwise> 
 		<c:choose> 

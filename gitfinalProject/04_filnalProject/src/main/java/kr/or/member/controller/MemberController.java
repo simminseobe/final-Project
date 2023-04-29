@@ -242,7 +242,7 @@ public class MemberController {
 			int mpAmountInt = mpAmount.intValue();  
 			model.addAttribute("mpAmount", mpAmountInt);
 		}
-		
+		System.out.println(m.getMemberLevel());
 		return "member/mypage";
 	}
 
