@@ -1,5 +1,9 @@
 package kr.or.gift.controller;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -229,4 +233,20 @@ public class GiftController {
 		return "gift/productOrderSheet";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/giftKakaoPay.do")
+	public String giftKakaoPay() {
+		try {
+			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
 } 
