@@ -3,8 +3,10 @@
  <mapper namespace="point">
 
 <!-- 포인트이용내역 -->
-<select id="memberPoint" parameterType="_int" resultType="point">
-	select 
+<select id="myPoint" parameterType="map" resultType="point">
+	select * from
+		(select rownum as rnum, r.* from
+		(select 
 		point_no as pointNo ,
 		member_no as memberNo ,
 		point_amount as pointAmount ,
@@ -12,9 +14,25 @@
 		point_detail as pointDetail ,
 		point_date as pointDate
 	from point_tbl 
-	where member_no=#{memberNo}
+	where member_no=#{memberNo} order by pointDate ) r)
+	where rnum between #{start} and #{end}
 </select>
 
+ <!-- 전체 예매 내역 수 조회 -->
+  <select id="totalCount" parameterType="_int" resultType="_int">
+  	select count(*) from point_tbl where member_no=#{memberNo}
+  </select>
+
+ <resultMap type="point" id="">
+ <result column="point_no" property="pointNo" />
+ <result column="member_no" property="memberNo" />
+ <result column="point_amount" property="pointAmount" />
+ <result column="point_status" property="pointStatus" />
+ <result column="point_detail" property="pointDetail" />
+ <result column="point_date" property="pointDate" />
+  </resultMap> 
+  
+  
 <!-- 포인트 사용 -->
 <insert id="usePoint" parameterType="kr.or.point.model.vo.AddUsePoint" >
 	insert into point_tbl 

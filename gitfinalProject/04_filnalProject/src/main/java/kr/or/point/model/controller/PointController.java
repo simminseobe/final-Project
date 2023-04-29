@@ -15,6 +15,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
 import kr.or.point.model.service.PointService;
 import kr.or.point.model.vo.Point;
+import kr.or.point.model.vo.PointPageData;
 
 @Controller
 public class PointController {
@@ -55,10 +56,14 @@ public class PointController {
 	}
 	
 	//포인트이용내력
-	@RequestMapping(value="/memberPoint2.do")
-	public String memberPoint(@SessionAttribute(required = false) Member m , Model model) {
-		ArrayList<MemberPoint> memberPoint = service.memberPoint(m.getMemberNo());
-		return "member/mypage";
+	@RequestMapping(value="/myPoint.do")
+	public String myPoint(int reqPage, Model model, int memberNo) {
+		PointPageData ppd = service.myPoint(reqPage,memberNo);
+		model.addAttribute("list", ppd.getList());
+		System.out.println(ppd.getList());
+		model.addAttribute("pageNavi", ppd.getPageNavi());
+		
+		return "member/myPoint";
 	}
 	
 }
