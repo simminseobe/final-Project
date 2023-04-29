@@ -507,7 +507,7 @@
 						</div>
 					</div>
 					-->
-					<input type ="hidden" class="ssMemberNo" name="memberNo" value=${sessionScope.m.memberNo }>
+						<input type="hidden" class="ssMemberNo" name="memberNo" value=${sessionScope.m.memberNo }>
 						<div class="hidden" style="display: none;">
 							<span class="ssMemberPhone">${sessionScope.m.memberPhone}</span>
 							<span class="sNum">${ticketingInfo.scheduleNo}</span>
@@ -537,7 +537,21 @@
 							</div>
 							<div class="modal-content">
 								<div>
-									<input type="text" name="usePoint"><button id="usePoint">사용</button>
+									<input type="text" name="usePoint" placeholder="사용하실 포인트를 입력하세요"><button id="usePoint">사용</button>
+									<input type="reset" value="닫기">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--관람권 사용 (모달)-->
+					<div class="modal2-wrap">
+						<div class="gTicket-modal">
+							<div class="modal2-top">
+								<h1>관람권사용</h1>
+							</div>
+							<div class="modal2-content">
+								<div>
+									<input type="text" name="useGiftTicketSerial" placeholder="관람권의 시리얼번호를 입력하세요"><button id="useGiftTicket">사용</button>
 									<input type="reset" value="닫기">
 								</div>
 							</div>
@@ -720,7 +734,7 @@
 				$("#usePoint").on("click", function () {
 					usePoint = $("[name=usePoint]").val();
 					memberNo = $("[name=memberNo]").val();
-					console.log("포인트 사용할 회원의 memberNo : "+memberNo);
+					console.log("포인트 사용할 회원의 memberNo : " + memberNo);
 					$.ajax({
 						url: "/usePoint.do",
 						type: "get",
@@ -740,15 +754,16 @@
 				$("input[type=reset]").on("click", function () {
 					closeModal();
 				});
-				function closeModal(){
+				function closeModal() {
 					$(".modal-wrap").css("display", "none");
+					$(".modal2-wrap").css("display", "none");
 				}
-				function discountUsingPoint(){
-					console.log("userPoint"+usePoint.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,","));
+				function discountUsingPoint() {
+					console.log("userPoint" + usePoint.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 					const priceAmountSame = $(".price-amount-same").text();
 					const filterPriceAmountSame = priceAmountSame.toString().replace(',', '');
 					const filterUsePoint = usePoint.toString().replace(',', '');
-					$(".discount-amount").text(usePoint.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,","));
+					$(".discount-amount").text(usePoint.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 					const usePointAfterAmount = filterPriceAmountSame - filterUsePoint;
 					console.log(priceAmountSame);
 					console.log(filterPriceAmountSame);
@@ -781,10 +796,35 @@
 				$(".amount").text(usePointAfterAmount.toLocaleString());
 				$("#finalAmount").text(usePointAfterAmount);
 				*/
-			
+
 
 				//관람권 사용 시 (100% 할인)
 				$(".voucher div.sub-div>.mega-voucher").on("click", function () {
+					$(".modal2-wrap").css("display", "flex");
+				});
+				$("#useGiftTicket").on("click", function () {
+					const giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+					const memberNo = $("[name=memberNo]").val();
+					console.log(memberNo);
+					$.ajax({
+						url: "/useGiftTicket.do",
+						type: "get",
+						data: { giftTicketSerial: giftTicketSerial, memberNo: memberNo },
+						success: function (data) {
+							console.log(data)
+							if (data == "ok") {
+								alert("사용성공.");
+								closeModal();
+								discountUsingGiftTicket();
+							} else {
+								alert("사용실패.");
+							}
+
+						}
+
+					});
+				});
+				function discountUsingGiftTicket() {
 					const priceAmountSame = $(".price-amount-same").text();
 					const buttonAfterTotalAmont = $(".price-amount").text();
 					const buttonAfterDiscountAmont = $(".discount-amount").text(priceAmountSame);
@@ -803,8 +843,7 @@
 					console.log(buttonAfterFinalAmount);
 					$('span.amount').text(buttonAfterFinalAmount); // 0이기 떄문에 .toLocaleString() 생략
 					$('#finalAmount').val(buttonAfterFinalAmount);
-				});
-
+				}
 
 
 				var payPrice;
