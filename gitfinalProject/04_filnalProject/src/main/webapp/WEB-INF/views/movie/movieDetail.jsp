@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <html>
@@ -472,9 +473,6 @@ z-index: 5;
                 </div>
             </div><!--모달 댓글 내부화면 끝-->
         </div><!--class="modal hidden 무비포스트 상세보기 모달끝 -->
-
-
-
         
         <div class="bg-img" style="background-image:url('/resources/upload/movie/${mov.mainFile.movieFileName}'); background-repeat: no-repeat; background-size:75%; background-position: center; background-position-y: 10%;"></div>
         <div class="bg-pattern"></div>
@@ -520,17 +518,14 @@ z-index: 5;
                 <li><a href="#">무비포스트</a></li>
                 <li><a href="#">예고편/스틸컷</a></li>
             </ul>
-
             <div class = "detail-content-wrap content-wrap">
                 <div class="importantInfo-content-wrap tabcontent"><!--===================================-->
-
                     <div class = "importantInfo-content detail" style="font-size:18px;">
                    		${mov.movieContent}
                         <div class="bottom-btn toggle">
                             <button type="button" id="more-btn" class="more">더보기</button>
                         </div>
                     </div>
-
                     <div class="movie-detail-info-wrap" style="margin-top: 20px;">
                         <div class="movie-detail-info">
                             <p>상영타입 : ${mov.movieType}</p>
@@ -585,7 +580,6 @@ z-index: 5;
                             <button type="button" class="sawMovieBtn">본 영화 등록</button>
                         </div>
                     </div>
-
                     <div class="reviewAllCountWrap">
                         <div class="reviewAllCount" style="font-weight: bold;">
                             <button>전체 <span color:#01738b;"> ${reviewListCount}</span>건</button>
@@ -775,9 +769,6 @@ z-index: 5;
                         <div class="reviewHead">
                             <h2><span style="color:#01738b;">${moviePostCount}</span>건의 무비포스트가 있어요.</h2>
                         </div>
-                        <div class="morePostMovie sawMovie">
-                            <button type="button" class="sawMovieBtn morePostMovie"><a href="/postAllList.do">더보기</a></button>
-                        </div>
                     </div>
                     <div class="userReviewInfoWrap moviePostWriteWrap">
                         <div class="reviewText moviePostText">
@@ -794,7 +785,6 @@ z-index: 5;
 		                            <span class="reviewTextTit">"${mov.movieTitle}"</span>
 		                            	재미있게 보셨나요? <span>무비포스트를 남겨보세요.</span>
 		                            </p>
-                        		
                         		</c:otherwise>
                         	</c:choose>
                         </div>
@@ -803,7 +793,6 @@ z-index: 5;
 	                            <c:when  test="${not empty sessionScope.m}">
 		                            <a href="/moviePostFrm.do?movieNo=${mov.movieNo}" style="color: #666666;">무비포스트 쓰기</a>
 	                            </c:when>
-	                            
 								<c:otherwise>
 									<a href="/login.do" style="color: #666666;">로그인 하기</a>
 								</c:otherwise>    
@@ -829,7 +818,6 @@ z-index: 5;
                         		<img src="/resources/upload/movie/${mov.mainFile.movieFileName}">
                             </c:when>
                             </c:choose>
-                            
                             <div class="moviePostImgContent">
                                 <a href="#"><p>${oneMoivePost.memberId }</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
                                 <a href="#" class="open3"><!--클릭시 무비포스트 상세보기 -->
@@ -837,7 +825,6 @@ z-index: 5;
 	                                <input type="text" name="moviePostNo" value="${oneMoivePost.moviePostNo}" style="display:none;">
                                     <input type="text" name="movieFilePath" value="${oneMoivePost.movieFilePath }" style="display:none;">
 	                                <input type="text" name="videoLink" value="${oneMoivePost.videoLink}" style="display:none;">
-                                   
                                     <p class="moviePostImgMovieTit">${oneMoivePost.movieTitle }</p>
                                     <p class="moviePostImgMovieCont"><p>${oneMoivePost.moviePostContent}</p>
                                     <p class="moviePostImgTime" ><p>${oneMoivePost.moviePostDate}</p>
@@ -852,12 +839,12 @@ z-index: 5;
                 </div><!--무비포스트 끝나는 자리-->
                 <div class="previewWrap tabcontent" ><!--preview예고편 시작-->
                     <div class="previewTop">
-                        <span>예고편(?)</span>
-                        <span> 스틸컷(?)</span>
+                        <span>예고편(${fn:length(mvList)})</span>
+                        <span> 스틸컷(${fn:length(movieFileList)})</span>
                     </div>
                     <div class="previewContentWrap">
                         <div class="previewContentTit">
-                            <h2 style="font-size: 18px;">런칭 예고편</h2>
+                            <h2 style="font-size: 18px;"><span>${mov.movieTitle}</span>에 대한 예고편이 <span>${fn:length(mvList)}</span>개 있어요.</h2>
                         </div>  
                         <div style="display:flex; justify-content: center;">
                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -887,7 +874,6 @@ z-index: 5;
                                 </button>
                             </div>
                             </div>
-
                             <div class="videoList">
                                 <c:forEach items="${mvList }" var="mv" varStatus="status"> 
                                     <video width="240px" height="136px" src="${mv.videoLink }" controls>
@@ -895,6 +881,16 @@ z-index: 5;
                                     </video>
                                 </c:forEach>
                             </div>
+                    </div>
+                    <div class="previewContentWrap">
+                        <div class="previewContentTit">
+                            <h2 style="font-size: 18px;"><span>${mov.movieTitle}</span>에 대한 스틸컷이 <span>${fn:length(movieFileList)}</span>개 있어요.</h2>
+                        </div>  
+                        <div class="stillCut-list">
+                            <c:forEach items="${movieFileList}" var="stillCut">
+	                            <img src="/resources/upload/movie/${stillCut.movieFilePath}">
+                            </c:forEach>
+                        </div>    
                     </div>
                 </div><!--preview예고편 끝-->    
 

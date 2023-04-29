@@ -133,10 +133,20 @@
     border-bottom: none;
    color: #503396;
 }
+.movie-detail-menu>.tabs{
+    padding: 0px;
+    cursor: pointer;
+}
+.moviePostImgContent a{
+    text-decoration: none;
+    color: #0f0f0f;
+}
 
-
-
-
+.postMoreBtnWrap>button{
+    color: #fff;
+    background-color: #503396;
+    border-radius: 5px;
+}
 
 
 
@@ -163,6 +173,9 @@
     bottom: 0px;
     left: 0;
     border: none;
+    background-color: #503396;
+    color: #fff;
+    border-radius: 5px;
 }
 
 .importantInfo-content{
@@ -222,19 +235,7 @@ overflow: hidden;
     vertical-align: center;
     float: left;
 }
-.sawMovie{
-    position: absolute;
-    right: 0;
-}
 
-.sawMovie>button{
-width: 105px;
-height: 36px;
-border-radius: 5px;
-background-color: transparent;
-border: 1px solid #432e75;
-cursor: pointer;
-}
 .reviewAllCountWrap{
     width: 1100px;
     height: 50px;
@@ -245,6 +246,7 @@ cursor: pointer;
 }
 .reviewAllCount>button{
     background-color: transparent;
+    border: none;
 }
 
 .reviewSearchBtn{
@@ -538,6 +540,12 @@ cursor: pointer;
     position: absolute;
     top: 0;
 }
+
+.moviePosttWrite a{
+    text-decoration: none;
+}
+
+
 
 .moviePostImg>img{
     width: 228px;
@@ -846,4 +854,14 @@ cursor: pointer;
 .videoList{
    padding-left: 180px;
     margin-top: 10px;
+}
+.stillCut-list{
+   padding-top: 20px;
+    text-align: center;
+}
+.stillCut-list img{
+    margin-bottom: 10px;
+}
+.previewContentTit>h2 span{
+    color: #329eb1;
 }

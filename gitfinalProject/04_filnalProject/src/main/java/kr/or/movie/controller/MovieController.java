@@ -56,9 +56,6 @@ public class MovieController {
 		int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
 		model.addAttribute("favoriteMovieCount",favoriteMovieCount);
 		 
-		
-		
-		
 		//상영예정작 조회와 관람평점이 들어가 있음
 		ArrayList<Movie> expectedList = service.expectedMovie(memberNo);
 		model.addAttribute("expectedList",expectedList);
@@ -72,7 +69,6 @@ public class MovieController {
 		//특별상영작 총 갯수 조회를 위함
 		int specialMovieCount=service.selectSpecialMovieCount();
 		model.addAttribute("specialMovieCount",specialMovieCount);
-		
 		
 		//필름소사이어티 조회와 관람평점
 		ArrayList<Movie> filmSocietyList = service.filmSocietyList(memberNo);
@@ -117,7 +113,7 @@ public class MovieController {
 		int moviePostCount=service.moviePostCount(movieNo);
 		model.addAttribute("moviePostCount",moviePostCount);
 		
-		//모든 관람평(review)조회하기()
+		//모든 관람평(review)조회하기
 		ArrayList<Review> reviewList = service.oneMovieAllReview(movieNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
 		model.addAttribute("reviewList",reviewList);
 		
@@ -134,11 +130,9 @@ public class MovieController {
 		
 		//8.리뷰좋아요 없음
 		
-		
 		//9.예매율 없음
+		
 		//10.누적관객수 조회
-		
-		
 		
 		//실관람평점산출위한 watchPoint조회
 		Review watchPointAvg = service.onlyWatchPointAvg(movieNo);//(12.실관람평점영화평점)
@@ -147,6 +141,14 @@ public class MovieController {
 		//영화별 관람평 갯수를 위한 조회
 		int reviewListCount= service.selectReviewListCount(movieNo);
 		model.addAttribute("reviewListCount", reviewListCount);
+		
+		//스틸컷(movie_file) 조회
+		ArrayList<MovieFile> movieFileList =service.selectFileList(movieNo);
+		model.addAttribute("movieFileList", movieFileList);
+		
+
+		
+		
 		
 		
 		return "movie/movieDetail";
