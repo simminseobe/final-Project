@@ -118,7 +118,7 @@ public class MovieDao {
 		int result = sqlSession.update("movie.updateWatchPoint", wPoint);
 		return result;
 	}
-
+	
 	public int deleteReview(int reviewCommentNo) {
 		int result = sqlSession.delete("movie.deleteReview", reviewCommentNo);
 		return result;
@@ -266,6 +266,10 @@ public class MovieDao {
 		
 	}
 
+	public ArrayList<MovieFile> selectFileList(int movieNo) {
+		List list = sqlSession.selectList("movie.selectFileList", movieNo);
+		return (ArrayList<MovieFile>) list;
+	}
 
 
 	/*
