@@ -136,10 +136,11 @@ padding-bottom: 20px;
     box-sizing: border-box;
 
 }
-/*===================================================*/
+
 .moviePostBottomBtn{
     text-align: center;
     margin-top: 50px;
+    margin-bottom:200px;
 }
 .moviePostBottomBtn div{
     display: inline-block;

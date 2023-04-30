@@ -582,12 +582,7 @@ z-index: 5;
                     </div>
                     <div class="reviewAllCountWrap">
                         <div class="reviewAllCount" style="font-weight: bold;">
-                            <button>전체 <span color:#01738b;"> ${reviewListCount}</span>건</button>
-                        </div>
-                        <div class="reviewSearchBtn">
-                            <span><button>최신순</button></span>
-                            <span><button>공감순</button></span>
-                            <span><button>평점순</button></span>
+                            <button>전체 <span style="color:#01738b;"> ${reviewListCount}</span>건</button>
                         </div>
                     </div>
                     <div class="userReviewInfoWrap">

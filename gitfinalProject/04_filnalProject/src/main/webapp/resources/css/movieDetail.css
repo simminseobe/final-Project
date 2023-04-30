@@ -4,7 +4,9 @@
     outline: none;
     box-sizing: border-box;
 }
-
+a{
+    text-decoration: none;
+}
 .bg-img{
     height: 520px;
 }
@@ -149,9 +151,16 @@
 }
 
 
-
-
-
+.modalContentBottom button{
+    background-color: #fff;
+    color: #0f0f0f;
+    border: 1px solid #503396;
+}
+.modalContentBottom button:hover{
+    background-color: #503396;
+    color: #fff;
+    
+}
 
 /*=========================*/
 
@@ -254,22 +263,18 @@ cursor: pointer;
     height: 50px;
     margin: 30px 0;
     font-size: 15px;
-    position: relative;
+   
     
 }
 .reviewAllCount>button{
-    background-color: transparent;
+    background-color: #fff;
     border: none;
 }
 
-.reviewSearchBtn{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
+
 
 .reviewSearchBtn button{
-    background-color: transparent;
+    background-color: #fff;
     cursor: pointer;
 }
 .userReviewInfoWrap{
@@ -753,11 +758,35 @@ cursor: pointer;
     border-radius: 5px;
     border: none;
 }
-
+.subscribe>.postUpdateBtn{
+    width: 70px;
+    height: 28px;
+    background-color: #503396;
+    border-radius: 5px;
+    border: none;
+}
+.subscribe>.postUpdateBtn>.postUpdateAtag{
+    text-decoration: none;
+    border: 1px solid #503396;
+    color: #fff;
+}
+.subscribe>.postDeleteBtn{
+    width: 70px;
+    height: 28px;
+    background-color: #503396;
+    border-radius: 5px;
+    border: none;
+    margin-left: 5px;
+}
+.subscribe>.postDeleteBtn>.postDeleteAtag{
+    text-decoration: none;
+    border: 1px solid #503396;
+    color: #fff;
+}
 .subscribe>.btnWrap>.updateBtnDiv>.subscribeBtn{
     width: 70px;
     height: 28px;
-    background-color: #432e75;
+    background-color: #503396;
     color: #fff;
     border-radius: 5px;
     border: none;
@@ -816,12 +845,6 @@ cursor: pointer;
     color: #fff;
 }
 
-.modalContentBottom>#close3{
-    background-color: transparent;
-    color: #432e75;
-    border-color: #432e75;
-}
-
 
 .post-comment-list>.comment-list-img{
     background-color: #ecf0f4;
@@ -845,7 +868,7 @@ cursor: pointer;
 .btnWrap>.updateBtn>button{
     width: 50px;
     height: 28px;
-    background-color: #432e75;
+    background-color:#503396;
     color: #fff;
     border-radius: 5px;
     border: none;
@@ -853,7 +876,7 @@ cursor: pointer;
 .btnWrap>.deleteBtn>button{
     width: 50px;
     height: 28px;
-    background-color: #432e75;
+    background-color: #503396;
     color: #fff;
     border-radius: 5px;
     border: none;
