@@ -32,10 +32,6 @@
                         <td>${p.productCompany}</td>
                     </tr>
                     <tr>
-                        <th>조회수</th>
-                        <td>${p.productLikeCount}</td>
-                    </tr>
-                    <tr>
                         <th>누적판매</th>
                         <td>${p.productLikeCount}</td>
                     </tr>
