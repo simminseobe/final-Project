@@ -140,6 +140,7 @@ public class MovieController {
 			memberNo = m.getMemberNo();
 		}
 		
+		
 		Movie mov = service.selectOneMovie(movieNo);		//1, 7(1.영화정보 / 7.영화포스터file)
 		model.addAttribute("mov", mov);
 		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
@@ -165,7 +166,9 @@ public class MovieController {
 		model.addAttribute("reviewList",reviewList);
 		
 		//아이디로 관람평 조회
-		//Review oneReview = service.selectOneReview();
+		String memberId=m.getMemberId();
+		Review oneReview = service.selectOneReview(memberId);
+		model.addAttribute("oneReview", oneReview);
 		
 		//관람포인트별 합산점수조회
 		WatchPoint watchPointSum=service.watchPointSum(movieNo);//(5-1.관람포인트 합산)

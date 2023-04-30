@@ -291,6 +291,11 @@ public class MovieDao {
 		int result = sqlSession.selectOne("movie.totalMovieLike", movieNo);
 		return result;
 	}
+	//아이디로 관람평 조회
+	public Review selectOneReview(String memberId) {
+		Review review = sqlSession.selectOne("movie.selectOneReview", memberId);
+		return review;
+	}
 
 
 

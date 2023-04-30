@@ -379,6 +379,11 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 		return movieFileList;
 	}
+	//아이디로 관람평 조회
+	public Review selectOneReview(String memberId) {
+		Review review = dao.selectOneReview(memberId);
+		return review;
+	}
 
 
 
