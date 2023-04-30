@@ -738,8 +738,8 @@ z-index: 5;
                                         <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px;  bottom: 0px; top: 20px;">
                                             <span>0</span>
                                             <input type="text" name="reviewLikeMember" value="${review.memberId}" style="display: none;">
-                                            <input type="text" name="reviewLikeReviewCommentNo" value="${review.reviewCommentNo }"style="display: none;">
                                             <input type="text" name="reviewCommentNo" value="${review.reviewCommentNo}" style="display: none;">
+                                            <%-- <input type="text" name="reviewLikeReviewCommentNo" value="${review.reviewCommentNo }"style="display: none;"> --%>
                                         </div>
                                     </div>
                                     <div class="reviewContentWrite2" style="font-size: 15px;">
@@ -903,6 +903,7 @@ z-index: 5;
 </div>
 <div class="session"  style="display:none;">
 	<input type="text" class="sessionId" value="${sessionScope.m.memberId}">
+	<input type="text" class="sessionMemberNo" value="${sessionScope.m.memberNo}">
 </div>
        
 
