@@ -605,10 +605,11 @@ z-index: 5;
                         		<c:when  test="${not empty sessionScope.m &&sessionScope.m.memberId eq oneReview.memberId}">
                         			 <a href="#" id="open" style="color: #666666;">작성완료</a>
                         		</c:when>
+               					<c:when  test="${empty sessionScope.m}">
+                        			 <a href="login.do" class="open" style="color: #666666;">로그인</a>
+                        		</c:when>
                         	</c:choose>
-                        	<c:if test="${empty sessionScope.m}">
-								 <a href="login.do" class="open" style="color: #666666;">로그인</a>
-							</c:if>
+                        	
 							<%-- <c:if test="${not empty sessionScope.m &&sessionScope.m.memberId ne oneReview.memberId}">
 	                            <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
 							</c:if>

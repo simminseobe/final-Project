@@ -166,9 +166,13 @@ public class MovieController {
 		model.addAttribute("reviewList",reviewList);
 		
 		//아이디로 관람평 조회
-		String memberId=m.getMemberId();
-		Review oneReview = service.selectOneReview(memberId);
-		model.addAttribute("oneReview", oneReview);
+		if(m!=null) {
+			String memberId=m.getMemberId();
+			Review oneReview = service.selectOneReview(memberId);
+			model.addAttribute("oneReview", oneReview);
+			
+		}
+		
 		
 		//관람포인트별 합산점수조회
 		WatchPoint watchPointSum=service.watchPointSum(movieNo);//(5-1.관람포인트 합산)
