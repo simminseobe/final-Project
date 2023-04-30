@@ -12,6 +12,7 @@ import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieVideo;
@@ -20,6 +21,18 @@ import kr.or.movie.model.vo.MovieVideo;
 public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	public ArrayList<Member> selectAllMember() {
+		List list = sqlSession.selectList("member.selectAllMember");
+
+		return (ArrayList<Member>) list;
+	}
+
+	public int updateMemberLevel(Member m) {
+		int result = sqlSession.update("member.updateMemberLevel", m);
+
+		return result;
+	}
 
 	public int insertMovie(Movie movie) {
 		int result = sqlSession.insert("movie.insertMovie", movie);

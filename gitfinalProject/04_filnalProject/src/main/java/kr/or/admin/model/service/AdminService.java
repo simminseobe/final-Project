@@ -13,6 +13,7 @@ import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
@@ -24,6 +25,16 @@ public class AdminService {
 	private AdminDao dao;
 	@Autowired
 	private MovieDao movieDao;
+
+	public ArrayList<Member> selectAllMember() {
+		ArrayList<Member> list = dao.selectAllMember();
+
+		return list;
+	}
+
+	public int updateMemberLevel(Member member) {
+		return dao.updateMemberLevel(member);
+	}
 
 	@Transactional
 	public int insertMovie(Movie movie, MovieFile mainFile, ArrayList<MovieFile> postList,
@@ -249,4 +260,5 @@ public class AdminService {
 
 		return result;
 	}
+
 }

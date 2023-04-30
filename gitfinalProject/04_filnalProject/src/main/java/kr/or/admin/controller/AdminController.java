@@ -27,6 +27,7 @@ import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
@@ -44,6 +45,28 @@ public class AdminController {
 	@RequestMapping("/adminPage.do")
 	public String adminPage() {
 		return "admin/adminPage";
+	}
+
+	@RequestMapping(value = "/manageMember.do")
+	public String manageMember(Model model) {
+		ArrayList<Member> list = new ArrayList<Member>();
+
+		list = service.selectAllMember();
+
+		model.addAttribute("list", list);
+
+		return "admin/manageMember";
+	}
+
+	@RequestMapping(value = "/updateMemberLevel.do")
+	public String updateMemberLevel(Member member) {
+		int result = service.updateMemberLevel(member);
+
+		if (result > 0) {
+			return "redirect:/manageMember.do";
+		} else {
+			return "redirect:/";
+		}
 	}
 
 	@RequestMapping(value = "/registerMovieFrm.do")
