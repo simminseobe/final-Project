@@ -44,10 +44,10 @@ public class MovieController {
 		if(m!=null) {
 			memberNo = m.getMemberNo();
 		}
-		
+		//영화 전체 리스트 조회와 메인 포스터
 		ArrayList<Movie> list = service.selectMovieAll(memberNo);
 		model.addAttribute("list", list);
-		
+		//전체 영화 갯수 조회위함
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
@@ -117,11 +117,11 @@ public class MovieController {
 					ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(memberNo);
 					model.addAttribute("oneMoviepostAll",oneMoviepostAll);
 				
-					//사용자 무비포스트 총 개수
+					//사용자 무비포스트 총 갯수
 					int moviePostCount=service.moviePostCount(memberNo);
 					model.addAttribute("moviePostCount",moviePostCount);
 					
-					//사용자 모든 관람평(review)조회하기()
+					//사용자 모든 관람평(review)조회하기
 					ArrayList<Review> reviewList = service.oneMovieAllReview(memberNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
 					model.addAttribute("reviewList",reviewList);
 					
@@ -148,13 +148,9 @@ public class MovieController {
 
 		//3번없음
 		//영화좋아요 갯수 조회
-		
-		
-		
-		/*
-		 * int movieLikeCount=service.movieLikeCount(movieNo);
-		 * model.addAttribute("movieLikeCount",movieLikeCount);
-		 */
+		 int movieLikeCount=service.movieLikeCount(movieNo);
+		 model.addAttribute("movieLikeCount",movieLikeCount);
+		 
 		
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
@@ -179,8 +175,6 @@ public class MovieController {
 		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);//(6.영화비디오조회)
 		model.addAttribute("mvList", mvList);
 		
-		
-		
 		//9.예매율 없음
 		
 		//10.누적관객수 조회
@@ -196,12 +190,7 @@ public class MovieController {
 		//스틸컷(movie_file) 조회
 		ArrayList<MovieFile> movieFileList =service.selectFileList(movieNo);
 		model.addAttribute("movieFileList", movieFileList);
-		
-
-		
-		
-		
-		
+	
 		return "movie/movieDetail";
 	}
 	//무비포스트 작성 폼으로 이동
@@ -229,9 +218,7 @@ public class MovieController {
 	public String reviewUpdate(Review rev, WatchPoint wPoint) {
 		int result=service.reviewUpdate(rev);
 		int wresult=service.watchPointUpdate(wPoint); 
-		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo()+"&=1";
-		
-		
+		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo()+"&=1";		
 	}
 	//실관람평 삭제하기
 	@RequestMapping(value="/deleteReview.do")
@@ -240,26 +227,20 @@ public class MovieController {
 		int wresult = service.deleteWatchPoint(reviewCommentNo);
 		return  "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 	}
-	 
 	//무비포스트 등록
 	@RequestMapping(value="/moviePostInsert.do")
 	public String moviePostInsert(MoviePost post) {
 		int result = service.postInsert(post);
-		
 		return "redirect:/movieDetail.do?movieNo="+post.getMovieNo()+"&reqPage=1";
-		
 	}
 	//무비포스트 상세보기
 	@ResponseBody
 	@RequestMapping(value="/moviePostDetail.do", produces = "application/json;charset=utf-8")
 	public String moviePostDetail(int moviePostNo,Model model) {
 		MoviePost moviePostOne= service.selectDetailPost(moviePostNo);
-		
-		
 		return new Gson().toJson(moviePostOne);
-		
-		
 	}
+	//무비포스트 댓글 insert
 	@ResponseBody
 	@RequestMapping(value="/insertPostComment.do")
 	public String insertPostComment(MoviePostComment mpc) {
@@ -273,7 +254,7 @@ public class MovieController {
 		}
 		
 	}
-	
+	//무비포스트 댓글 수정
 	@ResponseBody
 	@RequestMapping(value="/updatePostComment.do")
 	public String updatePostComment(MoviePostComment mpc) {
@@ -286,6 +267,7 @@ public class MovieController {
 		}
 		
 	}
+	//무비포스트 댓글 삭제
 	@ResponseBody
 	@RequestMapping(value="deletePostComment.do")
 	public String deletePostComment(int moviePostCommentNo) {
@@ -298,13 +280,13 @@ public class MovieController {
 		
 		
 	}
-	
+	//무비포스트 전체
 	@RequestMapping (value="/postAllList.do")
 	public String postAllList() {
 		return "movie/moviePostAll";
 		
 	}
-	
+	//무비포스트 수정 양식 띄우기
 	@RequestMapping(value="moviePostUpdateFrm.do")
 	public String postUpdateFrm(int moviePostNo,int movieNo,Model model) {
 		MoviePost moviePost=service.selectOneMoviePost(moviePostNo);
@@ -319,7 +301,7 @@ public class MovieController {
 		return "movie/moviePostUpdateFrm";
 		
 	}
-	
+	//무비포스트 수정하기
 	@RequestMapping(value="/updatePost.do")
 	public String postUpdate(MoviePost moviePost,int movieNo) {
 		int result = service.postUpdate(moviePost);
@@ -327,7 +309,7 @@ public class MovieController {
 		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 		
 	}
-	
+	//무비포스트 삭제하기
 	@RequestMapping(value="/moviePostDelete.do")
 	public String postDelete(MoviePost moviePost, int movieNo) {
 		int result = service.postDelete(moviePost);

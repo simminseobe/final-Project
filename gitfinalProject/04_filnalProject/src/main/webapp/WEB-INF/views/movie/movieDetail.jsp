@@ -439,6 +439,7 @@ z-index: 5;
             	
                 <div class="post-comment-list"></div>
                 <!--무비포스트 댓글리스트 출력하는 곳-->
+                <!-- 하단 스크립트에서 ajax로 구현한 모양 -->
                 <!--
                 <div class="post-comment-list">
                     <div class="detail-top-r comment-list-img">
@@ -481,13 +482,9 @@ z-index: 5;
                 <p class="d-day" style="float: left;">${mov.movieDate}</p>
                 <p class="contents-type" style="font-size: 22px; width: 300px; margin-left: 10px; display: inline-block;">#무비아일랜드토크 #무대인사</p>
                 <p class="title" style="font-size: 54px; position: absolute; left: 0; top: 100px;">${mov.movieTitle }</p>
-                <div class="btn-like" style="position: absolute; top: 35%;">
-                    <button type="button" class="likeBtn" style="width: 150px; height: 40px;">
-                        <i class="heart-icon">
-                            <img src="img/pink_heart.png" style="vertical-align: middle; width: 17px; height: 15px;">
-                            <span style="vertical-align: middle;">좋아요 갯수</span>
-                        </i>
-                    </button>
+                <div class="btn-like" style="position: absolute; top: 35%; font-sizw:18px">
+	                <span style="vertical-align: middle;">${movieLikeCount }명이</span>
+	                <span style="vertical-align: middle;">좋아해요</span>
                 </div>
                 <div class="movie-Score-wrap" style="position: absolute; bottom: 10%;">
                     <p class="movieScoreTitle" style="padding-bottom: 10px; font-size: 15px;">실관람평점</p>
@@ -513,10 +510,10 @@ z-index: 5;
     <div class="movie-detail-content-wrap"style="width:1100px; margin: 0 auto; margin-top:50px; margin-bottom:500px;">
         <div class="movie-detail-menu">
             <ul class="tabs">
-                <li><a href="#">주요정보</a></li>
-                <li><a href="#">실관람평</a></li>
-                <li><a href="#">무비포스트</a></li>
-                <li><a href="#">예고편/스틸컷</a></li>
+                <li><a href="javascript:void(0);">주요정보</a></li>
+                <li><a href="javascript:void(0);">실관람평</a></li>
+                <li><a href="javascript:void(0);">무비포스트</a></li>
+                <li><a href="javascript:void(0);">예고편/스틸컷</a></li>
             </ul>
             <div class = "detail-content-wrap content-wrap">
                 <div class="importantInfo-content-wrap tabcontent"><!--===================================-->
@@ -872,7 +869,6 @@ z-index: 5;
                             <div class="videoList">
                                 <c:forEach items="${mvList }" var="mv" varStatus="status"> 
                                     <video width="240px" height="136px" src="${mv.videoLink }" controls>
-                                        
                                     </video>
                                 </c:forEach>
                             </div>
@@ -888,7 +884,6 @@ z-index: 5;
                         </div>    
                     </div>
                 </div><!--preview예고편 끝-->    
-
             </div>
         </div>
     </div>
@@ -979,7 +974,7 @@ z-index: 5;
         }
     });
 
-/*===============모달OPEN=================*/
+   /*===============모달OPEN=================*/
    const openButton=document.getElementById("open");
    const modal = document.querySelector(".modal"); 
 	
@@ -1001,9 +996,7 @@ z-index: 5;
    openButton.addEventListener("click",openModal);
    }
    
- 	
    /*===============모달OPEN2=================*/
-   
    const openButton2=document.getElementById("open2");
    const modal2 = document.querySelector(".modal2"); 
 
@@ -1034,8 +1027,6 @@ z-index: 5;
 	   const movieNo = $(this).children().eq(0).val();
 	   const moviePostNo=$(this).children().eq(1).val();
 	   const postComment=$(".postComment").val("");
-
-	   console.log(moviePostNo);
 	   
 	   //멤버 아이디와 무비포스트 날짜를 받기 위함
 	   const detailmemberId=$(".detailmemberId");
@@ -1055,10 +1046,9 @@ z-index: 5;
 	   const dataVideoCheck=$(".dataVideoCheck");
 	   
 	   const modalMoviePostNo=$(".modalPostNo");
-	   
+		//세션 아이디값	   
 	   const sessionId=$(".sessionId").val();
-	   
-	
+	   //무비포스트 상세보기를 위한ajax
 		$.ajax({
 			  url :"/moviePostDetail.do",
 			  type : "post",
@@ -1219,7 +1209,6 @@ z-index: 5;
 			  });	
 
 	   			$(".modal3").removeClass("hidden3");//아작스가 필요하다면 아작스 내부에서 마지막 코드가 됨
-	   			//openModal();
 	   
    });
    
@@ -1296,9 +1285,10 @@ z-index: 5;
 	});
 	 
 
-	
-
-
+	 
+	 
+	 
+	 
 </script>
 <script src = "/resources/js/movieDetail.js"></script>
 </body>

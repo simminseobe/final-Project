@@ -548,25 +548,12 @@ select count(*) from
             (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo}) as likeCheck
 		 from movie_tbl m where (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo})=1)
 </select>
- 
-
-
-
-
-<!-- 영화 좋아요 수 -->
-<!-- <select id="movieLikeCount"  parameterType="_int" resultType="movieLike">
+<!-- 영화 좋아요 총 갯수 -->
+<select id="totalMovieLike" resultType="_int" parameterType="_int">
 	select count(*) from movie_like where movie_no=#{movieNo}
-</select> -->
-
-<!-- 
-영화 좋아요 수 
-<select id="deletenset">
-select count(*) from movie_like where movie_no=#{movieNo} as like_cnt
 </select>
 
-<select id="likeCheck" resultType="_int">
-	select count(*) from movie_like where movie_no=#{movie_no} and member_no=#{member_no}
-</select>  -->
+
 
 
 </mapper>

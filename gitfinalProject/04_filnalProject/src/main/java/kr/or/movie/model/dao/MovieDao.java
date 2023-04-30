@@ -154,41 +154,41 @@ public class MovieDao {
 		int result = sqlSession.selectOne("movie.movieListCount");
 		return result;
 	}
-
+	//무비포스트 전체 리스트를 조회
 	public ArrayList<MoviePost> selectOneMovieAllPost(int movieNo) {
 		List list = sqlSession.selectList("movie.oneMoviePostAll", movieNo);
 		return (ArrayList<MoviePost>) list;
 	}
-
+	//무비포스트 상세보기를 위함
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost", moviePostNo);
 
 		return moviePostOne;
 	}
-
+	//무비포스트 댓글 작성
 	public int insertPostComment(MoviePostComment mpc) {
 
 		int result = sqlSession.insert("movie.insertPostComment", mpc);
 		return result;
 
 	}
-
+	//무비포스트 댓글 전체 리스트 조회
 	public ArrayList<MoviePostComment> selectPostComment(int moviePostNo) {
 		System.out.println("dao postNo : " + moviePostNo);
 		List list = sqlSession.selectList("movie.selectPostComment", moviePostNo);
 		return (ArrayList<MoviePostComment>) list;
 	}
-
+	//무비포스트 댓글 수정
 	public int updatePostComment(MoviePostComment mpc) {
 		int result = sqlSession.update("movie.updatePostComment", mpc);
 		return result;
 	}
-
+	//무비포스트 총 갯수를 조회
 	public int selectMoviePostCount(int movieNo) {
 		int moviePostCount = sqlSession.selectOne("movie.moviePostCount", movieNo);
 		return moviePostCount;
 	}
-
+	//무비포스트 댓글 삭제
 	public int deletePostComment(int moviePostCommentNo) {
 		int deletePostComment = sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
 		return deletePostComment;
@@ -219,17 +219,17 @@ public class MovieDao {
 		List list = sqlSession.selectList("movie.favoriteMovieList",memberNo);
 		return (ArrayList<Movie>) list;
 	}
-	
+	//무비포스트를 영화별로 조회를 하기 위함
 	public MoviePost selectOneMoviePost(int moviePostNo) {
 		MoviePost moviePost = sqlSession.selectOne("movie.selectOneMoviePost", moviePostNo);
 		return moviePost;
 	}
-
+	//무비포스트 수정
 	public int postUpdate(MoviePost moviePost) {
 		int result = sqlSession.update("movie.postUpdate", moviePost);
 		return result;
 	}
-
+	//무비포스트 삭제
 	public int postDelete(MoviePost moviePost) {
 		int result = sqlSession.delete("movie.postDelete", moviePost);
 		return result;
@@ -281,19 +281,17 @@ public class MovieDao {
 		return result;
 		
 	}
-
+	//영화 포스터(movieFile)전체 조회를 위함
 	public ArrayList<MovieFile> selectFileList(int movieNo) {
 		List list = sqlSession.selectList("movie.selectFileList", movieNo);
 		return (ArrayList<MovieFile>) list;
 	}
+	//영화 좋아요 총 갯수를 위함
+	public int totalMovieLikeCount(int movieNo) {
+		int result = sqlSession.selectOne("movie.totalMovieLike", movieNo);
+		return result;
+	}
 
 
-
-
-
-	/*
-	 * public int movieLikeCount(int movieNo) { int result =
-	 * sqlSession.selectOne("movie.movieLikeCount",movieNo); return result; }
-	 */
 
 }

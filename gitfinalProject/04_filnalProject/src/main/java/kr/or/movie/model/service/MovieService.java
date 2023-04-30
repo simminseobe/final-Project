@@ -343,12 +343,12 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 	}
 	
-	
-	/*
-	 * public int movieLikeCount(int movieNo) { int likeCount
-	 * =dao.movieLikeCount(movieNo); System.out.println(likeCount); return
-	 * likeCount; }
-	 */
+	//영화 좋아요 총 갯수
+	public int movieLikeCount(int movieNo) {
+		int  result =dao.totalMovieLikeCount(movieNo);
+		return result;
+	}
+	 
 	
 	//상영예정작 총 갯수 조회를 위함
 	public int selectExpectedMovieCount() {
@@ -379,6 +379,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 		return movieFileList;
 	}
+
 
 
 	
