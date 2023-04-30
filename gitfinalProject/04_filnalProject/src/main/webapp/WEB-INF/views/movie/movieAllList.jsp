@@ -383,10 +383,10 @@
                           <input type=text class="likeMovieNo" value="${favorite.movieNo}" style="display:none">
                      </div>
                      <div class="movieAllList-reserve" style="margin-top: 10px;">
-                     <button type=" button"
-                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;">
-                             예약하기
-                     </button>
+	                     <button type=" button"
+	                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;">
+	                             	예약하기
+	                     </button>
                      </div>
                  </div>
              </div>
@@ -410,9 +410,6 @@
             	
             	const movieNo=$(this).parent().next().val();
                 const memberNo=$(".sessionMemberNo").val();
-				console.log(memberNo + "스크립트에서 memberNo");
-                console.log(movieNo + "스크립트에서 movieNo");
-                
             	const binHeart="img/bin-heart.png";
                 const blackHeart="img/black-heart.png";
                 const current  = $(this).attr("src");
@@ -436,7 +433,6 @@
                 			console.log(likeCount.text(likeCountString));
                 			
                 			icon.attr("src",blackHeart); 
-                		
                 		
                 		}else{
                 			console.log("fail"); 
