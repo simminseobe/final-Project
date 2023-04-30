@@ -423,7 +423,7 @@
 					<div class="content-title-wrap">
 						<div class="content-title">
 							<p class="title-p">관람권 및 할인적용</p>
-							<button type="button" onclick="resetBtn()" id="reset-btn">초기화</button>
+							<button type="button" id="reset-btn">초기화</button>
 						</div>
 					</div>
 
@@ -449,11 +449,11 @@
 								<div class="sub-discount mega-voucher">
 									<p>메가박스 관람권</p>
 								</div>
-
+								<!--
 								<div class="sub-discount">
 									<p>스토어교환권</p>
 								</div>
-
+								-->
 
 							</div>
 						</div>
@@ -537,7 +537,9 @@
 							</div>
 							<div class="modal-content">
 								<div>
-									<input type="text" name="usePoint" placeholder="사용하실 포인트를 입력하세요"><button id="usePoint">사용</button>
+									<input type="text" name="usePoint" placeholder="사용하실 포인트를 입력하세요"><button
+										id="usePoint">사용</button>
+									<input type="text" name="addPoint" style="display: none;"><button id="addPoint" style="display: none;">클릭</button>
 									<input type="reset" value="닫기">
 								</div>
 							</div>
@@ -551,7 +553,9 @@
 							</div>
 							<div class="modal2-content">
 								<div>
-									<input type="text" name="useGiftTicketSerial" placeholder="관람권의 시리얼번호를 입력하세요"><button id="useGiftTicket">사용</button>
+									<input type="text" name="useGiftTicketSerial"
+										placeholder="관람권의 시리얼번호를 입력하세요"><button id="useGiftTicket">사용</button>
+										<input type="text" name="addGiftTicketSerial" style="display: none;"><button id="addGiftTicket" style="display: none;">클릭</button>
 									<input type="reset" value="닫기">
 								</div>
 							</div>
@@ -802,9 +806,10 @@
 				$(".voucher div.sub-div>.mega-voucher").on("click", function () {
 					$(".modal2-wrap").css("display", "flex");
 				});
+				var giftTicketSerial;
 				$("#useGiftTicket").on("click", function () {
-					const giftTicketSerial = $("[name=useGiftTicketSerial]").val();
-					const memberNo = $("[name=memberNo]").val();
+					giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+					memberNo = $("[name=memberNo]").val();
 					console.log(memberNo);
 					$.ajax({
 						url: "/useGiftTicket.do",
@@ -930,8 +935,64 @@
 					}
 				});
 
+				$("#reset-btn").on("click", function () {
+					usePoint = $("[name=usePoint]").val();
+					giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+					if (usePoint !== "") {
+						addPointFunc();
+					} else if (giftTicketSerial !== "") {
+						//addGiftTicket();
+					}
+				});
+				var addPoint;
+				function addPointFunc() {
+					usePoint = $("[name=usePoint]").val();
+					addPoint = $("[name=addPoint]").val(usePoint);
+					var zero = $(".discount-amount").text();
+					memberNo = $("[name=memberNo]").val();
+					console.log(memberNo);
+					console.log(addPoint.val());
+					$.ajax({
+						url: "/addPoint.do",
+						type: "get",
+						data: { addPoint: addPoint, memberNo: memberNo },
+						success: function (data) {
+							console.log(data)
+							if (data == "ok") {
+								alert("포인트 사용취소");
+								//usedPoint.val().empty();
+								//zero.text(0);
+							} else {
+								alert("포인트 사용취소실패");
+							}
 
+						}
 
+					});
+				}
+				function addGiftTicketFunc() {
+					var zero = $(".discount-amount").text();
+					giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+					memberNo = $("[name=memberNo]").val();
+					console.log(memberNo);
+					$.ajax({
+						url: "/useGiftTicket.do",
+						type: "get",
+						data: { giftTicketSerial: giftTicketSerial, memberNo: memberNo },
+						success: function (data) {
+							console.log(data)
+							if (data == "ok") {
+								alert("관람권 사용취소");
+								$("[name=useGiftTicketSerial]").val().empty();
+								zero.text().empty();
+							} else {
+								alert("관람권 사용취소실패");
+							}
+
+						}
+
+					});
+				}
 
 				/*
 				$.ajax({
