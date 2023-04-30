@@ -444,7 +444,7 @@ public class AdminController {
 	public String registerConsultation(Consultation consultation) {
 		int result = service.insertConsultation(consultation);
 
-		return String.valueOf(result);
+		return String.valueOf(consultation.getConsultationNo());
 	}
 
 	@RequestMapping(value = "/adminChat.do")
@@ -452,5 +452,28 @@ public class AdminController {
 		model.addAttribute("chat", chat);
 
 		return "admin/adminChat";
+	}
+
+	@RequestMapping(value = "/adminCenter.do")
+	public String adminCenter() {
+		return "admin/adminCenter";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectChat.do", produces = "application/json;charset=utf-8")
+	public String selectChat(int consultationNo) {
+		ArrayList<Chat> list = new ArrayList<Chat>();
+
+		list = service.selectChat(consultationNo);
+
+		return new Gson().toJson(list);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteConsultation.do", produces = "application/json;charset=utf-8")
+	public String deleteConsultation(String consultationNo) {
+		int result = service.deleteConsultation(Integer.parseInt(consultationNo));
+
+		return String.valueOf(result);
 	}
 }

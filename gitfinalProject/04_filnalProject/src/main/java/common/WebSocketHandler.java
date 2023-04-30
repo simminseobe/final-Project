@@ -3,6 +3,7 @@ package common;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -11,9 +12,14 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import kr.or.admin.model.service.AdminService;
+import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 
 public class WebSocketHandler extends TextWebSocketHandler {
+	@Autowired
+	private AdminService service;
+
 	private Map<String, Consultation> consultationMap; // 채팅방 목록
 
 	public WebSocketHandler() {
@@ -40,36 +46,64 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		// 또 쓰기 위해서 마지막에 문자열로 꺼내옴
 		String type = element.getAsJsonObject().get("type").getAsString();
 		String msg = element.getAsJsonObject().get("msg").getAsString();
+		String chatMember = element.getAsJsonObject().get("chatMember").getAsString();
+		String memberLevel = element.getAsJsonObject().get("memberLevel").getAsString();
 		String consultationNo = element.getAsJsonObject().get("consultationNo").getAsString(); // 채팅방 ID
 
-		// 처리해야 할 type에 따른 다른 동작 수행
-		if (type.equals("enter")) {
-			Consultation consultation = consultationMap.get(consultationNo);
-			//
-			if (consultation == null) {
-				consultation = new Consultation(Integer.parseInt(consultationNo));
-				consultationMap.put(consultationNo, consultation);
-			}
+		Chat chat = new Chat();
 
-			consultation.addMember(session, msg);
-			// 다른 맴버 입장 메세지
-			String sendMsg = "<p>" + msg + "님이 입장하셨습니다. </p>";
-			// 전송 형태인 웹소켓 택스트 객체 생성
-			TextMessage textMessage = new TextMessage(sendMsg);
-			// 다른 맴버(세션)에 입장 메세지 전송
-			for (WebSocketSession memberSession : consultation.getMemberMap().keySet()) {
-				// 나 빼고
-				if (!memberSession.equals(session)) {
-					// 보내면 js에 ws.onmessage가 받음, 자료형은 json
-					memberSession.sendMessage(textMessage);
+		chat.setChatContent(msg);
+		chat.setChatMember(chatMember);
+		chat.setMemberLevel(Integer.parseInt(memberLevel));
+		chat.setConsultationNo(Integer.parseInt(consultationNo));
+
+		int result = service.insertChat(chat);
+
+		if (result > 0) {
+			// 처리해야 할 type에 따른 다른 동작 수행
+			if (type.equals("enter")) {
+				Consultation consultation = consultationMap.get(consultationNo);
+				//
+				if (consultation == null) {
+					consultation = new Consultation(Integer.parseInt(consultationNo));
+					consultationMap.put(consultationNo, consultation);
+				}
+
+				consultation.addMember(session, msg);
+				// 다른 맴버 입장 메세지
+				String sendMsg = "<p>" + msg + "님이 입장하셨습니다. </p>";
+				// 전송 형태인 웹소켓 택스트 객체 생성
+				TextMessage textMessage = new TextMessage(sendMsg);
+				// 다른 맴버(세션)에 입장 메세지 전송
+				for (WebSocketSession memberSession : consultation.getMemberMap().keySet()) {
+					// 나 빼고
+					if (!memberSession.equals(session)) {
+						// 보내면 js에 ws.onmessage가 받음, 자료형은 json
+						memberSession.sendMessage(textMessage);
+					}
+				}
+			} else if (type.equals("chat")) {
+				Consultation consultation = consultationMap.get(consultationNo);
+
+				if (consultation != null && consultation.hasMember(session)) {
+					String sendMsg = "<div class='chat left'><span class='chatId'>"
+							+ consultation.getMemberMap().get(session) + " : </span>" + msg + "</div>";
+					TextMessage textMessage = new TextMessage(sendMsg);
+
+					for (WebSocketSession memberSession : consultation.getMemberMap().keySet()) {
+						if (!memberSession.equals(session)) {
+							memberSession.sendMessage(textMessage);
+						}
+					}
 				}
 			}
-		} else if (type.equals("chat")) {
+		} else {
 			Consultation consultation = consultationMap.get(consultationNo);
 
 			if (consultation != null && consultation.hasMember(session)) {
 				String sendMsg = "<div class='chat left'><span class='chatId'>"
-						+ consultation.getMemberMap().get(session) + " : </span>" + msg + "</div>";
+						+ consultation.getMemberMap().get(session) + " : </span>" + "의 채팅이 실패 했습니다. 관리자에게 문의해주세요."
+						+ "</div>";
 				TextMessage textMessage = new TextMessage(sendMsg);
 
 				for (WebSocketSession memberSession : consultation.getMemberMap().keySet()) {
@@ -79,6 +113,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 				}
 			}
 		}
+
 	}
 
 // 클라이언트와 연결이 끊어졌을때 자동으로 수행되는 메소드

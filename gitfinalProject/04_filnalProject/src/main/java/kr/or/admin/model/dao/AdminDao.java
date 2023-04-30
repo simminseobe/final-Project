@@ -183,4 +183,18 @@ public class AdminDao {
 		return result;
 	}
 
+	public ArrayList<Chat> selectChat(int consultationNo) {
+		List list = sqlSession.selectList("chat.selectChat", consultationNo);
+
+		System.out.println(consultationNo);
+
+		return (ArrayList<Chat>) list;
+	}
+
+	public int deleteConsultation(int consultationNo) {
+		int result = sqlSession.delete("consultation.deleteConsultation", consultationNo);
+
+		return result;
+	}
+
 }
