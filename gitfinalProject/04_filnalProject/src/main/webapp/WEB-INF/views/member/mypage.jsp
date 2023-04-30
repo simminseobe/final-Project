@@ -22,17 +22,23 @@
 	<input type="hidden" name="memberNo" value=${sessionScope.m.memberNo }>
 	<div>잔여포인트:${mpAmount }</div>
 	<div>등급: ${sessionScope.m.memberLevel }
-	<c:choose>
-	<c:when test="${sessionScope.m.memberLevel eq 3 } "> 
+<%-- 	<c:choose> --%>
+<%-- 	<c:when test="${sessionScope.m.memberLevel == 3} ">  --%>
+<c:if test="${sessionScope.m.memberLevel == 3}">
 		VIP
-	</c:when> 
-	<c:when test="${sessionScope.m.memberLevel eq 2 } "> 
+		</c:if>
+<%-- 	</c:when>  --%>
+<%-- 	<c:when test="${sessionScope.m.memberLevel == 2} ">  --%>
+<c:if test="${sessionScope.m.memberLevel == 2}">
 		GOLD
-	</c:when> 
-	<c:otherwise> 
+		</c:if>
+<%-- 	</c:when>  --%>
+<%-- 	<c:otherwise>  --%>
+<c:if test="${sessionScope.m.memberLevel == 1}">
 		WHITE
-	</c:otherwise> 
-</c:choose> 
+		</c:if>
+<%-- 	</c:otherwise>  --%>
+<%-- </c:choose>  --%>
 	</div>
 	<div class="nextGrade">
 <c:choose>

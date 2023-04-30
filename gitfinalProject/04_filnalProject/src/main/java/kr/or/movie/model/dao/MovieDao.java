@@ -56,6 +56,11 @@ public class MovieDao {
 
 		return mov;
 	}
+	public ArrayList<Movie> selectOneMovieAll(int memberNo) {
+		List list = sqlSession.selectList("movie.selectOneMovieAll", memberNo);
+
+		return  (ArrayList<Movie>)list;
+	}
 
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
 		List list = sqlSession.selectList("movie.selectOneMovieVideo", movieNo);

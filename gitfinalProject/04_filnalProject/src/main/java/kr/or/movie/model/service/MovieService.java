@@ -123,6 +123,18 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		 }
 		return mov;
 	}
+	public ArrayList<Movie> selectOneMovieAll(int memberNo) {
+		ArrayList<Movie> list = dao.selectOneMovieAll(memberNo);
+		for(Movie movie : list) {
+			int movieNum= movie.getMovieNo();
+			MovieFile movieFile = dao.selectMovieFile(movieNum);
+			movie.setMainFile(movieFile);
+			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
+			movie.setMovieScoreAvg(movieScoreAvg);
+			
+		}	
+		return list;
+	}
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
 		ArrayList<MovieVideo> mv= dao.selectOneMovieVideo(movieNo);	
 		return mv;
