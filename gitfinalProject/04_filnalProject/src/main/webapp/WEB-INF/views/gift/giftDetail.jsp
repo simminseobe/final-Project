@@ -32,10 +32,6 @@
                         <td>${p.productCompany}</td>
                     </tr>
                     <tr>
-                        <th>조회수</th>
-                        <td>${p.productLikeCount}</td>
-                    </tr>
-                    <tr>
                         <th>누적판매</th>
                         <td>${p.productLikeCount}</td>
                     </tr>
@@ -43,10 +39,12 @@
                         <th>좋아요</th>
                         <td>${p.productLikeCount}</td>
                     </tr>
+                    <!-- 
                     <tr>
                         <th>구매후기</th>
                         <td>${p.productLikeCount}</td>
                     </tr>
+                     -->
                 </table>
                 <c:forEach items="${p.categorys}" var="cateogry">
                     <a href="#" class="my-btn my-blue cagegory-anc">${category.pcCategory}</a>
@@ -113,6 +111,13 @@
             </div>
         </form>
         </div>
+    </div>
+    <div class="main-content">
+        <c:forEach items="${p.images}" var="image">
+            <div class="main-img-container">
+                <img src="/resources/upload/gift/${image.ppPath}" alt="">
+            </div>
+        </c:forEach>
     </div>
 </div>
 <script>

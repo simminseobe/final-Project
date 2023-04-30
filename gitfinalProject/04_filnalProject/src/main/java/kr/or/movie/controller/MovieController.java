@@ -134,7 +134,12 @@ public class MovieController {
 			
 		}
 	@RequestMapping(value="/movieDetail.do")
-	public String detailMovie(int movieNo,int reqPage, Model model) {
+	public String detailMovie(int movieNo,int reqPage, Model model,@SessionAttribute(required = false) Member m) {
+		int memberNo=0;
+		if(m != null) {
+			memberNo = m.getMemberNo();
+		}
+		
 		Movie mov = service.selectOneMovie(movieNo);		//1, 7(1.영화정보 / 7.영화포스터file)
 		model.addAttribute("mov", mov);
 		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
@@ -174,7 +179,7 @@ public class MovieController {
 		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);//(6.영화비디오조회)
 		model.addAttribute("mvList", mvList);
 		
-		//8.리뷰좋아요 없음
+		
 		
 		//9.예매율 없음
 		
@@ -235,15 +240,7 @@ public class MovieController {
 		int wresult = service.deleteWatchPoint(reviewCommentNo);
 		return  "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 	}
-	/*
-	@ResponseBody
-	@RequestMapping(value="/reviewLikeInsert.do", produces = "application/json;charset=utf-8")
-	public String reviewLikeInsert(int reviewCommentNo, String memberId) {
-		int result = service.reviewLikeInsert();
-		return memberId;
-		
-	}
-	 */
+	 
 	//무비포스트 등록
 	@RequestMapping(value="/moviePostInsert.do")
 	public String moviePostInsert(MoviePost post) {
@@ -337,6 +334,7 @@ public class MovieController {
 		return "redirect:/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
 		
 	}
+	//영화좋아요 insert
 	@ResponseBody
 	@RequestMapping(value="/movieLikeInsert.do")
 	public String movieLikeInsert(int movieNo, int memberNo) {
@@ -347,7 +345,7 @@ public class MovieController {
 			return "fail";
 		}
 	}
-	
+	//영화 좋아요 delete
 	@ResponseBody
 	@RequestMapping(value="/movieLikeDelete.do")
 	public String movieLikeDelete(int movieNo,int memberNo) {
@@ -360,8 +358,29 @@ public class MovieController {
 			return "fail";
 		}
 	}
-	
-	
+	//관람평(review)좋아요 insert
+	@ResponseBody
+	@RequestMapping(value="/reviewLikeInsert.do")
+	public String reviewLikeInsert(int reviewCommentNo, int memberNo) {
+		int result = service.reviewLikeInsert(reviewCommentNo,memberNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	//관람평(review)좋아요 delete
+	@ResponseBody
+	@RequestMapping(value="/reviewLikeDelete.do")
+	public String reviewLikeDelete(int reviewCommentNo, int memberNo) {
+		int result=service.reviewLikeDelete(reviewCommentNo,memberNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 
 	
 	

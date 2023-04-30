@@ -77,31 +77,41 @@ $(function(){
 });
 
 $(".whiteLike2").on("click",function(){
+    
     const whiteLike = "img/like-24.png";
     const blackLike = "img/likeBlack-24.png";
     const current  = $(this).attr("src");
     
+    /*reviewCommentNo를 받아옴*/ 
     const reviewCommentNo=$(this).next().next().children().eq(2).val();
+    console.log(reviewCommentNo);
+    /*memberNo를 받아옴*/
+    const memberNo=$(".sessionMemberNo").val();
+    console.log(memberNo);
+    /*memberId를 받아옴*/
     const memberId=$("[name=reviewLikeMember]").val();
+    
+    /*reviewCount*/
+    const reviewLikeCount=$(this).next().next().children().eq(0);
+ 
+    const icon=$(this);
     
     if(current == whiteLike){
         
-        /*	
         $.ajax({
             url :"/reviewLikeInsert.do",
             type:"post",
-            data:{reviewNo:reviewNo,memberNo:memberNo},
+            data:{reviewCommentNo:reviewCommentNo,memberNo:memberNo},
             success:function(data){
                 if(data != null){
                     console.log(data);
                     
-                    const likeCountNumPlus=Number(likeCount.text())+1;
-                    const likeCountString=likeCountNumPlus.toString();
-                    likeCount.text(likeCountString);
-                    console.log(likeCount.text(likeCountString));
+                    const likeCountNumPlus=Number(reviewLikeCount.text())+1;
+                    const reviewlikeCountString=likeCountNumPlus.toString();
+                    reviewLikeCount.text(reviewlikeCountString);
+                    console.log(reviewLikeCount.text(reviewlikeCountString));
                     
-                    icon.attr("src",blackHeart); 
-                
+                    icon.attr("src",blackLike); 
                 
                 }else{
                     console.log("fail"); 
@@ -111,17 +121,31 @@ $(".whiteLike2").on("click",function(){
             
         });//ajax끝나는 지점
         
-        */   
         
-        
-        $(this).attr("src",blackLike); 
         
     }else{
-        $(this).attr("src",whiteLike);        
-       
-
-
-
+				
+		 $.ajax({
+		 		url :"/reviewLikeDelete.do",
+		        type:"post",
+		        data:{reviewCommentNo:reviewCommentNo,memberNo:memberNo},
+		        success:function(data){
+        		if(data != null){
+        			console.log(data);
+        			
+        			const likeCountNumMinus=Number(reviewLikeCount.text())-1;
+        			const reviewlikeCountString=likeCountNumMinus.toString();
+        			reviewLikeCount.text(reviewlikeCountString);
+        			console.log(reviewLikeCount.text(reviewlikeCountString));
+        			icon.attr("src",whiteLike); 			
+    		    
+        		}else{
+        			console.log("fail"); 
+        			
+        		}
+        	}
+        	
+        });//ajax끝나는 지점       
 
     }
 });

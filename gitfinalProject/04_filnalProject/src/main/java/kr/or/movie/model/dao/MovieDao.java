@@ -234,16 +234,27 @@ public class MovieDao {
 		int result = sqlSession.delete("movie.postDelete", moviePost);
 		return result;
 	}
-
+	//영화 좋아요 insert
 	public int movieLikeInsert(HashMap<String, Object> map) {
 		int result = sqlSession.insert("movie.movieLikeInsert", map);
 		return result;
 	}
-
+	//영화 좋아요 delete
 	public int movieLikeDelete(HashMap<String, Object> map) {
 		int result = sqlSession.delete("movie.movieLikeDelete", map);
 		return result;
 	}
+	//관람평(review)좋아요 insert
+	public int reviewLikeInsert(HashMap<String, Object> map) {
+		int result = sqlSession.insert("movie.reviewLikeInsert",map);
+		return result;
+	}
+	//관람평(review)좋아요 delete
+	public int reviewLikeDelete(HashMap<String, Object> map) {
+		int result =sqlSession.delete("movie.reviewLikeDelete",map);
+		return result;
+	}
+	
 	//상영예정작 총 갯수
 	public int totalExpectedMovieCount() {
 		int result =sqlSession.selectOne("movie.expectedMovieCount");
@@ -275,6 +286,9 @@ public class MovieDao {
 		List list = sqlSession.selectList("movie.selectFileList", movieNo);
 		return (ArrayList<MovieFile>) list;
 	}
+
+
+
 
 
 	/*

@@ -305,6 +305,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		int result = dao.postDelete(moviePost);
 		return result;
 	}
+	//영화 좋아요 insert
 	public int movieLikeInsert(int movieNo, int memberNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo",memberNo);
@@ -318,11 +319,30 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		map.put("memberNo",memberNo);
 		map.put("movieNo",movieNo);
 		
-		System.out.println(map+": map");
 		int result= dao.movieLikeDelete(map);
-		System.out.println(result+"service");
 		return result;
 	}
+	//관람평(review) 좋아요 insert
+	public int reviewLikeInsert(int reviewCommentNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewCommentNo",reviewCommentNo);
+		map.put("memberNo",memberNo);
+		
+		int result =dao.reviewLikeInsert(map);
+		return result;
+	}
+	//관람평(review) 좋아요 delete
+	public int reviewLikeDelete(int reviewCommentNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewCommentNo",reviewCommentNo);
+		map.put("memberNo",memberNo);
+		
+		System.out.println(map+" : reviewlike delete map");
+		int result =dao.reviewLikeDelete(map);
+		return result;
+		
+	}
+	
 	
 	/*
 	 * public int movieLikeCount(int movieNo) { int likeCount
@@ -359,6 +379,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 		return movieFileList;
 	}
+
+
 	
 
 

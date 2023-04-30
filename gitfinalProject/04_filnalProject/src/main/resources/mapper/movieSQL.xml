@@ -502,6 +502,14 @@ delete from movie_video where movie_video_no=
 <delete id="movieLikeDelete" parameterType="map">
 	delete from movie_like where movie_no=#{movieNo} and member_no=#{memberNo}
 </delete>
+<!-- 관람평(review)좋아요 insert -->
+<insert id="reviewLikeInsert" parameterType="map">
+	insert into review_like values(review_like_seq.nextval,#{reviewCommentNo},#{memberNo})
+</insert>
+<!-- 관람평(review)좋아요 delete -->
+<delete id="reviewLikeDelete" parameterType="map">
+	delete from review_like where review_comment_no=#{reviewCommentNo} and member_no=#{memberNo}
+</delete>
 <!-- 상영예정작 총 갯수 조회를 위함 -->
 <select id="expectedMovieCount" resultType="_int">
 	select count(*) from movie_tbl where movie_date > to_char(sysdate,'yyyy-mm-dd')

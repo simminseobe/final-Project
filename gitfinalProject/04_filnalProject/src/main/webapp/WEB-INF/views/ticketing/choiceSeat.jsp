@@ -177,7 +177,9 @@
 				height: 30px;
 				border: 0.5px solid #c1c1c1;
 				}
-
+				.seat:hover{
+					cursor: pointer;
+				}
 				.clicked {
 					background-color: #574286;
 					color: white;
@@ -416,7 +418,7 @@
 					width: 100%;
 					height: 40px;
 				}
-
+				
 				.pagePrevious {
 					border: 0;
 					display: block;
@@ -444,7 +446,9 @@
 					font-size: 20px;
 					text-align: center;
 				}
-				
+				.pagePrevious,.pageNext:hover{
+					cursor: pointer;
+				}
 				
 			</style>
 		</head>
@@ -1043,7 +1047,7 @@
 				
 				////////////////////////////////////////////////////////////	
 				$(".pagePrevious").on("click",function(){
-					location.href="/ticketing.do";
+					history.back();
 				});
 				
 				$(".pageNext").on("click",function(){
@@ -1075,7 +1079,7 @@
 						countArr.push(3);
 					}
 
-
+					const now = $(".now").text();
 
 					////////////////////////////////////////////////////////////////////////////////////
 					console.log(scheduleNo);
@@ -1086,7 +1090,11 @@
 					console.log("joinSeats : "+joinSeats);
 					$(this).css("backgroundColor","#329eb1");
 					$(this).css("color","#fff");
-					location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&countArr="+countArr.join("/")+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
+					if(now != 0){
+						location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&countArr="+countArr.join("/")+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
+					}else{
+						alert("관람인원 수를 선택해주세요");
+					}
 				});
 			</script>
 
