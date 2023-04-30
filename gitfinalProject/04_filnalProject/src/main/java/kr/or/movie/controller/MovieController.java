@@ -88,7 +88,51 @@ public class MovieController {
 		
 		return "movie/movieAllList";
 	}
-	
+	//마이무비스토리(사용자별 관람영화/관람평/무비포스트/선호영화)
+		@RequestMapping(value="/myMovie.do")
+		public String myMovie(Model model, @SessionAttribute(required = false) Member m, UserMovieVO umv) {
+			int memberNo = 0;
+			String memberId = "";
+			if(m!=null) {
+				memberNo = m.getMemberNo();
+				memberId = m.getMemberId();
+			}
+					
+					//사용자선호 영화
+					ArrayList<Movie> favoriteMovieList =service.selectFavoriteMovie(memberNo);
+					model.addAttribute("favoriteMovieList", favoriteMovieList);
+					//사용자 선호 영화  총 갯수 조회를 위함
+					int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
+					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
+					 
+					//사용자 관람영화
+					ArrayList<Movie> mov = service.selectOneMovieAll(memberNo);		//1, 7(1.영화정보 / 7.영화포스터file)
+					model.addAttribute("mov", mov);
+					//ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
+					//model.addAttribute("pageList",rpd.getList());
+					//model.addAttribute("pageNavi",rpd.getPageNavi());
+
+					
+					//4.사용자 무비포스트 리스트(무비포스트 리스트)
+					ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(memberNo);
+					model.addAttribute("oneMoviepostAll",oneMoviepostAll);
+				
+					//사용자 무비포스트 총 개수
+					int moviePostCount=service.moviePostCount(memberNo);
+					model.addAttribute("moviePostCount",moviePostCount);
+					
+					//사용자 모든 관람평(review)조회하기()
+					ArrayList<Review> reviewList = service.oneMovieAllReview(memberNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
+					model.addAttribute("reviewList",reviewList);
+					
+					//사용자 관람평 갯수를 위한 조회
+					int reviewListCount= service.selectReviewListCount(memberNo);
+					model.addAttribute("reviewListCount", reviewListCount);
+					
+					
+			return "member/myMovie";
+			
+		}
 	@RequestMapping(value="/movieDetail.do")
 	public String detailMovie(int movieNo,int reqPage, Model model) {
 		Movie mov = service.selectOneMovie(movieNo);		//1, 7(1.영화정보 / 7.영화포스터file)
@@ -317,51 +361,7 @@ public class MovieController {
 		}
 	}
 	
-	//마이무비스토리(사용자별 관람영화/관람평/무비포스트/선호영화)
-	@RequestMapping(value="/myMovie.do")
-	public String myMovie(Model model, @SessionAttribute(required = false) Member m, UserMovieVO umv) {
-		int memberNo = 0;
-		String memberId = "";
-		if(m!=null) {
-			memberNo = m.getMemberNo();
-			memberId = m.getMemberId();
-		}
-				
-				//사용자선호 영화
-				ArrayList<Movie> favoriteMovieList =service.selectFavoriteMovie(memberNo);
-				model.addAttribute("favoriteMovieList", favoriteMovieList);
-				//사용자 선호 영화  총 갯수 조회를 위함
-				int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
-				model.addAttribute("favoriteMovieCount",favoriteMovieCount);
-				 
-				//사용자 관람영화
-				ArrayList<Movie> mov = service.selectOneMovieAll(memberNo);		//1, 7(1.영화정보 / 7.영화포스터file)
-				model.addAttribute("mov", mov);
-				//ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
-				//model.addAttribute("pageList",rpd.getList());
-				//model.addAttribute("pageNavi",rpd.getPageNavi());
-
-				
-				//4.사용자 무비포스트 리스트(무비포스트 리스트)
-				ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(memberNo);
-				model.addAttribute("oneMoviepostAll",oneMoviepostAll);
-			
-				//사용자 무비포스트 총 개수
-				int moviePostCount=service.moviePostCount(memberNo);
-				model.addAttribute("moviePostCount",moviePostCount);
-				
-				//사용자 모든 관람평(review)조회하기()
-				ArrayList<Review> reviewList = service.oneMovieAllReview(memberNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
-				model.addAttribute("reviewList",reviewList);
-				
-				//사용자 관람평 갯수를 위한 조회
-				int reviewListCount= service.selectReviewListCount(memberNo);
-				model.addAttribute("reviewListCount", reviewListCount);
-				
-				
-		return "member/myMovie";
-		
-	}
+	
 
 	
 	

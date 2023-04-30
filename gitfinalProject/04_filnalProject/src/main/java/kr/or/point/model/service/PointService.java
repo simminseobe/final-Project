@@ -69,7 +69,7 @@ public class PointService {
 				
 				// 이전버튼 생성
 				if(pageNo != 1) {
-					pageNavi += "<a href='/myPoint.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'>[이전]</a>";
+					pageNavi += "&nbsp<a href='/myPoint.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'> [이전]</a>";
 					
 					
 				}
