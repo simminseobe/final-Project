@@ -1,0 +1,237 @@
+h2.tit {
+    padding: 0 0 26px 0;
+    font-size: 1.8666em;
+    font-weight: 400;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: #222;
+}
+
+#contents {
+    width: 50%;
+    margin: 0 auto;
+    padding: 80px;
+}
+
+.mypage-infomation {
+    position: relative;
+    min-height: 36px;
+    padding-bottom: 10px;
+}
+
+.mb30 {
+    margin-bottom: 30px !important;
+}
+
+.agree-box {
+    border: 1px solid #d8d9db;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+p.reset {
+    padding: 0;
+    margin: 0;
+}
+
+.mt10 {
+    margin-top: 10px !important;
+}
+
+.mt30 {
+    margin-top: 30px !important;
+}
+
+.a-r {
+    text-align: right !important;
+}
+
+.font-orange {
+    color: #e63e30 !important;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+.dot-list>li {
+    position: relative;
+    padding: 0 0 0 8px;
+}
+
+.dot-list>li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 0;
+    background-color: #503396;
+    width: 3px;
+    height: 3px;
+}
+
+.agree-box dl dt {
+    position: relative;
+    padding: 0 30px;
+    border-bottom: 1px solid #d8d9db;
+    height: 50px;
+    line-height: 48px;
+}
+
+.agree-box dl dd {
+    padding: 30px;
+}
+
+.agree-box dl dt span.bg-chk {
+    float: left;
+}
+
+.mr10 {
+    margin-right: 10px !important;
+}
+
+.bg-chk {
+    display: inline-block;
+    position: relative;
+}
+
+.font-orange {
+    color: #e63e30 !important;
+}
+
+.bg-chk [type=checkbox] {
+    position: absolute;
+    left: -99999px;
+}
+
+.agree-box dl dt input {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+[type=checkbox],
+[type=radio] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+[type=checkbox],
+[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.15;
+}
+
+.bg-chk label {
+    position: relative;
+    padding: 0 0 0 34px;
+    line-height: 28px;
+}
+
+label {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.bg-chk label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 0;
+    cursor: pointer;
+    background: url(https://img.megabox.co.kr/static/pc/images/common/bg/bg-checkbox.png) no-repeat 0 0;
+}
+
+.agree-box dl dt strong {
+    font-size: 1.2em;
+}
+
+.bg-chk [type=checkbox]:hover+label:before {
+    background-position: -56px 0
+}
+
+.bg-chk [type=checkbox]:checked+label:before {
+    background-position: -28px 0
+}
+
+.bg-chk [type=checkbox]:checked:hover+label:before {
+    background-position: -28px 0
+}
+
+.bg-chk [type=checkbox][disabled]+label:before {
+    background-position: -84px 0
+}
+
+.bg-chk [type=checkbox][disabled]:hover+label:before {
+    background-position: -84px 0
+}
+
+.bg-chk [type=checkbox][disabled]:checked+label:before {
+    background-position: right 0
+}
+
+.bg-chk [type=radio] {
+    position: absolute;
+    left: -99999px
+}
+
+.bg-chk [type=radio]+label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 0;
+    cursor: pointer;
+    background: url(https://img.megabox.co.kr/static/pc/images/common/bg/bg-radio.png) no-repeat -28px 0
+}
+
+.bg-chk [type=radio]:checked+label:before {
+    background-position: 0 0
+}
+
+.bg-chk [type=radio][disabled]+label:before {
+    background-position: -28px 0;
+    opacity: .2
+}
+
+.bg-chk [type=radio][disabled]:checked+label:before {
+    background-position: 0 0;
+    opacity: .2
+}
+
+.bg-chk.hide label {
+    width: 28px;
+    height: 28px;
+    padding: 0 0 0 28px;
+    font-size: 0;
+    line-height: 0
+}
