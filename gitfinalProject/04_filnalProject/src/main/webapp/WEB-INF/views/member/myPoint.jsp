@@ -20,12 +20,7 @@
 			<div class="booklist-header">
 				<h2>포인트 내역</h2>
 			</div>
-			<div class="menu-wrap">
-				<ul class="tabs">
-					<li class="active-tab">예매</li>
-					<li>구매</li>
-				</ul>
-			</div>
+			
 			<div class="date-wrap">
 				<button id="1week">1주일</button>
 				<button id="1mon">1개월</button>
@@ -55,41 +50,7 @@
 					</tbody>
 				</table>
 
-				<div class="second-header">
-					<h2>예매취소내역</h2>
-				</div>
-				<ul class="first-line">
-					<li>상영일 기준 7일간 취소내역을 확인하실 수 있습니다.</li>
-				</ul>
-				<table>
-					<tbody>
-					<c:forEach items="${list2}" var="p2" varStatus="i">
-						<tr>
-							<th>예매번호</th>
-							<th>영화제목</th>
-							<th>상영관</th>
-							<th>좌석번호</th>
-							<th>상영날짜</th>
-							<th>인원수</th>
-							<th>취소금액</th>
-						</tr>
-						<tr>
-							<td>${p2.payNo }</td>
-							<td>${p2.movieTitle }</td>
-							<td>${p2.theaterBranch }</td>
-							<td>${p2.seat }</td>
-							<td>${p2.movieDate }</td>
-							<td>${p2.list }</td>
-							<td>${p2.payPrice }</td>
-						</tr>
-					</c:forEach>
-						<tr>
-						<!-- 페이징 처리 -->
-							<th colspan="7">${pageNavi }</th>
-						</tr>
-					</tbody>
-				</table>
-
+			
 				<p>
 					<!--btn-primary -->
 					<button class="btn collapsed" type="button"
@@ -117,56 +78,7 @@
 				</div>
 
 			</div>
-			<div class="tab-content">
-
-				<div class="second-header">
-					<h2>구매내역</h2>
-				</div>
-				<table>
-					<tbody>
-						<tr>
-							<th>결제일시</th>
-							<th>구분</th>
-							<th>상품명</th>
-							<th>결제금액</th>
-							<th>상태</th>
-						</tr>
-						<tr>
-							<td>2023-01-01</td>
-							<td>스토어</td>
-							<td>팝콘</td>
-							<td>14,000</td>
-							<td>
-								<button type="button" class="my-btn my-blue">구매취소</button>
-							</td>
-						</tr>
-						<tr>
-							<th colspan="5">${pageNavi }</th>
-						</tr>
-					</tbody>
-				</table>
-
-				<p>
-					<!--btn-primary -->
-					<button class="btn collapsed" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseExample"
-						aria-expanded="false" aria-controls="collapseExample">
-						이용안내</button>
-				</p>
-				<div class="collapse" id="collapseExample">
-					<div class="card card-body">
-						<b>[스토어 구매/취소 안내]</b><br> 스토어 상품은 구매 후 취소가능기간 내 100% 환불이
-						가능하며, 부분환불은 불가 합니다.<br> (ex. 3개의 쿠폰을 한 번에 구매하신 경우, 3개 모두 취소만
-						가능하며 그 중 사용하신 쿠폰이 있는 경우 환불이 불가합니다)<br> 스토어 교환권은 MMS로 최대 1회
-						재전송 하실 수 있습니다.<br> <br> <b>[모바일오더 구매/취소 안내]</b><br>
-						ⓘ 모바일오더는 모바일앱을 통해 이용하실 수 있습니다.<br> 모바일오더는 구매 후 즉시 조리되는 상품으로
-						취소가 불가 합니다.<br> 극장 매점에서 주문번호가 호출되면 상품을 수령하실 수 있습니다.<br>
-						극장 상황에 따라 상품준비시간이 다소 길어질 수 있습니다.<br>
-					</div>
-				</div>
-
-			</div>
-			<!-- 페이징 처리 -->
+			
 		</div>
 	</div>
 				</td>

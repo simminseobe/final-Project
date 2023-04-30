@@ -16,4 +16,6 @@ public class Order {
 	private String shipRquest;
 	private String orderDate;
 	
+	private String itemName;
+	private int quantity;
 }
