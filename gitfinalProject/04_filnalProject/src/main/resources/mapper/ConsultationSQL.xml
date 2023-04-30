@@ -4,7 +4,13 @@
 	<insert id="insertConsultation" parameterType="consultation">
 		insert into consultation_tbl
   		values (consultation_tbl_seq.nextval, #{consultationTitle}, 'Y', sysdate, #{consultationMember})
+  		<selectKey resultType="_int" order="AFTER" keyProperty="consultationNo">
+			select max(consultation_no) from consultation_tbl
+		</selectKey>
 	</insert>
+	<delete id="deleteConsultation" parameterType="_int">
+		delete from consultation_tbl where consultation_no = #{_parameter}
+	</delete>
 	<select id="selectConsultation" resultType="consultation">
 		select
 			consultation_no as consultationNo,

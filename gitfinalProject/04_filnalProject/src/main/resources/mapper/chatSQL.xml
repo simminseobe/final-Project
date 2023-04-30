@@ -5,4 +5,14 @@
 	insert into chat_tbl
   		values (chat_tbl_seq.nextval, #{chatContent}, sysdate, #{memberLevel}, #{chatMember}, #{consultationNo})
 </insert>
+<select id="selectChat" parameterType="_int" resultType="chat">
+	select 
+			chat_no as chatNo,
+			chat_content as chatContent,
+			to_char(chat_date,'yyyy-mm-dd') as chatDate,
+			member_level as memberLevel,
+			chat_member as chatMember,
+			consultation_no as consultationNo
+	from chat_tbl where consultation_no = #{consultationNo}
+</select>
 </mapper>
