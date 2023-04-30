@@ -264,6 +264,7 @@
                 data : { memberId : memberId ,orderPrice : orderPrice.value ,productName : "${product.productName}", shipRequest : $('[name=shipRequest]').val(), itemName : itemName, quantity : quantity},
                 success : data => {
                     location.href = data.next_redirect_pc_url 
+                    //window.open(data.next_redirect_pc_url ,"","")
                 },
                 error : data => {
                     alert('error')

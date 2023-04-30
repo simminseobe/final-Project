@@ -1,5 +1,7 @@
 package kr.or.gift.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,6 +9,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+//Jackson json object controller가 존재하지 않는 필드를 무시하는 annotation
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ApproveResponse {
 	private String aid;
 	private String tid;
@@ -21,4 +25,6 @@ public class ApproveResponse {
 	private String created_at;
 	private String approved_at;
 	private String payload;
+	private Amount amount;
+	private CardInfo cardInfo;
 }
