@@ -235,6 +235,19 @@ overflow: hidden;
     vertical-align: center;
     float: left;
 }
+.sawMovie{
+    position: absolute;
+    right: 0;
+}
+
+.sawMovie>button{
+width: 105px;
+height: 36px;
+border-radius: 5px;
+background-color: transparent;
+border: 1px solid #432e75;
+cursor: pointer;
+}
 
 .reviewAllCountWrap{
     width: 1100px;

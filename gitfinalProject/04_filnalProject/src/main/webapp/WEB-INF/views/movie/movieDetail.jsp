@@ -1299,14 +1299,7 @@ z-index: 5;
 		
 	});
 	 
-	 $(".reviewContentWrite2>a").on("click",function(){
-		 const sessionMemberId=$(".sessionId").val();
-		 if(sessionMemberId !=""){
-			 alert("신고완료");
-		 }else{
-			 alert("로그인해주세요");
-		 }
-	 })
+
 	
 
 

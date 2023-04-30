@@ -21,7 +21,7 @@
                 <h2>${moviePost.movieTitle}</h2>
             </div>
             <div class="postSubRight">
-			<<input type="text" name="movieTitle" value="${moviePost.movieTitle }" style="display:none;">
+			<input type="text" name="movieTitle" value="${moviePost.movieTitle }" style="display:none;">
 			<input type="text"  name="movieNo" value="${moviePost.movieNo }" style="display:none;">
 			<input type="text" name="memberId" value="${sessionScope.m.memberId }" style="display:none;">
 			
@@ -40,7 +40,7 @@
                     <div class="LeftSideContentBtn">
                         <a href="#"><button type="button" class="tab stillCutBarBtn">스틸컷</button></a>
                         <a href="#"><button type="button" class="tab proviewBarBtn">예고편</button></a>
-                        <a href="#"><button type="button" class="tab myPhotoBtn" id="myPhotoBtn">내사진</button></a>
+                        
                     </div>
                     <div class="postLeftSideSel content-wrap">
                         <div class="tabcontent stillCut">

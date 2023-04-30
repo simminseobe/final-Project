@@ -21,11 +21,10 @@
                 <h2>${mov.movieTitle }</h2>
             </div>
             <div class="postSubRight">
-			<<input type="text" name="movieTitle" value="${mov.movieTitle }" style="display:none;">
+			<input type="text" name="movieTitle" value="${mov.movieTitle }" style="display:none;">
 			<input type="text"  name="movieNo" value="${mov.movieNo }" style="display:none;">
 			<input type="text" name="memberId" value="${sessionScope.m.memberId }" style="display:none;">
-			
-                <button type="button">다시선택</button>
+            <button type="button" class="reselect">다시선택</button>
             </div>
         </div>
         <div class="moviePostSideAll">
@@ -37,7 +36,6 @@
                     <div class="LeftSideContentBtn">
                         <a href="#"><button type="button" class="tab stillCutBarBtn">스틸컷</button></a>
                         <a href="#"><button type="button" class="tab proviewBarBtn">예고편</button></a>
-                        <a href="#"><button type="button" class="tab myPhotoBtn" id="myPhotoBtn">내사진</button></a>
                     </div>
                     <div class="postLeftSideSel content-wrap">
                         <div class="tabcontent stillCut">
@@ -54,13 +52,7 @@
                             	<input id="movieVideoNo1" value="${mv.videoNo }" style="display:none;" disabled>
 			            	</c:forEach>
                         </div>
-                        <div class="tabcontent myphotoCut" style="text-align: left; ">
-                        	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
-                        	<p style="margin-top: 10px;">※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                            <div class="innerBtnWrap" style="margin-top: 15px; display: flex; justify-content: center;">
-                                <button type="button" id="addMyPhotoImgBtn" onclick="myPhotoUpload();">등록</button>
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -96,6 +88,25 @@
         </div>
         </form><!-- form끝 -->
     </div>
+    <script>
+        $(".reselect").on("click",function(){
+		const currentImg=$(".current-img");
+		currentImg.attr("src","img/bg-img-select.png");
+		$(".postRightSideSel>video").remove();
+	    $(".postRightSideSel").append(video);
+		
+	});
+	
+	$(".moviePostCancelBtn").on("click",function(){
+		
+		const movieNo=$("[name=movieNo]").val();
+		
+		location.href="/movieDetail.do?movieNo="+movieNo+"&reqPage=1";
+		
+	});
+
+    </script>
     <script src = "/resources/js/moviePostFrm.js"></script>
 </body>
 </html>
+<%@include file="/WEB-INF/views/common/footer.jsp" %>
