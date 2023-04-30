@@ -235,4 +235,18 @@ public class AdminService {
 
 		return result;
 	}
+
+	public ArrayList<Chat> selectChat(int consultationNo) {
+		ArrayList<Chat> list = dao.selectChat(consultationNo);
+
+		System.out.println(list.get(0).getChatContent());
+
+		return list;
+	}
+
+	public int deleteConsultation(int consultationNo) {
+		int result = dao.deleteConsultation(consultationNo);
+
+		return result;
+	}
 }

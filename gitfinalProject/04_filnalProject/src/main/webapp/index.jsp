@@ -133,7 +133,7 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href="#">고객센터</a></li>
+                <li><a href="/adminCenter.do">고객센터</a></li>
                 <c:choose>
                 	<c:when test="${sessionScope.m.memberLevel eq 1 }">
 	                	<li><a href="/mypage.do">마이페이지</a></li>

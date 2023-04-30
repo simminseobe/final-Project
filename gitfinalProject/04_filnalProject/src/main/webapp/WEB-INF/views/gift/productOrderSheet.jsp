@@ -6,7 +6,6 @@
 <%@include file="/WEB-INF/views/common/giftNavi.jsp" %>
 <div class="gift-wrap">
     <div class="order">
-    <form action="#">
         <div class="top-area">
             <h1>Order / Payment</h1>
             <p>장바구니 > <span>주문서</span> > 주문완료</p>
@@ -65,7 +64,7 @@
                             <div class="product-info-row clearfix">
                                 <img src="/resources/upload/gift/${product.mainImage.ppPath}" alt="">
                                 <div>
-                                    <p><span>[${product.productCompany}]</span><a href="/giftDetail.do?productNo=${pos.productNo}">${product.productName}</a></p>
+                                    <p><span>[${product.productCompany}]</span><a href="/giftDetail.do?productNo=${pos.productNo}" class="product-names">${product.productName}</a></p>
                                     <div class="product-option-info">
                                         <p>옵션 : ${product.productOptions[i.index].poName}</p>
                                     </div>
@@ -181,10 +180,10 @@
             </c:if>
         </div>
         <button type="button" class="my-btn my-blue" id="takeOrder" onclick="takeOrderBtn()"><span id="totalPriceView"></span>원 결제하기</button>
-    </form>
     </div>
 </div>
 <script>
+    const memberId = document.querySelector('input[name=memberId]').value
     const orderPrice = document.querySelector('#orderPrice')
     const totalPriceView = document.querySelector('#totalPriceView')
     // 배송 요청사항 직접입력
@@ -250,19 +249,25 @@
             })
         })
     })
-    // 결제기능
+    // 결제
+    const itemName = document.querySelector('.product-names').innerText
+    const quantity = '${posList.size()}'
     const takeOrderBtn = () => {
-        console.log(allAgree.checked)
         if(!allAgree.checked) alert('개인정보 수집/이용 및 결제대행동의가 필요합니다') 
         else {
+            console.log('kakaoPay do')
+            console.log(quantity)
+            console.log( $('[name=shipRequest]').val())
             $.ajax({
                 url : '/giftKakaoPay.do',
                 type : 'POST',
+                data : { memberId : memberId ,orderPrice : orderPrice.value ,productName : "${product.productName}", shipRequest : $('[name=shipRequest]').val(), itemName : itemName, quantity : quantity},
                 success : data => {
-                    alert('success')
+                    location.href = data.next_redirect_pc_url 
                 },
                 error : data => {
                     alert('error')
+                    console.log(data)
                 }
             })
         } 

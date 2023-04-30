@@ -206,6 +206,23 @@
 				movie_type as movieType
 			 from movie_tbl where movie_no=#{movieNo}
 		</select>
+		<!-- 사용자 관람영화 -->
+		<select id="selectOneMovieAll" parameterType="_int" resultType="movie">
+			select DISTINCT 
+				movie_file.movie_file_name as movieFileName , 
+				movie_tbl.movie_title as movieTitle , 
+				schedule_tbl.schedule_start as scheduleStart , 
+				schedule_tbl.theater_branch as theaterBranch ,
+				movie_tbl.movie_no as movieNo
+			from movie_file, member, schedule_tbl, movie_tbl, ticketing_tbl, pay
+			where movie_tbl.movie_no = movie_file.movie_no
+				and movie_tbl.movie_title = schedule_tbl.movie_title
+				and movie_file.movie_file_category='메인'
+				and member.member_no = pay.member_no
+				and pay.pay_no = ticketing_tbl.pay_no
+				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
+				and member.member_no=#{memberNo}
+		</select>
 	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
 		select 
 			movie_video_no as videoNo,
