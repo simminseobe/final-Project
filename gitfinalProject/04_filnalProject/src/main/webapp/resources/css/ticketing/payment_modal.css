@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+.modal-wrap{
+    width: 53vw;
+    height: 59vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.point-modal{
+    background-color: #fff;
+    width: 40vw;
+    min-width: 100px;
+    max-width: 300px;
+    height: 40vh;
+    min-height: 100px;
+    max-height: 250px;
+}
+.modal-top{
+    margin-top: 30px;
+}
+.modal-top>h1{
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+}
+#usePoint{
+    display: block;
+    outline: none;
+    margin: 20px auto;
+    width: 80%;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+.modal-content input{
+    display: block;
+    outline: none;
+    margin: 20px auto;
+    width: 80%;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+/*-----------------------------------------------------------------------------*/
+.modal2-wrap{
+    width: 53vw;
+    height: 59vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.gTicket-modal{
+    background-color: #fff;
+    width: 40vw;
+    min-width: 100px;
+    max-width: 300px;
+    height: 40vh;
+    min-height: 100px;
+    max-height: 250px;
+}
+.modal2-top{
+    margin-top: 30px;
+}
+.modal2-top>h1{
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+}
+#useGiftTicket{
+    display: block;
+    outline: none;
+    margin: 20px auto;
+    width: 80%;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+.modal2-content input{
+    display: block;
+    outline: none;
+    margin: 20px auto;
+    width: 80%;
+    height: 30px;
+    border: 1px solid #ccc;
+}
