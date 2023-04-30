@@ -21,7 +21,7 @@ const stars = $(".modal>.modal_content>form>.star-wrap1>span");
 stars.on("mouseover",function(){
     //별의 최초의 색상을 회색으로 해놓음
     //그래야 마우스를 치웠을때 회색으로 바뀜
-    stars.css("color","lightgray");
+    stars.css("color","gray");
     //인덱스를 구해서 마우스를 올린데만 색칠함
     const index = stars.index(this);
     for(let i =0; i<=index;i++){//마우스 올린 곳까지 색칠해야 하므로 <=

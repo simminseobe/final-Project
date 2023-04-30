@@ -21,7 +21,7 @@
                 <h2>${moviePost.movieTitle}</h2>
             </div>
             <div class="postSubRight">
-			<<input type="text" name="movieTitle" value="${moviePost.movieTitle }" style="display:none;">
+			<input type="text" name="movieTitle" value="${moviePost.movieTitle }" style="display:none;">
 			<input type="text"  name="movieNo" value="${moviePost.movieNo }" style="display:none;">
 			<input type="text" name="memberId" value="${sessionScope.m.memberId }" style="display:none;">
 			
@@ -40,7 +40,7 @@
                     <div class="LeftSideContentBtn">
                         <a href="#"><button type="button" class="tab stillCutBarBtn">스틸컷</button></a>
                         <a href="#"><button type="button" class="tab proviewBarBtn">예고편</button></a>
-                        <a href="#"><button type="button" class="tab myPhotoBtn" id="myPhotoBtn">내사진</button></a>
+                        
                     </div>
                     <div class="postLeftSideSel content-wrap">
                         <div class="tabcontent stillCut">
@@ -56,13 +56,6 @@
                             	</video>
                             	<input id="movieVideoNo1" value="${mv.videoNo }" style="display:none;" disabled>
 			            	</c:forEach>
-                        </div>
-                        <div class="tabcontent myphotoCut" style="text-align: left; ">
-                        	<p>※ 2M 이내의 jpg,gif,png 파일만 등록이 가능합니다.</p>
-                        	<p style="margin-top: 10px;">※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                            <div class="innerBtnWrap" style="margin-top: 15px; display: flex; justify-content: center;">
-                                <button type="button" id="addMyPhotoImgBtn" onclick="myPhotoUpload();">등록</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,3 +135,4 @@
     <script src = "/resources/js/moviePostUpdateFrm.js"></script>
 </body>
 </html>
+<%@include file="/WEB-INF/views/common/footer.jsp" %>

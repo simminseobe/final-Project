@@ -352,6 +352,13 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return dao.totalFavoriteMovieCount(memberNo);
 		
 	}
+	//스틸컷(movie_file) 조회
+	public ArrayList<MovieFile> selectFileList(int movieNo) {
+		ArrayList<MovieFile> movieFileList=dao.selectFileList(movieNo);
+		
+		
+		return movieFileList;
+	}
 	
 
 
