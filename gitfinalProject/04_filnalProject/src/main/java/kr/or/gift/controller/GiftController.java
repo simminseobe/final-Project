@@ -1,6 +1,11 @@
 package kr.or.gift.controller;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,6 +24,7 @@ import com.google.gson.Gson;
 
 import common.FileManager;
 import kr.or.gift.model.service.GiftService;
+import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.gift.model.vo.ProductOption;
@@ -233,13 +239,77 @@ public class GiftController {
 		return "gift/productOrderSheet";
 	}
 	
+	
+	
+//	KAKAO PAY
+//  RESTAPI
+//	private HttpHeaders getHeaders() {
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("Authorization", "KakaoAK 어드민키");
+//		headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+//		
+//		return headers;
+//	}
+//	@ResponseBody
+//	@RequestMapping(value = "/giftKakaoPay.do", produces = "application/json;charset=utf-8")
+//	public ReadyResponse giftKakaoPay(Order order) {
+//		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+//		parameters.add("cid", "TC0ONETIME");
+//		parameters.add("partner_order_id", "");
+//		parameters.add("partner_user_id", "inflearn");
+//		parameters.add("item_name", order.getItemName());
+//		parameters.add("quantity", String.valueOf(order.getQuantity()));
+//		parameters.add("total_amount", String.valueOf(order.getOrderPrice()));
+//		parameters.add("tax_free_amount", "0");
+//		parameters.add("approval_url", "http://localhost/successPay.do"); // 결제승인시 넘어갈 url
+//		parameters.add("cancel_url", "http://localhost/cancelPay.do"); // 결제취소시 넘어갈 url
+//		parameters.add("fail_url", "http://localhost/failPay.do"); // 결제 실패시 넘어갈 url
+//		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
+//		// 외부url요청 통로 열기.
+//		RestTemplate template = new RestTemplate();
+//		String url = "https://kapi.kakao.com/v1/payment/ready";
+//        // template으로 값을 보내고 받아온 ReadyResponse값 readyResponse에 저장.
+//		ReadyResponse readyResponse = template.postForObject(url, requestEntity, ReadyResponse.class);
+//        // 받아온 값 return
+//		return readyResponse;
+//	}
 	@ResponseBody
-	@RequestMapping(value = "/giftKakaoPay.do")
-	public String giftKakaoPay() {
+	@RequestMapping(value = "/giftKakaoPay.do", produces = "application/json;charset=utf-8")
+	public String giftKakaoPay(Order order) {
 		try {
+			// 1. 요청 URL 생성
 			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+			// 2. ULR connection 생성
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			
+			// 3. KAKAO에서 권장하는 connection setting
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Authorization", "KakaoAK a9a0e196e56179a0efb5b33261aedcea");
+			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			// 4. connection을 통해 개체 전달을 위해 output이 있음을 설정
+			connection.setDoOutput(true);
+			// 5. 해당 요청개체 생성 매개변수 생성
+			String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name="+order.getItemName()+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://localhost/successPay.do&fail_url=http://localhost/failPay.do&cancel_url=http://localhost/cancelPay.do";
+			// 6. 작성한 매개변수 전송객체 생성
+			OutputStream outputStream = connection.getOutputStream();
+			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+			// 7. 매개변수를 바이트배열로 변환 후 전송 후 전송객체 소멸
+			dataOutputStream.writeBytes(param);
+			dataOutputStream.flush();
+			dataOutputStream.close();
+			// 8. 실제 서버 통신 후 결과 입력받기
+			int result = connection.getResponseCode();
+			// 9. 결과 입력받은 내용 출력
+			InputStream inputStream;
+			// HTTP 통신결과가 200이면 뭐다?
+			if (result == 200) {
+				inputStream = connection.getInputStream();
+			} else {
+				inputStream = connection.getErrorStream();
+			}
+			// 받은 결과를 읽어오기
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			return bufferedReader.readLine();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -247,6 +317,20 @@ public class GiftController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "";
+		return "redirect:/failPay.do";
 	}
+	@RequestMapping(value = "/successPay.do")
+	public String successPay() {
+		System.out.println("success pay gift");
+		return "gift/completePayment";
+	}
+	@RequestMapping(value = "/failPay.do")
+	public void failPay() {
+		System.out.println("failed pay gift");
+	}
+	@RequestMapping(value = "/cancelPay.do")
+	public void cancelPay() {
+		System.out.println("canceled pay gift");
+	}
+	
 } 
