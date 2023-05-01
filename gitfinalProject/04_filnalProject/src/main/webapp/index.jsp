@@ -135,7 +135,13 @@
             <ul>
                 <li><a href="#">고객센터</a></li>
                 <c:choose>
-                	<c:when test="${sessionScope.m.memberLevel eq 1 }">
+                	<c:when test="${sessionScope.m.memberLevel eq 1}">
+	                	<li><a href="/mypage.do">마이페이지</a></li>
+                	</c:when>
+                	<c:when test="${sessionScope.m.memberLevel eq 2}">
+	                	<li><a href="/mypage.do">마이페이지</a></li>
+                	</c:when>
+                	<c:when test="${sessionScope.m.memberLevel eq 3}">
 	                	<li><a href="/mypage.do">마이페이지</a></li>
                 	</c:when>
                 	<c:when test="${sessionScope.m.memberLevel eq 0 }">
