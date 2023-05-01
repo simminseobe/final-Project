@@ -17,6 +17,7 @@ import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
+import kr.or.point.model.vo.AddUsePoint;
 import kr.or.ticketing.model.service.TicketingService;
 import kr.or.ticketing.model.vo.ChoiceDataDay;
 import kr.or.ticketing.model.vo.Pay;
@@ -124,12 +125,14 @@ public class TicketingController {
 	
 	 @ResponseBody
 	 @RequestMapping(value = "/paymentPage.do") 
-	 public String insertPay(Pay pay, TicketingInfo ticketingInfo) { 
-		Ticketing ticketing = service.insertPay(pay, ticketingInfo);
+	 public String insertPay(Pay pay, TicketingInfo ticketingInfo, AddUsePoint aup) { 
+		Ticketing ticketing = service.insertPay(pay, ticketingInfo, aup);
+		
 	 	System.out.println("pay : "+pay);
 	 	System.out.println("ticketingInfo :" +ticketingInfo);
 	 	if(ticketing != null) {
 	 		System.out.println("return 통과");
+	 		System.out.println("controller 성공 : "+aup);
 	 		Gson gson = new Gson();
 	 		String json = gson.toJson(ticketing);
 			return json;

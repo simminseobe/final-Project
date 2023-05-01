@@ -564,8 +564,8 @@
 								<div>
 									<input type="text" name="usePoint" placeholder="사용하실 포인트를 입력하세요"><button
 										id="usePoint">사용</button>
-									<input type="text" name="addPoint" style="display: none;"><button id="addPoint"
-										style="display: none;">클릭</button>
+									<input type="text" name="addPoint" style="display: none; width: 150px; float: left; margin: 0;"><button id="addPoint"
+										style="display: none; float: left;">클릭</button>
 									<input type="reset" value="닫기">
 									<div class="point-view">
 										<span>잔여포인트 : </span>
@@ -817,6 +817,7 @@
 					$(".amount").text(usePointAfterAmount.toLocaleString());
 					$("#dc-amount").text(filterUsePoint);
 					$("#finalAmount").text(usePointAfterAmount);
+					$("#finalAmount").val(usePointAfterAmount);
 				}
 				
 				//잔여포인트 조회
@@ -919,6 +920,10 @@
 				var scheduleStart;
 				var memberPhone;
 
+				var usedPoint;
+				var addTarget;
+				var addPoint;
+
 				$(".paying").on("click", function () {
 					payPrice = $("#finalAmount").val();	//input안의 값은 val() / 태그사이 값은 text()
 					console.log(payPrice + " <-결제로 보낼 금액 재확인");
@@ -953,6 +958,8 @@
 					console.log("payPrice :" + payPrice);
 					console.log("countArr :" + countArr);
 					console.log("usePoint :" + usePoint);
+					var pointAmount = usePoint;
+					console.log("pointAmount :" + pointAmount);
 
 					if (payPrice == 0) {
 						location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
@@ -974,7 +981,7 @@
 								$.ajax({
 									url: "/paymentPage.do",
 									type: "post",
-									data: { payPrice: payPrice, memberNo: memberNo, choiceDtDay: choiceDtDay, countArr: countArr, joinSeats: joinSeats, scheduleNo: scheduleNo, usePoint: usePoint },
+									data: { payPrice: payPrice, memberNo: memberNo, choiceDtDay: choiceDtDay, countArr: countArr, joinSeats: joinSeats, scheduleNo: scheduleNo, pointAmount: pointAmount },
 									dataType: "json",
 									success: function (data) {
 										if (data == 'fail') {
@@ -982,8 +989,14 @@
 										} else {
 											alert("결제등록성공");
 											console.log(data);
+											console.log(data.memberNo);//undefined (insert라 상관없음)
+											console.log(data.pointAmount);//undefined (insert라 상관없음)
 											console.log(data.payNo);
-											const payNo = data.payNo
+											const payNo = data.payNo;
+											//
+											$("#addPoint").click();
+											
+											
 											location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
 
 
@@ -999,25 +1012,73 @@
 					}
 				});
 				$("#reset-btn").on("click", function () {
-					//usePoint = $("[name=usePoint]").val();
-
+					usePoint = $("[name=usePoint]");
+					var original = $(".price-amount-same");
+					//usePoint = document.getElementsByName("name");
+					//discountAmount = $(".discount-amount").text();
 					//giftTicketSerial = $("[name=useGiftTicketSerial]").val();
-					if (usePoint !== "") {
-						console.log("포인트input값 있음");
-						$("#addPoint").click();
-						//addPointFunc();
-					} else if (giftTicketSerial !== "") {
-						console.log("관람권input값 있음");
+					location.reload();
+					/*
+					if (discountAmount !== 0) {
 						
-						//addGiftTicket();
-					} else {
-						console.log("포인트,관람권 두쪽 다 input값 없음");
-					}
+						
+						console.log("현재 할인금액 : "+discountAmount);
+						$(".discount-amount").text("0");
+
+							usePoint.val("0");
+							$("#dc-amount").val(0);
+							$("#dc-amount").text(0);
+							console.log(usePoint);
+							console.log($(".discount-amount").text());
+							$(".amount").text(original.text());
+							//const filterAmount = original.toString().replace(',', '');
+						}
+					*/
 				});
 				
+				
+				$(".pagePrevious").on("click", function () {
+					history.back();
+				});
+				
+					
+					$("#addPoint").on("click",function(){
+						/*
+					usedPoint = $("[name=usePoint]").val();
+					console.log("usedPoint : "+usedPoint);
+					addTarget = $("[name=addPoint]").val(usedPoint);
+					console.log("addTarget : "+addTarget);
+					*/
+					var savedMoney = $("#finalAmount").val();
+					console.log("savedMoney : "+savedMoney);
+					addPoint = savedMoney*0.1;
+					console.log("savedMoney : "+savedMoney+" *10% = addPoint : "+addPoint);
+					memberNo = $("[name=memberNo]").val();
+					console.log("memberNo : "+memberNo);
+					$.ajax({
+						url : "/addPoint.do",
+						type: "get",
+						data: {addPoint:addPoint , memberNo:memberNo},
+						success : function(data){
+							console.log(data)
+							if(data=="ok"){
+								alert("적립성공");
+							}else{
+								alert("실패");
+							}
+							
+						}
+						
+					});	
+					
+				});
+			
+				//$("#addPoint").click();
+				/*
+			
 					$("#addPoint").on("click", function () {
-						var usedPoint = $("[name=usePoint]").val();
-						const addHidden = document.querySelector('input[name=addPoint]')
+						usePoint = $("[name=usePoint]");
+						const addHidden = document.querySelector('input[name=addPoint]');
 						addHidden.value = usedPoint;
 						console.log(usedPoint);
 						console.log(addHidden.value);
@@ -1049,7 +1110,7 @@
 
 						});
 					});
-				
+				*/
 				/*
 				var addPoint;
 				function addPointFunc() {

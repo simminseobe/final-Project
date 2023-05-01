@@ -80,12 +80,12 @@ public class TicketingService {
 	
 	
 
-	public Ticketing insertPay(Pay pay, TicketingInfo ticketingInfo) {
+	public Ticketing insertPay(Pay pay, TicketingInfo ticketingInfo, AddUsePoint aup) {
 		int result = dao.insertPay(pay, ticketingInfo);
 		int payNo = dao.selectLatestPay();
-		int usePoint = ticketingInfo.getUsePoint();
-		int memberNo = ticketingInfo.getMemberNo();
 		
+		result += dao.usePoint(aup);
+		//1. reult결과처리를 어떻게 해야하는지 2.포인트 사용 하지않을 시 0원으로 처리해야하는건지 (오류 우려)
 		System.out.println(payNo);
 		ticketingInfo.getChoiceDtDay();	//상영시간(날짜형식->+시간형식)
 		ticketingInfo.getScheduleNo();	//스케쥴넘버
@@ -111,8 +111,10 @@ public class TicketingService {
 		
 		if(result>0) {
 	 		System.out.println("return 통과");
+	 		System.out.println("service성공 : "+aup);
 	 		return ticketing;
 		} else {
+			System.out.println("service실패 : "+aup);
 			return null;
 		}
 		
@@ -138,6 +140,8 @@ public class TicketingService {
 	public Integer mpAmount(int memberNo) {
 		return dao.mpAmount(memberNo);
 	}
+
+	
 
 	
 
