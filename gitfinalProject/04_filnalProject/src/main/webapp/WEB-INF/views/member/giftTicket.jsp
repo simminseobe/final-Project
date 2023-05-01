@@ -9,6 +9,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/resources/css/member/purchaseDetail.css">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<style>
+		.addGiftTicketSerial{
+			float: right;
+		}
+		#addGiftTicket{
+			padding : 8px 8px;
+			border-radius : 10px 10px 10px 10px;
+			background-color : #fff;
+			border-color : #503396;
+			margin : 20px 10px;
+		}
+		[name=addGiftTicketSerial]{
+			padding: 5px 5px;
+			border: none;
+    		outline: none;
+    		border-bottom: 2px solid #503396;
+		}
+	</style>
 	<table>
 	<td>
 	<div class="menubar">
@@ -20,7 +38,9 @@
 			<div class="booklist-header">
 				<h2>영화관람권</h2>
 			</div>
-			
+			<div class="addGiftTicketSerial">
+			 <input type="text" name="addGiftTicketSerial" placeholder="8자리 숫자 입력"><button id="addGiftTicket">관람권 등록</button>
+			</div>
 			<div class="tab-content">
 				<table>
 					<tbody>
@@ -79,6 +99,58 @@
 				</td>
 </table>
 
-	<script src="/resources/js/member/purchaseDetail.js">
-	</script>
+	<script src="/resources/js/member/purchaseDetail.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<script>
+   $("#addGiftTicket").on("click",function(){
+    	const giftTicketSerial = $("[name=addGiftTicketSerial]").val();
+    	const memberNo = $("[name=memberNo]").val();
+    	console.log(memberNo);
+		$.ajax({
+			url : "/addGiftTicket.do",
+			type: "get",
+			data: {giftTicketSerial:giftTicketSerial , memberNo:memberNo},
+			success : function(data){
+				console.log(data)
+				if(data=="ok"){
+					alert("등록에 성공하였습니다.");
+				}else{
+					alert("이미 등록된 관람권입니다.");
+				}
+				
+			}
+			
+		});	
+	});
+   
+   $("#useGiftTicket").on("click",function(){
+   	const giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+   	const memberNo = $("[name=memberNo]").val();
+   	console.log(memberNo);
+		$.ajax({
+			url : "/useGiftTicket.do",
+			type: "get",
+			data: {giftTicketSerial:giftTicketSerial , memberNo:memberNo},
+			success : function(data){
+				console.log(data)
+				if(data=="ok"){
+					alert("사용성공.");
+				}else{
+					alert("사용실패.");
+				}
+				
+			}
+			
+		});	
+	});
+   
+   
+   
+   $(document).ready(function(){
+	   
+	   
+	});
+   
+
+</script>
+	

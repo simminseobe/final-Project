@@ -64,7 +64,7 @@ public class GiftTicketService {
 		
 		// 이전버튼 생성
 		if(pageNo != 1) {
-			pageNavi += "<a href='/giftTicket.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'>[이전]</a>";
+			pageNavi += "<a href='/giftTicket.do?reqPage="+(pageNo-1)+"&memberNo="+memberNo+"'> [이전] </a>";
 			// pageNavi = "" + "<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
 			// pageNavi = <a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>;
 		}

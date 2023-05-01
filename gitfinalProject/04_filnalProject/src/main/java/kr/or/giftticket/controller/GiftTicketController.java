@@ -24,6 +24,7 @@ public class GiftTicketController {
 	@RequestMapping(value = "/giftTicket.do")
 	public String giftTicket(int reqPage, Model model, int memberNo) {
 		GiftTicketPageData gtpd = service.selectTicketList(reqPage, memberNo);
+		model.addAttribute("gtpd", gtpd);
 		model.addAttribute("list", gtpd.getList());
 		model.addAttribute("pageNavi", gtpd.getPageNavi());
 		
