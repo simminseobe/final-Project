@@ -378,8 +378,6 @@ public class AdminController {
 		String start = element.getAsJsonObject().get("start").getAsString();
 		String end = element.getAsJsonObject().get("end").getAsString();
 
-		System.out.println(start);
-		System.out.println(end);
 		// fullCalander 시간을 DB형식에 맞게 Format
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm");
@@ -388,14 +386,8 @@ public class AdminController {
 		LocalDateTime startDateTime = LocalDateTime.parse(start, inputFormatter).plusHours(9);
 		LocalDateTime endDateTime = LocalDateTime.parse(end, inputFormatter).plusHours(9);
 
-		System.out.println(startDateTime);
-		System.out.println(endDateTime);
-
 		String startOutput = startDateTime.format(outputFormatter);
 		String endOutput = endDateTime.format(outputFormatter);
-
-		System.out.println(startOutput);
-		System.out.println(endOutput);
 
 		int result = service.insertSchedule(title, branch, startOutput, endOutput);
 

@@ -28,7 +28,7 @@
                             <div class="container">
                                 <h1>극장 등록</h1>
                                 <form action="/registerTheater.do" method="post">
-                                    <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}}">
+                                    <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}">
                                     <div class="form-group">
                                         <label for="theaterLocal" class="my-2">지역</label>
                                         <select class="form-select" id="theaterLocal" name="theaterLocal"
