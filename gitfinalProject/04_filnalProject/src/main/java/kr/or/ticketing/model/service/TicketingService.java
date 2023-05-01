@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.giftticket.model.vo.GiftTicket;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.vo.Movie;
+import kr.or.point.model.vo.AddUsePoint;
 import kr.or.ticketing.model.dao.TicketingDao;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
@@ -81,6 +83,9 @@ public class TicketingService {
 	public Ticketing insertPay(Pay pay, TicketingInfo ticketingInfo) {
 		int result = dao.insertPay(pay, ticketingInfo);
 		int payNo = dao.selectLatestPay();
+		int usePoint = ticketingInfo.getUsePoint();
+		int memberNo = ticketingInfo.getMemberNo();
+		
 		System.out.println(payNo);
 		ticketingInfo.getChoiceDtDay();	//상영시간(날짜형식->+시간형식)
 		ticketingInfo.getScheduleNo();	//스케쥴넘버
@@ -98,6 +103,7 @@ public class TicketingService {
 		for(int i=0;i<seatArr.length;i++) {
 			ticketing.setSeat(seatArr[i]);
 			String age = peopleArr[i];
+			System.out.println("age :"+age);
 			ticketing.setTicketingAge(Integer.parseInt(age));
 			
 			result += dao.insertTicketing(ticketing);
@@ -126,6 +132,14 @@ public class TicketingService {
 		ArrayList<Movie> list = dao.selectMovieAll();
 		return list;
 	}
+
+	
+
+	public Integer mpAmount(int memberNo) {
+		return dao.mpAmount(memberNo);
+	}
+
+	
 
 	
 

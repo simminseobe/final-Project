@@ -15,6 +15,7 @@ moreBtn.addEventListener("click",function(){
     const importantInfoContent = document.querySelector(".importantInfo-content");
     importantInfoContent.style.height = "auto";
     this.remove();
+    
 });
 /*별점표시*/
 const stars = $(".modal>.modal_content>form>.star-wrap1>span");

@@ -158,6 +158,7 @@
 		sum(point_amount) as pointAmount 
 	from point_tbl 
 	where member_no=#{memberNo}
+	and point_detail='사용가능'
  </select>
   
   <!-- 예매/구매 내역 조회 -->
@@ -282,4 +283,7 @@
   		member_level=#{memberLevel}
   	where member_no=#{memberNo}
   </update>
+  <select id="selectMemberCnt" resultType="_int">
+  	select count(*) from member
+  </select>
 </mapper>

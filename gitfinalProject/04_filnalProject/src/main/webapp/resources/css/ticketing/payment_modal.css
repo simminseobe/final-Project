@@ -25,7 +25,6 @@
 }
 .modal-top>h1{
     font-size: 20px;
-    margin: 0;
     text-align: center;
 }
 #usePoint{
@@ -88,4 +87,7 @@
     width: 80%;
     height: 30px;
     border: 1px solid #ccc;
+}
+.point-view{
+    margin: 0 30px 0 170px;
 }

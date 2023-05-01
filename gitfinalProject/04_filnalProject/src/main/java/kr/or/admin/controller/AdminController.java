@@ -43,7 +43,17 @@ public class AdminController {
 	private FileManager fileManager;
 
 	@RequestMapping("/adminPage.do")
-	public String adminPage() {
+	public String adminPage(Model model) {
+		int memberCnt = service.selectMemberCnt();
+		int movieCnt = service.selectMovieCnt();
+		int scheduleCnt = service.selectSchduleCnt();
+		int consultationCnt = service.selectConsultationCnt();
+
+		model.addAttribute("memberCnt", memberCnt);
+		model.addAttribute("movieCnt", movieCnt);
+		model.addAttribute("scheduleCnt", scheduleCnt);
+		model.addAttribute("consultationCnt", consultationCnt);
+
 		return "admin/adminPage";
 	}
 

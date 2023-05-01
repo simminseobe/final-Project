@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class myMovie {
+public class MyMovie_bk {
 	private int memberNo;
 	private String memberId;
 	private int movieNo;
 	private String movieTitle;
-	private String moviefileName;
+	private String movieFileName;
 	private String scheduleStart;
 	private String theaterBranch;
 }

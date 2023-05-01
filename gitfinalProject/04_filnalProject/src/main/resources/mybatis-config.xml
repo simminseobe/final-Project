@@ -15,6 +15,7 @@
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.point.model.vo.Point" alias="point"/>
 		<typeAlias type="kr.or.movie.model.vo.Movie" alias="movie"/>
+		<typeAlias type="kr.or.movie.model.vo.MyMovie" alias="MyMovie"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieFile" alias="movieFile"/>
 		<typeAlias type="kr.or.movie.model.vo.MovieVideo" alias="movieVideo"/>
 		<typeAlias type="kr.or.admin.model.vo.Theater" alias="theater"/>

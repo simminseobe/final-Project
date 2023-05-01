@@ -42,12 +42,12 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">관리자 홈</a></li>
-                        <li><a class="dropdown-item" href="#!">마이 페이지</a></li>
+                        <li><a class="dropdown-item" href="/adminPage.do">관리자 홈</a></li>
+                        <li><a class="dropdown-item" href="/myProfile.do">마이 페이지</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/logout.do">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>

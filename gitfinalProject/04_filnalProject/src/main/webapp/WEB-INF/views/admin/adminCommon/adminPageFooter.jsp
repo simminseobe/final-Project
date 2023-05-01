@@ -27,6 +27,12 @@
         <script src="/resources/js/admin/sideBar.js"></script>
         <!-- simple-datatables 템플릿 -->
         <script src="/resources/js/admin/datatables.js"></script>
+        <!-- chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+            crossorigin="anonymous"></script>
+        <script src="resources/js/admin/chart-area-demo.js"></script>
+        <script src="resources/js/admin/chart-bar-demo.js"></script>
+        <script src="resources/js/admin/chart-pie-demo.js"></script>
     </body>
 
     </html>

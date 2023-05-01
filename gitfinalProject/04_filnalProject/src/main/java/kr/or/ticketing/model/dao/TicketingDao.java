@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.giftticket.model.vo.GiftTicket;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.vo.Movie;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
@@ -87,6 +88,19 @@ public class TicketingDao {
 		List list = sqlSession.selectList("ticketing.selectMovieAll");
 		return (ArrayList<Movie>)list;
 	}
+
+	public Integer mpAmount(int memberNo) {
+		Integer mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
+		return mpAmount;
+	}
+
+	
+
+	
+
+	
+
+	
 	
 
 	

@@ -20,4 +20,7 @@
 			consultation_member as consultationMember
 		from consultation_tbl
 	</select>
+	<select id="selectConsultationCnt" resultType="_int">
+  	select count(*) from consultation_tbl
+  </select>
 </mapper>

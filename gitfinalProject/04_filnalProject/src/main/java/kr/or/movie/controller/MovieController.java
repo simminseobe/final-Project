@@ -26,6 +26,7 @@ import kr.or.movie.model.vo.MovieLike;
 import kr.or.movie.model.vo.MoviePost;
 import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
+import kr.or.movie.model.vo.MyMovie;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewLike;
 import kr.or.movie.model.vo.ReviewPageData;
@@ -96,7 +97,7 @@ public class MovieController {
 	}
 	//마이무비스토리(사용자별 관람영화/관람평/무비포스트/선호영화)
 		@RequestMapping(value="/myMovie.do")
-		public String myMovie(Model model, @SessionAttribute(required = false) Member m, UserMovieVO umv) {
+		public String myMovie(Model model, @SessionAttribute(required = false) Member m) {
 			int memberNo = 0;
 			String memberId = "";
 			if(m!=null) {
@@ -136,7 +137,7 @@ public class MovieController {
 					//사용자 관람평 갯수를 위한 조회
 					int reviewListCount= service.selectReviewListCount(memberNo);
 					model.addAttribute("reviewListCount", reviewListCount);
-					
+					*/
 					
 			return "member/myMovie";
 			

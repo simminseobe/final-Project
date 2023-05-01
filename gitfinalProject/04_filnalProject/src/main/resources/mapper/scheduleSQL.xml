@@ -48,4 +48,7 @@
 <delete id="deleteSchedule">
 	delete from schedule_tbl where schedule_no = #{scheduleNo}
 </delete>
+<select id="selectSchduleCnt" resultType="_int">
+	select count(*) from schedule_tbl
+</select>
 </mapper>
