@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+.wrapper{
+	margin: 0 auto;
+	outline: none;
+    width: 100%;
+    padding-top: 50px;
+    margin-left : 100px;
+}
+
+.booklist-header>h2{
+    margin: 30px;
+    font-size: 1.85em;
+    color: #503396;
+    font-weight: bold;
+}
+
+.menu-wrap{
+    width: 100%;
+}
+
+.tabs{
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+}
+
+.tabs>li{
+    float: left;
+    width: calc(35%/2);
+    text-align: center;
+    line-height: 40px;
+    background-color: #fff;
+    color: #444;
+    cursor: pointer;
+    font-size: 1.15em;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-top: 1px soild black;
+    /* 1px solid #7c7b7bd0; */
+}
+
+.active-tab{
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #444;
+    border-bottom: 2.5px solid #503396;
+}
+
+.tab-content{
+    margin: 35px 0px 35px 0px;
+}
+
+.tab-content>table{
+    width: 85vh;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-top: 1px solid #d1d5dd;
+    border-bottom: 1px solid #d1d5dd;
+    padding: 10px;
+}
+
+.tab-content>table{
+	width: 900px;
+}
+
+.tab-content>table>tbody>tr>th{
+    height: 40px;
+    background-color: #f7f8f9;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.tab-content>table>tbody>tr>td{
+    text-align: center;
+    height: 40px;
+    font-size: 1.0em;
+}
+
+.second-header>h2{
+    margin: 30px;
+    font-size: 1.85em;
+    color: #503396;
+    font-weight: bold;
+}
+
+.first-line{
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.btn{
+    background-color: #f3f4f6;
+    border: none;
+	width: 900px;
+    text-align: left;
+    padding-left: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.btn:hover{
+    background-color: #d1d5dd;
+}
+
+#collapseExample{
+    font-size: 0.95em;
+}
+
+.card{
+    width: 745px;
+}
+
+.my-btn,#file-upload-button{ color: #fff; padding:5px 10px 5px 10px; margin:5px; display:inline-block; border-radius: 10px; transition:all 0.080s; }
+.my-btn:active{ transform: translateY(3px); }
+.my-btn.my-blue{ background-color: #503396; border-bottom:5px solid #3C2671; }
+.my-btn.my-blue:active{ border-bottom:2px solid #3C2671; margin-bottom: 8px; }
+
