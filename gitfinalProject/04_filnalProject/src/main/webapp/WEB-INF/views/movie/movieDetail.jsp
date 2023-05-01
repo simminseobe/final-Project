@@ -936,8 +936,8 @@ z-index: 5;
   			console.log(data[1].scheduleStart);
   			console.log(data[1].audienceCnt);
   			 for(i=0; data.length;i++){//for문 시작
-  				const scheduleStart[i]=data[i].scheduleStart;
-  				const audienceCnt[i]=data[i].audienceCnt;
+  				const scheduleStart=data[i].scheduleStart;
+  				const audienceCnt=data[i].audienceCnt;
 				 
   			
   			//누적관객수 차트
