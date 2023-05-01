@@ -69,7 +69,7 @@
                                             <input class="inputMovieTitle" style="display:none;" value="${po.movieTitle }">
                                         </div>
                                         <div class="reserve-rate" style="font-size: 18px;">
-                                            <p>예매율%</p>
+                                            <p>예매율 ${po.reservationRate }%</p>
                                         </div>
                                         <div class="start-date" style="font-size: 18px;">
                                             <p>${po.movieDate}</p>
@@ -129,7 +129,7 @@
                                          <input class="inputMovieTitle" style="display:none;" value="${expected.movieTitle }">
                                      </div>
                                      <div class="reserve-rate" style="font-size: 18px;">
-                                         <p>예매율%</p>
+                                         <p>예매율 ${expected.reservationRate }%</p>
                                      </div>
                                      <div class="start-date" style="font-size: 18px;">
                                          <p>${expected.movieDate}</p>
@@ -187,7 +187,7 @@
                                      <input class="inputMovieTitle" style="display:none;" value="${special.movieTitle }">
                                  </div>
                                  <div class="reserve-rate" style="font-size: 18px;">
-                                     <p>예매율%</p>
+                                     <p>예매율 ${special.reservationRate }%</p>
                                  </div>
                                  <div class="start-date" style="font-size: 18px;">
                                      <p>${special.movieDate}</p>
@@ -245,7 +245,7 @@
                                  <input class="inputMovieTitle" style="display:none;" value="${filmSociety.movieTitle }">
                              </div>
                              <div class="reserve-rate" style="font-size: 18px;">
-                                 <p>예매율%</p>
+                                 <p>예매율 ${filmSociety.reservationRate }%</p>
                              </div>
                              <div class="start-date" style="font-size: 18px;">
                                  <p>${filmSociety.movieDate}</p>
@@ -304,7 +304,7 @@
                              <input class="inputMovieTitle" style="display:none;" value="${classicSociety.movieTitle }">
                          </div>
                          <div class="reserve-rate" style="font-size: 18px;">
-                             <p>예매율%</p>
+                             <p>예매율 ${classicSociety.reservationRate }%</p>
                          </div>
                          <div class="start-date" style="font-size: 18px;">
                              <p>${classicSociety.movieDate}</p>
@@ -363,7 +363,7 @@
                          <input class="inputMovieTitle" style="display:none;" value="${favorite.movieTitle }">
                      </div>
                      <div class="reserve-rate" style="font-size: 18px;">
-                         <p>예매율%</p>
+                         <p>예매율 ${favorite.reservationRate }%</p>
                      </div>
                      <div class="start-date" style="font-size: 18px;">
                          <p>${favorite.movieDate}</p>
@@ -476,7 +476,7 @@
             });//on click function끝나는 곳
             
         
-            
+      
       
             
             

@@ -279,7 +279,7 @@
 	</select>
 	<select id="selectWatchPointAvg" parameterType="_int" resultType="review">
 		select
-			trunc(avg(movie_score)) as movieScoreAvg
+			nvl(trunc(avg(movie_score)),0) as movieScoreAvg
 			from watch_point join review using(review_comment_no)
 		where 
 			movie_no=#{_parameter}
@@ -571,6 +571,7 @@ select count(*) from
 		from review join watch_point using(review_comment_no)
 		where member_id=#{memberId} and movie_no=#{movieNo}
 </select>
+<!-- 예매율 -->
 <select id="reservationRate" resultType="_double" parameterType="string">
 SELECT
     trunc(
@@ -578,9 +579,24 @@ SELECT
     (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD') AND MOVIE_TITLE=#{movieTitle})) / (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD')))*100,1)
     AS RESERVE_RATE
     FROM DUAL
-    
+</select>
+<!-- 전체누적관객수 -->
+<select id="totalAudience" resultType="_int" parameterType="string">	
+	 SELECT 
+        COUNT(*)
+    FROM TICKETING_TBL
+    LEFT JOIN SCHEDULE_TBL USING(SCHEDULE_NO)
+    WHERE MOVIE_TITLE = #{MOVIE_TITLE}
+</select>
+<!-- 일별 누적관객수 -->
+<select id="dayTotalAudience" resultType="schedule" parameterType="string">
+	    SELECT 
+        TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') AS SCHEDULESTART,
+        COUNT(*) AS AUDIENCECNT
+    FROM TICKETING_TBL
+    LEFT JOIN SCHEDULE_TBL USING(SCHEDULE_NO)
+    WHERE MOVIE_TITLE = #{movieTitle} AND TO_CHAR(SCHEDULE_START,'YYYY-MM-DD')>= TO_CHAR(SYSDATE-4,'YYYY-MM-DD')
+    GROUP BY TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') ORDER BY SCHEDULESTART ASC
 
 </select>
-
-
 </mapper>

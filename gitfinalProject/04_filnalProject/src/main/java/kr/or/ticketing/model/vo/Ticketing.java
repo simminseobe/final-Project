@@ -14,4 +14,5 @@ public class Ticketing {
 	private String seat;
 	private int payNo;//
 	private int scheduleNo;//
+	
 }
