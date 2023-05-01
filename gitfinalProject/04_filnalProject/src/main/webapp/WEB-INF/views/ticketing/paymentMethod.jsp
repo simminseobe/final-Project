@@ -750,7 +750,31 @@
 				$('#finalAmount').val(filterFinalAmount);
 				console.log("filterFinalAmount :" + filterFinalAmount);//30000
 
+				//포인트 버튼 눌러서 사용할 포인트 값 입력하는 모달창 띄우기
+				$(".mMoint div.sub-div>.mega-point").on("click", function () {
+					$(".modal-wrap").css("display", "flex");
+					$("#selectPoint").click();
+				});
+				//사용할 포인트 input에 입력 -> 사용 시 할인금액에 적용
 				var usePoint;
+				var pointToDiscountAmount;
+				$("#usePoint").on("click",function(){
+					usePoint = $("[name=usePoint]").val();
+					pointToDiscountAmount = $(".discount-amount").text(usePoint);
+					closeModal();
+					discountUsingPoint();
+				});
+
+				//닫기 버튼 클릭 시 closeModal()함수 호출
+				$("input[type=reset]").on("click", function () {
+					closeModal();
+				});
+				//닫는 closeModal()함수
+				function closeModal() {
+					$(".modal-wrap").css("display", "none");
+					$(".modal2-wrap").css("display", "none");
+				}
+				/*
 				//포인트 사용 시(선택금액)
 				$(".mMoint div.sub-div>.mega-point").on("click", function () {
 					$(".modal-wrap").css("display", "flex");
@@ -776,13 +800,9 @@
 						}
 					});
 				});
-				$("input[type=reset]").on("click", function () {
-					closeModal();
-				});
-				function closeModal() {
-					$(".modal-wrap").css("display", "none");
-					$(".modal2-wrap").css("display", "none");
-				}
+				*/
+				
+				//calculator
 				function discountUsingPoint() {
 					console.log("userPoint" + usePoint.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 					const priceAmountSame = $(".price-amount-same").text();
@@ -798,7 +818,7 @@
 					$("#dc-amount").text(filterUsePoint);
 					$("#finalAmount").text(usePointAfterAmount);
 				}
-
+				
 				//잔여포인트 조회
 				$("#selectPoint").on("click",function(){
 					memberNo = $(".ssMemberNo").val();
@@ -815,6 +835,7 @@
 						}
 					});
 				});
+				
 				/*
 				var memberNo = $(".ssMemberNo").text();
 				$.ajax({
@@ -918,6 +939,7 @@
 					joinSeats = $(".seats").text();
 					numOfPeople = $(".people-age").text();
 					countArr = $(".hidden-pp-age").text();
+					usePoint = $("[name=usePoint]").val();
 
 					console.log("movieTitle :" + movieTitle);
 					console.log("theaterBranch :" + theaterBranch);
@@ -930,6 +952,7 @@
 					console.log("memberHyphenPhone :" + memberHyphenPhone);//하이픈(-) 있음
 					console.log("payPrice :" + payPrice);
 					console.log("countArr :" + countArr);
+					console.log("usePoint :" + usePoint);
 
 					if (payPrice == 0) {
 						location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
@@ -951,7 +974,7 @@
 								$.ajax({
 									url: "/paymentPage.do",
 									type: "post",
-									data: { payPrice: payPrice, memberNo: memberNo, choiceDtDay: choiceDtDay, countArr: countArr, joinSeats: joinSeats, scheduleNo: scheduleNo },
+									data: { payPrice: payPrice, memberNo: memberNo, choiceDtDay: choiceDtDay, countArr: countArr, joinSeats: joinSeats, scheduleNo: scheduleNo, usePoint: usePoint },
 									dataType: "json",
 									success: function (data) {
 										if (data == 'fail') {
