@@ -18,12 +18,13 @@ import com.google.gson.Gson;
 import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
-import kr.or.movie.model.vo.myMovie;
+import kr.or.movie.model.vo.MyMovie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieLike;
 import kr.or.movie.model.vo.MoviePost;
 import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
+import kr.or.movie.model.vo.MyMovie;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewLike;
 import kr.or.movie.model.vo.ReviewPageData;
@@ -92,7 +93,7 @@ public class MovieController {
 	}
 	//마이무비스토리(사용자별 관람영화/관람평/무비포스트/선호영화)
 		@RequestMapping(value="/myMovie.do")
-		public String myMovie(Model model, @SessionAttribute(required = false) Member m, UserMovieVO umv) {
+		public String myMovie(Model model, @SessionAttribute(required = false) Member m) {
 			int memberNo = 0;
 			String memberId = "";
 			if(m!=null) {
@@ -107,21 +108,25 @@ public class MovieController {
 					int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
 					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
 					 
-					//사용자 관람영화
-					ArrayList<Movie> mov = service.selectOneMovieAll(memberNo);		//1, 7(1.영화정보 / 7.영화포스터file)
-					model.addAttribute("mov", mov);
-					//ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
-					//model.addAttribute("pageList",rpd.getList());
-					//model.addAttribute("pageNavi",rpd.getPageNavi());
+					// 사용자 관람영화
+					ArrayList<MyMovie> list = service.selectOneMovieAll(memberNo); // 1, 7(1.영화정보 / 7.영화포스터file)
+					model.addAttribute("list", list);
+					// 사용자 관람영화 중 개수
+					int myMovieListCount = service.selectmyMovieListCount(memberNo);
+					model.addAttribute("myMovieListCount", myMovieListCount);
 
-					
-					//4.사용자 무비포스트 리스트(무비포스트 리스트)
-					ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(memberNo);
-					model.addAttribute("oneMoviepostAll",oneMoviepostAll);
-				
-					//사용자 무비포스트 총 갯수
-					int moviePostCount=service.moviePostCount(memberNo);
-					model.addAttribute("moviePostCount",moviePostCount);
+					// ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
+					// model.addAttribute("pageList",rpd.getList());
+					// model.addAttribute("pageNavi",rpd.getPageNavi());
+
+					// 4.사용자 무비포스트 리스트(무비포스트 리스트)
+					ArrayList<MoviePost> oneMoviepostAll = service.oneMovieAllPost2(memberId);
+					model.addAttribute("oneMoviepostAll", oneMoviepostAll);
+					System.out.println(oneMoviepostAll);
+
+					// 사용자 무비포스트 총 개수
+					int moviePostCount = service.moviePostCount2(memberId);
+					model.addAttribute("moviePostCount", moviePostCount);
 					
 					//사용자 모든 관람평(review)조회하기
 					ArrayList<Review> reviewList = service.oneMovieAllReview(memberNo);//(5.관람포인트 / 리뷰 수정 위한 리뷰조회)
