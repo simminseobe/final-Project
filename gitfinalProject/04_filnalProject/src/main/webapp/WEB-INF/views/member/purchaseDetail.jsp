@@ -23,7 +23,7 @@
 			<div class="menu-wrap">
 				<ul class="tabs">
 					<li class="active-tab">예매</li>
-					<li>구매</li>
+					<!-- <li>구매</li> -->
 				</ul>
 			</div>
 
@@ -60,7 +60,6 @@
 						</tr>
 						</c:forEach>							
 						<tr>
-						<!-- 페이징 처리 -->
 							<th colspan="8">${pageNavi }</th>
 						</tr>
 					</tbody>
@@ -108,7 +107,6 @@
 						</tr>
 					</c:forEach>
 						<tr>
-						<!-- 페이징 처리 -->
 							<th colspan="7">${pageNavi2 }</th>
 						</tr>
 					</tbody>
@@ -141,7 +139,7 @@
 				</div>
 
 			</div>
-			<div class="tab-content">
+<%-- 			<div class="tab-content">
 
 				<div class="second-header">
 					<h2>구매내역</h2>
@@ -190,7 +188,7 @@
 				</div>
 
 			</div>
-			<!-- 페이징 처리 -->
+			<!-- 페이징 처리 --> --%>
 		</div>
 	</div>
 				</td>
