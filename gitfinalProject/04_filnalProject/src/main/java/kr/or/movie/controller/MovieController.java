@@ -109,7 +109,7 @@ public class MovieController {
 					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
 					 
 					// 사용자 관람영화
-					ArrayList<MyMovie> list = service.selectOneMovieAll(memberNo); // 1, 7(1.영화정보 / 7.영화포스터file)
+					ArrayList<MyMovie> list = service.selectOneMovieAll2(memberId); // 1, 7(1.영화정보 / 7.영화포스터file)
 					model.addAttribute("list", list);
 					// 사용자 관람영화 중 개수
 					int myMovieListCount = service.selectmyMovieListCount(memberNo);

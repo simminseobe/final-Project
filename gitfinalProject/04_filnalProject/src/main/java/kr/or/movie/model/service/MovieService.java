@@ -124,8 +124,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		 }
 		return mov;
 	}
-	public ArrayList<MyMovie> selectOneMovieAll(int memberNo) {
-		ArrayList<MyMovie> list = dao.selectOneMovieAll(memberNo);
+	public ArrayList<MyMovie> selectOneMovieAll2(String memberId) {
+		ArrayList<MyMovie> list = dao.selectOneMovieAll2(memberId);
 		
 		/*
 		for(Movie movie : list) {
