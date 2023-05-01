@@ -380,9 +380,16 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		return movieFileList;
 	}
 	//아이디로 관람평 조회
-	public Review selectOneReview(String memberId) {
-		Review review = dao.selectOneReview(memberId);
+	public Review selectOneReview(String memberId,int movieNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId",memberId);
+		map.put("movieNo",movieNo);
+		Review review = dao.selectOneReview(map);
 		return review;
+	}
+	public double reservationRate(String movieTitle) {
+		double result = dao.reservationRate(movieTitle);
+		return result;
 	}
 
 

@@ -292,9 +292,14 @@ public class MovieDao {
 		return result;
 	}
 	//아이디로 관람평 조회
-	public Review selectOneReview(String memberId) {
-		Review review = sqlSession.selectOne("movie.selectOneReview", memberId);
+	public Review selectOneReview(HashMap<String, Object> map) {
+		Review review = sqlSession.selectOne("movie.selectOneReview", map);
 		return review;
+	}
+
+	public double reservationRate(String movieTitle) {
+		double result = sqlSession.selectOne("movie.reservationRate", movieTitle);
+		return result;
 	}
 
 

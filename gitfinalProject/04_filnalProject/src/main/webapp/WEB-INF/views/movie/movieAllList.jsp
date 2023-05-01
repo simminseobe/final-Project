@@ -25,7 +25,7 @@
                             <li><a href="javascript:void(0);">필름소사이어티</a></li>
                             <li><a href="javascript:void(0);">클래식소사이어티</a></li>
                             <c:if test="${not empty sessionScope.m}">
-	                            <li><a href="javascript:void(0);">사용자 선호장르영화</a></li>
+	                            <li><a href="javascript:void(0);" ><span style="color:#329EB1; font-weight:bold;">${sessionScope.m.memberName }</span>님 선호영화</a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -36,7 +36,7 @@
                             <span class="tabcontent1" style="display:none;">특별상영만 총 <span style="color: #329eb1;">${specialMovieCount}</span>개의 영화가 검색되었습니다.</span>
                             <span class="tabcontent1" style="display:none;">필름소사이어티만 총 <span style="color: #329eb1;">${filmSocietyCount}</span>개의 영화가 검색되었습니다.</span>
                             <span class="tabcontent1" style="display:none;">클래식소사이어티만 총 <span style="color: #329eb1;">${classicSocietyCount}</span>개의 영화가 검색되었습니다.</span>
-                            <span class="tabcontent1" style="display:none;">사용자 선호영화만 총 <span style="color: #329eb1;">${favoriteMovieCount}</span>개의 영화가 검색되었습니다.</span>
+                            <span class="tabcontent1" style="display:none;">${sessionScope.m.memberName }님 선호영화만 총 <span style="color: #329eb1;">${favoriteMovieCount}</span>개의 영화가 검색되었습니다.</span>
                             <div class="searchBox">
                                 <input type="text" id="movieSearch" name="movieSearch" placeholder="영화명 검색">
                                 <img src="img/search-30.png">

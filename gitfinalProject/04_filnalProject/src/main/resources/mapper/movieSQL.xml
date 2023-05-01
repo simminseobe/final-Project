@@ -553,7 +553,7 @@ select count(*) from
 	select count(*) from movie_like where movie_no=#{movieNo}
 </select>
 <!-- 아이디로 관람평 조회 -->
-<select id="selectOneReview" resultType="review" parameterType="review">
+<select id="selectOneReview" resultType="review" parameterType="map">
 	select
 			review_comment_no as reviewCommentNo,
 			movie_no as movieNo,
@@ -569,7 +569,17 @@ select count(*) from
 			video_visual as videoVisual,
 			production as production
 		from review join watch_point using(review_comment_no)
-		where member_id=#{memberId}
+		where member_id=#{memberId} and movie_no=#{movieNo}
+</select>
+<select id="reservationRate" resultType="_double" parameterType="string">
+SELECT
+    trunc(
+    (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN 
+    (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD') AND MOVIE_TITLE=#{movieTitle})) / (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD')))*100,1)
+    AS RESERVE_RATE
+    FROM DUAL
+    
+
 </select>
 
 
