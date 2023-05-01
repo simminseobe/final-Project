@@ -17,6 +17,4 @@ public class TicketingInfo {
 	private String countArr;//1,2,3
 	private String totalAmount;
 	private int scheduleNo;
-	private int usePoint;
-	private int memberNo;
 }
