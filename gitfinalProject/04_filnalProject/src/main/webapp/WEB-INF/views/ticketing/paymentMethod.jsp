@@ -979,7 +979,13 @@
 				});
 				
 					$("#addPoint").on("click", function () {
-						var addPoint = $("[name=addPoint]").val();
+						var usedPoint = $("[name=usePoint]").val();
+						const addHidden = document.querySelector('input[name=addPoint]')
+						addHidden.value = usedPoint;
+						console.log(usedPoint);
+						console.log(addHidden.value);
+						const addPoint = addHidden.value;
+						console.log(addPoint);
 						memberNo = $("[name=memberNo]").val();
 						console.log(memberNo);
 						$.ajax({
@@ -990,10 +996,14 @@
 								console.log(data)
 								if (data == "ok") {
 									alert("포인트 사용취소");
-									usePoint = $("[name=usePoint]").val();
-									var zero = $(".discount-amount").text();
 									console.log("memberNo :"+memberNo);
-									console.log("취소되어 재적립될 포인트 :"+addPoint.val());
+									console.log("취소되어 재적립될 포인트 :"+addPoint);
+									
+									const before = $(".price-amount-same").text();
+									const calc = $(".discount-amount").text();
+									console.log(before);
+									console.log(calc);
+									
 								} else {
 									alert("포인트 사용취소실패");
 								}
