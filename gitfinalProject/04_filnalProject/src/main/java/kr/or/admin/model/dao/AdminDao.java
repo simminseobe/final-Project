@@ -22,6 +22,30 @@ public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	public int selectMemberCnt() {
+		int memberCnt = sqlSession.selectOne("member.selectMemberCnt");
+
+		return memberCnt;
+	}
+
+	public int selectMovieCnt() {
+		int movieCnt = sqlSession.selectOne("movie.selectMovieCnt");
+
+		return movieCnt;
+	}
+
+	public int selectSchduleCnt() {
+		int schduleCnt = sqlSession.selectOne("schedule.selectSchduleCnt");
+
+		return schduleCnt;
+	}
+
+	public int selectConsultationCnt() {
+		int consultationCnt = sqlSession.selectOne("consultation.selectConsultationCnt");
+
+		return consultationCnt;
+	}
+
 	public ArrayList<Member> selectAllMember() {
 		List list = sqlSession.selectList("member.selectAllMember");
 
