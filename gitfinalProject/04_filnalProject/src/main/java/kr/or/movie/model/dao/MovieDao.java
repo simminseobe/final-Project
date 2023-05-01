@@ -165,10 +165,12 @@ public class MovieDao {
 		List list = sqlSession.selectList("movie.oneMoviePostAll", movieNo);
 		return (ArrayList<MoviePost>) list;
 	}
+	/*
 	public ArrayList<MoviePost> selectOneMovieAllPost2(String memberId) {
 		List list = sqlSession.selectList("movie.oneMoviePostAll2", memberId);
 		return (ArrayList<MoviePost>) list;
 	}
+	*/
 	//무비포스트 상세보기를 위함
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost", moviePostNo);

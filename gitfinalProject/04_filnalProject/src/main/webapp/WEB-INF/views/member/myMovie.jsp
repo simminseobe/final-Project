@@ -285,7 +285,7 @@ z-index: 5;
                     
                     <!-- 찜영화  --> 
                     <div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                    	보여라 제발 좀]
+                    	
                     </div>
                     	<div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
                     		<div class="movie-all-list" style="margin-top: 25px; ">
