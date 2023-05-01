@@ -997,7 +997,7 @@
 											$("#addPoint").click();
 											
 											
-											//location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
+											location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
 
 
 										}
@@ -1041,7 +1041,6 @@
 					history.back();
 				});
 				
-				//function addTenPer(){
 					
 					$("#addPoint").on("click",function(){
 						/*
@@ -1073,7 +1072,7 @@
 					});	
 					
 				});
-			//}
+			
 				//$("#addPoint").click();
 				/*
 			
