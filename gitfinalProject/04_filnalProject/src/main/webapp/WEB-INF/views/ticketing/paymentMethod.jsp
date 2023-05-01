@@ -1063,6 +1063,9 @@
 							console.log(data)
 							if(data=="ok"){
 								alert("적립성공");
+								console.log("memberNo : "+memberNo);
+								console.log("savedMoney : "+savedMoney);
+								console.log("savedMoney : "+savedMoney+" *10% = addPoint : "+addPoint);
 							}else{
 								alert("실패");
 							}
