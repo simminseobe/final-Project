@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .modal-wrap{
-    width: 53vw;
+    width: 58vw;
     height: 59vh;
     background-color: rgba(0,0,0,0.5);
     position: absolute;
@@ -45,7 +45,7 @@
 }
 /*-----------------------------------------------------------------------------*/
 .modal2-wrap{
-    width: 53vw;
+    width: 58vw;
     height: 59vh;
     background-color: rgba(0,0,0,0.5);
     position: absolute;
