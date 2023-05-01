@@ -353,7 +353,7 @@ z-index: 5;
                 <div class="modal_content_tit modal_content_tit3">
                     <p>${mov.movieTitle }</p>
                     <input type="text" class="modalMovieTitle" name="movieTitle" value="${mov.movieTitle}" style="display:none;">
-                    <button type="button">예매하기</button>
+                    <button type="button" onclick="reservationFunc();">예매하기</button>
                 </div>
                 <div class="post-detail-top">
                 	<div class="detail-top-r">
@@ -500,7 +500,7 @@ z-index: 5;
                     <img src="/resources/upload/movie/${mov.mainFile.movieFileName}" style="border-radius: 10px; width: 260px; height: 375px;">
                 </div>
                 <div class="detailReservBtnWap" style="position: absolute; bottom: 7%; right: 0;">
-                    <button type="button" style="width: 260px; height: 46px; border-radius: 5px; background-color: #329eb1; color: white; font-size: 18px;">예약하기</button>
+                    <button type="button" style="width: 260px; height: 46px; border-radius: 5px; background-color: #329eb1; color: white; font-size: 18px;" onclick="reservationFunc();">예약하기</button>
                 </div>
             </div>
         </div>
