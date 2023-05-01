@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.admin.model.vo.Schedule;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MoviePost;
@@ -16,6 +17,7 @@ import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.MyMovie;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.WatchPoint;
+import kr.or.ticketing.model.vo.Ticketing;
 
 @Repository
 public class MovieDao {
@@ -326,7 +328,24 @@ public class MovieDao {
 		return result;
 	}
 
-	
+	public int totalAudience(String movieTitle) {
+		int result =sqlSession.selectOne("movie.totalAudience", movieTitle);
+		return result;
+	}
+
+	public ArrayList<Schedule> dayTotalAudience(String movieTitle) {
+		List list=sqlSession.selectList("movie.dayTotalAudience", movieTitle); 
+		return (ArrayList<Schedule>) list; 
+		
+	}
+
+
+	/*
+	 * public ArrayList<Schedule> dayTotalAudience(String movieTitle) { List list
+	 * =sqlSession.selectList("movie.onedayTotalAudience", movieTitle); return
+	 * (ArrayList<Schedule>) list; }
+	 */
+
 
 
 

@@ -2,6 +2,8 @@ package kr.or.movie.model.vo;
 
 import java.util.ArrayList;
 
+import kr.or.admin.model.vo.Schedule;
+import kr.or.ticketing.model.vo.Ticketing;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,4 +33,7 @@ public class Movie {
 	private Review movieScoreAvg;
 	private int likeCount;
 	private int likeCheck;
+	private double reservationRate;
+	private int totalAudience;
+
 }

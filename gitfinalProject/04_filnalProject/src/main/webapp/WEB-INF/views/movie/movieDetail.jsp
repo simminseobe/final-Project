@@ -2,12 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <html>
 <head>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -33,7 +33,7 @@
 	align-items: center; /*align-items는 세로축을 중심축으로 함
                                 즉, center를 넣으면 세로축의 중앙으로 정렬하게 됨*/
     z-index: 5;
-                            }
+    }
 
 .modal_overlay {
 	/*모달 전체 배경색 설정*/
@@ -177,9 +177,7 @@ z-index: 5;
 </head>
 <body>
     <div class="movie-detail-top"  style="margin: 0 auto; margin-top: 100px;">
-    	
-
-        
+    
         <div class="modal hidden"><!--모달로 댓글 작성 들어가는 자리-->
             <div class="modal_overlay"></div>
             <div class="modal_content"><!--모달 댓글 내부화면-->
@@ -496,7 +494,7 @@ z-index: 5;
                 </div>
                 <div class="audienceCount-wrap" style="position: absolute; left: 20%; bottom: 10%;">
                     <p class="audienceTitle" style="padding-bottom: 10px; font-size: 15px;">누적관객수</p>
-                    <p class="audienceCount" style="text-align: center; font-size: 36px;">10000<span class="audienceSpan" style="font-size: 12px;"> 명</span></pre>
+                    <p class="audienceCount" style="text-align: center; font-size: 36px;">${mov.totalAudience}<span class="audienceSpan" style="font-size: 12px;"> 명</span></pre>
                 </div>
                 <div class="poster-img" style="position: absolute; top: 10%; right: 0;">
                     <img src="/resources/upload/movie/${mov.mainFile.movieFileName}" style="border-radius: 10px; width: 260px; height: 375px;">
@@ -912,33 +910,70 @@ z-index: 5;
 	<input type="text" class="sessionId" value="${sessionScope.m.memberId}">
 	<input type="text" class="sessionMemberNo" value="${sessionScope.m.memberNo}">
 </div>
+<div class="movieSection" style="display:none;">
+	<input type="text" class="movieSectionTitle" value="${mov.movieTitle}">
+</div>
+
        
 
 <script>
 	//누적관객수 차트
 
 
-	var ctx = document.getElementById('myChart2').getContext('2d');
-	var chart = new Chart(ctx, {
-    // 만들기 원하는 차트의 유형
-    type: 'line',
 
-    // 데이터 집합을 위한 데이터
-    data: {
-        labels: ['25일', '26일', '27일', '28일', '29일', '30일', '1일'],
-        datasets: [{
-            label: '일별 누적관객수 단위(명)',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-    },
+	   
+ $(document).ready(function(){
+  const movieTitle=$(".movieSectionTitle").val();
+  console.log(movieTitle);
+  $.ajax({
+  	url :"/dayTotalAudience.do",
+  	type:"post",
+  	data:{movieTitle:movieTitle},
+  	success:function(data){
+  		if(data != null){
+  			console.log(data[0].scheduleStart);
+  			console.log(data[0].audienceCnt);
+  			console.log(data[1].scheduleStart);
+  			console.log(data[1].audienceCnt);
+  			 for(i=0; data.length;i++){//for문 시작
+  				const scheduleStart[i]=data[i].scheduleStart;
+  				const audienceCnt[i]=data[i].audienceCnt;
+				 
+  			
+  			//누적관객수 차트
+  		  	var ctx = document.getElementById('myChart2').getContext('2d');
+  			var chart = new Chart(ctx, {
+  		    // 만들기 원하는 차트의 유형
+  		    type: 'line',
 
-    // 설정은 여기서 하세요
-    options: {}
+  		    // 데이터 집합을 위한 데이터
+  		    data: {
+  		        labels: [scheduleStart[i]],
+  		        datasets: [{
+  		            label: '일별 누적관객수 단위(명)',
+  		            backgroundColor: 'rgb(255, 99, 132)',
+  		            borderColor: 'rgb(255, 99, 132)',
+  		            data: [audienceCnt[i]]
+  		        }]
+  		    },
+
+  		    // 설정은 여기서 하세요
+  		    options: {
+  		    	
+  		    	
+  		    }
+  		}); 
+  			
+  			 }//for문 종료	
+  		}else{
+  			console.log("fail");
+  		}
+  	}
+  	
+  });//ajax끝나는 지점   
+  
 });
-	 
-	
+	   
 	//관람포인트 차트
     var ctx = document.getElementById('myChart').getContext('2d');
     var story = $(".wpSumStory").val();
