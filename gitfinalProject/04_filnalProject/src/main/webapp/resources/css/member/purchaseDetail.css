@@ -61,6 +61,10 @@ th, td {
     padding: 10px;
 }
 
+.tab-content>table{
+	width: 900px;
+}
+
 .tab-content>table>tbody>tr>th{
     height: 40px;
     background-color: #f7f8f9;
@@ -89,7 +93,7 @@ th, td {
 .btn{
     background-color: #f3f4f6;
     border: none;
-	width: 745px;
+	width: 900px;
     text-align: left;
     padding-left: 12px;
     font-size: 1.1em;
