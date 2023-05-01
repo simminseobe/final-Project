@@ -600,13 +600,13 @@ z-index: 5;
                         <div class="reviewContentWrite" style="font-size: 15px;">
                         	<c:choose>
                         		<c:when  test="${not empty sessionScope.m &&sessionScope.m.memberId ne oneReview.memberId}">
-                        			 <a href="#" id="open" style="color: #666666;">관람평 쓰기</a>
+                        			 <a href="javascript:void(0);" id="open" style="color: #666666;">관람평 쓰기</a>
                         		</c:when>
                         		<c:when  test="${not empty sessionScope.m &&sessionScope.m.memberId eq oneReview.memberId}">
-                        			 <a href="#" id="open" style="color: #666666;">작성완료</a>
+                        			 <a href="javascript:void(0);" style="color: #666666;">작성완료</a>
                         		</c:when>
                					<c:when  test="${empty sessionScope.m}">
-                        			 <a href="login.do" class="open" style="color: #666666;">로그인</a>
+                        			 <a href="login.do"  style="color: #666666;">로그인</a>
                         		</c:when>
                         	</c:choose>
                         	

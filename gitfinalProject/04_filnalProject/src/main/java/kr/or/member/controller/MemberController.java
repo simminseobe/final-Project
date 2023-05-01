@@ -749,7 +749,10 @@ public class MemberController {
 		ReservationCancelPageData rcpd = service.selectCancelBookList(reqPage, memberNo);
 		model.addAttribute("list2", rcpd.getList());
 		System.out.println("취소내역 : " + rcpd.getList());
-		model.addAttribute("pageNavi", rcpd.getPageNavi());
+		model.addAttribute("pageNavi2", rcpd.getPageNavi());
+		
+		
+		
 		return "member/purchaseDetail";
 	}
 	
