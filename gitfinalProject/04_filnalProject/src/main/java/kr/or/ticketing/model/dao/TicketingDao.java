@@ -13,6 +13,7 @@ import kr.or.admin.model.vo.Theater;
 import kr.or.giftticket.model.vo.GiftTicket;
 import kr.or.member.model.vo.Member;
 import kr.or.movie.model.vo.Movie;
+import kr.or.point.model.vo.AddUsePoint;
 import kr.or.ticketing.model.vo.Pay;
 import kr.or.ticketing.model.vo.TheaterLocalCount;
 import kr.or.ticketing.model.vo.Ticketing;
@@ -93,6 +94,17 @@ public class TicketingDao {
 		Integer mpAmount = sqlSession.selectOne("member.mpAmount",memberNo);
 		return mpAmount;
 	}
+
+	public int usePoint(AddUsePoint aup) {
+		System.out.println("dao전 : "+aup);
+		int result = sqlSession.insert("point.usePoint", aup);
+		System.out.println("dao후 : "+aup);
+		return result;
+	}
+
+	
+
+	
 
 	
 

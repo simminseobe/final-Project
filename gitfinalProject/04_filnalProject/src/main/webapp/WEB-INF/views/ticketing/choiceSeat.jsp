@@ -991,7 +991,7 @@
 				function calculateAmount() {
 					const adultPrice = 100;//18000
 					const teenPrice = 100;//12000
-					const specPrice = 100;//7000
+					const specPrice = 1000;//7000
 
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());
