@@ -1,3 +1,32 @@
+$(function(){
+    $(".movie-list-set").slice(0, 4).show(); // 최초 8개 선택
+    $("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
+    e.preventDefault();
+    $(".movie-list-set:hidden").slice(0, 4).show(); // 숨김 설정된 다음 4개를 선택하여 표시
+    if($(".movie-list-set:hidden").length == 0){ // 숨겨진 .moviePostImg가 있는지 체크
+    alert("더 이상 항목이 없습니다"); // 더 이상 로드할 항목이 없는 경우 경고
+    }
+    });
+    });
+
+$(".tabs>li").on("click",function(){
+    $(".tabs>li").removeClass("active-tab");
+    $(this).addClass("active-tab");
+    
+    const contents = $(".tabcontent");
+    contents.hide();
+
+    const span =$(".tabcontent1");
+    span.hide();
+
+
+    //요소배열.index(요소)요소배열중 요소가 몇번째인지 찾아줌
+    const index = $(".tabs>li").index(this);
+    contents.eq(index).show();
+    span.eq(index).show();
+});
+$(".tabs>li").eq(0).click();
+
 
  $(".tabs>li").on("click", function(){
     $(".tabs>li").removeClass("active-tab");
@@ -78,41 +107,31 @@ $(function(){
 });
 
 $(".whiteLike2").on("click",function(){
-    
     const whiteLike = "img/like-24.png";
     const blackLike = "img/likeBlack-24.png";
     const current  = $(this).attr("src");
     
-    /*reviewCommentNo를 받아옴*/ 
     const reviewCommentNo=$(this).next().next().children().eq(2).val();
-    console.log(reviewCommentNo);
-    /*memberNo를 받아옴*/
-    const memberNo=$(".sessionMemberNo").val();
-    console.log(memberNo);
-    /*memberId를 받아옴*/
     const memberId=$("[name=reviewLikeMember]").val();
-    
-    /*reviewCount*/
-    const reviewLikeCount=$(this).next().next().children().eq(0);
- 
-    const icon=$(this);
     
     if(current == whiteLike){
         
+        /*	
         $.ajax({
             url :"/reviewLikeInsert.do",
             type:"post",
-            data:{reviewCommentNo:reviewCommentNo,memberNo:memberNo},
+            data:{reviewNo:reviewNo,memberNo:memberNo},
             success:function(data){
                 if(data != null){
                     console.log(data);
                     
-                    const likeCountNumPlus=Number(reviewLikeCount.text())+1;
-                    const reviewlikeCountString=likeCountNumPlus.toString();
-                    reviewLikeCount.text(reviewlikeCountString);
-                    console.log(reviewLikeCount.text(reviewlikeCountString));
+                    const likeCountNumPlus=Number(likeCount.text())+1;
+                    const likeCountString=likeCountNumPlus.toString();
+                    likeCount.text(likeCountString);
+                    console.log(likeCount.text(likeCountString));
                     
-                    icon.attr("src",blackLike); 
+                    icon.attr("src",blackHeart); 
+                
                 
                 }else{
                     console.log("fail"); 
@@ -122,31 +141,17 @@ $(".whiteLike2").on("click",function(){
             
         });//ajax끝나는 지점
         
+        */   
         
+        
+        $(this).attr("src",blackLike); 
         
     }else{
-				
-		 $.ajax({
-		 		url :"/reviewLikeDelete.do",
-		        type:"post",
-		        data:{reviewCommentNo:reviewCommentNo,memberNo:memberNo},
-		        success:function(data){
-        		if(data != null){
-        			console.log(data);
-        			
-        			const likeCountNumMinus=Number(reviewLikeCount.text())-1;
-        			const reviewlikeCountString=likeCountNumMinus.toString();
-        			reviewLikeCount.text(reviewlikeCountString);
-        			console.log(reviewLikeCount.text(reviewlikeCountString));
-        			icon.attr("src",whiteLike); 			
-    		    
-        		}else{
-        			console.log("fail"); 
-        			
-        		}
-        	}
-        	
-        });//ajax끝나는 지점       
+        $(this).attr("src",whiteLike);        
+       
+
+
+
 
     }
 });

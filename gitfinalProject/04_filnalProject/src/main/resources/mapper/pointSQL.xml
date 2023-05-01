@@ -18,7 +18,7 @@
 	where rnum between #{start} and #{end}
 </select>
 
- <!-- 전체 예매 내역 수 조회 -->
+ <!-- 전체 내역 수 조회 -->
   <select id="totalCount" parameterType="_int" resultType="_int">
   	select count(*) from point_tbl where member_no=#{memberNo}
   </select>

@@ -23,7 +23,7 @@ import kr.or.movie.model.vo.WatchPoint;
 import kr.or.movie.model.vo.MyMovie;
 
 @Service
-public class MovieService {
+public class MovieService_bk {
 	@Autowired
 	private MovieDao dao;
 
