@@ -997,7 +997,7 @@
 											$("#addPoint").click();
 											
 											
-											//location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
+											location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
 
 
 										}
@@ -1041,7 +1041,6 @@
 					history.back();
 				});
 				
-				//function addTenPer(){
 					
 					$("#addPoint").on("click",function(){
 						/*
@@ -1064,6 +1063,9 @@
 							console.log(data)
 							if(data=="ok"){
 								alert("적립성공");
+								console.log("memberNo : "+memberNo);
+								console.log("savedMoney : "+savedMoney);
+								console.log("savedMoney : "+savedMoney+" *10% = addPoint : "+addPoint);
 							}else{
 								alert("실패");
 							}
@@ -1073,7 +1075,7 @@
 					});	
 					
 				});
-			//}
+			
 				//$("#addPoint").click();
 				/*
 			

@@ -84,6 +84,7 @@
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 <script>
+ <!-- 
    $("#addGiftTicket").on("click",function(){
     	const giftTicketSerial = $("[name=addGiftTicketSerial]").val();
     	const memberNo = $("[name=memberNo]").val();
@@ -125,6 +126,8 @@
 			
 		});	
 	});
+   
+   -->
    
    $("#addPoint").on("click",function(){
    	var addPoint = $("[name=addPoint]").val();

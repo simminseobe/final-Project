@@ -18,4 +18,18 @@
   	where
   		gift_ticket_serial=#{giftTicketSerial} and gift_ticket_status='사용가능' and member_no=#{memberNo}
   </update>
+  
+  <select id="selectTicketList" parameterType="map" resultType="kr.or.giftticket.model.vo.GiftTicket">
+  	select 
+  		gift_ticket_no as giftTicketNo,
+  		gift_ticket_serial as giftTicketSerial, 
+  		gift_ticket_name as giftTicketName, 
+  		add_months(to_date(gift_ticket_date,'YYYY-MM-DD'),12) as giftTicketDate , 
+  		gift_ticket_status as giftTicketStatus
+	from gift_ticket
+	where member_no=#{memberNo}
+  </select>
+  <select id="selectTicketListCount" parameterType="_int" resultType="_int">
+  	select count(*) from gift_ticket where member_no=#{memberNo}
+  </select>
 </mapper>

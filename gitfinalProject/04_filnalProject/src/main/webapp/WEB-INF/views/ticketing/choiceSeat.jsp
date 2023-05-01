@@ -963,6 +963,8 @@
 
 				
 				$("#reset-btn").on("click",function(){
+					location.reload();
+					/*
 					$('.now').text('0');
 					nowTotal(); // nowTotal() 함수 호출
 					calculateAmount();
@@ -973,6 +975,7 @@
 					const input = $("input");
 					input.removeClass("clicked")
 					$('.seat').prop('disabled', true );
+					*/
 				});
 				/*
 				$(".pageNext").on("click",function(){
