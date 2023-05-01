@@ -86,6 +86,8 @@ public class MovieController {
 		int classicSocietyCount=service.selectclassicSocietyCount();
 		model.addAttribute("classicSocietyCount",classicSocietyCount);
 		
+		//예매율 조회를 위함
+		
 		return "movie/movieAllList";
 	}
 	//마이무비스토리(사용자별 관람영화/관람평/무비포스트/선호영화)
@@ -168,7 +170,7 @@ public class MovieController {
 		//아이디로 관람평 조회
 		if(m!=null) {
 			String memberId=m.getMemberId();
-			Review oneReview = service.selectOneReview(memberId);
+			Review oneReview = service.selectOneReview(memberId,movieNo);
 			model.addAttribute("oneReview", oneReview);
 			
 		}
@@ -182,9 +184,13 @@ public class MovieController {
 		ArrayList<MovieVideo> mvList = service.selectOneMovieVideo(movieNo);//(6.영화비디오조회)
 		model.addAttribute("mvList", mvList);
 		
-		//9.예매율 없음
+		//예매율 
+		String movieTitle=mov.getMovieTitle();
+		double reservationRate =service.reservationRate(movieTitle);
+		model.addAttribute("reservationRate",reservationRate);
+		//누적관객수 조회
+		/* int totalAudience=service.totalAudience(movieNo); */
 		
-		//10.누적관객수 조회
 		
 		//실관람평점산출위한 watchPoint조회
 		Review watchPointAvg = service.onlyWatchPointAvg(movieNo);//(12.실관람평점영화평점)

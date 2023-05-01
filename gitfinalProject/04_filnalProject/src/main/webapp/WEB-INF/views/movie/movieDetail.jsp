@@ -482,7 +482,7 @@ z-index: 5;
                 <p class="d-day" style="float: left;">${mov.movieDate}</p>
                 <p class="contents-type" style="font-size: 22px; width: 300px; margin-left: 10px; display: inline-block;">#무비아일랜드토크 #무대인사</p>
                 <p class="title" style="font-size: 54px; position: absolute; left: 0; top: 100px;">${mov.movieTitle }</p>
-                <div class="btn-like" style="position: absolute; top: 35%; font-sizw:18px">
+                <div class="btn-like" style="position: absolute; top: 35%; font-size:18px">
 	                <span style="vertical-align: middle;">${movieLikeCount }명이</span>
 	                <span style="vertical-align: middle;">좋아해요</span>
                 </div>
@@ -492,7 +492,7 @@ z-index: 5;
                 </div>
                 <div class="reservationRate-wrap" style="position: absolute; left: 10%; bottom: 10%;">
                     <p class="reservationTitle" style="padding-bottom: 10px; font-size: 15px;">예매율</p>
-                    <p class="reservaionCount"style="text-align: center; font-size: 36px;">1<span class="reservavionPer" style="font-size: 12px;"> 위 (20%)</span></p>
+                    <p class="reservaionCount"style="text-align: center; font-size: 36px;">${reservationRate}<span class="reservavionPer" style="font-size: 12px;">%</span></p>
                 </div>
                 <div class="audienceCount-wrap" style="position: absolute; left: 20%; bottom: 10%;">
                     <p class="audienceTitle" style="padding-bottom: 10px; font-size: 15px;">누적관객수</p>
@@ -552,7 +552,7 @@ z-index: 5;
                                 </div>
                                 <div class="reserve-rate-circle" style="margin-top: 30px;">
                                     <h3>예매율</h3>
-                                    <span id="rankTag" style="display:inline-block; margin-top: 20px; font-size: 24px;">예매율나옴%</span>
+                                    <span id="rankTag" style="display:inline-block; margin-top: 20px; font-size: 24px;">${reservationRate}%</span>
                                 </div>    
                             </div>
                         </div>
@@ -916,10 +916,8 @@ z-index: 5;
 
 <script>
 	//누적관객수 차트
-	
-	
-	
-	
+
+
 	var ctx = document.getElementById('myChart2').getContext('2d');
 	var chart = new Chart(ctx, {
     // 만들기 원하는 차트의 유형
@@ -927,9 +925,9 @@ z-index: 5;
 
     // 데이터 집합을 위한 데이터
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['25일', '26일', '27일', '28일', '29일', '30일', '1일'],
         datasets: [{
-            label: '월별 누적관객수 단위(만)',
+            label: '일별 누적관객수 단위(명)',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: [0, 10, 5, 2, 20, 30, 45]
@@ -939,7 +937,7 @@ z-index: 5;
     // 설정은 여기서 하세요
     options: {}
 });
-	
+	 
 	
 	//관람포인트 차트
     var ctx = document.getElementById('myChart').getContext('2d');
