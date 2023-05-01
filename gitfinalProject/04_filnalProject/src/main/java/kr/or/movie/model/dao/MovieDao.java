@@ -15,7 +15,6 @@ import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.WatchPoint;
-import kr.or.movie.model.vo.MyMovie;
 
 @Repository
 public class MovieDao {
@@ -57,10 +56,10 @@ public class MovieDao {
 
 		return mov;
 	}
-	public ArrayList<MyMovie> selectOneMovieAll(int memberNo) {
+	public ArrayList<Movie> selectOneMovieAll(int memberNo) {
 		List list = sqlSession.selectList("movie.selectOneMovieAll", memberNo);
 
-		return  (ArrayList<MyMovie>)list;
+		return  (ArrayList<Movie>)list;
 	}
 
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
@@ -160,16 +159,7 @@ public class MovieDao {
 		List list = sqlSession.selectList("movie.oneMoviePostAll", movieNo);
 		return (ArrayList<MoviePost>) list;
 	}
-<<<<<<< HEAD
-	
-	public ArrayList<MoviePost> selectOneMovieAllPost2(String memberId) {
-		List list = sqlSession.selectList("movie.oneMoviePostAll2", memberId);
-		return (ArrayList<MoviePost>) list;
-	}
-
-=======
 	//무비포스트 상세보기를 위함
->>>>>>> main
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost", moviePostNo);
 
@@ -198,15 +188,7 @@ public class MovieDao {
 		int moviePostCount = sqlSession.selectOne("movie.moviePostCount", movieNo);
 		return moviePostCount;
 	}
-<<<<<<< HEAD
-	public int selectMoviePostCount2(String memberId) {
-		int moviePostCount = sqlSession.selectOne("movie.moviePostCount2", memberId);
-		return moviePostCount;
-	}
-
-=======
 	//무비포스트 댓글 삭제
->>>>>>> main
 	public int deletePostComment(int moviePostCommentNo) {
 		int deletePostComment = sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
 		return deletePostComment;
@@ -293,22 +275,13 @@ public class MovieDao {
 		int result =sqlSession.selectOne("movie.classicSocietyCount");
 		return result;
 	}
-	//사용자 선호영화 총갯수
+	//사용자 영화 총갯수
 	public int totalFavoriteMovieCount(int memberNo) {
 		int result =sqlSession.selectOne("movie.favoriteMovieCount", memberNo);
 		return result;
 		
 	}
-<<<<<<< HEAD
-	//사용자 관람영화 총갯수
-		public int totalmyMovieListCount(int memberNo) {
-			int result =sqlSession.selectOne("movie.myMovieListCount", memberNo);
-			return result;
-			
-		}
-=======
 	//영화 포스터(movieFile)전체 조회를 위함
->>>>>>> main
 	public ArrayList<MovieFile> selectFileList(int movieNo) {
 		List list = sqlSession.selectList("movie.selectFileList", movieNo);
 		return (ArrayList<MovieFile>) list;
