@@ -33,7 +33,7 @@ import kr.or.movie.model.vo.WatchPoint;
 import sun.util.logging.resources.logging;
 
 @Controller
-public class MovieController {
+public class MovieController_bk {
 	@Autowired
 	private MovieService service;
 

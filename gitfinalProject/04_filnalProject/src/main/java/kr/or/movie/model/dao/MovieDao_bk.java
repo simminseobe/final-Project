@@ -18,7 +18,7 @@ import kr.or.movie.model.vo.WatchPoint;
 import kr.or.movie.model.vo.MyMovie;
 
 @Repository
-public class MovieDao {
+public class MovieDao_bk {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 

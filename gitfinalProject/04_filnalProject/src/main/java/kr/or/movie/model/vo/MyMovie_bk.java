@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyMovie {
+public class MyMovie_bk {
 	private int memberNo;
 	private String memberId;
 	private int movieNo;

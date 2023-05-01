@@ -893,11 +893,14 @@
 						}
 					});
 				});
+				
+				$(".scroll-container>ul>li").eq(0).click();
 
 				var movieTitle;
 				var theaterLocal;
 				// 영화 누르면 영화에 저장되어있는 상영지역 출력
 				function selMovie(button) {
+					
 					movieTitle = $(button).text();
 					$.ajax({
 						url: "/choiceDayTheater.do",

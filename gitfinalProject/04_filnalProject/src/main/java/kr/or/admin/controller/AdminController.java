@@ -27,6 +27,7 @@ import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
+import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
@@ -44,6 +45,28 @@ public class AdminController {
 	@RequestMapping("/adminPage.do")
 	public String adminPage() {
 		return "admin/adminPage";
+	}
+
+	@RequestMapping(value = "/manageMember.do")
+	public String manageMember(Model model) {
+		ArrayList<Member> list = new ArrayList<Member>();
+
+		list = service.selectAllMember();
+
+		model.addAttribute("list", list);
+
+		return "admin/manageMember";
+	}
+
+	@RequestMapping(value = "/updateMemberLevel.do")
+	public String updateMemberLevel(Member member) {
+		int result = service.updateMemberLevel(member);
+
+		if (result > 0) {
+			return "redirect:/manageMember.do";
+		} else {
+			return "redirect:/";
+		}
 	}
 
 	@RequestMapping(value = "/registerMovieFrm.do")
@@ -444,7 +467,7 @@ public class AdminController {
 	public String registerConsultation(Consultation consultation) {
 		int result = service.insertConsultation(consultation);
 
-		return String.valueOf(result);
+		return String.valueOf(consultation.getConsultationNo());
 	}
 
 	@RequestMapping(value = "/adminChat.do")
@@ -452,5 +475,28 @@ public class AdminController {
 		model.addAttribute("chat", chat);
 
 		return "admin/adminChat";
+	}
+
+	@RequestMapping(value = "/adminCenter.do")
+	public String adminCenter() {
+		return "admin/adminCenter";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectChat.do", produces = "application/json;charset=utf-8")
+	public String selectChat(int consultationNo) {
+		ArrayList<Chat> list = new ArrayList<Chat>();
+
+		list = service.selectChat(consultationNo);
+
+		return new Gson().toJson(list);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteConsultation.do", produces = "application/json;charset=utf-8")
+	public String deleteConsultation(String consultationNo) {
+		int result = service.deleteConsultation(Integer.parseInt(consultationNo));
+
+		return String.valueOf(result);
 	}
 }

@@ -158,6 +158,7 @@
 		sum(point_amount) as pointAmount 
 	from point_tbl 
 	where member_no=#{memberNo}
+	and point_detail='사용가능'
  </select>
   
   <!-- 예매/구매 내역 조회 -->
@@ -258,4 +259,28 @@
   	select count(*) from TICKETING_TBL
   </select>
   
+  <select id="selectAllMember" resultType="m">
+  	select 
+  		member_no as memberNo,
+  		member_id as memberId,
+  		member_pw  as memberPw,
+  		member_name as memberName,
+  		member_phone as memberPhone,
+  		member_birth_year as memberBirthYear,
+  		member_birth_month as memberBirthMonth,
+  		member_birth_day as memberBirthDay,
+  		member_email as memberEmail,
+  		member_level as memberLevel,
+  		enroll_date as enrollDate,
+  		member_gender as memberGender,
+  		member_filename as memberFilename,
+  		member_filepath as memberFilepath,
+  		social as social
+  	from member
+  </select>
+  <update id="updateMemberLevel" parameterType="m">
+  	update member set 
+  		member_level=#{memberLevel}
+  	where member_no=#{memberNo}
+  </update>
 </mapper>

@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.movie-list-wrap{
+    margin: 0 auto;
+}
+.movie-list-menu>ul{
+    display: flex;
+   
+}
+.movie-list-menu>ul>li{
+    margin-top: 30px;
+    list-style:none;
+    height: 40px;
+    line-height: 40px;
+    width: calc(100% / 5);
+    text-align: center;
+    border: 1px solid #503396;
+    border-right: 1px solid #503396;
+    border-left:none ;
+    
+    
+}
+.movie-list-menu>ul>li:first-child{
+    border-left: 1px solid #503396;
+}
+
+
+.movie-list-menu>ul>li .active-tab{
+    box-sizing: border-box;
+    border-bottom: none;
+   color: #503396;
+}
+.movieAllList-like>.likeCount{
+    border: 1px solid #503396;
+   background-color: #fff;
+    cursor: pointer;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.movieAllList-reserve>button{
+    cursor: pointer;
+    border: 1px solid #503396; 
+    background-color: #503396;
+    color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.movie-list-content-top{
+    overflow: hidden;
+}
+.movie-list-content-top span{
+    font-size: 24px;
+}
+
+.searchBox{
+    position: relative;
+    border: 1px solid rgb(54, 34, 34);
+    border-radius: 5px;
+    float: right;
+}
+.searchBox>input{
+    width: 150px;
+    height: 34px;
+    padding: 0 10px;
+    margin-right: 30px;  
+    border-style: none;
+    border-radius: 5px;
+}
+
+.searchBox>img{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    right: 0px;
+   
+
+}
+.movie-info{
+    overflow: hidden;
+}
+.reserve-rate{
+    float: left;
+    padding-top: 20px;
+    margin-right: 20px;
+   
+}
+.start-date{ 
+    padding-top: 20px;
+}
+
+.cover{
+    position: absolute;
+    width: 230px;
+    height: 331px;
+    background-color: rgba(0,0,0,0.5);
+    left: 0;
+    top: 600px;
+    padding: 10px;
+}
+
+
+.movie-all-list>.movie-list-set>a{
+    position: relative;
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    color: #000;
+    overflow: hidden;
+    width: 200px;
+    height: 331px;
+    
+}
+
+.movie-all-list>.movie-list-set>a:hover>.cover{
+    top: 0;
+}
+.movie-all-list{
+    float: left;
+    margin-left: 60px;
+}
+.bottom-btn>button{
+    width: 1220px;
+    height: 50px;
+    border: 1px solid #503396;
+    background-color: #503396;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+

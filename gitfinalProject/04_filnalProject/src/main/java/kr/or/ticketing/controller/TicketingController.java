@@ -154,10 +154,20 @@ public class TicketingController {
 	 }
 	 @ResponseBody
 	 @RequestMapping(value="/selectPoint.do", produces = "application/json;charset=utf-8")
-	 public String selectPoint(int memberNo) {
+	 public String selectPoint(@SessionAttribute(required = false) Member m, Model model) {
+		 Integer mpAmount = service.mpAmount(m.getMemberNo());
 		 
-		 return null;
+		 if(mpAmount==null) { 
+				model.addAttribute("mpAmount", mpAmount);
+			}else {
+				int mpAmountInt = mpAmount.intValue();  
+				model.addAttribute("mpAmount", mpAmountInt);
+			}
+		 
+		 
+		 return new Gson().toJson(mpAmount);
 	 }
+	 
 	 
 	 
 	 

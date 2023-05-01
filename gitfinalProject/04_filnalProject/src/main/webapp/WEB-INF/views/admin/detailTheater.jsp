@@ -232,7 +232,7 @@
 				}
 
 				.tab-list>ul>li:last-child {
-					width: 50%;
+					width: 100%;
 				}
 
 				.tab-list>ul>li>a {
@@ -465,7 +465,7 @@
 					<div class="tab-list">
 						<ul>
 							<li class="on"><a href="#">극장정보</a></li>
-							<li><a href="#">상영시간표</a></li>
+							<!--<li><a href="#">상영시간표</a></li>-->
 						</ul>
 					</div>
 					<div class="branch-content-wrap">
