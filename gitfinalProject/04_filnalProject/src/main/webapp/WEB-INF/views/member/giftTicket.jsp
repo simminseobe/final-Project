@@ -18,22 +18,24 @@
 	<div class="wrapper">
 		<div class="booklist-wrap">
 			<div class="booklist-header">
-				<h2>포인트 내역</h2>
+				<h2>영화관람권</h2>
 			</div>
 			
 			<div class="tab-content">
 				<table>
 					<tbody>
 						<tr>
-							<th>일자</th>
-							<th>구분</th>
-							<th>포인트</th>
+							<th>일련번호</th>
+							<th>티켓명</th>
+							<th>유효기간</th>
+							<th>상태</th>
 						</tr>
-						<c:forEach items="${list}" var="point" varStatus="i">
+						<c:forEach items="${list}" var="giftTicket" varStatus="i">
 						<tr>
-							<td>${point.pointDate }</td>
-							<td>${point.pointStatus }</td>
-							<td>${point.pointAmount }</td>
+							<td>${giftTicket.giftTicketSerial }</td>
+							<td>${giftTicket.giftTicketName }</td>
+							<td>${giftTicket.giftTicketDate }</td>
+							<td>${giftTicket.giftTicketStatus }</td>
 						</tr>
 						</c:forEach>							
 						<tr>
@@ -77,5 +79,6 @@
 				</td>
 </table>
 
-	<script src="/resources/js/member/purchaseDetail.js" ></script>
+	<script src="/resources/js/member/purchaseDetail.js">
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

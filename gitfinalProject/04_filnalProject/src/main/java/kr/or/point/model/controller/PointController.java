@@ -60,7 +60,6 @@ public class PointController {
 	public String myPoint(int reqPage, Model model, int memberNo) {
 		PointPageData ppd = service.myPoint(reqPage,memberNo);
 		model.addAttribute("list", ppd.getList());
-		System.out.println(ppd.getList());
 		model.addAttribute("pageNavi", ppd.getPageNavi());
 		
 		return "member/myPoint";
