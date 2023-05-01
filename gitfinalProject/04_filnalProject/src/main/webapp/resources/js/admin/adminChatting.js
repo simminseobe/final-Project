@@ -11,7 +11,7 @@ $(document).ready(function () {
     memberLevel = $("#memberLevel").val();
 
     // 웹 소켓 연결 시도
-    ws = new WebSocket("ws://14.37.168.225/adminChatSocket.do");
+    ws = new WebSocket("ws://192.168.10.7/adminChatSocket.do");
     // 웹 소켓 연결 성공시 실행할 함수 지정
     ws.onopen = startChat;
     // 서버에서 데이터를 받으면 처리할 함수 지정
@@ -25,7 +25,7 @@ $(document).ready(function () {
         url: "/selectChat.do",
         method: "POST",
         dataType: "json",
-        data: {consultationNo: consultationNo},
+        data: { consultationNo: consultationNo },
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 if (chatMember == data[i].chatMember) {
@@ -33,10 +33,10 @@ $(document).ready(function () {
                         appendChat("<div class='chat right'>" + data[i].chatContent + "</div>");
                     }
                 } else {
-                         appendChat("<div class='chat left'><span class='chatId'>"
-							+ data[i].chatMember + " : </span>" + data[i].chatContent + "</div>");                 
-                }						
-			}
+                    appendChat("<div class='chat left'><span class='chatId'>"
+                        + data[i].chatMember + " : </span>" + data[i].chatContent + "</div>");
+                }
+            }
         },
     });
 });

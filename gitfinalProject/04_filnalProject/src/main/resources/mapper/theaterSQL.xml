@@ -18,7 +18,7 @@
   </select>
   <insert id="insertTheater" parameterType="theater">
   	insert into theater_tbl
-  	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, 'admin')
+  	values (theater_tbl_seq.nextval, #{theaterLocal}, #{theaterBranch}, #{theaterAddr}, #{theaterFacility}, #{theaterContent}, #{enrollMember})
   </insert>
   <delete id="deleteTheater" parameterType="_int">
   	delete from theater_tbl where theater_no=#{theaterNo}

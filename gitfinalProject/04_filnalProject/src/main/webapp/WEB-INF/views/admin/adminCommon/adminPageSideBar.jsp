@@ -106,7 +106,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">로그인 되었습니다.</div>
-                    admin1
+                    ${sessionScope.m.memberId}
                 </div>
             </nav>
         </div>

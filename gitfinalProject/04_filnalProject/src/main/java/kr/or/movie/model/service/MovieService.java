@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import kr.or.admin.model.vo.Schedule;
 import kr.or.movie.model.dao.MovieDao;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.MovieFile;
@@ -20,6 +21,8 @@ import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewPageData;
 import kr.or.movie.model.vo.ReviewWatch;
 import kr.or.movie.model.vo.WatchPoint;
+import kr.or.ticketing.model.vo.Ticketing;
+import kr.or.movie.model.vo.MyMovie;
 
 @Service
 public class MovieService {
@@ -36,6 +39,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
 			String movieTitle = movie.getMovieTitle();
+			double reservationRate = dao.reservationRate(movieTitle);
+			movie.setReservationRate(reservationRate);
 			
 		}
 		
@@ -51,6 +56,9 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			String movieTitle = movie.getMovieTitle();
+			double reservationRate = dao.reservationRate(movieTitle);
+			movie.setReservationRate(reservationRate);
 
 		}
 		
@@ -65,6 +73,9 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			String movieTitle = movie.getMovieTitle();
+			double reservationRate = dao.reservationRate(movieTitle);
+			movie.setReservationRate(reservationRate);
 			
 		}	
 		
@@ -79,6 +90,9 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			String movieTitle = movie.getMovieTitle();
+			double reservationRate = dao.reservationRate(movieTitle);
+			movie.setReservationRate(reservationRate);
 			
 		}	
 		
@@ -93,6 +107,9 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			String movieTitle = movie.getMovieTitle();
+			double reservationRate = dao.reservationRate(movieTitle);
+			movie.setReservationRate(reservationRate);
 			
 		}	
 		
@@ -108,6 +125,9 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
+			String movieTitle = movie.getMovieTitle();
+			double reservationRate = dao.reservationRate(movieTitle);
+			movie.setReservationRate(reservationRate);
 			
 		}	
 		return favoriteMovieList;
@@ -120,19 +140,28 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		 if(mov !=null) {
 			 MovieFile movieFile = dao.selectMovieFile(movieNo);
 			 mov.setMainFile(movieFile);
+			//전체 누적관객수
+			 	String movieTitle=mov.getMovieTitle();
+				int totalAudience =dao.totalAudience(movieTitle);
+				mov.setTotalAudience(totalAudience);
+			
+				
 		 }
 		return mov;
 	}
-	public ArrayList<Movie> selectOneMovieAll(int memberNo) {
-		ArrayList<Movie> list = dao.selectOneMovieAll(memberNo);
+	public ArrayList<MyMovie> selectOneMovieAll2(String memberId) {
+		ArrayList<MyMovie> list = dao.selectOneMovieAll2(memberId);
+		
+		/*
 		for(Movie movie : list) {
 			int movieNum= movie.getMovieNo();
 			MovieFile movieFile = dao.selectMovieFile(movieNum);
 			movie.setMainFile(movieFile);
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
-			
 		}	
+			
+		}	*/
 		return list;
 	}
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
@@ -265,6 +294,14 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 		return postAllList;
 	}
+	/*
+	public ArrayList<MoviePost> oneMovieAllPost2(String memberId) {
+		ArrayList<MoviePost> postAllList=dao.selectOneMovieAllPost2(memberId);
+		
+		
+		return postAllList;
+	}
+	*/
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne=dao.selectDetailPost(moviePostNo);
 		
@@ -286,6 +323,10 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 	}
 	public int moviePostCount(int movieNo) {
 		int moviePostCount = dao.selectMoviePostCount(movieNo);
+		return moviePostCount;
+	}
+	public int moviePostCount2(String memberId) {
+		int moviePostCount = dao.selectMoviePostCount2(memberId);
 		return moviePostCount;
 	}
 	public int deletePostComment(int moviePostCommentNo) {
@@ -367,10 +408,15 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 	public int selectclassicSocietyCount() {
 		return dao.totalClassicSocietyCount();
 	}
-	//사용자 영화 총 갯수 조회를 위함
+	//사용자 선호영화 총 갯수 조회를 위함
 	public int selectFavoriteMovieCount(int memberNo) {
 		return dao.totalFavoriteMovieCount(memberNo);
 		
+	}
+	//사용자 관람영화 총 갯수 조회를 위함
+		public int selectmyMovieListCount(int memberNo) {
+			return dao.totalmyMovieListCount(memberNo);
+			
 	}
 	//스틸컷(movie_file) 조회
 	public ArrayList<MovieFile> selectFileList(int movieNo) {
@@ -390,6 +436,11 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 	public double reservationRate(String movieTitle) {
 		double result = dao.reservationRate(movieTitle);
 		return result;
+	}
+	public ArrayList<Schedule> selectDayTotalAudience(String movieTitle) {
+		 //일자별 누적관객수 
+		 ArrayList<Schedule> dayTotalAudience =dao.dayTotalAudience(movieTitle); 
+		return dayTotalAudience;
 	}
 
 

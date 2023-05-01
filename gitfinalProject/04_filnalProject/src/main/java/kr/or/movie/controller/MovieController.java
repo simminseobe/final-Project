@@ -15,15 +15,18 @@ import org.springframework.web.context.request.SessionScope;
 
 import com.google.gson.Gson;
 
+import kr.or.admin.model.vo.Schedule;
 import kr.or.member.model.vo.Member;
 import kr.or.movie.model.service.MovieService;
 import kr.or.movie.model.vo.Movie;
 import kr.or.movie.model.vo.myMovie;
+import kr.or.ticketing.model.vo.Ticketing;
 import kr.or.movie.model.vo.MovieFile;
 import kr.or.movie.model.vo.MovieLike;
 import kr.or.movie.model.vo.MoviePost;
 import kr.or.movie.model.vo.MoviePostComment;
 import kr.or.movie.model.vo.MovieVideo;
+import kr.or.movie.model.vo.MyMovie;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.ReviewLike;
 import kr.or.movie.model.vo.ReviewPageData;
@@ -51,6 +54,8 @@ public class MovieController {
 		int movieListCount= service.selectMovieListCount();
 		model.addAttribute("movieListCount", movieListCount);
 		
+		
+	
 		//사용자선호 영화
 		ArrayList<Movie> favoriteMovieList =service.selectFavoriteMovie(memberNo);
 		model.addAttribute("favoriteMovieList", favoriteMovieList);
@@ -86,13 +91,13 @@ public class MovieController {
 		int classicSocietyCount=service.selectclassicSocietyCount();
 		model.addAttribute("classicSocietyCount",classicSocietyCount);
 		
-		//예매율 조회를 위함
+	
 		
 		return "movie/movieAllList";
 	}
 	//마이무비스토리(사용자별 관람영화/관람평/무비포스트/선호영화)
 		@RequestMapping(value="/myMovie.do")
-		public String myMovie(Model model, @SessionAttribute(required = false) Member m, UserMovieVO umv) {
+		public String myMovie(Model model, @SessionAttribute(required = false) Member m) {
 			int memberNo = 0;
 			String memberId = "";
 			if(m!=null) {
@@ -107,13 +112,15 @@ public class MovieController {
 					int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
 					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
 					 
-					//사용자 관람영화
+					//사용자 관람영화+전체누적관객수
 					ArrayList<Movie> mov = service.selectOneMovieAll(memberNo);		//1, 7(1.영화정보 / 7.영화포스터file)
 					model.addAttribute("mov", mov);
 					//ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
 					//model.addAttribute("pageList",rpd.getList());
 					//model.addAttribute("pageNavi",rpd.getPageNavi());
 
+					
+					
 					
 					//4.사용자 무비포스트 리스트(무비포스트 리스트)
 					ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(memberNo);
@@ -130,7 +137,7 @@ public class MovieController {
 					//사용자 관람평 갯수를 위한 조회
 					int reviewListCount= service.selectReviewListCount(memberNo);
 					model.addAttribute("reviewListCount", reviewListCount);
-					
+					*/
 					
 			return "member/myMovie";
 			
@@ -142,9 +149,10 @@ public class MovieController {
 			memberNo = m.getMemberNo();
 		}
 		
-		
 		Movie mov = service.selectOneMovie(movieNo);		//1, 7(1.영화정보 / 7.영화포스터file)
 		model.addAttribute("mov", mov);
+		System.out.println(mov);
+		
 		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
 		model.addAttribute("pageList",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
@@ -155,6 +163,9 @@ public class MovieController {
 		 model.addAttribute("movieLikeCount",movieLikeCount);
 		 
 		
+		
+		 
+		 
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
 		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
@@ -190,6 +201,7 @@ public class MovieController {
 		model.addAttribute("reservationRate",reservationRate);
 		//누적관객수 조회
 		/* int totalAudience=service.totalAudience(movieNo); */
+		
 		
 		
 		//실관람평점산출위한 watchPoint조회
@@ -376,7 +388,15 @@ public class MovieController {
 			return "fail";
 		}
 	}
-
+	//일자별 누적관객수
+	@ResponseBody
+	@RequestMapping(value="/dayTotalAudience.do",produces = "application/json;charset=utf-8")
+	public String dayTotalAudience(String movieTitle) {
+		ArrayList<Schedule> dayTotalAudience=service.selectDayTotalAudience(movieTitle);
+		System.out.println(dayTotalAudience);
+		
+		return new Gson().toJson(dayTotalAudience);
+	}
 	
 	
 }

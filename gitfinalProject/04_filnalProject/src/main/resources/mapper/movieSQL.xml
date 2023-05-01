@@ -223,6 +223,22 @@
 				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
 				and member.member_no=#{memberNo}
 		</select>
+		<select id="selectOneMovieAll2" parameterType="_int" resultType="movie">
+			select DISTINCT 
+				movie_file.movie_file_name as movieFileName , 
+				movie_tbl.movie_title as movieTitle , 
+				schedule_tbl.schedule_start as scheduleStart , 
+				schedule_tbl.theater_branch as theaterBranch ,
+				movie_tbl.movie_no as movieNo
+			from movie_file, member, schedule_tbl, movie_tbl, ticketing_tbl, pay
+			where movie_tbl.movie_no = movie_file.movie_no
+				and movie_tbl.movie_title = schedule_tbl.movie_title
+				and movie_file.movie_file_category='메인'
+				and member.member_no = pay.member_no
+				and pay.pay_no = ticketing_tbl.pay_no
+				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
+				and member.member_id=#{memberId}
+		</select>
 	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
 		select 
 			movie_video_no as videoNo,
@@ -279,7 +295,7 @@
 	</select>
 	<select id="selectWatchPointAvg" parameterType="_int" resultType="review">
 		select
-			trunc(avg(movie_score)) as movieScoreAvg
+			nvl(trunc(avg(movie_score)),0) as movieScoreAvg
 			from watch_point join review using(review_comment_no)
 		where 
 			movie_no=#{_parameter}
@@ -420,6 +436,22 @@ delete from movie_video where movie_video_no=
     left join movie_file f on(p.movie_file_no=f.movie_file_no) 
     left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.movie_no=#{_parameter}
 </select>
+<select id="oneMoviePostAll2" resultType="moviePost">
+	select
+		movie_post_no as moviePostNo,
+		p.movie_no as movieNo,
+		p.movie_video_no as movieVideoNo,
+		p.movie_file_no as movieFileNo,
+		member_id as memberId,
+		movie_title as movieTitle,
+		movie_post_content as moviePostContent,
+		movie_post_date as moviePostDate,
+		movie_file_path as movieFilePath,
+        movie_video_link as videoLink
+    from movie_post p 
+    left join movie_file f on(p.movie_file_no=f.movie_file_no) 
+    left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.movie_id=#{_parameter}
+</select>
 <select id="detailPost" resultType="moviePost">
 	select
 		movie_post_no as moviePostNo,
@@ -548,6 +580,24 @@ select count(*) from
             (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo}) as likeCheck
 		 from movie_tbl m where (select count(*) from movie_like ml where ml.movie_no=m.movie_no and member_no=#{memberNo})=1)
 </select>
+<!-- 사용자 관람영화 총 갯수 조회를 위함 -->
+<select id="myMovieListCount" resultType="_int" parameterType="_int">
+select count(*) from
+	  (select DISTINCT 
+				movie_file.movie_file_name as movieFileName, 
+				movie_tbl.movie_title as movieTitle, 
+				schedule_tbl.schedule_start as scheduleStart, 
+				schedule_tbl.theater_branch as theaterBranch,
+				movie_tbl.movie_no as movieNo
+			from movie_file, member, schedule_tbl, movie_tbl, ticketing_tbl, pay
+			where movie_tbl.movie_no = movie_file.movie_no
+				and movie_tbl.movie_title = schedule_tbl.movie_title
+				and movie_file.movie_file_category='메인'
+				and member.member_no = pay.member_no
+				and pay.pay_no = ticketing_tbl.pay_no
+				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
+				and member.member_no=#{memberNo})
+</select>
 <!-- 영화 좋아요 총 갯수 -->
 <select id="totalMovieLike" resultType="_int" parameterType="_int">
 	select count(*) from movie_like where movie_no=#{movieNo}
@@ -571,6 +621,7 @@ select count(*) from
 		from review join watch_point using(review_comment_no)
 		where member_id=#{memberId} and movie_no=#{movieNo}
 </select>
+<!-- 예매율 -->
 <select id="reservationRate" resultType="_double" parameterType="string">
 SELECT
     trunc(
@@ -578,9 +629,45 @@ SELECT
     (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD') AND MOVIE_TITLE=#{movieTitle})) / (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD')))*100,1)
     AS RESERVE_RATE
     FROM DUAL
-    
+</select>
+<!-- 전체누적관객수 -->
+<select id="totalAudience" resultType="_int" parameterType="string">	
+	 SELECT 
+        COUNT(*)
+    FROM TICKETING_TBL
+    LEFT JOIN SCHEDULE_TBL USING(SCHEDULE_NO)
+    WHERE MOVIE_TITLE = #{MOVIE_TITLE}
+</select>
+<!-- 일별 누적관객수 -->
+<select id="dayTotalAudience" resultType="schedule" parameterType="string">
+	    SELECT 
+        TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') AS SCHEDULESTART,
+        COUNT(*) AS AUDIENCECNT
+    FROM TICKETING_TBL
+    LEFT JOIN SCHEDULE_TBL USING(SCHEDULE_NO)
+    WHERE MOVIE_TITLE = #{movieTitle} AND TO_CHAR(SCHEDULE_START,'YYYY-MM-DD')>= TO_CHAR(SYSDATE-4,'YYYY-MM-DD')
+    GROUP BY TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') ORDER BY SCHEDULESTART ASC
 
 </select>
-
-
+<select id="selectMovieList" resultType="movie">
+	select 
+		 	movie_no as movieNo,
+			movie_title as movieTitle,
+			movie_director as movieDirector,
+			movie_actor as movieActor,
+			movie_genre as movieGenre,
+			movie_time as movieTime,
+			to_char(movie_date,'yyyy-mm-dd')  as movieDate,
+			movie_rating as movieRating,
+			movie_content as movieContent,
+			film_society as filmSociety,
+			classic_society as classicSociety,
+			special_movie as specialMovie,
+			enroll_member as enrollMember,
+			movie_type as movieType
+		 from movie_tbl 
+</select>
+<select id="selectMovieCnt" resultType="_int">
+  	select count(*) from movie_tbl
+  </select>
 </mapper>

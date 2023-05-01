@@ -283,4 +283,7 @@
   		member_level=#{memberLevel}
   	where member_no=#{memberNo}
   </update>
+  <select id="selectMemberCnt" resultType="_int">
+  	select count(*) from member
+  </select>
 </mapper>

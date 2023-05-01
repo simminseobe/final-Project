@@ -123,8 +123,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 		for (Consultation consultation : consultationMap.values()) {
 			if (consultation.hasMember(session)) {
-				consultationRoomToRemove = consultation;
+				consultationRoomToRemove = new Consultation();
+				consultationRoomToRemove.setConsultationNo(consultation.getConsultationNo());
+				consultationRoomToRemove
+						.setMemberMap(new HashMap<WebSocketSession, String>(consultation.getMemberMap()));
+
 				consultation.removeMember(session);
+
 				break;
 			}
 		}

@@ -26,6 +26,30 @@ public class AdminService {
 	@Autowired
 	private MovieDao movieDao;
 
+	public int selectMemberCnt() {
+		int memberCnt = dao.selectMemberCnt();
+
+		return memberCnt;
+	}
+
+	public int selectMovieCnt() {
+		int movieCnt = dao.selectMovieCnt();
+
+		return movieCnt;
+	}
+
+	public int selectSchduleCnt() {
+		int schduleCnt = dao.selectSchduleCnt();
+
+		return schduleCnt;
+	}
+
+	public int selectConsultationCnt() {
+		int consultationCnt = dao.selectConsultationCnt();
+
+		return consultationCnt;
+	}
+
 	public ArrayList<Member> selectAllMember() {
 		ArrayList<Member> list = dao.selectAllMember();
 
