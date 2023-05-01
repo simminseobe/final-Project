@@ -107,7 +107,7 @@ public class MovieController {
 					//사용자 선호 영화  총 갯수 조회를 위함
 					int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
 					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
-					 
+					 /*
 					// 사용자 관람영화
 					ArrayList<MyMovie> list = service.selectOneMovieAll2(memberId); // 1, 7(1.영화정보 / 7.영화포스터file)
 					model.addAttribute("list", list);
@@ -118,12 +118,14 @@ public class MovieController {
 					// ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
 					// model.addAttribute("pageList",rpd.getList());
 					// model.addAttribute("pageNavi",rpd.getPageNavi());
-
+					*/
+					/*
 					// 4.사용자 무비포스트 리스트(무비포스트 리스트)
 					ArrayList<MoviePost> oneMoviepostAll = service.oneMovieAllPost2(memberId);
 					model.addAttribute("oneMoviepostAll", oneMoviepostAll);
 					System.out.println(oneMoviepostAll);
-
+					*/
+					/*
 					// 사용자 무비포스트 총 개수
 					int moviePostCount = service.moviePostCount2(memberId);
 					model.addAttribute("moviePostCount", moviePostCount);
@@ -135,7 +137,7 @@ public class MovieController {
 					//사용자 관람평 갯수를 위한 조회
 					int reviewListCount= service.selectReviewListCount(memberNo);
 					model.addAttribute("reviewListCount", reviewListCount);
-					
+					*/
 					
 			return "member/myMovie";
 			

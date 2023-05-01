@@ -268,12 +268,14 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 		return postAllList;
 	}
+	/*
 	public ArrayList<MoviePost> oneMovieAllPost2(String memberId) {
 		ArrayList<MoviePost> postAllList=dao.selectOneMovieAllPost2(memberId);
 		
 		
 		return postAllList;
 	}
+	*/
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne=dao.selectDetailPost(moviePostNo);
 		
