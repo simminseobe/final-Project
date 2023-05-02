@@ -108,6 +108,7 @@ public class MovieController {
 					//사용자선호 영화
 					ArrayList<Movie> favoriteMovieList =service.selectFavoriteMovie(memberNo);
 					model.addAttribute("favoriteMovieList", favoriteMovieList);
+					System.out.println(favoriteMovieList);
 					//사용자 선호 영화  총 갯수 조회를 위함
 					int favoriteMovieCount = service.selectFavoriteMovieCount(memberNo);
 					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
@@ -129,7 +130,6 @@ public class MovieController {
 					//4.사용자 무비포스트 리스트(무비포스트 리스트)
 					ArrayList<MoviePost> oneMoviePost=service.oneMovieAllPost2(memberId);
 					model.addAttribute("oneMoviePost",oneMoviePost);
-					System.out.println(oneMoviePost);
 					//사용자 무비포스트 총 갯수
 					int moviePostCount=service.moviePostCount2(memberId);
 					model.addAttribute("moviePostCount",moviePostCount);

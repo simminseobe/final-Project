@@ -28,16 +28,7 @@ $(".tabs>li").on("click",function(){
 $(".tabs>li").eq(0).click();
 
 
- $(".tabs>li").on("click", function(){
-    $(".tabs>li").removeClass("active-tab");
-    $(this).addClass("active-tab");
-    const contents = $(".tabcontent");
-    contents.hide();
-    const index = $(".tabs>li").index(this);
-    contents.eq(index).show();
 
- });
-$(".tabs>li").eq(0).click();
 
 
 /*별점표시*/

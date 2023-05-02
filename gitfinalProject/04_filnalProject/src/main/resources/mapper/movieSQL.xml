@@ -227,7 +227,7 @@
 			select DISTINCT 
 				movie_file.movie_file_name as movieFileName , 
 				movie_tbl.movie_title as movieTitle , 
-				schedule_tbl.schedule_start as scheduleStart , 
+				to_char(schedule_tbl.schedule_start,'yyyy-mm-dd hh24:mi') as scheduleStart , 
 				schedule_tbl.theater_branch as theaterBranch ,
 				movie_tbl.movie_no as movieNo
 			from movie_file, member, schedule_tbl, movie_tbl, ticketing_tbl, pay
