@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -212,7 +213,7 @@
 										<li>${ticketingComplete.memberHyphenPhone}</li>
 										<li style="display: none;">${ticketingComplete.memberPhone}</li>
 										<li>
-											<span style="color: #59bec9; font-size: 22px;">${ticketingComplete.payPrice}</span>
+											<span id="viewAmount" style="color: #59bec9; font-size: 22px;"><fmt:formatNumber value="${ticketingComplete.payPrice}" pattern="#,###" /></span>
 											<span>원</span>
 										</li>
 									</ul>

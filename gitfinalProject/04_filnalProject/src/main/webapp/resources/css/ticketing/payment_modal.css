@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 .modal-wrap{
-    width: 58vw;
-    height: 59vh;
+    width: 690px;
+    height: 550px;
     background-color: rgba(0,0,0,0.5);
     position: absolute;
     top: 0;
@@ -45,8 +45,8 @@
 }
 /*-----------------------------------------------------------------------------*/
 .modal2-wrap{
-    width: 58vw;
-    height: 59vh;
+    width: 690px;
+    height: 550px;
     background-color: rgba(0,0,0,0.5);
     position: absolute;
     top: 0;
@@ -72,7 +72,7 @@
     margin: 0;
     text-align: center;
 }
-#useGiftTicket{
+#useGiftTicketConfirm{
     display: block;
     outline: none;
     margin: 20px auto;

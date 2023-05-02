@@ -406,7 +406,7 @@
 				}
 
 				#usePoint,
-				#useGiftTicket {
+				#useGiftTicketConfirm {
 					cursor: pointer;
 				}
 
@@ -539,6 +539,7 @@
 						</div>
 
 					</div>
+					<div class="filter-test" style="display: none;">Test</div>
 					<!--
 								var payPrice;
 								var movieTitle;
@@ -583,10 +584,10 @@
 							</div>
 							<div class="modal2-content">
 								<div>
-									<input type="text" name="useGiftTicketSerial"
-										placeholder="관람권의 시리얼번호를 입력하세요"><button id="useGiftTicket">사용</button>
-									<input type="text" name="addGiftTicketSerial" style="display: none;"><button
-										id="addGiftTicket" style="display: none;">클릭</button>
+									
+									<input type="text" name="useGiftTicketSerial" placeholder="관람권의 시리얼번호를 입력하세요">
+									<button id="useGiftTicketConfirm">사용</button>
+									<button id="useGiftTicket" style="display: none;">사용</button>
 									<input type="reset" value="닫기">
 								</div>
 							</div>
@@ -862,11 +863,21 @@
 				*/
 
 
-				//관람권 사용 시 (100% 할인)
+				//관람권 사용 시 모달 띄우기
 				$(".voucher div.sub-div>.mega-voucher").on("click", function () {
 					$(".modal2-wrap").css("display", "flex");
 				});
+				//사용할 관람권시리얼번호 input에 입력 -> 사용 시 할인금액에 적용
 				var giftTicketSerial;
+				var gTicketToDiscountAmount;
+				$("#useGiftTicket").on("click",function(){
+					
+
+					closeModal();
+				});
+
+				/*
+				//관람권 사용
 				$("#useGiftTicket").on("click", function () {
 					giftTicketSerial = $("[name=useGiftTicketSerial]").val();
 					memberNo = $("[name=memberNo]").val();
@@ -889,6 +900,76 @@
 
 					});
 				});
+				
+				*/
+				$('#useGiftTicketConfirm').click(function() {
+					if (!confirm("관람권할인은 취소할 수 없습니다. 관람권을 사용하시겠습니까?")) {
+						alert("취소하셨습니다.");
+					} else {
+						$("#useGiftTicket").click();
+					}
+				});
+
+				$("#useGiftTicket").on("click",function(){
+					const giftTicketSerial = $("[name=useGiftTicketSerial]").val();
+					const memberNo = $("[name=memberNo]").val();
+					console.log(memberNo);
+						$.ajax({
+							url : "/useGiftTicket.do",
+							type: "get",
+							data: {giftTicketSerial:giftTicketSerial , memberNo:memberNo},
+							success : function(data){
+								console.log(data)
+								if(data=="ok"){
+									alert("관람권을 사용하셨습니다.");
+									discountUsingGiftTicket();
+								}else{
+									alert("사용실패.");
+								}
+								
+							}
+							
+						});	
+					});
+				/*
+				$(".filter-test").on("click",function(){
+					discountUsingGiftTicket();
+				});
+				*/
+				//관람권 50%적용 필터링(문자열과 정수사이)
+				function discountUsingGiftTicket() {
+
+					//할인 전 금액(,포함)
+					const bigTopAmount = $(".price-amount").text();
+					console.log("price-amount(,포함) : " + bigTopAmount);//18,000
+					
+					//할인 전 금액(,제외)
+					const filterSmallTopAmount = $(".price-amount-same").text().toString().replace(',', '');
+					console.log("price-amount-same : " + filterSmallTopAmount);	//18,000
+
+					//할인금액(,제외)
+					const filterPerSmallTopAmount = parseInt(filterSmallTopAmount)*0.5;
+					console.log("input#dc-amount에 들어갈 금액 : "+filterPerSmallTopAmount);
+					//할인금액(,포함)
+					const perSmallTopAmount = filterPerSmallTopAmount.toLocaleString();
+					console.log(".discount-amount에 들어갈 금액 : "+perSmallTopAmount);
+
+					//최종결제금액(,제외)
+					const filterBotAmount = filterSmallTopAmount-filterPerSmallTopAmount;
+					console.log("input#finalAmount에 들어갈 금액 : "+filterBotAmount);
+					//최종결제금액(,포함)
+					const botAmount = filterBotAmount.toLocaleString();
+					console.log(".amount에 들어갈 금액 : "+botAmount);
+					
+					//////////////////////////////////////////////////////////
+					$(".discount-amount").text(perSmallTopAmount);
+					$("#dc-amount").val(filterPerSmallTopAmount);
+					$(".amount").text(botAmount);
+					$("#finalAmount").val(filterBotAmount);
+					
+
+				}
+				/*되면 삭제
 				function discountUsingGiftTicket() {
 					const priceAmountSame = $(".price-amount-same").text();
 					const buttonAfterTotalAmont = $(".price-amount").text();
@@ -897,7 +978,7 @@
 					console.log("나와라 좀" + buttonAfterTotalAmont);//18,000
 					console.log("나와라 좀" + buttonAfterDiscountAmont.text());//18,000
 					const buttonAfterDiscountAmontt = buttonAfterDiscountAmont.text();
-					console.log("나와라 좀" + buttonAfterDiscountAmontt);//18,000
+					console.log(buttonAfterDiscountAmont+"*50%" + buttonAfterDiscountAmontt);//18,000
 
 					filterButtonAfterTotalAmont = buttonAfterTotalAmont.toString().replace(',', '');
 					filterButtonAfterDiscountAmont = buttonAfterDiscountAmontt.toString().replace(',', '');
@@ -909,6 +990,7 @@
 					$('span.amount').text(buttonAfterFinalAmount); // 0이기 떄문에 .toLocaleString() 생략
 					$('#finalAmount').val(buttonAfterFinalAmount);
 				}
+				*/
 				$(".pagePrevious").on("click", function () {
 					history.back();
 				});
@@ -996,7 +1078,7 @@
 											//
 											
 											$("#addPoint").click();
-											
+											//$("#useGiftTicket").click();
 											
 											location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberHyphenPhone=" + memberHyphenPhone + "&payPrice=" + payPrice + "&payNo=" + payNo;
 
