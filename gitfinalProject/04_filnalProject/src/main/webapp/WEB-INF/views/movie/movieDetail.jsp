@@ -353,7 +353,7 @@ z-index: 5;
                 <div class="modal_content_tit modal_content_tit3">
                     <p>${mov.movieTitle }</p>
                     <input type="text" class="modalMovieTitle" name="movieTitle" value="${mov.movieTitle}" style="display:none;">
-                    <button type="button">예매하기</button>
+                    <button type="button" onclick="reservationFunc();">예매하기</button>
                 </div>
                 <div class="post-detail-top">
                 	<div class="detail-top-r">
@@ -500,7 +500,7 @@ z-index: 5;
                     <img src="/resources/upload/movie/${mov.mainFile.movieFileName}" style="border-radius: 10px; width: 260px; height: 375px;">
                 </div>
                 <div class="detailReservBtnWap" style="position: absolute; bottom: 7%; right: 0;">
-                    <button type="button" style="width: 260px; height: 46px; border-radius: 5px; background-color: #329eb1; color: white; font-size: 18px;">예약하기</button>
+                    <button type="button" style="width: 260px; height: 46px; border-radius: 5px; background-color: #329eb1; color: white; font-size: 18px;" onclick="reservationFunc();">예약하기</button>
                 </div>
             </div>
         </div>
@@ -853,7 +853,7 @@ z-index: 5;
                                 <div class="carousel-inner">
                                     <c:forEach items="${mvList }" var="mv" varStatus="status">                                     
                                         <c:choose>
-                                            <c:when test="${status.index eq 1}">
+                                            <c:when test="${status.index eq 0}">
                                                 <div class="carousel-item active">
                                                     <video width="840px" height="600px" class="d-block" src="${mv.videoLink }" controls>
                                                 </div>
@@ -918,61 +918,88 @@ z-index: 5;
 
 <script>
 	//누적관객수 차트
+$(document).ready(function(){
+	 const movieTitle=$(".movieSectionTitle").val();
+	
+	 
+	$.ajax({
+		  	url :"/dayTotalAudience.do",
+		  	type:"post",
+		  	data:{movieTitle:movieTitle},
+		  	success:function(data){
+		  		console.log(data);
+		  		const labels = getDate();
+		  		
+		  		let arr = new Array();
+		  		if(data != null){
+		  			 
+		  			for(let i=0;i<labels.length;i++){
+		  				let checked = true;
+		  				for(let j=0;j<data.length;j++){
+		  					if(labels[i] == data[j].scheduleStart){
+		  						arr.push(data[j].audienceCnt);
+		  						checked = false;
+		  						break;
+		  					}
+		  				}
+		  				if(checked){
+		  					arr.push(0);
+		  				}
+		  			}
+		  			
+		  			
+		  		}else{
+		  			arr = [0,0,0,0,0];
+		  		}
+		  		console.log(labels,arr,data);
+		  		chart(labels,arr);
+		  	}
+		  	
+		  });//ajax끝나는 지점
+	
 
 
+});	
+/////////////////////////////////////////////////////////////
+	function getDate(){
+		const labels = new Array();
+		for(let i=0;i<5;i++){
+			let date =  new Date();
+			date.setDate(date.getDate()-i);			
+			let month = date.getMonth()+1;
+			if(month < 10){
+				month = "0"+month;
+			}
+			let day = date.getDate();			
+			if(day < 10){
+				day = "0"+day;
+			}
+			const dateStr = month+"/"+day;			
+			labels.unshift(dateStr);
+		}
+		return labels;
+		
+	}
+	function chart(labels, arr){
+		var ctx = document.getElementById('myChart2').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // 만들기 원하는 차트의 유형
+		    type: 'line',
+		    // 데이터 집합을 위한 데이터
+		    data: {
+		        labels: labels,
+		        datasets: [{
+		            label: '월별 누적관객수 단위(명)',
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: arr
+		        }]
+		    },
 
-	   
- $(document).ready(function(){
-  const movieTitle=$(".movieSectionTitle").val();
-  console.log(movieTitle);
-  $.ajax({
-  	url :"/dayTotalAudience.do",
-  	type:"post",
-  	data:{movieTitle:movieTitle},
-  	success:function(data){
-  		if(data != null){
-  			console.log(data[0].scheduleStart);
-  			console.log(data[0].audienceCnt);
-  			console.log(data[1].scheduleStart);
-  			console.log(data[1].audienceCnt);
-  			 for(i=0; data.length;i++){//for문 시작
-  				const scheduleStart=data[i].scheduleStart;
-  				const audienceCnt=data[i].audienceCnt;
-				 
-  			
-  			//누적관객수 차트
-  		  	var ctx = document.getElementById('myChart2').getContext('2d');
-  			var chart = new Chart(ctx, {
-  		    // 만들기 원하는 차트의 유형
-  		    type: 'line',
-
-  		    // 데이터 집합을 위한 데이터
-  		    data: {
-  		        labels: [scheduleStart[i]],
-  		        datasets: [{
-  		            label: '일별 누적관객수 단위(명)',
-  		            backgroundColor: 'rgb(255, 99, 132)',
-  		            borderColor: 'rgb(255, 99, 132)',
-  		            data: [audienceCnt[i]]
-  		        }]
-  		    },
-
-  		    // 설정은 여기서 하세요
-  		    options: {
-  		    	
-  		    	
-  		    }
-  		}); 
-  			
-  			 }//for문 종료	
-  		}else{
-  			console.log("fail");
-  		}
-  	}
-  	
-  });//ajax끝나는 지점   
-  
-});
+		    // 설정은 여기서 하세요
+		    options: {}
+		});
+	}
 	   
 	//관람포인트 차트
     var ctx = document.getElementById('myChart').getContext('2d');

@@ -224,7 +224,7 @@
 					content: '';
 					display: block;
 					position: absolute;
-					left: 40%;
+					left: 45%;
 					top: 0;
 					width: 1px;
 					height: 100%;
@@ -313,7 +313,7 @@
 				.depth {
 					display: none;
 					position: absolute;
-					left: 80px;
+					left: 90px;
 					top: 0;
 					width: 177px;
 					height: 340px;

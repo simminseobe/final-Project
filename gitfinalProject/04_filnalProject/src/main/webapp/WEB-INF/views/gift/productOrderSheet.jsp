@@ -10,34 +10,102 @@
             <h1>Order / Payment</h1>
             <p>장바구니 > <span>주문서</span> > 주문완료</p>
         </div>
+        <div class="addAddressModal">
+            <h2>배송지 추가</h2>
+            <button type="button" class="closeX" onclick="closeAddressModal()">  </button>
+            <table>
+                <tr>
+                    <th><span>주소</span></th>
+                    <td class="sa-found-td">
+                        <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                        <input type="hidden" name="zipCode" id="postcode" readonly>
+                        <input type="hidden" name="addressOld" id="addressOld" readonly>
+                        <input type="text" name="addressNew" id="address" required readonly>
+                        <button type="button" class="btn sa-found" onclick="searchAddr()">검색</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span>상세주소</span></th>
+                    <td><input type="text" name="addressDetail" id="detailAddress" required></td>
+                </tr>
+                <tr>
+                    <th><span>배송지 명</span></th>
+                    <td><input type="text" name="addressName" required></td>
+                </tr>
+                <tr>
+                    <th><span>배송자 명</span></th>
+                    <td><input type="text" name="addressReceiverName" required></td>
+                </tr>
+                <tr>
+                    <th><span>전화번호</span></th>
+                    <td><input type="text" name="addressPhone" required></td>
+                </tr>
+            </table>
+            <div class="submit-btn-address-add">
+                <button type="button" onclick="closeAddressModal()">취소</button>
+                <button type="button" onclick="addressAdd()">배송지 등록</button>
+            </div>
+        </div>
         <!-- 배송정보 -->
+        <form action="/order.do" method="POST" id="orderForm">
         <div class="info shpping-info">
             <h2>배송 정보</h2>
+            <input type="hidden" name="receiver" value="">
+            <input type="hidden" name="receiverPhone" value="">
+            <input type="hidden" name="receiveAddressOld" value="">
+            <input type="hidden" name="receiveAddressNew" value="">
+            <input type="hidden" name="receiveAddressDetail" value="">
+            <input type="hidden" name="receiveZipCode" value="">
             <table>
                 <tr>
                     <th>배송지</th>
                     <td>
-                        <!-- <c:forEach items=""></c:forEach> -->
+                        <div class="sa-selector">
+                            <c:forEach items="${sas}" var="address">
+                                <input type="radio" name="saNo" value="${address.saNo}" id="${address.saNo}">
+                                <label for="${address.saNo}" onclick="selectSa('${address.saNo}')">${address.addressName}</label>
+                            </c:forEach>
+                            <button type="button" class="addAddress" onclick="addAddressModalBtn()">주소추가</button>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <th>이름 / 연락처</th>
-                    <td></td>
+                    <td class="name-phone">
+                        <div class="ad-name">
+                            <input type="text" name="addressReceiverName" id="saARN" value="">
+                        </div>
+                        <div class="phone-number">
+                            <input type="text" name="phone0" maxlength="3" value=""> - 
+                            <input type="text" name="phone1" maxlength="4" value=""> - 
+                            <input type="text" name="phone2" maxlength="4" value="">
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th>주소</th>
-                    <td></td>
+                    <td>
+                        <input type="hidden" name="addressDetail" id="saNew" value="">
+                        <span id="saNewView"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>상세주소</th>
+                    <td>
+                        <input type="hidden" name="addressDetail" id="saDetail">
+                        <span id="saDetailView"></span>
+                    </td>
                 </tr>
                 <tr>
                     <th>배송 요청사항</th>
                     <td>
                         <select name="shipRequest" id="ship-request-select">
-                            <option value="배송 시 요청사항을 선택해주세요.">배송 시 요청사항을 선택해주세요.</option>
-                            <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
-                            <option value="부재 시 택배함에 넣어주세요.">부재 시 택배함에 넣어주세요.</option>
-                            <option value="부재 시 집 앞에 놔 주세요.">부재 시 집 앞에 놔 주세요.</option>
-                            <option value="배송 전 연락 바랍니다.">배송 전 연락 바랍니다.</option>
-                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                            <option value="배송 시 요청사항을 선택해주세요">배송 시 요청사항을 선택해주세요.</option>
+                            <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요.</option>
+                            <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요.</option>
+                            <option value="부재 시 집 앞에 놔 주세요">부재 시 집 앞에 놔 주세요.</option>
+                            <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다.</option>
+                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
                             <option value="#" id="test">직접입력</option>
                         </select>
                         <input type="hidden" name="#" id="ship-request-input">
@@ -59,6 +127,7 @@
                     <th>합계</th>
                 </tr>
                 <c:forEach items="${posList}" var="pos" varStatus="i">
+                    <input type="hidden" name="posNo" value="${pos.posNo}">
                     <tr>
                         <td>
                             <div class="product-info-row clearfix">
@@ -145,7 +214,7 @@
                     </td>
                     <td class="pay-type selectPayment">
                         <div class="pay-method-select-btns">
-                            <input type="radio" name="payMethod" id="kakaoPay" class="payment-method-select-radio" checked><label for="kakaoPay">카카오페이</label>
+                            <input type="radio" name="payMethod" id="kakaoPay" value="kakaoPay" class="payment-method-select-radio" checked><label for="kakaoPay">카카오페이</label>
                             <input type="radio" name="payMethod" id="bank" class="payment-method-select-radio" ><label for="bank">계좌이체</label>
                         </div>
                         <ul class="info-ul">
@@ -176,13 +245,109 @@
             </table>
             <c:if test="${sessionScope.m != null}">
                 <input type="hidden" name="memberId" value="${sessionScope.m.memberId}">
+                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                 <input type="hidden" name="orderPrice" value="" id="orderPrice">
+                <input type="hidden" name="payData" value="" id="successPay">
             </c:if>
         </div>
         <button type="button" class="my-btn my-blue" id="takeOrder" onclick="takeOrderBtn()"><span id="totalPriceView"></span>원 결제하기</button>
     </div>
+    </form>
 </div>
+<button type="button" value="" id="successPayButton" onclick="successPayed()">결제성공!</button>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    const selectSa = saNo => {
+        $.ajax({
+            url : "/getOneAddress.do",
+            type : "GET",
+            data : { saNo : saNo },
+            success : data => {
+                const saARN = document.querySelector('#saARN')
+                const saNew = document.querySelector('#saNew')
+                const saNewView = document.querySelector('#saNewView')
+                const saDetail = document.querySelector('#saDetail')
+                const saDetailView = document.querySelector('#saDetailView')
+
+
+                const receiver = document.querySelector('input[name=receiver]')
+                const receiverPhone = document.querySelector('input[name=receiverPhone]')
+                const receiveAddressOld = document.querySelector('input[name=receiveAddressOld]')
+                const receiveAddressNew = document.querySelector('input[name=receiveAddressNew]')
+                const receiveAddressDetail = document.querySelector('input[name=receiveAddressDetail]')
+                const receiveZipCode = document.querySelector('input[name=receiveZipCode]')
+
+                console.log(data)
+
+                saARN.value = data.addressReceiverName
+                saNew.value = data.addressNew
+                saNewView.innerText = data.addressNew
+                saDetail.value = data.addressDetail
+                saDetailView.innerText = data.addressDetail
+
+                receiver.value = data.addressReceiverName
+                receiverPhone.value = data.addressPhone
+                receiveAddressOld.value = data.addressOld
+                receiveAddressNew.value = data.addressNew
+                receiveAddressDetail.value = data.addressDetail
+                receiveZipCode.value = data.zipCode
+                
+            }
+        })
+    }
+    const addAddressModal = document.querySelector('.addAddressModal')
+    const addAddressModalBtn = () => {
+        addAddressModal.style.display = 'block'
+    }
+    const closeAddressModal = () => {
+        addAddressModal.style.display = 'none'
+        document.querySelector('input[name=memberNo]').value = ''
+        document.querySelector('input[name=zipCode]').value = ''
+        document.querySelector('input[name=addressOld]').value = ''
+        document.querySelector('input[name=addressNew]').value = ''
+        document.querySelector('input[name=addressDetail]').value = ''
+        document.querySelector('input[name=addressName]').value = ''
+        document.querySelector('input[name=addressReceiverName]').value = ''
+        document.querySelector('input[name=addressPhone]').value = ''
+    }
+    // 주소찾기
+    function searchAddr() {
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	        	console.log(data)
+	        	$("#postcode").val(data.zonecode);
+	        	$("#address").val(data.address);
+                $('#addressOld').val(data.jibunAddress)
+	        	$("#detailAddress").focus();
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	        }
+	    }).open();
+	}
+    const addressAdd = () => {
+        const memberNo = document.querySelector('input[name=memberNo]').value
+        const zipCode = document.querySelector('input[name=zipCode]').value
+        const addressOld = document.querySelector('input[name=addressOld]').value
+        const addressNew = document.querySelector('input[name=addressNew]').value
+        const addressDetail = document.querySelector('input[name=addressDetail]').value
+        const addressName = document.querySelector('input[name=addressName]').value
+        const addressReceiverName = document.querySelector('input[name=addressReceiverName]').value
+        const addressPhone = document.querySelector('input[name=addressPhone]').value
+        $.ajax({
+            url : "/addAddress.do",
+            type : "POST",
+            data : {memberNo : memberNo, zipCode : zipCode, addressOld : addressOld, addressNew : addressNew, addressDetail : addressDetail, addressName : addressName, addressReceiverName : addressReceiverName, addressPhone : addressPhone},
+            success : data => {
+                console.log(data)
+                if(data != '0') {
+                    closeAddressModal()
+                    location.reload()
+                } else {
+                    alert('배송지 등록 실패')
+                }
+            }
+        })
+    }
     const memberId = document.querySelector('input[name=memberId]').value
     const orderPrice = document.querySelector('#orderPrice')
     const totalPriceView = document.querySelector('#totalPriceView')
@@ -254,6 +419,7 @@
     const quantity = '${posList.size()}'
     const takeOrderBtn = () => {
         if(!allAgree.checked) alert('개인정보 수집/이용 및 결제대행동의가 필요합니다') 
+        else if(document.querySelector('input[name=receiver]').value == '') alert('배송지를 선택해 주세요') 
         else {
             console.log('kakaoPay do')
             console.log(quantity)
@@ -263,8 +429,8 @@
                 type : 'POST',
                 data : { memberId : memberId ,orderPrice : orderPrice.value ,productName : "${product.productName}", shipRequest : $('[name=shipRequest]').val(), itemName : itemName, quantity : quantity},
                 success : data => {
-                    location.href = data.next_redirect_pc_url 
-                    //window.open(data.next_redirect_pc_url ,"","")
+                    //location.href = data.next_redirect_pc_url 
+                    window.open(data.next_redirect_pc_url ,"movie island gift shop","left=700px,top=300px,width=400px,height=700px,menubar=no,status=no,scrollbars=yes")
                 },
                 error : data => {
                     alert('error')
@@ -272,6 +438,13 @@
                 }
             })
         } 
+    }
+    //결제완료감지기
+    const orderForm = document.querySelector('#orderForm')
+    const successPay = document.querySelector('#successPay')
+    const successPayed = () =>{
+        console.log('pay success')
+        orderForm.submit()
     }
 </script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

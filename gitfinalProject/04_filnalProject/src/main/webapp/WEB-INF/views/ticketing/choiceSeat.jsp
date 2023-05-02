@@ -846,7 +846,9 @@
 									});
 									if(totalCount ==  $(".mySeat").length){
 										$('.seat:not(.clicked)').prop('disabled', true );
-										
+										//인원 수 만큼 자리 선택되면 다음버튼 활성화
+										$(".pageNext").css("backgroundColor","#329eb1");
+										$(".pageNext").css("color","#fff");
 										
 									}
 								}
@@ -963,6 +965,8 @@
 
 				
 				$("#reset-btn").on("click",function(){
+					location.reload();
+					/*
 					$('.now').text('0');
 					nowTotal(); // nowTotal() 함수 호출
 					calculateAmount();
@@ -973,6 +977,7 @@
 					const input = $("input");
 					input.removeClass("clicked")
 					$('.seat').prop('disabled', true );
+					*/
 				});
 				/*
 				$(".pageNext").on("click",function(){
@@ -1024,7 +1029,7 @@
 				
 
 				////////////////////////////////////////////////////////////
-				
+				//$(".pageNext").prop('disabled', true);
 				$(document).ready(function() {
 					// 인원 수 선택 버튼이 클릭될 때마다 좌석 선택 버튼을 활성화하거나 비활성화합니다.
 					$('.how-many .count').on('click', function() {
@@ -1062,8 +1067,7 @@
 					scheduleNo = $(".hiddenSpan").text();//선택한 영화의 스케쥴넘버
 					console.log("자르기 전 "+numOfPeople);//
 					
-					//////////////////////////////////////////////////////////////////////////////
-					//regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+					
 					
 					const adultCount = parseInt($('#now1').text());
 					const teenCount = parseInt($('#now2').text());
@@ -1081,15 +1085,15 @@
 
 					const now = $(".now").text();
 
-					////////////////////////////////////////////////////////////////////////////////////
+					
 					console.log(scheduleNo);
 					console.log(theaterBranch);
 					console.log(choiceDtDay);
 					console.log(numOfPeople);//성인,청소년,우대
 					console.log(countArr);//1,2,3
 					console.log("joinSeats : "+joinSeats);
-					$(this).css("backgroundColor","#329eb1");
-					$(this).css("color","#fff");
+					//$(this).css("backgroundColor","#329eb1");
+					//$(this).css("color","#fff");
 					if(now != 0){
 						location.href = "/paymentMethod.do?movieTitle=" + movieTitle + "&scheduleStartEnd=" + scheduleStartEnd + "&theaterBranch=" + theaterBranch +"&choiceDtDay="+choiceDtDay +"&joinSeats="+joinSeats+"&numOfPeople="+numOfPeople+"&countArr="+countArr.join("/")+"&totalAmount="+totalAmount+"&scheduleNo="+scheduleNo;
 					}else{

@@ -89,9 +89,9 @@
                                             <input type=text class="likeMovieNo" value="${po.movieNo}" style="display:none">
                                         </div>
                                         <div class="movieAllList-reserve" style="margin-top: 10px; margin-left: 5px;">
-                                        <button type=" button"
+                                        <button type=" button" onclick="reservationFunc();"
                                             style="width: 150px; height: 40px; font-size: 18px; border: 1px solid #503396; background-color: #503396;  color:#fff; vertical-align: center;">
-                                           	 예약하기
+                                           	예약하기
                                         </button>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                      </div>
                                      <div class="movieAllList-reserve" style="margin-top: 10px;">
                                      <button type=" button"
-                                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;">
+                                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;"onclick="reservationFunc();">
                                         	 예약하기
                                      </button>
                                      </div>
@@ -208,7 +208,7 @@
                                  </div>
                                  <div class="movieAllList-reserve" style="margin-top: 10px;"">
                                  <button type=" button"
-                                     style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;">
+                                     style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;" onclick="reservationFunc();">
                                     	 예약하기
                                  </button>
                                  </div>
@@ -266,7 +266,7 @@
                              </div>
                              <div class="movieAllList-reserve" style="margin-top: 10px;">
                              <button type=" button"
-                                 style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;">
+                                 style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;" onclick="reservationFunc();">
                                  예약하기
                              </button>
                              </div>
@@ -325,7 +325,7 @@
                          </div>
                          <div class="movieAllList-reserve" style="margin-top: 10px;">
                          <button type=" button"
-                             style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;">
+                             style="width: 150px; height: 40px; font-size: 18px; vertical-align: center;" onclick="reservationFunc();">
                              예약하기
                          </button>
                          </div>
@@ -384,7 +384,7 @@
                      </div>
                      <div class="movieAllList-reserve" style="margin-top: 10px;">
 	                     <button type=" button"
-	                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;">
+	                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;" onclick="reservationFunc();">
 	                             	예약하기
 	                     </button>
                      </div>

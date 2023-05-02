@@ -151,3 +151,6 @@ $(".whiteLike2").on("click",function(){
     }
 });
 
+function reservationFunc(){
+    location.href="/ticketing.do";
+}

@@ -25,7 +25,7 @@ public class Member {
 	private String memberFilename;
 	private String memberFilepath;
 	private int social;
-	private ArrayList<ShoppingAddress> shopAdd;
+	private ArrayList<ShippingAddress> shopAdd;
 	private ArrayList<MemberPoint> memberPoint;
 	
 	private int mpAmount;
