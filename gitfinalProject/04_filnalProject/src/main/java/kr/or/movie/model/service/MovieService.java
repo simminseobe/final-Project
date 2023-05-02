@@ -214,6 +214,11 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		int reviewListCount = dao.selectReviewListCount(movieNo);
 		return reviewListCount;
 	}
+	//사용자 관람평
+	public int selectReviewListCount2(String memberId) {
+		int reviewListCount = dao.selectReviewListCount2(memberId);
+		return reviewListCount;
+	}
 	public ArrayList<MovieFile> selectMovieFileAll(int movieNo) {
 		ArrayList<MovieFile> movieFileAll=dao.selectMovieFileAll(movieNo);
 		return movieFileAll;
@@ -226,7 +231,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 	public int deleteWatchPoint(int reviewCommentNo) {
 		return dao.deleteWatchPoint(reviewCommentNo);
 	}
-	public ReviewPageData selectReviewList(int movieNo,int reqPage) {
+	public ReviewPageData selectReviewList(int movieNo,int reqPage,int memberNo) {
 		//처음에 페이지당 보여줄 게시물의 수는 10개로 함
 		int numPerPage = 10;
 		//reqPage=1인경우 1번 10번 2인경우 11번 20번까지
@@ -237,6 +242,7 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		map.put("start", start);
 		map.put("end",end);
 		map.put("movieNo",movieNo);
+		map.put("memberNo",memberNo);
 		ArrayList<Review> list = dao.selectReviewList(map);
 		System.out.println(map);
 		

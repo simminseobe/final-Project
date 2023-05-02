@@ -113,8 +113,11 @@ public class MovieController {
 					model.addAttribute("favoriteMovieCount",favoriteMovieCount);
 					 
 					//사용자 관람영화
-					ArrayList<MyMovie> mov = service.selectOneMovieAll2(memberNo);		//1, 7(1.영화정보 / 7.영화포스터file)
-					model.addAttribute("mov", mov);
+					ArrayList<MyMovie> list = service.selectOneMovieAll2(memberNo);		//1, 7(1.영화정보 / 7.영화포스터file)
+					model.addAttribute("list", list);
+					
+					int OneMemberMovieCount = service.selectmyMovieListCount(memberNo);
+					model.addAttribute("OneMemberMovieCount",OneMemberMovieCount);
 					
 					//ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
 					//model.addAttribute("pageList",rpd.getList());
@@ -124,9 +127,9 @@ public class MovieController {
 					
 					
 					//4.사용자 무비포스트 리스트(무비포스트 리스트)
-					ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost2(memberId);
-					model.addAttribute("oneMoviepostAll",oneMoviepostAll);
-				
+					ArrayList<MoviePost> oneMoviePost=service.oneMovieAllPost2(memberId);
+					model.addAttribute("oneMoviePost",oneMoviePost);
+					System.out.println(oneMoviePost);
 					//사용자 무비포스트 총 갯수
 					int moviePostCount=service.moviePostCount2(memberId);
 					model.addAttribute("moviePostCount",moviePostCount);
@@ -136,7 +139,7 @@ public class MovieController {
 					model.addAttribute("reviewList",reviewList);
 					
 					//사용자 관람평 갯수를 위한 조회
-					int reviewListCount= service.selectReviewListCount(memberNo);
+					int reviewListCount= service.selectReviewListCount2(memberId);
 					model.addAttribute("reviewListCount", reviewListCount);
 					
 					
@@ -154,7 +157,7 @@ public class MovieController {
 		model.addAttribute("mov", mov);
 		System.out.println(mov);
 		
-		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
+		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage,memberNo);//(2.페이징된 리뷰리스트)
 		model.addAttribute("pageList",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 
@@ -370,6 +373,8 @@ public class MovieController {
 	@ResponseBody
 	@RequestMapping(value="/reviewLikeInsert.do")
 	public String reviewLikeInsert(int reviewCommentNo, int memberNo) {
+		System.out.println(reviewCommentNo);
+		System.out.println(memberNo);
 		int result = service.reviewLikeInsert(reviewCommentNo,memberNo);
 		if(result>0) {
 			return "success";
@@ -382,6 +387,9 @@ public class MovieController {
 	@ResponseBody
 	@RequestMapping(value="/reviewLikeDelete.do")
 	public String reviewLikeDelete(int reviewCommentNo, int memberNo) {
+		System.out.println(reviewCommentNo+"=======");
+		System.out.println(memberNo+"=========");
+
 		int result=service.reviewLikeDelete(reviewCommentNo,memberNo);
 		if(result>0) {
 			return "success";

@@ -22,7 +22,7 @@
 			font-size: 30px;
 			color : #fff;
 			background-color : #1d1e36;
-			width: 40%;
+			width: 45%;
 			height: 200px;
 			border-top-left-radius : 20px;
 			border-bottom-left-radius : 20px;
@@ -31,7 +31,7 @@
 			font-size: 30px;
 			color : #fff;
 			background-color : #d6d6d6;
-			width: 40%;
+			width: 45%;
 			height: 200px;
 			border-top-right-radius : 20px;
 			border-bottom-right-radius : 20px;
