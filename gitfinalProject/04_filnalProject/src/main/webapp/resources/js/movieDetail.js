@@ -77,14 +77,15 @@ $(function(){
     }
 });
 
-$(".whiteLike2").on("click",function(){
-    
+$(".Like2").on("click",function(){
+    if($(".sessionMemberNo").val()!=""){
+
     const whiteLike = "img/like-24.png";
     const blackLike = "img/likeBlack-24.png";
     const current  = $(this).attr("src");
     
     /*reviewCommentNo를 받아옴*/ 
-    const reviewCommentNo=$(this).next().next().children().eq(2).val();
+    const reviewCommentNo=$(this).next().children().eq(2).val();
     console.log(reviewCommentNo);
     /*memberNo를 받아옴*/
     const memberNo=$(".sessionMemberNo").val();
@@ -93,12 +94,12 @@ $(".whiteLike2").on("click",function(){
     const memberId=$("[name=reviewLikeMember]").val();
     
     /*reviewCount*/
-    const reviewLikeCount=$(this).next().next().children().eq(0);
+    const reviewLikeCount=$(this).next().children().eq(0);
  
     const icon=$(this);
     
     if(current == whiteLike){
-        
+       
         $.ajax({
             url :"/reviewLikeInsert.do",
             type:"post",
@@ -121,9 +122,10 @@ $(".whiteLike2").on("click",function(){
             }
             
         });//ajax끝나는 지점
-
+        
         
     }else{
+				
 		 $.ajax({
 		 		url :"/reviewLikeDelete.do",
 		        type:"post",
@@ -131,19 +133,28 @@ $(".whiteLike2").on("click",function(){
 		        success:function(data){
         		if(data != null){
         			console.log(data);
+        			
         			const likeCountNumMinus=Number(reviewLikeCount.text())-1;
         			const reviewlikeCountString=likeCountNumMinus.toString();
         			reviewLikeCount.text(reviewlikeCountString);
         			console.log(reviewLikeCount.text(reviewlikeCountString));
         			icon.attr("src",whiteLike); 			
+    		    
         		}else{
         			console.log("fail"); 
         			
         		}
         	}
         	
-        });//ajax끝나는 지점      
+        });//ajax끝나는 지점       
+
     }
+
+
+    }else{
+        alert("로그인 해주세요");
+    }
+
 });
 
 function reservationFunc(){

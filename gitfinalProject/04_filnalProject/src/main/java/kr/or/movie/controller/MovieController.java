@@ -157,7 +157,7 @@ public class MovieController {
 		model.addAttribute("mov", mov);
 		System.out.println(mov);
 		
-		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage);//(2.페이징된 리뷰리스트)
+		ReviewPageData rpd=service.selectReviewList(movieNo,reqPage,memberNo);//(2.페이징된 리뷰리스트)
 		model.addAttribute("pageList",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 
@@ -373,6 +373,8 @@ public class MovieController {
 	@ResponseBody
 	@RequestMapping(value="/reviewLikeInsert.do")
 	public String reviewLikeInsert(int reviewCommentNo, int memberNo) {
+		System.out.println(reviewCommentNo);
+		System.out.println(memberNo);
 		int result = service.reviewLikeInsert(reviewCommentNo,memberNo);
 		if(result>0) {
 			return "success";
@@ -385,6 +387,9 @@ public class MovieController {
 	@ResponseBody
 	@RequestMapping(value="/reviewLikeDelete.do")
 	public String reviewLikeDelete(int reviewCommentNo, int memberNo) {
+		System.out.println(reviewCommentNo+"=======");
+		System.out.println(memberNo+"=========");
+
 		int result=service.reviewLikeDelete(reviewCommentNo,memberNo);
 		if(result>0) {
 			return "success";

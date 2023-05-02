@@ -133,7 +133,9 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href="/adminCenter.do">고객센터</a></li>
+	            <c:if test="${not empty sessionScope.m}">
+	            	<li><a href="/adminCenter.do">고객센터</a></li>
+	            </c:if>
                 <c:choose>
                 	<c:when test="${sessionScope.m.memberLevel eq 1}">
 	                	<li><a href="/mypage.do">마이페이지</a></li>
