@@ -21,13 +21,6 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <style>
-.whole-wrap{
-	margin: 0 auto;
-	outline: none;
-    width: calc(100% - 260px);
-    padding-top: 50px;
-}
-
 .modal {
 	/*position을 absolute에서 fixed로 변경
             왜냐? fixed를 하면 스크롤을 내려도 그 자리에 고정되어 있기때문에*/
@@ -184,7 +177,6 @@ z-index: 5;
 
 
 </style>
-<div class="whole-wrap">
 	<table>
 	<td>
 		<div class="menubar">
@@ -192,23 +184,11 @@ z-index: 5;
 		</div>
 	</td>
 	<td>
-	<div class="booklist-wrap">
-			<div class="booklist-header">
-				<h2>나의 무비스토리</h2>
-			</div>
-			<div class="menu-wrap">
-				<ul class="tabs">
-					<li class="active-tab"><a href="javascript:void(0);">본 영화</li>
-					<li><a href="javascript:void(0);">무비스토리</li>
-					<li><a href="javascript:void(0);">관람평</li>
-					<li><a href="javascript:void(0);">찜영화</li>
-				</ul>
-			</div>
-    	<!-- <div class="movie-list-wrap" style="width:1100px; margin: 0 auto;">
+    	<div class="movie-list-wrap" style="width:1100px; margin: 0 auto;">
     		<div class="movieList-title-wrap" style=" margin-top: 100px;">
     			<h1 style="font-size:30px;">나의 무비스토리</h1>
-    		</div> -->
-    		<!-- <div class="movie-list-wrap">
+    		</div>
+    		<div class="movie-list-wrap">
     			<div class="movie-list-menu tabs-wrap">
                         <ul class="tabs">
                             <li><a href="javascript:void(0);">본영화</a></li>
@@ -216,7 +196,7 @@ z-index: 5;
                             <li><a href="javascript:void(0);">관람평</a></li>
 	                        <li><a href="javascript:void(0);">찜영화</a></li>
                         </ul>
-                </div> -->
+                </div>
                 <div class="movie-list-content-wrap" style="margin-top: 25px;">
                 	<div class="movie-list-content-top">
                 			<span class="tabcontent1">본영화 총 <span style="color: #329eb1;">${OneMemberMovieCount}</span>개</span>
@@ -265,6 +245,7 @@ z-index: 5;
                     <c:forEach items="${oneMoviepostAll}" var="oneMoivePost">
                     <div class="movie-all-list" style="margin-top: 25px; ">
                         <div class="moviePostImg"><!--영화 한개 시작-->
+                        ${oneMoviepost.movieNo}
                        
                         	<c:choose>
                         	<c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
@@ -367,7 +348,7 @@ z-index: 5;
          </div>
 	</td>
 </table>
-</div>
+
 
    <script>
 

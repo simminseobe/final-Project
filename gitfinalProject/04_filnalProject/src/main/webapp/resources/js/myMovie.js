@@ -39,13 +39,7 @@ $(".tabs>li").eq(0).click();
  });
 $(".tabs>li").eq(0).click();
 
-const moreBtn = document.querySelector("#more-btn");
-moreBtn.addEventListener("click",function(){
-    const importantInfoContent = document.querySelector(".importantInfo-content");
-    importantInfoContent.style.height = "auto";
-    this.remove();
-    
-});
+
 /*별점표시*/
 const stars = $(".modal>.modal_content>form>.star-wrap1>span");
 stars.on("mouseover",function(){

@@ -21,13 +21,6 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <style>
-.whole-wrap{
-	margin: 0 auto;
-	outline: none;
-    width: calc(100% - 260px);
-    padding-top: 50px;
-}
-
 .modal {
 	/*position을 absolute에서 fixed로 변경
             왜냐? fixed를 하면 스크롤을 내려도 그 자리에 고정되어 있기때문에*/
@@ -184,7 +177,7 @@ z-index: 5;
 
 
 </style>
-<div class="whole-wrap">
+	<div class="whole-wrap">
 	<table>
 	<td>
 		<div class="menubar">
@@ -265,6 +258,7 @@ z-index: 5;
                     <c:forEach items="${oneMoviepostAll}" var="oneMoivePost">
                     <div class="movie-all-list" style="margin-top: 25px; ">
                         <div class="moviePostImg"><!--영화 한개 시작-->
+                        ${oneMoviepost.movieNo}
                        
                         	<c:choose>
                         	<c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
@@ -368,6 +362,7 @@ z-index: 5;
 	</td>
 </table>
 </div>
+
 
    <script>
 
