@@ -920,54 +920,86 @@ z-index: 5;
 	//누적관객수 차트
 $(document).ready(function(){
 	 const movieTitle=$(".movieSectionTitle").val();
-	var ctx = document.getElementById('myChart2').getContext('2d');
+	
 	 
 	$.ajax({
 		  	url :"/dayTotalAudience.do",
 		  	type:"post",
 		  	data:{movieTitle:movieTitle},
 		  	success:function(data){
+		  		console.log(data);
+		  		const labels = getDate();
+		  		
+		  		let arr = new Array();
 		  		if(data != null){
-
-		  			 for(i=0; data.length;i++){//for문 시작
-		  				const scheduleStart=data[i].scheduleStart;
-		  				const audienceCnt=data[i].audienceCnt;
-						 
-			  			console.log(data[0].scheduleStart);
-			  			console.log(data[0].audienceCnt);
-			  			console.log(data[1].scheduleStart);
-			  			console.log(data[1].audienceCnt);
-
+		  			 
+		  			for(let i=0;i<labels.length;i++){
+		  				let checked = true;
+		  				for(let j=0;j<data.length;j++){
+		  					if(labels[i] == data[j].scheduleStart){
+		  						arr.push(data[j].audienceCnt);
+		  						checked = false;
+		  						break;
+		  					}
+		  				}
+		  				if(checked){
+		  					arr.push(0);
+		  				}
+		  			}
 		  			
-		  			 }//for문 종료	
+		  			
 		  		}else{
-		  			console.log("fail");
+		  			arr = [0,0,0,0,0];
 		  		}
+		  		console.log(labels,arr,data);
+		  		chart(labels,arr);
 		  	}
 		  	
-		  });//ajax끝나는 지점   
-	var chart = new Chart(ctx, {
-    // 만들기 원하는 차트의 유형
-    type: 'line',
+		  });//ajax끝나는 지점
+	
 
-    // 데이터 집합을 위한 데이터
-    data: {
-        labels: [scheduleStart, 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: '월별 누적관객수 단위(만)',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [audienceCnt, 10, 5, 2, 20, 30, 45]
-        }]
-    },
-
-    // 설정은 여기서 하세요
-    options: {}
-});
 
 });	
-/////////////////////////////////////////////////////////////	   
+/////////////////////////////////////////////////////////////
+	function getDate(){
+		const labels = new Array();
+		for(let i=0;i<5;i++){
+			let date =  new Date();
+			date.setDate(date.getDate()-i);			
+			let month = date.getMonth()+1;
+			if(month < 10){
+				month = "0"+month;
+			}
+			let day = date.getDate();			
+			if(day < 10){
+				day = "0"+day;
+			}
+			const dateStr = month+"/"+day;			
+			labels.unshift(dateStr);
+		}
+		return labels;
+		
+	}
+	function chart(labels, arr){
+		var ctx = document.getElementById('myChart2').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // 만들기 원하는 차트의 유형
+		    type: 'line',
+		    // 데이터 집합을 위한 데이터
+		    data: {
+		        labels: labels,
+		        datasets: [{
+		            label: '월별 누적관객수 단위(명)',
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: arr
+		        }]
+		    },
 
+		    // 설정은 여기서 하세요
+		    options: {}
+		});
+	}
 	   
 	//관람포인트 차트
     var ctx = document.getElementById('myChart').getContext('2d');
