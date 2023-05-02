@@ -562,7 +562,7 @@
 							</div>
 							<div class="modal-content">
 								<div>
-									<input type="text" name="usePoint" placeholder="사용하실 포인트를 입력하세요"><button
+									<input type="text" name="usePoint" value="0" placeholder="사용하실 포인트를 입력하세요"><button
 										id="usePoint">사용</button>
 									<input type="text" name="addPoint" style="display: none; width: 150px; float: left; margin: 0;"><button id="addPoint"
 										style="display: none; float: left;">클릭</button>
@@ -994,6 +994,7 @@
 											console.log(data.payNo);
 											const payNo = data.payNo;
 											//
+											
 											$("#addPoint").click();
 											
 											
@@ -1011,6 +1012,13 @@
 						});
 					}
 				});
+				////////////////////////////////////////////////////////////////////////////
+
+
+
+
+				////////////////////////////////////////////////////////////////////////////
+
 				$("#reset-btn").on("click", function () {
 					usePoint = $("[name=usePoint]");
 					var original = $(".price-amount-same");

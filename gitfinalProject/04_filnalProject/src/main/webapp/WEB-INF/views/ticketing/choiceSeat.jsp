@@ -1029,7 +1029,7 @@
 				
 
 				////////////////////////////////////////////////////////////
-				//$(".pageNext").prop('disabled', true);
+				//$(".pageNext").prop('disabled', true);//버튼비활성화
 				$(document).ready(function() {
 					// 인원 수 선택 버튼이 클릭될 때마다 좌석 선택 버튼을 활성화하거나 비활성화합니다.
 					$('.how-many .count').on('click', function() {

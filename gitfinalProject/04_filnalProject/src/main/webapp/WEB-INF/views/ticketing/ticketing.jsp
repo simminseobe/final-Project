@@ -89,15 +89,13 @@
 					height: 400px;
 					width: 250px;
 					float: left;
-					padding-left: 20px;
-					padding-right: 20px;
-					padding-bottom: 20px;
+					padding: 0 20px 20px 10px;
 					border: 1px solid rgb(207, 204, 204);
 				}
 
 				.movie-list {
 					overflow-y: auto;
-					overflow-x: hidden;
+					overflow-x: auto;
 				}
 
 				.movie-list::-webkit-scrollbar {
@@ -143,6 +141,7 @@
 					height: 40px;
 					font-size: 20px;
 					padding-top: 5px;
+					border-bottom: 1px solid #ccc;
 				}
 
 				.content-wrap {
@@ -375,7 +374,7 @@
 					font-size: .8667em;
 					background-color: transparent;
 					letter-spacing: 0;
-					font-size: 12px;
+					font-size: 15px;
 				}
 				/*
 .brch {
@@ -494,8 +493,8 @@
 				<div class="header-wrap">
 					<div class="header-title" style="margin-top: 30px; margin-bottom: 30px;">
 						<h1 style="font-size: 30px;">빠른예매</h1>
-						<h1><a href="/ticketingComplete.do">예매완료페이지(test)</a></h1>
 						<!--
+						<h1><a href="/ticketingComplete.do">예매완료페이지(test)</a></h1>
 						<h1>
 							<a href="/ticketing2.do">예매페이지(test)</a>
 						</h1>

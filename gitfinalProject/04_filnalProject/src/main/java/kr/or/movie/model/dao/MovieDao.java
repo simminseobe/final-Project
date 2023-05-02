@@ -340,13 +340,5 @@ public class MovieDao {
 	}
 
 
-	/*
-	 * public ArrayList<Schedule> dayTotalAudience(String movieTitle) { List list
-	 * =sqlSession.selectList("movie.onedayTotalAudience", movieTitle); return
-	 * (ArrayList<Schedule>) list; }
-	 */
-
-
-
 
 }
