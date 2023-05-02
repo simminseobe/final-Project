@@ -853,7 +853,7 @@ z-index: 5;
                                 <div class="carousel-inner">
                                     <c:forEach items="${mvList }" var="mv" varStatus="status">                                     
                                         <c:choose>
-                                            <c:when test="${status.index eq 1}">
+                                            <c:when test="${status.index eq 0}">
                                                 <div class="carousel-item active">
                                                     <video width="840px" height="600px" class="d-block" src="${mv.videoLink }" controls>
                                                 </div>
@@ -918,61 +918,56 @@ z-index: 5;
 
 <script>
 	//누적관객수 차트
+$(document).ready(function(){
+	 const movieTitle=$(".movieSectionTitle").val();
+	var ctx = document.getElementById('myChart2').getContext('2d');
+	 
+	$.ajax({
+		  	url :"/dayTotalAudience.do",
+		  	type:"post",
+		  	data:{movieTitle:movieTitle},
+		  	success:function(data){
+		  		if(data != null){
 
+		  			 for(i=0; data.length;i++){//for문 시작
+		  				const scheduleStart=data[i].scheduleStart;
+		  				const audienceCnt=data[i].audienceCnt;
+						 
+			  			console.log(data[0].scheduleStart);
+			  			console.log(data[0].audienceCnt);
+			  			console.log(data[1].scheduleStart);
+			  			console.log(data[1].audienceCnt);
 
+		  			
+		  			 }//for문 종료	
+		  		}else{
+		  			console.log("fail");
+		  		}
+		  	}
+		  	
+		  });//ajax끝나는 지점   
+	var chart = new Chart(ctx, {
+    // 만들기 원하는 차트의 유형
+    type: 'line',
 
-	   
- $(document).ready(function(){
-  const movieTitle=$(".movieSectionTitle").val();
-  console.log(movieTitle);
-  $.ajax({
-  	url :"/dayTotalAudience.do",
-  	type:"post",
-  	data:{movieTitle:movieTitle},
-  	success:function(data){
-  		if(data != null){
-  			console.log(data[0].scheduleStart);
-  			console.log(data[0].audienceCnt);
-  			console.log(data[1].scheduleStart);
-  			console.log(data[1].audienceCnt);
-  			 for(i=0; data.length;i++){//for문 시작
-  				const scheduleStart=data[i].scheduleStart;
-  				const audienceCnt=data[i].audienceCnt;
-				 
-  			
-  			//누적관객수 차트
-  		  	var ctx = document.getElementById('myChart2').getContext('2d');
-  			var chart = new Chart(ctx, {
-  		    // 만들기 원하는 차트의 유형
-  		    type: 'line',
+    // 데이터 집합을 위한 데이터
+    data: {
+        labels: [scheduleStart, 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: '월별 누적관객수 단위(만)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [audienceCnt, 10, 5, 2, 20, 30, 45]
+        }]
+    },
 
-  		    // 데이터 집합을 위한 데이터
-  		    data: {
-  		        labels: [scheduleStart[i]],
-  		        datasets: [{
-  		            label: '일별 누적관객수 단위(명)',
-  		            backgroundColor: 'rgb(255, 99, 132)',
-  		            borderColor: 'rgb(255, 99, 132)',
-  		            data: [audienceCnt[i]]
-  		        }]
-  		    },
-
-  		    // 설정은 여기서 하세요
-  		    options: {
-  		    	
-  		    	
-  		    }
-  		}); 
-  			
-  			 }//for문 종료	
-  		}else{
-  			console.log("fail");
-  		}
-  	}
-  	
-  });//ajax끝나는 지점   
-  
+    // 설정은 여기서 하세요
+    options: {}
 });
+
+});	
+/////////////////////////////////////////////////////////////	   
+
 	   
 	//관람포인트 차트
     var ctx = document.getElementById('myChart').getContext('2d');
