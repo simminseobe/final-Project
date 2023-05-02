@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.gift.model.dao.GiftDao;
+import kr.or.gift.model.vo.GiftPay;
+import kr.or.gift.model.vo.KakaoPay;
+import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
+import kr.or.gift.model.vo.Receive;
+import kr.or.member.model.vo.ShippingAddress;
 
 @Service
 public class GiftService {
@@ -127,5 +132,50 @@ public class GiftService {
 		// TODO Auto-generated method stub
 		return dao.deletePos(posNo);
 	}
+
+	public ArrayList<ShippingAddress> getShppingAddress(int memberNo) {
+		// TODO Auto-generated method stub
+		return dao.getShppingAddress(memberNo);
+	}
+
+	public int insertAddress(ShippingAddress sa) {
+		// TODO Auto-generated method stub
+		return dao.insertAddress(sa);
+	}
+
+	public ShippingAddress getOneAddress(int saNo) {
+		// TODO Auto-generated method stub
+		return dao.getOneAddress(saNo);
+	}
+
+	public int insertOrder(Order order) {
+		// TODO Auto-generated method stub
+		return dao.insertOrder(order);
+	}
+
+	public int insertGiftPay(GiftPay giftPay) {
+		// TODO Auto-generated method stub
+		return dao.insertGiftPay(giftPay);
+	}
+	
+	public int insertReceive(Receive receive) {
+		// TODO Auto-generated method stub
+		return dao.insertReceive(receive);
+	}
+
+	public int insertKakaoPay(KakaoPay kakaoPay) {
+		// TODO Auto-generated method stub
+		return dao.insertKakaoPay(kakaoPay);
+	}
+
+	public int setOrderNo(ArrayList<ProductOrderSheet> poss) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		for(ProductOrderSheet pos : poss) {
+			result += dao.setOrderNo(pos);
+		}
+		return result;
+	}
+
 
 }
