@@ -11,6 +11,8 @@ import kr.or.gift.model.vo.KakaoPay;
 import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductCompany;
+import kr.or.gift.model.vo.ProductLike;
 import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
@@ -175,6 +177,56 @@ public class GiftService {
 			result += dao.setOrderNo(pos);
 		}
 		return result;
+	}
+
+	public int getProductTotalOrder(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.getProductTotalOrder(productNo);
+	}
+
+	public Object getAllCompanyList() {
+		// TODO Auto-generated method stub
+		return dao.getAllCompanyList();
+	}
+
+	public void insertCompanySql(ProductCompany company) {
+		// TODO Auto-generated method stub
+		dao.insertCompanySql(company);
+	}
+
+	public void deleteCompany(ProductCompany company) {
+		// TODO Auto-generated method stub
+		dao.deleteCompany(company);
+	}
+
+	public void updateCompany(ProductCompany company) {
+		// TODO Auto-generated method stub
+		dao.updateCompany(company);
+	}
+
+	public ProductLike getOneProductLike(ProductLike like) {
+		// TODO Auto-generated method stub
+		return dao.getOneProductLike(like);
+	}
+	public ProductLike getOneProductLike(int productNo, int memberNo) {
+		// TODO Auto-generated method stub
+		ProductLike like = new ProductLike(0, productNo, memberNo);
+		return dao.getOneProductLike(like);
+	}
+
+	public int likeProduct(ProductLike like) {
+		// TODO Auto-generated method stub
+		return dao.likeProduct(like);
+	}
+
+	public int disLikeProduct(ProductLike like) {
+		// TODO Auto-generated method stub
+		return dao.disLikeProduct(like);
+	}
+
+	public int getProductLikeCount(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.getProductLikeCount(productNo);
 	}
 
 

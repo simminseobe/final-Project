@@ -26,9 +26,11 @@
 		<typeAlias type="kr.or.ticketing.model.vo.Ticketing" alias="ticketing"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TheaterLocalCount" alias="theaterLocalCount"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>
+		<typeAlias type="kr.or.gift.model.vo.ProductCompany" alias="pcc"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductOption" alias="po"/>
 		<typeAlias type="kr.or.gift.model.vo.Product" alias="product"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductPhoto" alias="pp"/>
+		<typeAlias type="kr.or.gift.model.vo.ProductLike" alias="pl"/>
 		<typeAlias type="kr.or.gift.model.vo.Order" alias="order"/>
 		<typeAlias type="kr.or.gift.model.vo.GiftPay" alias="gp"/>
 		<typeAlias type="kr.or.gift.model.vo.KakaoPay" alias="kp"/>

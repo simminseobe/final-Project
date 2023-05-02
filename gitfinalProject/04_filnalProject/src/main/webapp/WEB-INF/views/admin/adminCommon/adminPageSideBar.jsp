@@ -83,13 +83,13 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="/allCategoryList.do">카테고리 리스트</a>
                                         <a class="nav-link" href="/categoryInsertForm.do">카테고리 추가</a>
-                                        <a class="nav-link" href="password.html">제조사 등록</a>
+                                        <a class="nav-link" href="/insertCompany.do">제조사 등록</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                     data-bs-target="#management" aria-expanded="false"
                                     aria-controls="pagesCollapseError">
-                                    관리
+                                    상품관리
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="management" aria-labelledby="headingOne"
@@ -97,7 +97,7 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="/adminGiftList.do">기프트 리스트</a>
                                         <a class="nav-link" href="/giftInsertForm.do">기프트 등록</a>
-                                        <a class="nav-link" href="/giftEvent.do">이벤트 관리</a>
+                                        <!-- <a class="nav-link" href="/giftEvent.do">이벤트 관리</a> -->
                                     </nav>
                                 </div>
                             </nav>
