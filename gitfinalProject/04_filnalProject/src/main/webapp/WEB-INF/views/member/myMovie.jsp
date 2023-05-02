@@ -262,35 +262,36 @@ z-index: 5;
                       
                     	<div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
                     		<div class="moviePostContentList">
-                    <c:forEach items="${oneMoviepostAll}" var="oneMoivePost">
+                    <c:forEach items="${oneMoviePost}" var="oneMoviePost">
                     <div class="movie-all-list" style="margin-top: 25px; ">
                         <div class="moviePostImg"><!--영화 한개 시작-->
                        
                         	<c:choose>
-                        	<c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
+                        	<c:when test="${oneMoviePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
 	                            <img src="/resources/upload/movie/${oneMoivePost.movieFilePath}">
                         	</c:when>
-                            <c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink ne null}">
+                            <c:when test="${oneMoviePost.movieFilePath ne null && oneMoivePost.videoLink ne null}">
 	                            <img src="/resources/upload/movie/${oneMoivePost.movieFilePath}">
                         	</c:when>
-                        	<c:when test="${oneMoivePost.movieFilePath eq null && oneMoivePost.videoLink ne null}">
-                        		<img src="/resources/upload/movie/${mov.mainFile.movieFileName}">
+                        	<c:when test="${oneMoviePost.movieFilePath eq null && oneMoivePost.videoLink ne null}">
+                        		<img src="/resources/upload/movie/${oneMoviePost.movieFileName}">
                         	
                             </c:when>
                             </c:choose>
                             <div class="moviePostImgContent">
-                                <a href="#"><p>${oneMoivePost.memberId }</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
+                                <a href="#"><p>${oneMoviePost.memberId }</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
                                 <a href="#" class="open3"><!--클릭시 무비포스트 상세보기 -->
-	                                <input type="text" name="movieNo" value="${oneMoivePost.movieNo }" style="display:none;">
-	                                <input type="text" name="moviePostNo" value="${oneMoivePost.moviePostNo}" style="display:none;">
-                                    <input type="text" name="movieFilePath" value="${oneMoivePost.movieFilePath }" style="display:none;">
-	                                <input type="text" name="videoLink" value="${oneMoivePost.videoLink}" style="display:none;">
-                                    <p class="moviePostImgMovieTit">${oneMoivePost.movieTitle }</p>
-                                    <p class="moviePostImgMovieCont"><p>${oneMoivePost.moviePostContent}</p>
-                                    <p class="moviePostImgTime" ><p>${oneMoivePost.moviePostDate}</p>
+	                                <input type="text" name="movieNo" value="${oneMoviePost.movieNo }" style="display:none;">
+	                                <input type="text" name="moviePostNo" value="${oneMoviePost.moviePostNo}" style="display:none;">
+                                    <input type="text" name="movieFilePath" value="${oneMoviePost.movieFilePath }" style="display:none;">
+	                                <input type="text" name="videoLink" value="${oneMoviePost.videoLink}" style="display:none;">
+                                    <p class="moviePostImgMovieTit">${oneMoviePost.movieTitle }</p>
+                                    <p class="moviePostImgMovieCont"><p>${oneMoviePost.moviePostContent}</p>
+                                    <p class="moviePostImgTime" ><p>${oneMoviePost.moviePostDate}</p>
                                 </a>
                             </div>
-                        </div><!--영화 한개 끝-->                           
+                        </div><!--영화 한개 끝-->   
+                       </div>                        
                     </c:forEach>
                     
                     </div>       

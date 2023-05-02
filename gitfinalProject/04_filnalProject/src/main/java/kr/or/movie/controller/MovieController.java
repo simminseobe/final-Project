@@ -127,9 +127,9 @@ public class MovieController {
 					
 					
 					//4.사용자 무비포스트 리스트(무비포스트 리스트)
-					ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost2(memberId);
-					model.addAttribute("oneMoviepostAll",oneMoviepostAll);
-					System.out.println(oneMoviepostAll);
+					ArrayList<MoviePost> oneMoviePost=service.oneMovieAllPost2(memberId);
+					model.addAttribute("oneMoviePost",oneMoviePost);
+					System.out.println(oneMoviePost);
 					//사용자 무비포스트 총 갯수
 					int moviePostCount=service.moviePostCount2(memberId);
 					model.addAttribute("moviePostCount",moviePostCount);
