@@ -21,17 +21,21 @@ input[name=store_nav_ct] { display: none; }
 input[name=store_nav_ct]:checked~label { font-weight: 900; border: 1px solid #503396; border-bottom: none; }
 
 /* 스토어 상단 홍보배너 */
-.store-wellcome { display: flex; width: 600px; margin-top: 50px; }
+.store-wellcome { display: flex; width: 600px; margin: 50px 0 0; }
 .text-info { font-weight: 200; padding: 40px 0 30px; }
 .text-info>h2 { font-size: 30px; margin-top: 10px; }
 .text-info p:first-of-type { padding: 40px 0 5px; font-size: 20px; }
 .text-info p:last-of-type { font-size: 15px;}
+.pic-info { margin-left: 30px; }
 .pic-info>img { width: 300px; }
+
+.store-wellcome2 { float: right; margin: 0 200px 30px; width: 700px; }
+.store-wellcome2 .text-info { margin-left: 50px; }
 
 /* 스토어 내부 컨텐츠 상단 바 */
 .gift-ct-nav { display: flex; justify-content: space-between; margin-top: 60px; }
 .ct-title { font-size: 20px; }
-.gift-more { background: none; }
+.gift-more { background: none; border: none; }
 
 /* 스토어 내부 컨탠츠 */
 a { color: #000; }
@@ -44,7 +48,16 @@ a { color: #000; }
 .item-title { font-size: 16px; margin-bottom: 10px; }
 .item-content { font-size: 12px; font-weight: 200;}
 .item-price { position: absolute; bottom: 20px; left: 20px; font-size: 20px; font-weight: 200; }
+.like-count-view { position: absolute; bottom: 20px; right: 20px; display: flex; align-items: center; }
+.like-count-view button { background-color: #fff; border: none; }
+.like-count-view span:first-of-type { display: block; margin-right: 10px; }
+.like-count-view span:last-of-type { font-weight: 100; font-size: 1rem; color: red; }
+.like-count-view span:last-of-type:hover {font-variation-settings:'FILL' 1;}
 
+.buy-event-item { width: 120px; height: 50px; line-height: 50px; text-align: center; margin: 50px auto 0; }
+.buy-event-item a { display: block; font-size: 0.75rem; color: #fff; background-color: #503396; font-weight: 600; }
+.event-banner img { max-width: 1200px;}
+.event-banner h2 { font-size: 2rem; font-weight: 600; display: block; text-align: center; margin: 50px 0;}
 /* 상품섹션 */
 .head-title { border-bottom: 1px solid #555; padding: 42px 0 15px; }
 .head-title h1 { font-size: 1.7rem; margin-bottom: 10px; }
@@ -53,14 +66,20 @@ a { color: #000; }
 /* images */
 .product-control { display: flex; margin: 30px 0 100px; border-bottom: 1px solid #d8d9db; padding-bottom: 100px; }
 .product-control .images { text-align: center; }
-.images { width: 480px; }
+.images { width: 580px; }
 #selected-image { width: 100%; }
 #selected-image > img { max-width: 400px; max-height: 400px; }
-#preview { display: flex; height: 120px; justify-content: space-between; align-items: center; }
-#preview .prev-img-container { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; }
+
+#preview { display: flex; width: 480px; height: 120px; align-items: center; margin: 0 auto; }
+#preview .prev-img-container { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;}
 #preview .prev-img-container img { max-width: 80px; max-height: 80px; }
+#preview > button { width: 23px; height: 60px; background-image: url(/resources/images/common/visual_btns_black.png); text-indent: -9999px; opacity: 0.5; }
+#preview > button:last-of-type { background-position: right 0; }
+.selectImg { border: 2px solid royalblue; }
+
+
 /* infomation */
-.right-info { padding-left: 130px; width: 720px; }
+.right-info { padding-left: 20px; width: 720px; }
 .right-info > div { padding: 10px 0; }
 .productInfo { border-bottom: 1px solid #ddd; }
 .right-info h2 { font-size: 1rem; margin-top: 10px; }
@@ -96,12 +115,9 @@ a { color: #000; }
 .quantity input { border: none; background-color: transparent; width: 25%; padding-left: 15px; font-size: 1.2rem; font-weight: 600; }
 .quantity button { background-color: transparent; border: none; cursor: pointer; font-size: 1.5rem; font-weight: bold; }
 
-
 /* 상세 메인콘텐츠영역 */
 .main-content { width: 960px; margin: 0 auto; }
 .main-img-container img { max-width: 960px; margin: 10px 0; }
-
-
 
 /* 주문서 결제 페이지 */
 .order { min-height: 500px; } 
@@ -214,4 +230,8 @@ a { color: #000; }
 .complete-btns a { display: block; width: 220px; border: 1px solid #000; text-align: center; height: 60px; line-height: 60px; font-size: 1rem; font-weight: 600; } 
 .complete-btns a:first-of-type { margin-right: 30px; }
 .complete-btns a:last-of-type { color: #FFF; background-color: #503396; }
-#successPayButton { display: none; }
+#successPayButton, #cancelPay, #failPay { display: none; }
+
+/* 하트뿌리기 애니메이션 */
+.material-symbols-outlined { font-variation-settings:'FILL' 0, 'wght' 700, 'GRAD' 200, 'opsz' 48 }
+.like-on { font-variation-settings:'FILL' 1; color: red;}
