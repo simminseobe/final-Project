@@ -45,7 +45,7 @@ import common.FileManager;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
-import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.member.model.vo.ShippingAddress;
 import kr.or.ticketing.model.vo.ReservationCancelPageData;
 import kr.or.ticketing.model.vo.ReservationPageData;
 
@@ -252,7 +252,7 @@ public class MemberController {
 	@RequestMapping(value = "/myProfile.do")
 	public String myProfile(@SessionAttribute(required = false) Member m , Model model) {
 		// 배송지 정보 조회
-		ArrayList<ShoppingAddress> address = service.shopAddress(m.getMemberNo());
+		ArrayList<ShippingAddress> address = service.shopAddress(m.getMemberNo());
 		if(!address.isEmpty()) {
 			model.addAttribute("address", address);
 		}

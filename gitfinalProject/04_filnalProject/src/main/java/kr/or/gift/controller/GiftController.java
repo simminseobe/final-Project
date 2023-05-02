@@ -23,12 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import common.FileManager;
 import kr.or.gift.model.service.GiftService;
 import kr.or.gift.model.vo.ApproveResponse;
+import kr.or.gift.model.vo.GiftPay;
+import kr.or.gift.model.vo.KakaoPay;
 import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
@@ -36,6 +40,8 @@ import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
 import kr.or.gift.model.vo.ReadyResponse;
+import kr.or.gift.model.vo.Receive;
+import kr.or.member.model.vo.ShippingAddress;
 
 @Controller
 @SessionAttributes({"tid","order"}) //하... 
@@ -228,6 +234,11 @@ public class GiftController {
 			posList.add(pos);
 		}
 //		배송지 가져오기
+		ArrayList<ShippingAddress> sas = sv.getShppingAddress(memberNo);
+		for(ShippingAddress sa : sas) {
+			String[] split = sa.getAddressPhone().split("-");
+			sa.setSplit(split);
+		}
 //		상품 가져오기
 		Product product = sv.getOneProduct(productNo);
 		product.setMainImage(sv.getMainImage(productNo));
@@ -243,6 +254,7 @@ public class GiftController {
 		System.out.println("result : " + result);
 		model.addAttribute("posList", posList);
 		model.addAttribute("product", product);
+		model.addAttribute("sas", sas);
 		return "gift/productOrderSheet";
 	}
 	
@@ -295,7 +307,7 @@ public class GiftController {
 			// 4. connection을 통해 매개변 전달을 위해 output이 있음을 설정
 			connection.setDoOutput(true);
 			// 5. 해당 요청개체 생성 매개변수 생성
-			String param = "cid=TC0ONETIME&partner_order_id="+order.getMemberId()+order.getItemName()+"&partner_user_id=무비아일랜드기프트샾&item_name="+order.getItemName()+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://localhost/successPay.do&fail_url=http://localhost/failPay.do&cancel_url=http://localhost/cancelPay.do&item_code=";
+			String param = "cid=TC0ONETIME&partner_order_id="+order.getMemberId()+order.getItemName()+"&partner_user_id=movieIslandGift&item_name="+order.getItemName()+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://localhost/successPay.do&fail_url=http://localhost/failPay.do&cancel_url=http://localhost/cancelPay.do&item_code=";
 			// 6. 작성한 매개변수 전송객체 생성
 			OutputStream outputStream = connection.getOutputStream();
 			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
@@ -314,7 +326,7 @@ public class GiftController {
 				inputStream = connection.getErrorStream();
 			}
 			// 받은 결과를 읽어오기
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String data = bufferedReader.readLine();
 			//JSON 형식 문자열을 객체에 담아줌
@@ -350,7 +362,7 @@ public class GiftController {
 			// 4. connection을 통해 개체 전달을 위해 output이 있음을 설정
 			connection.setDoOutput(true);
 			// 5. 해당 요청개체 생성 매개변수 생성
-			String param = "cid=TC0ONETIME&tid="+tid+"&partner_order_id="+order.getMemberId()+order.getItemName()+"&partner_user_id=무비아일랜드기프트샾&pg_token="+pgToken;
+			String param = "cid=TC0ONETIME&tid="+tid+"&partner_order_id="+order.getMemberId()+order.getItemName()+"&partner_user_id=movieIslandGift&pg_token="+pgToken;
 			OutputStream outputStream = connection.getOutputStream();
 			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 			// 7. 매개변수를 바이트배열로 변환 후 전송 후 전송객체 소멸
@@ -367,14 +379,14 @@ public class GiftController {
 				inputStream = connection.getErrorStream();
 			}
 			// 받은 결과를 읽어오기
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String data = bufferedReader.readLine();
 			ObjectMapper objectMapper = new ObjectMapper();
 			ApproveResponse approveResponse = objectMapper.readValue(data, ApproveResponse.class);
 			System.out.println(data);
 			System.out.println(approveResponse);
-			model.addAttribute("data", approveResponse);
+			model.addAttribute("data", data);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -383,15 +395,96 @@ public class GiftController {
 			e.printStackTrace();
 		}
 		
-		return "gift/completePayment";
+		return "gift/giftPaysuccess";
 	}
 	@RequestMapping(value = "/failPay.do")
 	public void failPay() {
 		System.out.println("failed pay gift");
 	}
 	@RequestMapping(value = "/cancelPay.do")
-	public void cancelPay() {
+	public String cancelPay() {
 		System.out.println("canceled pay gift");
+		return "gift/giftPayCancel";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/addAddress.do")
+	public String insertAddress(ShippingAddress sa) {
+		int result = sv.insertAddress(sa);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/getOneAddress.do", produces = "application/json;charset=utf-8")
+	public String getOneAddress(int saNo) {
+		ShippingAddress sa = sv.getOneAddress(saNo);
+		if(sa != null) {
+			Gson gson = new Gson();
+			String result = gson.toJson(sa);
+			return result;
+		} else {
+			return "fail";
+		}
+	}
+	@RequestMapping(value = "/order.do")
+	public String order(Model model, Order order, GiftPay giftPay, Receive receive, String payData, String[] posNo) {
+		System.out.println("order : "+order);
+		System.out.println("giftPay : " + giftPay);
+		System.out.println("receive : " + receive);
+		//data 문자열 깨지는거 수정해야함 강사님 도와주세요!
+		System.out.println("payData : " + payData);
+		int result = sv.insertOrder(order);
+		//order insert하고나서 orderNo 삽입까지 마침
+		System.out.println("1111;1111;1111111; === : " + result);
+		if(result == 1) {
+			giftPay.setOrderNo(order.getOrderNo());
+			result = result + sv.insertGiftPay(giftPay);
+			switch (giftPay.getPayMethod()) {
+			case "kakaoPay":
+				ObjectMapper objectMapper = new ObjectMapper();
+				KakaoPay kakaoPay = null;
+				try {
+					kakaoPay = objectMapper.readValue(payData, KakaoPay.class);
+					kakaoPay.setGpNo(giftPay.getGpNo());
+				} catch (JsonMappingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(kakaoPay);
+				result = result + sv.insertKakaoPay(kakaoPay);
+				
+				break;
+			default:
+				break;
+			}
+		} else System.out.println("order insert fail");
+		System.out.println("2222222222222;kdfas;22222222222; === : " + result);
+		if(result == 3) {
+			receive.setOrderNo(order.getOrderNo());
+			receive.setReceiverPhone(receive.getPhone0() + "-" + receive.getPhone1() + "-" + receive.getPhone2());
+			result = result + sv.insertReceive(receive);
+		} else System.out.println("giftPay insert fail");
+		System.out.println("3333333333;kdfas;33333333; === : " + result);
+		if(result == 4) {
+			ArrayList<ProductOrderSheet> poss = new ArrayList<ProductOrderSheet>();
+			for(String pn : posNo) {
+				ProductOrderSheet newPos = new ProductOrderSheet();
+				newPos.setPosNo(Integer.parseInt(pn));
+				newPos.setOrderNo(order.getOrderNo());
+				poss.add(newPos);
+			}
+			System.out.println(poss);
+			result = result + sv.setOrderNo(poss);
+		}
+		System.out.println("gkasdfl;kdfas;hladsfghl; === : " + result);
+		//배송
+		return "gift/completePayment";
+	}
 } 

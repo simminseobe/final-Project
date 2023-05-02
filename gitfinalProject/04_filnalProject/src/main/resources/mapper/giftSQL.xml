@@ -23,6 +23,31 @@
 	</insert>
 	<insert id="insertOrderSheet" parameterType="pos">
 		insert into product_order_sheet values(pos_seq.nextval, null, #{productNo},#{poNo},#{orderCount},#{memberNo})
+		<selectKey resultType="_int" order="AFTER" keyProperty="posNo">
+			select max(pos_no) from product_order_sheet
+		</selectKey>
+	</insert>
+	<insert id="insertAddress" parameterType="sa">
+		INSERT INTO shipping_address (sa_no, member_no, address_old, address_new, address_detail, zip_code, address_name, address_phone, address_receiver_name) 
+		VALUES (sa_seq.nextval, #{memberNo}, #{addressOld}, #{addressNew}, #{addressDetail}, #{zipCode}, #{addressName}, #{addressPhone}, #{addressReceiverName})
+	</insert>
+	<insert id="insertOrder" parameterType="order">
+		insert into order_tbl values(order_seq.nextval, #{memberId}, #{orderPrice}, 1, #{orderRequest}, #{shipRequest} , TO_CHAR(SYSDATE, 'YYYY-MM-DD / HH24:MI:SS'))
+		<selectKey resultType="_int" order="AFTER" keyProperty="orderNo">
+			select max(order_no) from order_tbl
+		</selectKey>
+	</insert>
+	<insert id="insertGiftPay" parameterType="gp">
+		insert into gift_pay values(gp_seq.nextval, #{orderNo}, #{payMethod}, (TO_CHAR(SYSDATE, 'YYYY-MM-DD / HH24:MI:SS')), #{memberNo})
+		<selectKey resultType="_int" order="AFTER" keyProperty="gpNo">
+			select max(gp_no) from gift_pay
+		</selectKey>
+	</insert>
+	<insert id="insertReceive" parameterType="receive">
+		insert into receive values(ra_seq.nextval, #{orderNo}, #{receiver}, #{receiverPhone}, #{receiveAddressOld}, #{receiveAddressNew}, #{receiveAddressDetail}, #{receiveZipCode})
+	</insert>
+	<insert id="insertKakaoPay" parameterType="kp">
+		insert into kakao_pay values(#{tid}, #{gpNo}, #{cid}, #{amount.total}, #{amount.tax_free})
 	</insert>
 	<delete id="deleteCategory" parameterType="pc">
 		delete from product_category where pc_no = #{pcNo}
@@ -38,6 +63,9 @@
 	</delete>
 	<update id="updateCategory" parameterType="pc">
 		update product_category set pc_category = #{pcCategory} where pc_no = #{pcNo}
+	</update>
+	<update id="updatePos" parameterType="pos">
+		update product_order_sheet set order_no = #{orderNo} where pos_no = #{posNo}
 	</update>
 	<!-- select -->
 	<select id="selectOneProduct" parameterType="_int" resultType="product">
@@ -140,5 +168,33 @@
 			member_no as memberNo
 		from product_order_sheet
 		where member_no = #{_parameter}
+	</select>
+	<select id="selectAllShippingAddress" parameterType="_int" resultType="sa">
+		select
+			sa_no as saNo,
+			member_no as memberNo,
+			address_old as addressOld,
+			address_new as addressNew,
+			address_detail as addressDetail,
+			zip_code as zipCode,
+			address_name as addressName,
+			address_phone as addressPhone,
+			address_receiver_name as addressReceiverName
+		from shipping_address
+		where member_no = #{_parameter}
+	</select>
+	<select id="selectOneAddress" resultType="sa" parameterType="_int">
+		select
+			sa_no as saNo,
+			member_no as memberNo,
+			address_old as addressOld,
+			address_new as addressNew,
+			address_detail as addressDetail,
+			zip_code as zipCode,
+			address_name as addressName,
+			address_phone as addressPhone,
+			address_receiver_name as addressReceiverName
+		from shipping_address
+		where sa_no = #{_parameter}
 	</select>
 </mapper>
