@@ -11,12 +11,32 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<style>
 		.pointDetail{
-			width: 90%;
-			height: 100px;
-			border: 2px solid #d1d5dd;
-			border-radius: 20px 20px 20px 20px;
-			background-color : #091529;
+			overflow: hidden;
+			
 		}
+		.pointDetail>div{
+			float: left;
+			
+		}
+		.pointDetail>div:nth-child(1){
+			font-size: 30px;
+			color : #fff;
+			background-color : #1d1e36;
+			width: 40%;
+			height: 200px;
+			border-top-left-radius : 20px;
+			border-bottom-left-radius : 20px;
+		}
+		.pointDetail>div:nth-child(2){
+			font-size: 30px;
+			color : #fff;
+			background-color : #d6d6d6;
+			width: 40%;
+			height: 200px;
+			border-top-right-radius : 20px;
+			border-bottom-right-radius : 20px;
+		}
+		
 	
 	</style>
 	<table>
@@ -31,7 +51,8 @@
 				<h2>포인트 내역</h2>
 			</div>
 			<div class="pointDetail">
-				${sessionScope.m.memberName }
+			<div>사용가능포인트<br>${mpAmount }</div>
+			<div>잔여 포인트는<br>${mpAmount }</div>
 			</div>
 			<div class="tab-content">
 				<table>
