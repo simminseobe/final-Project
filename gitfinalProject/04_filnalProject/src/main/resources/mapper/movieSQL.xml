@@ -316,6 +316,13 @@
 		 from review 
 		 where movie_no=#{movieNo}
 	</select>
+	<!-- 작성한 관람평 -->
+	<select id="ReviewListCount2" parameterType="String" resultType="_int">
+		 select 
+		 	count(review_comment_no) as reviewListCount
+		 from review 
+		 where member_id=#{_parameter}
+	</select>
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
 		select 
 				*
@@ -489,6 +496,10 @@ select * from
 </update>
 <select id="moviePostCount" parameterType="moviePost" resultType="_int">
 	select count(*) from movie_post where movie_no=#{movieNo}
+</select>
+<!-- 사용자 무비포스트 count -->
+<select id="moviePostCount2" parameterType="moviePost" resultType="_int">
+	select count(*) from movie_post where member_id=#{_parameter}
 </select>
 <delete id="deletePostComment" parameterType="moviePostComment">
 	delete from movie_post_comment where movie_post_comment_no=#{moviePostCommentNo}

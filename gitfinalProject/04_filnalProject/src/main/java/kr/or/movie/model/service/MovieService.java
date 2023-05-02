@@ -214,6 +214,11 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		int reviewListCount = dao.selectReviewListCount(movieNo);
 		return reviewListCount;
 	}
+	//사용자 관람평
+	public int selectReviewListCount2(String memberId) {
+		int reviewListCount = dao.selectReviewListCount2(memberId);
+		return reviewListCount;
+	}
 	public ArrayList<MovieFile> selectMovieFileAll(int movieNo) {
 		ArrayList<MovieFile> movieFileAll=dao.selectMovieFileAll(movieNo);
 		return movieFileAll;

@@ -114,6 +114,11 @@ public class MovieDao {
 		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount", movieNo);
 		return reviewListCount;
 	}
+	//사용자 관람평
+	public int selectReviewListCount2(String memberId) {
+		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount2", memberId);
+		return reviewListCount;
+	}
 
 	public ArrayList<MovieFile> selectMovieFileAll(int movieNo) {
 		List list = sqlSession.selectList("movie.selectmovieFileAll", movieNo);
