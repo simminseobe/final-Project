@@ -121,11 +121,9 @@ $(".whiteLike2").on("click",function(){
             }
             
         });//ajax끝나는 지점
-        
-        
+
         
     }else{
-				
 		 $.ajax({
 		 		url :"/reviewLikeDelete.do",
 		        type:"post",
@@ -133,21 +131,18 @@ $(".whiteLike2").on("click",function(){
 		        success:function(data){
         		if(data != null){
         			console.log(data);
-        			
         			const likeCountNumMinus=Number(reviewLikeCount.text())-1;
         			const reviewlikeCountString=likeCountNumMinus.toString();
         			reviewLikeCount.text(reviewlikeCountString);
         			console.log(reviewLikeCount.text(reviewlikeCountString));
         			icon.attr("src",whiteLike); 			
-    		    
         		}else{
         			console.log("fail"); 
         			
         		}
         	}
         	
-        });//ajax끝나는 지점       
-
+        });//ajax끝나는 지점      
     }
 });
 
