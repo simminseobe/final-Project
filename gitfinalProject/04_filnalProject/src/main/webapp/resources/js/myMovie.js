@@ -27,7 +27,9 @@ $(".tabs>li").on("click",function(){
 });
 $(".tabs>li").eq(0).click();
 
-
+function reservationFunc(){
+    location.href="/ticketing.do";
+}
 
 
 
