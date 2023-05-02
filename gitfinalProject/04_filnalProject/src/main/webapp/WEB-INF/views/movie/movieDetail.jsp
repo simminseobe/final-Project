@@ -669,8 +669,8 @@ z-index: 5;
                                     <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa; box-sizing: border-box;" readonly>${review.reviewContent}</textarea>
                                 </div>
                                 <div class="reviewTextLike reviewTextLikeSelf">
-                                    <img src="img/like-24.png" class="whiteLike2">
-                                    <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
+                                    <img src="img/like-24.png" class="whiteLike">
+                                    <img src="img/likeBlack-24.png" class="blackLike" style="display:none;">
                                     <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px; top:20px;">
                                         <p>0</p>
                                     </div>
@@ -681,6 +681,7 @@ z-index: 5;
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="reviewDate">
                             <span>${review.reviewDate}</span>
                         </div>
