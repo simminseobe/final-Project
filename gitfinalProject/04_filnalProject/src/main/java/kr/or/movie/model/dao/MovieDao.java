@@ -64,8 +64,8 @@ public class MovieDao {
 
 		return  (ArrayList<Movie>)list;
 	}
-	public ArrayList<MyMovie> selectOneMovieAll2(String memberId) {
-		List list = sqlSession.selectList("movie.selectOneMovieAll2", memberId);
+	public ArrayList<MyMovie> selectOneMovieAll2(int memberNo) {
+		List list = sqlSession.selectList("movie.selectOneMovieAll2", memberNo);
 
 		return  (ArrayList<MyMovie>)list;
 	}
@@ -112,6 +112,11 @@ public class MovieDao {
 
 	public int selectReviewListCount(int movieNo) {
 		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount", movieNo);
+		return reviewListCount;
+	}
+	//사용자 관람평
+	public int selectReviewListCount2(String memberId) {
+		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount2", memberId);
 		return reviewListCount;
 	}
 
@@ -167,12 +172,12 @@ public class MovieDao {
 		List list = sqlSession.selectList("movie.oneMoviePostAll", movieNo);
 		return (ArrayList<MoviePost>) list;
 	}
-	/*
+	//사용자별 무비포스트 리스트 조회
 	public ArrayList<MoviePost> selectOneMovieAllPost2(String memberId) {
 		List list = sqlSession.selectList("movie.oneMoviePostAll2", memberId);
 		return (ArrayList<MoviePost>) list;
 	}
-	*/
+	
 	//무비포스트 상세보기를 위함
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost", moviePostNo);
@@ -338,14 +343,6 @@ public class MovieDao {
 		return (ArrayList<Schedule>) list; 
 		
 	}
-
-
-	/*
-	 * public ArrayList<Schedule> dayTotalAudience(String movieTitle) { List list
-	 * =sqlSession.selectList("movie.onedayTotalAudience", movieTitle); return
-	 * (ArrayList<Schedule>) list; }
-	 */
-
 
 
 

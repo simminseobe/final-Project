@@ -192,7 +192,7 @@ z-index: 5;
 			<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 		</div>
 	</td>
-	<td width="1200px">
+	<td>
 	<div class="booklist-wrap">
 			<div class="booklist-header">
 				<h2>나의 무비스토리</h2>
@@ -205,6 +205,19 @@ z-index: 5;
 					<li><a href="javascript:void(0);">찜영화</li>
 				</ul>
 			</div>
+    	<!-- <div class="movie-list-wrap" style="width:1100px; margin: 0 auto;">
+    		<div class="movieList-title-wrap" style=" margin-top: 100px;">
+    			<h1 style="font-size:30px;">나의 무비스토리</h1>
+    		</div> -->
+    		<!-- <div class="movie-list-wrap">
+    			<div class="movie-list-menu tabs-wrap">
+                        <ul class="tabs">
+                            <li><a href="javascript:void(0);">본영화</a></li>
+                            <li><a href="javascript:void(0);">무비포스트</a></li>
+                            <li><a href="javascript:void(0);">관람평</a></li>
+	                        <li><a href="javascript:void(0);">찜영화</a></li>
+                        </ul>
+                </div> -->
                 <div class="movie-list-content-wrap" style="margin-top: 25px;">
                 	<div class="movie-list-content-top">
                 			<span class="tabcontent1">본영화 총 <span style="color: #329eb1;">${OneMemberMovieCount}</span>개</span>
@@ -249,13 +262,12 @@ z-index: 5;
                     <!-- 작성한 무비포스트  -->
                       
                     	<div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                        
                     		<div class="moviePostContentList">
                     <c:forEach items="${oneMoviePost}" var="oneMoviePost">
                     <div class="movie-all-list" style="margin-top: 25px; ">
                         <div class="moviePostImg"><!--영화 한개 시작-->
-                        <img src="/resources/upload/movie/${oneMoviePost.movieFilePath }">
-                        	<%-- <c:choose>
+                       
+                        	<c:choose>
                         	<c:when test="${oneMoviePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
 	                            <img src="/resources/upload/movie/${oneMoivePost.movieFilePath}">
                         	</c:when>
@@ -266,7 +278,7 @@ z-index: 5;
                         		<img src="/resources/upload/movie/${oneMoviePost.movieFileName}">
                         	
                             </c:when>
-                            </c:choose> --%>
+                            </c:choose>
                             <div class="moviePostImgContent">
                                 <a href="#"><p>${oneMoviePost.memberId }</p></a><!--클릭시 해당 유저의 무비포스트 리스트 목록 조회-->
                                 <a href="#" class="open3"><!--클릭시 무비포스트 상세보기 -->
@@ -280,7 +292,7 @@ z-index: 5;
                                 </a>
                             </div>
                         </div><!--영화 한개 끝-->   
-                       </div>                      
+                       </div>                        
                     </c:forEach>
                     
                     </div>       
@@ -289,144 +301,69 @@ z-index: 5;
                     
                     <!-- 작성한 관람평  -->
                     <div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                    	
                     
-       		<!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
-                    <c:forEach  items="${reviewList }" var="review">
-                    <c:choose>
-                    <c:when  test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
-                    <div class="infoWap2Top">
-                        <div class=" infoWrap2">
-                            <div class="userReviewInfo2">
-                                <img src="/resources/images/member/nonImg.png">
-                                <p class="user-id user-second">${review.memberId}</p>
-                            </div>
-                            <div class="Text2 textSecond">
-                                <div class="Tit2">
-                                    <p>관람평</p>
-                                </div>
-                                <div class=" Point2 pointSecond">
-                                    <p>${review.movieScore}</p>
-                                </div>
-                                <div class="PointCom PointComSecond" style="font-size:16px;">
-                                	<c:choose>
-                                		<c:when test="${review.story eq 1}">
-                                    	<p>스토리</p>
-                                		</c:when>
-                                		<c:when test="${review.actor eq 1}">
-                                    	<p>배우</p>
-                                		</c:when>
-                                		<c:when test="${review.ost eq 1}">
-                                    	<p>OST</p>
-                                		</c:when>
-                                		<c:when test="${review.videoVisual eq 1}">
-                                    	<p>영상미</p>
-                                		</c:when>
-                                		<c:when test="${review.production eq 1}">
-                                    	<p>연출</p>
-                                		</c:when>
-                                		<c:otherwise>
-                                			<p>관람포인트</p>
-                                		</c:otherwise>
-                                	</c:choose>
- 									<c:choose>
- 										<c:when test="${review.story+review.actor+review.ost+review.videoVisual+review.production gt 0}">
-                                    	<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production-1}</p>
- 										</c:when>
- 										<c:otherwise>
- 										<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production}</p>
- 										</c:otherwise>
- 									</c:choose>                             
-                                
-                                </div>
-                                <div class="reviewTextContent reviewTextSecond">
-                                    <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa; box-sizing: border-box;" readonly>${review.reviewContent}</textarea>
-                                </div>
-                                <div class="reviewTextLike reviewTextLikeSelf">
-                                    <img src="img/like-24.png" class="whiteLike">
-                                    <img src="img/likeBlack-24.png" class="blackLike" style="display:none;">
-                                    <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px; top:20px;">
-                                        <p>0</p>
-                                    </div>
-                                </div>
-                                <div class="reviewContentWrite2" style="font-size: 15px;">
-                                    <a href="#" id="open2" style="color: #666666;">수정</a>
-                                    <a href="/deleteReview.do?reviewCommentNo=${review.reviewCommentNo }&movieNo=${review.movieNo}" style="color: #666666;">삭제</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="reviewDate">
-                            <span>${review.reviewDate}</span>
-                        </div>
-                    </div>
-                    </c:when>
-                    </c:choose>
-			        </c:forEach><!--본인작성댓글 끝-->
-                </div><!--실관람평 내용 끝나는 자리-->
                     </div>
                     
                     <!-- 찜영화  --> 
-                      <div class="tabcontent movie-all-list-flex"
-             style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-             <c:forEach items="${favoriteMovieList}" var="favorite">
-             <div class="movie-all-list" style="margin-top: 25px; ">
-                 <div class="movie-list-set" style="overflow: hidden;">
-                     <a href="/movieDetail.do?movieNo=${favorite.movieNo}&reqPage=1">
-                         <div class="img-poster">
-                             <img src="/resources/upload/movie/${favorite.mainFile.movieFileName}" style="width: 230px; height:331px;">
-                         </div>
-                         <div class="cover" style=" color:white; padding: 10px;">
-                             <div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
-                                 <p>${favorite.movieContent}</p>
-                             </div>
-                             <div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
-                                 <div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;" >
-                                     <p>관람평<span style="color:#ffcb05"> ${favorite.movieScoreAvg.movieScoreAvg}</span></p>
-                                 </div>
-                             </div>
-                         </div>
-                         
-                     </a>
-                     <div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
-                         <p class="movie-title" >${favorite.movieTitle }</p>
-                         <input class="inputMovieTitle" style="display:none;" value="${favorite.movieTitle }">
-                     </div>
-                     <div class="reserve-rate" style="font-size: 18px;">
-                         <p>예매율 ${favorite.reservationRate }%</p>
-                     </div>
-                     <div class="start-date" style="font-size: 18px;">
-                         <p>${favorite.movieDate}</p>
-                     </div>
-                     <div class="movieAllList-like" style="margin-top: 10px; float: left;">
-                      <button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
-                          <c:choose>
-                        <c:when test="${favorite.likeCheck eq 1}">
-                            <img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
-                        </c:otherwise>
-                        </c:choose>
-                          <span>${favorite.likeCount}</span>
-                      </button>
-                          <input type=text class="likeMovieNo" value="${favorite.movieNo}" style="display:none">
-                     </div>
-                     <div class="movieAllList-reserve" style="margin-top: 10px;">
-	                     <button type=" button"
-	                         style="width: 150px; height: 40px; font-size: 18px;  vertical-align: center;" onclick="reservationFunc();">
-	                             	예약하기
-	                     </button>
-                     </div>
-                 </div>
-             </div>
-         </c:forEach>
-         </div>
-                        </div>
+                    <div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
+                    	
                     </div>
+                    	<div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
+                    		<div class="movie-all-list" style="margin-top: 25px; ">
+                    			<div class="movie-list-set" style="overflow: hidden;">
+                    				<a href="/movieDetail.do?movieNo=${favorite.movieNo}&reqPage=1">
+                    					<div class="img-poster">
+                             				<img src="/resources/upload/movie/${favorite.mainFile.movieFileName}" style="width: 230px; height:331px;">
+                         				</div>
+                         				<div class="cover" style=" color:white; padding: 10px;">
+                         					<div class="coverMovieContent" style="height: 230px; font-size: 10px; margin: 5px 0;">
+                                 				<p>${favorite.movieContent}</p>
+                            			 	</div>
+                            			 	<div class="coverMovieRate" style="position: absolute; left: 0; bottom: 15px; text-align: center;">
+                            			 		<div class="innerCoverMovieRate" style="margin-top: 10px; padding-top: 10px; width: 230px; border-top:1px solid lightgray; font-size: 20px;" >
+                            			 			<p>관람평<span style="color:#ffcb05"> ${favorite.movieScoreAvg.movieScoreAvg}</span></p>
+                            			 		</div>
+                            			 	</div>
+                         				</div>
+                    				</a>
+                    				<div class="movie-title-wrap" style="margin-top: 20px; font-size: 18px;">
+                         				<p class="movie-title" >${favorite.movieTitle }</p>
+                         				<input class="inputMovieTitle" style="display:none;" value="${favorite.movieTitle }">
+                     				</div>
+                     				<div class="reserve-rate" style="font-size: 18px;">
+                         				<p>예매율%</p>
+                     				</div>
+                     				<div class="start-date" style="font-size: 18px;">
+                         				<p>${favorite.movieDate}</p>
+                     				</div>
+                     				<div class="movieAllList-like" style="margin-top: 10px; float: left;">
+                      					<button type="button" class="likeCount"style="width: 76px; height: 40px; font-size: 18px;">
+                          					<c:choose>
+                        						<c:when test="${favorite.likeCheck eq 1}">
+                            						<img src="img/black-heart.png" style="width:18px; height:18px; font-size:10px;">
+                        						</c:when>
+                        						<c:otherwise>
+                            						<img src="img/bin-heart.png" style="width:18px; height:18px; font-size:10px;">
+                        						</c:otherwise>
+                        					</c:choose>
+                          					<span>${favorite.likeCount}</span>
+                      					</button>
+                          				<input type=text class="likeMovieNo" value="${favorite.movieNo}" style="display:none">
+                     				</div>
+                     				<div class="movieAllList-reserve" style="margin-top: 10px;">
+                     					<button type=" button" style="width: 120px; height: 40px; font-size: 18px;  vertical-align: center;">
+                             				예약하기
+                     					</button>
+                     				</div>
+                    			</div>
+                    		</div>
+                    	</div>
+                    
+                     
+                    
                 </div>
-            </div>
-            </div>
+    		</div>
+    	</div>
     	 <div class="sessionInfo" style="display:none;">
             <input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo}">
          </div>
@@ -434,85 +371,87 @@ z-index: 5;
 </table>
 </div>
 
- 
-         
-	
-	<script>
-	 $(".movieAllList-like>button>img").on("click",function(){
-     	if($(".sessionMemberNo").val() !=""){
-     	
-     	const movieNo=$(this).parent().next().val();
-         const memberNo=$(".sessionMemberNo").val();
-			console.log(memberNo + "스크립트에서 memberNo");
-         console.log(movieNo + "스크립트에서 movieNo");
-         
-     	const binHeart="img/bin-heart.png";
-         const blackHeart="img/black-heart.png";
-         const current  = $(this).attr("src");
-			const icon = $(this);
-			
-			const likeCount=$(this).next();
-			
-         if(current == binHeart){
-	        	
-           $.ajax({
-         	url :"/movieLikeInsert.do",
-         	type:"post",
-         	data:{movieNo:movieNo,memberNo:memberNo},
-         	success:function(data){
-         		if(data != null){
-         			console.log(data);
-						
-						const likeCountNumPlus=Number(likeCount.text())+1;
-         			const likeCountString=likeCountNumPlus.toString();
-         			likeCount.text(likeCountString);
-         			console.log(likeCount.text(likeCountString));
-         			
-         			icon.attr("src",blackHeart); 
-         		
-         		
-         		}else{
-         			console.log("fail"); 
-         			
-         		}
-         	}
-         	
-         });//ajax끝나는 지점
-         
-	        	
-	        }else{
-	                $.ajax({
-	                	url :"/movieLikeDelete.do",
-	                	type:"post",
-	                	data:{movieNo:movieNo,memberNo:memberNo},
-	                	success:function(data){
-	                		if(data != null){
-	                			console.log(data);
-	                			const likeCountNumMinus=Number(likeCount.text())-1;
-	                			const likeCountString=likeCountNumMinus.toString();
-	                			likeCount.text(likeCountString);
-	                			console.log(likeCount.text(likeCountString));
-	                			
-	                			icon.attr("src",binHeart); 
-	            		    
-	                		}else{
-	                			console.log("fail"); 
-	                			
-	                		}
-	                	}
-	                	
-	                });//ajax끝나는 지점
-	        		
+   <script>
 
-	            } 
-	            	
-     	}else{
-     		alert("로그인 해주세요");
-     	}
+            $(".movieAllList-like>button>img").on("click",function(){
+            	if($(".sessionMemberNo").val() !=""){
+            	
+            	const movieNo=$(this).parent().next().val();
+                const memberNo=$(".sessionMemberNo").val();
+				console.log(memberNo + "스크립트에서 memberNo");
+                console.log(movieNo + "스크립트에서 movieNo");
+                
+            	const binHeart="img/bin-heart.png";
+                const blackHeart="img/black-heart.png";
+                const current  = $(this).attr("src");
+				const icon = $(this);
+				
+				const likeCount=$(this).next();
+				
+                if(current == binHeart){
+		        	
+                  $.ajax({
+                	url :"/movieLikeInsert.do",
+                	type:"post",
+                	data:{movieNo:movieNo,memberNo:memberNo},
+                	success:function(data){
+                		if(data != null){
+                			console.log(data);
+							
+							const likeCountNumPlus=Number(likeCount.text())+1;
+                			const likeCountString=likeCountNumPlus.toString();
+                			likeCount.text(likeCountString);
+                			console.log(likeCount.text(likeCountString));
+                			
+                			icon.attr("src",blackHeart); 
+                		
+                		
+                		}else{
+                			console.log("fail"); 
+                			
+                		}
+                	}
+                	
+                });//ajax끝나는 지점
+                
+		        	
+		        }else{
+		                $.ajax({
+		                	url :"/movieLikeDelete.do",
+		                	type:"post",
+		                	data:{movieNo:movieNo,memberNo:memberNo},
+		                	success:function(data){
+		                		if(data != null){
+		                			console.log(data);
+		                			const likeCountNumMinus=Number(likeCount.text())-1;
+		                			const likeCountString=likeCountNumMinus.toString();
+		                			likeCount.text(likeCountString);
+		                			console.log(likeCount.text(likeCountString));
+		                			
+		                			icon.attr("src",binHeart); 
+		            		    
+		                		}else{
+		                			console.log("fail"); 
+		                			
+		                		}
+		                	}
+		                	
+		                });//ajax끝나는 지점
+		        		
 
-     });//on click function끝나는 곳
-     
+		            } 
+		            	
+            	}else{
+            		alert("로그인 해주세요");
+            	}
 
-     </script>
-     <script src="/resources/js/myMovie.js" ></script>
+            });//on click function끝나는 곳
+            
+            
+            
+            
+            
+            
+       </script>     
+	<script src="/resources/js/myMovie.js" ></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -13,6 +13,7 @@ public class MyMovie {
 	private int movieNo;
 	private String movieTitle;
 	private String movieFileName;
+	private String movieFilePath;
 	private String scheduleStart;
 	private String theaterBranch;
 }

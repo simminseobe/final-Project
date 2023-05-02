@@ -223,11 +223,11 @@
 				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
 				and member.member_no=#{memberNo}
 		</select>
-		<select id="selectOneMovieAll2" parameterType="_int" resultType="movie">
+		<select id="selectOneMovieAll2" parameterType="_int" resultType="MyMovie">
 			select DISTINCT 
 				movie_file.movie_file_name as movieFileName , 
 				movie_tbl.movie_title as movieTitle , 
-				schedule_tbl.schedule_start as scheduleStart , 
+				to_char(schedule_tbl.schedule_start,'yyyy-mm-dd hh24:mi') as scheduleStart , 
 				schedule_tbl.theater_branch as theaterBranch ,
 				movie_tbl.movie_no as movieNo
 			from movie_file, member, schedule_tbl, movie_tbl, ticketing_tbl, pay
@@ -237,7 +237,7 @@
 				and member.member_no = pay.member_no
 				and pay.pay_no = ticketing_tbl.pay_no
 				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
-				and member.member_id=#{memberId}
+				and member.member_no=#{memberNo}
 		</select>
 	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
 		select 
@@ -316,6 +316,13 @@
 		 from review 
 		 where movie_no=#{movieNo}
 	</select>
+	<!-- 작성한 관람평 -->
+	<select id="ReviewListCount2" parameterType="String" resultType="_int">
+		 select 
+		 	count(review_comment_no) as reviewListCount
+		 from review 
+		 where member_id=#{_parameter}
+	</select>
 	<select id="selectOneUpdateMovie" parameterType="_int" resultMap="getMovie">
 		select 
 				*
@@ -384,10 +391,10 @@ delete from movie_video where movie_video_no=
 	delete from watch_point where review_comment_no=#{_parameter}
 </delete>
 <select id="selectReviewList" parameterType="map" resultType="review">
-	select * from 
+select * from 
 		(select rownum as rnum, review.*from
 			(select 
-				review_comment_no as reviewCommentNo,
+				r.review_comment_no as reviewCommentNo,
 				movie_no as movieNo,
 				review_content as reviewContent,
 				movie_score as movieScore,
@@ -397,8 +404,10 @@ delete from movie_video where movie_video_no=
                 actor as actor,
                 ost as ost,
                 video_visual as videoVisual,
-                production as production
-			from review join watch_point using(review_comment_no) where movie_no=#{movieNo} order by 1 desc)review)
+                production as production,
+                (select count(*) from review_like rl where rl.review_comment_no=r.review_comment_no) as likeCount,
+                (select count(*) from review_like rl where rl.review_comment_no=r.review_comment_no and member_no=#{memberNo}) as likeCheck
+			from review r join watch_point wp on(r.review_comment_no=wp.review_comment_no) where movie_no=#{movieNo} order by 1 desc)review)
 		where rnum between #{start} and #{end}
 </select>
 <select id="totalCount" parameterType="review" resultType="_int">
@@ -450,9 +459,9 @@ delete from movie_video where movie_video_no=
         movie_video_link as videoLink
     from movie_post p 
     left join movie_file f on(p.movie_file_no=f.movie_file_no) 
-    left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.movie_id=#{_parameter}
+    left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.member_id=#{_parameter}
 </select>
-<select id="detailPost" resultType="moviePost">
+<select id="detailPost" parameterType="String" resultType="moviePost">
 	select
 		movie_post_no as moviePostNo,
 		p.movie_no as movieNo,
@@ -487,6 +496,10 @@ delete from movie_video where movie_video_no=
 </update>
 <select id="moviePostCount" parameterType="moviePost" resultType="_int">
 	select count(*) from movie_post where movie_no=#{movieNo}
+</select>
+<!-- 사용자 무비포스트 count -->
+<select id="moviePostCount2" parameterType="moviePost" resultType="_int">
+	select count(*) from movie_post where member_id=#{_parameter}
 </select>
 <delete id="deletePostComment" parameterType="moviePostComment">
 	delete from movie_post_comment where movie_post_comment_no=#{moviePostCommentNo}
@@ -623,8 +636,10 @@ select count(*) from
 </select>
 <!-- 예매율 -->
 <select id="reservationRate" resultType="_double" parameterType="string">
-SELECT
-    nvl(trunc((SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD') AND MOVIE_TITLE='에어')) /decode((SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD'))),0,null, (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD')))),0)*100,0)
+    SELECT
+        decode((SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD'))),0,0,trunc(
+    (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN 
+    (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD') AND MOVIE_TITLE=#{movieTitle})) / (SELECT COUNT(*) FROM TICKETING_TBL WHERE SCHEDULE_NO IN (SELECT SCHEDULE_NO FROM SCHEDULE_TBL WHERE TO_CHAR(SCHEDULE_START,'YYYY-MM-DD') =  TO_CHAR(SYSDATE,'YYYY-MM-DD')))*100,1))
     AS RESERVE_RATE
     FROM DUAL
     
@@ -635,16 +650,16 @@ SELECT
         COUNT(*)
     FROM TICKETING_TBL
     LEFT JOIN SCHEDULE_TBL USING(SCHEDULE_NO)
-    WHERE MOVIE_TITLE = #{MOVIE_TITLE}
+    WHERE MOVIE_TITLE = #{movieTitle}
 </select>
 <!-- 일별 누적관객수 -->
 <select id="dayTotalAudience" resultType="schedule" parameterType="string">
    SELECT         
-        SUBSTR(TO_CHAR(SCHEDULE_START,'YYYY-MM/DD'),6) as SCHEDULESTART ,--RESERVE_DATE
+        SUBSTR(TO_CHAR(SCHEDULE_START,'YYYY-MM/DD'),6) as SCHEDULESTART ,
         COUNT(*) as audienceCnt
     FROM TICKETING_TBL
     LEFT JOIN SCHEDULE_TBL USING(SCHEDULE_NO)
-    WHERE MOVIE_TITLE = #{MOVIETITLE} AND TO_CHAR(SCHEDULE_START,'YYYY-MM-DD')>= TO_CHAR(SYSDATE-4,'YYYY-MM-DD')
+    WHERE MOVIE_TITLE = #{movieTitle} AND TO_CHAR(SCHEDULE_START,'YYYY-MM-DD')>= TO_CHAR(SYSDATE-4,'YYYY-MM-DD')
     GROUP BY TO_CHAR(SCHEDULE_START,'YYYY-MM/DD') order by SCHEDULESTART ASC
 
 </select>

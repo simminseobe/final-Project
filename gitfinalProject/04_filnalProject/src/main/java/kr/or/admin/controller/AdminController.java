@@ -25,6 +25,7 @@ import common.FileManager;
 import kr.or.admin.model.service.AdminService;
 import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
+import kr.or.admin.model.vo.SalesPerDay;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.member.model.vo.Member;
@@ -44,15 +45,19 @@ public class AdminController {
 
 	@RequestMapping("/adminPage.do")
 	public String adminPage(Model model) {
+		ArrayList<Member> list = new ArrayList<Member>();
+
 		int memberCnt = service.selectMemberCnt();
 		int movieCnt = service.selectMovieCnt();
 		int scheduleCnt = service.selectSchduleCnt();
 		int consultationCnt = service.selectConsultationCnt();
+		list = service.selectAllMember();
 
 		model.addAttribute("memberCnt", memberCnt);
 		model.addAttribute("movieCnt", movieCnt);
 		model.addAttribute("scheduleCnt", scheduleCnt);
 		model.addAttribute("consultationCnt", consultationCnt);
+		model.addAttribute("list", list);
 
 		return "admin/adminPage";
 	}
@@ -500,5 +505,15 @@ public class AdminController {
 		int result = service.deleteConsultation(Integer.parseInt(consultationNo));
 
 		return String.valueOf(result);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectSalesPerDay.do", produces = "application/json;charset=utf-8")
+	public String selectSalesPerDay() {
+		ArrayList<SalesPerDay> list = new ArrayList<SalesPerDay>();
+
+		list = service.selectSalesPerDay();
+
+		return new Gson().toJson(list);
 	}
 }

@@ -383,11 +383,11 @@ z-index: 5;
                         <div class="post-detail-content">
                             <textarea class="postDetailTextInput" name="moviePostContent" readonly></textarea>
                         </div>
-                        <div class="post-detail-like">
-                            <img src="img/like-24.png" class="whiteLike2">
+                        <!-- <div class="post-detail-like">
+                           <img src="img/like-24.png" class="whiteLike2">
                             <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
                             <span>0</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
@@ -400,11 +400,11 @@ z-index: 5;
                         <div class="post-detail-content">
                             <textarea class="postDetailTextInput" name="moviePostContent" readonly></textarea>
                         </div>
-                        <div class="post-detail-like">
+                        <!-- <div class="post-detail-like">
                             <img src="img/like-24.png" class="whiteLike2">
                             <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
                             <span>0</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
@@ -420,11 +420,11 @@ z-index: 5;
                         <div class="post-detail-content">
                             <textarea class="postDetailTextInput" name="moviePostContent" readonly></textarea>
                         </div>
-                        <div class="post-detail-like">
+                        <!--<div class="post-detail-like">
                             <img src="img/like-24.png" class="whiteLike2">
                             <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
                             <span>0</span>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             
@@ -669,11 +669,20 @@ z-index: 5;
                                     <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa; box-sizing: border-box;" readonly>${review.reviewContent}</textarea>
                                 </div>
                                 <div class="reviewTextLike reviewTextLikeSelf">
-                                    <img src="img/like-24.png" class="whiteLike2">
-                                    <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
-                                    <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px; top:20px;">
-                                        <p>0</p>
-                                    </div>
+                                    <c:choose>
+                                        <c:when test="${review.likeCheck eq 0}">
+                                            <img src="img/like-24.png" class="Like2">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="img/likeBlack-24.png" class="Like2">
+                                        </c:otherwise>
+                                        </c:choose>
+                                        <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px;  bottom: 0px; top: 20px;">
+                                            <span>${review.likeCount }</span>
+                                            <input type="text" name="reviewLikeMember" value="${review.memberId}" style="display: none;">
+                                            <input type="text" name="reviewCommentNo" value="${review.reviewCommentNo}" style="display: none;">
+                                            <input type="text" name="reviewLikeReviewCommentNo" value="${review.reviewCommentNo }"style="display: none;">
+                                        </div>
                                 </div>
                                 <div class="reviewContentWrite2" style="font-size: 15px;">
                                     <a href="#" id="open2" style="color: #666666;">수정</a>
@@ -681,6 +690,7 @@ z-index: 5;
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="reviewDate">
                             <span>${review.reviewDate}</span>
                         </div>
@@ -740,13 +750,19 @@ z-index: 5;
                                         <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa;" readonly>${review.reviewContent}</textarea>
                                     </div>
                                     <div class="reviewTextLike reviewTextLikeOther">
-                                        <img src="img/like-24.png" class="whiteLike2">
-                                        <img src="img/likeBlack-24.png" class="blackLike2" style="display:none;">
+                                    	<c:choose>
+                                        <c:when test="${review.likeCheck eq 0}">
+                                            <img src="img/like-24.png" class="Like2">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="img/likeBlack-24.png" class="Like2">
+                                        </c:otherwise>
+                                        </c:choose>
                                         <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px;  bottom: 0px; top: 20px;">
-                                            <span>0</span>
+                                            <span>${review.likeCount }</span>
                                             <input type="text" name="reviewLikeMember" value="${review.memberId}" style="display: none;">
                                             <input type="text" name="reviewCommentNo" value="${review.reviewCommentNo}" style="display: none;">
-                                            <%-- <input type="text" name="reviewLikeReviewCommentNo" value="${review.reviewCommentNo }"style="display: none;"> --%>
+                                            <input type="text" name="reviewLikeReviewCommentNo" value="${review.reviewCommentNo }"style="display: none;">
                                         </div>
                                     </div>
                                     <div class="reviewContentWrite2" style="font-size: 15px;">

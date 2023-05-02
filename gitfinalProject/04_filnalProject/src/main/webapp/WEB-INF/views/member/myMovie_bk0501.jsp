@@ -231,19 +231,18 @@
                      <div class="movieAllList-reserve" style="margin-top: 10px;">
                      <button type=" button"
                          style="width: 120px; height: 40px; font-size: 18px;  vertical-align: center;">
-                             예약하기
+                             	예약하기
                      </button>
                      </div>
                  </div>
              </div>
          </c:forEach>
-         
-         </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+        </div>
+       </div>
+     </div>
+    </div>
+   </div>
+ </div>
             <div class="sessionInfo" style="display:none;">
             	<input class="sessionMemberNo" type="text" value="${sessionScope.m.memberNo}">
             </div>
