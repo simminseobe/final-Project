@@ -23,7 +23,8 @@ public class Review {
 	private int ost;
 	private int videoVisual;
 	private int production;
-
 	private int movieScoreAvg;
 	private int reviewListCount;
+	private int likeCount;
+	private int likeCheck;
 }

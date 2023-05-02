@@ -384,10 +384,10 @@ delete from movie_video where movie_video_no=
 	delete from watch_point where review_comment_no=#{_parameter}
 </delete>
 <select id="selectReviewList" parameterType="map" resultType="review">
-	select * from 
+select * from 
 		(select rownum as rnum, review.*from
 			(select 
-				review_comment_no as reviewCommentNo,
+				r.review_comment_no as reviewCommentNo,
 				movie_no as movieNo,
 				review_content as reviewContent,
 				movie_score as movieScore,
@@ -397,8 +397,10 @@ delete from movie_video where movie_video_no=
                 actor as actor,
                 ost as ost,
                 video_visual as videoVisual,
-                production as production
-			from review join watch_point using(review_comment_no) where movie_no=#{movieNo} order by 1 desc)review)
+                production as production,
+                (select count(*) from review_like rl where rl.review_comment_no=r.review_comment_no) as likeCount,
+                (select count(*) from review_like rl where rl.review_comment_no=r.review_comment_no and member_no=#{memberNo}) as likeCheck
+			from review r join watch_point wp on(r.review_comment_no=wp.review_comment_no) where movie_no=#{movieNo} order by 1 desc)review)
 		where rnum between #{start} and #{end}
 </select>
 <select id="totalCount" parameterType="review" resultType="_int">
