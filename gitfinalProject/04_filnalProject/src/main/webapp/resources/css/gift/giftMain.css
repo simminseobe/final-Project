@@ -78,7 +78,7 @@ a { color: #000; }
 .opt { width: 40%; }
 .amount { width: 25%; text-align: center; }
 .price { }
-.price button { background: none; height: 20px; width: 20px; background: url("/resources/images/gift/x-mark.png") 0 0 no-repeat;  background-size:  cover; text-indent: -9999px; cursor: pointer; border: none; }
+.price button { background: none; height: 20px; width: 20px; background: url("/resources/images/gift/x-mark.png") 0 0 no-repeat; background-size:  cover; text-indent: -9999px; cursor: pointer; border: none; }
 
 /* btn 구매하기 / 좋아요 / 장바구니 */
 .product-btn-box  { display: flex; justify-content: space-between; align-items: center; width: 450px; margin-top: 30px; }
@@ -122,6 +122,38 @@ a { color: #000; }
 .shpping-info tr:last-of-type { height: 80px; }
 .shpping-info th { width: 220px; }
 #ship-request-input { display: block; width: 450px; margin-top: 10px; }
+.sa-selector { height: 60px; display: flex; align-items: center; }
+.sa-selector input[type=radio] { display: none; }
+.sa-selector label, .addAddress { display: block; width: 100px; height: 35px; line-height: 33px; border: 1px solid #999; text-align: center; border-radius: 5px; margin-right: 5px; background-color: #fff; }
+.addAddress { margin-left: 10px; }
+.sa-selector label:hover { cursor: pointer; }
+.sa-selector input:checked + label { border: 1px solid #503396; } 
+.sa-selector .addAddress {  }
+.name-phone { height: 100px; }
+.ad-name input { height: 30px; margin-bottom: 10px; width: 195px;  border-radius: 5px; padding-left: 10px; border: 1px solid #999; }
+.phone-number input { height: 20px; width: 50px; text-align: center; padding: 5px; border-radius: 5px; border: 1px solid #999; }
+
+/* 배송지 추가 모달 */
+.addAddressModal { position: relative; display: none; position: fixed; left: 0; right: 0; margin: 0 auto; background-color: #fff; border: 1px solid #999; border-radius: 5px; z-index: 9999; width: 700px; height: 700px; }
+.addAddressModal h2 { font-size: 1.2rem; width: 100px; margin: 40px auto 50px; }
+.addAddressModal form {  }
+.addAddressModal button:hover { cursor: pointer; }
+.addAddressModal table { width: 500px; margin: 0 auto; }
+.addAddressModal table tbody tr { height: 70px; border: none; }
+.addAddressModal table tbody tr:nth-child(3) input,
+.addAddressModal table tbody tr:nth-child(4) input,
+.addAddressModal table tbody tr:nth-child(5) input { width: 200px; }
+.addAddressModal table tbody tr:nth-child(4) input { width: 200px; }
+.addAddressModal span { display: block; }
+.addAddressModal input { display: block; width: 300px; height: 35px; line-height: 35px; margin-left: 30px; box-sizing: border-box; }
+.addAddressModal .closeX { position: absolute; top: 35px; right: 30px; width: 30px; height: 30px; line-height: 30px; background: #fff url("/resources/images/gift/x-mark.png") 0 0 no-repeat; background-size:  cover; text-indent: -9999; border: none; }
+.closeX:hover {cursor: pointer;}
+.sa-found-td { display: flex; align-items: center; height: 70px; }
+.sa-found { background-color: #000; color: #fff; width: 80px; border: none; height: 35px; }
+.submit-btn-address-add { width: 270px; margin: 30px auto; }
+.submit-btn-address-add button { width: 120px; background-color: #fff; height: 50px; line-height: 19px; }
+.submit-btn-address-add button:last-child { background-color: #000; color: #fff; font-weight: 600; margin-left: 20px; }
+.addAddressModal table tbody tr:last-child { border: none; }
 
 /* 상품정보 */
 .product-info-row { }
@@ -182,3 +214,4 @@ a { color: #000; }
 .complete-btns a { display: block; width: 220px; border: 1px solid #000; text-align: center; height: 60px; line-height: 60px; font-size: 1rem; font-weight: 600; } 
 .complete-btns a:first-of-type { margin-right: 30px; }
 .complete-btns a:last-of-type { color: #FFF; background-color: #503396; }
+#successPayButton { display: none; }

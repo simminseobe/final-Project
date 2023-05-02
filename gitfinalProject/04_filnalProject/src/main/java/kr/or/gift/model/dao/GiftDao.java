@@ -7,11 +7,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.gift.model.vo.GiftPay;
+import kr.or.gift.model.vo.KakaoPay;
+import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
+import kr.or.gift.model.vo.Receive;
+import kr.or.member.model.vo.ShippingAddress;
 
 @Repository
 public class GiftDao {
@@ -124,5 +129,47 @@ public class GiftDao {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("gift.deletePos",posNo);
 	}
+
+	public ArrayList<ShippingAddress> getShppingAddress(int memberNo) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("gift.selectAllShippingAddress", memberNo);
+		return (ArrayList<ShippingAddress>) list;
+	}
+
+	public int insertAddress(ShippingAddress sa) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertAddress",sa);
+	}
+
+	public ShippingAddress getOneAddress(int saNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("gift.selectOneAddress",saNo);
+	}
+
+	public int insertOrder(Order order) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertOrder",order);
+	}
+
+	public int insertGiftPay(GiftPay giftPay) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertGiftPay",giftPay);
+	}
+	
+	public int insertReceive(Receive receive) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertReceive",receive);
+	}
+
+	public int insertKakaoPay(KakaoPay kakaoPay) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertKakaoPay",kakaoPay);
+	}
+
+	public int setOrderNo(ProductOrderSheet pos) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("gift.updatePos", pos);
+	}
+
 
 }

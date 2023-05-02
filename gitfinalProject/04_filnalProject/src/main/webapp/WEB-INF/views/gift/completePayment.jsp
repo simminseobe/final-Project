@@ -15,4 +15,7 @@
         <a href="/">홈으로 가기</a>
     </div>
 </div>
+<script>
+    
+</script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

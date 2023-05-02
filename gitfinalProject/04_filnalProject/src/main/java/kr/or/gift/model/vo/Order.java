@@ -15,7 +15,7 @@ public class Order {
 	private int orderPrice;
 	private int orderStatus;
 	private String orderRequest;
-	private String shipRquest;
+	private String shipRequest;
 	private String orderDate;
 	
 	private String itemName;

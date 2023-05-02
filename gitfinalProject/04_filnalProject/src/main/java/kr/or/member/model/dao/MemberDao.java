@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.gift.model.vo.ProductCategory;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPoint;
-import kr.or.member.model.vo.ShoppingAddress;
+import kr.or.member.model.vo.ShippingAddress;
 import kr.or.ticketing.model.vo.Reservation;
 import kr.or.ticketing.model.vo.ReservationCancel;
 
@@ -87,9 +87,9 @@ public class MemberDao {
 	}
 
 	// 배송지 정보 조회
-	public ArrayList<ShoppingAddress> shopAddress(int memberNo) {
+	public ArrayList<ShippingAddress> shopAddress(int memberNo) {
 		List list = sqlSession.selectList("member.shopAddress", memberNo);
-		return (ArrayList<ShoppingAddress>)list;
+		return (ArrayList<ShippingAddress>)list;
 	}
 	
 	// 예매/구매 내역 조회

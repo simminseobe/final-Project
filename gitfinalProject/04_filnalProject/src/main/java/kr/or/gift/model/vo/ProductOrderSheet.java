@@ -1,5 +1,8 @@
 package kr.or.gift.model.vo;
 
+import java.util.ArrayList;
+
+import kr.or.member.model.vo.ShippingAddress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +17,6 @@ public class ProductOrderSheet {
 	private int poNo;
 	private int orderCount;
 	private int memberNo;
+
+	private ArrayList<ShippingAddress> sas;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShoppingAddress {
+public class ShippingAddress {
 	private int saNo;
 	private int memberNo;
 	private String addressOld;
@@ -16,5 +16,8 @@ public class ShoppingAddress {
 	private int zipCode;
 	private String addressName;
 	private String addressPhone;
-	private String addressReiceverName;
+	private String addressReceiverName;
+	
+	//전화번호 배열 [0] = 010 [1] = 1111...
+	private String[] split;
 }
