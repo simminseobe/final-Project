@@ -207,10 +207,10 @@ z-index: 5;
 			</div>
                 <div class="movie-list-content-wrap" style="margin-top: 25px;">
                 	<div class="movie-list-content-top">
-                			<span class="tabcontent1">본영화 총 <span style="color: #329eb1;">${OneMemberMovieCount}</span>개</span>
-                            <span class="tabcontent1" style="display:none;">작성 무비포스트 총 <span style="color: #329eb1;">${moviePostCount}</span>개</span>
-                            <span class="tabcontent1" style="display:none;">작성 관람평 총 <span style="color: #329eb1;">${reviewListCount}</span>개</span>
-                            <span class="tabcontent1" style="display:none;">찜영화 총 <span style="color: #329eb1;">${favoriteMovieCount}</span>개</span>
+                			<span class="tabcontent1 " style="margin-left: 30px;">총 <span style="color: #329eb1;">${OneMemberMovieCount}</span>개</span>
+                            <span class="tabcontent1" style="display:none;  margin-left: 30px;">총 <span style="color: #329eb1;">${moviePostCount}</span>개</span>
+                            <span class="tabcontent1" style="display:none;  margin-left: 30px;">총 <span style="color: #329eb1;">${reviewListCount}</span>개</span>
+                            <span class="tabcontent1" style="display:none;  margin-left: 30px;">총 <span style="color: #329eb1;">${favoriteMovieCount}</span>개</span>
                             <div class="searchBox">
                                 <input type="text" id="movieSearch" name="movieSearch" placeholder="영화명 검색">
                                 <img src="img/search-30.png">
