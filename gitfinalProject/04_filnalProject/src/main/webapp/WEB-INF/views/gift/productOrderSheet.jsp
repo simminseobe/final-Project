@@ -254,7 +254,10 @@
     </div>
     </form>
 </div>
+
 <button type="button" value="" id="successPayButton" onclick="successPayed()">결제성공!</button>
+<button type="button" id="cancelPay" onclick="cancelPayed()">결제취소</button>
+<button type="button" id="failPay" onclick="failPayed()">결제실패</button>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     const selectSa = saNo => {
@@ -442,9 +445,15 @@
     //결제완료감지기
     const orderForm = document.querySelector('#orderForm')
     const successPay = document.querySelector('#successPay')
-    const successPayed = () =>{
+    const successPayed = () => {
         console.log('pay success')
         orderForm.submit()
+    }
+    const cancelPayed = () => {
+        alert('결제가 취소되었습니다')
+    }
+    const failPayed = () => {
+        alert('결제에 실패했습니다.')
     }
 </script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

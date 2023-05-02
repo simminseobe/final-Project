@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h1>결제취소</h1>
+    <h1>결제실패</h1>
     <script>
-        const successPay = $('#cancelPay', opener.document)
-        successPay.click()
+        const failPay = $('#failPay', opener.document)
+        failPay.click()
         self.close()
     </script>
 </body>

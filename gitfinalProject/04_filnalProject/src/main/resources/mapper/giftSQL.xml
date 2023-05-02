@@ -8,6 +8,13 @@
 			select max(pc_no) from product_category
 		</selectKey>
 	</insert>
+	<!-- category -->
+	<insert id="insertCompany" parameterType="pcc">
+		insert into product_company values (company_seq.nextval, #{companyName})
+		<selectKey resultType="_int" order="AFTER" keyProperty="companyNo">
+			select max(company_no) from product_company
+		</selectKey>
+	</insert>
 	<!-- insert product item -->
 	<insert id="insertProduct" parameterType="product">
 		insert into product values(product_seq.nextval, #{pcNo}, #{productName}, #{productPrice}, #{productDetail}, #{productCompany}, #{shipping}, #{productStatus},#{simpleInfo})
@@ -49,8 +56,14 @@
 	<insert id="insertKakaoPay" parameterType="kp">
 		insert into kakao_pay values(#{tid}, #{gpNo}, #{cid}, #{amount.total}, #{amount.tax_free})
 	</insert>
+	<insert id="insertProductLike" parameterType="pl">
+		insert into product_like values(pl_seq.nextval, #{productNo}, #{memberNo})
+	</insert>
 	<delete id="deleteCategory" parameterType="pc">
 		delete from product_category where pc_no = #{pcNo}
+	</delete>
+	<delete id="deleteCompany" parameterType="pcc">
+		delete from product_company where company_no = #{companyNo}
 	</delete>
 	<delete id="deleteOption" parameterType="_int">
 		delete from product_option where po_no = #{_parameter}
@@ -61,15 +74,20 @@
 	<delete id="deletePos" parameterType="_int">
 		delete from product_order_sheet where pos_no = #{_parameter}
 	</delete>
+	<delete id="deleteProductLike" parameterType="pl">
+		delete from product_like where product_no = #{productNo} and member_no = #{memberNo}
+	</delete>
 	<update id="updateCategory" parameterType="pc">
 		update product_category set pc_category = #{pcCategory} where pc_no = #{pcNo}
+	</update>
+	<update id="updateCompany" parameterType="pcc">
+		update product_company set company_name = #{companyName} where company_no = #{companyNo}
 	</update>
 	<update id="updatePos" parameterType="pos">
 		update product_order_sheet set order_no = #{orderNo} where pos_no = #{posNo}
 	</update>
 	<!-- select -->
 	<select id="selectOneProduct" parameterType="_int" resultType="product">
-		
 		select
 			product_no as productNo,
 			pc_no as pcNo,
@@ -90,6 +108,13 @@
 		from product_category
 		order by 1 DESC
 	</select>
+	<select id="selectAllCompany" resultType="pcc">
+		select 
+			company_no companyNo,
+			company_name companyName
+		from product_company
+		order by 1 DESC
+	</select>
 	<select id="selectAllProduct" resultType="product">
 		select
 			product_no as productNo,
@@ -101,6 +126,7 @@
 			product_status as productStatus,
 			simple_info as simpleInfo
 		from product
+		order by 1 DESC
 	</select>
 	<select id="selectOneMainImage" parameterType="_int" resultType="pp">
 		select
@@ -148,6 +174,7 @@
 			pp_path as ppPath
 		from product_photo
 		where product_no = #{_parameter}
+		order by 1
 	</select>
 	<select id="selectAllProductOptions" resultType="po" parameterType="_int">
 		select
@@ -157,6 +184,7 @@
 			po_price as poPrice
 		from product_option
 		where product_no = #{_parameter}
+		order by 1 DESC
 	</select>
 	<select id="getPosList" parameterType="_int" resultType="pos">
 		select
@@ -168,6 +196,7 @@
 			member_no as memberNo
 		from product_order_sheet
 		where member_no = #{_parameter}
+		order by 1 DESC
 	</select>
 	<select id="selectAllShippingAddress" parameterType="_int" resultType="sa">
 		select
@@ -182,6 +211,7 @@
 			address_receiver_name as addressReceiverName
 		from shipping_address
 		where member_no = #{_parameter}
+		order by 1 DESC
 	</select>
 	<select id="selectOneAddress" resultType="sa" parameterType="_int">
 		select
@@ -196,5 +226,19 @@
 			address_receiver_name as addressReceiverName
 		from shipping_address
 		where sa_no = #{_parameter}
+	</select>
+	<select id="selectOneTotalOrder" resultType="_int" parameterType="_int">
+		select count(*) as totalOrder from product_order_sheet where order_no is not null and product_no = #{_parameter}
+	</select>
+	<select id="selectOneProductLike" parameterType="pl" resultType="pl">
+		select
+			pl_no as plNo,
+			product_no as productNo,
+			member_no as memberNo
+		from product_like
+		where product_no = #{productNo} and member_no = #{memberNo}		
+	</select>
+	<select id="selectProductLikeCount" parameterType="_int" resultType="_int">
+		select count(*) as productLikeCount from product_like where product_no = #{_parameter}
 	</select>
 </mapper>
