@@ -1044,7 +1044,8 @@
 					console.log("pointAmount :" + pointAmount);
 
 					if (payPrice == 0) {
-						location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
+						//100원미만일 경우 결제 불가능
+						//location.href = "/ticketingComplete.do?movieTitle=" + movieTitle + "&theaterBranch=" + theaterBranch + "&choiceDtDay=" + choiceDtDay + "&scheduleStart=" + scheduleStart + "&numOfPeople=" + numOfPeople + "&joinSeats=" + joinSeats + "&memberPhone=" + memberPhone + "&payPrice=" + payPrice;
 					} else {
 						//console.log(payPrice + "," + memberNo + "," + choiceDtDay + "," + scheduleNo + "," + joinSeats + "," + numOfPeople);
 						IMP.init("imp04040307");
