@@ -459,7 +459,7 @@ delete from movie_video where movie_video_no=
     left join movie_file f on(p.movie_file_no=f.movie_file_no) 
     left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.member_id=#{_parameter}
 </select>
-<select id="detailPost" resultType="moviePost">
+<select id="detailPost" parameterType="String" resultType="moviePost">
 	select
 		movie_post_no as moviePostNo,
 		p.movie_no as movieNo,

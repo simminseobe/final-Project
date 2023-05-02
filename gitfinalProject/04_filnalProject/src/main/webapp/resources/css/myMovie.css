@@ -136,4 +136,11 @@
 }
 
 
+.moviePostImg>img{
+   width: 228px;
+    height: 340px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 

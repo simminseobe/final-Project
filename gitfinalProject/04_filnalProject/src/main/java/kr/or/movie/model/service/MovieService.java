@@ -160,8 +160,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 			Review movieScoreAvg=dao.onlyWatchPointAvg(movieNum);
 			movie.setMovieScoreAvg(movieScoreAvg);
 		}	
+		*/
 			
-		}	*/
 		return list;
 	}
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {

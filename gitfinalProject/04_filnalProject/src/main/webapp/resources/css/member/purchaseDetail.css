@@ -26,7 +26,7 @@
 
 .tabs>li{
     float: left;
-    width: calc(35%/2);
+    width: 150px;
     text-align: center;
     line-height: 40px;
     background-color: #fff;
