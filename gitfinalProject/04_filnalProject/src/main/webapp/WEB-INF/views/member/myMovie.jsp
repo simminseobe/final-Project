@@ -246,7 +246,7 @@ z-index: 5;
                     <div class="movie-all-list" style="margin-top: 25px; ">
                         <div class="moviePostImg"><!--영화 한개 시작-->
                         ${oneMoviepost.movieNo}
-                        <!-- 
+                       
                         	<c:choose>
                         	<c:when test="${oneMoivePost.movieFilePath ne null && oneMoivePost.videoLink eq null}">
 	                            <img src="/resources/upload/movie/${oneMoivePost.movieFilePath}">
@@ -256,7 +256,7 @@ z-index: 5;
                         	</c:when>
                         	<c:when test="${oneMoivePost.movieFilePath eq null && oneMoivePost.videoLink ne null}">
                         		<img src="/resources/upload/movie/${mov.mainFile.movieFileName}">
-                        	 -->	
+                        	
                             </c:when>
                             </c:choose>
                             <div class="moviePostImgContent">
@@ -425,17 +425,6 @@ z-index: 5;
             	}
 
             });//on click function끝나는 곳
-            
-            
-            
-            
-            
-            
-            
-            
-            <!-- 무비포스트 관련 -->
-            
-            
             
             
             

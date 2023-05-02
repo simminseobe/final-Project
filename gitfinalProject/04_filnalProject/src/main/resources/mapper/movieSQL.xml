@@ -223,7 +223,7 @@
 				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
 				and member.member_no=#{memberNo}
 		</select>
-		<select id="selectOneMovieAll2" parameterType="_int" resultType="movie">
+		<select id="selectOneMovieAll2" parameterType="_int" resultType="MyMovie">
 			select DISTINCT 
 				movie_file.movie_file_name as movieFileName , 
 				movie_tbl.movie_title as movieTitle , 
@@ -237,7 +237,7 @@
 				and member.member_no = pay.member_no
 				and pay.pay_no = ticketing_tbl.pay_no
 				and ticketing_tbl.schedule_no = schedule_tbl.schedule_no
-				and member.member_id=#{memberId}
+				and member.member_no=#{memberNo}
 		</select>
 	<select id="selectOneMovieVideo" parameterType="_int" resultType="movieVideo">
 		select 
@@ -450,7 +450,7 @@ delete from movie_video where movie_video_no=
         movie_video_link as videoLink
     from movie_post p 
     left join movie_file f on(p.movie_file_no=f.movie_file_no) 
-    left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.movie_id=#{_parameter}
+    left join movie_video v on(p.movie_video_no=v.movie_video_no) where p.member_id=#{_parameter}
 </select>
 <select id="detailPost" resultType="moviePost">
 	select

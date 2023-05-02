@@ -149,8 +149,8 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		 }
 		return mov;
 	}
-	public ArrayList<MyMovie> selectOneMovieAll2(String memberId) {
-		ArrayList<MyMovie> list = dao.selectOneMovieAll2(memberId);
+	public ArrayList<MyMovie> selectOneMovieAll2(int memberNo) {
+		ArrayList<MyMovie> list = dao.selectOneMovieAll2(memberNo);
 		
 		/*
 		for(Movie movie : list) {
@@ -294,14 +294,14 @@ public ArrayList<Movie> selectMovieAll(int memberNo) {
 		
 		return postAllList;
 	}
-	/*
+	
 	public ArrayList<MoviePost> oneMovieAllPost2(String memberId) {
 		ArrayList<MoviePost> postAllList=dao.selectOneMovieAllPost2(memberId);
 		
 		
 		return postAllList;
 	}
-	*/
+	
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne=dao.selectDetailPost(moviePostNo);
 		
