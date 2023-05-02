@@ -109,4 +109,18 @@
 	insert into ticketing_tbl values
 		(ticketing_seq.nextval, #{ticketingTime},#{ticketingAge},#{seat},#{payNo},#{scheduleNo})
 </insert>
+<select id="selectSalesPerDay" resultType="salesPerDay">
+	select month, max(accumulatedrevenue) as accumulatedrevenue
+		from (
+		    select month, max(dailyaccumulatedrevenue) as accumulatedrevenue
+		    from (
+		        select to_char(to_date(pay_regdate, 'yyyy-mm-dd hh24:mi:ss'), 'mm-dd') as month,
+		               sum(pay_price) over (order by to_date(pay_regdate, 'yyyy-mm-dd hh24:mi:ss')) as dailyaccumulatedrevenue
+		        from pay
+		    ) subquery
+		    group by month, dailyaccumulatedrevenue
+		) subquery2
+		group by month
+		order by month
+</select>
 </mapper>

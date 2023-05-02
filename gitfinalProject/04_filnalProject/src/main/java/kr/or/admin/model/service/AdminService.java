@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.admin.model.dao.AdminDao;
 import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
+import kr.or.admin.model.vo.SalesPerDay;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.member.model.vo.Member;
@@ -283,6 +284,12 @@ public class AdminService {
 		int result = dao.deleteConsultation(consultationNo);
 
 		return result;
+	}
+
+	public ArrayList<SalesPerDay> selectSalesPerDay() {
+		ArrayList<SalesPerDay> list = dao.selectSalesPerDay();
+
+		return list;
 	}
 
 }

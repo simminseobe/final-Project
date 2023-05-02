@@ -22,6 +22,7 @@
 		<typeAlias type="kr.or.admin.model.vo.Consultation" alias="consultation"/>
 		<typeAlias type="kr.or.admin.model.vo.Schedule" alias="schedule"/>
 		<typeAlias type="kr.or.admin.model.vo.Chat" alias="chat"/>
+		<typeAlias type="kr.or.admin.model.vo.SalesPerDay" alias="salesPerDay"/>
 		<typeAlias type="kr.or.ticketing.model.vo.Ticketing" alias="ticketing"/>
 		<typeAlias type="kr.or.ticketing.model.vo.TheaterLocalCount" alias="theaterLocalCount"/>
 		<typeAlias type="kr.or.gift.model.vo.ProductCategory" alias="pc"/>

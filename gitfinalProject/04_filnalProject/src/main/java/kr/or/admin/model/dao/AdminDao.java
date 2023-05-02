@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.admin.model.vo.Chat;
 import kr.or.admin.model.vo.Consultation;
+import kr.or.admin.model.vo.SalesPerDay;
 import kr.or.admin.model.vo.Schedule;
 import kr.or.admin.model.vo.Theater;
 import kr.or.member.model.vo.Member;
@@ -232,6 +233,12 @@ public class AdminDao {
 		int result = sqlSession.delete("consultation.deleteConsultation", consultationNo);
 
 		return result;
+	}
+
+	public ArrayList<SalesPerDay> selectSalesPerDay() {
+		List list = sqlSession.selectList("ticketing.selectSalesPerDay");
+
+		return (ArrayList<SalesPerDay>) list;
 	}
 
 }
