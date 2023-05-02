@@ -12,6 +12,8 @@ import kr.or.gift.model.vo.KakaoPay;
 import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductCompany;
+import kr.or.gift.model.vo.ProductLike;
 import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
@@ -169,6 +171,53 @@ public class GiftDao {
 	public int setOrderNo(ProductOrderSheet pos) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("gift.updatePos", pos);
+	}
+
+	public int getProductTotalOrder(int productNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("gift.selectOneTotalOrder", productNo);
+	}
+
+	public Object getAllCompanyList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("gift.selectAllCompany");
+	}
+
+	public void insertCompanySql(ProductCompany company) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("gift.insertCompany",company);
+	}
+
+	public void deleteCompany(ProductCompany company) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("gift.deleteCompany",company);
+		
+	}
+
+	public void updateCompany(ProductCompany company) {
+		// TODO Auto-generated method stub
+		sqlSession.update("gift.updateCompany",company);
+		
+	}
+
+	public ProductLike getOneProductLike(ProductLike like) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("gift.selectOneProductLike",like);
+	}
+
+	public int likeProduct(ProductLike like) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("gift.insertProductLike",like);
+	}
+
+	public int disLikeProduct(ProductLike like) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("gift.deleteProductLike",like);
+	}
+
+	public int getProductLikeCount(int productNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("gift.selectProductLikeCount", productNo);
 	}
 
 

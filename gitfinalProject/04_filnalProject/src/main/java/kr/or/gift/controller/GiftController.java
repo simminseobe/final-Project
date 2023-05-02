@@ -1,5 +1,6 @@
 package kr.or.gift.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,7 +10,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,11 +40,14 @@ import kr.or.gift.model.vo.KakaoPay;
 import kr.or.gift.model.vo.Order;
 import kr.or.gift.model.vo.Product;
 import kr.or.gift.model.vo.ProductCategory;
+import kr.or.gift.model.vo.ProductCompany;
+import kr.or.gift.model.vo.ProductLike;
 import kr.or.gift.model.vo.ProductOption;
 import kr.or.gift.model.vo.ProductOrderSheet;
 import kr.or.gift.model.vo.ProductPhoto;
 import kr.or.gift.model.vo.ReadyResponse;
 import kr.or.gift.model.vo.Receive;
+import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.ShippingAddress;
 
 @Controller
@@ -52,20 +59,41 @@ public class GiftController {
 	private FileManager fileManager;
 	
 	@RequestMapping(value = "/allGiftList.do")
-	public String allGiftLsit(Model model, HttpServletRequest request) {
+	public String allGiftLsit(Model model, HttpServletRequest request, @SessionAttribute(required = false) Member m) {
+		//상품을 최신순으로 가져옴
 		ArrayList<Product> pList = sv.getAllProduct();
+		ArrayList<Product> fpList = new ArrayList<Product>();
 		for(Product p : pList) {
 			// status !=1 (상품 상태가 판매중이 아닌 -> status가 1이 아닌 p 객체를 rList에서 삭제함)
 			if(p.getProductStatus() != 1) pList.remove(p);
 			p.setMainImage(sv.getMainImage(p.getProductNo()));
+			p.setProductLikeCount(sv.getProductLikeCount(p.getProductNo()));
+			if(m != null && sv.getOneProductLike(p.getProductNo(), m.getMemberNo()) != null) p.setProductLikeStatus(true);
+			else p.setProductLikeStatus(false);
+			p.setTotalOrder(sv.getProductTotalOrder(p.getProductNo()));
 		}
+		//깊은복사
+		fpList.addAll(pList);
+		Comparator<Product> comparator = new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o2.getTotalOrder() - o1.getTotalOrder();
+            }
+        };
+        fpList.sort(comparator);
+
+        System.out.println(pList);
+        System.out.println(fpList);
 		model.addAttribute("pList", pList);
+		model.addAttribute("fpList", fpList);
+		
 		return "gift/allGiftList";
 	}
 	
 	@RequestMapping(value = "/giftInsertForm.do")
 	public String giftInsertForm(Model model) {
 		ArrayList<ProductCategory> categoryList = sv.getAllCategoryList();
+		model.addAttribute("companyList", sv.getAllCompanyList());
 		model.addAttribute("categoryList", categoryList);
 		return "admin/gift/giftInsertForm";
 	}
@@ -147,7 +175,33 @@ public class GiftController {
 	public void updateCategory(ProductCategory category) {
 		sv.updateCategory(category);
 	}
+	
+	@RequestMapping(value = "/insertCompany.do")
+	public String insertCompany(Model model) {
+		model.addAttribute("list", sv.getAllCompanyList());
+		return "admin/gift/insertCompany";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/insertCompanySql.do", produces = "application/json;charset=utf-8")
+	public String insertCompanySql(ProductCompany company) {
+		sv.insertCompanySql(company);
+		Gson gson = new Gson();
+		String result = gson.toJson(company);
+		return result;		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/deleteCompany.do", produces = "application/json;charset=utf-8")
+	public void deleteCompany(ProductCompany company) {
+		sv.deleteCompany(company);
+	}
 
+	@ResponseBody
+	@RequestMapping(value = "/updateCompany.do", produces = "application/json;charset=utf-8")
+	public void updateCompany(ProductCompany company) {
+		sv.updateCompany(company);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/getCategoryItems.do", produces = "application/json;charset=utf-8")
 	public String getCategoryItems(int pcNo) {
@@ -158,10 +212,14 @@ public class GiftController {
 	}
 
 	@RequestMapping(value = "/giftDetail.do")
-	public String giftDetail(Model model, int productNo) {
+	public String giftDetail(Model model, int productNo, @SessionAttribute(required = false) Member m) {
 		Product product = sv.getOneProduct(productNo);
 		product.setImages(sv.getAllProductImage(productNo));
 		product.setProductOptions(sv.getProductOptions(productNo));
+		product.setTotalOrder(sv.getProductTotalOrder(productNo));
+		if(m != null && sv.getOneProductLike(productNo, m.getMemberNo()) != null) product.setProductLikeStatus(true);
+		else product.setProductLikeStatus(false);
+		product.setProductLikeCount(sv.getProductLikeCount(productNo));
 		model.addAttribute("p",product);
 		
 		return "gift/giftDetail";
@@ -307,10 +365,11 @@ public class GiftController {
 			// 4. connection을 통해 매개변 전달을 위해 output이 있음을 설정
 			connection.setDoOutput(true);
 			// 5. 해당 요청개체 생성 매개변수 생성
-			String param = "cid=TC0ONETIME&partner_order_id="+order.getMemberId()+order.getItemName()+"&partner_user_id=movieIslandGift&item_name="+order.getItemName()+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://localhost/successPay.do&fail_url=http://localhost/failPay.do&cancel_url=http://localhost/cancelPay.do&item_code=";
+			String param = "cid=TC0ONETIME&partner_order_id="+order.getMemberId()+URLEncoder.encode(order.getItemName(),"utf-8")+"&partner_user_id=movieIslandGift&item_name="+URLEncoder.encode(order.getItemName(),"utf-8")+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://localhost/successPay.do&fail_url=http://localhost/failPay.do&cancel_url=http://localhost/cancelPay.do&item_code=";
 			// 6. 작성한 매개변수 전송객체 생성
 			OutputStream outputStream = connection.getOutputStream();
-			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+			DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
 			// 7. 매개변수를 바이트배열로 변환 후 전송 후 전송객체 소멸
 			dataOutputStream.writeBytes(param);
 			dataOutputStream.flush();
@@ -362,9 +421,10 @@ public class GiftController {
 			// 4. connection을 통해 개체 전달을 위해 output이 있음을 설정
 			connection.setDoOutput(true);
 			// 5. 해당 요청개체 생성 매개변수 생성
-			String param = "cid=TC0ONETIME&tid="+tid+"&partner_order_id="+order.getMemberId()+order.getItemName()+"&partner_user_id=movieIslandGift&pg_token="+pgToken;
+			String param = "cid=TC0ONETIME&tid="+tid+"&partner_order_id="+order.getMemberId()+URLEncoder.encode(order.getItemName(),"utf-8")+"&partner_user_id=movieIslandGift&pg_token="+pgToken;
 			OutputStream outputStream = connection.getOutputStream();
-			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+			DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
 			// 7. 매개변수를 바이트배열로 변환 후 전송 후 전송객체 소멸
 			dataOutputStream.writeBytes(param);
 			dataOutputStream.flush();
@@ -398,8 +458,9 @@ public class GiftController {
 		return "gift/giftPaysuccess";
 	}
 	@RequestMapping(value = "/failPay.do")
-	public void failPay() {
+	public String failPay() {
 		System.out.println("failed pay gift");
+		return "gift/giftPayFail";
 	}
 	@RequestMapping(value = "/cancelPay.do")
 	public String cancelPay() {
@@ -439,7 +500,6 @@ public class GiftController {
 		System.out.println("payData : " + payData);
 		int result = sv.insertOrder(order);
 		//order insert하고나서 orderNo 삽입까지 마침
-		System.out.println("1111;1111;1111111; === : " + result);
 		if(result == 1) {
 			giftPay.setOrderNo(order.getOrderNo());
 			result = result + sv.insertGiftPay(giftPay);
@@ -465,13 +525,11 @@ public class GiftController {
 				break;
 			}
 		} else System.out.println("order insert fail");
-		System.out.println("2222222222222;kdfas;22222222222; === : " + result);
 		if(result == 3) {
 			receive.setOrderNo(order.getOrderNo());
 			receive.setReceiverPhone(receive.getPhone0() + "-" + receive.getPhone1() + "-" + receive.getPhone2());
 			result = result + sv.insertReceive(receive);
 		} else System.out.println("giftPay insert fail");
-		System.out.println("3333333333;kdfas;33333333; === : " + result);
 		if(result == 4) {
 			ArrayList<ProductOrderSheet> poss = new ArrayList<ProductOrderSheet>();
 			for(String pn : posNo) {
@@ -483,8 +541,29 @@ public class GiftController {
 			System.out.println(poss);
 			result = result + sv.setOrderNo(poss);
 		}
-		System.out.println("gkasdfl;kdfas;hladsfghl; === : " + result);
 		//배송
 		return "gift/completePayment";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/selectOneProductLike.do")
+	public String selectOneProductLike(ProductLike like) {
+		ProductLike pl = sv.getOneProductLike(like);
+		if(pl == null) return "false";
+		else return "true";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/likeProduct.do")
+	public String likeProduct(ProductLike like) {
+		int result = sv.likeProduct(like);
+		if(result > 0) return "success";
+		else return "fail";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/disLikeProduct.do")
+	public String disLikeProduct(ProductLike like) {
+		int result = sv.disLikeProduct(like);
+		if(result > 0) return "success";
+		else return "fail";
 	}
 } 

@@ -38,7 +38,11 @@
                 </tr>
                 <tr>
                     <th><span>전화번호</span></th>
-                    <td><input type="text" name="addressPhone" required></td>
+                    <td>
+                        <input type="text" name="addressPhone0" required> - 
+                        <input type="text" name="addressPhone1" required> - 
+                        <input type="text" name="addressPhone2" required>
+                    </td>
                 </tr>
             </table>
             <div class="submit-btn-address-add">
@@ -76,9 +80,9 @@
                             <input type="text" name="addressReceiverName" id="saARN" value="">
                         </div>
                         <div class="phone-number">
-                            <input type="text" name="phone0" maxlength="3" value=""> - 
-                            <input type="text" name="phone1" maxlength="4" value=""> - 
-                            <input type="text" name="phone2" maxlength="4" value="">
+                            <input type="text" name="phone0" maxlength="3" value="" required> - 
+                            <input type="text" name="phone1" maxlength="4" value="" required> - 
+                            <input type="text" name="phone2" maxlength="4" value="" required>
                         </div>
                     </td>
                 </tr>
@@ -254,7 +258,10 @@
     </div>
     </form>
 </div>
+
 <button type="button" value="" id="successPayButton" onclick="successPayed()">결제성공!</button>
+<button type="button" id="cancelPay" onclick="cancelPayed()">결제취소</button>
+<button type="button" id="failPay" onclick="failPayed()">결제실패</button>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     const selectSa = saNo => {
@@ -276,8 +283,20 @@
                 const receiveAddressNew = document.querySelector('input[name=receiveAddressNew]')
                 const receiveAddressDetail = document.querySelector('input[name=receiveAddressDetail]')
                 const receiveZipCode = document.querySelector('input[name=receiveZipCode]')
+                const phone0 = document.querySelector('input[name=phone0]')
+                const phone1 = document.querySelector('input[name=phone1]')
+                const phone2 = document.querySelector('input[name=phone2]')
 
-                console.log(data)
+                const phoneNum = data.addressPhone;
+                if(phoneNum.substring(12,13) == ' ') {
+                    phone0.value =  phoneNum.substring(0, 3);
+                    phone1.value =  phoneNum.substring(3, 7);
+                    phone2.value =  phoneNum.substring(7, 11);
+                } else {
+                    phone0.value =  phoneNum.substring(0, 3);
+                    phone1.value =  phoneNum.substring(4, 8);
+                    phone2.value =  phoneNum.substring(9, 13);
+                }
 
                 saARN.value = data.addressReceiverName
                 saNew.value = data.addressNew
@@ -308,7 +327,9 @@
         document.querySelector('input[name=addressDetail]').value = ''
         document.querySelector('input[name=addressName]').value = ''
         document.querySelector('input[name=addressReceiverName]').value = ''
-        document.querySelector('input[name=addressPhone]').value = ''
+        document.querySelector('input[name=addressPhone0]').value = ''
+        document.querySelector('input[name=addressPhone1]').value = ''
+        document.querySelector('input[name=addressPhone2]').value = ''
     }
     // 주소찾기
     function searchAddr() {
@@ -332,7 +353,10 @@
         const addressDetail = document.querySelector('input[name=addressDetail]').value
         const addressName = document.querySelector('input[name=addressName]').value
         const addressReceiverName = document.querySelector('input[name=addressReceiverName]').value
-        const addressPhone = document.querySelector('input[name=addressPhone]').value
+        const addressPhone0 = document.querySelector('input[name=addressPhone0]').value
+        const addressPhone1 = document.querySelector('input[name=addressPhone1]').value
+        const addressPhone2 = document.querySelector('input[name=addressPhone2]').value
+        const addressPhone = addressPhone0 + '-' + addressPhone1 + '-' + addressPhone2
         $.ajax({
             url : "/addAddress.do",
             type : "POST",
@@ -442,9 +466,15 @@
     //결제완료감지기
     const orderForm = document.querySelector('#orderForm')
     const successPay = document.querySelector('#successPay')
-    const successPayed = () =>{
+    const successPayed = () => {
         console.log('pay success')
         orderForm.submit()
+    }
+    const cancelPayed = () => {
+        alert('결제가 취소되었습니다')
+    }
+    const failPayed = () => {
+        alert('결제에 실패했습니다.')
     }
 </script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

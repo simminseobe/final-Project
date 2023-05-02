@@ -11,11 +11,11 @@
     </div>
     <div class="product-control">
         <div class="images">
-            <div id="selected-image"><img src="/resources/upload/gift/${p.images[0].ppPath}" alt=""></div>
-            <div id="preview">
+            <div id="selected-image"><img src="/resources/upload/gift/${p.images[0].ppPath}" alt="" id="main-img-view"></div>
+            <div id="preview" class="regular slider">
                 <c:forEach items="${p.images}" var="image">
                     <div class="prev-img-container">
-                        <img src="/resources/upload/gift/${image.ppPath}" alt="">
+                        <img src="/resources/upload/gift/${image.ppPath}" alt="" class="imgs">
                     </div>
                 </c:forEach>
             </div>
@@ -33,11 +33,11 @@
                     </tr>
                     <tr>
                         <th>누적판매</th>
-                        <td>${p.productLikeCount}</td>
+                        <td>${p.totalOrder}</td>
                     </tr>
                     <tr>
                         <th>좋아요</th>
-                        <td>${p.productLikeCount}</td>
+                        <td class="lcv">${p.productLikeCount}</td>
                     </tr>
                     <!-- 
                     <tr>
@@ -105,7 +105,12 @@
                 </table>
                 <div class="product-btn-box">
                     <button type="button" onclick="nowBuyBtn()">바로구매</button>
-                    <button type="button"><span class="material-symbols-outlined"> favorite </span></button>
+                    <c:if test="${p.productLikeStatus}">
+                        <button type="button" onclick="likeProduct()"><span class="material-symbols-outlined like-on" id="likeProduct"> favorite </span></button>
+                    </c:if>
+                    <c:if test="${!p.productLikeStatus}">
+                        <button type="button" onclick="likeProduct()"><span class="material-symbols-outlined" id="likeProduct"> favorite </span></button>
+                    </c:if>
                     <button type="button"><span class="material-symbols-outlined">shopping_cart</span></button>
                 </div>
             </div>
@@ -121,6 +126,22 @@
     </div>
 </div>
 <script>
+    const imgMain = document.querySelector('#main-img-view')
+    const imgs = document.querySelectorAll('.imgs')
+    imgs[0].classList.add('selectImg')
+    imgs.forEach(img => {
+        img.addEventListener('click', e => {
+            imgs.forEach(img => {img.classList.remove('selectImg')})
+            img.classList.add('selectImg')
+            imgMain.src =  e.target.src
+        })
+    })
+    $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    });
     const optionTbl = document.querySelector('#product-option')
     const optionSelectTr = document.querySelector('#option-select-tr')
     const optionSelect = document.querySelector('#productOption')
@@ -248,5 +269,44 @@
             }
         }
     }
+
+    const likeProduct = () => {
+        const memberNo = document.querySelector('input[name=memberNo]').value
+        const productNo = document.querySelector('input[name=productNo]').value
+        const isProductLike = false
+        if(memberNo == '') {
+            alert('상품 좋아요는 로그인 후 가능합니다.')
+        } else {
+            $.ajax({
+                url : "/selectOneProductLike.do",
+                type : "get",
+                data : {productNo : productNo, memberNo : memberNo},
+                success : data => {
+                    if(data == "false") {
+                        $.ajax({
+                            url : "/likeProduct.do",
+                            type : "get",
+                            data : {productNo : productNo, memberNo : memberNo},
+                            success : data => {
+                                document.querySelector('.lcv').innerText ++
+                                document.getElementById('likeProduct').classList.add('like-on')
+                            }
+                        })
+                    } else {
+                        $.ajax({
+                            url : "/disLikeProduct.do",
+                            type : "get",
+                            data : {productNo : productNo, memberNo : memberNo},
+                            success : data => {
+                                document.querySelector('.lcv').innerText --
+                                document.getElementById('likeProduct').classList.remove('like-on')
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    }
 </script>
+
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

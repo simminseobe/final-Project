@@ -67,6 +67,9 @@
                 <!-- db에서 select 예정 -->
                 <td>
                     <select name="productCompany">
+                        <c:forEach items="${companyList}" var="company">
+                            <option value="${company.companyName}">${company.companyName}</option>
+                        </c:forEach>
                         <option value="SLAMDUNK">슬램덩크</option>
                         <option value="MARVLE">마블</option>
                         <option value="한국영화사">한국영화사</option>
