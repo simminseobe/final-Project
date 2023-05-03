@@ -121,7 +121,9 @@ likeProductBtn.forEach((btn,i) => {
     })
 })
 
-    
+const giftMore = () => {
+    location.href = "/allAboutGift.do"
+}
 
 const likeProduct = i => {
         const memberNo = document.querySelector('input[name=memberNo]').value

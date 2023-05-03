@@ -19,7 +19,7 @@
                     <li>※ 회원님의 정보를 정확히 입력해주세요.</li>
                 </ul>
             </div>
-            <div class="table-wrap">
+            <div class="table-wrap clearfix">
                 <table class="profile-content">
                     <tbody>
                         <tr>
@@ -99,8 +99,9 @@
                         </tr>
                     </tbody>
                 </table>
-                
                 <h2 class="delivery">배송지 관리</h2>
+                <div id="test">
+                
                 <table class="profile-content-two">
                 	<tbody>
                 		<tr>
@@ -118,10 +119,11 @@
                 				<button type="button" class="my-btn my-blue">수정</button>
                 				<button type="button" class="my-btn my-blue">삭제</button>
                 			</td> 
-                		</c:forEach>
                 		</tr>
+                		</c:forEach>
                 	</tbody>
                 </table>
+                </div>
             <div class="btn-wrap">
                 <button type="button" id="cancelBtn">취소</button>
                 <input type="submit" value="등록" id="enrollBtn"></input>

@@ -47,4 +47,14 @@
 	
 </insert>
 
+<!-- 잔여포인트 -->
+ <select id="mpAmount" parameterType="_int" resultType="_int">
+ select 
+		sum(point_amount) as pointAmount 
+	from point_tbl 
+	where member_no=#{memberNo}
+	and point_detail='사용가능'
+	and point_date between (sysdate-1) and sysdate 
+ </select>
+
 </mapper>

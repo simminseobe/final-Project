@@ -100,6 +100,11 @@ public class PointService {
 				return ppd;
 			
 	}
+	//잔여포인트 조회
+	
+	public Integer mpAmount(int memberNo) {
+		return dao.mpAmount(memberNo);
+	}
 	
 	
 }

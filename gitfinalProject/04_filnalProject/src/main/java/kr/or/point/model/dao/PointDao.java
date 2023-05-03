@@ -49,4 +49,9 @@ public class PointDao {
 		int totalCount = sqlSession.selectOne("point.totalCount", memberNo);
 		return totalCount;
 	}
+
+	public Integer mpAmount(int memberNo) {
+		Integer mpAmount = sqlSession.selectOne("point.mpAmount",memberNo);
+		return mpAmount;
+	}
 }
