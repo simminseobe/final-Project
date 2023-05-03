@@ -14,7 +14,7 @@
             <li><a href="/giftTicket.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">영화 관람권</a></li>
            <li><a href="/myPoint.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">멤버십 포인트</a></li>
            <li><a href="/myMovie.do">나의 무비스토리</a></li>
-           <li><a href="#">나의 문의내역</a></li>
+           <li><a href="/adminCenter.do">나의 문의내역</a></li>
            <li id="last-li"><a href="/myProfile.do">개인정보 수정</a></li>
         </ul>
     </div>
