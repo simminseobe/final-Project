@@ -565,7 +565,7 @@ public class GiftController {
 	@RequestMapping(value = "/cart.do")
 	public String cart(Model model, @SessionAttribute(required = false) Member m) {
 		//작업 후 맴버번호 수
-		ArrayList<ProductOrderSheet> posList = sv.getPosList(68);
+		ArrayList<ProductOrderSheet> posList = sv.getPosList(m.getMemberNo());
 		for(ProductOrderSheet pos : posList) {
 			Product p = sv.getPosProduct(pos.getProductNo());
 			p.setMainImage(sv.getMainImage(pos.getProductNo()));

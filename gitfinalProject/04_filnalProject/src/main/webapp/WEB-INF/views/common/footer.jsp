@@ -48,6 +48,15 @@
     	});
     </script>
 </footer>
+<script>
+    const cart = () => {
+        if('${sessionScope.m.memberNo}' == '') {
+            alert('로그인 후 장바구니 확인 가능합니다')
+        } else {
+            location.href = '/cart.do'
+        }
+    }
+</script>
 </body>
 </html>
 
