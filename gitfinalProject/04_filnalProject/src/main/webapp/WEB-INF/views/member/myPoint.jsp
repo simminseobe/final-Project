@@ -52,7 +52,7 @@
 			</div>
 			<div class="pointDetail">
 			<div>사용가능포인트<br>${mpAmount }</div>
-			<div>잔여 포인트는<br>${mpAmount }</div>
+			<div>등급<br>${mpAmount }</div>
 			</div>
 			<div class="tab-content">
 				<table>
