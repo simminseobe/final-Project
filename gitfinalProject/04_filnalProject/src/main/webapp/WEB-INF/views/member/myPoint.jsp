@@ -38,7 +38,7 @@
 			height: 200px;
 			border-top-right-radius : 20px;
 			border-bottom-right-radius : 20px;
-			padding: 50px 50px;
+			padding: 40px 50px;
 		}
 		.pointDetail span{
 			font-size: 60px;
