@@ -59,8 +59,8 @@ body { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; }
 .visual li { float: left; width: 33.33%; }
 .visual li article { height: 594px; background-position: center center; background-size: cover; }
 .visual li:nth-child(1) article { background-image: url(/resources/images/common/banner_image01.jpg); }
-.visual li:nth-child(2) article { background-image: url(/resources/images/common/banner_image02.jpg); }
-.visual li:nth-child(3) article { background-image: url(/resources/images/common/banner_image03.jpg); }
+.visual li:nth-child(2) article { background-image: url(/resources/images/common/banner_image02_1.jpg); }
+.visual li:nth-child(3) article { background-image: url(/resources/images/common/banner_image03_1.jpg); }
 
 /*visual btns work*/
 .visual_btns1 { position: absolute; width: 81px; height: 30px; left: calc(50% - 57px); bottom: 8px }
@@ -105,25 +105,25 @@ body { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; }
 /*movie thumbnail*/
 #movies input { display: none; }
 #movies dl dd li>div { height: 335px; background-size: cover; }
-.box_office .thumb_movie1 { background: url(/resources/images/common/thumbs01.jpg) center center; }
-.box_office .thumb_movie2 { background: url(/resources/images/common/thumbs02.jpg) center center; }
-.box_office .thumb_movie3 { background: url(/resources/images/common/thumbs03.jpg) center center; }
-.box_office .thumb_movie4 { background: url(/resources/images/common/thumbs04.jpg) center center; }
+.box_office .thumb_movie1 { background: url(/resources/images/common/common1.jpg) center center; }
+.box_office .thumb_movie2 { background: url(/resources/images/common/common2.jpg) center center; }
+.box_office .thumb_movie3 { background: url(/resources/images/common/common3.jpg) center center; }
+.box_office .thumb_movie4 { background: url(/resources/images/common/common4.jpg) center center; }
 
-.latest_release .thumb_movie1 {background: url(/resources/images/common/thumb_latest01.jpg) center center; }
-.latest_release .thumb_movie2 {background: url(/resources/images/common/thumb_latest02.jpg) center center; }
-.latest_release .thumb_movie3 {background: url(/resources/images/common/thumb_latest03.jpg) center center; }
-.latest_release .thumb_movie4 {background: url(/resources/images/common/thumb_latest04.jpg) center center; }
+.latest_release .thumb_movie1 {background: url(/resources/images/common/common16.jpg) center center; }
+.latest_release .thumb_movie2 {background: url(/resources/images/common/common6.jpg) center center; }
+.latest_release .thumb_movie3 {background: url(/resources/images/common/common17.jpg) center center; }
+.latest_release .thumb_movie4 {background: url(/resources/images/common/common18.jpg) center center; }
 
-.future_works .thumb_movie1 { background: url(/resources/images/common/future_works01.jpg) center center; }
-.future_works .thumb_movie2 { background: url(/resources/images/common/future_works02.jpg) center center; }
-.future_works .thumb_movie3 { background: url(/resources/images/common/future_works03.jpg) center center; }
-.future_works .thumb_movie4 { background: url(/resources/images/common/future_works04.jpg) center center; }
+.future_works .thumb_movie1 { background: url(/resources/images/common/common9.jpg) center center; }
+.future_works .thumb_movie2 { background: url(/resources/images/common/common10.jpg) center center; }
+.future_works .thumb_movie3 { background: url(/resources/images/common/common11.jpg) center center; }
+.future_works .thumb_movie4 { background: url(/resources/images/common/common12.jpg) center center; }
 
-.curation .thumb_movie1 { background: url(/resources/images/common/thumb_curation01.jpg) center center; }
-.curation .thumb_movie2 { background: url(/resources/images/common/thumb_curation02.jpg) center center; }
-.curation .thumb_movie3 { background: url(/resources/images/common/thumb_curation03.jpg) center center; }
-.curation .thumb_movie4 { background: url(/resources/images/common/thumb_curation04.jpg) center center; }
+.curation .thumb_movie1 { background: url(/resources/images/common/common7.jpg) center center; }
+.curation .thumb_movie2 { background: url(/resources/images/common/common13.jpg) center center; }
+.curation .thumb_movie3 { background: url(/resources/images/common/common14.jpg) center center; }
+.curation .thumb_movie4 { background: url(/resources/images/common/common15.jpg) center center; }
 
 #movies .info_movies { padding: 21px 14px 17px; background-color: #fff; height: 123px; }
 .info_movies h3 { margin-bottom: 18px; }

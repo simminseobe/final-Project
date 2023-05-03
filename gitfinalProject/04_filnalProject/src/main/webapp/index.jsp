@@ -169,9 +169,9 @@
             <li>
                 <article>
                    <div class="banner_text">
-                    <div>메가박스 오리지널 티켓 No.2</div>
-                    <h2>&lt;라이온킹&gt;을 가장 잘 간직하는 방법</h2>
-                    <div>7월 19일 (금) 멤버십 대상 한정수량 배포</div>
+                    <div>MovieIsland 오리지널 티켓</div>
+                    <h2>&lt;이벤트&gt;을 잘 받는 방법</h2>
+                    <div>5월 10일 (수) 멤버십 대상 한정수량 배포</div>
                     </div>
                 </article>
             </li>
@@ -224,7 +224,7 @@
                    <li>
                        <div class="thumb_movie1"></div>
                        <div class="info_movies">
-                           <h3><span class="age_12"></span> <a href="#">스파이더맨: 파 프...</a></h3>
+                           <h3><span class="age_all"></span> <a href="#">슈퍼 마리오 브라..</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -232,7 +232,7 @@
                    <li>
                        <div class="thumb_movie2"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">토이 스토리 4</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">드림</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -240,7 +240,7 @@
                    <li>
                        <div class="thumb_movie3"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">라이온 킹</a></h3>
+                           <h3><span class="age_19"></span> <a href="#">존윅4</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -248,7 +248,7 @@
                    <li>
                        <div class="thumb_movie4"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">알 라딘</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">스즈메의 문단속</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -265,7 +265,7 @@
                    <li>
                        <div class="thumb_movie1"></div>
                        <div class="info_movies">
-                           <h3><span class="age_12"></span> <a href="#">어벤져스:엔드게임</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">클로즈</a></h3>
                            <a href="#" onclick="alert('준비중입니다.')">상세정보</a>
                            <a href="#" onclick="alert('준비중입니다.')">예매하기</a>
                        </div>
@@ -273,7 +273,7 @@
                    <li>
                        <div class="thumb_movie2"></div>
                        <div class="info_movies">
-                           <h3><span class="age_12"></span> <a href="#">이케아 옷장에서...</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">리바운드</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -281,7 +281,7 @@
                    <li>
                        <div class="thumb_movie3"></div>
                        <div class="info_movies">
-                           <h3><span class="age_15"></span> <a href="#">수영장으로 간 남...</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">던전 앤 드래곤</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -289,7 +289,7 @@
                    <li>
                        <div class="thumb_movie4"></div>
                        <div class="info_movies">
-                           <h3><span class="age_19"></span> <a href="#">나이트메어 시네마</a></h3>
+                           <h3><span class="age_15"></span> <a href="#">분노의 질주: 라..</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -306,7 +306,7 @@
                    <li>
                        <div class="thumb_movie1"></div>
                        <div class="info_movies">
-                           <h3><span class="age_15"></span> <a href="#">돈 워리</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">가디언즈 오브 갤..</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -314,7 +314,7 @@
                    <li>
                        <div class="thumb_movie2"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">마담 프루스트의...</a></h3>
+                           <h3><span class="age_all"></span> <a href="#">극장판 짱구는...</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -322,7 +322,7 @@
                    <li>
                        <div class="thumb_movie3"></div>
                        <div class="info_movies">
-                           <h3><span class="age_15"></span> <a href="#">롱 샷</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">유량지구</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -330,7 +330,7 @@
                    <li>
                        <div class="thumb_movie4"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">레드슈즈</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">롱디</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -347,7 +347,7 @@
                    <li>
                        <div class="thumb_movie1"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">2019 브레겐츠...</a></h3>
+                           <h3><span class="age_15"></span> <a href="#">무명</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -355,7 +355,7 @@
                    <li>
                        <div class="thumb_movie2"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">&#91;오페라&#93; 라 트라...</a></h3>
+                           <h3><span class="age_all"></span> <a href="#">&#91;로열 발레&#93;신데렐..</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -363,7 +363,7 @@
                    <li>
                         <div class="thumb_movie3"></div>
                        <div class="info_movies">
-                           <h3><span class="age_15"></span> <a href="#">&#91;페스티벌 앙코르...</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">&#91;시네 마인드 런&#91;돈..</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>
@@ -371,7 +371,7 @@
                    <li>
                        <div class="thumb_movie4"></div>
                        <div class="info_movies">
-                           <h3><span class="age_all"></span> <a href="#">마리아 칼라스: 세...</a></h3>
+                           <h3><span class="age_12"></span> <a href="#">&#91;시네도슨트-그리..&#91;</a></h3>
                            <a href="#">상세정보</a>
                            <a href="#">예매하기</a>
                        </div>

@@ -500,7 +500,6 @@ public class GiftController {
 		System.out.println("payData : " + payData);
 		int result = sv.insertOrder(order);
 		//order insert하고나서 orderNo 삽입까지 마침
-		System.out.println("1111;1111;1111111; === : " + result);
 		if(result == 1) {
 			giftPay.setOrderNo(order.getOrderNo());
 			result = result + sv.insertGiftPay(giftPay);
@@ -526,13 +525,11 @@ public class GiftController {
 				break;
 			}
 		} else System.out.println("order insert fail");
-		System.out.println("2222222222222;kdfas;22222222222; === : " + result);
 		if(result == 3) {
 			receive.setOrderNo(order.getOrderNo());
 			receive.setReceiverPhone(receive.getPhone0() + "-" + receive.getPhone1() + "-" + receive.getPhone2());
 			result = result + sv.insertReceive(receive);
 		} else System.out.println("giftPay insert fail");
-		System.out.println("3333333333;kdfas;33333333; === : " + result);
 		if(result == 4) {
 			ArrayList<ProductOrderSheet> poss = new ArrayList<ProductOrderSheet>();
 			for(String pn : posNo) {
@@ -544,7 +541,6 @@ public class GiftController {
 			System.out.println(poss);
 			result = result + sv.setOrderNo(poss);
 		}
-		System.out.println("gkasdfl;kdfas;hladsfghl; === : " + result);
 		//배송
 		return "gift/completePayment";
 	}

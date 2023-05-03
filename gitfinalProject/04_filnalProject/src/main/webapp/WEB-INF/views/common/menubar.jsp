@@ -9,7 +9,7 @@
 <div class="menu-wrap">
  <div class="menu">
         <ul class="main-menu">
-            <li id="myBox"><a href="/mypage.do">나의 메가박스</a></li>
+            <li id="myBox"><a href="/purchaseList.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">나의 메가박스</a></li>
             <li><a href="/purchaseList.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">예매/구매내역</a></li>
             <li><a href="/giftTicket.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">영화 관람권</a></li>
            <li><a href="/myPoint.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">멤버십 포인트</a></li>
