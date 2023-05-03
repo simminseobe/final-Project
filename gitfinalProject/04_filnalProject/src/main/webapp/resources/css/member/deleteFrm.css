@@ -19,6 +19,7 @@
 
 .mypage-header{
     width: 100vh;
+    padding-left: 100px;
 }
 
 .mypage-header>h2{

@@ -229,5 +229,15 @@ public class GiftService {
 		return dao.getProductLikeCount(productNo);
 	}
 
+	public Product getPosProduct(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.getPosProduct(productNo);
+	}
+
+	public ProductOption getPosOption(int poNo) {
+		// TODO Auto-generated method stub
+		return dao.getPosOption(poNo);
+	}
+
 
 }

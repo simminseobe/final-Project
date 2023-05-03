@@ -81,9 +81,6 @@ public class GiftController {
             }
         };
         fpList.sort(comparator);
-
-        System.out.println(pList);
-        System.out.println(fpList);
 		model.addAttribute("pList", pList);
 		model.addAttribute("fpList", fpList);
 		
@@ -302,6 +299,7 @@ public class GiftController {
 		product.setMainImage(sv.getMainImage(productNo));
 //		선택한 옵션 설정
 		ArrayList<ProductOption> options = sv.getProductOptions(productNo);
+//		sv.insertBuyOption(options);
 		ArrayList<ProductOption> selectOptions = new ArrayList<ProductOption>();
 		for(ProductOption option : options) {
 			for(ProductOrderSheet pos : posList) if(option.getPoNo() == pos.getPoNo()) selectOptions.add(option);
@@ -309,15 +307,13 @@ public class GiftController {
 		product.setProductOptions(selectOptions);
 //		product.setProductOptions();
 		int result = sv.insertOrderSheet(posList);
+		System.out.println("POSLIST  " + posList);
 		System.out.println("result : " + result);
 		model.addAttribute("posList", posList);
 		model.addAttribute("product", product);
 		model.addAttribute("sas", sas);
 		return "gift/productOrderSheet";
 	}
-	
-	
-	
 //	KAKAO PAY
 //  RESTAPI
 //	private HttpHeaders getHeaders() {
@@ -444,7 +440,6 @@ public class GiftController {
 			String data = bufferedReader.readLine();
 			ObjectMapper objectMapper = new ObjectMapper();
 			ApproveResponse approveResponse = objectMapper.readValue(data, ApproveResponse.class);
-			System.out.println(data);
 			System.out.println(approveResponse);
 			model.addAttribute("data", data);
 		} catch (MalformedURLException e) {
@@ -566,4 +561,88 @@ public class GiftController {
 		if(result > 0) return "success";
 		else return "fail";
 	}
+
+	@RequestMapping(value = "/cart.do")
+	public String cart(Model model, @SessionAttribute(required = false) Member m) {
+		//작업 후 맴버번호 수
+		ArrayList<ProductOrderSheet> posList = sv.getPosList(68);
+		for(ProductOrderSheet pos : posList) {
+			Product p = sv.getPosProduct(pos.getProductNo());
+			p.setMainImage(sv.getMainImage(pos.getProductNo()));
+			ProductOption po = sv.getPosOption(pos.getPoNo());
+			System.out.println(p + " : product");
+			pos.setProduct(p);
+			pos.setProductOption(po);
+		}
+		model.addAttribute("posList", posList);
+		return "gift/myCart";
+	}
+	
+
+	@RequestMapping(value = "/allAboutGift.do")
+	public String allAboutGift(Model model, @SessionAttribute(required = false) Member m) {
+		//상품을 최신순으로 가져옴
+		ArrayList<Product> pList = sv.getAllProduct();
+		ArrayList<Product> fpList = new ArrayList<Product>();
+		for(Product p : pList) {
+			// status !=1 (상품 상태가 판매중이 아닌 -> status가 1이 아닌 p 객체를 rList에서 삭제함)
+			if(p.getProductStatus() != 1) pList.remove(p);
+			p.setMainImage(sv.getMainImage(p.getProductNo()));
+			p.setProductLikeCount(sv.getProductLikeCount(p.getProductNo()));
+			if(m != null && sv.getOneProductLike(p.getProductNo(), m.getMemberNo()) != null) p.setProductLikeStatus(true);
+			else p.setProductLikeStatus(false);
+			p.setTotalOrder(sv.getProductTotalOrder(p.getProductNo()));
+		}
+		//깊은복사
+		fpList.addAll(pList);
+		Comparator<Product> comparator = new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o2.getTotalOrder() - o1.getTotalOrder();
+            }
+        };
+        fpList.sort(comparator);
+		model.addAttribute("pList", pList);
+		model.addAttribute("fpList", fpList);
+		
+		return "gift/allAboutGift";
+	}
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

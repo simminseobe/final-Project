@@ -36,10 +36,11 @@ input[name=store_nav_ct]:checked~label { font-weight: 900; border: 1px solid #50
 .gift-ct-nav { display: flex; justify-content: space-between; margin-top: 60px; }
 .ct-title { font-size: 20px; }
 .gift-more { background: none; border: none; }
+.gift-more:hover { cursor: pointer; }
 
 /* 스토어 내부 컨탠츠 */
 a { color: #000; }
-.gift-items {display: flex; margin: 50px 0px; }
+.gift-items {display: flex; flex-wrap: wrap; margin: 50px 0px; }
 .item { width: 245px; margin: 20px; border: 1px solid #ddd; height: 435px; border-radius: 10px;}
 .item:hover { border: 1px solid #503396;}
 .item-img>img { width: 243px; height: 245px; border-radius: 10px; }
@@ -87,7 +88,7 @@ a { color: #000; }
 .right-info table { font-size: 0.8rem; margin: 10px 0 10px; }
 .right-info table tr { height: 30px; }
 .right-info table th { width: 100px; text-align-last: left; }
-.deliveryInfo { border-bottom: 1px solid #ddd   ; }
+.deliveryInfo { border-bottom: 1px solid #ddd; }
 .deliveryInfo > table .deliveryNotice { padding-left: 20px; width: 100%; background-color: #eee; height: 40px; line-height: 40px; }
 .productInfo .category-anc {  }
 

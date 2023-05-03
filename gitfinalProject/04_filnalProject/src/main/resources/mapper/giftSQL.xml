@@ -97,7 +97,7 @@
 			shipping,
 			product_status as productStatus,
 			simple_info as simpleInfo,
-            (select count(*) from product_like where product_no = 16) as productLikeCount
+            (select count(*) from product_like where product_no = #{_parameter}) as productLikeCount
 		from product
 		where product_no = #{_parameter}
 	</select>
@@ -240,5 +240,28 @@
 	</select>
 	<select id="selectProductLikeCount" parameterType="_int" resultType="_int">
 		select count(*) as productLikeCount from product_like where product_no = #{_parameter}
+	</select>
+	<select id="selectOnePosProduct" parameterType="_int" resultType="product">
+		select
+			product_no as productNo,
+			pc_no as pcNo,
+			product_name as productName,
+			product_price as productPrice,
+			product_company as productCompany,
+			shipping,
+			product_status as productStatus,
+			simple_info as simpleInfo,
+            (select count(*) from product_like where product_no = #{_parameter}) as productLikeCount
+		from product
+		where product_no = #{_parameter}
+	</select>
+	<select id="getPosOption" parameterType="_int" resultType="po">
+		select
+			po_no as poNo,
+			product_no as productNo,
+			po_name as poName,
+			po_price as poPrice
+		from product_option
+		where po_no = #{_parameter}
 	</select>
 </mapper>

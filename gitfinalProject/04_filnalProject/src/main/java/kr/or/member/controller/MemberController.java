@@ -247,6 +247,7 @@ public class MemberController {
 		System.out.println(mpAmount);
 		return "member/mypage";
 	}
+	
 
 	// 개인정보 수정 페이지 이동
 	@RequestMapping(value = "/myProfile.do")
@@ -736,6 +737,67 @@ public class MemberController {
 	public String naverLogout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	// 네이버 로그아웃
+	public void naverLogout(String access_Token) {
+		String reqURL="https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=2bPh_mYXLtkjmaWWo_8B&client_secret=vKHZagAtTC&access_token=ACCESS_TOKEN";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn=(HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String result = "";
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 네이버 로그아웃(링크연결 끊기)
+	@RequestMapping(value = "/naverLink")
+	public String naverLink(HttpSession session) {
+		//session.getAttribute("access_token");
+		//session.removeAttribute("access_Token");
+		session.invalidate();
+		return "redirect:/";
+	}
+
+	// 네이버 로그아웃(링크연결 끊기)
+	public void naverLink(String access_Token) {
+		String reqURL="https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=2bPh_mYXLtkjmaWWo_8B&client_secret=vKHZagAtTC&access_token=ACCESS_TOKEN";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String result = "";
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// 예매/구매 내역 페이지 이동

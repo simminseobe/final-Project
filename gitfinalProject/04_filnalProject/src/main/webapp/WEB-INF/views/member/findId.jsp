@@ -12,7 +12,7 @@
     <div class="wrapper">
         <div class="logo-wrap">
             <a href="/">
-                <img src="/resources/images/common/logo.png" class="logo">
+                <img src="/image/logo2.PNG" class="logo">
             </a>
         </div>
         <p class="findId-pw">

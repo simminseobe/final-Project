@@ -19,24 +19,36 @@
 			
 		}
 		.pointDetail>div:nth-child(1){
-			font-size: 30px;
+			font-size: 40px;
 			color : #fff;
+			font-weight: bold;
 			background-color : #1d1e36;
 			width: 45%;
 			height: 200px;
 			border-top-left-radius : 20px;
 			border-bottom-left-radius : 20px;
+			padding: 50px 90px;
 		}
 		.pointDetail>div:nth-child(2){
-			font-size: 30px;
+			font-size: 40px;
 			color : #fff;
+			font-weight: bold;
 			background-color : #d6d6d6;
 			width: 45%;
 			height: 200px;
 			border-top-right-radius : 20px;
 			border-bottom-right-radius : 20px;
+			padding: 40px 50px;
 		}
-		
+		.pointDetail span{
+			font-size: 60px;
+			color : #59cf4c;
+			font-weight: bold;
+		}
+		.nextGrade{
+			font-size: 20px;
+			color : #fff;
+		}
 	
 	</style>
 	<table>
@@ -51,8 +63,20 @@
 				<h2>포인트 내역</h2>
 			</div>
 			<div class="pointDetail">
-			<div>사용가능포인트<br>${mpAmount }</div>
-			<div>잔여 포인트는<br>${mpAmount }</div>
+			<div>사용가능포인트<br><span>&nbsp;${mpAmount } P</span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;현재 등급<br>
+				<c:if test="${sessionScope.m.memberLevel == 3}">
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP</span>
+		</c:if>
+		<c:if test="${sessionScope.m.memberLevel == 2}">
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOLD</span><br>
+		<div class="nextGrade">&nbsp;&nbsp;&nbsp;다음 등급까지 ${12000-mpAmount } P 남았습니다.</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberLevel == 1}">
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHITE</span><br>
+		<div class="nextGrade">&nbsp;&nbsp;&nbsp;다음 등급까지 ${6000-mpAmount } P 남았습니다.</div>
+		</c:if>
+			</div>
 			</div>
 			<div class="tab-content">
 				<table>

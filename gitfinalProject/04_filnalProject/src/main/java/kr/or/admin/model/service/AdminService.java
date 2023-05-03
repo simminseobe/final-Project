@@ -275,8 +275,6 @@ public class AdminService {
 	public ArrayList<Chat> selectChat(int consultationNo) {
 		ArrayList<Chat> list = dao.selectChat(consultationNo);
 
-		System.out.println(list.get(0).getChatContent());
-
 		return list;
 	}
 
@@ -290,6 +288,12 @@ public class AdminService {
 		ArrayList<SalesPerDay> list = dao.selectSalesPerDay();
 
 		return list;
+	}
+
+	public Theater dupBranchChk(String theaterBranch) {
+		Theater theater = dao.dupBranchChk(theaterBranch);
+
+		return theater;
 	}
 
 }
