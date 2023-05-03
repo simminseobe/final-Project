@@ -29,7 +29,7 @@
                 <li><a href="/allTheater.do">영화관</a></li>
                 <li><a href="#">특별관</a></li>
                 <li><a href="/allGiftList.do">스토어</a></li>
-                <li><a href="/cart.do">장바구니</a></li>
+                <li><a href="javascript:void(0)" onclick="cart()">장바구니</a></li>
                 <c:choose>
 	                <c:when test="${empty sessionScope.m}">
 		                <li><a href="/login.do">로그인</a></li>
