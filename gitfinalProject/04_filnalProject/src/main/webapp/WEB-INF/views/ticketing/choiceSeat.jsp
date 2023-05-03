@@ -806,6 +806,13 @@
 					let clicked = "";
 					let div = "";
 
+					var now1Text;
+					var now2Text;
+					var now3Text;
+					var nowTotalText;
+					var clickedCount;
+					
+
 				for (let i = 0; i < 10; i++) {
 						div = document.createElement("div");
 						seatWrapper.append(div);
@@ -826,6 +833,7 @@
 								});
 
 								console.log(totalCount);
+								/*
 								if(totalCount >= $(".mySeat").length){//mh
 									if($(this).hasClass("clicked")) {
 										$(this).removeClass("clicked");
@@ -853,19 +861,81 @@
 										//인원 수, 좌석 수 일치 시 css변경
 										$(".pageNext").css("backgroundColor","#329eb1");
 										$(".pageNext").css("color","#fff");
-
-
-
-										
 									}
-									
+								}
+								*/
+								/*
+								if(totalCount !== $(".mySeat").length) {
+									//인원 수와 좌석 수가 일치하지 않는 경우
+									$(".pageNext").prop("disabled", true); // 버튼 비활성화
+									$(".pageNext").css("backgroundColor", "#e0e0e0");
+									$(".pageNext").css("color", "#aaaaaa");
+								} else {
+									//인원 수와 좌석 수가 일치하는 경우
+									$(".pageNext").prop("disabled", false); // 버튼 활성화
+									$(".pageNext").css("backgroundColor", "#329eb1");
+									$(".pageNext").css("color", "#fff");
+								}
+								*/
+								//////////////////////////////////////////////////////////////////
+								
+								if(totalCount >= $(".mySeat").length){//mh
+									if($(this).hasClass("clicked")) {
+										$(this).removeClass("clicked");
+										const index = selectedSeats.indexOf($(this).val());
+										selectedSeats.splice(index,1);
+										//인원 수, 좌석 수 불일치 시 css변경
+										$(".pageNext").prop("disabled", true); // 버튼 비활성화
+										$(".pageNext").css("backgroundColor","#e0e0e0");
+										$(".pageNext").css("color","#aaaaaa");
+									}else{
+										$(this).addClass("clicked");
+										selectedSeats.push($(this).val());
+										selectedSeats.sort();
+									}
+									console.log(selectedSeats);
+									$(".selectedSeats-area").empty();
+									$('.seat:not(.clicked)').prop('disabled', false );//mh
+										
+									$(selectedSeats).each(function(no,item){
+										const div = $("<div>").addClass("mySeat")
+										div.text(item)
+										$(".selectedSeats-area").append(div)
+									});
+									if(totalCount ==  $(".mySeat").length){
+										if($(".down").on("click",function(){
+											if(!confirm("선택하신 좌석을 모두 취소하고 다시 선택하시겠습니까?")){
+												alert("죄송합니다. 인원과 좌석을 다시 선택해주세요");
+												location.reload();
+											}else{
+												location.reload();
+											}
+										}))
+										$('.seat:not(.clicked)').prop('disabled', true );
+										//인원 수, 좌석 수 일치 시 css변경
+										$(".pageNext").prop("disabled", false); // 버튼 비활성화
+										$(".pageNext").css("backgroundColor","#329eb1");
+										$(".pageNext").css("color","#fff");
+									}
 								}
 								
+								if(totalCount != $('.clicked').length) {
+									
+									$(".pageNext").prop("disabled", true); // 버튼 비활성화
+									$(".pageNext").css("backgroundColor", "#e0e0e0");
+									$(".pageNext").css("color", "#aaaaaa");
+								} else {
+									$(".pageNext").prop("disabled", false); // 버튼 활성화
+									$(".pageNext").css("backgroundColor", "#329eb1");
+									$(".pageNext").css("color", "#fff");
+								}
 								
-								
+								//////////////////////////////////////////////////////////////////							
 							})
 						}
 					}
+
+					
 					/*
 					//인원 수 만큼 자리 선택되면 버튼에 css
 										$(".pageNext").css("backgroundColor","#329eb1");
