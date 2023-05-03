@@ -111,7 +111,7 @@
                     <c:if test="${!p.productLikeStatus}">
                         <button type="button" onclick="likeProduct()"><span class="material-symbols-outlined" id="likeProduct"> favorite </span></button>
                     </c:if>
-                    <button type="button"><span class="material-symbols-outlined">shopping_cart</span></button>
+                    <button type="button"><span class="material-symbols-outlined" onclick="cartInsert()">shopping_cart</span></button>
                 </div>
             </div>
         </form>
@@ -142,6 +142,33 @@
         slidesToShow: 3,
         slidesToScroll: 3
     });
+
+    // cart send request
+    const form = document.querySelector('#orderT')
+    const cartInsert = () => {
+        if('${sessionScope.m.memberNo}' == '') {
+           alert('로그인 후 장바구니 추가 가능합니다')
+        } else if($('.selected-options').length == 0) {
+            alert('옵션을 선택해 주세요')
+        } else {
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form)
+            }).then(response => {
+                if (response.ok) {
+                // 성공적으로 처리된 경우
+                    alert('장바구니에 추가되었습니다')
+                } else {
+                // 처리 중에 오류가 발생한 경우
+                console.error('Error adding option.')
+                alert('에러발생')
+                }
+            })
+        }
+    }
+    
+
+
     const optionTbl = document.querySelector('#product-option')
     const optionSelectTr = document.querySelector('#option-select-tr')
     const optionSelect = document.querySelector('#productOption')
