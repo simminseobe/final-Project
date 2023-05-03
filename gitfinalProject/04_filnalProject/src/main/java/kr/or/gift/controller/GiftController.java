@@ -361,7 +361,7 @@ public class GiftController {
 			// 4. connection을 통해 매개변 전달을 위해 output이 있음을 설정
 			connection.setDoOutput(true);
 			// 5. 해당 요청개체 생성 매개변수 생성
-			String param = "cid=TC0ONETIME&partner_order_id="+order.getMemberId()+URLEncoder.encode(order.getItemName(),"utf-8")+"&partner_user_id=movieIslandGift&item_name="+URLEncoder.encode(order.getItemName(),"utf-8")+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://localhost/successPay.do&fail_url=http://localhost/failPay.do&cancel_url=http://localhost/cancelPay.do&item_code=";
+			String param = "cid=TC0ONETIME&partner_order_id="+order.getMemberId()+URLEncoder.encode(order.getItemName(),"utf-8")+"&partner_user_id=movieIslandGift&item_name="+URLEncoder.encode(order.getItemName(),"utf-8")+"&quantity="+order.getQuantity()+"&total_amount="+order.getOrderPrice()+"&tax_free_amount=0&approval_url=http://192.168.10.32/successPay.do&fail_url=http://192.168.10.32/failPay.do&cancel_url=http://192.168.10.32/cancelPay.do&item_code=";
 			// 6. 작성한 매개변수 전송객체 생성
 			OutputStream outputStream = connection.getOutputStream();
 			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);

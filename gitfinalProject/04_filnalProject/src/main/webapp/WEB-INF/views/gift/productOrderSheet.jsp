@@ -453,7 +453,7 @@
                 type : 'POST',
                 data : { memberId : memberId ,orderPrice : orderPrice.value ,productName : "${product.productName}", shipRequest : $('[name=shipRequest]').val(), itemName : itemName, quantity : quantity},
                 success : data => {
-                    //location.href = data.next_redirect_pc_url 
+                    //location.href = data.next_redirect_pc_url
                     window.open(data.next_redirect_pc_url ,"movie island gift shop","left=700px,top=300px,width=400px,height=700px,menubar=no,status=no,scrollbars=yes")
                 },
                 error : data => {
