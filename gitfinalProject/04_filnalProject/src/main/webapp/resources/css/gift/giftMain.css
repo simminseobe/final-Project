@@ -236,3 +236,9 @@ a { color: #000; }
 /* 하트뿌리기 애니메이션 */
 .material-symbols-outlined { font-variation-settings:'FILL' 0, 'wght' 700, 'GRAD' 200, 'opsz' 48 }
 .like-on { font-variation-settings:'FILL' 1; color: red;}
+
+/* 장바구니 */
+.chkPos { width: 40px; }
+.chkPos input { display: block; margin: 0 auto; }
+.pos-del-btn { width: 30px; height: 20px; }
+.pos-del-btn:hover { cursor: pointer; }

@@ -607,6 +607,15 @@ public class GiftController {
 		
 		return "gift/allAboutGift";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/deletePos.do")
+	public String cart(int posNo) {
+		int result = sv.deletePos(posNo);
+		if(result > 0) return "success";
+		else return "fail"; 
+		
+	}
 } 
 
 
