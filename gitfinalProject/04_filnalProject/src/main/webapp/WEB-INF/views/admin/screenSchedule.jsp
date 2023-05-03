@@ -163,8 +163,26 @@
                             },
 
                             select: function (arg) {
-                                var title = "";
+                                var title;
                                 var title = prompt('영화를 입력해주세요.');
+
+                                if (title) {
+                                    $.ajax({
+                                        url: "/dupTitleChk.do",
+                                        type: "post",
+                                        data: { movieTitle: title },
+                                        async: false,
+                                        success: function (data) {
+                                            if (data == "null") {
+                                                alert("없는 영화 이름입니다");
+                                                title = null;
+                                            }
+                                        },
+                                        error: function () {
+                                            console.log("에러발생");
+                                        }
+                                    });
+                                }
 
                                 if (title) {
                                     calendar.addEvent({
