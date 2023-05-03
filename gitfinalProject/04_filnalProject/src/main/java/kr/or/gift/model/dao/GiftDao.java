@@ -220,5 +220,15 @@ public class GiftDao {
 		return sqlSession.selectOne("gift.selectProductLikeCount", productNo);
 	}
 
+	public Product getPosProduct(int productNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("gift.selectOnePosProduct", productNo);
+	}
+
+	public ProductOption getPosOption(int poNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("gift.getPosOption", poNo);
+	}
+
 
 }
