@@ -201,7 +201,6 @@ z-index: 5;
 				<ul class="tabs">
 					<li class="active-tab"><a href="javascript:void(0);">본 영화</li>
 					<li><a href="javascript:void(0);">무비스토리</li>
-					<li><a href="javascript:void(0);">관람평</li>
 					<li><a href="javascript:void(0);">찜영화</li>
 				</ul>
 			</div>
@@ -209,7 +208,7 @@ z-index: 5;
                 	<div class="movie-list-content-top">
                 			<span class="tabcontent1 " style="margin-left: 30px;">총 <span style="color: #329eb1;">${OneMemberMovieCount}</span>개</span>
                             <span class="tabcontent1" style="display:none;  margin-left: 30px;">총 <span style="color: #329eb1;">${moviePostCount}</span>개</span>
-                            <span class="tabcontent1" style="display:none;  margin-left: 30px;">총 <span style="color: #329eb1;">${reviewListCount}</span>개</span>
+                       
                             <span class="tabcontent1" style="display:none;  margin-left: 30px;">총 <span style="color: #329eb1;">${favoriteMovieCount}</span>개</span>
                             <div class="searchBox">
                                 <input type="text" id="movieSearch" name="movieSearch" placeholder="영화명 검색">
@@ -288,83 +287,7 @@ z-index: 5;
                     
                     
                     <!-- 작성한 관람평  -->
-                    <div class="tabcontent movie-all-list-flex" style="display: flex; flex-wrap: wrap; margin: -60px; margin-top: 5px; margin-bottom: 10px;">
-                    	
-                    
-       		<!--본인이 로그인한 후 본인이 작성한 영화에 댓글이 나옴 -->
-                    <c:forEach  items="${reviewList }" var="review">
-                    <c:choose>
-                    <c:when  test="${not empty sessionScope.m && sessionScope.m.memberId eq review.memberId}">
-                    <div class="infoWap2Top">
-                        <div class=" infoWrap2">
-                            <div class="userReviewInfo2">
-                                <img src="/resources/images/member/nonImg.png">
-                                <p class="user-id user-second">${review.memberId}</p>
-                            </div>
-                            <div class="Text2 textSecond">
-                                <div class="Tit2">
-                                    <p>관람평</p>
-                                </div>
-                                <div class=" Point2 pointSecond">
-                                    <p>${review.movieScore}</p>
-                                </div>
-                                <div class="PointCom PointComSecond" style="font-size:16px;">
-                                	<c:choose>
-                                		<c:when test="${review.story eq 1}">
-                                    	<p>스토리</p>
-                                		</c:when>
-                                		<c:when test="${review.actor eq 1}">
-                                    	<p>배우</p>
-                                		</c:when>
-                                		<c:when test="${review.ost eq 1}">
-                                    	<p>OST</p>
-                                		</c:when>
-                                		<c:when test="${review.videoVisual eq 1}">
-                                    	<p>영상미</p>
-                                		</c:when>
-                                		<c:when test="${review.production eq 1}">
-                                    	<p>연출</p>
-                                		</c:when>
-                                		<c:otherwise>
-                                			<p>관람포인트</p>
-                                		</c:otherwise>
-                                	</c:choose>
- 									<c:choose>
- 										<c:when test="${review.story+review.actor+review.ost+review.videoVisual+review.production gt 0}">
-                                    	<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production-1}</p>
- 										</c:when>
- 										<c:otherwise>
- 										<p>+ ${review.story+review.actor+review.ost+review.videoVisual+review.production}</p>
- 										</c:otherwise>
- 									</c:choose>                             
-                                
-                                </div>
-                                <div class="reviewTextContent reviewTextSecond">
-                                    <textarea style="width:595px; height: 84px; padding: 5px; resize: none; border-color: #f8fafa; box-sizing: border-box;" readonly>${review.reviewContent}</textarea>
-                                </div>
-                                <div class="reviewTextLike reviewTextLikeSelf">
-                                    <img src="img/like-24.png" class="whiteLike">
-                                    <img src="img/likeBlack-24.png" class="blackLike" style="display:none;">
-                                    <div class="textLikeCount" style="font-size: 14px; position: absolute; right: 30px; bottom: 0px; top:20px;">
-                                        <p>0</p>
-                                    </div>
-                                </div>
-                                <div class="reviewContentWrite2" style="font-size: 15px;">
-                                    <a href="#" id="open2" style="color: #666666;">수정</a>
-                                    <a href="/deleteReview.do?reviewCommentNo=${review.reviewCommentNo }&movieNo=${review.movieNo}" style="color: #666666;">삭제</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="reviewDate">
-                            <span>${review.reviewDate}</span>
-                        </div>
-                    </div>
-                    </c:when>
-                    </c:choose>
-			        </c:forEach><!--본인작성댓글 끝-->
-                </div><!--실관람평 내용 끝나는 자리-->
-                    </div>
+                   
                     
                     <!-- 찜영화  --> 
                       <div class="tabcontent movie-all-list-flex"
