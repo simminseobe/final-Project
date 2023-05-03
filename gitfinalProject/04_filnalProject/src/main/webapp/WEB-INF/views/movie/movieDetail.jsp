@@ -432,7 +432,16 @@ z-index: 5;
                 <div class="modalTxtArea post-detail-txt" style="background-color: #ecf0f4;">
                 	<input value="${sessionScope.m.memberId}" class="loginId" name="memberId" style="display:none;">
                     <textarea class="postComment" name="moviePostComment"  style="width:810px;"></textarea>
-                    <button type="button"class="postReviewBtn postCommentBtn">댓글등록</button>
+					<c:choose>
+						<c:when test="${not empty sessionScope }">
+		                    <button type="button"class="postReviewBtn postCommentBtn">댓글등록</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button"class="postReviewBtn postCommentBtn" disabled>로그인 해주세요</button>
+						</c:otherwise>					
+					</c:choose>                	
+                	  
+                
                 </div>
             	
                 <div class="post-comment-list"></div>
@@ -1356,10 +1365,14 @@ $(document).ready(function(){
 	}
 	 //무비포스트 댓글 등록
 	$(".postCommentBtn").on("click",function(){
+		
 		const moviePostNo =$(".modalPostNo").val();
 		const movieTitle=$(".modalMovieTitle").val();
 		const memberId=$(".loginId").val();
 		const PostComment=$(".postComment").val();
+	
+			
+			
 	$.ajax({
 			url:"/insertPostComment.do",
 			type:"post",
@@ -1371,9 +1384,13 @@ $(document).ready(function(){
 		}); 
 		
 	});
+	
 	 
-
-	 
+			
+			
+			
+			
+	
 	 
 	 
 	 
