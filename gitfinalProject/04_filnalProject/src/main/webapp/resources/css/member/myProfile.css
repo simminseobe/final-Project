@@ -93,7 +93,7 @@ select{
     font-size: 14px;
 }
 
-table{
+/* table{ */
     border-top: 1px solid #444444;
     border-collapse: collapse;
 }
@@ -285,9 +285,14 @@ sup{
 }
 
 .delivery{
+	padding-left: 400px;
 	margin: 15px 0px 15px 0px;
 	font-size: 2.0em;
 	font-weight: bold;
+}
+#test {
+	width: 800px;
+	margin-left : 400px;
 }
 
 .profile-content-two>tbody>tr>th{
