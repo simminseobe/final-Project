@@ -163,6 +163,7 @@
                             },
 
                             select: function (arg) {
+                                var title = "";
                                 var title = prompt('영화를 입력해주세요.');
 
                                 if (title) {
@@ -181,20 +182,22 @@
                                 obj.end = arg.end;
                                 obj.branch = theaterBranch;
 
-                                $.ajax({
-                                    url: "/registerSchedule.do",
-                                    method: "POST",
-                                    dataType: "json",
-                                    data: JSON.stringify(obj),
-                                    contentType: 'application/json',
-                                    success: function (result) {
-                                        if (result > 0) {
-                                            console.log(result);
+                                if (title) {
+                                    $.ajax({
+                                        url: "/registerSchedule.do",
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: JSON.stringify(obj),
+                                        contentType: 'application/json',
+                                        success: function (result) {
+                                            if (result > 0) {
+                                                console.log(result);
 
-                                            selectScheduleCalendar(theaterBranch);
-                                        }
-                                    },
-                                });
+                                                selectScheduleCalendar(theaterBranch);
+                                            }
+                                        },
+                                    });
+                                }
 
                                 calendar.unselect();
                             },

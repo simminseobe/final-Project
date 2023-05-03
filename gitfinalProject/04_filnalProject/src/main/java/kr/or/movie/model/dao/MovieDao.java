@@ -17,7 +17,6 @@ import kr.or.movie.model.vo.MovieVideo;
 import kr.or.movie.model.vo.MyMovie;
 import kr.or.movie.model.vo.Review;
 import kr.or.movie.model.vo.WatchPoint;
-import kr.or.ticketing.model.vo.Ticketing;
 
 @Repository
 public class MovieDao {
@@ -59,15 +58,17 @@ public class MovieDao {
 
 		return mov;
 	}
+
 	public ArrayList<Movie> selectOneMovieAll(int memberNo) {
 		List list = sqlSession.selectList("movie.selectOneMovieAll", memberNo);
 
-		return  (ArrayList<Movie>)list;
+		return (ArrayList<Movie>) list;
 	}
+
 	public ArrayList<MyMovie> selectOneMovieAll2(int memberNo) {
 		List list = sqlSession.selectList("movie.selectOneMovieAll2", memberNo);
 
-		return  (ArrayList<MyMovie>)list;
+		return (ArrayList<MyMovie>) list;
 	}
 
 	public ArrayList<MovieVideo> selectOneMovieVideo(int movieNo) {
@@ -114,7 +115,8 @@ public class MovieDao {
 		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount", movieNo);
 		return reviewListCount;
 	}
-	//사용자 관람평
+
+	// 사용자 관람평
 	public int selectReviewListCount2(String memberId) {
 		int reviewListCount = sqlSession.selectOne("movie.ReviewListCount2", memberId);
 		return reviewListCount;
@@ -136,7 +138,7 @@ public class MovieDao {
 		int result = sqlSession.update("movie.updateWatchPoint", wPoint);
 		return result;
 	}
-	
+
 	public int deleteReview(int reviewCommentNo) {
 		int result = sqlSession.delete("movie.deleteReview", reviewCommentNo);
 		return result;
@@ -167,162 +169,188 @@ public class MovieDao {
 		int result = sqlSession.selectOne("movie.movieListCount");
 		return result;
 	}
-	//무비포스트 전체 리스트를 조회
+
+	// 무비포스트 전체 리스트를 조회
 	public ArrayList<MoviePost> selectOneMovieAllPost(int movieNo) {
 		List list = sqlSession.selectList("movie.oneMoviePostAll", movieNo);
 		return (ArrayList<MoviePost>) list;
 	}
-	//사용자별 무비포스트 리스트 조회
+
+	// 사용자별 무비포스트 리스트 조회
 	public ArrayList<MoviePost> selectOneMovieAllPost2(String memberId) {
 		List list = sqlSession.selectList("movie.oneMoviePostAll2", memberId);
 		return (ArrayList<MoviePost>) list;
 	}
-	
-	//무비포스트 상세보기를 위함
+
+	// 무비포스트 상세보기를 위함
 	public MoviePost selectDetailPost(int moviePostNo) {
 		MoviePost moviePostOne = sqlSession.selectOne("movie.detailPost", moviePostNo);
 
 		return moviePostOne;
 	}
-	//무비포스트 댓글 작성
+
+	// 무비포스트 댓글 작성
 	public int insertPostComment(MoviePostComment mpc) {
 
 		int result = sqlSession.insert("movie.insertPostComment", mpc);
 		return result;
 
 	}
-	//무비포스트 댓글 전체 리스트 조회
+
+	// 무비포스트 댓글 전체 리스트 조회
 	public ArrayList<MoviePostComment> selectPostComment(int moviePostNo) {
 		System.out.println("dao postNo : " + moviePostNo);
 		List list = sqlSession.selectList("movie.selectPostComment", moviePostNo);
 		return (ArrayList<MoviePostComment>) list;
 	}
-	//무비포스트 댓글 수정
+
+	// 무비포스트 댓글 수정
 	public int updatePostComment(MoviePostComment mpc) {
 		int result = sqlSession.update("movie.updatePostComment", mpc);
 		return result;
 	}
-	//무비포스트 총 갯수를 조회
+
+	// 무비포스트 총 갯수를 조회
 	public int selectMoviePostCount(int movieNo) {
 		int moviePostCount = sqlSession.selectOne("movie.moviePostCount", movieNo);
 		return moviePostCount;
 	}
-	
+
 	public int selectMoviePostCount2(String memberId) {
 		int moviePostCount = sqlSession.selectOne("movie.moviePostCount2", memberId);
 		return moviePostCount;
 	}
-	//무비포스트 댓글 삭제
+
+	// 무비포스트 댓글 삭제
 	public int deletePostComment(int moviePostCommentNo) {
 		int deletePostComment = sqlSession.delete("movie.deletePostComment", moviePostCommentNo);
 		return deletePostComment;
 	}
-	//상영예정작 리스트 조회를 위함
+
+	// 상영예정작 리스트 조회를 위함
 	public ArrayList<Movie> expectedMovie(int memberNo) {
-		List list = sqlSession.selectList("movie.expectedMovie",memberNo);
+		List list = sqlSession.selectList("movie.expectedMovie", memberNo);
 		return (ArrayList<Movie>) list;
 	}
-	//특별상영작 리스트를  조회하기 위함
+
+	// 특별상영작 리스트를 조회하기 위함
 	public ArrayList<Movie> specialMovie(int memberNo) {
-		List list = sqlSession.selectList("movie.specialMovieList",memberNo);
+		List list = sqlSession.selectList("movie.specialMovieList", memberNo);
 		return (ArrayList<Movie>) list;
 	}
-	//필름소사이어티 리스트를 조회하기 위함
+
+	// 필름소사이어티 리스트를 조회하기 위함
 	public ArrayList<Movie> filmSocietyList(int memberNo) {
-		List list = sqlSession.selectList("movie.filmSocietyList",memberNo);
+		List list = sqlSession.selectList("movie.filmSocietyList", memberNo);
 		return (ArrayList<Movie>) list;
 	}
-	//클래식소사이어티 리스트를 조회하기 위함
+
+	// 클래식소사이어티 리스트를 조회하기 위함
 	public ArrayList<Movie> classicSocietyList(int memberNo) {
-		List list = sqlSession.selectList("movie.classicSocietyList",memberNo);
+		List list = sqlSession.selectList("movie.classicSocietyList", memberNo);
 		return (ArrayList<Movie>) list;
 
 	}
-	//사용자 선호 영화조회를 위함
+
+	// 사용자 선호 영화조회를 위함
 	public ArrayList<Movie> favoriteMovieList(int memberNo) {
-		List list = sqlSession.selectList("movie.favoriteMovieList",memberNo);
+		List list = sqlSession.selectList("movie.favoriteMovieList", memberNo);
 		return (ArrayList<Movie>) list;
 	}
-	//무비포스트를 영화별로 조회를 하기 위함
+
+	// 무비포스트를 영화별로 조회를 하기 위함
 	public MoviePost selectOneMoviePost(int moviePostNo) {
 		MoviePost moviePost = sqlSession.selectOne("movie.selectOneMoviePost", moviePostNo);
 		return moviePost;
 	}
-	//무비포스트 수정
+
+	// 무비포스트 수정
 	public int postUpdate(MoviePost moviePost) {
 		int result = sqlSession.update("movie.postUpdate", moviePost);
 		return result;
 	}
-	//무비포스트 삭제
+
+	// 무비포스트 삭제
 	public int postDelete(MoviePost moviePost) {
 		int result = sqlSession.delete("movie.postDelete", moviePost);
 		return result;
 	}
-	//영화 좋아요 insert
+
+	// 영화 좋아요 insert
 	public int movieLikeInsert(HashMap<String, Object> map) {
 		int result = sqlSession.insert("movie.movieLikeInsert", map);
 		return result;
 	}
-	//영화 좋아요 delete
+
+	// 영화 좋아요 delete
 	public int movieLikeDelete(HashMap<String, Object> map) {
 		int result = sqlSession.delete("movie.movieLikeDelete", map);
 		return result;
 	}
-	//관람평(review)좋아요 insert
+
+	// 관람평(review)좋아요 insert
 	public int reviewLikeInsert(HashMap<String, Object> map) {
-		int result = sqlSession.insert("movie.reviewLikeInsert",map);
+		int result = sqlSession.insert("movie.reviewLikeInsert", map);
 		return result;
 	}
-	//관람평(review)좋아요 delete
+
+	// 관람평(review)좋아요 delete
 	public int reviewLikeDelete(HashMap<String, Object> map) {
-		int result =sqlSession.delete("movie.reviewLikeDelete",map);
+		int result = sqlSession.delete("movie.reviewLikeDelete", map);
 		return result;
 	}
-	
-	//상영예정작 총 갯수
+
+	// 상영예정작 총 갯수
 	public int totalExpectedMovieCount() {
-		int result =sqlSession.selectOne("movie.expectedMovieCount");
+		int result = sqlSession.selectOne("movie.expectedMovieCount");
 		return result;
 	}
-	//특별영화 총 갯수
+
+	// 특별영화 총 갯수
 	public int totalSpecialMovieCount() {
 		int result = sqlSession.selectOne("movie.specialMovieCount");
 		return result;
 	}
-	//필름 소사이어티 영화 총갯수
+
+	// 필름 소사이어티 영화 총갯수
 	public int totalFilmSocietyCount() {
-		int result =sqlSession.selectOne("movie.fileSocietyCount");
+		int result = sqlSession.selectOne("movie.fileSocietyCount");
 		return result;
 	}
-	//클래식 소사이어티 영화 총 갯수
+
+	// 클래식 소사이어티 영화 총 갯수
 	public int totalClassicSocietyCount() {
-		int result =sqlSession.selectOne("movie.classicSocietyCount");
+		int result = sqlSession.selectOne("movie.classicSocietyCount");
 		return result;
 	}
-	//사용자 영화 총갯수
+
+	// 사용자 영화 총갯수
 	public int totalFavoriteMovieCount(int memberNo) {
-		int result =sqlSession.selectOne("movie.favoriteMovieCount", memberNo);
+		int result = sqlSession.selectOne("movie.favoriteMovieCount", memberNo);
 		return result;
-		
+
 	}
-	//사용자 관람영화 총갯수
+
+	// 사용자 관람영화 총갯수
 	public int totalmyMovieListCount(int memberNo) {
-		int result =sqlSession.selectOne("movie.myMovieListCount", memberNo);
+		int result = sqlSession.selectOne("movie.myMovieListCount", memberNo);
 		return result;
-		
+
 	}
-	
-	//영화 포스터(movieFile)전체 조회를 위함
+
+	// 영화 포스터(movieFile)전체 조회를 위함
 	public ArrayList<MovieFile> selectFileList(int movieNo) {
 		List list = sqlSession.selectList("movie.selectFileList", movieNo);
 		return (ArrayList<MovieFile>) list;
 	}
-	//영화 좋아요 총 갯수를 위함
+
+	// 영화 좋아요 총 갯수를 위함
 	public int totalMovieLikeCount(int movieNo) {
 		int result = sqlSession.selectOne("movie.totalMovieLike", movieNo);
 		return result;
 	}
-	//아이디로 관람평 조회
+
+	// 아이디로 관람평 조회
 	public Review selectOneReview(HashMap<String, Object> map) {
 		Review review = sqlSession.selectOne("movie.selectOneReview", map);
 		return review;
@@ -334,16 +362,20 @@ public class MovieDao {
 	}
 
 	public int totalAudience(String movieTitle) {
-		int result =sqlSession.selectOne("movie.totalAudience", movieTitle);
+		int result = sqlSession.selectOne("movie.totalAudience", movieTitle);
 		return result;
 	}
 
 	public ArrayList<Schedule> dayTotalAudience(String movieTitle) {
-		List list=sqlSession.selectList("movie.dayTotalAudience", movieTitle); 
-		return (ArrayList<Schedule>) list; 
-		
+		List list = sqlSession.selectList("movie.dayTotalAudience", movieTitle);
+		return (ArrayList<Schedule>) list;
+
 	}
 
+	public Movie selectTitleMovie(String movieTitle) {
+		Movie movie = sqlSession.selectOne("movie.selectTitleMovie", movieTitle);
 
+		return movie;
+	}
 
 }

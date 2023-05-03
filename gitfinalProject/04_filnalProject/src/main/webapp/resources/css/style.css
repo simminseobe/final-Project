@@ -295,7 +295,7 @@ body { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; }
 .ft_color { color: #999; font-family: 'Nanum Gothic', sans-serif; }
 
 .footer_logo { margin-bottom: 21px; }
-.footer_logo a { display: inline-block; width: 158px; height: 34px; background-image: url(/resources/images/common/logo_footer.png); background-size: contain; opacity: 0.3; text-indent: -9999px; }
+.footer_logo a { display: inline-block; width: 158px; height: 34px; background-size: contain; opacity: 0.3; text-indent: -9999px; }
 .footer_logo a:hover { opacity: 1; transition: .5s; }
 .footer_logo span { display: inline-block; float: right; color: #FFF; }
 .footer_logo .ars { color: #999; margin-right: 8px; }
