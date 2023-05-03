@@ -275,8 +275,6 @@ public class AdminService {
 	public ArrayList<Chat> selectChat(int consultationNo) {
 		ArrayList<Chat> list = dao.selectChat(consultationNo);
 
-		System.out.println(list.get(0).getChatContent());
-
 		return list;
 	}
 
