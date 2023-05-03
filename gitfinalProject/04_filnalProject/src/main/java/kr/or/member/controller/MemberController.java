@@ -245,7 +245,7 @@ public class MemberController {
 		}
 		System.out.println(m.getMemberLevel());
 		System.out.println(mpAmount);
-		return "member/mypage";
+		return "member/myPoint";
 	}
 
 	// 개인정보 수정 페이지 이동
