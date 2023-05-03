@@ -245,8 +245,9 @@ public class MemberController {
 		}
 		System.out.println(m.getMemberLevel());
 		System.out.println(mpAmount);
-		return "member/myPoint";
+		return "member/mypage";
 	}
+	
 
 	// 개인정보 수정 페이지 이동
 	@RequestMapping(value = "/myProfile.do")
