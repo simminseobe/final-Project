@@ -124,9 +124,7 @@ public class MovieController {
 					//model.addAttribute("pageList",rpd.getList());
 					//model.addAttribute("pageNavi",rpd.getPageNavi());
 
-					
-					
-					
+
 					//4.사용자 무비포스트 리스트(무비포스트 리스트)
 					ArrayList<MoviePost> oneMoviePost=service.oneMovieAllPost2(memberId);
 					model.addAttribute("oneMoviePost",oneMoviePost);
@@ -166,10 +164,6 @@ public class MovieController {
 		 int movieLikeCount=service.movieLikeCount(movieNo);
 		 model.addAttribute("movieLikeCount",movieLikeCount);
 		 
-		
-		
-		 
-		 
 		//4.무비포스트 리스트(무비포스트 리스트)
 		ArrayList<MoviePost> oneMoviepostAll=service.oneMovieAllPost(movieNo);
 		model.addAttribute("oneMoviepostAll",oneMoviepostAll);
@@ -205,7 +199,6 @@ public class MovieController {
 		model.addAttribute("reservationRate",reservationRate);
 		//누적관객수 조회
 		/* int totalAudience=service.totalAudience(movieNo); */
-		
 		
 		
 		//실관람평점산출위한 watchPoint조회
@@ -247,7 +240,7 @@ public class MovieController {
 	public String reviewUpdate(Review rev, WatchPoint wPoint) {
 		int result=service.reviewUpdate(rev);
 		int wresult=service.watchPointUpdate(wPoint); 
-		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo()+"&=1";		
+		return "redirect:/movieDetail.do?movieNo="+rev.getMovieNo()+"&reqPage=1";		
 	}
 	//실관람평 삭제하기
 	@RequestMapping(value="/deleteReview.do")
