@@ -19,4 +19,6 @@ public class ProductOrderSheet {
 	private int memberNo;
 
 	private ArrayList<ShippingAddress> sas;
+	private Product product;
+	private ProductOption productOption;
 }
