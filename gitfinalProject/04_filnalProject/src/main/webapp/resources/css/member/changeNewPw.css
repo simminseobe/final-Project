@@ -8,6 +8,7 @@
 }
 
 .content{
+	margin-top: 120px;
 	width: calc(100% - 360px);
 	float: right;
 }

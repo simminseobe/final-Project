@@ -109,16 +109,16 @@
                 			<th>연락처</th>
                 			<th></th>
                 		</tr>
-                		<tr>
                 		<c:forEach items="${address}" var="a">
+                		<tr>
                 			<td>${a.addressName }</td>
                 			<td>${a.addressNew }</td>
                 			<td>${a.addressPhone }</td>
-                		</c:forEach>
                 			<td>
                 				<button type="button" class="my-btn my-blue">수정</button>
                 				<button type="button" class="my-btn my-blue">삭제</button>
                 			</td> 
+                		</c:forEach>
                 		</tr>
                 	</tbody>
                 </table>
