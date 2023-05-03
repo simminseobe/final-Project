@@ -426,20 +426,20 @@
         <div class="mega_point_event clearfix">
             <a href="#" class="local_slide clearfix">
                 <div class="local_shop_event">지점 이벤트</div>
-                <div class="local">양산시</div>
-                <div class="shop">양산리피에스타</div>
-                <div class="event">#오픈100일기념 #다드려요</div>
+                <div class="local">강남</div>
+                <div class="shop">강남대로(씨티)</div>
+                <div class="event">#오픈 3주년 기념 #다드려요</div>
             </a>
             <a href="#" class="local_slide">
                 <div class="local_shop_event">지점 이벤트</div>
-                <div class="local">대전광역시</div>
-                <div class="shop">대전중앙로</div>
-                <div class="event">#우리도100일 #야구팬분들주목!</div>
+                <div class="local">경기</div>
+                <div class="shop">고양스타필드</div>
+                <div class="event">#오픈 2주년 #야구팬분들주목!</div>
             </a>
             <a href="#" class="local_slide">
                 <div class="local_shop_event">지점 이벤트</div>
-                <div class="local">부산광역시</div>
-                <div class="shop">부산대</div>
+                <div class="local">광주</div>
+                <div class="shop">순천</div>
                 <div class="event">#방학맞이 #저세상할인이벤트</div>
             </a>
         </div>
@@ -484,38 +484,38 @@
             <!--label-->
             <article class="mega_notice">
                 <div class="notice_01">
-                    <h3><span>전체</span><span>2019.07.19</span></h3>
+                    <h3><span>전체</span><span>2023.05.03</span></h3>
                     <span>&#91;공지&#93; 시스템 점검 안내</span>
                 </div>
                 <div class="notice_02">
-                    <h3><span>전체</span><span>2019.07.19</span></h3>
-                    <span>&#91;당첨안내&#93;&lt;'토이스토리4' 개봉 기념 선물&gt;...</span>
+                    <h3><span>전체</span><span>2023.05.03</span></h3>
+                    <span>&#91;당첨안내&#93;&lt;'스즈메의 문단속' 개봉 기념 선물&gt;...</span>
                 </div>
                 <div class="notice_03">
-                    <h3><span>전체</span><span>2019.07.19</span></h3>
-                    <span>&#91;무대인사&#93;&lt;사자&gt; 2주차 (8/10~8/1...</span>
+                    <h3><span>전체</span><span>2023.05.03</span></h3>
+                    <span>&#91;무대인사&#93;&lt;사자&gt; 2주차 (4/25~5/3...</span>
                 </div>
                 <div class="notice_04">
-                    <h3><span>전체</span><span>2019.07.17</span></h3>
-                    <span>&#91;무대인사&#93;&lt;엑시트&gt; 1주차 (8/3~8/4...</span>
+                    <h3><span>전체</span><span>2023.05.03</span></h3>
+                    <span>&#91;무대인사&#93;&lt;엑시트&gt; 1주차 (4/10~5/1...</span>
                 </div>
             </article>
             <!--notice_all-->
             <article class="cine_notice">
                 <div class="notice_01">
-                    <h3><span>동대문</span><span>2019.07.18</span></h3>
+                    <h3><span>동대문</span><span>2023.04.28</span></h3>
                     <span>&#91;동대문&#93; 무비올나잇패키지 재 오픈 안내</span>
                 </div>
                 <div class="notice_02">
-                    <h3><span>강남대로(씨티)</span><span>2019.07.17</span></h3>
+                    <h3><span>강남대로(씨티)</span><span>2023.05.01</span></h3>
                     <span>&#91;강남대로(씨티)&#93;&lt;관람요금 조정 안내&gt;...</span>
                 </div>
                 <div class="notice_03">
-                    <h3><span>상봉</span><span>2019.07.16</span></h3>
+                    <h3><span>상봉</span><span>2023.04.01</span></h3>
                     <span>&#91;상봉&#93;기계식 주차 타워 점검 안내</span>
                 </div>
                 <div class="notice_04">
-                    <h3><span>상암</span><span>2019.07.15</span></h3>
+                    <h3><span>상암</span><span>2023.04.28</span></h3>
                     <span>&#91;상암월드컵경기장&#93;K-리그 경기에 따른 주차...</span>
                 </div>
             </article>

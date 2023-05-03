@@ -684,4 +684,7 @@ select count(*) from
 <select id="selectMovieCnt" resultType="_int">
   	select count(*) from movie_tbl
   </select>
+  <select id="selectTitleMovie" parameterType="String" resultType="movie">
+  	select movie_title as movieTitle from movie_tbl where movie_title = #{_parameter}
+  </select>
 </mapper>

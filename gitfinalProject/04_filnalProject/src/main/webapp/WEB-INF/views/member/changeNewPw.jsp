@@ -49,8 +49,6 @@
 		</div>
 	</div>
 	</form>
-	
 	<script src="/resources/js/member/changeNewPw.js"></script>
-	<jsp:include page="/WEB-INF/views/common/menubar.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

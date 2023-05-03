@@ -44,6 +44,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="theaterBranch" class="my-2">지점 입력</label>
+                                        <span id="dupTitleChk"></span>
                                         <input type="text" class="form-control" id="theaterBranch" name="theaterBranch"
                                             required>
                                     </div>
@@ -83,6 +84,43 @@
                 <jsp:include page="/WEB-INF/views/admin/adminCommon/adminPageFooter.jsp"></jsp:include>
             </div>
             <script>
+                var result = true;
+
+                $("#theaterBranch").on("change", function () {
+                    let theaterBranch = $("#theaterBranch").val();
+
+                    $.ajax({
+                        url: "/dupBranchChk.do",
+                        type: "post",
+                        data: { theaterBranch: theaterBranch },
+                        success: function (data) {
+                            if (data != "null") {
+                                $("#dupTitleChk").text("지점 이름이 중복됩니다.");
+                                $("#dupTitleChk").show();
+                                $("#dupTitleChk").css("color", "red");
+                                $("#dupTitleChk").focus();
+
+                                result = false;
+                            } else if (data == "null") {
+                                $("#dupTitleChk").text("");
+                                $("#dupTitleChk").hide();
+
+                                result = true;
+                            }
+                        },
+                        error: function () {
+                            console.log("에러발생");
+                        }
+                    });
+                });
+
+                $("[type=submit]").on("click", function (e) {
+                    if (result == false) {
+                        e.preventDefault();
+                        alert("지점 이름이 중복됩니다.")
+                    }
+                });
+
                 $("#theaterContent").summernote({
                     height: 400,
                     lang: "ko-KR",

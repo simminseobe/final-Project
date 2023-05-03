@@ -292,4 +292,10 @@ public class AdminService {
 		return list;
 	}
 
+	public Theater dupBranchChk(String theaterBranch) {
+		Theater theater = dao.dupBranchChk(theaterBranch);
+
+		return theater;
+	}
+
 }

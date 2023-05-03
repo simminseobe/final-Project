@@ -28,6 +28,7 @@
                                 <input type="hidden" name="enrollMember" value="${sessionScope.m.memberId}">
                                 <div class="form-group">
                                     <label for="movieTitle" class="my-1">영화 제목</label>
+                                    <span id="dupTitleChk"></span>
                                     <input type="text" class="form-control" id="movieTitle" name="movieTitle"
                                         placeholder="영화 제목을 입력하세요" required>
                                 </div>
@@ -196,6 +197,43 @@
             </div>
         </div>
         <script>
+            var result = true;
+
+            $("#movieTitle").on("change", function () {
+                let movieTitle = $("#movieTitle").val();
+
+                $.ajax({
+                    url: "/dupTitleChk.do",
+                    type: "post",
+                    data: { movieTitle: movieTitle },
+                    success: function (data) {
+                        if (data != "null") {
+                            $("#dupTitleChk").text("영화 제목이 중복됩니다.");
+                            $("#dupTitleChk").show();
+                            $("#dupTitleChk").css("color", "red");
+                            $("#dupTitleChk").focus();
+
+                            result = false;
+                        } else if (data == "null") {
+                            $("#dupTitleChk").text("");
+                            $("#dupTitleChk").hide();
+
+                            result = true;
+                        }
+                    },
+                    error: function () {
+                        console.log("에러발생");
+                    }
+                });
+            });
+
+            $("[type=submit]").on("click", function (e) {
+                if (result == false) {
+                    e.preventDefault();
+                    alert("영화 제목이 중복됩니다.")
+                }
+            });
+
             $("#movieContent").summernote({
                 height: 400,
                 lang: "ko-KR",

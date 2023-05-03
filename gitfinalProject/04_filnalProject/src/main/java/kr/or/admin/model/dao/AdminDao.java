@@ -241,4 +241,10 @@ public class AdminDao {
 		return (ArrayList<SalesPerDay>) list;
 	}
 
+	public Theater dupBranchChk(String theaterBranch) {
+		Theater theater = sqlSession.selectOne("theater.selectTitleBranch", theaterBranch);
+
+		return theater;
+	}
+
 }
