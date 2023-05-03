@@ -50,4 +50,10 @@
 	  from theater_tbl
 	  where theater_local = #{_parameter}
   </select>
+  <select id="selectTitleBranch" parameterType="String" resultType="theater">
+  	select 
+  		theater_branch as theaterBranch
+  	from theater_tbl
+  	where theater_branch = #{_parameter}
+  </select>
 </mapper>

@@ -77,7 +77,9 @@ public class AdminController {
 	public String updateMemberLevel(Member member) {
 		int result = service.updateMemberLevel(member);
 
-		if (result > 0) {
+		if (result > 0 && member.getMemberLevel() == 0) {
+			return "redirect:/adminPage.do";
+		} else if (result > 0) {
 			return "redirect:/manageMember.do";
 		} else {
 			return "redirect:/";
@@ -87,6 +89,14 @@ public class AdminController {
 	@RequestMapping(value = "/registerMovieFrm.do")
 	public String registerMovieFrm() {
 		return "admin/registerMovieFrm";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/dupTitleChk.do")
+	public String dupTitleChk(String movieTitle) {
+		Movie movie = movieServie.selectTitleMovie(movieTitle);
+
+		return new Gson().toJson(movie);
 	}
 
 	@RequestMapping(value = "/registerMovie.do")
@@ -284,6 +294,14 @@ public class AdminController {
 		} else {
 			return "redirect:/";
 		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/dupBranchChk.do")
+	public String dupBranchChk(String theaterBranch) {
+		Theater theater = service.dupBranchChk(theaterBranch);
+
+		return new Gson().toJson(theater);
 	}
 
 	@RequestMapping(value = "/theaterList.do")
